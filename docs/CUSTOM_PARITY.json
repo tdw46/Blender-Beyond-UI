@@ -1,0 +1,965 @@
+{
+  "requirement": "Every control uses custom appearance and interactions, exactly matching generated references.",
+  "native_counts_as_custom": false,
+  "members": {
+    "activate_init": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "active": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "active_default": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "alert": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "alignment": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "bl_rna_get_subclass": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "bl_rna_get_subclass_py": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "box": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "column": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "column_flow": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "context_pointer_set": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "context_string_set": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Values are stored but not yet supplied to an operator context; do not use as an accepted route.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "direction": {
+      "kind": "property",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "emboss": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "enabled": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "enum_item_description": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "enum_item_icon": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "enum_item_name": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "grid_flow": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "icon": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "introspect": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "label": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "link": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "menu": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "menu_contents": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "menu_pie": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "operator": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "operator_context": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "operator_enum": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "operator_menu_enum": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "operator_menu_hold": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "panel": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom disclosure returns header/body and increments schema revision. Host must rebuild on explicit schema change; exact header geometry is unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "panel_prop": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "popover": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "popover_group": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "progress": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented; pointer and event shortcuts, native decorators, unit syntax and complete context actions remain open.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_decorator": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_enum": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_menu_enum": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_search": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_tabs_enum": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_with_menu": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "prop_with_popover": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "props_enum": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "row": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "scale_x": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "scale_y": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "separator": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "separator_spacer": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "split": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_ID": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_ID_preview": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_ID_session_uid": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_ID_tabs": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_action": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_any_ID": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_asset_shelf_popover": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_asset_view": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_bone_collection_tree": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_cache_file": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_cache_file_layers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_cache_file_procedural": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_cache_file_time_settings": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_cache_file_velocity": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_collection_exporters": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_collection_importer": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_color_picker": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom SV/hue/RGB/HSV/alpha/hex editing; eyedropper requires host callback. Advanced locking/cubic modes and exact reference matching remain open.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_color_ramp": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Gradient sampling and stop add/remove/drag/position entry implemented. Interpolation dropdown, color edit overlay wiring, exact reference matching remain open.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_colormanaged_view_settings": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_colorspace_settings": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_component_menu": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_constraint_header": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_constraints": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_curve_mapping": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Curve sampling, point drag/add/remove and channel selector implemented. Handles, exact-coordinate fields, bounds, presets/levels/brush modes and exact reference matching remain open.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_curveprofile": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_edit_mode_selection": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_event_from_keymap_item": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_file_select_path": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_grease_pencil_layer_tree": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_grease_pencil_modifiers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_greasepencil_color": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_header": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_header_3D_mode": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_histogram": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_icon": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_icon_view": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_image": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_image_layers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_image_settings": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_image_stereo_3d": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_image_views": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_input_status": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_keymap_item_properties": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_layers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_light_linking_collection": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_list": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_marker": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_matrix": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Current component editing does not yet reproduce matrix row/column layout.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_menu_search": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_modifier_asset_menu_items": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_modifiers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_movieclip": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_movieclip_information": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_asset_menu_items": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_inputs": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_link": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_operator_asset_menu_items": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_operator_asset_root_items": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_operator_registration_errors": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_socket": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_tree_interface": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_node_view": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_operator_search": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_palette": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_path_builder": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_popup_confirm": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_preview": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_recent_files": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_reports_banner": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_running_jobs": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_search": {
+      "kind": "method",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_search_preview": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_shaderfx": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_shape_key_tree": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_status_info": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_strip_modifiers": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_texture_user": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_track": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_vectorscope": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "template_waveform": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "textbox": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "textbox_with_state": {
+      "kind": "method",
+      "status": "unimplemented",
+      "notes": "No custom implementation; native forwarding does not count.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "ui_units_x": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "ui_units_y": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "use_property_decorate": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    },
+    "use_property_split": {
+      "kind": "property",
+      "status": "partial",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "reference": null,
+      "comparison_evidence": null
+    }
+  }
+}

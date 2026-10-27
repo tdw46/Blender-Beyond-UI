@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "image": "specialized-controls-v1.png",
+  "sha256": "9fc9b50f456a75081da5b8abb619a7411e64cf611bef0cff763bb7c0a7bfa959",
+  "size": [
+    1536,
+    1024
+  ],
+  "generator": "built-in image_gen",
+  "status": "visual specification; implementation matching not yet verified",
+  "controls": [
+    "Curve Mapping",
+    "Color Ramp",
+    "Data Picker",
+    "Color Picker"
+  ],
+  "style_sources": [
+    "Beyond VTuber Tools documentation/design/effect-menus-20261002/inspectors.png",
+    "Beyond VTuber Tools documentation/design/shoost-glass/panel-concept.png"
+  ],
+  "acceptance_rule": "AGENTS.md: Hard rule: exact generated-reference fidelity"
+}

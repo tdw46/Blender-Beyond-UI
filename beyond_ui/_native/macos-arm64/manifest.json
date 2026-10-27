@@ -1,0 +1,14 @@
+{
+  "platform": "Darwin",
+  "machine": "arm64",
+  "builds": {
+    "d0cbe84903e8": 42,
+    "ec6e62d40fa9": 51,
+    "d13f752e3b9c": 52
+  },
+  "library": "bridge-2eace69413d1f04d.dylib",
+  "source_sha256": "2eace69413d1f04de77b511e2fa71afddc8a7d8de349918975d56a9a0b8c088b",
+  "binary_sha256": "0ef27368eac6fe650f99c005515fb1a66a32eb2b5994694c3a619ce2d840673f",
+  "abi": "beyond-ui-extra-v1",
+  "qualification": "experimental; see docs/VALIDATION.md"
+}

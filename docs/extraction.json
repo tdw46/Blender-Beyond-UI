@@ -1,0 +1,56 @@
+{
+  "source_project": "Beyond VTuber Tools",
+  "source_commit": "70f28650352f61652273f32cd042fbb3df491c53",
+  "files": [
+    {
+      "source": "_custom_ui_components.py",
+      "destination": "beyond_ui/components.py",
+      "source_sha256": "27a35fbf3d10e901e66d71daa68e084770bbf52f252dc4505dbe427b58065782"
+    },
+    {
+      "source": "_custom_ui_draw.py",
+      "destination": "beyond_ui/gpu/menus.py",
+      "source_sha256": "1ac9d2a0abd37c19bf669f5193ac8e520abd80f89b47c8ff452ec9d194885296"
+    },
+    {
+      "source": "_custom_ui_materials.py",
+      "destination": "beyond_ui/materials.py",
+      "source_sha256": "308b81dadc41ec1b15bd6a3a8bc2d92e16d15f429f35b63e1f5d9a8fcb6238a9"
+    },
+    {
+      "source": "_custom_ui_previews.py",
+      "destination": "beyond_ui/gpu/previews.py",
+      "source_sha256": "09ae500b4c7ad18db46e0fa062e4b122cbc52ae13396ca49bea1fa61d815c918"
+    },
+    {
+      "source": "_shoost_canvas_style.py",
+      "destination": "beyond_ui/gpu/style.py",
+      "source_sha256": "01d050fe912ea90a45ca997b3b0276d25f01b31eda6b15e4bc1d9042eb0ab621"
+    },
+    {
+      "source": "_shoost_canvas_edit.py",
+      "destination": "beyond_ui/editing.py",
+      "source_sha256": "3557caa3604e59bac0533737655a32190edb58337e10bd77f62891953c174cd5"
+    },
+    {
+      "source": "VRM_ShoostGlass.py",
+      "destination": "beyond_ui/gpu/glass.py",
+      "source_sha256": "d70acafd42a5987d74804bd97fdf42b04c1cab3d1a581a82d6f85ec822f64024"
+    },
+    {
+      "source": "_shoost_canvas_transition.py",
+      "destination": "beyond_ui/gpu/transition.py",
+      "source_sha256": "5033f400d06423d0d49f102c5aee1b9edc54bcd8f4e4fabf4265dfa8d8ff37e6"
+    },
+    {
+      "source": "tools/native_ui_probe/bridge.cpp",
+      "destination": "beyond_ui/_native/bridge_macos.cpp",
+      "source_sha256": "2eace69413d1f04de77b511e2fa71afddc8a7d8de349918975d56a9a0b8c088b"
+    },
+    {
+      "source": "tools/native_ui_probe/bridge_windows.cpp",
+      "destination": "beyond_ui/_native/bridge_windows.cpp",
+      "source_sha256": "31a248a551beaee70a013bd5f064dabee077a644fc42f1e3ca9e9c38da3bcd39"
+    }
+  ]
+}

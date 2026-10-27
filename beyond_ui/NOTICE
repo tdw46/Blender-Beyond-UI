@@ -1,0 +1,8 @@
+Beyond UI
+Copyright (C) 2026 Tyler Walker
+GPL-3.0-or-later
+
+Derived from first-party Effect Layers UI helpers in Beyond VTuber Tools.
+See docs/PROVENANCE.md and docs/extraction.json in the source repository.
+Blender is not bundled. The optional native adapter uses Blender private ABI
+and is restricted to audited build hashes; see docs/VALIDATION.md.

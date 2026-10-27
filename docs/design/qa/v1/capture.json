@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "backend": "METAL",
+  "font": "Inter.woff2",
+  "captures": [
+    {
+      "control": "Curve Mapping",
+      "file": "curve-mapping.png",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.curve.CurveMapping"
+    },
+    {
+      "control": "Color Ramp",
+      "file": "color-ramp.png",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.ramp.ColorRamp"
+    },
+    {
+      "control": "Data Picker",
+      "file": "data-picker.png",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.picker.DataPicker"
+    },
+    {
+      "control": "Color Picker",
+      "file": "color-picker.png",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.color.ColorPicker"
+    }
+  ],
+  "source": "Actual Blender GPUOffScreen, stock theme, library painters; no reference pixels used",
+  "acceptance": "Unapproved; Tyler performs visual QA"
+}

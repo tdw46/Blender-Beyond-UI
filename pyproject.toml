@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blender-beyond-ui"
+version = "0.1.0"
+description = "Vendorable native UI adapters and retained GPU canvas components for Blender"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+authors = [{name = "Tyler Walker"}]
+readme = "README.md"
+
+[dependency-groups]
+dev = [
+    "pillow==12.0.0",
+    "ruff==0.14.2",
+]
+
+[tool.uv.workspace]
+
+[tool.hatch.build.targets.wheel]
+packages = ["beyond_ui"]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]
