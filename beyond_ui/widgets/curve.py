@@ -2,13 +2,14 @@
 
 from .base import Widget, Painter, contains
 from ..bindings import Edit
-from ..gpu import style
+from ..gpu import skin
+from .metrics import CURVE, SIZE
+from ..editing import Text, number
 
 
 class CurveMapping(Widget):
-    width = 320.0
-    height = 240.0
-    graph = (74, 38, 176, 176)
+    width, height = SIZE
+    graph = CURVE["graph"]
 
     def __init__(self, binding, *, evaluate=None, channel=None):
         super().__init__()
@@ -42,6 +43,22 @@ class CurveMapping(Widget):
             self.cancel()
             return True
         points = tuple(self.binding.read())
+        if self.text_edit:
+            result = self.edit_text(event, clipboard=clipboard)
+            if result is False:
+                self.cancel()
+            elif isinstance(result, str):
+                try:
+                    values = list(points)
+                    point = list(values[self.selected])
+                    point[self.field] = max(0.0, min(1.0, number(result)))
+                    values[self.selected] = tuple(point)
+                    self.transaction.update(tuple(values))
+                    self._finish()
+                except ValueError:
+                    self.text_edit = Text(result)
+                    self.capturing = True
+            return True
         a, b, w, h = self.graph
         if self.capturing:
             if kind == "MOUSEMOVE":
@@ -62,12 +79,19 @@ class CurveMapping(Widget):
             return True
         if kind != "LEFTMOUSE" or not press:
             return False
-        if y < 32 and self.channel:
-            old = self.channel.read()
-            new = min(3, max(0, int(x / 80)))
-            self.channel.write(new)
-            self.channel.commit(old, new)
-            return True
+        for i, r in enumerate(CURVE["tabs"]):
+            if contains(r, x, y) and self.channel:
+                old = self.channel.read()
+                self.channel.write(i)
+                self.channel.commit(old, i)
+                return True
+        for i, r in enumerate(CURVE["fields"][:2]):
+            if contains(r, x, y) and points:
+                self.transaction = Edit(self.binding)
+                self.field = i
+                self.text_edit = Text(points[self.selected][i])
+                self.capturing = True
+                return True
         if contains(self.graph, x, y):
             if event.value == "DOUBLE_CLICK":
                 values = (*points, ((x - a) / w, 1 - (y - b) / h))
@@ -98,57 +122,63 @@ class CurveMapping(Widget):
                 return ay + (by - ay) * (x - a) / max(1e-9, b - a)
         return ordered[-1][1]
 
-    def paint(self, rect, font, palette):
-        p = Painter(rect, self.width, self.height, font, palette)
+    def paint(self, rect, font, palette, *, backdrop=None):
+        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p.card("Curve Mapping")
         points = tuple(self.binding.read())
         if not points:
             return
         channel = self.channel.read() if self.channel else 0
-        for i, label in enumerate("CRGB"):
-            r = (8 + i * 78, 6, 74, 24)
-            p.surface(r, "tab" if i == channel else "field")
-            p.text(r, label)
-        p.surface(self.graph)
+        for i, (label, r) in enumerate(zip("CRGB", CURVE["tabs"])):
+            p.surface(r, "tab" if i == channel else "button")
+            p.text(r, label, size=19, align="center")
+        p.surface(self.graph, "graph", 7, 1.4)
         a, b, w, h = self.graph
-        for i in range(7):
-            t = i / 6
-            p.line(
-                ((a + t * w, b), (a + t * w, b + h)),
-                (*palette["muted"][:3], 0.3),
-                0.5 * p.scale,
-            )
-            p.line(
-                ((a, b + t * h), (a + w, b + t * h)),
-                (*palette["muted"][:3], 0.3),
-                0.5 * p.scale,
-            )
+        for major in (False, True):
+            lines = []
+            for i in range(1, 6):
+                if (i == 3) != major:
+                    continue
+                t = i / 6
+                lines.extend(
+                    (
+                        ((a + t * w, b + 2), (a + t * w, b + h - 2)),
+                        ((a + 2, b + t * h), (a + w - 2, b + t * h)),
+                    )
+                )
+            p.lines(lines, skin.rgba("8d9398", 0.27 if major else 0.14), p.scale)
         signature = (points, channel)
         if signature != self._signature:
+            min_x = min(pt[0] for pt in points)
+            span = max(pt[0] for pt in points) - min_x
             self._samples = tuple(
                 (
-                    a + i / 128 * w,
-                    b + (1 - max(0, min(1, self._sample(i / 128, points)))) * h,
+                    a + (min_x + i / 256 * span) * w,
+                    b
+                    + (1 - max(0, min(1, self._sample(min_x + i / 256 * span, points))))
+                    * h,
                 )
-                for i in range(129)
+                for i in range(257)
             )
             self._signature = signature
-        p.line(self._samples, palette["slider_fill"], 1.5 * p.scale)
+        p.line(self._samples, skin.rgba("4abefa"), 2.2 * p.scale)
         for i, (px, py) in enumerate(points):
-            x, y, rw, rh = p.map((a + px * w - 3, b + (1 - py) * h - 3, 6, 6))
-            style.draw(
-                x,
-                y,
-                rw,
-                rh,
-                palette["slider_fill"] if i == self.selected else palette["text"],
-                mode=3,
+            pos = (a + px * w, b + (1 - py) * h)
+            p.circle(pos, 9 if i == self.selected else 7, skin.rgba("111820"))
+            p.circle(
+                pos,
+                8 if i == self.selected else 6.4,
+                skin.rgba("49b7ee") if i == self.selected else skin.rgba("e6ebf0"),
+                0.6,
             )
-        self.selected = min(self.selected, len(points) - 1)
-        px, py = points[self.selected]
-        for r, text in (
-            ((8, 218, 104, 22), f"X  {px:.2f}"),
-            ((118, 218, 104, 22), f"Y  {py:.2f}"),
-            ((228, 218, 84, 22), "Auto"),
-        ):
-            p.surface(r)
-            p.text(r, text)
+        index = min(self.selected, len(points) - 1)
+        for i, label in enumerate(("X", "Y")):
+            value = (
+                self.text_edit.text
+                if self.text_edit and self.field == i
+                else f"{points[index][i]:.2f}"
+            )
+            p.field(CURVE["fields"][i], label, value, split=54)
+        p.surface(CURVE["fields"][2])
+        p.text(CURVE["fields"][2], "Auto", inset=18)
+        p.chevron(583, 432, 14)

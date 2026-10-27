@@ -19,6 +19,12 @@ and sizes require corresponding references. Retain every reference revision.
 
 ## Current implementation comparison
 
-[QA board](qa/v1/index.html) · [All four side by side](qa/v1/all-controls-comparison.png).
+[QA board](qa/v2/index.html) · [All four side by side](qa/v2/all-controls-comparison.png).
 Reference left, actual Blender 5.2.2 / Metal implementation right. Tyler performs
 visual QA; no control is marked reference-matched.
+
+Revision 2 includes [transparency evidence](qa/v2/transparency.png),
+[exact comparison results](qa/v2/comparison.json),
+[performance measurements](qa/v2/performance.json) and
+[remaining defects/specification conflicts](qa/v2/NOTES.md).
+Revision 1 remains unchanged in `qa/v1/`.

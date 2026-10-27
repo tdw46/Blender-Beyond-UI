@@ -27,3 +27,9 @@ scene renders, product shaders, credentials or shared guidance were copied.
 GPL-3.0-or-later. The copied first-party code is distributed under the GPL license
 already declared by its source extension. No third-party MIT-only VRMXT code was
 copied; this library is independent of the exporter and renderer dependencies.
+
+## Typography
+
+Unmodified Inter Regular and SemiBold WOFF2 assets are vendored from the official
+[Inter repository](https://github.com/rsms/inter), under the SIL Open Font License
+1.1. `beyond_ui/assets/fonts/OFL.txt` and `provenance.json` travel with the library.

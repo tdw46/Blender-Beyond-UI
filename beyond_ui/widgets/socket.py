@@ -10,7 +10,7 @@ class Socket(Widget):
         super().__init__()
         self.color = tuple(color)
 
-    def paint(self, rect, font, palette):
+    def paint(self, rect, font, palette, *, backdrop=None):
         x, y, w, h = rect
         r = min(w, h) * 0.3
         style.draw(

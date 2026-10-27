@@ -26,7 +26,7 @@ def build_canvas(key):
         return Binding(lambda: state[name], lambda value: state.update({name: value}))
 
     canvas = Canvas()
-    canvas.label("title", "Custom Effect Layers components")
+    canvas.title("title", "Custom Effect Layers components")
     canvas.toggle("enabled", "Enabled", binding("enabled"))
     canvas.number(
         "strength",

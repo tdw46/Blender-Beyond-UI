@@ -36,6 +36,31 @@ EXACTLY. A generated reference is a visual specification, not loose inspiration.
 - Keep reference versions immutable. Retain prior versions and record which
   version each implementation and validation result targets.
 
+## Hard rule: source-level UI performance
+
+Tyler requires this library to remain exceptionally fast and responsive, like
+the source Effect Layers UI. Visual fidelity and performance are simultaneous
+requirements; neither may be traded away to satisfy the other.
+
+- Retain GPU shaders, batches, textures, fonts and layout geometry. Rebuild only
+  the resources whose input or owning context changed; bound all caches and
+  release owned resources on teardown. No shader compilation, font loading,
+  file/network I/O or repeated GPU resource creation in steady-state painting.
+- Share one cached backdrop capture/blur per host and revision. Never add a
+  separate capture, blur or framebuffer readback for every control or frame.
+- Cull clipped and hidden controls before binding reads or drawing; virtualize
+  long lists. Keep draw read-only and avoid full-data scans for visible rows.
+- Drive redraws from input, explicit invalidation and finite animation windows.
+  Idle UI must not create a permanent redraw or polling loop.
+- Measure representative warm rendering and interaction workloads in Blender,
+  including dense controls and scrolling. Record runtime, scale, workload,
+  timing distribution and resource counts; compare equivalent workloads before
+  and after changes. Tests or subjective impressions alone do not establish
+  source-level speed. Investigate regressions before claiming completion.
+- Keep measurement and framebuffer capture out of the production paint path.
+  Do not remove transparency, blur, animations, correct interactions, older
+  supported API fallbacks or exact-reference requirements as a speed shortcut.
+
 ## Evidence and publication
 
 Maintain a member-by-member API inventory and custom parity ledger. Distinguish

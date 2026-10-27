@@ -84,6 +84,9 @@ class Group:
     def label(self, key, text, **kw):
         return self.add("label", key, text, **kw)
 
+    def title(self, key, text, **kw):
+        return self.label(key, text, text_role="title", **kw)
+
     def button(self, key, text, action, **kw):
         return self.add("button", key, text, action=action, **kw)
 
@@ -106,7 +109,7 @@ class Group:
         return self.add("separator", key, **kw)
 
     def widget(self, key, widget, **kw):
-        return self.add("widget", key, widget=widget, height=widget.height, **kw)
+        return self.add("widget", key, widget=widget, **kw)
 
     def image(self, key, texture, **kw):
         return self.add("image", key, texture=texture, **kw)
@@ -139,24 +142,49 @@ class Canvas(Group):
             return self.height
         t = self.theme
 
-        def height(node):
+        heights = {}
+
+        def height(node, available):
+            cache_key = (id(node), available)
+            if cache_key in heights:
+                return heights[cache_key]
             if isinstance(node, Control):
+                default_height = (
+                    (
+                        node.options["widget"].height
+                        * available
+                        / node.options["widget"].width
+                    )
+                    if node.kind == "widget"
+                    else 8.0
+                    if node.kind == "separator"
+                    else t.row_height
+                )
                 return max(
                     0.0,
-                    node.options.get(
-                        "height", 8.0 if node.kind == "separator" else t.row_height
-                    ),
+                    node.options.get("height", default_height),
                 )
-            values = [height(c) for c in node.children]
+            inner = max(0.0, available - (2 * t.padding if node.kind == "box" else 0.0))
+            child_width = (
+                max(
+                    0.0,
+                    (inner - max(0, len(node.children) - 1) * t.gap)
+                    / max(1, len(node.children)),
+                )
+                if node.kind == "row"
+                else inner
+            )
+            values = [height(c, child_width) for c in node.children]
             h = (
                 max(values, default=0.0)
                 if node.kind == "row"
                 else sum(values) + max(0, len(values) - 1) * t.gap
             )
-            return h + (2 * t.padding if node.kind == "box" else 0.0)
+            heights[cache_key] = h + (2 * t.padding if node.kind == "box" else 0.0)
+            return heights[cache_key]
 
         def place(node, x, y, w):
-            h = height(node)
+            h = height(node, w)
             node.rect = (x, y, max(0.0, w), h)
             if isinstance(node, Control):
                 return
@@ -175,10 +203,10 @@ class Canvas(Group):
             else:
                 for child in node.children:
                     place(child, x, y, w)
-                    y += height(child) + t.gap
+                    y += height(child, w) + t.gap
 
         place(self, t.padding, t.padding, max(0.0, width - 2 * t.padding))
-        self.height = height(self) + 2 * t.padding
+        self.height = height(self, max(0.0, width - 2 * t.padding)) + 2 * t.padding
         self._width = width
         self._dirty = False
         self.layout_count += 1

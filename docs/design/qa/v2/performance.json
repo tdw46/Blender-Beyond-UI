@@ -1,0 +1,48 @@
+{
+  "baseline_commit": "5ce15666d0835c8fe6aa336cfe57880ab7162cdd",
+  "before": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/perf-baseline",
+    "workload": "4 visible 630x472 compound cards in 1260x944; picker has 10000 rows; 20 warmup + 100 measured frames; tint-only backdrop",
+    "cpu_submission": {
+      "p50_ms": 0.315270503051579,
+      "p95_ms": 0.36695797462016344,
+      "max_ms": 0.40625000838190317
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 0.782145478297025,
+      "p95_ms": 1.067624893039465,
+      "max_ms": 1.238917000591755
+    },
+    "retained_line_batches": 18,
+    "warm_resources_unchanged": true,
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "after": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "workload": "4 visible 630x472 compound cards in 1260x944; picker has 10000 rows; 20 warmup + 100 measured frames; tint-only backdrop",
+    "cpu_submission": {
+      "p50_ms": 0.45389652950689197,
+      "p95_ms": 0.5107090109959245,
+      "max_ms": 0.5702080670744181
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 1.0769375367090106,
+      "p95_ms": 1.2924999464303255,
+      "max_ms": 1.3652910711243749
+    },
+    "retained_line_batches": 26,
+    "warm_resources_unchanged": true,
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "baseline_scope": "previous library prototype, not the source Effect Layers extension"
+}

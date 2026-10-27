@@ -4,7 +4,6 @@ Host registers its own modal operator and calls event(). No classes, timers,
 preferences, scene properties or input modals are installed by this library.
 """
 
-from pathlib import Path
 from .bridge import load, BridgeUnavailable
 
 
@@ -18,7 +17,6 @@ class PanelHost:
         self.records = {}
         self.handlers = []
         self.font = -1
-        self.font_path = ""
         self.reason = "Not started"
         self.closed = False
 
@@ -32,21 +30,14 @@ class PanelHost:
         except BridgeUnavailable as error:
             self.reason = str(error)
             return False
-        import bpy, blf
+        import bpy
+        from ..gpu.typography import Fonts
 
-        fonts = Path(bpy.utils.resource_path("LOCAL")) / "datafiles/fonts"
-        path = next(iter(fonts.glob("Inter*.woff2")), None) or next(
-            iter(fonts.glob("bfont*")), None
-        )
-        if path is None:
+        try:
+            self.font = Fonts()
+        except RuntimeError as error:
             self.bridge = None
-            self.reason = "Blender UI font is unavailable"
-            return False
-        self.font_path = str(path)
-        self.font = blf.load(self.font_path)
-        if self.font < 0:
-            self.bridge = None
-            self.reason = "Could not load a private UI font"
+            self.reason = str(error)
             return False
         for space, region in (
             (bpy.types.SpaceView3D, "UI"),
@@ -264,8 +255,6 @@ class PanelHost:
             space.draw_handler_remove(handle, region)
         self.handlers.clear()
         if self.font >= 0:
-            import blf
-
-            blf.unload(self.font_path)
+            self.font.close()
             self.font = -1
         self.bridge = None

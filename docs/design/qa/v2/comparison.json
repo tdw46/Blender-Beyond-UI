@@ -1,0 +1,64 @@
+{
+  "reference": "../../references/specialized-controls-v1.png",
+  "reference_sha256": "9fc9b50f456a75081da5b8abb619a7411e64cf611bef0cff763bb7c0a7bfa959",
+  "exact_match": false,
+  "notes": "RGB error is diagnostic, not acceptance. Reference background lighting is not known; color-marker and ramp-stop positions conflict with numeric labels. No image pixels enter the renderer.",
+  "controls": [
+    {
+      "control": "Curve Mapping",
+      "crop": [
+        118,
+        27,
+        748,
+        499
+      ],
+      "exact_match": false,
+      "changed_pixels": 274453,
+      "mean_absolute_rgb_error_v1": 27.14897542821272,
+      "mean_absolute_rgb_error_v2": 5.2154481660837595,
+      "capture_sha256": "ffd0156b8f1c3f0d35fcee053fffcfef8f4ef67df212b49d6d8edfb951000f07"
+    },
+    {
+      "control": "Color Ramp",
+      "crop": [
+        788,
+        27,
+        1418,
+        499
+      ],
+      "exact_match": false,
+      "changed_pixels": 283651,
+      "mean_absolute_rgb_error_v1": 39.08291184647117,
+      "mean_absolute_rgb_error_v2": 7.465002017756255,
+      "capture_sha256": "5ef4df16d454ea1a7145fc9e31e9aaab27b8ab9fc8abd500e2f1f98410a782d6"
+    },
+    {
+      "control": "Data Picker",
+      "crop": [
+        118,
+        523,
+        748,
+        995
+      ],
+      "exact_match": false,
+      "changed_pixels": 292136,
+      "mean_absolute_rgb_error_v1": 23.01099004573581,
+      "mean_absolute_rgb_error_v2": 6.03591606133979,
+      "capture_sha256": "969ffabe3f026cc414a5461d1b9faef9dd6084a03843a787529cc315ec201b79"
+    },
+    {
+      "control": "Color Picker",
+      "crop": [
+        788,
+        523,
+        1418,
+        995
+      ],
+      "exact_match": false,
+      "changed_pixels": 292955,
+      "mean_absolute_rgb_error_v1": 28.61218052192628,
+      "mean_absolute_rgb_error_v2": 9.959440857322214,
+      "capture_sha256": "bbbb2e7eb738147c8e6bef131c8608b8f865d9f51f3c32503e65919a846b47bb"
+    }
+  ]
+}

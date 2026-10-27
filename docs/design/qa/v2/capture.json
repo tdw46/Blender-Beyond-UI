@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "backend": "METAL",
+  "font": "Bundled Inter Regular / SemiBold",
+  "captures": [
+    {
+      "control": "Curve Mapping",
+      "file": "curve-mapping.png",
+      "background": "neutral",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.curve.CurveMapping"
+    },
+    {
+      "control": "Curve Mapping",
+      "file": "curve-mapping-contrast.png",
+      "background": "contrast",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.curve.CurveMapping"
+    },
+    {
+      "control": "Curve Mapping",
+      "file": "curve-mapping-alpha.png",
+      "background": "alpha",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.curve.CurveMapping"
+    },
+    {
+      "control": "Color Ramp",
+      "file": "color-ramp.png",
+      "background": "neutral",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.ramp.ColorRamp"
+    },
+    {
+      "control": "Color Ramp",
+      "file": "color-ramp-contrast.png",
+      "background": "contrast",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.ramp.ColorRamp"
+    },
+    {
+      "control": "Color Ramp",
+      "file": "color-ramp-alpha.png",
+      "background": "alpha",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.ramp.ColorRamp"
+    },
+    {
+      "control": "Data Picker",
+      "file": "data-picker.png",
+      "background": "neutral",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.picker.DataPicker"
+    },
+    {
+      "control": "Data Picker",
+      "file": "data-picker-contrast.png",
+      "background": "contrast",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.picker.DataPicker"
+    },
+    {
+      "control": "Data Picker",
+      "file": "data-picker-alpha.png",
+      "background": "alpha",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.picker.DataPicker"
+    },
+    {
+      "control": "Color Picker",
+      "file": "color-picker.png",
+      "background": "neutral",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.color.ColorPicker"
+    },
+    {
+      "control": "Color Picker",
+      "file": "color-picker-contrast.png",
+      "background": "contrast",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.color.ColorPicker"
+    },
+    {
+      "control": "Color Picker",
+      "file": "color-picker-alpha.png",
+      "background": "alpha",
+      "size": [
+        630,
+        472
+      ],
+      "painter": "beyond_ui.widgets.color.ColorPicker"
+    }
+  ],
+  "source": "Actual Blender GPUOffScreen, reference skin, production library painters; no reference pixels used. Contrast/alpha fixtures test tint-only transparency; shared blur is not exercised in this offscreen fixture.",
+  "source_sha256": {
+    "beyond_ui/__init__.py": "bdf7ff38ce65a2d7d9243f8d838c64125579e04e1f590390d538c15e00649099",
+    "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+    "beyond_ui/bindings.py": "ff280e02e3b2bdd4335c83dc9990c6b7f946a68bc47a40193fdad5d6120498e2",
+    "beyond_ui/canvas.py": "420df8b0411e6a20c18ec4d27b68576c2a36cde00088ec4526ff7ec75e34c065",
+    "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+    "beyond_ui/editing.py": "ad68a307294441d8b52370002a04875963b526f2ed8e89eff790e0d343543f68",
+    "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+    "beyond_ui/gpu/glass.py": "c64ba0e47a92880bf87e542dc1d91011e9051c95aa61ad492fd2a1f319d9750b",
+    "beyond_ui/gpu/menus.py": "6cdf37ca392fbd6bd63d52f5793208d3c14eb64639946c96ced6a4bc3d9ff0ac",
+    "beyond_ui/gpu/paint.py": "a91dc7700252f3609783b2423548ea253311686368c582bd1e4e7fcb573b8c73",
+    "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+    "beyond_ui/gpu/skin.py": "b44ce92da8b67913ce3ecea310d2ee3b2479ae532b51b757078a417021f4be98",
+    "beyond_ui/gpu/style.py": "fd2772c351ebd8b80731b777fe2bcbd2496f219f7be7f83bec80b12804638088",
+    "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+    "beyond_ui/gpu/typography.py": "1c532ea9a590359abf5667d503b73d7296e316ecbd5725f3a5be1c028826cec5",
+    "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+    "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+    "beyond_ui/hosts/panel.py": "6d5eee56be51af6206cf1bec38cf3481fe1ffdec33a8a591c078897ec543072b",
+    "beyond_ui/layout.py": "87d5e259a03754b5470b6dedad5771c1d0b46523d362f31b54d3352aae4943c5",
+    "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+    "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+    "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+    "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+    "beyond_ui/widgets/__init__.py": "f3265f17ea9eaaf70489074f37ed4d4b05eef98fed10fdd58e3991bf853d2ac8",
+    "beyond_ui/widgets/base.py": "46af6a3fce2cf31d843e68edf68001985392289bc74edd08cff4dd8254ea8ff4",
+    "beyond_ui/widgets/color.py": "882d048515f410b3b0f5736267e5a89a50494b6727c4cda674d7d46a7b79691a",
+    "beyond_ui/widgets/curve.py": "9738e5b5bf196d9724ea9fd52609e005f77de04d180cb05448286a5266b454a7",
+    "beyond_ui/widgets/icon_paths.py": "a1c30cc74ba25bb5cfe74991358843eb1ae8e73c03c0e4665b8fa9bf3d07350c",
+    "beyond_ui/widgets/metrics.py": "ffeefff0d10f117684316111a21e5bec6f1ce7f74ee20e5875abd14026f14cca",
+    "beyond_ui/widgets/picker.py": "047acec27485fc43a45c0aa0a84ddd34f24408052a657291f446be5251650655",
+    "beyond_ui/widgets/ramp.py": "5193d9b74387ba976a17f549651c583ac0ccc61f5f091fa788f51a83740a5ac1",
+    "beyond_ui/widgets/rna.py": "6e048d4711be0afeab0c0c452ad8e9d4dbab257df5d024f728cde216c5a229a4",
+    "beyond_ui/widgets/socket.py": "7e30dc4d4e3950561e6e2f683850554b6ae5074175047a1a3850f1eb3a2ca7ab"
+  },
+  "font_sha256": {
+    "Inter-Regular.woff2": "e06f6b1bc553aaea4e4668023ed0ab0a147129c3107f511bc7d03d361b0ae085",
+    "Inter-SemiBold.woff2": "5cb7103e4e605989afebc03d989c79201e54b21b5183db33981f70db9178a301"
+  },
+  "acceptance": "Unapproved; Tyler performs visual QA"
+}

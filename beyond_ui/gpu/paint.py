@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager
 from functools import lru_cache
-from . import style, glass
+from . import style, glass, typography, skin
 from ..editing import display_number
 
 
@@ -62,35 +62,39 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
         a, b, c, d = r
         return x + a * sx, y + h - (b + d) * sy, c * sx, d * sy
 
-    def text(value, r, ink):
+    def text(value, r, ink, role="body"):
+        active_font = typography.face(font, role)
         a, b, c, d = r
         size = t.font_size * scale
-        blf.size(font, size)
+        blf.size(active_font, size)
         left = max(a + 6 * scale, cx)
         bottom = max(b, cy)
         right = min(a + c - 4 * scale, cx + cw)
         top = min(b + d, cy + ch)
         if right <= left or top <= bottom:
             return
-        blf.enable(font, blf.CLIPPING)
+        blf.enable(active_font, blf.CLIPPING)
         try:
-            blf.clipping(font, left, bottom, right, top)
-            blf.color(font, *ink)
+            blf.clipping(active_font, left, bottom, right, top)
+            blf.color(active_font, *ink)
             blf.position(
-                font, a + 6 * scale, b + (d - measure(font, size, "H")[1]) / 2, 0
+                active_font,
+                a + 6 * scale,
+                b + (d - measure(active_font, size, "H")[1]) / 2,
+                0,
             )
-            blf.draw(font, str(value))
+            blf.draw(active_font, str(value))
         finally:
-            blf.disable(font, blf.CLIPPING)
+            blf.disable(active_font, blf.CLIPPING)
 
     def surface(r, ink, radius=t.radius):
         if backdrop is None or not glass.lens(backdrop, r, radius * scale, ink):
-            style.draw(
-                *r,
+            skin.draw(
+                r,
                 ink,
+                style.shade(ink, 0.025),
                 radius=radius * scale,
                 border=0.6 * scale,
-                top=style.shade(ink, 0.025),
             )
 
     count = 0
@@ -123,7 +127,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     else palette["field"],
                 )
             if kind == "widget":
-                control.options["widget"].paint(r, font, palette)
+                control.options["widget"].paint(r, font, palette, backdrop=backdrop)
             elif kind == "separator":
                 style.draw(a, b + d / 2, c, scale, palette["muted"], radius=0)
             elif kind == "toggle":
@@ -187,12 +191,12 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 if texture is not None:
                     style.preview(texture, *r, radius=t.radius * scale)
             else:
-                text(control.label, r, ink)
+                text(control.label, r, ink, control.options.get("text_role", "body"))
             count += 1
         if canvas.overlay and "widget" in canvas.overlay:
             r = mapped(canvas.overlay["rect"])
             surface(r, palette["overlay"])
-            canvas.overlay["widget"].paint(r, font, palette)
+            canvas.overlay["widget"].paint(r, font, palette, backdrop=backdrop)
         elif canvas.overlay:
             for r, value, label in canvas.overlay["items"]:
                 target = mapped(r)

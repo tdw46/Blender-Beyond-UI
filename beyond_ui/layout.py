@@ -41,6 +41,7 @@ class Layout:
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
+        self._text_role = "body"
         self.enabled = True
         self.active = True
         self.alert = False
@@ -72,6 +73,7 @@ class Layout:
             state=self.state,
         )
         for name in (
+            "_text_role",
             "enabled",
             "active",
             "alert",
@@ -103,13 +105,13 @@ class Layout:
     def row(self, *, align=False, heading="", heading_ctxt="", translate=True):
         row = self._child(self.group.row())
         if heading:
-            row.label(text=heading, text_ctxt=heading_ctxt, translate=translate)
+            row.title(text=heading, text_ctxt=heading_ctxt, translate=translate)
         return row
 
     def column(self, *, align=False, heading="", heading_ctxt="", translate=True):
         column = self._child(self.group.column())
         if heading:
-            column.label(text=heading, text_ctxt=heading_ctxt, translate=translate)
+            column.title(text=heading, text_ctxt=heading_ctxt, translate=translate)
         return column
 
     def box(self):
@@ -123,6 +125,14 @@ class Layout:
             self._text(text, text_ctxt, translate),
             icon=icon,
             icon_value=icon_value,
+            text_role=self._text_role,
+            **self._options(),
+        )
+
+    def title(self, *, text="", text_ctxt="", translate=True):
+        return self.group.title(
+            self._key("title"),
+            self._text(text, text_ctxt, translate),
             **self._options(),
         )
 
@@ -346,6 +356,7 @@ class Layout:
     def panel(self, idname, *, default_closed=False):
         expanded = self.state.get(idname, not default_closed)
         header = self.row()
+        header._text_role = "title"
 
         def toggle():
             self.state[idname] = not expanded
@@ -357,6 +368,7 @@ class Layout:
 
     def panel_prop(self, data, property):
         header = self.row()
+        header._text_role = "title"
         header.prop(data, property)
         return header, self.column() if getattr(data, property) else None
 

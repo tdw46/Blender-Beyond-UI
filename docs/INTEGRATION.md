@@ -84,3 +84,24 @@ ui.template_curve_mapping(node, "mapping")
 This preserves native behavior and full installed API access. It is not part of
 the custom parity acceptance count. Retain a `NativeLayout` only during the
 current Blender draw callback.
+
+## Shared typography and reference skin
+
+`PanelHost` owns bundled Inter Regular/SemiBold handles. Use `canvas.title(key,
+text)` or `Layout.title(text=...)` for headings. Labels returned inside
+`Layout.panel()` and `panel_prop()` headers, plus row/column `heading` labels,
+receive the title role automatically. A custom host should create
+`beyond_ui.gpu.typography.Fonts()` once, pass it as `font`, and call `close()` at
+teardown. Plain integer font handles remain supported but cannot supply a
+separate semibold face.
+
+The default shared palette is the explicit reference skin, including transparent
+fields and consistent blue highlights. `style.native_theme_palette(preferences)`
+is an explicit opt-in utility; native Blender theme colors do not override the
+reference skin. Compound widgets include their card/header; do not wrap them in
+a second painted header. Canvas derives their height from the authored aspect
+ratio unless an explicit height is supplied. Hosts provide a backdrop revision
+to `PanelHost` to reuse the source glass pipeline; otherwise translucent tinting
+is used. `ColorRamp(linear=True)` converts scene-linear stop colors to display
+space consistently for the gradient, handles and swatch. Set `linear=False` only
+for display-space bindings.

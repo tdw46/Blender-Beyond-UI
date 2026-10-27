@@ -12,14 +12,14 @@ from ..editing import (
     to_display,
     to_linear,
 )
-from ..gpu import style
+from ..gpu import style, skin
+from .metrics import COLOR, SIZE
 
 
 class ColorPicker(Widget):
-    width = 320.0
-    height = 240.0
-    sv = (8, 40, 176, 176)
-    hue = (8, 222, 176, 14)
+    width, height = SIZE
+    sv = COLOR["sv"]
+    hue = COLOR["hue"]
 
     def __init__(self, binding, *, linear=True, eyedropper=None):
         super().__init__()
@@ -72,7 +72,17 @@ class ColorPicker(Widget):
             a, b, w, d = self.hue
             self._rgb((max(0.0, min(1.0, (x - a) / w)), s, v))
         elif self.drag == "alpha" and len(value) > 3:
-            self.transaction.update((*value[:3], max(0.0, min(1.0, (x - 196) / 116))))
+            self.transaction.update(
+                (
+                    *value[:3],
+                    max(
+                        0.0,
+                        min(
+                            1.0, (x - COLOR["alpha_track"][0]) / COLOR["alpha_track"][2]
+                        ),
+                    ),
+                )
+            )
 
     def event(self, event, x, y, *, clipboard=None):
         if not self.binding.valid():
@@ -126,13 +136,14 @@ class ColorPicker(Widget):
             return True
         if kind != "LEFTMOUSE" or not press:
             return False
-        if y < 32:
-            self.mode = "RGB" if x < 160 else "HSV"
-            return True
+        for mode, r in zip(("RGB", "HSV"), COLOR["tabs"]):
+            if contains(r, x, y):
+                self.mode = mode
+                return True
         for name, rect in (
             ("sv", self.sv),
             ("hue", self.hue),
-            ("alpha", (196, 178, 116, 16)),
+            ("alpha", COLOR["alpha_track"]),
         ):
             if contains(rect, x, y):
                 self._begin()
@@ -141,7 +152,7 @@ class ColorPicker(Widget):
                 return True
         current = self.binding.read()
         for i in range(4 if len(current) > 3 else 3):
-            if contains((196, 40 + i * 34, 116, 28), x, y):
+            if contains((COLOR["fields"][i] if i < 3 else (374, 294, 230, 48)), x, y):
                 channels = (
                     color_hsv(current, self.linear, self.hue_value)
                     if self.mode == "HSV"
@@ -153,39 +164,36 @@ class ColorPicker(Widget):
                 self.field = i
                 self.text_edit = Text(current[3] if i == 3 else channels[i])
                 return True
-        if contains((196, 208, 88, 28), x, y):
+        if contains(COLOR["hex"], x, y):
             self._begin()
             self.field = "hex"
             self.text_edit = Text(color_hex(current, self.linear))
             return True
-        if contains((288, 208, 24, 28), x, y) and self.eyedropper:
+        if contains(COLOR["eyedropper"], x, y) and self.eyedropper:
             self.eyedropper(self.binding)
             return True
         return False
 
-    def paint(self, rect, font, palette):
-        p = Painter(rect, self.width, self.height, font, palette)
+    def paint(self, rect, font, palette, *, backdrop=None):
+        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p.card("Color Picker")
         value = self.binding.read()
         h, s, v = color_hsv(value, self.linear, self.hue_value)
-        for i, label in enumerate(("RGB", "HSV")):
-            r = (8 + i * 156, 6, 148, 26)
-            p.surface(r, "tab" if self.mode == label else "field")
-            p.text(r, label)
-        style.draw(*p.map(self.sv), (1, 1, 1, 1), radius=4 * p.scale, mode=1, hue=h)
-        style.draw(*p.map(self.hue), (1, 1, 1, 1), radius=3 * p.scale, mode=2)
+        for label, r in zip(("RGB", "HSV"), COLOR["tabs"]):
+            p.surface(r, "tab" if self.mode == label else "button")
+            p.text(r, label, size=19, align="center")
+        skin.draw(p.map(self.sv), (1, 1, 1, 1), radius=6 * p.scale, mode=1, hue=h)
+        skin.draw(p.map(self.hue), (1, 1, 1, 1), radius=6 * p.scale, mode=2)
         a, b, w, d = p.map(self.sv)
         style.picker_marker(
-            a + s * w, b + v * d, 5 * p.scale, (1, 1, 1, 1), scale=p.scale
+            a + s * w,
+            b + v * d,
+            14 * p.scale,
+            color_rgb((h, s, v), False) + (1.0,),
+            scale=p.scale,
         )
-        a, b, w, d = p.map(self.hue)
-        style.draw(
-            a + h * w - 2 * p.scale,
-            b - 1 * p.scale,
-            4 * p.scale,
-            d + 2 * p.scale,
-            palette["text"],
-            radius=1 * p.scale,
-        )
+        a, b, w, d = self.hue
+        p.surface((a + h * w - 4, b - 3, 8, d + 6), skin.TEXT, 1, 0.6)
         channels = (
             color_hsv(value, self.linear, self.hue_value)
             if self.mode == "HSV"
@@ -193,44 +201,39 @@ class ColorPicker(Widget):
             if self.linear
             else value[:3]
         )
-        labels = ("H", "S", "V") if self.mode == "HSV" else ("R", "G", "B")
-        for i, (label, v) in enumerate(zip(labels, channels)):
-            r = (196, 40 + i * 34, 116, 28)
-            p.surface(r)
+        for i, (label, v) in enumerate(
+            zip("HSV" if self.mode == "HSV" else "RGB", channels)
+        ):
             txt = (
                 self.text_edit.text
                 if self.text_edit and self.field == i
                 else f"{v:.2f}"
             )
-            p.text(r, f"{label}   {txt}")
+            p.field(COLOR["fields"][i], label, txt, size=21)
         if len(value) > 3:
-            r = (196, 142, 116, 28)
-            p.surface(r)
-            p.text(
-                r,
-                "Alpha  "
-                + (
-                    self.text_edit.text
-                    if self.text_edit and self.field == 3
-                    else f"{value[3]:.2f}"
-                ),
+            p.surface(COLOR["alpha"])
+            p.field(
+                (374, 294, 230, 48),
+                "Alpha",
+                self.text_edit.text
+                if self.text_edit and self.field == 3
+                else f"{value[3]:.2f}",
+                split=126,
+                size=21,
             )
-            p.surface((196, 178, 116, 8), "slider_track", 4)
-            p.surface((196, 178, 116 * max(0, min(1, value[3])), 8), "slider_fill", 4)
-        r = (196, 208, 88, 28)
-        p.surface(r)
+            r = COLOR["alpha_track"]
+            a, b, w, d = r
+            p.surface(r, "track", 8, 0)
+            ratio = max(0, min(1, value[3]))
+            p.surface((a, b, w * ratio, d), "fill", 8, 0)
+            p.circle((a + w * ratio, b + d / 2), 11, skin.TEXT, 0.7)
+        p.surface(COLOR["hex"], "input")
         p.text(
-            r,
+            COLOR["hex"],
             self.text_edit.text
             if self.text_edit and self.field == "hex"
             else color_hex(value, self.linear),
+            size=21,
         )
-        a, b, w, d = p.map((288, 208, 24, 28))
-        p.surface((288, 208, 24, 28))
-        style.icon(
-            "eyedropper",
-            a + w / 2,
-            b + d / 2,
-            16 * p.scale,
-            palette["text"] if self.eyedropper else palette["muted"],
-        )
+        p.surface(COLOR["eyedropper"])
+        p.icon("eyedropper", COLOR["eyedropper"], 29)

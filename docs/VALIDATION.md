@@ -9,7 +9,7 @@ unit tests, native forwarding or ordinary CI.
 
 ## Evidence
 
-- 16 pure Python tests pass: transactions/rollback, stale-owner rejection,
+- 18 pure Python tests pass: transactions/rollback, stale-owner rejection,
   retained geometry, clipped input, million-row virtualization, text/arithmetic,
   independent vendor namespaces, and custom color/curve/ramp/picker interactions.
 - Ruff parser/name-error checks pass. No claim of full static type validation.
@@ -25,9 +25,9 @@ unit tests, native forwarding or ordinary CI.
   geometry, outside-region pass-through, invalidation rollback, and disable /
   re-enable callback ownership.
 - All four specialized widget painters execute in Blender 5.2.2 / Metal and
-  produce actual GPU framebuffer captures. [QA board](design/qa/v1/index.html),
-  [full image](design/qa/v1/all-controls-comparison.png),
-  [capture provenance](design/qa/v1/capture.json).
+  produce actual GPU framebuffer captures. [QA board](design/qa/v2/index.html),
+  [full image](design/qa/v2/all-controls-comparison.png),
+  [capture provenance](design/qa/v2/capture.json).
 
 No live Blender MCP listener was available. Tests used isolated processes and
 profiles; the source BVT extension and unrelated user scenes were not changed.
@@ -46,3 +46,10 @@ No visual approval or native Windows/Linux qualification is implied.
 The strict `tools/check_custom_parity.py --require-complete` gate intentionally
 fails. Ordinary CI validates the current implementation and honest ledger; it
 must never be described as evidence of full custom parity.
+
+## Reference styling revision 2
+
+All four revised compound painters execute in Blender 5.1.2 and 5.2.2. The
+[revision notes](design/qa/v2/NOTES.md) distinguish the improved visual comparison,
+actual alpha/transparency proof, measured rendering costs and remaining defects.
+No exact match or source-performance equivalence is claimed.

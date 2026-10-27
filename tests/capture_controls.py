@@ -6,6 +6,8 @@ import gpu
 from mathutils import Matrix
 from pathlib import Path
 import json
+import hashlib
+from itertools import product
 import os
 import struct
 import sys
@@ -15,8 +17,10 @@ import zlib
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from beyond_ui.bindings import Binding
+from beyond_ui.editing import to_linear
 from beyond_ui.widgets import ColorPicker, ColorRamp, CurveMapping, DataPicker
-from beyond_ui.gpu import style
+from beyond_ui.gpu import style, skin
+from beyond_ui.gpu.typography import Fonts
 from beyond_ui.gpu.paint import gpu_state
 
 OUTPUT = Path(os.environ["BEYOND_UI_CAPTURE_DIR"])
@@ -56,12 +60,7 @@ def run():
     font = -1
     target = None
     try:
-        fonts = Path(bpy.utils.resource_path("LOCAL")) / "datafiles/fonts"
-        path = next(iter(fonts.glob("Inter*.woff2")), None) or next(
-            iter(fonts.glob("bfont*")), None
-        )
-        assert path, "No Blender font"
-        font = blf.load(str(path))
+        font = Fonts()
         curve = CurveMapping(
             binding(((0.05, 0.05), (0.5, 0.5), (0.95, 0.95))),
             channel=binding(3),
@@ -72,9 +71,9 @@ def run():
         ramp = ColorRamp(
             binding(
                 (
-                    (0.0, (0.0, 0.03, 0.4, 1.0)),
-                    (0.5, (0.0, 0.6, 0.9, 1.0)),
-                    (1.0, (0.8, 0.95, 1.0, 1.0)),
+                    (0.0, tuple(to_linear(c) for c in (0.0, 0.26, 0.77)) + (1.0,)),
+                    (0.5, tuple(to_linear(c) for c in (0.10, 0.75, 0.94)) + (1.0,)),
+                    (1.0, tuple(to_linear(c) for c in (0.94, 0.98, 1.0)) + (1.0,)),
                 )
             )
         )
@@ -95,7 +94,10 @@ def run():
         palette = style.theme_palette(bpy.context.preferences)
         target = gpu.types.GPUOffScreen(width, height, format="RGBA8")
         records = []
-        for slug, title, widget in widgets:
+        for (slug, title, widget), variant in product(
+            widgets, ("neutral", "contrast", "alpha")
+        ):
+            filename = slug + ("" if variant == "neutral" else "-" + variant) + ".png"
             with (
                 target.bind(),
                 gpu.matrix.push_pop(),
@@ -116,36 +118,32 @@ def run():
                     )
                 )
                 gpu.state.active_framebuffer_get().clear(
-                    color=(0.085, 0.09, 0.095, 1.0)
+                    color=(0, 0, 0, 0)
+                    if variant == "alpha"
+                    else (22 / 255, 25 / 255, 27 / 255, 1.0)
                 )
-                # The frame is an actual GPU component, not reference pixels.
-                style.draw(
-                    0, 0, width, height, (0.12, 0.13, 0.14, 1.0), radius=12, border=1.0
-                )
-                style.draw(
-                    1,
-                    height - 60,
-                    width - 2,
-                    59,
-                    (0.16, 0.17, 0.18, 0.8),
-                    radius=10,
-                    border=0.5,
-                )
-                style.icon("▾", 30, height - 30, 18, palette["text"])
-                blf.size(font, 26)
-                blf.color(font, *palette["text"])
-                blf.position(font, 66, height - 40, 0)
-                blf.draw(font, title)
-                widget.paint((18, 18, width - 36, height - 88), font, palette)
+                if variant == "contrast":
+                    for row in range(6):
+                        for col in range(8):
+                            color = (
+                                skin.rgba("a67c43")
+                                if (row + col) % 2
+                                else skin.rgba("347b9b")
+                            )
+                            skin.draw(
+                                (col * 80, row * 80, 80, 80), color, radius=0, border=0
+                            )
+                widget.paint((0, 0, width, height), font, palette)
                 buffer = gpu.state.active_framebuffer_get().read_color(
                     0, 0, width, height, 4, 0, "UBYTE"
                 )
                 buffer.dimensions = width * height * 4
-                png(OUTPUT / f"{slug}.png", width, height, buffer)
+                png(OUTPUT / filename, width, height, buffer)
                 records.append(
                     {
                         "control": title,
-                        "file": slug + ".png",
+                        "file": filename,
+                        "background": variant,
                         "size": [width, height],
                         "painter": widget.__class__.__module__
                         + "."
@@ -157,9 +155,17 @@ def run():
             "version": bpy.app.version_string,
             "build": bpy.app.build_hash.decode(),
             "backend": gpu.platform.backend_type_get(),
-            "font": path.name,
+            "font": "Bundled Inter Regular / SemiBold",
             "captures": records,
-            "source": "Actual Blender GPUOffScreen, stock theme, library painters; no reference pixels used",
+            "source": "Actual Blender GPUOffScreen, reference skin, production library painters; no reference pixels used. Contrast/alpha fixtures test tint-only transparency; shared blur is not exercised in this offscreen fixture.",
+            "source_sha256": {
+                str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in sorted((ROOT / "beyond_ui").rglob("*.py"))
+            },
+            "font_sha256": {
+                p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in sorted((ROOT / "beyond_ui/assets/fonts").glob("*.woff2"))
+            },
             "acceptance": "Unapproved; Tyler performs visual QA",
         }
     except Exception:
@@ -168,7 +174,7 @@ def run():
         if target is not None:
             target.free()
         if font >= 0:
-            blf.unload(str(path))
+            font.close()
     (OUTPUT / "capture.json").write_text(json.dumps(result, indent=2) + "\n")
     print("BEYOND_UI_CAPTURE", json.dumps(result), flush=True)
     bpy.ops.wm.quit_blender()

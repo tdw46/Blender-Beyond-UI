@@ -37,7 +37,18 @@ def shade(color, amount, alpha=None):
     )
 
 
-def theme_palette(preferences):
+def theme_palette(preferences=None):
+    """The custom reference skin; native-theme adaptation is explicitly opt-in."""
+    from .skin import palette
+
+    result = palette()
+    native = _theme_palette(((0.025, 0.38, 0.77, 1.0),) * 11)
+    names = ("bg", "card", "bar", "accent", "field", "text", "muted", "api", "selected")
+    result["tokens"] = {key: result[name] for key, name in zip(native["tokens"], names)}
+    return result
+
+
+def native_theme_palette(preferences):
     """Read public widget roles at paint time; cache derived colors, not RNA.
 
     Theme RNA is display-space, unlike scene material colors. No conversion,

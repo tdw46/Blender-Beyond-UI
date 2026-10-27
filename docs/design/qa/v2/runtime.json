@@ -1,0 +1,116 @@
+{
+  "background": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9",
+        "documented_members": {
+          "Header": 11,
+          "Menu": 18,
+          "Panel": 28,
+          "UILayout": 130,
+          "UIList": 21
+        },
+        "checks": [
+          "documented RNA availability",
+          "RNA edit rollback",
+          "two vendor namespaces",
+          "register/unregister twice",
+          "custom RNA authoring without native delegation",
+          "custom ramp/curve transaction rollback",
+          "unsupported template fails explicitly"
+        ],
+        "platform": "darwin"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/runtime-v2/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c",
+        "documented_members": {
+          "Header": 11,
+          "Menu": 18,
+          "Panel": 30,
+          "UILayout": 134,
+          "UIList": 21
+        },
+        "checks": [
+          "documented RNA availability",
+          "RNA edit rollback",
+          "two vendor namespaces",
+          "register/unregister twice",
+          "custom RNA authoring without native delegation",
+          "custom ramp/curve transaction rollback",
+          "unsupported template fails explicitly"
+        ],
+        "platform": "darwin"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/runtime-v2/blender-1.log"
+    }
+  ],
+  "windowed": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9",
+        "checks": [
+          "all documented UILayout members resolve in draw",
+          "native nested layouts/operator properties",
+          "custom anchor and GPU shader draw",
+          "real modal mouse input toggles custom binding",
+          "warm layout retains geometry",
+          "outside-region input passes through",
+          "owner invalidation rolls back active edit",
+          "disable/re-enable draws with independent callback ownership"
+        ],
+        "native_draws": 7,
+        "error": "",
+        "platform": "darwin"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/windowed-v2/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c",
+        "checks": [
+          "all documented UILayout members resolve in draw",
+          "native nested layouts/operator properties",
+          "custom anchor and GPU shader draw",
+          "real modal mouse input toggles custom binding",
+          "warm layout retains geometry",
+          "outside-region input passes through",
+          "owner invalidation rolls back active edit",
+          "disable/re-enable draws with independent callback ownership"
+        ],
+        "native_draws": 7,
+        "error": "",
+        "platform": "darwin"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/windowed-v2/blender-1.log"
+    }
+  ],
+  "specialized_gpu_5_1": {
+    "passed": true,
+    "version": "5.1.2",
+    "build": "ec6e62d40fa9",
+    "backend": "METAL"
+  }
+}

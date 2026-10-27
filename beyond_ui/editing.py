@@ -81,7 +81,7 @@ def color_rgb(hsv, linear=True):
 
 def color_hex(value, linear=True):
     rgb = (to_display(v) for v in value[:3]) if linear else value[:3]
-    return "#" + "".join(f"{round(max(0.0, min(1.0, v)) * 255):02X}" for v in rgb)
+    return "#" + "".join(f"{int(max(0.0, min(1.0, v)) * 255 + 0.5):02X}" for v in rgb)
 
 
 def parse_color_hex(text, current, linear=True):
