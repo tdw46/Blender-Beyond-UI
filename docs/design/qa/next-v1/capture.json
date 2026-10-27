@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "backend": "METAL",
+  "font": "Bundled Inter Regular / SemiBold",
+  "captures": [
+    {
+      "control": "Palette",
+      "file": "palette.png",
+      "background": "neutral",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.palette.Palette"
+    },
+    {
+      "control": "Palette",
+      "file": "palette-contrast.png",
+      "background": "contrast",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.palette.Palette"
+    },
+    {
+      "control": "Palette",
+      "file": "palette-alpha.png",
+      "background": "alpha",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.palette.Palette"
+    },
+    {
+      "control": "Matrix",
+      "file": "matrix.png",
+      "background": "neutral",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.matrix.MatrixView"
+    },
+    {
+      "control": "Matrix",
+      "file": "matrix-contrast.png",
+      "background": "contrast",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.matrix.MatrixView"
+    },
+    {
+      "control": "Matrix",
+      "file": "matrix-alpha.png",
+      "background": "alpha",
+      "size": [
+        705,
+        487
+      ],
+      "painter": "beyond_ui.widgets.matrix.MatrixView"
+    },
+    {
+      "control": "Progress Bar",
+      "file": "progress-bar.png",
+      "background": "neutral",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    },
+    {
+      "control": "Progress Bar",
+      "file": "progress-bar-contrast.png",
+      "background": "contrast",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    },
+    {
+      "control": "Progress Bar",
+      "file": "progress-bar-alpha.png",
+      "background": "alpha",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    },
+    {
+      "control": "Progress Ring",
+      "file": "progress-ring.png",
+      "background": "neutral",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    },
+    {
+      "control": "Progress Ring",
+      "file": "progress-ring-contrast.png",
+      "background": "contrast",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    },
+    {
+      "control": "Progress Ring",
+      "file": "progress-ring-alpha.png",
+      "background": "alpha",
+      "size": [
+        705,
+        437
+      ],
+      "painter": "beyond_ui.widgets.progress.Progress"
+    }
+  ],
+  "source": "Actual Blender GPUOffScreen, reference skin, production library painters; no reference pixels used. Contrast/alpha fixtures test tint-only transparency; shared blur is not exercised in this offscreen fixture.",
+  "source_sha256": {
+    "beyond_ui/__init__.py": "22dbe5d62ffa0a7419c90b9124b7366fa3a2bc9fef5f246557586863441849e6",
+    "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+    "beyond_ui/animation.py": "c15f0a195f7146543f373a1fe3468f62c2c50330641f207b43be34294617b2ac",
+    "beyond_ui/bindings.py": "ff280e02e3b2bdd4335c83dc9990c6b7f946a68bc47a40193fdad5d6120498e2",
+    "beyond_ui/canvas.py": "07537df4b765959b4c805c7abac77246ccb8942f7c1ddc9c46f94c4a8511c3af",
+    "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+    "beyond_ui/editing.py": "ad68a307294441d8b52370002a04875963b526f2ed8e89eff790e0d343543f68",
+    "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+    "beyond_ui/gpu/glass.py": "c64ba0e47a92880bf87e542dc1d91011e9051c95aa61ad492fd2a1f319d9750b",
+    "beyond_ui/gpu/menus.py": "6cdf37ca392fbd6bd63d52f5793208d3c14eb64639946c96ced6a4bc3d9ff0ac",
+    "beyond_ui/gpu/paint.py": "6df643d44655da79445f2da4fe95078aeddf652b051684bfdaa649f0c2215310",
+    "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+    "beyond_ui/gpu/progress.py": "a64b7761751b5bb68e18a5fae4287a24f9c7e87de18d3423165591ecf3118f7d",
+    "beyond_ui/gpu/skin.py": "3b27b35200c405e7ec817df0625db1c059df26653167274427c8096c7a7a1779",
+    "beyond_ui/gpu/style.py": "fd2772c351ebd8b80731b777fe2bcbd2496f219f7be7f83bec80b12804638088",
+    "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+    "beyond_ui/gpu/typography.py": "c5a5f75aa05ed07769b4ff8a9c6c28aec2726ee44d1024fed768b2e021b9dd5a",
+    "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+    "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+    "beyond_ui/hosts/panel.py": "fdec6c05d34893e84c32552e9bcb286114efa6bc4fe88ea6cc20b77f5858f99f",
+    "beyond_ui/layout.py": "a3b9b502f242b4de735ff839bd996c35524f3ee08a93ff7dce800906e419a37d",
+    "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+    "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+    "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+    "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+    "beyond_ui/widgets/__init__.py": "27ef333656b9033c833ea4ffa585f57ef0690cadb5e3381669859707865dff2a",
+    "beyond_ui/widgets/base.py": "2d1b9c6f162131362974779ea4f1b2587db20c39015d1dabaee09be70a1a05d5",
+    "beyond_ui/widgets/color.py": "ad742c17ece8fc343ca673adb0c6ea3c32fd697351b5f12b75a6776362cb7de9",
+    "beyond_ui/widgets/curve.py": "79492cb5d233407f2918e01157b2b0c9e79e2d60f9edf8c79533789f6fe03ad0",
+    "beyond_ui/widgets/icon_paths.py": "a1c30cc74ba25bb5cfe74991358843eb1ae8e73c03c0e4665b8fa9bf3d07350c",
+    "beyond_ui/widgets/matrix.py": "a465df55d36988c39d3f48c8f96ea193b31b7bd40087101d97bfbd6269db1fdd",
+    "beyond_ui/widgets/metrics.py": "ffeefff0d10f117684316111a21e5bec6f1ce7f74ee20e5875abd14026f14cca",
+    "beyond_ui/widgets/palette.py": "762365fb89f9c6c50e9728fcfb928bf3d93f4276b9acadaa1579f90c8abbdc7a",
+    "beyond_ui/widgets/picker.py": "5eaa38ccdba1d7bba788c7f9e00be5a763eb0d81c12f32cb97146b6d7e24f40f",
+    "beyond_ui/widgets/progress.py": "d5e847f520e24801b1e4cd8dbe72a05b261db17cdd48986b69174f709984a8df",
+    "beyond_ui/widgets/ramp.py": "781975b4340c528139fccaf7e8a62ea5eda13ee5c11fdc723ba8117c96bc3146",
+    "beyond_ui/widgets/rna.py": "ddb47479b4b6d2743ecb8784133bb8a4444dda6adf11447407cd24e6e1b38873",
+    "beyond_ui/widgets/socket.py": "7e30dc4d4e3950561e6e2f683850554b6ae5074175047a1a3850f1eb3a2ca7ab"
+  },
+  "font_sha256": {
+    "Inter-Regular.woff2": "e06f6b1bc553aaea4e4668023ed0ab0a147129c3107f511bc7d03d361b0ae085",
+    "Inter-SemiBold.woff2": "5cb7103e4e605989afebc03d989c79201e54b21b5183db33981f70db9178a301"
+  },
+  "acceptance": "Unapproved; Tyler performs visual QA"
+}

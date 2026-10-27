@@ -97,7 +97,9 @@ class DataPicker(Widget):
         return False
 
     def paint(self, rect, font, palette, *, backdrop=None):
-        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p = Painter(
+            rect, self.width, self.height, font, palette, backdrop, motion=self.motion
+        )
         p.card("Data Picker")
         p.surface(PICKER["search"], "input", border=1)
         p.text(

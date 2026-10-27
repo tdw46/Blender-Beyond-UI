@@ -1,12 +1,29 @@
 """Small retained painter and event contracts for compound custom controls."""
 
+from contextlib import nullcontext
+from ..animation import Motion
 from ..editing import Text, number
 from ..gpu import style
 from ..gpu.paint import measure
 
 
 class Painter:
-    def __init__(self, rect, width, height, font, palette, backdrop=None):
+    def __init__(
+        self,
+        rect,
+        width,
+        height,
+        font,
+        palette,
+        backdrop=None,
+        *,
+        motion=None,
+        interactive=True,
+    ):
+        self.motion = motion
+        self.interactive = interactive
+        if motion is not None:
+            motion.begin_paint()
         self.rect, self.width, self.height = rect, width, height
         self.font, self.palette, self.backdrop = font, palette, backdrop
         self.sx, self.sy = rect[2] / width, rect[3] / height
@@ -17,18 +34,43 @@ class Painter:
         rx, ry, rw, rh = self.rect
         return rx + x * self.sx, ry + rh - (y + h) * self.sy, w * self.sx, h * self.sy
 
-    def surface(self, r, role="field", radius=8, border=0.7):
+    def surface(self, r, role="field", radius=8, border=0.7, *, motion_key=None):
         from ..gpu import skin
 
         colors = skin.ROLES.get(role) if isinstance(role, str) else None
         if colors is None:
             color = self.palette.get(role, role) if isinstance(role, str) else role
             colors = (color, color)
+        if (
+            motion_key is None
+            and isinstance(role, str)
+            and role in {"field", "input", "button", "tab", "selected", "thumb"}
+        ):
+            motion_key = tuple(r)
+        if self.motion is not None and motion_key is not None:
+            if self.interactive:
+                self.motion.region(motion_key, r)
+            if motion_key in self.motion.tracks:
+                with self.motion.deform(motion_key, self.map(r)):
+                    skin.draw(
+                        self.map(r),
+                        *colors,
+                        radius=radius * self.scale,
+                        border=border * self.scale,
+                    )
+                return
         skin.draw(
             self.map(r), *colors, radius=radius * self.scale, border=border * self.scale
         )
 
-    def card(self, title):
+    def deform(self, key, r, *, circular=False):
+        if self.motion is None or key is None:
+            return nullcontext()
+        if self.interactive:
+            self.motion.region(key, r, circular=circular)
+        return self.motion.deform(key, self.map(r))
+
+    def card(self, title, *, title_inset=67):
         from ..gpu import glass, skin
 
         r = (0, 0, self.width, self.height)
@@ -43,7 +85,11 @@ class Painter:
         )
         self.triangle(((23, 28), (39, 28), (31, 39)), skin.MUTED)
         self.text(
-            (67, 0, self.width - 115, 60), title, size=28, inset=0, weight="title"
+            (title_inset, 0, self.width - title_inset - 48, 60),
+            title,
+            size=28,
+            inset=0,
+            weight="title",
         )
         for y in (22, 32, 42):
             self.circle((self.width - 29, y), 2, skin.MUTED)
@@ -102,17 +148,19 @@ class Painter:
             1.8 * self.scale,
         )
 
-    def circle(self, center, radius, color, border=0):
+    def circle(self, center, radius, color, border=0, *, motion_key=None):
         from ..gpu import skin
 
         x, y = center
-        skin.draw(
-            self.map((x - radius, y - radius, radius * 2, radius * 2)),
-            color,
-            radius=radius * self.scale,
-            border=border * self.scale,
-            mode=3,
-        )
+        r = (x - radius, y - radius, radius * 2, radius * 2)
+        with self.deform(motion_key, r, circular=True):
+            skin.draw(
+                self.map(r),
+                color,
+                radius=radius * self.scale,
+                border=border * self.scale,
+                mode=3,
+            )
 
     def triangle(self, points, color):
         import gpu
@@ -291,11 +339,13 @@ class Widget:
     height = 240.0
 
     def __init__(self):
+        self.motion = Motion()
         self.capturing = False
         self.text_edit = None
         self.field = None
 
     def cancel(self):
+        self.motion.clear()
         self.capturing = False
         self.text_edit = None
         self.field = None

@@ -123,7 +123,9 @@ class CurveMapping(Widget):
         return ordered[-1][1]
 
     def paint(self, rect, font, palette, *, backdrop=None):
-        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p = Painter(
+            rect, self.width, self.height, font, palette, backdrop, motion=self.motion
+        )
         p.card("Curve Mapping")
         points = tuple(self.binding.read())
         if not points:
@@ -164,12 +166,18 @@ class CurveMapping(Widget):
         p.line(self._samples, skin.rgba("4abefa"), 2.2 * p.scale)
         for i, (px, py) in enumerate(points):
             pos = (a + px * w, b + (1 - py) * h)
-            p.circle(pos, 9 if i == self.selected else 7, skin.rgba("111820"))
+            p.circle(
+                pos,
+                9 if i == self.selected else 7,
+                skin.rgba("111820"),
+                motion_key=("point", i),
+            )
             p.circle(
                 pos,
                 8 if i == self.selected else 6.4,
                 skin.rgba("49b7ee") if i == self.selected else skin.rgba("e6ebf0"),
                 0.6,
+                motion_key=("point", i),
             )
         index = min(self.selected, len(points) - 1)
         for i, label in enumerate(("X", "Y")):

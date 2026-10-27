@@ -39,10 +39,11 @@ class Fonts(int):
         self.closed = True
         _owners -= 1
         if _owners == 0:
-            from . import skin, style
+            from . import skin, style, progress
             from .paint import measure
             from ..widgets import base
 
+            progress.clear()
             skin.clear()
             style.clear()
             base.clear()

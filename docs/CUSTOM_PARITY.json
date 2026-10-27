@@ -249,10 +249,10 @@
     },
     "progress": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
-      "reference": null,
-      "comparison_evidence": null
+      "status": "partial",
+      "notes": "Custom BAR and RING rendering; finite/clamped factors, translated text, compact inline mode and framed showcase. Runtime and GPU execution tested. New visual states await QA; exact pixel match and all DPI/theme configurations unqualified.",
+      "reference": "docs/design/references/next-controls-v2.png",
+      "comparison_evidence": "docs/design/qa/next-v1/all-controls-comparison.png"
     },
     "prop": {
       "kind": "method",
@@ -285,9 +285,10 @@
     "prop_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "reference": "docs/design/references/specialized-controls-v1.png",
+      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "prop_tabs_enum": {
       "kind": "method",
@@ -474,16 +475,18 @@
     "template_color_picker": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom SV/hue/RGB/HSV/alpha/hex editing; eyedropper requires host callback. Advanced locking/cubic modes and exact reference matching remain open.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Custom SV/hue/RGB/HSV/alpha/hex editing; eyedropper requires host callback. Advanced locking/cubic modes and exact reference matching remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "reference": "docs/design/references/specialized-controls-v1.png",
+      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_color_ramp": {
       "kind": "method",
       "status": "partial",
-      "notes": "Gradient sampling and stop add/remove/drag/position entry implemented. Interpolation dropdown, color edit overlay wiring, exact reference matching remain open.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Gradient sampling and stop add/remove/drag/position entry implemented. Interpolation dropdown, color edit overlay wiring, exact reference matching remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "reference": "docs/design/references/specialized-controls-v1.png",
+      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_colormanaged_view_settings": {
       "kind": "method",
@@ -523,9 +526,10 @@
     "template_curve_mapping": {
       "kind": "method",
       "status": "partial",
-      "notes": "Curve sampling, point drag/add/remove and channel selector implemented. Handles, exact-coordinate fields, bounds, presets/levels/brush modes and exact reference matching remain open.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Curve sampling, point drag/add/remove and channel selector implemented. Handles, exact-coordinate fields, bounds, presets/levels/brush modes and exact reference matching remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "reference": "docs/design/references/specialized-controls-v1.png",
+      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_curveprofile": {
       "kind": "method",
@@ -691,9 +695,9 @@
     "template_matrix": {
       "kind": "method",
       "status": "partial",
-      "notes": "Current component editing does not yet reproduce matrix row/column layout.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Replaced incorrect generic editable prop forwarding with a read-only 4x4 MATRIX decomposition into translation, XYZ Euler rotation and scale. Cached until matrix changes. 5.1/5.2 execution tested; same custom mathutils path supports earlier versions without calling their absent native template. Unit formatting and full version matrix remain unqualified.",
+      "reference": "docs/design/references/next-controls-v2.png",
+      "comparison_evidence": "docs/design/qa/next-v1/all-controls-comparison.png"
     },
     "template_menu_search": {
       "kind": "method",
@@ -802,10 +806,10 @@
     },
     "template_palette": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
-      "reference": null,
-      "comparison_evidence": null
+      "status": "partial",
+      "notes": "Custom virtualized swatches, active selection, add/remove, Ctrl-click color editor and deferred-element validation. 4.2\u20135.1 color/value flag default detected by capability; explicit legacy flags retained on 5.2. Owner brush color/weight synchronization supported. Full brush-context discovery, move/sort UI, weight editing, Backspace reset and all keyboard semantics remain incomplete.",
+      "reference": "docs/design/references/next-controls-v2.png",
+      "comparison_evidence": "docs/design/qa/next-v1/all-controls-comparison.png"
     },
     "template_path_builder": {
       "kind": "method",
@@ -852,9 +856,10 @@
     "template_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
-      "reference": null,
-      "comparison_evidence": null
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "reference": "docs/design/references/specialized-controls-v1.png",
+      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_search_preview": {
       "kind": "method",

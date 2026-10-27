@@ -1,0 +1,96 @@
+{
+  "background_5.1": {
+    "passed": true,
+    "version": "5.1.2",
+    "build": "ec6e62d40fa9",
+    "documented_members": {
+      "Header": 11,
+      "Menu": 18,
+      "Panel": 28,
+      "UILayout": 130,
+      "UIList": 21
+    },
+    "checks": [
+      "documented RNA availability",
+      "RNA edit rollback",
+      "two vendor namespaces",
+      "register/unregister twice",
+      "custom RNA authoring without native delegation",
+      "custom ramp/curve transaction rollback",
+      "unsupported template fails explicitly",
+      "custom palette selection/add/remove and canceled color edit",
+      "palette stale-element and owner rejection",
+      "legacy palette color flag and 5.2 default",
+      "read-only matrix decomposition cache and type validation",
+      "custom BAR/RING authoring"
+    ],
+    "platform": "darwin"
+  },
+  "background_5.2": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "documented_members": {
+      "Header": 11,
+      "Menu": 18,
+      "Panel": 30,
+      "UILayout": 134,
+      "UIList": 21
+    },
+    "checks": [
+      "documented RNA availability",
+      "RNA edit rollback",
+      "two vendor namespaces",
+      "register/unregister twice",
+      "custom RNA authoring without native delegation",
+      "custom ramp/curve transaction rollback",
+      "unsupported template fails explicitly",
+      "custom palette selection/add/remove and canceled color edit",
+      "palette stale-element and owner rejection",
+      "legacy palette color flag and 5.2 default",
+      "read-only matrix decomposition cache and type validation",
+      "custom BAR/RING authoring"
+    ],
+    "platform": "darwin"
+  },
+  "windowed_5.1": {
+    "passed": true,
+    "version": "5.1.2",
+    "build": "ec6e62d40fa9",
+    "checks": [
+      "all documented UILayout members resolve in draw",
+      "native nested layouts/operator properties",
+      "custom anchor and GPU shader draw",
+      "animation timer settles and unregisters while hovered",
+      "real modal mouse input toggles custom binding",
+      "warm layout retains geometry",
+      "outside-region input passes through",
+      "host animation disable clears existing springs",
+      "owner invalidation rolls back active edit",
+      "disable/re-enable draws with independent callback ownership"
+    ],
+    "native_draws": 91,
+    "error": "",
+    "platform": "darwin"
+  },
+  "windowed_5.2": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "checks": [
+      "all documented UILayout members resolve in draw",
+      "native nested layouts/operator properties",
+      "custom anchor and GPU shader draw",
+      "animation timer settles and unregisters while hovered",
+      "real modal mouse input toggles custom binding",
+      "warm layout retains geometry",
+      "outside-region input passes through",
+      "host animation disable clears existing springs",
+      "owner invalidation rolls back active edit",
+      "disable/re-enable draws with independent callback ownership"
+    ],
+    "native_draws": 91,
+    "error": "",
+    "platform": "darwin"
+  }
+}

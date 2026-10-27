@@ -23,9 +23,6 @@ from beyond_ui.gpu import style, skin
 from beyond_ui.gpu.typography import Fonts
 from beyond_ui.gpu.paint import gpu_state
 
-OUTPUT = Path(os.environ["BEYOND_UI_CAPTURE_DIR"])
-OUTPUT.mkdir(parents=True, exist_ok=True)
-
 
 def binding(value):
     values = [value]
@@ -56,47 +53,66 @@ def png(path, width, height, data):
     )
 
 
+def make_widgets():
+    curve = CurveMapping(
+        binding(((0.05, 0.05), (0.5, 0.5), (0.95, 0.95))),
+        channel=binding(3),
+        evaluate=lambda x: 0.05
+        + 0.9 * (lambda t: t * t * (3 - 2 * t))(max(0, min(1, (x - 0.05) / 0.9))),
+    )
+    curve.selected = 1
+    ramp = ColorRamp(
+        binding(
+            (
+                (0.0, tuple(to_linear(c) for c in (0.0, 0.26, 0.77)) + (1.0,)),
+                (0.5, tuple(to_linear(c) for c in (0.10, 0.75, 0.94)) + (1.0,)),
+                (1.0, tuple(to_linear(c) for c in (0.94, 0.98, 1.0)) + (1.0,)),
+            )
+        )
+    )
+    ramp.selected = 1
+    picker = DataPicker(
+        ((1, "Camera", "camera"), (2, "Cube", "object"), (3, "Sphere", "material")),
+        lambda key: None,
+        selected=lambda: 2,
+    )
+    color = ColorPicker(binding((0.2, 0.7, 0.9, 1.0)), linear=False)
+    widgets = [
+        ("curve-mapping", "Curve Mapping", curve),
+        ("color-ramp", "Color Ramp", ramp),
+        ("data-picker", "Data Picker", picker),
+        ("color-picker", "Color Picker", color),
+    ]
+    next_set = os.environ.get("BEYOND_UI_CAPTURE_SET") == "next"
+    if next_set:
+        sys.path.insert(0, str(ROOT / "tests"))
+        from next_fixtures import widgets as next_widgets
+
+        widgets = next_widgets()
+    return widgets, next_set
+
+
 def run():
+    OUTPUT = Path(os.environ["BEYOND_UI_CAPTURE_DIR"])
+    OUTPUT.mkdir(parents=True, exist_ok=True)
     font = -1
     target = None
     try:
         font = Fonts()
-        curve = CurveMapping(
-            binding(((0.05, 0.05), (0.5, 0.5), (0.95, 0.95))),
-            channel=binding(3),
-            evaluate=lambda x: 0.05
-            + 0.9 * (lambda t: t * t * (3 - 2 * t))(max(0, min(1, (x - 0.05) / 0.9))),
-        )
-        curve.selected = 1
-        ramp = ColorRamp(
-            binding(
-                (
-                    (0.0, tuple(to_linear(c) for c in (0.0, 0.26, 0.77)) + (1.0,)),
-                    (0.5, tuple(to_linear(c) for c in (0.10, 0.75, 0.94)) + (1.0,)),
-                    (1.0, tuple(to_linear(c) for c in (0.94, 0.98, 1.0)) + (1.0,)),
-                )
-            )
-        )
-        ramp.selected = 1
-        picker = DataPicker(
-            ((1, "Camera", "camera"), (2, "Cube", "object"), (3, "Sphere", "material")),
-            lambda key: None,
-            selected=lambda: 2,
-        )
-        color = ColorPicker(binding((0.2, 0.7, 0.9, 1.0)), linear=False)
-        widgets = [
-            ("curve-mapping", "Curve Mapping", curve),
-            ("color-ramp", "Color Ramp", ramp),
-            ("data-picker", "Data Picker", picker),
-            ("color-picker", "Color Picker", color),
-        ]
-        width, height = 630, 472
+        widgets, next_set = make_widgets()
+        width, height = (705, 487) if next_set else (630, 472)
         palette = style.theme_palette(bpy.context.preferences)
         target = gpu.types.GPUOffScreen(width, height, format="RGBA8")
         records = []
         for (slug, title, widget), variant in product(
             widgets, ("neutral", "contrast", "alpha")
         ):
+            if next_set:
+                wanted = (705, 487 if widget.height == 436 else 437)
+                if wanted != (width, height):
+                    target.free()
+                    width, height = wanted
+                    target = gpu.types.GPUOffScreen(width, height, format="RGBA8")
             filename = slug + ("" if variant == "neutral" else "-" + variant) + ".png"
             with (
                 target.bind(),
@@ -181,4 +197,5 @@ def run():
     return None
 
 
-bpy.app.timers.register(run, first_interval=1.0)
+if __name__ == "__main__":
+    bpy.app.timers.register(run, first_interval=1.0)

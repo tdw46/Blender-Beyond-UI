@@ -56,14 +56,48 @@ def run():
             ),
             ColorPicker(binding((0.2, 0.7, 0.9, 1.0)), linear=False),
         ]
+        next_set = os.environ.get("BEYOND_UI_BENCH_SET") == "next"
+        color_reads = [0]
+        if next_set:
+            sys.path.insert(0, str(Path(__file__).parent))
+            from next_fixtures import widgets as next_widgets
+            from beyond_ui.gpu import progress as progress_gpu
+
+            widgets = [w for _, _, w in next_widgets()]
+            source = widgets[0].source
+            original_color = source.color
+
+            def counted_color(index):
+                color_reads[0] += 1
+                return original_color(index % 18)
+
+            source.count = lambda: 10000
+            source.color = counted_color
+
+        def textures():
+            return tuple(id(t) for w in widgets for t in getattr(w, "_textures", ()))
+
         palette = style.theme_palette(bpy.context.preferences)
         target = gpu.types.GPUOffScreen(1260, 944, format="RGBA8")
+
+        motion_mode = os.environ.get("BEYOND_UI_BENCH_MOTION", "rest")
+        motion_time = [0.0]
+        if motion_mode == "active":
+            for widget in widgets:
+                widget.motion.clock = lambda: motion_time[0]
+                widget.motion.pulse("reveal", 0.14)
+            motion_time[0] = 0.08
 
         def render():
             for i, widget in enumerate(widgets):
                 x, y = (i % 2) * 630, (i // 2) * 472
                 if modern:
-                    widget.paint((x, y, 630, 472), font, palette)
+                    rect = (x, y, 630, widget.height if next_set else 472)
+                    if motion_mode == "active":
+                        with widget.motion.deform("reveal", rect):
+                            widget.paint(rect, font, palette)
+                    else:
+                        widget.paint(rect, font, palette)
                 else:
                     style.draw(
                         x, y, 630, 472, (0.12, 0.13, 0.14, 1), radius=12, border=1.0
@@ -106,6 +140,8 @@ def run():
             )
             fb = gpu.state.active_framebuffer_get()
             for i in range(120):
+                if next_set:
+                    widgets[2].factor = widgets[3].factor = i / 119
                 fb.clear(color=(0.09, 0.10, 0.11, 1))
                 start = time.perf_counter()
                 render()
@@ -116,14 +152,16 @@ def run():
                     cache_before = {
                         key: id(value[1]) for key, value in base._LINE_CACHE.items()
                     }
-                    textures_before = tuple(id(t) for t in widgets[1]._textures)
+                    textures_before = textures()
+                    ring_before = id(progress_gpu._batch) if next_set else None
                 if i >= 20:
                     timings.append((submitted - start) * 1000)
                     complete.append((end - start) * 1000)
             cache_after = {key: id(value[1]) for key, value in base._LINE_CACHE.items()}
-            stable = cache_before == cache_after and textures_before == tuple(
-                id(t) for t in widgets[1]._textures
-            )
+            stable = cache_before == cache_after and textures_before == textures()
+            if next_set:
+                stable = stable and ring_before == id(progress_gpu._batch)
+                assert color_reads[0] == 120 * 19, color_reads[0]
             assert stable, "Warm frames rebuilt retained geometry or ramp textures"
 
         def stats(values):
@@ -141,11 +179,18 @@ def run():
             "backend": gpu.platform.backend_type_get(),
             "device": gpu.platform.renderer_get(),
             "root": str(ROOT),
-            "workload": "4 visible 630x472 compound cards in 1260x944; picker has 10000 rows; 20 warmup + 100 measured frames; tint-only backdrop",
+            "visible_palette_color_reads_per_frame": color_reads[0] / 120
+            if next_set
+            else None,
+            "progress_changes_each_frame": next_set,
+            "workload": "4 next-batch cards at 630 logical width; 10000 palette colors; progress advances every frame; 20 warmup + 100 measured; tint-only"
+            if next_set
+            else "4 visible 630x472 compound cards in 1260x944; picker has 10000 rows; 20 warmup + 100 measured frames; tint-only backdrop",
             "cpu_submission": stats(timings),
             "submission_plus_one_pixel_sync_readback": stats(complete),
             "retained_line_batches": len(cache_after),
             "warm_resources_unchanged": stable,
+            "motion_mode": motion_mode,
             "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance.",
         }
     except Exception:

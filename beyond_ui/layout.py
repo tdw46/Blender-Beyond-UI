@@ -534,7 +534,97 @@ class Layout:
         return result
 
     def template_matrix(self, data, property):
-        return self.prop(data, property)
+        from .widgets import MatrixView
+        from .widgets.rna import matrix_components
+
+        resolver = self.resolve(data) if self.resolve else None
+        return self.group.widget(
+            self._key("matrix"),
+            MatrixView(
+                matrix_components(data, property, resolver),
+                labels=tuple(
+                    self._text(t) for t in ("Translation", "Rotation", "Scale")
+                ),
+                title=self._text("Matrix"),
+                unavailable_text=self._text("Matrix unavailable"),
+            ),
+            **self._options(),
+        )
+
+    def progress(
+        self, *, text="", text_ctxt="", translate=True, factor=0.0, type="BAR"
+    ):
+        from .widgets import Progress
+
+        return self.group.widget(
+            self._key("progress"),
+            Progress(
+                factor,
+                type=type,
+                text=self._text(text, text_ctxt, translate),
+                framed=False,
+            ),
+            **self._options(),
+        )
+
+    def template_palette(self, data, property, *, color=None):
+        from .widgets import Palette, ColorPicker
+        from .widgets.rna import palette_source
+        import bpy
+
+        # 5.2 removed the native color/value flag. Preserve explicit legacy
+        # calls, with version-appropriate defaults when it is omitted.
+        if color is None:
+            function = bpy.types.UILayout.bl_rna.functions.get("template_palette")
+            color = not (function and function.parameters.get("color"))
+        brush = None
+        owner = getattr(data, "brush", None)
+        brush_property = "color" if color else "weight"
+        if owner is not None and brush_property in owner.bl_rna.properties:
+            brush = rna_binding(lambda: owner, brush_property)
+        control = None
+
+        def edit(binding):
+            widget = ColorPicker(binding, linear=True)
+            x, y, w, h = control.rect
+            scale = min(
+                1.0,
+                max(1.0, self.canvas._width or w) / widget.width,
+                max(1.0, self.canvas.height) / widget.height,
+            )
+            width, height = widget.width * scale, widget.height * scale
+            self.canvas.overlay = {
+                "widget": widget,
+                "rect": (
+                    max(0.0, min(x, (self.canvas._width or w) - width)),
+                    max(0.0, min(y, self.canvas.height - height)),
+                    width,
+                    height,
+                ),
+            }
+
+        resolver = self.resolve(data) if self.resolve else None
+        source = palette_source(
+            data,
+            property,
+            self.commit,
+            brush=brush,
+            edit=edit if color else None,
+            resolve=resolver,
+            value_mode=not color,
+        )
+        control = self.group.widget(
+            self._key("palette"),
+            Palette(
+                source,
+                show_colors=bool(color),
+                title=self._text("Palette"),
+                selected_text=self._text("Selected"),
+                unavailable_text=self._text("Palette unavailable"),
+            ),
+            **self._options(),
+        )
+        return control
 
     def template_node_socket(self, *, color=(0.0, 0.0, 0.0, 1.0)):
         from .widgets.socket import Socket

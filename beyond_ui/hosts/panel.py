@@ -1,16 +1,20 @@
 """Custom canvas anchoring and input routing for a host-owned Panel.
 
-Host registers its own modal operator and calls event(). No classes, timers,
-preferences, scene properties or input modals are installed by this library.
+Host registers its own modal operator and calls event(). Finite animation timers
+exist only while visible controls settle. Nothing is registered on import.
 """
 
+from ..animation import AnimationSettings
 from .bridge import load, BridgeUnavailable
 
 
 class PanelHost:
-    def __init__(self, owner, *, backdrop_revision=None):
+    def __init__(self, owner, *, backdrop_revision=None, animation=None):
         if not owner:
             raise ValueError("Use a unique extension-qualified owner")
+        self.animation = animation or AnimationSettings()
+        self._animation_keys = set()
+        self._animation_callback = self._animate
         self.owner = owner
         self.backdrop_revision = backdrop_revision
         self.bridge = None
@@ -109,6 +113,7 @@ class PanelHost:
         record["valid"] = False
         record["painted"] = False
         canvas.visible = True
+        canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
         raw = getattr(layout, "raw", layout)
         return bool(
             self.bridge.library.bvt_probe_reserve(
@@ -214,6 +219,12 @@ class PanelHost:
                 or canvas.widget_capture is not None
             )
             if not captured and not (cx <= px < cx + cw and cy <= py < cy + ch):
+                if canvas.hover is not None:
+                    canvas.hover = None
+                    if canvas._motion_focus:
+                        canvas._motion_focus.hover = None
+                        canvas._motion_focus.pointer = None
+                    region.tag_redraw()
                 continue
             sx = w / max(1.0, canvas._width)
             sy = h / max(1.0, canvas.height)
@@ -233,6 +244,68 @@ class PanelHost:
                 return True
         return False
 
+    def _wake_animation(self, key):
+        if self.closed or key not in self.records:
+            return
+        import bpy
+
+        self._animation_keys.add(key)
+        if not bpy.app.timers.is_registered(self._animation_callback):
+            bpy.app.timers.register(self._animation_callback, first_interval=0.0)
+
+    def _animate(self):
+        import bpy
+
+        if self.closed:
+            return None
+        for key in tuple(self._animation_keys):
+            record = self.records.get(key)
+            window = next(
+                (
+                    w
+                    for w in bpy.context.window_manager.windows
+                    if w.as_pointer() == key[0]
+                ),
+                None,
+            )
+            area = (
+                next((a for a in window.screen.areas if a.as_pointer() == key[1]), None)
+                if window
+                else None
+            )
+            region = (
+                next((r for r in area.regions if r.as_pointer() == key[2]), None)
+                if area
+                else None
+            )
+            visible = (
+                region is not None
+                and record
+                and record["valid"]
+                and record["canvas"].visible
+            )
+            if (
+                area
+                and area.type == "VIEW_3D"
+                and not area.spaces.active.show_region_ui
+            ):
+                visible = False
+            if not visible:
+                if record:
+                    record["canvas"].park()
+                self._animation_keys.discard(key)
+                continue
+            # One last redraw publishes exact rest when the last spring expires.
+            region.tag_redraw()
+            canvas = record["canvas"]
+            x, y, w, h = record["rect"]
+            cx, cy, cw, ch = record["clip"]
+            sx, sy = w / max(1.0, canvas._width), h / max(1.0, canvas.height)
+            clip = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
+            if not canvas.advance_animations(clip):
+                self._animation_keys.discard(key)
+        return 1 / 60 if self._animation_keys else None
+
     def invalidate(self):
         """Call from undo_pre/load_pre; never retain old RNA transactions."""
         for record in self.records.values():
@@ -245,6 +318,11 @@ class PanelHost:
             if isinstance(key, tuple) and key and key[0] == id(self):
                 glass._owners.pop(key, None)
         self.records.clear()
+        self._animation_keys.clear()
+        import bpy
+
+        if bpy.app.timers.is_registered(self._animation_callback):
+            bpy.app.timers.unregister(self._animation_callback)
 
     def close(self):
         if self.closed:

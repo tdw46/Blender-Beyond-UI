@@ -24,6 +24,7 @@ ROLES = {
     "selected": (rgba("214d78", 0.83), rgba("285e8b", 0.83)),
     "track": (rgba("35393c", 0.65), rgba("42464a", 0.65)),
     "thumb": (rgba("83868a", 0.80), rgba("a4a7aa", 0.80)),
+    "progress_fill": (rgba("08b0ee", 0.98), rgba("26c1f2", 0.98)),
     "fill": (rgba("209be9", 0.96), rgba("31b9ef", 0.96)),
 }
 TEXT = rgba("f0f1f3")

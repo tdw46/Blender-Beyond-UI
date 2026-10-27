@@ -151,7 +151,9 @@ class ColorRamp(Widget):
         import gpu
         from array import array
 
-        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p = Painter(
+            rect, self.width, self.height, font, palette, backdrop, motion=self.motion
+        )
         p.card("Color Ramp")
         points = tuple(self.binding.read())
         if not points:
@@ -186,9 +188,10 @@ class ColorRamp(Widget):
         for i, (position, color) in enumerate(points):
             color = self.display_color(color)
             x = 30 + position * 572
-            p.triangle(((x, 289), (x - 12, 304), (x + 12, 304)), skin.TEXT)
-            p.triangle(((x, 292), (x - 9, 303), (x + 9, 303)), color)
-            p.surface((x - 12, 303, 24, 26), color, 2, 1)
+            with p.deform(("stop", i), (x - 12, 287, 24, 42)):
+                p.triangle(((x, 289), (x - 12, 304), (x + 12, 304)), skin.TEXT)
+                p.triangle(((x, 292), (x - 9, 303), (x + 9, 303)), color)
+                p.surface((x - 12, 303, 24, 26), color, 2, 1)
         position, color = points[selected]
         p.field(
             RAMP["position"],

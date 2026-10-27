@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "curve-mapping-alpha.png",
+      "unchanged": true
+    },
+    {
+      "file": "curve-mapping.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-picker-alpha.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-ramp-alpha.png",
+      "unchanged": true
+    },
+    {
+      "file": "data-picker-alpha.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-ramp.png",
+      "unchanged": true
+    },
+    {
+      "file": "data-picker.png",
+      "unchanged": true
+    },
+    {
+      "file": "data-picker-contrast.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-picker-contrast.png",
+      "unchanged": true
+    },
+    {
+      "file": "curve-mapping-contrast.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-ramp-contrast.png",
+      "unchanged": true
+    },
+    {
+      "file": "color-picker.png",
+      "unchanged": true
+    }
+  ]
+}

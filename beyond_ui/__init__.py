@@ -3,10 +3,20 @@
 No bpy import, registration, native loading, threads or timers at import time.
 """
 
+from .animation import AnimationSettings, animation_defaults
 from .native import Layout as NativeLayout
 from .layout import Layout, UnsupportedControl
 from .canvas import Canvas, Theme
 from .lifecycle import Scope
 
 __version__ = "0.1.0"
-__all__ = ["Canvas", "Layout", "NativeLayout", "Scope", "Theme", "UnsupportedControl"]
+__all__ = [
+    "AnimationSettings",
+    "animation_defaults",
+    "Canvas",
+    "Layout",
+    "NativeLayout",
+    "Scope",
+    "Theme",
+    "UnsupportedControl",
+]

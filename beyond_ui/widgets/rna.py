@@ -86,3 +86,207 @@ def curve_mapping(data, property, commit, channel):
         mapping.update()
 
     return Binding(get, set_value, valid, commit), mapping, curve
+
+
+def matrix_components(data, property, resolve=None):
+    """Read-only RNA is valid input; cache decomposition, never modify the matrix."""
+    from math import degrees, isfinite
+
+    resolve = resolve or (lambda: data)
+    pointer = data.as_pointer()
+    meta = data.bl_rna.properties[property]
+    if (
+        meta.type != "FLOAT"
+        or meta.subtype != "MATRIX"
+        or tuple(meta.array_dimensions[:2]) != (4, 4)
+    ):
+        raise TypeError("template_matrix requires a 4x4 FLOAT MATRIX property")
+    cache = [None, None]
+
+    def current():
+        owner = resolve()
+        if owner is None or owner.as_pointer() != pointer:
+            raise ReferenceError("Matrix owner changed")
+        return owner
+
+    def valid():
+        try:
+            return property in current().bl_rna.properties
+        except (ReferenceError, AttributeError, RuntimeError):
+            return False
+
+    def get():
+        from mathutils import Matrix
+
+        values = tuple(
+            tuple(float(v) for v in row) for row in getattr(current(), property)
+        )
+        if not all(isfinite(v) for row in values for v in row):
+            raise ValueError("Matrix contains non-finite values")
+        if values != cache[0]:
+            location, rotation, scale = Matrix(values).decompose()
+            cache[:] = [
+                values,
+                (
+                    tuple(location),
+                    tuple(degrees(v) for v in rotation.to_euler("XYZ")),
+                    tuple(scale),
+                ),
+            ]
+        return cache[1]
+
+    def reject(value):
+        raise TypeError("template_matrix is read-only")
+
+    return Binding(get, reject, valid)
+
+
+def palette_source(
+    data, property, commit, *, brush=None, edit=None, resolve=None, value_mode=False
+):
+    """Visible-only color access; full snapshots occur only during mutation/undo."""
+    from .palette import PaletteSource
+
+    resolve = resolve or (lambda: data)
+    owner_pointer = data.as_pointer()
+    palette = getattr(data, property)
+    if palette is None:
+        raise ValueError("Palette property is empty")
+    pointer = palette.as_pointer()
+    active_cache = [None, -1]
+
+    def valid():
+        try:
+            owner = resolve()
+            return (
+                owner is not None
+                and owner.as_pointer() == owner_pointer
+                and getattr(owner, property).as_pointer() == pointer
+                and getattr(palette, "is_editable", True)
+            )
+        except (AttributeError, ReferenceError, RuntimeError):
+            return False
+
+    def checked():
+        if not valid():
+            raise ReferenceError("Palette owner changed")
+        return palette.colors
+
+    def active():
+        colors = checked()
+        item = colors.active
+        if item is None:
+            return -1
+        key = item.as_pointer()
+        index = active_cache[1]
+        if (
+            active_cache[0] == key
+            and 0 <= index < len(colors)
+            and colors[index].as_pointer() == key
+        ):
+            return index
+        index = next((i for i, c in enumerate(colors) if c.as_pointer() == key), -1)
+        active_cache[:] = [key, index]
+        return index
+
+    def selection_state():
+        return {
+            "active": active(),
+            "brush": (float(brush.read()) if value_mode else tuple(brush.read()))
+            if brush and brush.valid()
+            else None,
+        }
+
+    def snapshot():
+        state = selection_state()
+        state["colors"] = tuple(
+            (tuple(c.color), float(c.strength), float(c.weight)) for c in checked()
+        )
+        return state
+
+    def select(index):
+        colors = checked()
+        if not 0 <= index < len(colors):
+            return
+        before = selection_state()
+        colors.active = colors[index]
+        active_cache[:] = [colors[index].as_pointer(), index]
+        if brush and brush.valid():
+            brush.write(
+                float(colors[index].weight)
+                if value_mode
+                else tuple(colors[index].color)
+            )
+        after = selection_state()
+        if before != after:
+            commit(before, after)
+
+    def add():
+        colors = checked()
+        before = snapshot()
+        index = active()
+        color = (
+            tuple(brush.read())[:3]
+            if brush and brush.valid() and not value_mode
+            else tuple(colors[index].color)
+            if index >= 0
+            else (1.0, 1.0, 1.0)
+        )
+        item = colors.new()
+        item.color = color
+        if value_mode:
+            item.weight = (
+                float(brush.read())
+                if brush and brush.valid()
+                else float(colors[index].weight)
+                if index >= 0
+                else 0.0
+            )
+        colors.active = item
+        active_cache[:] = [item.as_pointer(), len(colors) - 1]
+        commit(before, snapshot())
+
+    def remove():
+        colors = checked()
+        index = active()
+        if index < 0:
+            return
+        before = snapshot()
+        colors.remove(colors[index])
+        if colors:
+            colors.active = colors[min(index, len(colors) - 1)]
+        active_cache[:] = [None, -1]
+        commit(before, snapshot())
+
+    def edit_color(index):
+        colors = checked()
+        item = colors[index]
+        key = item.as_pointer()
+
+        def color_valid():
+            try:
+                return (
+                    valid()
+                    and index < len(colors)
+                    and colors[index].as_pointer() == key
+                )
+            except (ReferenceError, RuntimeError):
+                return False
+
+        def color_set(value):
+            item.color = value[:3]
+
+        if edit:
+            edit(Binding(lambda: tuple(item.color), color_set, color_valid, commit))
+
+    return PaletteSource(
+        lambda: len(checked()),
+        lambda i: tuple(checked()[i].color),
+        active,
+        select,
+        valid,
+        add,
+        remove,
+        edit_color if edit else None,
+        lambda i: checked()[i].weight,
+    )

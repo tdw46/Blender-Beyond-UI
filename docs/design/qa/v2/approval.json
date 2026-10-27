@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-27",
+  "user_statement": "perfect! onto our next ui parity items!",
+  "scope": "User visual QA approval of the four specialized-control captures presented from docs/design/qa/v2. This is not complete API or exact-pixel certification.",
+  "implementation_commit": "cf8b1f36ceb1f1ae439765b90a1c8848a02790d4",
+  "evidence": "docs/design/qa/v2/all-controls-comparison.png",
+  "capture_sha256": "a084f8b85acdd671e772f353944552c052241940d2283b86da0dc2ead6627896",
+  "controls": [
+    "Curve Mapping",
+    "Color Ramp",
+    "Data Picker",
+    "Color Picker"
+  ],
+  "machine_exact_match": false
+}

@@ -61,6 +61,39 @@ requirements; neither may be traded away to satisfy the other.
   Do not remove transparency, blur, animations, correct interactions, older
   supported API fallbacks or exact-reference requirements as a speed shortcut.
 
+## Hard rule: shared source squash-and-stretch animation
+
+Every custom control must use the source Effect Layers UI's bouncy, area-preserving
+squash-and-stretch motion. This includes existing and future buttons, toggles,
+tabs, fields, sliders, handles, swatches, lists, disclosures, menus, popovers and
+specialized controls. Read-only indicators use appropriate reveal/change motion;
+they must not pretend to accept clicks. Do not leave a new control on an unrelated
+animation implementation or silently omit its animation integration.
+
+- Reuse the shared source spring/hover/release behavior and timing. Preserve
+  directional impulses, finite settling and stable hit targets; animation changes
+  presentation only and must never move the logical layout or mutate bindings.
+- Expose documented backend configuration for `enabled` and `strength`, with
+  global/host defaults and per-control overrides. Settings must be easy to change
+  without modifying shaders or individual painters. Disabled animation or zero
+  strength must restore the exact resting appearance and stop animation redraws.
+  Default to `enabled=True` and `strength=1.0` (the source amplitude); accept only
+  finite, nonnegative strength values and keep deformation nonsingular at every
+  supported strength. A global/host disable must override child settings. Apply
+  setting changes to existing controls without requiring an add-on reload.
+- Keep animation state per host/control, retarget from the current state during
+  rapid input, and bound its lifetime. Share retained GPU geometry and the cached
+  glass backdrop. Never add a blur/capture pass or rebuild geometry on each tick.
+- Drive redraws only while a visible animation is active. Clear animation state
+  and cancel scheduled work on hide, invalidation, reload and teardown. Idle,
+  hidden and disabled UI must remain quiescent.
+- Validate hover, press/release, drag, retarget, settle, disable and strength
+  controls, including runtime visual evidence. Static reference approval does
+  not establish animation parity; document any unfinished motion integration.
+  Do not mark a control complete until its applicable motion states and backend
+  settings are implemented and verified. Keep generated motion references and
+  actual implementation evidence available side by side for Tyler's QA.
+
 ## Evidence and publication
 
 Maintain a member-by-member API inventory and custom parity ledger. Distinguish

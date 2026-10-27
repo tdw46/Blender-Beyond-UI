@@ -129,6 +129,18 @@ def tick():
             event("LEFTMOUSE", "PRESS", px, py)
             event("LEFTMOUSE", "RELEASE", px, py)
         elif stage == 2:
+            if not state.get("motion_wait"):
+                assert bpy.app.timers.is_registered(demo._host._animation_callback), (
+                    "Active spring has no redraw timer"
+                )
+                state["motion_wait"] = True
+                return 1.6
+            assert not bpy.app.timers.is_registered(demo._host._animation_callback), (
+                "Idle spring kept polling"
+            )
+            state["checks"].append(
+                "animation timer settles and unregisters while hovered"
+            )
             assert demo._states[state["key"]]["enabled"] is False, (
                 "Custom toggle did not handle input"
             )
@@ -147,10 +159,16 @@ def tick():
             )
             assert not demo._host.event(bpy.context, e)
             state["checks"].append("outside-region input passes through")
+            canvas.notify_changed("enabled")
+            assert bpy.app.timers.is_registered(demo._host._animation_callback)
+            demo._host.animation.enabled = False
+            assert not canvas.advance_animations()
+            state["checks"].append("host animation disable clears existing springs")
             # Cancel an active edit on owner invalidation; never save anything.
             canvas._begin(canvas.controls["strength"])
             canvas._write(0.9)
             demo._host.invalidate()
+            assert not bpy.app.timers.is_registered(demo._host._animation_callback)
             assert demo._states[state["key"]]["strength"] == 0.5
             state["checks"].append("owner invalidation rolls back active edit")
             demo._host.close()

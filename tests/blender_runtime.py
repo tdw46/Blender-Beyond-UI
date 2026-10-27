@@ -119,4 +119,103 @@ result["checks"] += [
     "custom ramp/curve transaction rollback",
     "unsupported template fails explicitly",
 ]
+# New custom palette/progress/matrix adapters, with disposable RNA owners.
+from beyond_ui.widgets.rna import matrix_components, palette_source
+from mathutils import Matrix, Euler, Vector
+from types import SimpleNamespace
+
+palette = bpy.data.palettes.new("Beyond UI test palette")
+obj = bpy.data.objects.new("Beyond UI matrix test", None)
+bpy.types.Scene.beyond_ui_test_palette = bpy.props.PointerProperty(
+    type=bpy.types.Palette
+)
+try:
+    scene.beyond_ui_test_palette = palette
+    for rgb in ((0.1, 0.2, 0.3), (0.3, 0.4, 0.5), (0.5, 0.6, 0.7)):
+        palette.colors.new().color = rgb
+    palette.colors.active = palette.colors[0]
+    commits = []
+    edited = []
+    source = palette_source(
+        scene,
+        "beyond_ui_test_palette",
+        lambda a, b: commits.append((a, b)),
+        edit=edited.append,
+    )
+    source.select(1)
+    assert palette.colors.active == palette.colors[1]
+    source.add()
+    assert len(palette.colors) == 4 and source.active() == 3
+    source.remove()
+    assert len(palette.colors) == 3 and source.active() == 2
+    source.edit(0)
+    binding = edited[-1]
+    before = binding.read()
+    edit = Edit(binding)
+    edit.update((0.8, 0.7, 0.6))
+    edit.finish(cancel=True)
+    assert binding.read() == before
+    # Deferred picker cannot be redirected to the next element after deletion.
+    palette.colors.remove(palette.colors[0])
+    assert not binding.valid()
+    ui = type(custom)(context=bpy.context)
+    control = ui.template_palette(scene, "beyond_ui_test_palette", color=True)
+    assert control.options["widget"].show_colors
+    default_control = ui.template_palette(scene, "beyond_ui_test_palette")
+    native_has_color = (
+        "color" in bpy.types.UILayout.bl_rna.functions["template_palette"].parameters
+    )
+    assert default_control.options["widget"].show_colors == (not native_has_color)
+    ui.progress(factor=0.65, type="BAR", text="Preparing assets")
+    ui.progress(factor=0.65, type="RING")
+    obj.matrix_world = Matrix.LocRotScale(
+        Vector((2, 3, 4)), Euler((0.1, 0.2, 0.3)).to_quaternion(), Vector((2, 3, 4))
+    )
+    matrix = matrix_components(obj, "matrix_world")
+    before = tuple(tuple(row) for row in obj.matrix_world)
+    values = matrix.read()
+    assert all(abs(a - b) < 1e-5 for a, b in zip(values[0], (2, 3, 4)))
+    assert values is matrix.read(), "Warm matrix decomposition was repeated"
+    assert all(abs(a - b) < 1e-4 for a, b in zip(values[2], (2, 3, 4)))
+    try:
+        matrix.write(None)
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("Matrix template must be read-only")
+    ui.template_matrix(obj, "matrix_world")
+    assert tuple(tuple(row) for row in obj.matrix_world) == before
+    try:
+        ui.template_matrix(obj, "location")
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("Matrix template must reject non-matrix RNA")
+    # Preserve the legacy weight-value route without treating a scalar as RGB.
+    from beyond_ui.bindings import Binding
+
+    weight = [0.37]
+    wb = Binding(lambda: weight[0], lambda v: weight.__setitem__(0, v))
+    weight_source = palette_source(
+        scene, "beyond_ui_test_palette", lambda a, b: None, brush=wb, value_mode=True
+    )
+    weight_source.add()
+    assert abs(palette.colors[-1].weight - 0.37) < 1e-6
+    palette.colors[0].weight = 0.63
+    weight_source.select(0)
+    assert abs(weight[0] - 0.63) < 1e-6
+    scene.beyond_ui_test_palette = None
+    assert not source.valid()
+    assert len(commits) == 3
+    result["checks"] += [
+        "custom palette selection/add/remove and canceled color edit",
+        "palette stale-element and owner rejection",
+        "legacy palette color flag and 5.2 default",
+        "read-only matrix decomposition cache and type validation",
+        "custom BAR/RING authoring",
+    ]
+finally:
+    del bpy.types.Scene.beyond_ui_test_palette
+    bpy.data.palettes.remove(palette)
+    bpy.data.objects.remove(obj)
 Path(os.environ["BEYOND_UI_TEST_RESULT"]).write_text(json.dumps(result, indent=2))

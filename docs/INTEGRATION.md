@@ -105,3 +105,11 @@ to `PanelHost` to reuse the source glass pipeline; otherwise translucent tinting
 is used. `ColorRamp(linear=True)` converts scene-linear stop colors to display
 space consistently for the gradient, handles and swatch. Set `linear=False` only
 for display-space bindings.
+
+## Animation configuration
+
+Use `AnimationSettings` on the host, canvas or individual control for live
+`enabled` and `strength` settings. [The animation guide](ANIMATION.md) documents
+inheritance, read-only change notifications, finite redraw ownership and current
+coverage gaps. The library does not register settings in the consuming extension;
+bind these Python properties to your own backend/preferences.

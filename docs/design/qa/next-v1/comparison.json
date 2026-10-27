@@ -1,0 +1,56 @@
+{
+  "reference": "docs/design/references/next-controls-v2.png",
+  "reference_sha256": "ebee334ddfb7a24012bfa3d80a2391dc995787113007ddc4a6fc20177e6b774c",
+  "exact_match": false,
+  "controls": [
+    {
+      "control": "Palette",
+      "bounds": [
+        45,
+        36,
+        750,
+        523
+      ],
+      "exact_match": false,
+      "mean_absolute_rgb_error": 8.157972048679376,
+      "capture_sha256": "439f9b81f17e6ebf92544dcd120b373284f4534ee6f53b3f48501242cf25918b"
+    },
+    {
+      "control": "Matrix",
+      "bounds": [
+        787,
+        36,
+        1492,
+        523
+      ],
+      "exact_match": false,
+      "mean_absolute_rgb_error": 8.697522827559089,
+      "capture_sha256": "61196b7a5205b102c59c8feecc0756cb334ac65dd9a43d4fdedb149e4864c2fb"
+    },
+    {
+      "control": "Progress Bar",
+      "bounds": [
+        45,
+        549,
+        750,
+        986
+      ],
+      "exact_match": false,
+      "mean_absolute_rgb_error": 6.436236752844182,
+      "capture_sha256": "75a998f4177734f4fcff4e76ee37c02ab2814ba3a496f3c6d2f05b9597c87281"
+    },
+    {
+      "control": "Progress Ring",
+      "bounds": [
+        787,
+        549,
+        1492,
+        986
+      ],
+      "exact_match": false,
+      "mean_absolute_rgb_error": 8.65478682831037,
+      "capture_sha256": "d976bc1d62e9c7be717a81433530a3f7c90cff4b90c383ee404b20df645e0f25"
+    }
+  ],
+  "acceptance": "Awaiting Tyler QA. Numerical image difference is not a visual-acceptance claim."
+}

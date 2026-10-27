@@ -3,13 +3,13 @@
 ## Current status
 
 The modular extraction and initial custom implementation are execution-tested.
-Full custom Blender UI parity is **not complete**. No generated-reference match
-has been accepted. Tyler owns visual QA; do not infer approval from screenshots,
+Full custom Blender UI parity is **not complete**. Tyler approved the prior four controls' presented resting state; full exact
+matching across controls/states is not established. Tyler owns visual QA; do not infer approval from screenshots,
 unit tests, native forwarding or ordinary CI.
 
 ## Evidence
 
-- 18 pure Python tests pass: transactions/rollback, stale-owner rejection,
+- 28 pure Python tests pass: transactions/rollback, stale-owner rejection,
   retained geometry, clipped input, million-row virtualization, text/arithmetic,
   independent vendor namespaces, and custom color/curve/ramp/picker interactions.
 - Ruff parser/name-error checks pass. No claim of full static type validation.
@@ -31,7 +31,7 @@ unit tests, native forwarding or ordinary CI.
 
 No live Blender MCP listener was available. Tests used isolated processes and
 profiles; the source BVT extension and unrelated user scenes were not changed.
-No visual approval or native Windows/Linux qualification is implied.
+No new visual approval or native Windows/Linux qualification is implied.
 
 ## Gates still open
 
@@ -53,3 +53,20 @@ All four revised compound painters execute in Blender 5.1.2 and 5.2.2. The
 [revision notes](design/qa/v2/NOTES.md) distinguish the improved visual comparison,
 actual alpha/transparency proof, measured rendering costs and remaining defects.
 No exact match or source-performance equivalence is claimed.
+
+## Next controls and shared motion
+
+Palette, read-only matrix decomposition, BAR/RING progress and the shared
+animation policy are implemented with partial parity. [QA board](design/qa/next-v1/index.html)
+and [motion guide](ANIMATION.md) enumerate remaining gaps. The ledger has 39
+partial members out of 137; no member is marked fully reference-matched.
+
+Fresh background/runtime tests pass on 5.1.2 and 5.2.2. Fresh windowed tests cover
+input, timer registration during motion, automatic termination while hovered,
+live host disable, invalidation rollback and repeated registration. Deterministic
+actual Canvas captures on both versions prove identical resting/settled/disabled
+pixels and unchanged retained geometry. These do not qualify older runtimes,
+Windows/Linux, every motion state or every UI scale.
+
+The performance record retains the earlier baseline and the resting/active-motion
+measurements; exact source-extension performance equivalence is not claimed.

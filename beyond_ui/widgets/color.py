@@ -175,7 +175,9 @@ class ColorPicker(Widget):
         return False
 
     def paint(self, rect, font, palette, *, backdrop=None):
-        p = Painter(rect, self.width, self.height, font, palette, backdrop)
+        p = Painter(
+            rect, self.width, self.height, font, palette, backdrop, motion=self.motion
+        )
         p.card("Color Picker")
         value = self.binding.read()
         h, s, v = color_hsv(value, self.linear, self.hue_value)
@@ -185,15 +187,27 @@ class ColorPicker(Widget):
         skin.draw(p.map(self.sv), (1, 1, 1, 1), radius=6 * p.scale, mode=1, hue=h)
         skin.draw(p.map(self.hue), (1, 1, 1, 1), radius=6 * p.scale, mode=2)
         a, b, w, d = p.map(self.sv)
-        style.picker_marker(
-            a + s * w,
-            b + v * d,
-            14 * p.scale,
-            color_rgb((h, s, v), False) + (1.0,),
-            scale=p.scale,
-        )
+        with p.deform(
+            "sv",
+            (
+                self.sv[0] + s * self.sv[2] - 14,
+                self.sv[1] + (1 - v) * self.sv[3] - 14,
+                28,
+                28,
+            ),
+            circular=True,
+        ):
+            style.picker_marker(
+                a + s * w,
+                b + v * d,
+                14 * p.scale,
+                color_rgb((h, s, v), False) + (1.0,),
+                scale=p.scale,
+            )
+        self.motion.region("sv", self.sv, circular=True)
         a, b, w, d = self.hue
-        p.surface((a + h * w - 4, b - 3, 8, d + 6), skin.TEXT, 1, 0.6)
+        p.surface((a + h * w - 4, b - 3, 8, d + 6), skin.TEXT, 1, 0.6, motion_key="hue")
+        self.motion.region("hue", self.hue)
         channels = (
             color_hsv(value, self.linear, self.hue_value)
             if self.mode == "HSV"
@@ -226,7 +240,8 @@ class ColorPicker(Widget):
             p.surface(r, "track", 8, 0)
             ratio = max(0, min(1, value[3]))
             p.surface((a, b, w * ratio, d), "fill", 8, 0)
-            p.circle((a + w * ratio, b + d / 2), 11, skin.TEXT, 0.7)
+            p.circle((a + w * ratio, b + d / 2), 11, skin.TEXT, 0.7, motion_key="alpha")
+            self.motion.region("alpha", COLOR["alpha_track"], circular=True)
         p.surface(COLOR["hex"], "input")
         p.text(
             COLOR["hex"],

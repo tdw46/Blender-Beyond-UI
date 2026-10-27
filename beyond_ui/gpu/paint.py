@@ -1,6 +1,6 @@
 """Canvas painter. Own touched GPU state; share retained style batches."""
 
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from functools import lru_cache
 from . import style, glass, typography, skin
 from ..editing import display_number
@@ -117,89 +117,133 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 value = None
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
-            if kind in {"button", "number", "text", "enum", "color"}:
-                surface(
-                    r,
-                    palette["selected"]
-                    if selected
-                    else palette["hover"]
-                    if canvas.hover == control.key
-                    else palette["field"],
-                )
-            if kind == "widget":
-                control.options["widget"].paint(r, font, palette, backdrop=backdrop)
-            elif kind == "separator":
-                style.draw(a, b + d / 2, c, scale, palette["muted"], radius=0)
-            elif kind == "toggle":
-                text(control.label, (a, b, max(0.0, c - 48 * scale), d), ink)
-                style.switch(
-                    a + c - 48 * scale,
-                    b,
-                    48 * scale,
-                    d,
-                    float(bool(value)),
-                    scale=scale,
-                    palette=palette,
-                    backdrop=backdrop,
-                )
-            elif kind == "number":
-                lo = control.options.get("min", 0.0)
-                hi = control.options.get("max", 1.0)
-                if value is not None:
-                    ratio = max(0.0, min(1.0, (value - lo) / max(1e-12, hi - lo)))
-                    style.draw(
-                        a, b, c * ratio, 3 * scale, palette["slider_fill"], radius=scale
+            if kind != "widget":
+                control.motion.begin_paint()
+                if control.enabled and kind in {
+                    "button",
+                    "number",
+                    "text",
+                    "enum",
+                    "color",
+                    "toggle",
+                }:
+                    control.motion.region(
+                        "body", control.rect, circular=(abs(c - d) < 8)
                     )
-                label = (
-                    canvas.editor.text
-                    if canvas.active is control and canvas.editor
-                    else (display_number(value) if value is not None else "Unavailable")
-                )
-                text(f"{control.label}  {label}", r, ink)
-            elif kind == "text":
-                value = (
-                    canvas.editor.text
-                    if canvas.active is control and canvas.editor
-                    else value
-                )
-                text(f"{control.label}  {value if value is not None else ''}", r, ink)
-            elif kind == "enum":
-                label = next(
-                    (label for key, label in control.options["items"] if key == value),
-                    str(value),
-                )
-                text(
-                    f"{control.label}  {label}", (a, b, max(0, c - 20 * scale), d), ink
-                )
-                style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
-            elif kind == "color":
-                text(control.label, (a, b, max(0, c - 40 * scale), d), ink)
-                if value is not None:
-                    rgb = tuple(value[:3])
-                    alpha = value[3] if len(value) > 3 else 1.0
-                    style.draw(
-                        a + c - 34 * scale,
-                        b + 5 * scale,
-                        28 * scale,
-                        d - 10 * scale,
-                        (*rgb, alpha),
-                        radius=4 * scale,
+            with (
+                control.motion.deform("reveal", r),
+                nullcontext() if kind == "toggle" else control.motion.deform("body", r),
+            ):
+                if kind in {"button", "number", "text", "enum", "color"}:
+                    surface(
+                        r,
+                        palette["selected"]
+                        if selected
+                        else palette["hover"]
+                        if canvas.hover == control.key
+                        else palette["field"],
                     )
-            elif kind == "image":
-                texture = control.options["texture"]
-                texture = texture() if callable(texture) else texture
-                if texture is not None:
-                    style.preview(texture, *r, radius=t.radius * scale)
-            else:
-                text(control.label, r, ink, control.options.get("text_role", "body"))
+                if kind == "widget":
+                    control.options["widget"].paint(r, font, palette, backdrop=backdrop)
+                elif kind == "separator":
+                    style.draw(a, b + d / 2, c, scale, palette["muted"], radius=0)
+                elif kind == "toggle":
+                    text(control.label, (a, b, max(0.0, c - 48 * scale), d), ink)
+                    style.switch(
+                        a + c - 48 * scale,
+                        b,
+                        48 * scale,
+                        d,
+                        float(bool(value)),
+                        shape=control.motion.sample("body")[0],
+                        scale=scale,
+                        palette=palette,
+                        backdrop=backdrop,
+                    )
+                elif kind == "number":
+                    lo = control.options.get("min", 0.0)
+                    hi = control.options.get("max", 1.0)
+                    if value is not None:
+                        ratio = max(0.0, min(1.0, (value - lo) / max(1e-12, hi - lo)))
+                        style.draw(
+                            a,
+                            b,
+                            c * ratio,
+                            3 * scale,
+                            palette["slider_fill"],
+                            radius=scale,
+                        )
+                    label = (
+                        canvas.editor.text
+                        if canvas.active is control and canvas.editor
+                        else (
+                            display_number(value)
+                            if value is not None
+                            else "Unavailable"
+                        )
+                    )
+                    text(f"{control.label}  {label}", r, ink)
+                elif kind == "text":
+                    value = (
+                        canvas.editor.text
+                        if canvas.active is control and canvas.editor
+                        else value
+                    )
+                    text(
+                        f"{control.label}  {value if value is not None else ''}", r, ink
+                    )
+                elif kind == "enum":
+                    label = next(
+                        (
+                            label
+                            for key, label in control.options["items"]
+                            if key == value
+                        ),
+                        str(value),
+                    )
+                    text(
+                        f"{control.label}  {label}",
+                        (a, b, max(0, c - 20 * scale), d),
+                        ink,
+                    )
+                    style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
+                elif kind == "color":
+                    text(control.label, (a, b, max(0, c - 40 * scale), d), ink)
+                    if value is not None:
+                        rgb = tuple(value[:3])
+                        alpha = value[3] if len(value) > 3 else 1.0
+                        style.draw(
+                            a + c - 34 * scale,
+                            b + 5 * scale,
+                            28 * scale,
+                            d - 10 * scale,
+                            (*rgb, alpha),
+                            radius=4 * scale,
+                        )
+                elif kind == "image":
+                    texture = control.options["texture"]
+                    texture = texture() if callable(texture) else texture
+                    if texture is not None:
+                        style.preview(texture, *r, radius=t.radius * scale)
+                else:
+                    text(
+                        control.label, r, ink, control.options.get("text_role", "body")
+                    )
             count += 1
         if canvas.overlay and "widget" in canvas.overlay:
             r = mapped(canvas.overlay["rect"])
             surface(r, palette["overlay"])
-            canvas.overlay["widget"].paint(r, font, palette, backdrop=backdrop)
+            widget = canvas.overlay["widget"]
+            with widget.motion.deform("reveal", r):
+                widget.paint(r, font, palette, backdrop=backdrop)
         elif canvas.overlay:
-            for r, value, label in canvas.overlay["items"]:
-                target = mapped(r)
-                surface(target, palette["overlay"])
-                text(label, target, palette["text"])
+            motion = canvas.active.motion
+            with motion.deform("menu-reveal", mapped(canvas.overlay["rect"])):
+                for r, value, label in canvas.overlay["items"]:
+                    target = mapped(r)
+                    key = ("menu", value)
+                    motion.region(key, r)
+                    with motion.deform(key, target):
+                        surface(target, palette["overlay"])
+                        text(label, target, palette["text"])
     return count

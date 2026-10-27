@@ -1,0 +1,101 @@
+{
+  "earlier_next_batch": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "visible_palette_color_reads_per_frame": 19.0,
+    "progress_changes_each_frame": true,
+    "workload": "4 next-batch cards at 630 logical width; 10000 palette colors; progress advances every frame; 20 warmup + 100 measured; tint-only",
+    "cpu_submission": {
+      "p50_ms": 0.3471249947324395,
+      "p95_ms": 0.40658400394022465,
+      "max_ms": 0.5049579776823521
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 0.9245414985343814,
+      "p95_ms": 1.1584579478949308,
+      "max_ms": 1.216749893501401
+    },
+    "retained_line_batches": 16,
+    "warm_resources_unchanged": true,
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "first_motion_rest": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "visible_palette_color_reads_per_frame": 19.0,
+    "progress_changes_each_frame": true,
+    "workload": "4 next-batch cards at 630 logical width; 10000 palette colors; progress advances every frame; 20 warmup + 100 measured; tint-only",
+    "cpu_submission": {
+      "p50_ms": 0.4236250533722341,
+      "p95_ms": 0.9828750044107437,
+      "max_ms": 1.2305419659242034
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 0.8719164761714637,
+      "p95_ms": 1.6685830196365714,
+      "max_ms": 2.5573750026524067
+    },
+    "retained_line_batches": 16,
+    "warm_resources_unchanged": true,
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "optimized_motion_rest": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "visible_palette_color_reads_per_frame": 19.0,
+    "progress_changes_each_frame": true,
+    "workload": "4 next-batch cards at 630 logical width; 10000 palette colors; progress advances every frame; 20 warmup + 100 measured; tint-only",
+    "cpu_submission": {
+      "p50_ms": 0.3848750493489206,
+      "p95_ms": 0.9389579063281417,
+      "max_ms": 1.277000061236322
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 0.8338754996657372,
+      "p95_ms": 1.669249963015318,
+      "max_ms": 1.783709041774273
+    },
+    "retained_line_batches": 16,
+    "warm_resources_unchanged": true,
+    "motion_mode": "rest",
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "active_motion": {
+    "passed": true,
+    "runtime": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "backend": "METAL",
+    "device": "Metal API",
+    "root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "visible_palette_color_reads_per_frame": 19.0,
+    "progress_changes_each_frame": true,
+    "workload": "4 next-batch cards at 630 logical width; 10000 palette colors; progress advances every frame; 20 warmup + 100 measured; tint-only",
+    "cpu_submission": {
+      "p50_ms": 0.43037557043135166,
+      "p95_ms": 1.0284589370712638,
+      "max_ms": 1.514042029157281
+    },
+    "submission_plus_one_pixel_sync_readback": {
+      "p50_ms": 0.8645415073260665,
+      "p95_ms": 1.7152921063825488,
+      "max_ms": 2.8079169569537044
+    },
+    "retained_line_batches": 16,
+    "warm_resources_unchanged": true,
+    "motion_mode": "active",
+    "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+  },
+  "analysis": "Resting median increased from 0.347ms to 0.385ms (+0.038ms, 10.9%); an idle-path optimization reduced the first 0.424ms reading. Tail timings increased and remain a performance investigation item. Active median 0.430ms. This is not a source-extension equivalence claim."
+}

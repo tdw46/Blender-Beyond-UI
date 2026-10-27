@@ -6,9 +6,11 @@ vector icons, inline editing, searchable lists and bounded previews.
 
 **Development status:** the extraction and initial custom backend work. Full
 custom parity with Blender's UI API is **not complete**, and exact matching to
-the generated visual specifications has **not been accepted**. The release gate
+the complete generated visual specifications is **not established**. Tyler approved
+the prior four controls' presented resting state; new controls and motion await QA. The release gate
 tracks these honestly; a native wrapper does not count as custom parity.
 
+[Next batch QA](docs/design/qa/next-v1/index.html) ·
 [Visual specification](docs/design/references/specialized-controls-v1.png) ·
 [Custom parity ledger](docs/CUSTOM_PARITY.json) ·
 [Validation](docs/VALIDATION.md) · [Integration](docs/INTEGRATION.md)
@@ -58,7 +60,10 @@ per-region canvases, event routing, invalidation and teardown.
 ## Components
 
 * `Canvas`, `Layout`, `Binding`, `Edit`: retained controls and host-owned edits.
-* `widgets`: custom color picker, curve/ramp editor and searchable data picker.
+* `widgets`: custom color picker, curve/ramp editor, searchable data picker,
+  virtualized palette, read-only matrix decomposition and progress bar/ring.
+* `AnimationSettings`: shared source springs with live enable/strength policy;
+  see [animation integration and remaining gaps](docs/ANIMATION.md).
 * `components`, `virtual`, `editing`: Blender-independent layout/search/clipping,
   indexed virtualization, text selection, safe number parsing and color math.
 * `gpu`: extracted rounded primitives, semantic vector icons, finite springs,
