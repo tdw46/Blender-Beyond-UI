@@ -43,5 +43,36 @@
     }
   ],
   "source": "Actual Blender GPUOffScreen, stock theme, library painters; no reference pixels used",
-  "acceptance": "Unapproved; Tyler performs visual QA"
+  "acceptance": "Unapproved; Tyler performs visual QA",
+  "implementation_sha256": {
+    "beyond_ui/__init__.py": "bdf7ff38ce65a2d7d9243f8d838c64125579e04e1f590390d538c15e00649099",
+    "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+    "beyond_ui/bindings.py": "ff280e02e3b2bdd4335c83dc9990c6b7f946a68bc47a40193fdad5d6120498e2",
+    "beyond_ui/canvas.py": "c22bc794a1fd3a3bb8af61cdbbb87c2a72772e2578601287069f6730a4230353",
+    "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+    "beyond_ui/editing.py": "8074f686bce3c373707bf3b5014cd030c997130b6360854aa39392d090253172",
+    "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+    "beyond_ui/gpu/glass.py": "c64ba0e47a92880bf87e542dc1d91011e9051c95aa61ad492fd2a1f319d9750b",
+    "beyond_ui/gpu/menus.py": "6cdf37ca392fbd6bd63d52f5793208d3c14eb64639946c96ced6a4bc3d9ff0ac",
+    "beyond_ui/gpu/paint.py": "ad70ab310ebfa2e4f04d827616104020c959655b03fb670b7c8399ed10daf7ce",
+    "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+    "beyond_ui/gpu/style.py": "7802657f0047bd8ca454caf7bfba511320b972dc4158c4cb8156d87da320cdb8",
+    "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+    "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+    "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+    "beyond_ui/hosts/panel.py": "db378b868224b772f77337865dd17fb1d066d40e16f48724eec0b389506648f5",
+    "beyond_ui/layout.py": "4f6db2cbffadaf03354cbc082fcaa35c4ac418e70dcbad76fe03415556e32624",
+    "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+    "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+    "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+    "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+    "beyond_ui/widgets/__init__.py": "f3265f17ea9eaaf70489074f37ed4d4b05eef98fed10fdd58e3991bf853d2ac8",
+    "beyond_ui/widgets/base.py": "f7e375c024c81fd24539580a5a80d73032102a270e7c596beaf9340439944ef4",
+    "beyond_ui/widgets/color.py": "349979855d1ec7087aff15b33f3f591f88fa09847f1c8dc29cb94179d90301c5",
+    "beyond_ui/widgets/curve.py": "829bab472893991aae1fb778e086648e06433f2aaf4e0f904abe4a034a3d26d3",
+    "beyond_ui/widgets/picker.py": "1f2dad06647f2e75c821cb0c7542e9e19a3fba2be8e48db5806878daae5a9486",
+    "beyond_ui/widgets/ramp.py": "aa25d5b220180bc14c6f5ddfdb58fde389b1104484e32086d87cd1ebf380b9db",
+    "beyond_ui/widgets/rna.py": "6e048d4711be0afeab0c0c452ad8e9d4dbab257df5d024f728cde216c5a229a4",
+    "beyond_ui/widgets/socket.py": "84fd75bc336ddc6042516808ff3e7324ca9b0192b49188407d3c6bbf95112a31"
+  }
 }

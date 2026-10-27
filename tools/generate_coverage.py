@@ -55,4 +55,4 @@ for typename in ("UILayout", "Panel", "Menu", "UIList", "Header"):
         )
         lines.append("| `" + name + "` | " + " | ".join(flags) + " | " + route + " |")
     lines.append("")
-(ROOT / "docs/COVERAGE.md").write_text("\n".join(lines) + "\n")
+(ROOT / "docs/COVERAGE.md").write_text("\n".join(lines).rstrip() + "\n")

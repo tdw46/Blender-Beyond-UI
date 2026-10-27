@@ -265,4 +265,3 @@ Fetched from exact versioned official API pages; see `api_inventory.json` for si
 | `layout` | yes | yes | yes | yes | yes | yes | yes | Host-owned native class |
 | `prepend` | yes | yes | yes | yes | yes | yes | yes | Host-owned native class |
 | `remove` | yes | yes | yes | yes | yes | yes | yes | Host-owned native class |
-
