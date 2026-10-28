@@ -387,14 +387,23 @@ class Canvas(Group):
         self.edit = self.editor = self.active = self.overlay = None
 
     def finish(self):
-        if self.edit:
-            self.edit.finish()
-        self.edit = self.editor = self.active = None
+        try:
+            if self.edit:
+                self.edit.finish()
+        finally:
+            self.edit = self.editor = self.active = None
 
     def _begin(self, control):
         self.finish()
         self.active = control
         self.edit = Edit(control.binding)
+        numeric = control.options.get("numeric")
+        self._numeric_state = numeric.snapshot() if numeric else None
+        self._initial_text = (
+            numeric.format(self.edit.before, self._numeric_state)
+            if numeric
+            else str(self.edit.before)
+        )
 
     def blur_focus(self):
         if self.keyboard_focus is not None:
@@ -796,11 +805,15 @@ class Canvas(Group):
             if kind in {"RET", "NUMPAD_ENTER"} and press:
                 try:
                     value = (
-                        number(self.editor.text)
+                        self._parse_number(self.editor.text)
                         if self.active.kind == "number"
                         else self.editor.text
                     )
-                    self._write(value)
+                    if (
+                        self.active.kind != "number"
+                        or value != self.active.binding.read()
+                    ):
+                        self._write(value)
                     self.finish()
                 except ValueError:
                     pass  # Keep invalid text selected for correction.
@@ -879,9 +892,43 @@ class Canvas(Group):
                 )
                 if getattr(event, "shift", False):
                     delta *= 0.25
-                self._write(self._drag_start + delta)
+                numeric = self.active.options.get("numeric")
+                if numeric is not None:
+                    if numeric.snapshot() != self._numeric_state:
+                        self.cancel()
+                        return True
+                    if not self._dragged and abs(x - self._drag_x) <= 3:
+                        return True
+                    self._dragged = True
+                    step = (
+                        ((maximum - minimum) / max(1.0, self.active.rect[2]))
+                        if self.active.options.get("slider")
+                        and 0 < maximum - minimum < 1e6
+                        else numeric.drag(self._numeric_state)
+                    )
+                    if getattr(event, "shift", False):
+                        step *= 0.25
+                    self._drag_start += (x - self._drag_last) * step
+                    self._drag_last = x
+                    self._drag_start = max(minimum, min(maximum, self._drag_start))
+                    value = self._drag_start
+                    if getattr(event, "ctrl", False):
+                        snap = max(
+                            1e-12,
+                            numeric.step
+                            / (1 if numeric.integer else 100)
+                            / numeric.display_scale(self._numeric_state),
+                        )
+                        value = round(value / snap) * snap
+                    value = max(minimum, min(maximum, value))
+                    self._write(value)
+                else:
+                    self._write(self._drag_start + delta)
             elif kind == "LEFTMOUSE" and event.value == "RELEASE":
-                self.finish()
+                if self.active.options.get("numeric") and not self._dragged:
+                    self.editor = Text(self._initial_text)
+                else:
+                    self.finish()
             return True
         control = self.hit(x, y, clip)
         if kind == "MOUSEMOVE":
@@ -935,10 +982,12 @@ class Canvas(Group):
                     }
                 return True
             if control.kind == "text" or event.value == "DOUBLE_CLICK":
-                self.editor = Text(control.binding.read())
+                self.editor = Text(self._initial_text)
             else:
                 self._drag_x = x
                 self._drag_start = control.binding.read()
+                self._drag_last = x
+                self._dragged = False
         elif control.kind == "enum":
             self._begin(control)
             a, b, w, h = control.rect
@@ -961,6 +1010,14 @@ class Canvas(Group):
         else:
             return False
         return True
+
+    def _parse_number(self, text):
+        numeric = self.active.options.get("numeric")
+        if numeric:
+            if numeric.snapshot() != self._numeric_state:
+                raise ValueError("Unit settings changed; cancel and reopen the field")
+            return numeric.parse(text, self.edit.before, self._numeric_state)
+        return number(text)
 
     def _write(self, value):
         if self.active.kind == "number":

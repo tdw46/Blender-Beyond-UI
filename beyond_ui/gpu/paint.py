@@ -100,6 +100,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
             )
 
     count = 0
+    numeric_states = {}  # Resolve shared scene/view settings once per visible host paint.
     with gpu_state():
         # Geometry is clipped via scissor rectangle as well as logical culling.
         # The caller establishes scissor enable; no unsupported getter is used.
@@ -165,9 +166,16 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         backdrop=backdrop,
                     )
                 elif kind == "number":
+                    numeric = control.options.get("numeric")
+                    numeric_state = None
+                    if numeric is not None:
+                        owner = id(numeric.context)
+                        if owner not in numeric_states:
+                            numeric_states[owner] = numeric.snapshot()
+                        numeric_state = numeric_states[owner]
                     lo = control.options.get("min", 0.0)
                     hi = control.options.get("max", 1.0)
-                    if value is not None:
+                    if value is not None and control.options.get("slider", True):
                         ratio = max(0.0, min(1.0, (value - lo) / max(1e-12, hi - lo)))
                         style.draw(
                             a,
@@ -181,7 +189,11 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         canvas.editor.text
                         if canvas.active is control and canvas.editor
                         else (
-                            display_number(value)
+                            (
+                                numeric.format(value, numeric_state)
+                                if numeric is not None
+                                else display_number(value)
+                            )
                             if value is not None
                             else "Unavailable"
                         )

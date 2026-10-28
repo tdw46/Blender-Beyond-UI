@@ -1,0 +1,4 @@
+BEYOND_UI_NUMERIC {"passed": true, "version": "5.2.2 LTS", "checks": ["metric/imperial input, explicit preferred units, bare values, scene scale and area/volume powers", "rotation units, radians preference, factor percentage preference, exact unchanged roundtrip", "custom canvas click-to-type, unchanged confirmation, converted writes, soft drag/hard text bounds, cancel-before-menu and changed unit rejection", "contributed field units and settings guard; exact native RNA context target retained", "warm formatting reuses bounded unit caches without registration or timers"]}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

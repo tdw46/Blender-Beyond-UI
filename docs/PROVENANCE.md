@@ -81,3 +81,20 @@ imports/painting never compile it. No Blender struct offset is read by this shim
 The existing source BVT glass, spring and theme extraction remain shared by inline
 menu fields. v5 adds actual implementation frames, without changing prior
 reference images or claiming new reference acceptance.
+
+
+### Numeric properties
+
+The original BVT `begin_edit` / numeric gesture path and `_shoost_canvas_edit.py`
+were re-read at commit `ec947ccefc44bd02ad2b175323fa4fc78d60ee4d`; those files had
+no local changes. [Audited source hashes](design/qa/numeric-props-v1/bvt-source-audit.json)
+record the three-pixel threshold, fractional drag accumulation, Shift precision
+and unchanged-text preservation used by this pass. Product-specific transform
+ranges and bindings remain outside the library. The renderer, fonts, spring,
+theme roles and backdrop implementation are reused.
+
+The new conversion uses Blender's public unit helpers, with [official source
+URLs and hashes](design/qa/numeric-props-v1/api-source-audit.json) for the 4.2.0 tag
+and exact installed 5.1.2/5.2.2 revisions. No native adapter is introduced. A
+bounded unit-token/arithmetic gate precedes public parsing; arbitrary Python
+expressions are not forwarded.

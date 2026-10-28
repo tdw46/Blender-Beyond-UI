@@ -341,3 +341,37 @@ production and five retained offscreens serve the entire capture. These are CPU
 submission measurements, not GPU completion or end-to-end latency. Current capture
 shutdown has no allocation warning; the historical intermittent Metal warning is
 not declared fixed.
+
+
+## Numeric property units and gestures — 2026-10-28
+
+[Numeric property QA](design/qa/numeric-props-v1/index.html) extends the existing
+custom painter with scene-unit presentation and input. Both installed macOS arm64
+Blender 5.1.2/5.2.2 runtimes pass metric/imperial conversion, preferred length
+units, scaled area/volume, degree/radian and percentage-factor handling, unchanged
+roundtrip, click-to-type, soft/hard limits, Ctrl snapping, unit-setting changes
+during edits, cancellation before context menus and exact raw RNA subtargets.
+Authoring, contributed-menu and actual window-menu regression fixtures also pass.
+68 pure tests, Ruff, ledger validation and source/wheel builds pass. No scene or
+preferences were saved outside disposable profiles.
+
+The 640×560 capture uses 16 numeric properties with clipping, 20 warmups and 100
+CPU submission samples. Unit-aware median/p95 is 0.230/0.309 ms; the
+raw-format baseline in the same renderer is 0.213/0.238 ms. This is not
+a historical binary comparison or GPU completion measurement. An initial probe
+identified repeated per-field scene/view setting reads; the final painter resolves
+those once per context per paint. Unit caches retain primitive keys only.
+
+The real BVT backdrop has one production, one strong-blur production and five
+retained offscreens. Layout, shader and batch identities remain unchanged through
+hover/press/release, live theme/unit changes and captures. Settled and disabled
+motion pixels equal the resting capture. Existing visual references are unchanged;
+no new exact-match/motion acceptance is claimed. The current capture log has no
+allocation warning. Unrelated historical Metal shutdown observations remain open.
+
+Exact official public unit-helper source was inspected for 4.2.0 and the installed
+5.1.2/5.2.2 revisions. Most exact API/Manual URLs returned fetch/access errors;
+they were not replaced with stale-version compatibility evidence. Blender 4.2
+runtime and broader platform/DPI qualification remain untested in this pass.
+[Numeric integration](NUMERIC_PROPERTIES.md) lists the remaining property semantics;
+full API parity remains false (137 members, 39 partial, zero reference-matched).

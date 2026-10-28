@@ -66,6 +66,15 @@ source/executable admission. See the [supported cases and gaps](docs/CONTEXT_MEN
 Exact generated-reference/motion acceptance is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
 preview exercises the real liquid-glass path.
 
+Numeric properties now support scene units, angles, percentage factors and source-style
+dragging through the same glass/theme/motion path.
+
+![Actual Blender numeric property motion](docs/media/panels/numeric-props-v1.gif)
+
+[Numeric property QA](docs/design/qa/numeric-props-v1/index.html) ·
+[Supported semantics and remaining gaps](docs/NUMERIC_PROPERTIES.md)
+
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

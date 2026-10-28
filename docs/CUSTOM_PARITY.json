@@ -257,9 +257,9 @@
     "prop": {
       "kind": "method",
       "status": "partial",
-      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented; pointer and event shortcuts, native decorators, unit syntax and complete context actions remain open.",
+      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, pointer/event props, decorators, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/numeric-props-v1/capture.json"
     },
     "prop_decorator": {
       "kind": "method",

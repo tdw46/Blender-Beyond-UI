@@ -171,13 +171,18 @@ class Layout:
         text_align="LEFT",
     ):
         meta = data.bl_rna.properties[property]
+        subtype = (
+            "NONE"
+            if getattr(meta, "unit", "NONE") in {"AREA", "VOLUME"}
+            else meta.subtype
+        )
         label = self._text(text or meta.name, text_ctxt, translate)
         if event or full_event:
             raise UnsupportedControl("prop event binding")
         if (
             getattr(meta, "is_array", False)
             and index < 0
-            and meta.subtype not in {"COLOR", "COLOR_GAMMA"}
+            and subtype not in {"COLOR", "COLOR_GAMMA"}
         ):
             row = self.row()
             for i in range(meta.array_length):
@@ -200,10 +205,12 @@ class Layout:
                 )
             return self.group.toggle(key, label, binding, **options)
         if meta.type in {"INT", "FLOAT"}:
-            if meta.subtype in {"COLOR", "COLOR_GAMMA"} and index < 0:
+            if subtype in {"COLOR", "COLOR_GAMMA"} and index < 0:
                 return self.group.color(
-                    key, label, binding, linear=meta.subtype == "COLOR", **options
+                    key, label, binding, linear=subtype == "COLOR", **options
                 )
+            from .numeric import Numeric
+
             return self.group.number(
                 key,
                 label,
@@ -213,6 +220,8 @@ class Layout:
                 hard_min=meta.hard_min,
                 hard_max=meta.hard_max,
                 integer=meta.type == "INT",
+                numeric=Numeric(meta, self.context),
+                slider=slider,
                 **options,
             )
         if meta.type == "STRING":

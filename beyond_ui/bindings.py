@@ -46,7 +46,12 @@ class Edit:
         else:
             after = deepcopy(self.binding.read())
             if self.before != after:
-                self.binding.commit(self.before, after)
+                try:
+                    self.binding.commit(self.before, after)
+                except Exception:
+                    if self.binding.valid():
+                        self.binding.write(self.before)
+                    raise
 
 
 def rna_binding(

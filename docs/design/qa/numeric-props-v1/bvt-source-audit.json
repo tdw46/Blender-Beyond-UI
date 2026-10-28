@@ -1,0 +1,8 @@
+{
+  "bvt_revision": "ec947ccefc44bd02ad2b175323fa4fc78d60ee4d",
+  "source_files": {
+    "VRM_ShoostCanvas.py": "ab3dd110f4567d94d2d7ef24f0a638a91a8b934838ab80e8717b5ed13306cdf4",
+    "_shoost_canvas_edit.py": "3557caa3604e59bac0533737655a32190edb58337e10bd77f62891953c174cd5"
+  },
+  "scope": "Source three-pixel gesture threshold, displayed-unit accumulation, Shift quarter-step, finite source motion and unchanged-text precision preservation. Product-specific transform ranges are not imported."
+}

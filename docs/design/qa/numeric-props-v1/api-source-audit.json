@@ -1,0 +1,20 @@
+{
+  "v4.2.0": {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/python/intern/bpy_utils_units.cc",
+    "sha256": "2643a4f57d2ddceb9eb290e45b1258e7a8616adc3b23b340a568d04d14201708",
+    "to_value_reference_unit": true,
+    "to_string_precision": true
+  },
+  "ec6e62d40fa9": {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/python/intern/bpy_utils_units.cc",
+    "sha256": "ccbef054c68794ab8b376cde54f4450b4b58f55df8d64e0d30067f693cc046a2",
+    "to_value_reference_unit": true,
+    "to_string_precision": true
+  },
+  "d13f752e3b9c": {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/python/intern/bpy_utils_units.cc",
+    "sha256": "fd0f84e302c9c02b5e83008e6b680113d7e8f24ed91f9835c852b10b5ed0465c",
+    "to_value_reference_unit": true,
+    "to_string_precision": true
+  }
+}

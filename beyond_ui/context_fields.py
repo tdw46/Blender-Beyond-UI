@@ -70,7 +70,10 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
         )
     if meta.type in {"INT", "FLOAT", "STRING"}:
         from .context_edit import Field
-        from .editing import number
+        from .numeric import Numeric
+
+        def codec(context):
+            return Numeric(meta, context)
 
         def read(target, context):
             current = source.read()
@@ -82,7 +85,7 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
             if meta.type == "STRING":
                 after = text[: meta.length_max] if meta.length_max else text
             else:
-                after = number(text)
+                after = codec(context).parse(text, original)
                 after = round(after) if meta.type == "INT" else after
                 after = min(meta.hard_max, max(meta.hard_min, after))
             before = source.read()
@@ -100,7 +103,20 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
                 raise
 
         return Entry(
-            name, label, enabled=enabled, field=Field(read, apply), tip=meta.description
+            name,
+            label,
+            enabled=enabled,
+            field=Field(
+                read,
+                apply,
+                (lambda value, context: str(value))
+                if meta.type == "STRING"
+                else (lambda value, context: codec(context).format(value)),
+                (lambda target, context: None)
+                if meta.type == "STRING"
+                else (lambda target, context: codec(context).snapshot()),
+            ),
+            tip=meta.description,
         )
 
     if meta.type == "BOOLEAN" and not (getattr(meta, "is_array", False) and index < 0):

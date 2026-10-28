@@ -9,12 +9,14 @@ class Field:
     read: object
     apply: object  # (text, original, target, context) -> None, transactional
     format: object = lambda value, context: str(value)
+    state: object = lambda target, context: None
 
 
 class Editor:
     def __init__(self, row, index, target, context):
         self.row, self.index = row, index
         self.original = row.field.read(target, context)
+        self.state = row.field.state(target, context)
         formatted = row.field.format(self.original, context)
         if len(formatted) > 4096:
             raise ValueError("Field exceeds the inline editing limit")

@@ -471,6 +471,10 @@ class Menu:
                 return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
             if press and kind in {"RET", "NUMPAD_ENTER"}:
                 try:
+                    if editor.state != editor.row.field.state(self.target, context):
+                        raise ValueError(
+                            "Field settings changed; cancel and reopen the field"
+                        )
                     editor.row.field.apply(
                         editor.text.text, editor.original, self.target, context
                     )
