@@ -285,7 +285,7 @@
     "prop_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Full data-block actions, right-click menus and theme adaptation remain incomplete.",
       "reference": "docs/design/references/specialized-controls-v1.png",
       "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
       "visual_approval": "docs/design/qa/v2/approval.json"
@@ -856,7 +856,7 @@
     "template_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Full data-block actions, right-click menus and theme adaptation remain incomplete.",
       "reference": "docs/design/references/specialized-controls-v1.png",
       "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
       "visual_approval": "docs/design/qa/v2/approval.json"
@@ -965,6 +965,18 @@
       "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
       "reference": null,
       "comparison_evidence": null
+    }
+  },
+  "cross_cutting_gates": {
+    "right_click_context_menus": {
+      "status": "unimplemented",
+      "source_contract": "docs/SOURCE_UI_CONTRACT.md",
+      "notes": "Full BVT owner-aware nested context-menu/action/shortcut contract required; cancellation and selection menus alone do not count."
+    },
+    "active_blender_theme": {
+      "status": "partial",
+      "source_contract": "docs/SOURCE_UI_CONTRACT.md",
+      "notes": "Original BVT native_theme_palette reader is extracted; fixed reference skin remains the default and compound role plumbing is incomplete."
     }
   }
 }

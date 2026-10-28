@@ -1,0 +1,62 @@
+{
+  "reference": "docs/design/references/data-picker-scroll-v1.png",
+  "reference_sha256": "3c7447d74429a24c5ae7c90145c1fee434759a0ce60ee894c8a1b28ed49f1e6d",
+  "exact_match": false,
+  "mean_absolute_rgb": [
+    3.0540220608017217,
+    2.9113431530804412,
+    2.981863734194243
+  ],
+  "outside_list_pixels_unchanged": true,
+  "rest_regression": [
+    {
+      "file": "color-picker-alpha.png",
+      "identical": true
+    },
+    {
+      "file": "color-picker-contrast.png",
+      "identical": true
+    },
+    {
+      "file": "color-picker.png",
+      "identical": true
+    },
+    {
+      "file": "color-ramp-alpha.png",
+      "identical": true
+    },
+    {
+      "file": "color-ramp-contrast.png",
+      "identical": true
+    },
+    {
+      "file": "color-ramp.png",
+      "identical": true
+    },
+    {
+      "file": "curve-mapping-alpha.png",
+      "identical": true
+    },
+    {
+      "file": "curve-mapping-contrast.png",
+      "identical": true
+    },
+    {
+      "file": "curve-mapping.png",
+      "identical": true
+    },
+    {
+      "file": "data-picker-alpha.png",
+      "identical": true
+    },
+    {
+      "file": "data-picker-contrast.png",
+      "identical": true
+    },
+    {
+      "file": "data-picker.png",
+      "identical": true
+    }
+  ],
+  "acceptance": "Awaiting Tyler QA. Generated scrollbar size/position differs from the requested fixture; do not claim an exact match."
+}

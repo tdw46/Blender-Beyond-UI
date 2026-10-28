@@ -33,3 +33,9 @@ copied; this library is independent of the exporter and renderer dependencies.
 Unmodified Inter Regular and SemiBold WOFF2 assets are vendored from the official
 [Inter repository](https://github.com/rsms/inter), under the SIL Open Font License
 1.1. `beyond_ui/assets/fonts/OFL.txt` and `provenance.json` travel with the library.
+
+## BVT theme and context-menu behavior
+
+The [source UI contract audit](SOURCE_UI_CONTRACT.md) records the original
+examples, exact source commit/file hashes, reusable behavior and remaining
+extraction gaps. BVT-specific data resolution and operators remain host-owned.

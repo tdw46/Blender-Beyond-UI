@@ -1,0 +1,10 @@
+{
+  "file": "data-picker-scroll-v1.png",
+  "sha256": "3c7447d74429a24c5ae7c90145c1fee434759a0ce60ee894c8a1b28ed49f1e6d",
+  "generator": "built-in image_gen.imagegen",
+  "date": "2026-10-27",
+  "prompt": "data-picker-scroll-v1.prompt.txt",
+  "source_reference": "docs/design/qa/v2/data-picker.png",
+  "state": "Four items; offset 24 logical pixels; Cube selected; clipped first/fourth rows",
+  "status": "Awaiting QA; generated scrollbar placement deviates from requested geometry, tracked as a reference conflict"
+}

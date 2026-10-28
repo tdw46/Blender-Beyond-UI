@@ -217,8 +217,19 @@ class PanelHost:
                 canvas.edit is not None
                 or canvas.overlay is not None
                 or canvas.widget_capture is not None
+                or (
+                    canvas.keyboard_focus is not None
+                    and event.type in canvas.navigation_keys
+                )
             )
             if not captured and not (cx <= px < cx + cw and cy <= py < cy + ch):
+                if (
+                    event.type == "LEFTMOUSE"
+                    and event.value == "PRESS"
+                    and canvas.keyboard_focus is not None
+                ):
+                    canvas.blur_focus()
+                    region.tag_redraw()
                 if canvas.hover is not None:
                     canvas.hover = None
                     if canvas._motion_focus:
@@ -241,6 +252,10 @@ class PanelHost:
             if consumed or old_hover != canvas.hover:
                 region.tag_redraw()
             if consumed:
+                if event.type == "LEFTMOUSE" and event.value == "PRESS":
+                    for other_key, other in self.records.items():
+                        if other_key != key and other_key[0] == key[0]:
+                            other["canvas"].blur_focus()
                 return True
         return False
 

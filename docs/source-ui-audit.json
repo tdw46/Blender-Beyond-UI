@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-27",
+  "source_commit": "70f28650352f61652273f32cd042fbb3df491c53",
+  "source_files_clean": true,
+  "files": {
+    "_shoost_canvas_style.py": "01d050fe912ea90a45ca997b3b0276d25f01b31eda6b15e4bc1d9042eb0ab621",
+    "VRM_ShoostContextMenu.py": "0aec55c8d640ea4c9796e89941951e7333acd72298dc0161e44929f3cf98dd78",
+    "VRM_ShoostCanvas.py": "d18cf2678bc51784126e4e0434df1c1d5d51dcfcb5c9f5cfd601fa59a6e2f3b7"
+  },
+  "contract": "docs/SOURCE_UI_CONTRACT.md",
+  "source_modified": false
+}

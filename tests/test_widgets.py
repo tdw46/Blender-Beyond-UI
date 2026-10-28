@@ -80,6 +80,8 @@ class Widgets(unittest.TestCase):
         widget.text_edit.insert("cube")
         widget.event(event("RET"), 50, 100)
         self.assertEqual(len(widget.filtered), 1)
+        self.assertEqual(selected, [2])
+        selected.clear()
         valid.remove(2)
         widget.event(event("LEFTMOUSE"), 100, 175)
         self.assertEqual(selected, [])

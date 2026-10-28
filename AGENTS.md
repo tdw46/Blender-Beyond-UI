@@ -94,6 +94,62 @@ animation implementation or silently omit its animation integration.
   settings are implemented and verified. Keep generated motion references and
   actual implementation evidence available side by side for Tyler's QA.
 
+## Hard rule: consistent right-click menus
+
+Preserve the source Effect Layers UI's right-click/context-menu support across
+every applicable custom control, including compound controls and their individual
+fields, handles, rows and swatches. A control is not complete when it only supports
+left-click interaction.
+
+Use the original BVT `VRM_ShoostContextMenu.py` and the context-menu routing in
+`VRM_ShoostCanvas.py` as the implementation/behavior examples. Inspect those
+examples before changing this contract; do not substitute guessed generic-menu
+behavior. Keep BVT-specific resolution and operators in the consuming extension.
+
+- Use one shared, host-extensible context-menu contract. Preserve the source's
+  menu appearance, ordering, nested navigation, shortcuts, keyboard selection,
+  dismissal, clipping, glass treatment and bounded squash-and-stretch motion.
+- Resolve actions against the exact clicked control/subcontrol and current owner.
+  Revalidate bindings and capabilities before execution. Expose applicable
+  property/data actions through the consuming extension's context and undo policy;
+  never invent enabled actions or mutate the wrong element after sorting/deletion.
+- Preserve right-click cancellation during active edits/drags before opening a
+  menu. Outside the owned hit area, pass the event through to Blender. Do not
+  indiscriminately swallow right-click or replace all context actions with cancel.
+- Track missing menu/action coverage explicitly. Validate mouse and keyboard
+  invocation, nested/back navigation, stale owners, disabled actions, cancellation
+  and teardown before claiming parity. Keep menu references and actual QA captures.
+
+## Hard rule: pull colors from Blender's active theme
+
+Custom UI must obtain its semantic colors from Blender's active theme, as the
+source does. A fixed reference palette must not silently override the user's
+Blender theme in production.
+
+Use original BVT `_shoost_canvas_style.py::theme_palette` / `_theme_palette` as
+the color-extraction and glass-opacity examples. Its theme colors are already
+display-space: do not apply scene-linear color conversion, saturation guessing,
+preference mutation or a theme polling timer. Record audited source revisions in
+this repository's provenance notes.
+
+- Centralize theme-to-role mapping for text, titles, fields, buttons, selections,
+  hover/focus highlights, disabled states, sliders, graphs, curves and points.
+  All painters, icons, menus and popovers must use those shared roles.
+  Theme the UI chrome, not user-authored data: palette/ramp colors, color-picker
+  values and image previews must retain their bound values and color handling.
+- Preserve the source's translucent glass, alpha hierarchy, blur/refraction and
+  readable contrast while adapting colors. Do not turn translucent controls into
+  opaque native-theme rectangles or hard-code blue highlights across themes.
+- Capability-gate theme API access across the supported Blender versions. Keep
+  deterministic fallback colors for unavailable theme data and explicit reference
+  fixtures only; document fallback use rather than pretending it is theme-derived.
+- Apply active-theme changes without reloading the extension. Cache the resolved
+  palette per host/revision; do not scan all theme properties, rebuild GPU geometry,
+  or capture/blur a new backdrop for every control or animation tick.
+- Record the theme and color-management context used for each reference/capture.
+  Compare exact fidelity under the reference theme and validate light/dark/custom
+  themes separately. Track missing theme plumbing as a parity defect.
+
 ## Evidence and publication
 
 Maintain a member-by-member API inventory and custom parity ledger. Distinguish

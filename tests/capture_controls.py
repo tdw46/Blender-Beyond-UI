@@ -89,6 +89,19 @@ def make_widgets():
         from next_fixtures import widgets as next_widgets
 
         widgets = next_widgets()
+    if os.environ.get("BEYOND_UI_CAPTURE_SET") == "picker-scroll":
+        picker = DataPicker(
+            (
+                (1, "Camera", "camera"),
+                (2, "Cube", "object"),
+                (3, "Sphere", "material"),
+                (4, "Light", "☼"),
+            ),
+            lambda key: None,
+            selected=lambda: 2,
+        )
+        picker.rows.offset = 24
+        widgets = [("data-picker-scroll", "Data Picker — scrolled", picker)]
     return widgets, next_set
 
 
@@ -149,7 +162,11 @@ def run():
                             skin.draw(
                                 (col * 80, row * 80, 80, 80), color, radius=0, border=0
                             )
+                # This isolated fixture owns scissor enable; the widget intersects
+                # and restores the caller's enabled box, just like the panel host.
+                gpu.state.scissor_test_set(True)
                 widget.paint((0, 0, width, height), font, palette)
+                gpu.state.scissor_test_set(False)
                 buffer = gpu.state.active_framebuffer_get().read_color(
                     0, 0, width, height, 4, 0, "UBYTE"
                 )

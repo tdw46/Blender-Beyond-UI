@@ -126,6 +126,18 @@ class Group:
 
 
 class Canvas(Group):
+    navigation_keys = {
+        "UP_ARROW",
+        "DOWN_ARROW",
+        "HOME",
+        "END",
+        "PAGE_UP",
+        "PAGE_DOWN",
+        "RET",
+        "NUMPAD_ENTER",
+        "ESC",
+    }
+
     def __init__(self, theme=None, *, animation=None):
         self.animation = animation or AnimationSettings()
         self._animation_parents = ()
@@ -145,6 +157,7 @@ class Canvas(Group):
         self.active = None
         self.overlay = None
         self.widget_capture = None
+        self.keyboard_focus = None
         self.hover = None
         self.visible = True
         super().__init__(self)
@@ -315,6 +328,7 @@ class Canvas(Group):
         self.hover = None
 
     def cancel(self):
+        self.blur_focus()
         for motion in tuple(self._moving):
             motion.clear()
         self._moving.clear()
@@ -339,12 +353,55 @@ class Canvas(Group):
         self.active = control
         self.edit = Edit(control.binding)
 
+    def blur_focus(self):
+        if self.keyboard_focus is not None:
+            self.keyboard_focus.options["widget"].blur()
+            self.keyboard_focus = None
+            if self.visible and self._animation_wake:
+                self._animation_wake()
+
     def event(self, event, x, y, clip, *, clipboard=None):
         if not self.visible:
             return False
+        if (
+            event.type == "LEFTMOUSE"
+            and event.value in {"PRESS", "DOUBLE_CLICK"}
+            and not (self.overlay or self.widget_capture)
+        ):
+            hit = self.hit(x, y, clip)
+            focus = (
+                hit
+                if hit
+                and hit.kind == "widget"
+                and getattr(hit.options["widget"], "focusable", False)
+                else None
+            )
+            if focus is not self.keyboard_focus:
+                self.blur_focus()
+                self.keyboard_focus = focus
+                if focus:
+                    focus.options["widget"].focus()
+        if (
+            self.keyboard_focus
+            and event.type in self.navigation_keys
+            and not (self.overlay or self.widget_capture or self.edit)
+        ):
+            control = self.keyboard_focus
+            if not control.enabled or not any(
+                c is control for c in self.visible_controls(clip)
+            ):
+                self.blur_focus()
+                return False
+            widget = control.options["widget"]
+            used = widget.event(event, 0, 0, clipboard=clipboard)
+            if not widget.focused:
+                self.keyboard_focus = None
+            return used
         self._motion_input(event, x, y, clip)
         previous = self.overlay
         used = self._event(event, x, y, clip, clipboard=clipboard)
+        if self.keyboard_focus and not self.keyboard_focus.options["widget"].focused:
+            self.keyboard_focus = None
         if self.overlay is not previous and self.overlay and "widget" in self.overlay:
             motion = self.overlay["widget"].motion
             self._bind_motion(motion)

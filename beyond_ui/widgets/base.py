@@ -1,6 +1,6 @@
 """Small retained painter and event contracts for compound custom controls."""
 
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 from ..animation import Motion
 from ..editing import Text, number
 from ..gpu import style
@@ -22,6 +22,7 @@ class Painter:
     ):
         self.motion = motion
         self.interactive = interactive
+        self._clip = None
         if motion is not None:
             motion.begin_paint()
         self.rect, self.width, self.height = rect, width, height
@@ -33,6 +34,31 @@ class Painter:
         x, y, w, h = r
         rx, ry, rw, rh = self.rect
         return rx + x * self.sx, ry + rh - (y + h) * self.sy, w * self.sx, h * self.sy
+
+    @contextmanager
+    def clip(self, r):
+        """Intersect the caller-owned enabled scissor; restore its exact box."""
+        import gpu
+        from math import ceil, floor
+
+        previous = gpu.state.scissor_get()
+        prior_clip = self._clip
+        x, y, w, h = self.map(r)
+        a, b, c, d = previous
+        left, bottom = max(x, a), max(y, b)
+        right, top = min(x + w, a + c), min(y + h, b + d)
+        self._clip = (left, bottom, max(left, right), max(bottom, top))
+        gpu.state.scissor_set(
+            ceil(left),
+            ceil(bottom),
+            max(0, floor(right) - ceil(left)),
+            max(0, floor(top) - ceil(bottom)),
+        )
+        try:
+            yield
+        finally:
+            gpu.state.scissor_set(*previous)
+            self._clip = prior_clip
 
     def surface(self, r, role="field", radius=8, border=0.7, *, motion_key=None):
         from ..gpu import skin
@@ -107,7 +133,17 @@ class Painter:
         blf.color(font, *(skin.MUTED if role == "muted" else skin.TEXT))
         blf.enable(font, blf.CLIPPING)
         try:
-            blf.clipping(font, a, b, a + w, b + h)
+            bounds = (a, b, a + w, b + h)
+            if self._clip is not None:
+                bounds = (
+                    max(a, self._clip[0]),
+                    max(b, self._clip[1]),
+                    min(a + w, self._clip[2]),
+                    min(b + h, self._clip[3]),
+                )
+            if bounds[2] <= bounds[0] or bounds[3] <= bounds[1]:
+                return
+            blf.clipping(font, *bounds)
             tw, _ = measure(font, size, str(value))
             x = (
                 a + (w - tw) / 2

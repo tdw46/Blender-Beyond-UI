@@ -80,6 +80,7 @@ def run():
         palette = style.theme_palette(bpy.context.preferences)
         target = gpu.types.GPUOffScreen(1260, 944, format="RGBA8")
 
+        scroll_mode = os.environ.get("BEYOND_UI_BENCH_SCROLL") == "1"
         motion_mode = os.environ.get("BEYOND_UI_BENCH_MOTION", "rest")
         motion_time = [0.0]
         if motion_mode == "active":
@@ -140,6 +141,8 @@ def run():
             )
             fb = gpu.state.active_framebuffer_get()
             for i in range(120):
+                if scroll_mode:
+                    widgets[2].rows.scroll(1.25, 206)
                 if next_set:
                     widgets[2].factor = widgets[3].factor = i / 119
                 fb.clear(color=(0.09, 0.10, 0.11, 1))
@@ -191,6 +194,7 @@ def run():
             "retained_line_batches": len(cache_after),
             "warm_resources_unchanged": stable,
             "motion_mode": motion_mode,
+            "scrolls_each_frame": scroll_mode,
             "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance.",
         }
     except Exception:

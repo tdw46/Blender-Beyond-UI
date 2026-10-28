@@ -15,7 +15,28 @@ tracks these honestly; a native wrapper does not count as custom parity.
 [Custom parity ledger](docs/CUSTOM_PARITY.json) ·
 [Validation](docs/VALIDATION.md) · [Integration](docs/INTEGRATION.md)
 
-![Specialized custom control reference](docs/design/references/specialized-controls-v1.png)
+## Panel overview
+
+Actual Blender-rendered panels with the shared squash-and-stretch animations.
+These previews show the current implementation; full API and visual parity are
+still in progress. [Animation settings](docs/ANIMATION.md) control strength and
+whether motion is enabled.
+
+| Curve Mapping | Color Ramp |
+| --- | --- |
+| ![Animated Curve Mapping panel](docs/media/panels/curve-mapping.gif) | ![Animated Color Ramp panel](docs/media/panels/color-ramp.gif) |
+| **Data Picker** | **Color Picker** |
+| ![Animated Data Picker panel](docs/media/panels/data-picker.gif) | ![Animated Color Picker panel](docs/media/panels/color-picker.gif) |
+| **Palette** | **Matrix decomposition** |
+| ![Animated Palette panel](docs/media/panels/palette.gif) | ![Animated Matrix decomposition panel](docs/media/panels/matrix.gif) |
+| **Progress Bar** | **Progress Ring** |
+| ![Animated Progress Bar panel](docs/media/panels/progress-bar.gif) | ![Animated Progress Ring panel](docs/media/panels/progress-ring.gif) |
+
+[Full motion overview](docs/design/qa/next-v1/motion.gif) ·
+[Generated references versus implementations](docs/design/qa/next-v1/all-controls-comparison.png)
+
+Previews use the translucent tint fallback over a neutral backdrop. A consuming
+host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
 ## Requirements
 
