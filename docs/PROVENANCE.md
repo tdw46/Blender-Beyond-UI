@@ -150,3 +150,19 @@ native batching. Production uses public zero-angle rotation for finite-motion
 text submission and drains underlying owned-font batches before overlays. The
 settled control path retains batching. The popup background also follows its
 reveal transform, and per-control motion settings persist across input events.
+
+### Collection search and standalone array decorators
+
+The collection search renderer reuses the existing BVT-family Data Picker card,
+retained icon geometry, active-theme roles, shared glass and spring policy. A row's
+background, text and icon now share one transform; old resting geometry remains
+byte-identical in the fixture. The immutable prior picker painter is saved with
+its SHA for the implementation-to-implementation motion comparison.
+
+The search source audit records official `rna_ui_api.cc`, `interface_layout.cc`
+and `interface_utils.cc` at v4.2.0, ec6e62d40fa9 and d13f752e3b9c. It establishes
+string/pointer search, pointer poll filtering, ID-name precedence, newer custom
+item-string labels and decorator expansion exceptions for color/direction.
+Exact versioned API/Manual pages were searched; fetch access failures were
+supplemented with these sources and the installed public-RNA/runtime fixtures.
+No native control delegation or private production API was added.

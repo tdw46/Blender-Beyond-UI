@@ -493,3 +493,51 @@ source-equivalent dense-scene speed, GPU completion time or input latency.
 The first decorator visuals reuse existing retained BVT-family geometry. No new
 generated-reference approval is claimed. Exact theme/DPI/motion fidelity remains
 Tyler's QA gate; immutable earlier reference and comparison galleries are intact.
+
+## Transactional collection search and array decorators — 2026-10-28
+
+[Search QA v1](design/qa/collection-search-v1/index.html) includes 503-candidate
+rendering, actual window input, and an immutable before/after row-motion comparison.
+Both Blender 5.1.2 and 5.2.2 pass RNA checks for string/custom-label selection,
+free suggestions, stale/removed collection members, concurrent edits, rejected
+commits, host pointer candidate/poll restrictions, exact context targets and
+standalone vector/aggregate-color decorators. The 500-item non-ID fixture
+reproduces address reuse after removal and rejects stale actions. Refresh cancels
+owned text/focus/capture/context state. Removed collection RNA fails closed.
+
+Real window input covers End/Enter, typed suggestions, right-click cancellation,
+candidate menus, exact component keying, motion disable and timer cleanup.
+Existing pointer/decorator and general runtime regressions pass on both versions;
+existing pointer real-window navigation/context/glass/teardown checks also pass.
+77 unit tests, Ruff, compilation, distribution build and parity-ledger checks pass.
+The ledger remains 40 partial members out of 137, with no reference acceptance.
+
+At scale 1 and 640×560, the renderer compares the old and new picker painters on
+the same retained 503-row workload and three decorators. Each case has 20 warmups
+and 100 CPU paint submission samples, with readback excluded:
+
+| Runtime | Workload | Median ms | p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | baseline rest | 0.270 | 0.310 |
+| 5.2.2 LTS | current rest | 0.274 | 0.305 |
+| 5.2.2 LTS | baseline row motion | 0.276 | 0.303 |
+| 5.2.2 LTS | current row motion | 0.282 | 0.315 |
+| 5.1.2 | baseline rest | 0.266 | 0.316 |
+| 5.1.2 | current rest | 0.278 | 0.305 |
+| 5.1.2 | baseline row motion | 0.282 | 0.319 |
+| 5.1.2 | current row motion | 0.283 | 0.314 |
+
+The measured change is small for this workload. No source-equivalent speed or
+cross-platform input-latency claim follows from these CPU timings. The old/new
+resting images are byte-identical. Every one of 100 current animated frames per
+runtime matches between native BLF batching and standalone submission. Row
+backgrounds, labels and icons now share their motion transform; clipping and
+logical hit targets remain fixed. Resource records retain one backdrop, one
+strong blur, five offscreens, one layout and unchanged recorded shader/batch/font
+identities. Paint-facing model reads are separately checked for zero collection
+iteration; membership/signature scans occur only on refresh or actions.
+
+This evidence uses actual Blender pixels, not generated images. Exact reference,
+theme/DPI and remaining search/decorator semantics are still open in the ledger.
+Blender 4.2's default-name path is preserved and the newer item-string keyword is
+capability gated; 4.2 and non-macOS runtimes remain unexecuted here.

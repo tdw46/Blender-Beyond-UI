@@ -73,7 +73,11 @@ class Painter:
             and role in {"field", "input", "button", "tab", "selected", "thumb"}
         ):
             motion_key = tuple(r)
-        if self.motion is not None and motion_key is not None:
+        if (
+            self.motion is not None
+            and motion_key is not None
+            and motion_key is not False
+        ):
             if self.interactive:
                 self.motion.region(motion_key, r)
             if motion_key in self.motion.tracks:

@@ -314,6 +314,17 @@ class Layout:
                 index >= 0 and (not meta.is_array or index >= meta.array_length)
             ):
                 raise ValueError("Decorator component index is outside the property")
+            if (
+                index == -1
+                and getattr(meta, "is_array", False)
+                and meta.subtype not in {"COLOR", "COLOR_GAMMA", "DIRECTION"}
+                and meta.is_animatable
+            ):
+                column = self.column()
+                return tuple(
+                    column.prop_decorator(data, property, index=i)
+                    for i in range(meta.array_length)
+                )
             if meta.is_animatable and getattr(data, "id_data", None) is not None:
                 binding = self._binding(data, property, None if index < 0 else index)
                 model = Decorator(binding, self.context)
@@ -592,51 +603,44 @@ class Layout:
         results_are_suggestions=False,
         item_search_property="",
     ):
-        from .widgets import DataPicker
+        from .search import CollectionSearch
 
-        source = self._binding(data, property)
-        collection = getattr(search_data, search_property)
-        values = tuple(collection)
-        snapshots = {value.as_pointer(): value for value in values}
+        if item_search_property:
+            import bpy
 
-        def valid(key):
-            try:
-                return (
-                    key in snapshots
-                    and snapshots[key].as_pointer() == key
-                    and any(v.as_pointer() == key for v in collection)
+            if (
+                "item_search_property"
+                not in bpy.types.UILayout.bl_rna.functions["prop_search"].parameters
+            ):
+                raise UnsupportedControl(
+                    "item_search_property is unavailable in this Blender version"
                 )
-            except ReferenceError:
-                return False
-
-        pointer = data.bl_rna.properties[property].type == "POINTER"
-
-        def select(key):
-            if not valid(key):
-                return
-            before = source.read()
-            value = snapshots[key]
-            source.write(value if pointer else value.name)
-            source.commit(before, source.read())
-
-        def selected():
-            value = source.read()
-            return (
-                value.as_pointer()
-                if pointer and value
-                else next(
-                    (key for key, v in snapshots.items() if v.name == value), None
-                )
+        resolver = self.resolve(search_data) if self.resolve else lambda: search_data
+        policy = self.pointer_sources(data, property) if self.pointer_sources else None
+        try:
+            model = CollectionSearch(
+                self._binding(data, property),
+                resolver,
+                search_property,
+                policy=policy,
+                label=self._text(
+                    text or data.bl_rna.properties[property].name, text_ctxt, translate
+                ),
+                item_name=item_search_property,
+                suggestions=results_are_suggestions,
             )
-
-        widget = DataPicker(
-            ((key, value.name, "object") for key, value in snapshots.items()),
-            select,
-            selected=selected,
-            valid=valid,
+        except ValueError as error:
+            raise UnsupportedControl(str(error)) from error
+        control = self.group.widget(
+            self._key("search"),
+            model.widget,
+            binding=model.binding,
+            search_field=model,
+            context_menu=model.entries,
+            **self._options(),
         )
-        widget.binding = source
-        return self.group.widget(self._key("search"), widget, **self._options())
+        model.canvas, model.control = self.canvas, control
+        return control
 
     def template_search(
         self,

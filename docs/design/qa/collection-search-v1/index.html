@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>Collection search · QA v1</title>
+<style>body{background:#151719;color:#eee;font:15px system-ui;margin:28px}a{color:#8bcafb}img{max-width:100%;height:auto}p{max-width:1050px;line-height:1.6}h2{margin-top:36px}</style>
+<h1>Collection search & component decorators</h1>
+<p>Actual Blender output with 503 candidates, virtual scrolling and three standalone component decorators. The shared BVT glass, theme, typography and source spring remain in use. Search now validates the source, candidate and property value before committing, with rollback on host rejection.</p>
+<img src="../../../media/panels/collection-search-v1.gif" alt="Collection search and context menu motion">
+<h2>Before / after: whole-row motion</h2>
+<img src="row-motion-comparison.gif" alt="Previous and current implementation side by side">
+<p>Both sides are actual Blender renders under identical input, theme, scale and backdrop. The current implementation moves the row icon and label with its background. Resting pixels are byte-identical. This is an implementation comparison, not a generated-reference approval.</p>
+<h2>Candidate right-click target</h2><img src="row-context.png" alt="Exact candidate context menu">
+<p>Real window tests cover End/Enter selection, typed suggestions, right-click cancellation, candidate context menus and component keying. Both tested versions match all 100 sampled frames with native BLF batching enabled and disabled. Capture, strong blur, offscreen, font and recorded shader/batch resources remain stable.</p>
+<p><strong>Parity remains partial.</strong> Non-ID pointer targets, compact search fields, native ranking/icon variants, complete focus traversal and exact generated-reference/theme/DPI acceptance remain open. Non-ID collection changes require host refresh; no polling timer is added.</p>
+<p><a href="capture.json">5.2 capture and timing</a> · <a href="capture-51.json">5.1 capture and timing</a> · <a href="runtime-52.json">RNA behavior</a> · <a href="windowed-52.json">Actual window input</a> · <a href="api-source-audit.json">Official source audit</a> · <a href="../../../SEARCH_PROPERTIES.md">Integration and remaining gaps</a> · <a href="../pointer-decorators-v1/index.html">Earlier pointer/decorator pass</a></p>

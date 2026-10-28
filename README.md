@@ -103,6 +103,15 @@ keyed, changed, animated and driven states beside supported properties.
 [Pointer/decorator QA](docs/design/qa/pointer-decorators-v1/index.html) ·
 [Policies, host undo and remaining gaps](docs/POINTERS_AND_DECORATORS.md)
 
+Collection searches now validate stale rows and host commits, support custom
+result labels and optional free-text suggestions, and animate row contents together.
+Standalone vector decorators expand into exact component controls.
+
+![Actual Blender collection search motion](docs/media/panels/collection-search-v1.gif)
+
+[Search QA and before/after row motion](docs/design/qa/collection-search-v1/index.html) ·
+[Search integration and remaining gaps](docs/SEARCH_PROPERTIES.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

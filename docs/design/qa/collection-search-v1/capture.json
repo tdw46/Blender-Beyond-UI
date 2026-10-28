@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "backend": "METAL",
+  "dimensions": [
+    640,
+    560
+  ],
+  "theme": "Factory Blender active theme; Standard viewport fixture, raw display-space capture",
+  "timings": {
+    "baseline_rest": {
+      "median_ms": 0.27008302276954055,
+      "p95_ms": 0.3097080625593662,
+      "max_ms": 0.39599998854100704
+    },
+    "current_rest": {
+      "median_ms": 0.2741459757089615,
+      "p95_ms": 0.30458299443125725,
+      "max_ms": 0.3469999646767974
+    },
+    "baseline_row_motion": {
+      "median_ms": 0.27645850786939263,
+      "p95_ms": 0.30333304312080145,
+      "max_ms": 0.33466704189777374
+    },
+    "current_row_motion": {
+      "median_ms": 0.2821250236593187,
+      "p95_ms": 0.31504209619015455,
+      "max_ms": 0.3911249805241823
+    }
+  },
+  "workload": "503 candidate rows, three component decorators, scale 1. Each workload: 20 warmups, 100 CPU paint submission samples; framebuffer readback excluded",
+  "stable_resources": true,
+  "baseline_sha256": "d9aee56cef9a84e98015718b83959efa2f6721032c74e2d11036d44a7eb07c6e",
+  "resting_pixels_equal": true,
+  "native_text_batching_equal_frames": 100,
+  "batch_admission": {
+    "native_text_batch": true,
+    "baseline_sha256": null,
+    "helper_sha256": "a8aef9cb6cbf9b39d3ade908885d2b0203491b67e002c092bb97ded1623ade43"
+  },
+  "retained_resources": {
+    "productions": 1,
+    "blur": 1,
+    "offscreens": 5,
+    "layout": 1,
+    "font_handles": [
+      25,
+      26
+    ],
+    "skin_shader": 481757831696,
+    "skin_batch": 481500692336,
+    "glass_batches": {
+      "0.3": 481758233408,
+      "0.4": 481758233360,
+      "0.7": 481758233504
+    }
+  },
+  "source_sha256": {
+    "beyond_ui/__init__.py": "5f9c73228beaa128bc5477635fbc12a8b684cfddc36caa949f5f8d72ffb81102",
+    "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+    "beyond_ui/animation.py": "d6f0b51c1eddd496245781589471b94025144970b767e3d6170b8d74526518a0",
+    "beyond_ui/bindings.py": "5d4b24f23a71b3c7a15fbf3809ce21ab9d82e9d8df1f8a4160cc251c235f3dd7",
+    "beyond_ui/canvas.py": "a5c308c4eac99cb7b900fe67b5dbe6d631a12dd0ea24340c9bb23c185b8d43ac",
+    "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+    "beyond_ui/context_arguments.py": "6676c46bbac4fdafcccd523b25d517c82d070c4651f6e4db5aa71bf1d0c04144",
+    "beyond_ui/context_dispatch.py": "f0d21f5a4b8eacc5b679d2a6ce97df09d55b8abcee31e8801d146f3331bfff56",
+    "beyond_ui/context_edit.py": "5f35327a2571f38861418f389a7b9542b5e3950a08851dd2d20548bb33262214",
+    "beyond_ui/context_enums.py": "4494cdcf583ca65b7b67882097ad0c7499b941ea7c468fdfb516fea176ab18e8",
+    "beyond_ui/context_extensions.py": "9d04166d18e04632e46b8463cf9f2aa25c5cf13b3fe47284c9b1843a1c8d6e52",
+    "beyond_ui/context_fields.py": "4d40a4745c10009a0dd9b8545865e63f074f77add00a7f7a6e6cb63af3849dd8",
+    "beyond_ui/context_menu.py": "8fbcefeec1496a795c3aadefe6102f3f827db47f8fed28f2e605f3a0c5cae44a",
+    "beyond_ui/context_paths.py": "f5270177458dca0e87904dc652b4fad7395d081df46d4e0d597694bf80788063",
+    "beyond_ui/context_rna.py": "24886681be340b7fe9056143c6c71d5adb91834a466152bb20d8e19b0379a398",
+    "beyond_ui/context_shortcuts.py": "9eb91a0f7dddc347de765a41efd87fbae423d48c815f929a3d858b0b3b6fcbeb",
+    "beyond_ui/context_source.py": "0509ce60136ba88dd0e05a6504c6a4962dd54d36e68e4c0c376612d77794762e",
+    "beyond_ui/decorator.py": "b99f80ce662585ab971dbcef1b8b291c0e8440ff0e40bc4d276705a6f1ac7653",
+    "beyond_ui/editing.py": "ad68a307294441d8b52370002a04875963b526f2ed8e89eff790e0d343543f68",
+    "beyond_ui/event_field.py": "c95423a0ebe8c49154d273b6cc80cc8cb06c399e4ec979f854e8e23056c8e30a",
+    "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+    "beyond_ui/gpu/glass.py": "8ad0821ff4c24c10568a444eddacd5fcd39a23288372955511d7539f9a7d1847",
+    "beyond_ui/gpu/menus.py": "c438dc274a3303392638958c0569f6d24e44dce2f9ed12b41fe3fab1e32f52b4",
+    "beyond_ui/gpu/paint.py": "bb328bc8b61f60305554822aa01aabd3d3092e76c65b0df5ca8cf932496322d3",
+    "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+    "beyond_ui/gpu/progress.py": "a64b7761751b5bb68e18a5fae4287a24f9c7e87de18d3423165591ecf3118f7d",
+    "beyond_ui/gpu/skin.py": "6628df33bf33d1a14ba315879c96dc520e1c51be5b582106272ce9df48211ece",
+    "beyond_ui/gpu/style.py": "6c662192acded63f20a968f3243d512feecf1504882e71b2fb6fba2fe1c7560e",
+    "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+    "beyond_ui/gpu/typography.py": "0d99f34e26b89fdb4c620ba4b370b2e5425074cb1a0d1a6e30c267955fa63358",
+    "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+    "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+    "beyond_ui/hosts/menu_context.py": "30429f105d8097988e58201176d13be9fd0a60969cb87c3cc3b82b21c3b81327",
+    "beyond_ui/hosts/menu_native.py": "ceb2d96343134d4ba615162c85c74885d722a313dadac518f2fa6b5fbea1c476",
+    "beyond_ui/hosts/panel.py": "99d8118ea177c3cf5858ca5d5a6c7e7a7e4ffce04d152a7852e3d83bb7063dcd",
+    "beyond_ui/layout.py": "75c2979c5a1316d8ed1816a12c638304b9d3fd3b01d220ea4b6a216ce8e9b7e2",
+    "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+    "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+    "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+    "beyond_ui/numeric.py": "5830529d032488e2bb4f73d551597ba23bb5b6feae5f02b3451c18870a29de04",
+    "beyond_ui/pointer.py": "0b7d5b86a7dd418590585f39843784309bde9676d77074366e93e7a23dcdc81a",
+    "beyond_ui/search.py": "4c6ae7574f14d39ec82e89a0f627d4ab1b848783df2a00e3945df2f8be041e90",
+    "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+    "beyond_ui/widgets/__init__.py": "27ef333656b9033c833ea4ffa585f57ef0690cadb5e3381669859707865dff2a",
+    "beyond_ui/widgets/base.py": "2ef2b34a96de74a159d4cacf6638347a59488454310aed067c106c5696297d77",
+    "beyond_ui/widgets/color.py": "413023ca6e272e1315bd753e6b216788d15abdae0264d38ad8d62ba0fc6b66ef",
+    "beyond_ui/widgets/context.py": "5f642cf43872bd75ccb8f0ff050441e07916d60df3c8a02efed3675076621604",
+    "beyond_ui/widgets/curve.py": "ec6fdf5b2cfffa1ff8ec4631009b530218fbf45dc693a54461f93ea0614f4446",
+    "beyond_ui/widgets/icon_paths.py": "a1c30cc74ba25bb5cfe74991358843eb1ae8e73c03c0e4665b8fa9bf3d07350c",
+    "beyond_ui/widgets/matrix.py": "dead09b5cc468354dba253d19c1b995e4da3ef7630d8a7a85531b4fa307b6523",
+    "beyond_ui/widgets/metrics.py": "ffeefff0d10f117684316111a21e5bec6f1ce7f74ee20e5875abd14026f14cca",
+    "beyond_ui/widgets/palette.py": "0a832dbe09307fa3b3359b83aa5b935adc6fcaea5a4cc3dc2a8e75bf10c982fb",
+    "beyond_ui/widgets/picker.py": "57d7057f3e8b3f195dedd3221980ff4c94862633cef90b1a7d502c9180e1563b",
+    "beyond_ui/widgets/progress.py": "36b7dd07e489875eb23d18d951cbd6de54b7e5d2bfb140087b932d063a61a47f",
+    "beyond_ui/widgets/ramp.py": "88fa922e8985bd4375c225c823f4b404e39abacb5658e2eb03afcac2a94b0cb0",
+    "beyond_ui/widgets/rna.py": "bf67c6653647f9cc35e7812c6a1b55cd88aee46f4bbe94ef0ecdb7b7d185bec2",
+    "beyond_ui/widgets/socket.py": "7e30dc4d4e3950561e6e2f683850554b6ae5074175047a1a3850f1eb3a2ca7ab"
+  },
+  "fixture_sha256": "8b2104db510b89d1655ee696a2759ce5532d849a69fc83b73b69458cda870c0e",
+  "exact_match": false,
+  "acceptance": "Actual production frames; existing shared field/menu styling. Generated-reference and motion acceptance remain open."
+}

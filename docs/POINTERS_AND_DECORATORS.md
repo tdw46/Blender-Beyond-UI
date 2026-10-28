@@ -56,7 +56,9 @@ a failing commit callback: deleted data cannot be restored by pointer assignment
 ## Decorators
 
 `prop_decorator(owner, name, index=-1)` renders empty, keyed, changed, animated
-elsewhere and driven states. Scalar/indexed properties use their exact RNA path.
+elsewhere and driven states. Standalone vector/array calls now expand into a
+vertical tuple of compact component decorators. Color/color-gamma/direction
+properties retain one aggregate decorator, following native expansion rules. Scalar/indexed properties use their exact RNA path.
 Click inserts a key or deletes the current key (including a changed keyed value,
 as in Blender's decorator callback). A driven property opens the shared property
 menu. Right-click and Shift-F10 use the same property/component target. A host
@@ -95,7 +97,7 @@ No minimum supported version, private production API or registration changed.
 
 Open parity includes non-ID pointers; unexposed native polls without host adapters;
 eyedropper, drag/drop, previews and ID-specific creation/duplication actions;
-full keyboard focus traversal; `index=-2`/expanded standalone decorator layouts;
+full keyboard focus traversal; `index=-2` and remaining specialized decorator layouts;
 NLA time remapping, multi-layer blending, modifiers and all animation variants;
 all prop keyword combinations, themes, DPI and platform coverage. New visuals
 have not been matched to an approved generated reference. These remain **partial

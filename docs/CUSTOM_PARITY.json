@@ -264,7 +264,7 @@
     "prop_decorator": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom empty/keyed/changed/animated/driven states, active theme animation roles, exact component key insertion/deletion and owner-aware right-click menus. Active Action slots/channelbags and legacy fcurves fallback; requires host undo callback. NLA/layer blending, all standalone array layouts, index=-2, full animation semantics and generated-reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md.",
+      "notes": "Custom empty/keyed/changed/animated/driven states, active theme animation roles, exact component key insertion/deletion and owner-aware right-click menus. Active Action slots/channelbags and legacy fcurves fallback; requires host undo callback. NLA/layer blending, remaining specialized array layouts, index=-2, full animation semantics and generated-reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Standalone arrays now expand by exact component; color/direction remain aggregate, with both forms execution-tested.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/pointer-decorators-v1/capture.json"
     },
@@ -285,9 +285,9 @@
     "prop_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Shared right-click target routing and active-theme adaptation now implemented; full data-block actions and exact-reference acceptance remain incomplete.",
+      "notes": "Transactional custom collection search for strings and supported ID pointers. Snapshot refresh, collection/owner/value validation, pointer poll, commit rollback, candidate right-click, custom item string labels and explicit free suggestions. Virtual visible rows; no collection scans during paint. Runtime/window tested on 5.1.2/5.2.2. Compact search layout, non-ID pointers, native ranking/icons/name variants and exact-reference acceptance remain open. See docs/SEARCH_PROPERTIES.md.",
       "reference": "docs/design/references/specialized-controls-v1.png",
-      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "comparison_evidence": "docs/design/qa/collection-search-v1/capture.json",
       "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "prop_tabs_enum": {
@@ -856,9 +856,9 @@
     "template_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Full data-block actions, right-click menus and theme adaptation remain incomplete.",
+      "notes": "Uses the transactional prop_search implementation with host-owned optional New/Unlink operators. Full native template layout, action variants and exact visual acceptance remain open. See docs/SEARCH_PROPERTIES.md.",
       "reference": "docs/design/references/specialized-controls-v1.png",
-      "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
+      "comparison_evidence": "docs/design/qa/collection-search-v1/capture.json",
       "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_search_preview": {

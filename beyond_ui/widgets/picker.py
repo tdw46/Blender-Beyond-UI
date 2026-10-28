@@ -103,13 +103,25 @@ class DataPicker(Widget):
         self._reveal_cursor()
 
     def _accept(self):
+        accept_text = getattr(self, "accept_text", None)
+        if (
+            accept_text is not None
+            and self.cursor is None
+            and self.text_edit is not None
+        ):
+            if accept_text(self.text_edit.text) is False:
+                return False
+            self.text_edit = None
+            self.capturing = False
+            return True
         if not self.filtered:
             return False
         index = self.cursor if self.cursor is not None else 0
         key = self.filtered[index][0]
         if not self.valid(key):
             return False
-        self.select(key)
+        if self.select(key) is False:
+            return False
         self.cursor = index
         self.text_edit = None
         self.capturing = False
@@ -159,6 +171,12 @@ class DataPicker(Widget):
                 self.blur()
                 return True
         if self.text_edit:
+            if kind == "RIGHTMOUSE" and press:
+                self.text_edit = None
+                self.capturing = False
+                self.query = ""
+                self._filter()
+                return True
             before = self.text_edit.text
             result = self.edit_text(event, clipboard=clipboard)
             if isinstance(result, str):
@@ -245,48 +263,49 @@ class DataPicker(Widget):
                     if self.focused and self.cursor is not None
                     else key == active
                 )
-                p.surface(
-                    r,
-                    "selected" if highlighted else "field",
-                    7,
-                    motion_key=("row", key),
-                )
-                self.motion.region(
-                    ("row", key),
-                    (
-                        25,
-                        max(147, 147 + top),
-                        560,
-                        max(0, min(353, 147 + top + 65) - max(147, 147 + top)),
-                    ),
-                )
-                p.text(
-                    (117, 147 + top, 460, 65),
-                    label,
-                    role="selected_text" if highlighted else "text",
-                    inset=16,
-                )
-                # Four retained icon slots cover the clipped viewport. At rest,
-                # use the approved coordinates exactly (no extra matrix rounding).
-                import gpu
-
-                anchor = (i % 4) * PICKER["row_height"]
-                if top == anchor:
-                    p.icon(
-                        "○" if icon == "material" else icon,
-                        (49, 156 + anchor, 52, 45),
-                        37,
-                        role="selected_text" if highlighted else "text",
+                with p.deform(("row", key), r):
+                    p.surface(
+                        r,
+                        "selected" if highlighted else "field",
+                        7,
+                        motion_key=False,
                     )
-                else:
-                    with gpu.matrix.push_pop():
-                        gpu.matrix.translate((0, -(top - anchor) * p.sy, 0))
+                    self.motion.region(
+                        ("row", key),
+                        (
+                            25,
+                            max(147, 147 + top),
+                            560,
+                            max(0, min(353, 147 + top + 65) - max(147, 147 + top)),
+                        ),
+                    )
+                    p.text(
+                        (117, 147 + top, 460, 65),
+                        label,
+                        role="selected_text" if highlighted else "text",
+                        inset=16,
+                    )
+                    # Four retained icon slots cover the clipped viewport. At rest,
+                    # use the approved coordinates exactly (no extra matrix rounding).
+                    import gpu
+
+                    anchor = (i % 4) * PICKER["row_height"]
+                    if top == anchor:
                         p.icon(
                             "○" if icon == "material" else icon,
                             (49, 156 + anchor, 52, 45),
                             37,
                             role="selected_text" if highlighted else "text",
                         )
+                    else:
+                        with gpu.matrix.push_pop():
+                            gpu.matrix.translate((0, -(top - anchor) * p.sy, 0))
+                            p.icon(
+                                "○" if icon == "material" else icon,
+                                (49, 156 + anchor, 52, 45),
+                                37,
+                                role="selected_text" if highlighted else "text",
+                            )
         p.surface(PICKER["scroll"], "track", 5, 0)
         thumb, _, _ = self.scrollbar()
         p.surface(thumb, "thumb", 5, 0.6, motion_key="scroll")
@@ -297,11 +316,12 @@ class DataPicker(Widget):
         for r, icon, action in zip(
             PICKER["actions"], ("+", "duplicate", "unlink"), self.actions
         ):
-            p.icon(
-                icon,
-                r,
-                31,
-                role="muted"
-                if getattr(self, "disabled_actions", False) and action is None
-                else "text",
-            )
+            with p.deform(("action", icon), r):
+                p.icon(
+                    icon,
+                    r,
+                    31,
+                    role="muted"
+                    if getattr(self, "disabled_actions", False) and action is None
+                    else "text",
+                )
