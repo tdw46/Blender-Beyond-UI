@@ -55,7 +55,9 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
     sy = h / max(1.0, canvas.height)
     scale = min(sx, sy)
     logical = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
-    palette = style.theme_palette(preferences)
+    palette = style.theme_palette(
+        preferences, reference=canvas.theme.palette == "REFERENCE"
+    )
     t = canvas.theme
 
     def mapped(r):
@@ -117,6 +119,8 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 value = None
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
+            if selected and control.enabled:
+                ink = palette["selected_text"]
             if kind != "widget":
                 control.motion.begin_paint()
                 if control.enabled and kind in {

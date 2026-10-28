@@ -114,7 +114,7 @@ def run():
         font = Fonts()
         widgets, next_set = make_widgets()
         width, height = (705, 487) if next_set else (630, 472)
-        palette = style.theme_palette(bpy.context.preferences)
+        palette = style.theme_palette(bpy.context.preferences, reference=True)
         target = gpu.types.GPUOffScreen(width, height, format="RGBA8")
         records = []
         for (slug, title, widget), variant in product(

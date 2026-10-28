@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "tool": "built-in image_gen",
+  "prompt": "theme-states-v1.prompt.txt",
+  "requested_size": [
+    1360,
+    1680
+  ],
+  "generated_size": [
+    1130,
+    1392
+  ],
+  "sha256": "ee1f38c4f722abd5a4bf74a339ec84c6c30dc20ad8e2af31e7107252b04ffc8c",
+  "supporting_inputs": [
+    {
+      "file": "../qa/theme-v1/native-dark.png",
+      "sha256": "4fe608635bab83a5d610ec9f591d6425fe4282c59d414c26df4107b3a9126f2c"
+    },
+    {
+      "file": "../qa/theme-v1/synthetic-light.png",
+      "sha256": "86a72fd714eb02fe0a3e019aa810e78006f6ae06297a7de7f9679fc8e19f5e7e"
+    },
+    {
+      "file": "../qa/theme-v1/synthetic-purple.png",
+      "sha256": "6c1eb37f48c6b6cb8dc07d0fcb4e4227e9eb7aa5e4303a2dfbce111d8860357d"
+    }
+  ],
+  "states": [
+    "native-dark",
+    "synthetic-light",
+    "synthetic-purple"
+  ],
+  "status": "reference conflict; not adopted or approved",
+  "conflicts": [
+    "Changed panel proportions and row spacing",
+    "Cropped/compressed purple bottom row",
+    "Altered numeric text; generated color values must not replace bound values"
+  ],
+  "resolution": "Pending explicit reference correction and Tyler QA. Preserve source-driven theme semantics and prior geometry; no exact-match claim."
+}

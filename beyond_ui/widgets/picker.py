@@ -4,7 +4,6 @@ from .base import Widget, Painter, contains
 from ..components import matches
 from ..virtual import VirtualList
 from ..editing import Text
-from ..gpu import skin
 from .metrics import PICKER, SIZE
 
 
@@ -259,7 +258,12 @@ class DataPicker(Widget):
                         max(0, min(353, 147 + top + 65) - max(147, 147 + top)),
                     ),
                 )
-                p.text((117, 147 + top, 460, 65), label, inset=16)
+                p.text(
+                    (117, 147 + top, 460, 65),
+                    label,
+                    role="selected_text" if highlighted else "text",
+                    inset=16,
+                )
                 # Four retained icon slots cover the clipped viewport. At rest,
                 # use the approved coordinates exactly (no extra matrix rounding).
                 import gpu
@@ -270,6 +274,7 @@ class DataPicker(Widget):
                         "○" if icon == "material" else icon,
                         (49, 156 + anchor, 52, 45),
                         37,
+                        role="selected_text" if highlighted else "text",
                     )
                 else:
                     with gpu.matrix.push_pop():
@@ -278,6 +283,7 @@ class DataPicker(Widget):
                             "○" if icon == "material" else icon,
                             (49, 156 + anchor, 52, 45),
                             37,
+                            role="selected_text" if highlighted else "text",
                         )
         p.surface(PICKER["scroll"], "track", 5, 0)
         thumb, _, _ = self.scrollbar()
@@ -285,6 +291,6 @@ class DataPicker(Widget):
         self.motion.region("scroll", PICKER["scroll"])
         p.surface(PICKER["toolbar"], "field", 8)
         for x in (211, 417):
-            p.line(((x, 394), (x, 430)), skin.rgba("9da2a7", 0.40), p.scale)
+            p.line(((x, 394), (x, 430)), palette["toolbar_divider"], p.scale)
         for r, icon in zip(PICKER["actions"], ("+", "duplicate", "unlink")):
             p.icon(icon, r, 31)

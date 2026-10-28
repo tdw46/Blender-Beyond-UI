@@ -77,7 +77,8 @@ def run():
         def textures():
             return tuple(id(t) for w in widgets for t in getattr(w, "_textures", ()))
 
-        palette = style.theme_palette(bpy.context.preferences)
+        theme_mode = os.environ.get("BEYOND_UI_BENCH_THEME", "REFERENCE")
+        palette = style.theme_palette(bpy.context.preferences, reference=True)
         target = gpu.types.GPUOffScreen(1260, 944, format="RGBA8")
 
         scroll_mode = os.environ.get("BEYOND_UI_BENCH_SCROLL") == "1"
@@ -90,6 +91,9 @@ def run():
             motion_time[0] = 0.08
 
         def render():
+            nonlocal palette
+            if theme_mode == "BLENDER":
+                palette = style.theme_palette(bpy.context.preferences)
             for i, widget in enumerate(widgets):
                 x, y = (i % 2) * 630, (i // 2) * 472
                 if modern:
@@ -194,6 +198,8 @@ def run():
             "retained_line_batches": len(cache_after),
             "warm_resources_unchanged": stable,
             "motion_mode": motion_mode,
+            "theme_mode": theme_mode,
+            "theme_reads_per_frame": 11 if theme_mode == "BLENDER" else 0,
             "scrolls_each_frame": scroll_mode,
             "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance.",
         }

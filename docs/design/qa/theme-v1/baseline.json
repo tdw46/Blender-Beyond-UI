@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "runtime": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "backend": "METAL",
+  "device": "Metal API",
+  "root": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/theme-v1",
+  "visible_palette_color_reads_per_frame": null,
+  "progress_changes_each_frame": false,
+  "workload": "4 visible 630x472 compound cards in 1260x944; picker has 10000 rows; 20 warmup + 100 measured frames; tint-only backdrop",
+  "cpu_submission": {
+    "p50_ms": 0.5142500158399343,
+    "p95_ms": 0.6114999996498227,
+    "max_ms": 0.7079580100253224
+  },
+  "submission_plus_one_pixel_sync_readback": {
+    "p50_ms": 0.9376039379276335,
+    "p95_ms": 1.1244999477639794,
+    "max_ms": 1.390957972034812
+  },
+  "retained_line_batches": 27,
+  "warm_resources_unchanged": true,
+  "motion_mode": "rest",
+  "scrolls_each_frame": true,
+  "note": "Sync readback is benchmark-only. These figures do not measure live input latency, shared blur, idle redraws, or source extension performance."
+}

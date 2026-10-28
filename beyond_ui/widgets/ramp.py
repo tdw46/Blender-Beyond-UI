@@ -3,7 +3,7 @@
 from .base import Widget, Painter, contains
 from ..bindings import Edit, Binding
 from ..editing import Text, number, to_display, to_linear
-from ..gpu import style, skin
+from ..gpu import style
 from .metrics import RAMP, SIZE
 
 
@@ -189,7 +189,7 @@ class ColorRamp(Widget):
             color = self.display_color(color)
             x = 30 + position * 572
             with p.deform(("stop", i), (x - 12, 287, 24, 42)):
-                p.triangle(((x, 289), (x - 12, 304), (x + 12, 304)), skin.TEXT)
+                p.triangle(((x, 289), (x - 12, 304), (x + 12, 304)), palette["text"])
                 p.triangle(((x, 292), (x - 9, 303), (x + 9, 303)), color)
                 p.surface((x - 12, 303, 24, 26), color, 2, 1)
         position, color = points[selected]

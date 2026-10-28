@@ -2,7 +2,6 @@
 
 from math import isfinite
 from .base import Widget, Painter
-from ..gpu import skin
 
 
 def factor_value(value):
@@ -75,8 +74,8 @@ class Progress(Widget):
                 p.map(r),
                 value,
                 16 * p.scale if self.framed else 8 * p.scale,
-                skin.ROLES["track"][0],
-                skin.ROLES["progress_fill"][1],
+                palette["surfaces"]["track"][0],
+                palette["surfaces"]["progress_fill"][1],
             )
             p.text(
                 r,

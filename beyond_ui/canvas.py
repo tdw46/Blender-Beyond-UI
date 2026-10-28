@@ -17,6 +17,11 @@ class Theme:
     padding: float = 8.0
     radius: float = 8.0
     font_size: float = 11.0
+    palette: str = "BLENDER"
+
+    def __post_init__(self):
+        if self.palette not in {"BLENDER", "REFERENCE"}:
+            raise ValueError("palette must be BLENDER or REFERENCE")
 
 
 @dataclass

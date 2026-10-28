@@ -2,7 +2,6 @@
 
 from .base import Widget, Painter, contains
 from ..bindings import Edit
-from ..gpu import skin
 from .metrics import CURVE, SIZE
 from ..editing import Text, number
 
@@ -133,7 +132,13 @@ class CurveMapping(Widget):
         channel = self.channel.read() if self.channel else 0
         for i, (label, r) in enumerate(zip("CRGB", CURVE["tabs"])):
             p.surface(r, "tab" if i == channel else "button")
-            p.text(r, label, size=19, align="center")
+            p.text(
+                r,
+                label,
+                role="selected_text" if i == channel else "text",
+                size=19,
+                align="center",
+            )
         p.surface(self.graph, "graph", 7, 1.4)
         a, b, w, h = self.graph
         for major in (False, True):
@@ -148,7 +153,7 @@ class CurveMapping(Widget):
                         ((a + 2, b + t * h), (a + w - 2, b + t * h)),
                     )
                 )
-            p.lines(lines, skin.rgba("8d9398", 0.27 if major else 0.14), p.scale)
+            p.lines(lines, palette["grid_major" if major else "grid_minor"], p.scale)
         signature = (points, channel)
         if signature != self._signature:
             min_x = min(pt[0] for pt in points)
@@ -163,19 +168,19 @@ class CurveMapping(Widget):
                 for i in range(257)
             )
             self._signature = signature
-        p.line(self._samples, skin.rgba("4abefa"), 2.2 * p.scale)
+        p.line(self._samples, palette["curve"], 2.2 * p.scale)
         for i, (px, py) in enumerate(points):
             pos = (a + px * w, b + (1 - py) * h)
             p.circle(
                 pos,
                 9 if i == self.selected else 7,
-                skin.rgba("111820"),
+                palette["point_border"],
                 motion_key=("point", i),
             )
             p.circle(
                 pos,
                 8 if i == self.selected else 6.4,
-                skin.rgba("49b7ee") if i == self.selected else skin.rgba("e6ebf0"),
+                palette["point_selected"] if i == self.selected else palette["point"],
                 0.6,
                 motion_key=("point", i),
             )

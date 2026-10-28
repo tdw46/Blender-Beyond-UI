@@ -1,0 +1,38 @@
+{
+  "reference": "../../references/theme-states-v1.png",
+  "reference_normalization": {
+    "from": [
+      1130,
+      1392
+    ],
+    "to": [
+      1360,
+      1680
+    ],
+    "method": "Lanczos; QA copy only, original immutable"
+  },
+  "exact_match": false,
+  "reference_status": "reference conflict; not adopted or approved",
+  "mean_absolute_rgba_difference": [
+    43.70758403361344,
+    42.303294817927174,
+    47.076956407563024,
+    0.0
+  ],
+  "unchanged_prior_captures": [
+    "color-picker-alpha.png",
+    "color-picker-contrast.png",
+    "color-picker.png",
+    "color-ramp-alpha.png",
+    "color-ramp-contrast.png",
+    "color-ramp.png",
+    "curve-mapping-alpha.png",
+    "curve-mapping-contrast.png",
+    "curve-mapping.png",
+    "data-picker-alpha.png",
+    "data-picker-contrast.png",
+    "data-picker.png"
+  ],
+  "unchanged_prior_animation_frames": 75,
+  "note": "The sheet does not align because generation changed geometry. Difference metrics are diagnostics, not acceptance; no image data is used by production painters."
+}

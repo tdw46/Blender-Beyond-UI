@@ -1,7 +1,6 @@
 """Read-only translation/rotation/scale display, matching template_matrix semantics."""
 
 from .base import Widget, Painter
-from ..gpu import skin
 
 
 class MatrixView(Widget):
@@ -46,7 +45,7 @@ class MatrixView(Widget):
                 p.surface(r, "input", 8, 1)
                 p.line(
                     ((x + 50, y + 1), (x + 50, y + h - 1)),
-                    skin.rgba("7c858e", 0.24),
+                    palette["matrix_divider"],
                     p.scale,
                 )
                 p.text((x, y, 50, h), axis, size=21, align="center", inset=0)

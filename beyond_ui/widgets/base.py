@@ -63,7 +63,7 @@ class Painter:
     def surface(self, r, role="field", radius=8, border=0.7, *, motion_key=None):
         from ..gpu import skin
 
-        colors = skin.ROLES.get(role) if isinstance(role, str) else None
+        colors = self.palette["surfaces"].get(role) if isinstance(role, str) else None
         if colors is None:
             color = self.palette.get(role, role) if isinstance(role, str) else role
             colors = (color, color)
@@ -97,19 +97,24 @@ class Painter:
         return self.motion.deform(key, self.map(r))
 
     def card(self, title, *, title_inset=67):
-        from ..gpu import glass, skin
+        from ..gpu import glass
 
         r = (0, 0, self.width, self.height)
         # Reuse the source host's one blurred backdrop, not one capture per control.
         if self.backdrop is None or not glass.lens(
-            self.backdrop, self.map(r), 14 * self.scale, skin.ROLES["card"][0]
+            self.backdrop,
+            self.map(r),
+            14 * self.scale,
+            self.palette["surfaces"]["card"][0],
         ):
             self.surface(r, "card", 14, 1)
         self.surface((1, 1, self.width - 2, 59), "header", 13, 0)
         self.line(
-            ((1, 60), (self.width - 1, 60)), skin.rgba("5d6267", 0.28), 0.8 * self.scale
+            ((1, 60), (self.width - 1, 60)),
+            self.palette["header_divider"],
+            0.8 * self.scale,
         )
-        self.triangle(((23, 28), (39, 28), (31, 39)), skin.MUTED)
+        self.triangle(((23, 28), (39, 28), (31, 39)), self.palette["muted"])
         self.text(
             (title_inset, 0, self.width - title_inset - 48, 60),
             title,
@@ -118,19 +123,22 @@ class Painter:
             weight="title",
         )
         for y in (22, 32, 42):
-            self.circle((self.width - 29, y), 2, skin.MUTED)
+            self.circle((self.width - 29, y), 2, self.palette["muted"])
 
     def text(
         self, r, value, role="text", size=22, *, align="left", inset=16, weight="body"
     ):
         import blf
-        from ..gpu import typography, skin
+        from ..gpu import typography
 
         a, b, w, h = self.map(r)
         font = typography.face(self.font, weight)
         size *= self.scale
         blf.size(font, size)
-        blf.color(font, *(skin.MUTED if role == "muted" else skin.TEXT))
+        blf.color(
+            font,
+            *self.palette["title" if weight == "title" and role == "text" else role],
+        )
         blf.enable(font, blf.CLIPPING)
         try:
             bounds = (a, b, a + w, b + h)
@@ -158,13 +166,11 @@ class Painter:
             blf.disable(font, blf.CLIPPING)
 
     def field(self, r, label, value, split=64, size=22):
-        from ..gpu import skin
-
         self.surface(r)
         x, y, w, h = r
         self.surface(
             (x + split, y + 1, w - split - 1, h - 2),
-            skin.rgba("101315", 0.35),
+            self.palette["field_inset"],
             radius=7,
             border=0,
         )
@@ -172,15 +178,13 @@ class Painter:
         self.text((x + split, y, w - split, h), value, size=size, inset=22)
 
     def chevron(self, x, y, size=15):
-        from ..gpu import skin
-
         self.line(
             (
                 (x - size / 2, y - size / 4),
                 (x, y + size / 4),
                 (x + size / 2, y - size / 4),
             ),
-            skin.TEXT,
+            self.palette["text"],
             1.8 * self.scale,
         )
 
@@ -222,16 +226,19 @@ class Painter:
             shader.uniform_float("color", color)
             batch.draw(shader)
 
-    def icon(self, name, r, size=32):
-        from ..gpu import skin
+    def icon(self, name, r, size=32, *, role="text"):
         from .icon_paths import paths, transformed
 
         outlines = paths(name)
         if not outlines:
             x, y, w, h = self.map(r)
-            style.icon(name, x + w / 2, y + h / 2, size * self.scale, skin.TEXT)
+            style.icon(
+                name, x + w / 2, y + h / 2, size * self.scale, self.palette[role]
+            )
             return
-        self.line(transformed(name, tuple(r), size), skin.TEXT, 2.2 * self.scale)
+        self.line(
+            transformed(name, tuple(r), size), self.palette[role], 2.2 * self.scale
+        )
 
     def lines(self, paths, color, width=1):
         self.line(

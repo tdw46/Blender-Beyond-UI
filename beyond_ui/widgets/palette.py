@@ -143,7 +143,7 @@ class Palette(Widget):
             if index == active:
                 x, y, w, h = r
                 with p.deform(("swatch", index), r, circular=True):
-                    p.surface((x - 3, y - 3, w + 6, h + 6), skin.TEXT, 11, 0)
+                    p.surface((x - 3, y - 3, w + 6, h + 6), palette["text"], 11, 0)
             color = self.display(index)
             with p.deform(("swatch", index), r, circular=True):
                 skin.draw(
@@ -157,7 +157,7 @@ class Palette(Widget):
         for r, icon in ((self.add_rect, "+"), (self.remove_rect, "−")):
             p.surface(r, "button", 6, 0.6)
             p.icon(icon, r, 22)
-        p.line(((179, 377), (179, 407)), skin.EDGE, 1.2 * p.scale)
+        p.line(((179, 377), (179, 407)), palette["edge"], 1.2 * p.scale)
         p.text((204, 364, 120, 56), self.selected_text, inset=0, size=21)
         if 0 <= active < self.source.count():
             p.surface(self.swatch_rect, self.display(active), 6, 0.6)

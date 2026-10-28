@@ -183,7 +183,13 @@ class ColorPicker(Widget):
         h, s, v = color_hsv(value, self.linear, self.hue_value)
         for label, r in zip(("RGB", "HSV"), COLOR["tabs"]):
             p.surface(r, "tab" if self.mode == label else "button")
-            p.text(r, label, size=19, align="center")
+            p.text(
+                r,
+                label,
+                role="selected_text" if self.mode == label else "text",
+                size=19,
+                align="center",
+            )
         skin.draw(p.map(self.sv), (1, 1, 1, 1), radius=6 * p.scale, mode=1, hue=h)
         skin.draw(p.map(self.hue), (1, 1, 1, 1), radius=6 * p.scale, mode=2)
         a, b, w, d = p.map(self.sv)
@@ -203,10 +209,13 @@ class ColorPicker(Widget):
                 14 * p.scale,
                 color_rgb((h, s, v), False) + (1.0,),
                 scale=p.scale,
+                palette=palette,
             )
         self.motion.region("sv", self.sv, circular=True)
         a, b, w, d = self.hue
-        p.surface((a + h * w - 4, b - 3, 8, d + 6), skin.TEXT, 1, 0.6, motion_key="hue")
+        p.surface(
+            (a + h * w - 4, b - 3, 8, d + 6), palette["text"], 1, 0.6, motion_key="hue"
+        )
         self.motion.region("hue", self.hue)
         channels = (
             color_hsv(value, self.linear, self.hue_value)
@@ -240,7 +249,9 @@ class ColorPicker(Widget):
             p.surface(r, "track", 8, 0)
             ratio = max(0, min(1, value[3]))
             p.surface((a, b, w * ratio, d), "fill", 8, 0)
-            p.circle((a + w * ratio, b + d / 2), 11, skin.TEXT, 0.7, motion_key="alpha")
+            p.circle(
+                (a + w * ratio, b + d / 2), 11, palette["text"], 0.7, motion_key="alpha"
+            )
             self.motion.region("alpha", COLOR["alpha_track"], circular=True)
         p.surface(COLOR["hex"], "input")
         p.text(

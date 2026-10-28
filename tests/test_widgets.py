@@ -131,7 +131,7 @@ class Widgets(unittest.TestCase):
         from beyond_ui.gpu import style, skin
         from beyond_ui.editing import color_hex
 
-        palette = style.theme_palette(None)
+        palette = style.theme_palette(None, reference=True)
         self.assertEqual(palette["selected"], skin.ROLES["selected"][0])
         self.assertLess(palette["field"][3], 1.0)
         self.assertLess(palette["card"][3], 1.0)

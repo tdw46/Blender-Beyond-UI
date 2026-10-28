@@ -37,15 +37,27 @@ def shade(color, amount, alpha=None):
     )
 
 
-def theme_palette(preferences=None):
-    """The custom reference skin; native-theme adaptation is explicitly opt-in."""
-    from .skin import palette
+def theme_palette(preferences=None, *, reference=False):
+    """Resolve once per host paint. Reference artwork is an explicit fixture."""
+    return reference_palette() if reference else native_theme_palette(preferences)
 
-    result = palette()
+
+@lru_cache(maxsize=1)
+def reference_palette():
+    from types import MappingProxyType
+    from . import skin
+
+    result = skin.palette()
     native = _theme_palette(((0.025, 0.38, 0.77, 1.0),) * 11)
     names = ("bg", "card", "bar", "accent", "field", "text", "muted", "api", "selected")
-    result["tokens"] = {key: result[name] for key, name in zip(native["tokens"], names)}
-    return result
+    result["tokens"] = MappingProxyType(
+        {key: result[name] for key, name in zip(native["tokens"], names)}
+    )
+    result.update(skin.reference_inks())
+    result["surfaces"] = MappingProxyType(skin.ROLES)
+    result["source"] = "reference"
+    result["fallback_roles"] = ()
+    return MappingProxyType(result)
 
 
 def native_theme_palette(preferences):
@@ -56,17 +68,22 @@ def native_theme_palette(preferences):
     """
     try:
         ui = preferences.themes[0].user_interface
-    except (AttributeError, IndexError, TypeError):
+    except (AttributeError, IndexError, TypeError, ReferenceError):
         ui = None
+
+    missing = []
 
     def read(widget, field, fallback):
         try:
             value = tuple(getattr(getattr(ui, widget), field))
             if len(value) == 3:
                 value += (1.0,)
-            return value if len(value) == 4 else fallback
-        except (AttributeError, TypeError, ReferenceError):
-            return fallback
+            if len(value) == 4 and all(math.isfinite(v) for v in value):
+                return value
+        except (AttributeError, TypeError, ReferenceError, ValueError):
+            pass
+        missing.append(f"{widget}.{field}")
+        return fallback
 
     accent = read("wcol_radio", "inner_sel", (0.025, 0.38, 0.77, 1.0))
     regular = read("wcol_regular", "inner", (0.070, 0.091, 0.111, 1.0))
@@ -84,12 +101,13 @@ def native_theme_palette(preferences):
             read("wcol_toggle", "inner", regular),
             read("wcol_toggle", "inner_sel", accent),
             read("wcol_radio", "text_sel", text),
-        )
+        ),
+        tuple(missing),
     )
 
 
 @lru_cache(maxsize=8)
-def _theme_palette(signature):
+def _theme_palette(signature, missing=()):
     (
         accent,
         regular,
@@ -143,7 +161,18 @@ def _theme_palette(signature):
         (0.035, 0.05, 0.065, 1): alpha(regular, 1.0),
         (0.025, 0.035, 0.047, 1): alpha(regular, 1.0),
     }
-    return p
+    from types import MappingProxyType
+    from .skin import themed_roles
+
+    surfaces, inks = themed_roles(p)
+    p.update(inks)
+    p["surfaces"] = MappingProxyType(surfaces)
+    p["tokens"] = MappingProxyType(p["tokens"])
+    p["source"] = (
+        "fallback" if len(missing) == 11 else "mixed" if missing else "blender"
+    )
+    p["fallback_roles"] = missing
+    return MappingProxyType(p)
 
 
 def icon(glyph, x, y, size, color):
@@ -698,18 +727,21 @@ def switch_bounds(x, y, width, height, scale=1.0):
     return x + width * 0.2, y + height * 0.2, width * 0.6, height * 0.6, scale * 0.6
 
 
-def picker_marker(x, y, radius, fill, shape=(1.0, 1.0), angle=0.0, scale=1.0):
+def picker_marker(
+    x, y, radius, fill, shape=(1.0, 1.0), angle=0.0, scale=1.0, *, palette=None
+):
     import gpu
     from mathutils import Matrix
 
+    palette = palette or theme_palette()
     ax, ay = shape
     with gpu.matrix.push_pop():
         gpu.matrix.translate((x, y, 0))
         if angle and shape != (1.0, 1.0):
             gpu.matrix.multiply_matrix(Matrix.Rotation(angle, 4, "Z"))
         for r, color in (
-            (radius + 2 * scale, (0.01, 0.02, 0.03, 0.8)),
-            (radius, (0.98, 0.99, 1, 1)),
+            (radius + 2 * scale, palette["marker_outer"]),
+            (radius, palette["marker_ring"]),
             (radius - 2.5 * scale, fill),
         ):
             draw(-r * ax, -r * ay, 2 * r * ax, 2 * r * ay, color, mode=3)
@@ -762,7 +794,7 @@ def switch(
         cy - rh - 1.5 * scale,
         2 * rw + 2 * scale,
         2 * rh + 2 * scale,
-        (0.015, 0.035, 0.065, 0.30),
+        palette["switch_shadow"],
         mode=3,
     )
     draw(

@@ -35,7 +35,9 @@ whether motion is enabled.
 [Full motion overview](docs/design/qa/next-v1/motion.gif) ·
 [Generated references versus implementations](docs/design/qa/next-v1/all-controls-comparison.png)
 
-Previews use the translucent tint fallback over a neutral backdrop. A consuming
+Previews explicitly use the fixed artwork palette and translucent tint fallback
+over a neutral backdrop. Production defaults to Blender’s active theme across
+all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
 ## Requirements

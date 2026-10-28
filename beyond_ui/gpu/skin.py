@@ -127,3 +127,75 @@ def palette():
         "overlay": rgba("222528", 0.85),
         "api": rgba("72c8ff"),
     }
+
+
+def reference_inks():
+    """Immutable artwork values; used only by explicitly selected fixtures."""
+    return {
+        "title": TEXT,
+        "edge": EDGE,
+        "header_divider": rgba("5d6267", 0.28),
+        "field_inset": rgba("101315", 0.35),
+        "toolbar_divider": rgba("9da2a7", 0.40),
+        "matrix_divider": rgba("7c858e", 0.24),
+        "grid_major": rgba("8d9398", 0.27),
+        "grid_minor": rgba("8d9398", 0.14),
+        "curve": rgba("4abefa"),
+        "point_border": rgba("111820"),
+        "point_selected": rgba("49b7ee"),
+        "point": rgba("e6ebf0"),
+        "marker_outer": (0.01, 0.02, 0.03, 0.8),
+        "marker_ring": (0.98, 0.99, 1.0, 1.0),
+        "switch_shadow": (0.015, 0.035, 0.065, 0.30),
+    }
+
+
+def themed_roles(p):
+    """Source RGB roles, with the compound controls' existing glass opacities.
+
+    Graph chrome derives from the same source roles: regular background, text
+    grid/unselected points and radio accent curve/selected points. Bound color
+    data never passes through this function. Neutral shader rims are optics.
+    """
+    from .style import shade
+
+    owners = {
+        "card": "card",
+        "header": "bar",
+        "field": "field",
+        "input": "bg",
+        "button": "card",
+        "graph": "bg",
+        "tab": "tab",
+        "selected": "selected",
+        "track": "slider_track",
+        "thumb": "muted",
+        "progress_fill": "slider_fill",
+        "fill": "slider_fill",
+    }
+    surfaces = {}
+    for role, owner in owners.items():
+        lower, upper = ROLES[role]
+        # Retain each material's authored gradient delta and alpha hierarchy.
+        delta = sum(b - a for a, b in zip(lower[:3], upper[:3])) / 3
+        base = p[owner][:3] + (lower[3],)
+        surfaces[role] = (base, shade(base, delta, upper[3]))
+    alpha = lambda role, a: p[role][:3] + (a,)
+    inks = {
+        "title": p["text"],
+        "edge": alpha("muted", 0.45),
+        "header_divider": alpha("muted", 0.28),
+        "field_inset": alpha("bg", 0.35),
+        "toolbar_divider": alpha("muted", 0.40),
+        "matrix_divider": alpha("muted", 0.24),
+        "grid_major": alpha("text", 0.27),
+        "grid_minor": alpha("text", 0.14),
+        "curve": p["accent"],
+        "point_border": alpha("bg", 1.0),
+        "point_selected": p["accent"],
+        "point": p["text"],
+        "marker_outer": alpha("bg", 0.8),
+        "marker_ring": p["text"],
+        "switch_shadow": alpha("bg", 0.30),
+    }
+    return surfaces, inks

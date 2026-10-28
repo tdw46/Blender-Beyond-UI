@@ -28,7 +28,7 @@ def run():
         now = [0.0]
         canvases = []
         for slug, title, widget in widgets:
-            canvas = Canvas(Theme(padding=10))
+            canvas = Canvas(Theme(padding=10, palette="REFERENCE"))
             control = canvas.widget(slug, widget)
             canvas.arrange(340)
             widget.motion.clock = lambda: now[0]

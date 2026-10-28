@@ -1,4 +1,4 @@
-# Validation record — 2026-10-27
+# Validation record — 2026-10-28
 
 ## Current status
 
@@ -9,7 +9,7 @@ unit tests, native forwarding or ordinary CI.
 
 ## Evidence
 
-- 32 pure Python tests pass: transactions/rollback, stale-owner rejection,
+- 36 pure Python tests pass: transactions/rollback, stale-owner rejection,
   retained geometry, clipped input, million-row virtualization, text/arithmetic,
   independent vendor namespaces, and custom color/curve/ramp/picker interactions.
 - Ruff parser/name-error checks pass. No claim of full static type validation.
@@ -81,5 +81,19 @@ contains runtime, performance and visual-comparison limits. The original resting
 captures remain unchanged. No new exact-match acceptance is inferred.
 
 Original BVT right-click menus and theme extraction are now explicit hard rules
-with an [audited source contract](SOURCE_UI_CONTRACT.md). Complete menu wiring and
-default live-theme role plumbing remain open defects in the parity ledger.
+with an [audited source contract](SOURCE_UI_CONTRACT.md). Complete menu wiring remains open. The default live-theme role plumbing was
+implemented in the following checkpoint; exact theme-reference fidelity is open.
+
+## Active Blender theme colors
+
+The source BVT reader now supplies production colors to basic controls, selection
+menus and all eight compound cards. [Theme configuration](THEMING.md) records
+semantic mappings, fallback reporting and explicit reference-only policy.
+[Theme QA](design/qa/theme-v1/NOTES.md) includes 5.1.2/5.2.2 execution records,
+native dark and synthetic light/purple captures, data-color preservation,
+retained resource checks, before/after timings and a generated-reference conflict.
+
+All 12 earlier individual resting captures and all 75 frames of the eight-panel
+reference animation remain byte-identical. Real windowed input, animation idle,
+teardown and re-registration checks pass on both installed versions. This
+checkpoint does not grant visual acceptance or full context-menu/API parity.

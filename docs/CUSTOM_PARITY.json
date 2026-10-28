@@ -976,7 +976,12 @@
     "active_blender_theme": {
       "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Original BVT native_theme_palette reader is extracted; fixed reference skin remains the default and compound role plumbing is incomplete."
+      "notes": "Production default uses original BVT public widget RGB extraction, immutable bounded caches and shared semantic roles across basic controls, selection menus and all eight compound cards. Reference policy is explicit. Blender 5.1.2/5.2.2 live theme, unchanged data pixels and retained resource checks pass; exact theme-reference fidelity and broader runtime/platform qualification remain open.",
+      "comparison_evidence": "docs/design/qa/theme-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/theme-v1/runtime-51.json",
+        "docs/design/qa/theme-v1/runtime-52.json"
+      ]
     }
   }
 }

@@ -23,12 +23,13 @@ tokens resolve at painting time so edits to the active theme do not invalidate
 layout, geometry, thumbnails or blur. There is no theme polling timer and no
 preference mutation.
 
-The extraction already contains this reader as `native_theme_palette`, but the
-production `theme_palette` currently chooses the fixed reference skin, and
-compound painters still contain fixed colors. **Default theme selection and
-complete role plumbing are open parity defects.** An explicit reference fixture
-must stay available for reproducible comparisons, without silently becoming the
-production theme policy. Graph/point roles also need a documented theme mapping.
+Production now selects this reader by default. Basic controls, existing selection
+menus and all eight compound cards consume shared colors; graph/point mapping and
+explicit artwork fixtures are documented in [THEMING.md](THEMING.md). Palette
+mappings are immutable and cached by signature. Missing theme roles are reported
+explicitly. Light/custom appearance and exact generated-reference acceptance
+remain open; [theme QA](design/qa/theme-v1/NOTES.md) records the execution evidence
+and the generated reference conflict.
 
 ## Context menus
 
