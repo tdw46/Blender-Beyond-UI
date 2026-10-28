@@ -96,7 +96,15 @@ def conflict_maps(context, selected):
 
 class Action:
     def __init__(
-        self, idname, properties, context, *, valid=lambda c: True, keymap=None
+        self,
+        idname,
+        properties,
+        context,
+        *,
+        valid=lambda c: True,
+        keymap=None,
+        check=None,
+        conflict_keymaps=None,
     ):
         from .hosts import menu_native
 
@@ -109,6 +117,8 @@ class Action:
         self.operator_pointer = operator(idname).get_rna_type().as_pointer()
         self.portable = portable(properties)
         self.valid = valid
+        self.check = check
+        self.conflict_keymaps = conflict_keymaps
         config = context.window_manager.keyconfigs.user
         km = (
             config.keymaps.get(keymap)
@@ -202,15 +212,24 @@ class Action:
             return False
         if device != mouse:
             return False
+        if self.check is not None and not self.check(context):
+            raise ReferenceError("Shortcut target changed; reopen the menu")
         km, old = self.current(context)
         modifiers = {
             k: bool(getattr(event, k, False)) for k in ("shift", "ctrl", "alt", "oskey")
         }
         if "hyper" in bpy.types.KeyMapItem.bl_rna.properties:
             modifiers["hyper"] = bool(getattr(event, "hyper", False))
-        for item in (
-            item for scope in conflict_maps(context, km) for item in scope.keymap_items
-        ):
+        maps = conflict_maps(context, km)
+        if self.conflict_keymaps is not None:
+            from itertools import islice
+
+            known = {scope.as_pointer() for scope in maps}
+            for scope in islice(self.conflict_keymaps(context, km), 64):
+                if scope is not None and scope.as_pointer() not in known:
+                    maps.append(scope)
+                    known.add(scope.as_pointer())
+        for item in (item for scope in maps for item in scope.keymap_items):
             if (
                 item == old
                 or not item.active
@@ -348,6 +367,7 @@ def property_entry(source, context):
     from .context_paths import property_path
     from dataclasses import replace
     from itertools import islice
+    from .context_enums import items, contains
 
     path = property_path(source, context)
     meta = source.owner().bl_rna.properties[source.name]
@@ -371,11 +391,10 @@ def property_entry(source, context):
 
         def value_entry(value, label, c):
             def current(ctx):
-                return (
-                    valid(ctx)
-                    and value
-                    in source.owner().bl_rna.properties[source.name].enum_items
-                )
+                return valid(ctx)
+
+            def check(ctx):
+                return contains(source.owner(), source.name, value, ctx)
 
             if meta.is_enum_flag:
                 # Blender's context_set_value supplies its normal property undo.
@@ -401,11 +420,18 @@ def property_entry(source, context):
                 }
             else:
                 op, props = "wm.context_set_enum", {"data_path": path, "value": value}
-            row = Action(op, props, c, valid=current).entry(c)
+            row = Action(op, props, c, valid=current, check=check).entry(c)
             return replace(row, label=label) if label else row
 
         if source.enum_value is not None:
-            item = meta.enum_items.get(source.enum_value)
+            item = next(
+                (
+                    i
+                    for i in items(source.owner(), source.name, context)
+                    if i.identifier == source.enum_value
+                ),
+                None,
+            )
             return value_entry(
                 source.enum_value,
                 None if item else "Unavailable enum item",
@@ -416,7 +442,10 @@ def property_entry(source, context):
             current = source.owner().bl_rna.properties[source.name]
             return tuple(
                 value_entry(item.identifier, item.name, c)
-                for item in islice((i for i in current.enum_items if i.identifier), 63)
+                for item in islice(
+                    (i for i in items(source.owner(), source.name, c) if i.identifier),
+                    63,
+                )
             )
 
         return Entry(

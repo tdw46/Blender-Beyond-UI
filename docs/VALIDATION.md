@@ -290,3 +290,54 @@ motion acceptance, custom-popup shortcut dispatch, inline scalar contribution
 editors, dynamic enum/string contexts and the broader platform/theme/DPI matrix
 remain open. The ledger remains 137 documented members, 39 partial and zero
 reference-matched.
+
+
+## Functional menu completion — QA v5, 2026-10-28
+
+[QA v5](design/qa/context-menu-v5/index.html) supersedes the functional menu gaps
+listed in v4. Inline numeric/string/array-component editors now provide deferred
+transactions, safe arithmetic, clipboard editing, mouse caret/drag selection,
+keyboard selection and shared-glass validation feedback. Cancellation never
+writes; stale values and rejected host commits cannot overwrite data.
+
+An explicit host-owned `ShortcutRegistry` reopens custom enum menus and routes
+custom invocation/context callbacks. Actual simulated window key events assign
+and invoke the shortcut outside the canvas, then commit a selection, on both
+macOS arm64 Blender 5.1.2 and 5.2.2. Hidden/replaced controls reject dispatch;
+unregister clears callbacks. Hosts can supply additional editor/modal keymaps;
+a runtime conflict fixture confirms those bindings cannot be overwritten.
+
+Dynamic RNA enum callbacks, including changed choices and operator-property
+snapshots, use exact-build admitted native evaluation. Property callbacks receive
+the current context; Blender can intentionally supply `None` to operator callbacks.
+Native string scopes now reach operator poll/execute and nested/direct menu
+contributions. Tests cover Unicode, inherited keys, nested and exception restore,
+zero remaining native stores and temporary keyconfig cleanup without dirtying
+preferences. Typed operator scratch containers and owned enum arrays are released.
+
+62 pure tests, Ruff, the parity checker and source/wheel builds pass. The runtime
+completion, native-context, adapter, menu contribution, modal-input and general
+regression fixtures pass on both installed qualified builds. Disposable profiles
+are used throughout; no live scene or preferences were saved. The wheel contains
+matching native source, admitted binary, manifests and all new Python modules.
+
+The v5 root pixels exactly equal v4. Inline-field motion and live native/synthetic
+light/purple themes retain the same shaders, batches and shared backdrop resources.
+150% render captures check scaling/clipping; they are not a complete system-DPI
+or multi-window/hardware qualification. No generated reference or motion approval
+is inferred. Previous gallery/reference versions are unchanged.
+
+The remaining release gates are broader platform/native-build qualification and
+Tyler's exact visual/motion QA. General UILayout templates, pointer/event property
+options, unit/subtype semantics and other controls remain in the main UI parity
+ledger: 137 documented members, 39 partial, zero reference-matched. This work does
+not convert that ledger to full parity or admit untested Blender 4.2 native APIs.
+
+On the equivalent 640×560 fixture (20 warmups, 100 samples), root CPU submission
+median/p95 is 0.235/0.267 ms versus v4's 0.242/0.293 ms.
+The new inline-edit workload is 0.117/0.141 ms. Navigation median is
+0.084 ms versus 0.079 ms previously. One backdrop production, one strong-blur
+production and five retained offscreens serve the entire capture. These are CPU
+submission measurements, not GPU completion or end-to-end latency. Current capture
+shutdown has no allocation warning; the historical intermittent Metal warning is
+not declared fixed.

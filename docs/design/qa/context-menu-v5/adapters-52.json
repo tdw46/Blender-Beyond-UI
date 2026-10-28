@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "checks": [
+    "real native driver clipboard preserves expression and replaces exact component",
+    "host undo failure restores complete previous driver and removes staging ID",
+    "new-driver clipboard uses exact ID/path; readonly input and unsupported whole-array guards",
+    "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected",
+    "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released",
+    "custom glass capture: assign/change/remove real keymap, cancel, modifier-only input, conflicts, stale-item rejection and exact properties",
+    "explicit authoring source opens correct file/line; Python tooltip preference honored"
+  ]
+}

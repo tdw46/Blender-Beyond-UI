@@ -119,7 +119,7 @@ def run():
                 "menu-fixture", 1, underlay.texture_color, (0, 0, width, height)
             ), glass.error
 
-            def render(name=None, contrast=False, useglass=True):
+            def render(name=None, contrast=False, useglass=True, ratio=1):
                 fb.clear(color=(22 / 255, 25 / 255, 27 / 255, 1))
                 glass._draw(
                     underlay.texture_color,
@@ -131,10 +131,16 @@ def run():
                     @ gpu.matrix.get_model_view_matrix(),
                 )
                 canvas.paint(
-                    (0, height - canvas.height, width, canvas.height),
+                    (
+                        0,
+                        height - canvas.height * ratio,
+                        width * ratio,
+                        canvas.height * ratio,
+                    ),
                     (0, 0, width, height),
                     font=fonts,
                     backdrop="menu-fixture" if useglass else None,
+                    preferences=bpy.context.preferences,
                 )
                 if name:
                     data = fb.read_color(0, 0, width, height, 4, 0, "UBYTE")
@@ -344,6 +350,116 @@ def run():
                 canvas.context_menu.motion.clear()
                 render("enum-choices")
                 canvas.close_context()
+                canvas.context_menu = Menu(
+                    target,
+                    (
+                        property_row(owner, "name"),
+                        property_row(owner, "location", index=1),
+                        property_row(owner, "location"),
+                    ),
+                    (170, 100),
+                    clip,
+                    context=bpy.context,
+                )
+                canvas.context_menu.motion.clear()
+                render("scalar-fields")
+                canvas.context_menu.choose(1, bpy.context)
+                canvas.context_menu.event(
+                    NS(type="TEXTINPUT", value="PRESS", unicode="2+3"),
+                    200,
+                    200,
+                    bpy.context,
+                )
+                canvas.context_menu.motion.clear()
+                render("scalar-edit")
+                edit_menu = canvas.context_menu
+                now[0] = 0
+                edit_menu.motion.clock = lambda: now[0]
+                edit_menu.motion.clear()
+                edit_menu.motion.pulse("reveal", 0.12)
+                edit_resources = resources()
+                for frame in range(36):
+                    now[0] = frame / 30
+                    render(f"field-{frame:03}")
+                assert resources() == edit_resources
+                for _ in range(20):
+                    render()
+                samples = []
+                for _ in range(100):
+                    started = time.perf_counter()
+                    render()
+                    samples.append((time.perf_counter() - started) * 1000)
+                timing["inline-edit"] = dict(
+                    median_ms=statistics.median(samples),
+                    p95_ms=sorted(samples)[94],
+                    max_ms=max(samples),
+                )
+                from dataclasses import replace
+
+                original_theme = canvas.theme
+                canvas.theme = replace(canvas.theme, palette="BLENDER")
+                render("field-native-theme")
+                ui = bpy.context.preferences.themes[0].user_interface
+                fields = [
+                    (name, attr)
+                    for name in ("wcol_regular", "wcol_num", "wcol_radio", "wcol_tool")
+                    for attr in ("inner", "inner_sel", "text", "text_sel")
+                ]
+                original_colors = {
+                    (name, attr): tuple(getattr(getattr(ui, name), attr))
+                    for name, attr in fields
+                }
+                try:
+                    for theme_name, fill, accent, ink in (
+                        (
+                            "light",
+                            (0.8, 0.82, 0.85, 1),
+                            (0.12, 0.34, 0.72, 1),
+                            (0.06, 0.07, 0.09),
+                        ),
+                        (
+                            "purple",
+                            (0.15, 0.11, 0.19, 1),
+                            (0.66, 0.24, 0.78, 1),
+                            (0.94, 0.89, 0.98),
+                        ),
+                    ):
+                        for name, attr in fields:
+                            value = (
+                                fill
+                                if attr == "inner"
+                                else accent
+                                if attr == "inner_sel"
+                                else ink
+                                if attr == "text"
+                                else (1, 1, 1)
+                            )
+                            setattr(getattr(ui, name), attr, value)
+                        render("field-" + theme_name + "-theme")
+                        render("field-" + theme_name + "-scale-150", ratio=1.5)
+                        assert resources() == edit_resources
+                finally:
+                    for (name, attr), value in original_colors.items():
+                        setattr(getattr(ui, name), attr, value)
+                    canvas.theme = original_theme
+                edit_menu.event(
+                    NS(type="A", value="PRESS", ctrl=True), 200, 200, bpy.context
+                )
+                edit_menu.event(
+                    NS(type="TEXTINPUT", value="PRESS", unicode="invalid"),
+                    200,
+                    200,
+                    bpy.context,
+                )
+                edit_menu.event(NS(type="RET", value="PRESS"), 200, 200, bpy.context)
+                assert edit_menu.error and edit_menu.tooltip is not None
+                edit_menu.motion.clear()
+                render("field-invalid")
+                edit_menu.event(NS(type="ESC", value="PRESS"), 200, 200, bpy.context)
+                edit_menu.choose(2, bpy.context)
+                edit_menu.motion.clear()
+                render("array-fields")
+                canvas.close_context()
                 from beyond_ui.context_shortcuts import property_entry
 
                 canvas.context_menu = Menu(
@@ -406,6 +522,11 @@ def run():
             theme="explicit REFERENCE",
             transparency="Production BVT lens, blur=0.7, untinted refracted body; one GPU backdrop revision shared by all menus and motion frames",
             frames=45,
+            additional_field_states={
+                "themes": ["native Blender", "synthetic light", "synthetic purple"],
+                "render_scales": [1, 1.5],
+                "acceptance": "Execution/capture fixtures; not approved references or a system-DPI matrix",
+            },
             timings=timing,
             retained_resources=before,
             stable_resources=before == after,

@@ -8,6 +8,8 @@ from types import SimpleNamespace
 from dataclasses import replace
 from .context_menu import Entry
 from .context_arguments import Arguments
+from .context_enums import items as enum_items, operator_items
+from .hosts.menu_context import override
 
 
 def overrides(source):
@@ -49,9 +51,9 @@ class Collector:
         self.extra[name] = value
 
     def context_string_set(self, name, value):
-        raise NotImplementedError(
-            "String context requires a host adapter; Blender temp_override accepts RNA pointers"
-        )
+        if not isinstance(value, str):
+            raise TypeError("Context strings must be strings")
+        self.extra[name] = value
 
     def separator(self, **kwargs):
         self.divider = True
@@ -103,7 +105,7 @@ class Collector:
         permitted = self.enabled and self.active
 
         def scope(context):
-            return context.temp_override(**values())
+            return override(context, values())
 
         def poll(target, context):
             with scope(context):
@@ -151,7 +153,18 @@ class Collector:
     def prop_enum(self, data, property, value, *, text="", **kwargs):
         from .context_fields import property_row
 
-        item = data.bl_rna.properties[property].enum_items.get(value)
+        item = (
+            None
+            if text
+            else next(
+                (
+                    i
+                    for i in enum_items(data, property, self.context)
+                    if i.identifier == value
+                ),
+                None,
+            )
+        )
         self._add(
             property_row(
                 data,
@@ -166,16 +179,20 @@ class Collector:
         from itertools import islice
 
         for item in islice(
-            (i for i in data.bl_rna.properties[property].enum_items if i.identifier), 64
+            (i for i in enum_items(data, property, self.context) if i.identifier), 64
         ):
-            self.prop_enum(data, property, item.identifier)
+            self.prop_enum(
+                data, property, item.identifier, text=item.name or item.identifier
+            )
 
     def operator_enum(self, operator, property, **kwargs):
         from itertools import islice
 
         op = globals()["operator"](operator)
         meta = op.get_rna_type().properties[property]
-        for item in islice((i for i in meta.enum_items if i.identifier), 64):
+        with override(self.context, self._scope()()):
+            choices = operator_items(operator, property, self.context)
+        for item in islice((i for i in choices if i.identifier), 64):
             props = self.operator(operator, text=item.name)
             setattr(
                 props,
@@ -197,7 +214,7 @@ class Collector:
 
         def enabled(target, context):
             current = operator(idname)
-            with context.temp_override(**values()):
+            with override(context, values()):
                 return (
                     permitted
                     and snapshot.valid()
@@ -207,10 +224,12 @@ class Collector:
 
         def children(target, context):
             meta = operator(idname).get_rna_type().properties[property]
+            with override(context, values()):
+                choices = operator_items(idname, property, context, snapshot.values())
 
             def draw(holder, current):
                 holder.layout.operator_context = invocation
-                for item in islice((i for i in meta.enum_items if i.identifier), 63):
+                for item in islice((i for i in choices if i.identifier), 63):
                     settings = holder.layout.operator(idname, text=item.name)
                     for key, value in snapshot.values().items():
                         setattr(settings, key, value)
@@ -246,7 +265,7 @@ class Collector:
 
         def poll(target, context):
             menu = getattr(bpy.types, idname, None)
-            with context.temp_override(**values()):
+            with override(context, values()):
                 return (
                     permitted
                     and menu is cls
@@ -272,7 +291,7 @@ class Collector:
 
         cls = getattr(bpy.types, idname, None)
         if cls is not None and self.depth < 3:
-            with self.context.temp_override(**self._scope()()):
+            with override(self.context, self._scope()()):
                 if not hasattr(cls, "poll") or cls.poll(self.context):
                     # Inline children inherit the same state as an ordinary row.
                     child = self.row()
@@ -287,7 +306,7 @@ def collect(context, source, callbacks, depth=0, extra=None):
     from .context_rna import decorate
 
     rows = []
-    with context.temp_override(**{**(extra or {}), **overrides(source)}):
+    with override(context, {**(extra or {}), **overrides(source)}):
         for callback in callbacks:
             pending = []
             try:

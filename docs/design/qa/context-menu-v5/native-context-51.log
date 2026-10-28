@@ -1,0 +1,4 @@
+00:02.333  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+BEYOND_UI_RESULT={"passed": true, "version": "5.1.2", "checks": ["native string scope preserves Unicode and inherited keys; nested/exception exit restores context and releases stores", "contributed and authored operators retain native string scope; dynamic operator enums see snapshotted properties; scratch config cleanup preserves preferences", "dynamic Python enum callbacks receive exact context and updated items; repeated native temporary arrays released", "dynamic field menus reject vanished choices; custom Layout.prop uses current callback items"]}
+
+Blender quit

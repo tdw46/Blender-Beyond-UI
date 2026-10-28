@@ -398,3 +398,80 @@ def operator_favorite(idname, properties, invocation, context, *, operation="ADD
 
 def add_operator_favorite(idname, properties, invocation, context):
     return operator_favorite(idname, properties, invocation, context)
+
+
+@lru_cache(maxsize=1)
+def _enum_api():
+    if api() is None:
+        return None
+    # Enum callbacks can execute Python. PyDLL keeps the GIL held throughout.
+    lib = C.PyDLL(None)
+    pointer = getattr(lib, "_ZN7blender19pyrna_struct_as_ptrEP7_objectPKNS_9StructRNAE")
+    pointer.argtypes, pointer.restype = [C.py_object, C.c_void_p], C.c_void_p
+    items = getattr(
+        lib,
+        "_ZN7blender23RNA_property_enum_itemsEPNS_8bContextEPNS_10PointerRNAEPNS_11PropertyRNAEPPKNS_16EnumPropertyItemEPiPb",
+    )
+    items.argtypes = [
+        C.c_void_p,
+        C.c_void_p,
+        C.c_void_p,
+        C.POINTER(C.c_void_p),
+        C.POINTER(C.c_int),
+        C.POINTER(C.c_bool),
+    ]
+    items.restype = None
+    free = C.c_void_p.in_dll(lib, "_ZN11mem_guarded8internal12mem_freeN_exE")
+    return pointer, items, free
+
+
+def enum_items(owner, name, context):
+    """Copy dynamic RNA items and immediately release Blender-owned temporary data."""
+    from types import SimpleNamespace
+
+    functions = _enum_api()
+    if functions is None:
+        return None
+
+    class Item(C.Structure):
+        _fields_ = [
+            ("value", C.c_int),
+            ("identifier", C.c_char_p),
+            ("icon", C.c_int),
+            ("name", C.c_char_p),
+            ("description", C.c_char_p),
+        ]
+
+    pointer, evaluate, free = functions
+    raw, count, owned = C.c_void_p(), C.c_int(), C.c_bool()
+    rna = pointer(owner, owner.bl_rna.as_pointer())
+    if not rna:
+        raise ReferenceError("Enum owner disappeared")
+    try:
+        evaluate(
+            context.as_pointer(),
+            rna,
+            owner.bl_rna.properties[name].as_pointer(),
+            C.byref(raw),
+            C.byref(count),
+            C.byref(owned),
+        )
+        if not 0 <= count.value <= 4096:
+            raise ValueError("Enum exceeds the bounded item limit")
+        rows = C.cast(raw, C.POINTER(Item))
+        decode = lambda value: value.decode("utf8", "replace") if value else ""
+        return tuple(
+            SimpleNamespace(
+                identifier=decode(rows[i].identifier),
+                name=decode(rows[i].name),
+                description=decode(rows[i].description),
+                icon=rows[i].icon,
+                value=rows[i].value,
+            )
+            for i in range(count.value)
+            if rows[i].identifier
+        )
+    finally:
+        if owned.value and raw.value:
+            # RNA_enum_item_add uses raw MEM_reallocN; its allocation is Trivial.
+            C.CFUNCTYPE(None, C.c_void_p, C.c_int)(free.value)(raw, 0)

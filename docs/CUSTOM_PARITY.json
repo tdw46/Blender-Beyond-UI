@@ -82,7 +82,7 @@
     "context_string_set": {
       "kind": "method",
       "status": "partial",
-      "notes": "Values are stored but not yet supplied to an operator context; do not use as an accepted route.",
+      "notes": "Native scoped string context reaches operator poll/execute and nested contributions on exact admitted macOS arm64 5.1.2/5.2.2 builds, with nested/exception restoration and resource release. Other builds fail closed; cross-platform admission remains open.",
       "reference": null,
       "comparison_evidence": null
     },
@@ -971,7 +971,7 @@
     "right_click_context_menus": {
       "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Owner-aware menus retain BVT glass/motion. Keyboard-accessible capture mode selection, inline menu state/invocation inheritance, deep bounded argument snapshots and registration revocation are implemented. Real property/operator Favorites add/remove, enum value/flag shortcuts, keyboard/mouse/key-modifier capture, common-scope conflict checks and contributed bool/enum/operator-choice rows are execution-tested on exact macOS arm64 Blender 5.1.2/5.2.2. Full custom-popup shortcut dispatch, arbitrary editor/modal conflicts, inline scalar fields, dynamic enum callbacks, arbitrary callbacks/string contexts, broader platforms/themes/DPI/windows and exact generated-reference/motion acceptance remain open; see docs/CONTEXT_MENUS.md.",
+      "notes": "Shared owner-aware BVT glass/motion menus now include scalar/string/array fields, transactional inline edits, host-owned custom-popup shortcuts, dynamic enum callbacks, scoped string contexts and host-extensible conflict maps. QA v5 tests actual keyboard dispatch, stale owners and native release on admitted macOS arm64 5.1.2/5.2.2. Generic UILayout templates and full prop subtype semantics remain in the main UI ledger. Broader platform/theme/DPI/window qualification and exact generated-reference/motion acceptance remain open. See docs/CONTEXT_MENUS.md.",
       "execution_evidence": [
         "docs/design/qa/context-menu-v1/rna-51.json",
         "docs/design/qa/context-menu-v1/rna-52.json",
@@ -994,9 +994,21 @@
         "docs/design/qa/context-menu-v4/parity-51.json",
         "docs/design/qa/context-menu-v4/parity-52.json",
         "docs/design/qa/context-menu-v4/modal-51.json",
-        "docs/design/qa/context-menu-v4/modal-52.json"
+        "docs/design/qa/context-menu-v4/modal-52.json",
+        "docs/design/qa/context-menu-v5/completion-51.json",
+        "docs/design/qa/context-menu-v5/completion-52.json",
+        "docs/design/qa/context-menu-v5/native-context-51.json",
+        "docs/design/qa/context-menu-v5/native-context-52.json",
+        "docs/design/qa/context-menu-v5/modal-51.json",
+        "docs/design/qa/context-menu-v5/modal-52.json",
+        "docs/design/qa/context-menu-v5/adapters-51.json",
+        "docs/design/qa/context-menu-v5/adapters-52.json",
+        "docs/design/qa/context-menu-v5/parity-51.json",
+        "docs/design/qa/context-menu-v5/parity-52.json",
+        "docs/design/qa/context-menu-v5/regression-51.json",
+        "docs/design/qa/context-menu-v5/regression-52.json"
       ],
-      "comparison_evidence": "docs/design/qa/context-menu-v4/comparison.json"
+      "comparison_evidence": "docs/design/qa/context-menu-v5/comparison.json"
     },
     "active_blender_theme": {
       "status": "partial",
@@ -1013,7 +1025,7 @@
       "required": true,
       "policy": "AGENTS.md#hard-rule-real-bvt-liquid-glass",
       "notes": "Mandatory BVT shared backdrop, Gaussian strong blur, refraction/rim and finite motion for every translucent surface. Default embedded host and new shortcut capture use this material. Tint/opaque fallback is degraded and cannot count as parity. Exact generated-reference acceptance and broader theme/platform matrix remain open.",
-      "comparison_evidence": "docs/design/qa/context-menu-v4/comparison.json"
+      "comparison_evidence": "docs/design/qa/context-menu-v5/comparison.json"
     }
   }
 }

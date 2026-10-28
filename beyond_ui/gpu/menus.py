@@ -89,6 +89,8 @@ def enum_option(
     if item["data"]:
         style.icon("●", right - 4 * scale, y + h / 2, 6 * scale, ink)
         right -= 16 * scale
+    if item.get("field"):
+        right = min(right, x + w * 0.44)
     text(item["text"], left, right, 11 * scale, ink)
 
 
@@ -158,6 +160,7 @@ def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     shortcut=row.shortcut,
                     divider=row.divider,
                     submenu=row.children is not None,
+                    field=row.field is not None,
                 )
 
                 def text_clip(bounds):
@@ -181,6 +184,23 @@ def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                         color,
                         text_clip=text_clip,
                     )
+                    if row.field is not None:
+                        editor = (
+                            menu.editor
+                            if active and menu.editor and menu.editor.index == index
+                            else None
+                        )
+                        field_value(
+                            font,
+                            target,
+                            scale,
+                            palette,
+                            backdrop,
+                            page.values[index],
+                            editor,
+                            text_clip,
+                            page.available[index],
+                        )
 
     if menu.tooltip:
         rect, lines = menu.tooltip
@@ -209,3 +229,48 @@ def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     (x + 7 * scale, y + (h - measure(font, 11 * scale, "H")[1]) / 2),
                     (bounds,),
                 )
+
+
+def field_value(font, rect, scale, palette, backdrop, value, editor, clips, enabled):
+    """Prepared field text and shared lens; no binding access or new GPU resources."""
+    from . import style, glass
+    from .paint import measure
+
+    x, y, w, h = rect
+    x += w * 0.45
+    w = w * 0.55 - 4 * scale
+    y += 2 * scale
+    h -= 4 * scale
+    if not glass.lens(backdrop, (x, y, w, h), 4 * scale, palette["field"], blur=0.7):
+        style.draw(x, y, w, h, palette["field"], radius=4 * scale)
+    size = 11 * scale
+    left, right = x + 5 * scale, x + w - 5 * scale
+    text = editor.text.text if editor else str(value)
+    cursor = measure(font, size, text[: editor.text.cursor])[0] if editor else 0
+    origin = left - max(0, cursor - max(0, right - left - 2 * scale))
+    if editor:
+        a, b = sorted((editor.text.anchor, editor.text.cursor))
+        start = max(left, origin + measure(font, size, text[:a])[0])
+        end = min(right, origin + measure(font, size, text[:b])[0])
+        if end > start:
+            style.draw(
+                start,
+                y + scale,
+                end - start,
+                h - 2 * scale,
+                palette["selected"],
+                radius=0,
+            )
+        caret = min(right, max(left, origin + cursor))
+        style.draw(
+            caret, y + 2 * scale, scale, h - 4 * scale, palette["text"], radius=0
+        )
+    ink = palette["text"] if enabled else palette["muted"]
+    text_run(
+        font,
+        text,
+        size,
+        ink,
+        (origin, y + (h - measure(font, size, "H")[1]) / 2),
+        clips((left, y, right, y + h)),
+    )

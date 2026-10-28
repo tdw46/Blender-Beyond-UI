@@ -106,7 +106,7 @@ and [GPU backdrop integration](INTEGRATION.md).
 
 ## Evidence and remaining parity
 
-[QA gallery](design/qa/context-menu-v4/index.html) includes real Blender root,
+[QA gallery](design/qa/context-menu-v5/index.html) includes real Blender root,
 nested, tooltip, all eight compound targets, glass-versus-tint comparison and
 motion. Disposable Blender 5.1.2/5.2.2 tests cover RNA transactions, selected-owner
 rollback, keyframes/drivers, public nested menu contributions, stale elements,
@@ -159,14 +159,19 @@ library's minimum Blender version or qualify those runtimes by inference.
   capture instruction/body area. Cancel returns to the mode chooser; another
   Escape returns to the originating menu. Navigation keys remain assignable once
   capture is armed. Mode selection adds no extra nesting beyond the capture page.
-  Arbitrary editor/modal keymap hierarchy conflicts remain open.
+  Hosts can supply `conflict_keymaps(context, selected_keymap)` to `Action` or
+  `ShortcutRegistry` to include their editor/modal maps. This is bounded to 64
+  additional maps and cannot bypass the built-in checks. Blender does not expose
+  every active C modal handler through public RNA; host-owned modal routing must
+  provide its applicable maps explicitly.
 - **Shortcut applicability:** direct boolean property toggles and independent
   `INVOKE_DEFAULT` operator buttons are supported. Numeric fields have no direct
   native-style shortcut action. Expanded enum options assign their exact value;
   collapsed enums offer a Shortcut to Value submenu. Enum flags toggle only the
   specified flag and preserve the other flags. Shortcuts that reopen a custom
-  enum popup, custom invocations and context pointer overrides need a host dispatcher; they
-  never silently launch a native enum widget or drop invocation context.
+  enum popup, custom invocations and context pointer overrides use the explicit
+  host-owned `ShortcutRegistry` below. The callback retains the original action
+  and its scope; enum dispatch opens the same custom glass menu.
 - **Edit Source:** provide `source=your_authoring_function` to `Layout(...)` or
   `rna_binding(...)`; child layouts and component bindings inherit it. Python
   operators resolve their registered class automatically. Native C operators have
@@ -177,27 +182,44 @@ library's minimum Blender version or qualify those runtimes by inference.
   only when Blender's `show_tooltips_python` is enabled. Tooltip reveal retains
   the same finite dwell, blur, spring and cleanup as ordinary descriptions.
 
-[Menu parity and glass QA v4](design/qa/context-menu-v4/index.html) records disposable
+[Menu parity and glass QA v5](design/qa/context-menu-v5/index.html) records disposable
 runtime tests and current captures. These are execution results, not a claim of
-exact generated-reference acceptance. The full light/custom-theme, DPI,
-multi-window and platform matrix, arbitrary UILayout callbacks/string context,
-and the limitations above remain tracked gaps. The rejected v1 generation remains
+exact generated-reference acceptance. Cross-platform/native-build admission,
+the broader theme/DPI/window matrix and generated-reference/motion approval
+remain separate qualification gates. Arbitrary UILayout templates belong to the
+remaining control parity work, rather than being flattened into menu commands. The rejected v1 generation remains
 immutable provenance and is not a specification for corrected liquid glass.
 
 ## Extension-contributed fields
 
-The bounded public menu collector supports `prop` boolean scalars/components,
-`prop_enum`, `props_enum`, enum `prop` submenus, `operator_enum` and
+The bounded public menu collector supports `prop` boolean, numeric and string
+scalars/components, whole-array component submenus, `prop_enum`, `props_enum`, enum `prop` submenus, `operator_enum` and
 `operator_menu_enum`. Choices use the existing BVT menu renderer, checked
 indicator, theme roles, liquid glass and spring. Operator choices preserve their
 arguments, invocation and pointer override scope. Property commands require the
 host's `menu_commit("PROPERTY")` boundary and roll back if it rejects the change.
 Disabled parent rows and stale owners cannot execute.
 
-Numeric/string inline editors, arbitrary UILayout templates, dynamic enum
-callbacks without publicly enumerable RNA items, and string-context propagation
-remain explicit host-integration gaps. Unsupported fields stay disabled with an
-explanation; this collector does not claim general UILayout parity.
+Inline fields use the shared text buffer, glass, theme roles and row motion.
+Typing is deferred until Enter. Mouse caret placement, drag/Shift selection and
+clipboard editing retain the draft; invalid input shows a shared-glass tooltip
+when Blender tooltips are enabled. Escape/right-click cancels the draft without
+writing; invalid expressions and concurrent owner/value changes reject commit.
+Numeric input supports safe arithmetic and RNA hard bounds. Unit syntax and
+full subtype formatting remain part of broader `prop` parity. Text is bounded
+at 4096 characters; longer existing strings are rejected instead of truncated.
+
+Dynamic property/operator enums are evaluated with the real Blender context on
+admitted native builds; choices are revalidated before mutation. Blender may
+supply `None` to operator enum callbacks according to its RNA flags, so callbacks
+must preserve Blender's normal optional-context contract. Temporary typed
+operator containers are released immediately without saving preferences. Other
+builds retain public static RNA enumeration, with unavailable choices disabled.
+`context_string_set` now supplies real native string contexts to poll, execute
+and nested contributions on admitted builds. Nested stores restore on exit and
+exceptions; window/context invalidation clears instead of restoring stale state.
+Unsupported native scopes fail closed. Arbitrary UILayout templates still need
+their own custom controls; this collector does not claim general UILayout parity.
 
 Inline `menu_contents` inherits its parent's enabled/active state, operator
 invocation and scoped pointers. Its callback failures are isolated so later
@@ -208,3 +230,38 @@ retain their owner identity and are rechecked before execution. Snapshots are
 bounded to 512 nodes and eight levels; unsupported/oversized snapshots disable
 the affected action and report a diagnostic. Operator/menu registration identity
 is also rechecked. Collection and snapshot copying never run in painting.
+
+
+## Custom-popup shortcut lifecycle
+
+Registration remains explicit and belongs to the consuming extension:
+
+```python
+from beyond_ui import Canvas, ShortcutRegistry
+
+shortcuts = ShortcutRegistry("your_extension.ui")
+shortcuts.register()  # extension register(), never a drawing callback
+canvas = Canvas(shortcut_registry=shortcuts, shortcut_namespace="tools")
+# Add controls. Supply stable shortcut_key values for custom buttons/enums.
+canvas.arrange(width)
+canvas.bind_shortcuts(context, clip)  # after rebuild, outside painting
+# ... extension unregister():
+shortcuts.close()
+```
+
+Use one registry per unique extension owner. Commands are bounded, scoped to the
+window/area and revalidated against the current scene, exact control identity,
+binding, visibility and enabled state. Rebind after rebuilding controls, without
+changing their stable `shortcut_key`. RNA enum controls default to their context
+property path; transient generated layout IDs should not be persisted as keys.
+For custom host actions use `bind(command, context, callback, valid=...)` and
+`entry(command, context)`. Remove a particular owner with `unbind`; `close`
+revokes all callbacks and unregisters the owned operator. User keymap entries
+are not automatically deleted or saved: a subsequent registration/rebind
+restores their targets. Host conflict maps can be passed to the registry.
+
+The window-input fixture assigns F18, invokes it outside the canvas, opens the
+custom enum popup and commits with keyboard navigation. Scope and transaction
+fixtures also reject hidden/replaced owners, reject concurrent edits, roll back
+host commit failures, and cleanly unregister. These are execution checks, not
+exact visual acceptance.

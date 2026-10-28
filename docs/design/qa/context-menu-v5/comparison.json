@@ -1,0 +1,92 @@
+{
+  "exact_match": false,
+  "reference_status": "No accepted generated liquid-glass reference; rejected v1 retained unchanged",
+  "reference_matched": false,
+  "existing_root_pixel_identical_to_v4": true,
+  "additional_field_states": {
+    "themes": [
+      "native Blender",
+      "synthetic light",
+      "synthetic purple"
+    ],
+    "render_scales": [
+      1,
+      1.5
+    ],
+    "acceptance": "Execution/capture fixtures; not approved references or a system-DPI matrix"
+  },
+  "theme": "explicit REFERENCE",
+  "dimensions": [
+    640,
+    560
+  ],
+  "warm_cpu_submission_before_ms": {
+    "closed": {
+      "median_ms": 0.05579151911661029,
+      "p95_ms": 0.0992919085547328,
+      "max_ms": 0.19525003153830767
+    },
+    "tint-fallback": {
+      "median_ms": 0.23072946351021528,
+      "p95_ms": 0.25741709396243095,
+      "max_ms": 0.32783299684524536
+    },
+    "open": {
+      "median_ms": 0.2419165102764964,
+      "p95_ms": 0.29270804952830076,
+      "max_ms": 0.4865420050919056
+    },
+    "nested": {
+      "median_ms": 0.24629099061712623,
+      "p95_ms": 0.27154095005244017,
+      "max_ms": 0.6977500161156058
+    },
+    "scroll": {
+      "median_ms": 0.2483339630998671,
+      "p95_ms": 0.28895901050418615,
+      "max_ms": 0.3333750646561384
+    },
+    "navigation": {
+      "median_ms": 0.07929198909550905,
+      "p95_ms": 0.0827909680083394
+    }
+  },
+  "warm_cpu_submission_after_ms": {
+    "closed": {
+      "median_ms": 0.05597900599241257,
+      "p95_ms": 0.08012494072318077,
+      "max_ms": 0.2257500309497118
+    },
+    "tint-fallback": {
+      "median_ms": 0.23379101185128093,
+      "p95_ms": 0.28566690161824226,
+      "max_ms": 0.2912909258157015
+    },
+    "open": {
+      "median_ms": 0.23547897581011057,
+      "p95_ms": 0.2674170536920428,
+      "max_ms": 0.29495800845324993
+    },
+    "nested": {
+      "median_ms": 0.24856202071532607,
+      "p95_ms": 0.2797089982777834,
+      "max_ms": 0.32791600096970797
+    },
+    "scroll": {
+      "median_ms": 0.2509999321773648,
+      "p95_ms": 0.29191700741648674,
+      "max_ms": 0.36162498872727156
+    },
+    "navigation": {
+      "median_ms": 0.08445803541690111,
+      "p95_ms": 0.08733395952731371
+    },
+    "inline-edit": {
+      "median_ms": 0.11710450053215027,
+      "p95_ms": 0.14124996960163116,
+      "max_ms": 0.18066703341901302
+    }
+  },
+  "scope": "Equivalent 640x560 root/nested/scroll fixture, 20 warmups and 100 samples; CPU submission only, no GPU completion fence or end-to-end latency claim.",
+  "capture_shutdown": "Current capture log has no allocation warning. Historical v1/v2 MTLSafeFreeList warning remains an unresolved intermittent backend observation, not a demonstrated fix."
+}

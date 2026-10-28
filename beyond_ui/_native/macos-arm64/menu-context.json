@@ -1,0 +1,6 @@
+{
+  "source_sha256": "e7c9e037fa958fa60c485e8029e3102ffb00ef67a6bf21abcbfb788913971084",
+  "binary_sha256": "a68c6dd23db62fe2c5c4ab907e8620c77af6638fd1d4619e945b9c0c3a4e5740",
+  "library": "menu-context-e7c9e037fa958fa6.dylib",
+  "qualification": "Exact menu_native admission required; Darwin arm64 5.1.2/5.2.2 only"
+}

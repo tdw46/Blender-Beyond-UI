@@ -56,3 +56,28 @@ Only validated RNA paths and quoted known flag identifiers enter flag expression
 [QA v3](design/qa/context-menu-v3/index.html) preserves source and fixture hashes,
 raw captures, runtime results and logs. Its GIF contains actual production-rendered
 frames. Existing generated references and earlier QA versions remain immutable.
+
+
+### Menu completion adapters (v5)
+
+`context_enums.py` uses admitted `pyrna_struct_as_ptr` and
+`RNA_property_enum_items`, keeping the GIL for Python callbacks. Copied enum
+strings outlive the returned native array; owned arrays use the audited trivial
+`mem_freeN_ex` release. Exact 5.1.2/5.2.2 `bpy_rna`, `RNA_access`, `RNA_types`
+and `rna_access.cc` source hashes are in `hosts/menu-native-audit.json`.
+
+`_native/menu_context_macos.cpp` uses opaque exported `ui::Layout` context-store
+interfaces, compiled libc++ strings and the audited StringRef ABI. It creates a
+regionless, buttonless, undrawn block to own a scoped string store; it never uses
+a native UI widget as the custom implementation. Nested stores copy their parent,
+restore on exit and release both layout and block. `UI_interface_c.hh`,
+`UI_interface_layout.hh`, `interface.cc`, `interface_layout.cc`, `BKE_context.hh`
+and `context.cc` are audited at both exact revisions already listed above.
+The packaged dylib and source have separate SHA-256 admission in
+`_native/macos-arm64/menu-context.json`, in addition to exact Blender executable
+admission. `tools/build_menu_context.py` is an explicit developer build only;
+imports/painting never compile it. No Blender struct offset is read by this shim.
+
+The existing source BVT glass, spring and theme extraction remain shared by inline
+menu fields. v5 adds actual implementation frames, without changing prior
+reference images or claiming new reference acceptance.

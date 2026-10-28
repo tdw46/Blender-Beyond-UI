@@ -144,7 +144,14 @@ class Canvas(Group):
     }
 
     def __init__(
-        self, theme=None, *, animation=None, context_provider=None, menu_commit=None
+        self,
+        theme=None,
+        *,
+        animation=None,
+        context_provider=None,
+        menu_commit=None,
+        shortcut_registry=None,
+        shortcut_namespace="canvas",
     ):
         self.animation = animation or AnimationSettings()
         self._animation_parents = ()
@@ -167,6 +174,8 @@ class Canvas(Group):
         self.context_menu = None
         self.context_provider = context_provider
         self.menu_commit = menu_commit
+        self.shortcut_registry = shortcut_registry
+        self.shortcut_namespace = shortcut_namespace
         self.context_focus = None
         self._context_point = (0.5, 0.5)
         self.menu_error = None
@@ -405,6 +414,114 @@ class Canvas(Group):
             if self.visible and self._animation_wake:
                 self._animation_wake()
 
+    def open_enum_menu(self, control, clip, context):
+        """Open an owned enum through the same bounded glass menu as context actions."""
+        from .context_menu import Entry, Menu, Target
+
+        if not control.enabled or not control.binding.valid():
+            return False
+        rows = []
+        for value, label in control.options["items"][:63]:
+
+            def apply(target, ctx, selected=value):
+                before = control.binding.read()
+                try:
+                    control.binding.write(selected)
+                    control.binding.commit(before, control.binding.read())
+                except Exception:
+                    if control.binding.valid():
+                        control.binding.write(before)
+                    raise
+
+            rows.append(
+                Entry(
+                    str(value),
+                    label,
+                    apply,
+                    checked=lambda t, c, v=value: control.binding.read() == v,
+                )
+            )
+        if not rows:
+            return False
+        self.cancel()
+        target = Target(
+            control.key,
+            binding=control.binding,
+            valid=lambda: self.visible
+            and self.controls.get(control.key) is control
+            and control.enabled
+            and control.binding.valid(),
+        )
+        self.context_menu = Menu(
+            target,
+            rows,
+            control.rect[:2],
+            clip,
+            context=context,
+            on_tip=self._tooltip_wake,
+            on_error=lambda error: setattr(self, "menu_error", str(error)),
+        )
+        self.context_menu.motion.bind(
+            (*self._animation_parents, self.animation, control.motion.settings),
+            self._wake_motion,
+        )
+        self.context_menu.motion.pulse("reveal", 0.12)
+        return True
+
+    def _bind_shortcut(self, control, target, context, clip):
+        registry = self.shortcut_registry
+        if registry is None or control.kind not in {"enum", "button"}:
+            return None
+        shortcut_key = control.options.get("shortcut_key")
+        if shortcut_key is None and control.kind == "enum":
+            from .context_paths import property_path
+
+            source = getattr(control.binding, "context", None)
+            path = property_path(source, context) if source is not None else None
+            shortcut_key = "enum:" + path if path else None
+        command = self.shortcut_namespace + ":" + (shortcut_key or control.key)
+        scene = context.scene.as_pointer() if context.scene else None
+
+        def run(ctx, event):
+            if control.kind == "enum":
+                result = self.open_enum_menu(control, clip, ctx)
+            else:
+                result = control.action()
+            if getattr(ctx, "area", None):
+                for region in ctx.area.regions:
+                    region.tag_redraw()
+            return result
+
+        registry.bind(
+            command,
+            context,
+            run,
+            valid=lambda ctx: target.valid()
+            and control.enabled
+            and (ctx.scene.as_pointer() if ctx.scene else None) == scene,
+        )
+        return command
+
+    def bind_shortcuts(self, context, clip):
+        """Call after rebuilding/arranging a host canvas, outside painting."""
+        from .context_menu import Target
+
+        if self.shortcut_registry is None:
+            return
+        for control in self.visible_controls(clip):
+
+            def valid(c=control):
+                return (
+                    self.visible
+                    and self.controls.get(c.key) is c
+                    and c.enabled
+                    and (c.binding is None or c.binding.valid())
+                )
+
+            self._bind_shortcut(
+                control, Target(control.key, valid=valid), context, clip
+            )
+
     def open_context(
         self, control, x, y, clip, *, context=None, measure=None, overlay=None
     ):
@@ -467,7 +584,26 @@ class Canvas(Group):
                 or self.context_provider
                 or default_entries
             )
-            rows = provider(target, context)
+            from itertools import islice
+
+            rows = list(islice(provider(target, context), Menu.limit))
+            if self.shortcut_registry is not None:
+                command = self._bind_shortcut(control, target, context, clip)
+                routed = (
+                    self.shortcut_registry.entry(command, context) if command else None
+                )
+                if routed is not None:
+                    if control.kind == "enum":
+                        rows.insert(
+                            0,
+                            replace(
+                                routed, label="Shortcut to Open Menu", divider=True
+                            ),
+                        )
+                    elif not any(
+                        r.key == "SHORTCUT" and r.enabled is not False for r in rows
+                    ):
+                        rows = [r for r in rows if r.key != "SHORTCUT"] + [routed]
             # Empty providers deliberately preserve Blender's outside/unsupported path.
             from itertools import islice
 

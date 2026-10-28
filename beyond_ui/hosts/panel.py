@@ -29,6 +29,7 @@ class PanelHost:
         self.font = -1
         self.reason = "Not started"
         self.menu_adapter_reason = "Not started"
+        self.menu_context_reason = "Not started"
         self.closed = False
 
     def start(self):
@@ -48,6 +49,13 @@ class PanelHost:
         # Admission hashes once at host startup, never on the first menu paint.
         menu_native.api()
         self.menu_adapter_reason = menu_native.reason()
+        from . import menu_context
+
+        try:
+            menu_context.api()
+            self.menu_context_reason = ""
+        except (RuntimeError, OSError, ValueError) as error:
+            self.menu_context_reason = str(error)
 
         try:
             self.font = Fonts()

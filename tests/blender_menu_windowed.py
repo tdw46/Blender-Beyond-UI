@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from beyond_ui import Canvas, MenuEntry, Shortcut
+from beyond_ui import Canvas, MenuEntry, Shortcut, ShortcutRegistry
 from beyond_ui.bindings import rna_binding
 from beyond_ui.context_menu import default_entries
 from beyond_ui.context_shortcuts import Action
@@ -19,6 +19,8 @@ spec = importlib.util.spec_from_file_location("menu_demo", ROOT / "examples/demo
 demo = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(demo)
 called = []
+registry = ShortcutRegistry("windowed-menu-fixture")
+registry.register()
 
 
 def provider(target, context):
@@ -47,11 +49,20 @@ def provider(target, context):
 
 
 def build(key):
-    canvas = Canvas(context_provider=provider, menu_commit=called.append)
+    canvas = Canvas(
+        context_provider=provider, menu_commit=called.append, shortcut_registry=registry
+    )
     canvas.number(
         "value",
         "Resolution",
         rna_binding(lambda: bpy.context.scene.render, "resolution_percentage"),
+    )
+    canvas.enum(
+        "rotation",
+        "Rotation",
+        rna_binding(lambda: bpy.context.active_object, "rotation_mode"),
+        items=(("XYZ", "XYZ"), ("ZYX", "ZYX")),
+        shortcut_key="rotation",
     )
     for i in range(12):
         canvas.label(str(i), "Menu fixture space")
@@ -87,6 +98,7 @@ def emit(kind, value="PRESS", outside=False, logical=None, **mods):
 
 def finish(passed, error=""):
     try:
+        registry.close()
         demo.unregister()
         assert demo._host is None
     except Exception:
@@ -252,6 +264,51 @@ def tick():
                 ).remove(None, bpy.context)
             state["checks"].append(
                 "real window keyboard mode selection and capture persist a working shortcut, invokes outside canvas, and removes it"
+            )
+            record, canvas = current()
+            with bpy.context.temp_override(window=window, area=area, region=region):
+                canvas.bind_shortcuts(bpy.context, (0, 0, canvas._width, canvas.height))
+                Action(
+                    registry.idname,
+                    {"command": "canvas:rotation"},
+                    bpy.context,
+                    keymap="Window",
+                ).capture(
+                    None,
+                    bpy.context,
+                    type(
+                        "Event",
+                        (),
+                        {
+                            "type": "F18",
+                            "value": "PRESS",
+                            "ctrl": True,
+                            "alt": True,
+                            "shift": True,
+                        },
+                    )(),
+                )
+            emit("F18", outside=True, ctrl=True, alt=True, shift=True)
+            emit("F18", "RELEASE", outside=True, ctrl=True, alt=True, shift=True)
+        elif stage == 20:
+            _, canvas = current()
+            assert canvas.context_menu is not None, (
+                "Custom popup shortcut did not dispatch"
+            )
+            assert canvas.context_menu.target.key == "rotation"
+            emit("DOWN_ARROW")
+            emit("RET")
+        elif stage == 21:
+            assert bpy.context.active_object.rotation_mode == "ZYX"
+            with bpy.context.temp_override(window=window, area=area, region=region):
+                Action(
+                    registry.idname,
+                    {"command": "canvas:rotation"},
+                    bpy.context,
+                    keymap="Window",
+                ).remove(None, bpy.context)
+            state["checks"].append(
+                "actual F18 window event reopens custom enum popup and keyboard selection commits"
             )
             finish(True)
             return None

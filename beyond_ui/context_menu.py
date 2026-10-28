@@ -66,6 +66,7 @@ class Entry:
     capture_options: object = None  # on-demand alternate capture modes
     capture_mouse: bool = False
     checked: object = False  # prepared on open/input, never read from paint
+    field: object = None  # context_edit.Field
 
 
 @dataclass
@@ -77,6 +78,7 @@ class Page:
     offset: int = 0
     title: str = ""
     checked: tuple = ()
+    values: tuple = ()
 
 
 def inside(rect, x, y):
@@ -109,6 +111,7 @@ class Menu:
         self.on_error = on_error or (lambda error: None)
         self.motion = Motion()
         self.parents = []
+        self.editor = None
         self.capture_row = None
         self.capture_picker = self.capture_return = None
         self.held_keys = set()
@@ -160,6 +163,7 @@ class Menu:
             rect,
             title=title,
             checked=tuple(self._checked(row, context) for row in rows),
+            values=tuple(self._value(row, context) for row in rows),
         )
 
     def _enabled(self, row, context):
@@ -182,6 +186,16 @@ class Menu:
             )
         except (AttributeError, ReferenceError, RuntimeError, TypeError):
             return False
+
+    def _value(self, row, context):
+        if row.field is None:
+            return ""
+        try:
+            return row.field.format(row.field.read(self.target, context), context)[
+                :4096
+            ]
+        except (AttributeError, ReferenceError, RuntimeError, TypeError):
+            return "Unavailable"
 
     def _error(self, error):
         self.error = str(error)
@@ -209,6 +223,7 @@ class Menu:
             self._enabled(row, context) for row in self.page.rows
         )
         self.page.checked = tuple(self._checked(row, context) for row in self.page.rows)
+        self.page.values = tuple(self._value(row, context) for row in self.page.rows)
         return True
 
     @property
@@ -316,6 +331,7 @@ class Menu:
         self.motion.clear()
         self.parents.clear()
         self.held_keys.clear()
+        self.editor = None
         self.capture_row = None
         self.capture_picker = self.capture_return = None
 
@@ -392,7 +408,13 @@ class Menu:
             self.back()
             return
         try:
-            if row.capture is not None:
+            if row.field is not None:
+                from .context_edit import Editor
+
+                self.editor = Editor(row, index, self.target, context)
+                self.page.highlight = index
+                self.motion.pulse(("row", index), 0.12)
+            elif row.capture is not None:
                 self.start_capture(row, context)
             elif row.children is not None:
                 if len(self.parents) >= self.depth_limit:
@@ -438,6 +460,56 @@ class Menu:
             self.held_keys.discard(kind)
         elif press and len(self.held_keys) < 64:
             self.held_keys.add(kind)
+        if self.editor is not None:
+            editor = self.editor
+            if not self._enabled(editor.row, context):
+                self.editor = None
+                return True
+            if press and kind in {"ESC", "RIGHTMOUSE"}:
+                self.editor = None
+                self.error = None
+                return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
+            if press and kind in {"RET", "NUMPAD_ENTER"}:
+                try:
+                    editor.row.field.apply(
+                        editor.text.text, editor.original, self.target, context
+                    )
+                    self.editor = None
+                    self.error = None
+                    self.refresh(context)
+                except Exception as error:
+                    editor.error = str(error)
+                    self._error(error)
+                    self.tip_pending = (
+                        editor.index,
+                        str(error),
+                        x,
+                        y,
+                        self.motion.clock(),
+                    )
+                    self.reveal_tip(context)
+                return True
+            row_rect = next(
+                (r for i, r, _ in self.visible_rows() if i == editor.index), None
+            )
+            if kind == "LEFTMOUSE" and event.value == "RELEASE":
+                editor.dragging = False
+                return inside(self.clip, x, y)
+            if press and kind == "LEFTMOUSE" and row_rect and inside(row_rect, x, y):
+                editor.pointer(event, x, row_rect, self.measure)
+                return True
+            if kind == "MOUSEMOVE" and editor.dragging and row_rect:
+                editor.pointer(event, x, row_rect, self.measure)
+                return True
+            if press and kind == "LEFTMOUSE":
+                self.editor = None
+                if not over:
+                    self.close()
+                return inside(self.clip, x, y)
+            if kind == "MOUSEMOVE":
+                return inside(self.clip, x, y)
+            editor.event(event, getattr(context, "window_manager", None))
+            return True
         if self.capture_row is not None:
             hit = next((i for i, r, _ in self.visible_rows() if inside(r, x, y)), None)
             if press and kind in {"ESC", "RIGHTMOUSE"}:

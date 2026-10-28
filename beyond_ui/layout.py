@@ -224,7 +224,7 @@ class Layout:
                 return self.props_enum(data, property)
             items = tuple(
                 (item.identifier, self._text(item.name))
-                for item in meta.enum_items
+                for item in self._enum_items(data, property)
                 if item.identifier
             )
             if expand:
@@ -233,6 +233,11 @@ class Layout:
         if meta.type == "POINTER":
             raise UnsupportedControl("prop pointer picker")
         raise UnsupportedControl(f"prop {meta.type}")
+
+    def _enum_items(self, data, property):
+        from .context_enums import items
+
+        return items(data, property, self.context)
 
     def prop_enum(
         self,
@@ -249,7 +254,14 @@ class Layout:
         source = self._binding(data, property)
         source.context.enum_value = value
         flag = getattr(meta, "is_enum_flag", False)
-        item = meta.enum_items.get(value)
+        item = (
+            None
+            if text
+            else next(
+                (i for i in self._enum_items(data, property) if i.identifier == value),
+                None,
+            )
+        )
         label = self._text(text or (item.name if item else value), text_ctxt, translate)
 
         def get():
@@ -285,9 +297,11 @@ class Layout:
 
     def props_enum(self, data, property):
         row = self.row()
-        for item in data.bl_rna.properties[property].enum_items:
+        for item in self._enum_items(data, property):
             if item.identifier:
-                row.prop_enum(data, property, item.identifier)
+                row.prop_enum(
+                    data, property, item.identifier, text=item.name or item.identifier
+                )
 
     def prop_menu_enum(self, data, property, **kwargs):
         return self.prop(data, property, **kwargs)
@@ -316,7 +330,8 @@ class Layout:
         label = self._text(text or function.get_rna_type().name, text_ctxt, translate)
         context = self.context
         invocation = self.operator_context
-        pointers = dict(self._context_pointers)
+        pointers = {**self._context_pointers, **self._context_strings}
+        from .hosts.menu_context import override
 
         def execute():
             if context is None:
@@ -325,7 +340,7 @@ class Layout:
                 )
             # Operator properties are passed intact. No active-button operators
             # are synthesized against a native widget the user did not click.
-            with context.temp_override(**pointers):
+            with override(context, pointers):
                 if function.poll():
                     return function(invocation, **vars(properties))
             return {"CANCELLED"}
@@ -353,6 +368,8 @@ class Layout:
         self._context_pointers[name] = data
 
     def context_string_set(self, name, value):
+        if not isinstance(value, str):
+            raise TypeError("Context strings must be strings")
         self._context_strings[name] = value
 
     def link(

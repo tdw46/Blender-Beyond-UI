@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "native string scope preserves Unicode and inherited keys; nested/exception exit restores context and releases stores",
+    "contributed and authored operators retain native string scope; dynamic operator enums see snapshotted properties; scratch config cleanup preserves preferences",
+    "dynamic Python enum callbacks receive exact context and updated items; repeated native temporary arrays released",
+    "dynamic field menus reject vanished choices; custom Layout.prop uses current callback items"
+  ]
+}
