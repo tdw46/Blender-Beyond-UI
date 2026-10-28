@@ -100,6 +100,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
             )
 
     count = 0
+    animation_colors = None
     numeric_states = {}  # Resolve shared scene/view settings once per visible host paint.
     with gpu_state():
         # Geometry is clipped via scissor rectangle as well as logical culling.
@@ -128,6 +129,8 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     "button",
                     "number",
                     "event",
+                    "pointer",
+                    "decorator",
                     "text",
                     "enum",
                     "color",
@@ -137,10 +140,20 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         "body", control.rect, circular=(abs(c - d) < 8)
                     )
             with (
+                typography.motion_text(font, control.motion),
                 control.motion.deform("reveal", r),
                 nullcontext() if kind == "toggle" else control.motion.deform("body", r),
             ):
-                if kind in {"button", "number", "event", "text", "enum", "color"}:
+                if kind in {
+                    "button",
+                    "number",
+                    "event",
+                    "pointer",
+                    "decorator",
+                    "text",
+                    "enum",
+                    "color",
+                }:
                     surface(
                         r,
                         palette["selected"]
@@ -166,6 +179,43 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         palette=palette,
                         backdrop=backdrop,
                     )
+                elif kind == "pointer":
+                    label = control.options["pointer_field"].label()
+                    text(
+                        f"{control.label}  {label}",
+                        (a, b, max(0, c - 22 * scale), d),
+                        ink,
+                    )
+                    style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
+                elif kind == "decorator":
+                    model = control.options["decorator"]
+                    if model is not None:
+                        state = model.state()
+                        if animation_colors is None:
+                            animation_colors = style.animation_palette(
+                                preferences, reference=t.palette == "REFERENCE"
+                            )
+                        colors = animation_colors
+                        color = (
+                            colors.get(state, palette["muted"])
+                            if control.enabled
+                            else palette["muted"]
+                        )
+                        glyph = {
+                            "EMPTY": "●",
+                            "KEYED": "◆",
+                            "CHANGED": "◆",
+                            "ANIMATED": "◇",
+                            "DRIVEN": "◉",
+                            "UNAVAILABLE": "○",
+                        }[state]
+                        style.icon(
+                            glyph,
+                            a + c / 2,
+                            b + d / 2,
+                            (4 if state == "EMPTY" else 12) * scale,
+                            color,
+                        )
                 elif kind == "event":
                     label = (
                         control.options["event_field"].format(value)
@@ -254,11 +304,16 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         control.label, r, ink, control.options.get("text_role", "body")
                     )
             count += 1
+        if canvas.overlay or canvas.context_menu is not None:
+            typography.flush_text(font)
         if canvas.overlay and "widget" in canvas.overlay:
             r = mapped(canvas.overlay["rect"])
-            surface(r, palette["overlay"])
             widget = canvas.overlay["widget"]
-            with widget.motion.deform("reveal", r):
+            with (
+                typography.motion_text(font, widget.motion),
+                widget.motion.deform("reveal", r),
+            ):
+                surface(r, palette["overlay"])
                 widget.paint(r, font, palette, backdrop=backdrop)
         elif canvas.overlay:
             motion = canvas.active.motion
@@ -271,6 +326,8 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         surface(target, palette["overlay"])
                         text(label, target, palette["text"])
         if canvas.context_menu is not None and not canvas.context_menu.closed:
+            if canvas.overlay:
+                typography.flush_text(font)
             from .menus import context_menu
 
             context_menu(

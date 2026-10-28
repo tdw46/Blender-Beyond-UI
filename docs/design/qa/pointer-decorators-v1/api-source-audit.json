@@ -1,0 +1,68 @@
+{
+  "v4.2.0": {
+    "source/blender/makesrna/intern/rna_ui_api.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_ui_api.cc",
+      "sha256": "2ca0ada7be7641ccd485cfdf919f350c5d6a1f825c4c388a8d1f6be7be364b50"
+    },
+    "source/blender/editors/interface/interface.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/interface.cc",
+      "sha256": "2a1bcb2e0cdfb29268cbbffb492f10ade6e05214396b68cd27a7c8417fd4ff15"
+    },
+    "source/blender/editors/interface/interface_layout.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/interface_layout.cc",
+      "sha256": "4da24523602f9a7c0d999d4c580acda5faecc64686867db63da40755655f91cf"
+    },
+    "source/blender/makesrna/intern/rna_rna.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_rna.cc",
+      "sha256": "c007683914b414933a475a1e080e32be091056b3ac9a3343cdd593163b7df5c4"
+    },
+    "source/blender/editors/interface/interface_anim.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/interface_anim.cc",
+      "sha256": "d166ffe85c976933c44473c27c0445fa5c1e0d08c04f98bad94537b855d24115"
+    }
+  },
+  "ec6e62d40fa9": {
+    "source/blender/makesrna/intern/rna_ui_api.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_ui_api.cc",
+      "sha256": "53ff057c9948263c1a7338653f6052d14e53999084f21952741f784e1d00a20e"
+    },
+    "source/blender/editors/interface/interface.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/interface.cc",
+      "sha256": "c832392c7fba2bb5c875fe6eb9db23a2534193372cef42bca71a428b2b13057c"
+    },
+    "source/blender/editors/interface/interface_layout.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/interface_layout.cc",
+      "sha256": "fcfbafcc58c90c407e3e2b93c414a6e02f470dea39b41c03fe99879b5fa082b7"
+    },
+    "source/blender/makesrna/intern/rna_rna.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_rna.cc",
+      "sha256": "a2dfbced680576b577a61c3ee377352e387b12c349071b7344217934c265d6a2"
+    },
+    "source/blender/editors/interface/interface_anim.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/interface_anim.cc",
+      "sha256": "033fa615a93d789359927d3221f2c66d1b8008fdcd99727ea680c7c0cdebfdbd"
+    }
+  },
+  "d13f752e3b9c": {
+    "source/blender/makesrna/intern/rna_ui_api.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_ui_api.cc",
+      "sha256": "238b66bbb5063d1a18452471470eabb726ce96d3083664952c6054d2356e3b62"
+    },
+    "source/blender/editors/interface/interface.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/interface.cc",
+      "sha256": "ca50ebb65d67dc8bd6b5fdfab091f3c8b63aeb661f290ab3ee19a0b8819cf3ca"
+    },
+    "source/blender/editors/interface/interface_layout.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/interface_layout.cc",
+      "sha256": "da71c05f91c604220d9f96d6283be93ea96bfa2abad683fca288c0d68dafed7b"
+    },
+    "source/blender/makesrna/intern/rna_rna.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_rna.cc",
+      "sha256": "7e03739d2d78790bbdca47864538e5c30aefdb024392d6b15b40ded3215624ab"
+    },
+    "source/blender/editors/interface/interface_anim.cc": {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/interface_anim.cc",
+      "sha256": "69877a495f6c922e0b7c9cc4eb8df7ef7cb99fd81dba9c05e58c1b49068cadb4"
+    }
+  }
+}

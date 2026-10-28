@@ -446,3 +446,50 @@ Test-only calls to BLF batch begin/end are source/executable admitted for the tw
 exact installed builds. Production adds no private ABI calls. The audit includes
 official 4.2.0 and exact 5.1.2/5.2.2 font/Python API sources; 4.2 execution and
 other platforms remain open. Historical v1-v5 captures are untouched.
+
+## Pointer pickers and animation decorators — 2026-10-28
+
+[QA v1](design/qa/pointer-decorators-v1/index.html) records custom pointer fields,
+filtered virtual popovers and empty/keyed/changed/animated/driven decorators.
+Public-RNA checks and real window-input fixtures pass on macOS arm64 Blender
+5.1.2 and 5.2.2. Cases include camera/custom polls, parent-cycle exclusion,
+exact candidate/property context ownership, stale/deleted/renamed candidates,
+commit-time poll/membership changes, failed pointer-commit rollback, read-only
+pointers, key insertion/deletion, driver state, action replacement, automatic
+split slots, opt-out and host animation disable/teardown. Numeric, event,
+general runtime and existing menu/event-window regressions pass on both.
+
+74 pure tests, Ruff, compilation, distribution build and the member-by-member
+ledger check pass. The ledger now has 40 partial members out of 137; none are
+marked reference-matched. Blender 4.2 execution, other platforms and all listed
+pointer/animation variants remain open. See
+[scope and integration](POINTERS_AND_DECORATORS.md).
+
+Each runtime capture compares 100 actual animation frames with native BLF
+batching enabled and disabled: all are byte-identical after font/menu warmup.
+The checks exposed underlying field text flushing after a settled popover and
+body/title text escaping finite transforms. Owned text now drains before
+layered overlays, and finite-motion text is submitted within its transform.
+Settled fields retain batching; popup shell and contents animate together.
+Per-control popup strength/disable survives subsequent input (unit regression).
+
+The 640×560 workload has two pointers, five scalar properties, five decorators
+and optionally a 28-row virtualized picker. Each measurement uses 20 warmups and
+100 CPU paint submissions, excluding framebuffer readback. At UI scale 1:
+
+| Runtime | Workload | Median ms | p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | fields and decorators | 0.388 | 0.467 |
+| 5.2.2 LTS | open picker | 0.494 | 0.556 |
+| 5.1.2 | fields and decorators | 0.366 | 0.421 |
+| 5.1.2 | open picker | 0.475 | 0.525 |
+
+The entire animation capture retains one backdrop production, one strong blur,
+five offscreens, unchanged font handles/shader/batch identities and one layout.
+No per-frame capture/blur or permanent animation timer is introduced. These
+small-workload measurements are a baseline for the new controls, not proof of
+source-equivalent dense-scene speed, GPU completion time or input latency.
+
+The first decorator visuals reuse existing retained BVT-family geometry. No new
+generated-reference approval is claimed. Exact theme/DPI/motion fidelity remains
+Tyler's QA gate; immutable earlier reference and comparison galleries are intact.

@@ -74,6 +74,8 @@ class Group:
             "toggle",
             "number",
             "event",
+            "pointer",
+            "decorator",
             "text",
             "enum",
             "color",
@@ -215,8 +217,12 @@ class Canvas(Group):
                     else 1.0
                 )
 
-    def _bind_motion(self, motion):
-        motion.bind((*self._animation_parents, self.animation), self._wake_motion)
+    def _bind_motion(self, motion, owner=None):
+        parents = (*self._animation_parents, self.animation)
+        motion.bind(
+            (*parents, owner.motion.settings) if owner else parents,
+            self._wake_motion,
+        )
 
     def bind_animation(self, parents=(), wake=None):
         self._animation_parents = tuple(parents)
@@ -259,7 +265,7 @@ class Canvas(Group):
         if self.overlay and "widget" in self.overlay:
             widget = self.overlay["widget"]
             motion = widget.motion
-            self._bind_motion(motion)
+            self._bind_motion(motion, self.overlay.get("owner"))
             a, b, w, h = self.overlay["rect"]
             mx, my = (
                 (x - a) * widget.width / max(1, w),
@@ -292,6 +298,11 @@ class Canvas(Group):
         self._dirty = True
         for control in self.controls.values():
             control.motion.clear()
+            if control.kind == "decorator" and control.options["decorator"] is not None:
+                try:
+                    control.options["decorator"].refresh()
+                except (ReferenceError, RuntimeError):
+                    pass
 
     def arrange(self, width):
         width = max(1.0, float(width))
@@ -300,6 +311,17 @@ class Canvas(Group):
         t = self.theme
 
         heights = {}
+
+        def row_widths(node, width):
+            usable = max(0.0, width - max(0, len(node.children) - 1) * t.gap)
+            fixed = [
+                c.options.get("width") if isinstance(c, Control) else None
+                for c in node.children
+            ]
+            total = sum(v for v in fixed if v is not None)
+            factor = min(1.0, usable / total) if total else 1.0
+            flex = max(0.0, usable - total) / max(1, fixed.count(None))
+            return [v * factor if v is not None else flex for v in fixed]
 
         def height(node, available):
             cache_key = (id(node), available)
@@ -322,16 +344,12 @@ class Canvas(Group):
                     node.options.get("height", default_height),
                 )
             inner = max(0.0, available - (2 * t.padding if node.kind == "box" else 0.0))
-            child_width = (
-                max(
-                    0.0,
-                    (inner - max(0, len(node.children) - 1) * t.gap)
-                    / max(1, len(node.children)),
-                )
+            widths = (
+                row_widths(node, inner)
                 if node.kind == "row"
-                else inner
+                else [inner] * len(node.children)
             )
-            values = [height(c, child_width) for c in node.children]
+            values = [height(c, width) for c, width in zip(node.children, widths)]
             h = (
                 max(values, default=0.0)
                 if node.kind == "row"
@@ -341,6 +359,8 @@ class Canvas(Group):
             return heights[cache_key]
 
         def place(node, x, y, w):
+            if isinstance(node, Control) and "width" in node.options:
+                w = min(w, node.options["width"])
             h = height(node, w)
             node.rect = (x, y, max(0.0, w), h)
             if isinstance(node, Control):
@@ -350,13 +370,9 @@ class Canvas(Group):
                 y += t.padding
                 w = max(0.0, w - 2 * t.padding)
             if node.kind == "row":
-                cell = max(
-                    0.0,
-                    (w - max(0, len(node.children) - 1) * t.gap)
-                    / max(1, len(node.children)),
-                )
-                for i, child in enumerate(node.children):
-                    place(child, x + i * (cell + t.gap), y, cell)
+                for child, cell in zip(node.children, row_widths(node, w)):
+                    place(child, x, y, cell)
+                    x += cell + t.gap
             else:
                 for child in node.children:
                     place(child, x, y, w)
@@ -834,16 +850,17 @@ class Canvas(Group):
                 self.menu_error = str(error)
             return True
         previous = self.overlay
-        used = self._event(event, x, y, clip, clipboard=clipboard)
+        used = self._event(event, x, y, clip, clipboard=clipboard, context=context)
         if self.keyboard_focus and not self.keyboard_focus.options["widget"].focused:
             self.keyboard_focus = None
         if self.overlay is not previous and self.overlay and "widget" in self.overlay:
             motion = self.overlay["widget"].motion
-            self._bind_motion(motion)
+            owner = self.overlay.get("owner")
+            self._bind_motion(motion, owner)
             motion.pulse("reveal", 0.12)
         return used
 
-    def _event(self, event, x, y, clip, *, clipboard=None):
+    def _event(self, event, x, y, clip, *, clipboard=None, context=None):
         """Return True only for consumed events; coordinates are top-down logical px.
 
         event has type/value/unicode/shift/ctrl/oskey fields (Blender Event works).
@@ -1023,6 +1040,35 @@ class Canvas(Group):
         if control.kind == "button":
             if control.action:
                 control.action()
+        elif control.kind == "pointer":
+            try:
+                picker = control.options["pointer_field"].picker(self, control)
+                picker.glass_blur = 0.7
+                scale = min(1.0, clip[2] / picker.width, clip[3] / picker.height)
+                w, h = picker.width * scale, picker.height * scale
+                self.overlay = {
+                    "widget": picker,
+                    "owner": control,
+                    "rect": (
+                        clip[0] + (clip[2] - w) / 2,
+                        clip[1] + (clip[3] - h) / 2,
+                        w,
+                        h,
+                    ),
+                }
+                self.menu_error = None
+            except (ReferenceError, RuntimeError, ValueError) as error:
+                self.menu_error = str(error)
+        elif control.kind == "decorator":
+            model = control.options["decorator"]
+            if model is not None:
+                try:
+                    if model.state() == "DRIVEN":
+                        self.open_context(control, x, y, clip, context=context)
+                    else:
+                        model.click(self, control, context)
+                except (ReferenceError, RuntimeError, ValueError) as error:
+                    self.menu_error = str(error)
         elif control.kind == "toggle":
             self._begin(control)
             self._write(not control.binding.read())

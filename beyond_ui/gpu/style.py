@@ -175,6 +175,41 @@ def _theme_palette(signature, missing=()):
     return MappingProxyType(p)
 
 
+def animation_palette(preferences, *, reference=False):
+    """Central animation-state colors; missing theme data remains observable."""
+    palette = theme_palette(preferences, reference=reference)
+    try:
+        state = preferences.themes[0].user_interface.wcol_state
+    except (AttributeError, IndexError, TypeError, ReferenceError):
+        state = None
+    colors, missing = [palette["muted"]], []
+    for field in ("inner_key", "inner_anim", "inner_driven", "inner_changed"):
+        try:
+            value = (
+                tuple(getattr(state, field)) if not reference else palette["accent"][:3]
+            )
+            if len(value) < 3 or not all(math.isfinite(c) for c in value):
+                raise ValueError("Invalid theme state color")
+        except (AttributeError, TypeError, ReferenceError, ValueError):
+            missing.append("wcol_state." + field)
+            value = palette["accent"][:3]
+        colors.append(tuple(value[:3]) + (1.0,))
+    return _animation_palette(tuple(colors), tuple(missing), reference)
+
+
+@lru_cache(maxsize=8)
+def _animation_palette(colors, missing=(), reference=False):
+    from types import MappingProxyType
+
+    return MappingProxyType(
+        {
+            **dict(zip(("EMPTY", "KEYED", "ANIMATED", "DRIVEN", "CHANGED"), colors)),
+            "fallback_roles": missing,
+            "source": "reference" if reference else "mixed" if missing else "blender",
+        }
+    )
+
+
 def icon(glyph, x, y, size, color):
     """Centered vector icons, independent of a font's bearings and baseline."""
     global _icon_shader

@@ -5,6 +5,7 @@ with the host. A plain integer remains supported for host-supplied legacy fonts.
 """
 
 from pathlib import Path
+from contextlib import contextmanager
 
 _owners = 0
 
@@ -52,3 +53,36 @@ class Fonts(int):
 
 def face(font, role="body"):
     return getattr(font, "title", int(font)) if role == "title" else int(font)
+
+
+@contextmanager
+def motion_text(font, motion):
+    """Submit owned fonts inside finite transforms; retain batching at rest."""
+    import blf
+
+    moving = bool(motion.tracks) and bool(motion.strength)
+    fonts = {face(font), face(font, "title")} if moving else ()
+    for handle in fonts:
+        blf.rotation(handle, 0.0)
+        blf.enable(handle, blf.ROTATION)
+        blf.position(handle, 0, 0, 0)
+        blf.draw(handle, " ")
+    try:
+        yield
+    finally:
+        for handle in fonts:
+            blf.disable(handle, blf.ROTATION)
+
+
+def flush_text(font):
+    """Finish underlying owned text before painting an overlay above it."""
+    import blf
+
+    for handle in {face(font), face(font, "title")}:
+        blf.rotation(handle, 0.0)
+        blf.enable(handle, blf.ROTATION)
+        try:
+            blf.position(handle, 0, 0, 0)
+            blf.draw(handle, " ")
+        finally:
+            blf.disable(handle, blf.ROTATION)

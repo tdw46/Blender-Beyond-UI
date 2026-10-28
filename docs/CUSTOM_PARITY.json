@@ -257,16 +257,16 @@
     "prop": {
       "kind": "method",
       "status": "partial",
-      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, pointer props, remaining event variants, decorators, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md.",
+      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, remaining pointer/decorator and event variants, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md. Custom ID pointer popovers support camera/parent/registered polls or explicit PointerItems policies, stale candidate validation, clear and host commit rollback. See docs/POINTERS_AND_DECORATORS.md.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/event-props-v1/capture.json"
+      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/capture.json"
     },
     "prop_decorator": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom empty/keyed/changed/animated/driven states, active theme animation roles, exact component key insertion/deletion and owner-aware right-click menus. Active Action slots/channelbags and legacy fcurves fallback; requires host undo callback. NLA/layer blending, all standalone array layouts, index=-2, full animation semantics and generated-reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/capture.json"
     },
     "prop_enum": {
       "kind": "method",
@@ -955,16 +955,16 @@
     "use_property_decorate": {
       "kind": "property",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/runtime-52.json"
     },
     "use_property_split": {
       "kind": "property",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/runtime-52.json"
     }
   },
   "cross_cutting_gates": {

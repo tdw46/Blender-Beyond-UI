@@ -1,0 +1,4 @@
+POINTER_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Real click opens shared strong-glass picker; End/Enter selects exact ID with one host commit', 'Candidate row context, Escape dismissal and exact component decorator insert/delete/context menu', 'Host disable/invalidation settles all motion and teardown releases ownership']}
+00:10.195  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

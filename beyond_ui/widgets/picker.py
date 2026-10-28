@@ -224,7 +224,9 @@ class DataPicker(Widget):
         p = Painter(
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
         )
-        p.card("Data Picker")
+        p.card(
+            getattr(self, "title", "Data Picker"), blur=getattr(self, "glass_blur", 0.4)
+        )
         p.surface(PICKER["search"], "input", border=1)
         p.text(
             (76, 74, 510, 57),
@@ -292,5 +294,14 @@ class DataPicker(Widget):
         p.surface(PICKER["toolbar"], "field", 8)
         for x in (211, 417):
             p.line(((x, 394), (x, 430)), palette["toolbar_divider"], p.scale)
-        for r, icon in zip(PICKER["actions"], ("+", "duplicate", "unlink")):
-            p.icon(icon, r, 31)
+        for r, icon, action in zip(
+            PICKER["actions"], ("+", "duplicate", "unlink"), self.actions
+        ):
+            p.icon(
+                icon,
+                r,
+                31,
+                role="muted"
+                if getattr(self, "disabled_actions", False) and action is None
+                else "text",
+            )

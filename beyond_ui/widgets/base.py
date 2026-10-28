@@ -96,7 +96,7 @@ class Painter:
             self.motion.region(key, r, circular=circular)
         return self.motion.deform(key, self.map(r))
 
-    def card(self, title, *, title_inset=67):
+    def card(self, title, *, title_inset=67, blur=0.4):
         from ..gpu import glass
 
         r = (0, 0, self.width, self.height)
@@ -106,6 +106,7 @@ class Painter:
             self.map(r),
             14 * self.scale,
             self.palette["surfaces"]["card"][0],
+            blur=blur,
         ):
             self.surface(r, "card", 14, 1)
         self.surface((1, 1, self.width - 2, 59), "header", 13, 0)

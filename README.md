@@ -94,6 +94,15 @@ and held-key chords, with owner validation and host-owned commit/rollback.
 [Event property QA](docs/design/qa/event-props-v1/index.html) ·
 [Supported semantics and open gaps](docs/EVENT_PROPERTIES.md)
 
+Pointer properties now open a custom searchable ID picker, with owner-checked
+selection and candidate right-click menus. Compact animation decorators show
+keyed, changed, animated and driven states beside supported properties.
+
+![Actual Blender pointer picker and decorator motion](docs/media/panels/pointer-decorators-v1.gif)
+
+[Pointer/decorator QA](docs/design/qa/pointer-decorators-v1/index.html) ·
+[Policies, host undo and remaining gaps](docs/POINTERS_AND_DECORATORS.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

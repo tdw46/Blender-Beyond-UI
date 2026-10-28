@@ -128,3 +128,25 @@ font symbol is used by production; the admitted batch symbols are test-only.
 The original BVT context-menu and Canvas deferred-text handling were re-inspected
 for ownership, clipping and retained glass behavior. User-requested animation
 coverage now includes every menu label/shortcut, including disabled and final rows.
+
+### Pointer fields and animation decorators
+
+Pointer popovers reuse the existing BVT-derived Data Picker, field chrome,
+shared glass and source springs. Candidate collections, poll decisions and undo
+remain host-owned. No BVT product binding was imported. The decorator uses the
+existing retained dot/diamond/ring vector geometry and active Blender
+`wcol_state` colors; new states remain pending generated-reference approval.
+
+[Official source audit](design/qa/pointer-decorators-v1/api-source-audit.json)
+records UILayout/RNA/interface/decorator sources at v4.2.0, ec6e62d40fa9 and
+d13f752e3b9c. `button_anim_decorate_cb` confirms keyed-value click deletion;
+installed public-RNA probes establish the exact Action-slot channelbag behavior
+and retained Python PointerProperty declaration metadata used here. Native
+pointer polls are not inferred from target type. The legacy fcurves path remains
+capability gated, with no change to the 4.2 compatibility floor.
+
+The existing exact-build, test-only BLF batch helper qualifies popup text under
+native batching. Production uses public zero-angle rotation for finite-motion
+text submission and drains underlying owned-font batches before overlays. The
+settled control path retains batching. The popup background also follows its
+reveal transform, and per-control motion settings persist across input events.

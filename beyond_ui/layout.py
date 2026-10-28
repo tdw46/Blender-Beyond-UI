@@ -34,12 +34,14 @@ class Layout:
         commit=None,
         state=None,
         source=None,
+        pointer_sources=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
         self.group = group if group is not None else self.canvas
         self.resolve = resolve
         self.source = source
+        self.pointer_sources = pointer_sources
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
@@ -74,6 +76,7 @@ class Layout:
             commit=self.commit,
             state=self.state,
             source=self.source,
+            pointer_sources=self.pointer_sources,
         )
         for name in (
             "_text_role",
@@ -170,7 +173,19 @@ class Layout:
         invert_checkbox=False,
         text_align="LEFT",
     ):
+        arguments = dict(locals())
+        arguments.pop("self")
         meta = data.bl_rna.properties[property]
+        if (
+            self.use_property_split
+            and self.use_property_decorate
+            and (index >= 0 or not getattr(meta, "is_array", False))
+        ):
+            row = self.row()
+            row.use_property_decorate = False
+            result = row.prop(**arguments)
+            row.prop_decorator(data, property, index=index)
+            return result
         subtype = (
             "NONE"
             if getattr(meta, "unit", "NONE") in {"AREA", "VOLUME"}
@@ -254,8 +269,65 @@ class Layout:
                 return self.props_enum(data, property)
             return self.group.enum(key, label, binding, items=items, **options)
         if meta.type == "POINTER":
-            raise UnsupportedControl("prop pointer picker")
+            from .pointer import PointerField
+            from .context_menu import default_entries
+
+            policy = (
+                self.pointer_sources(data, property) if self.pointer_sources else None
+            )
+            try:
+                field = PointerField(binding, policy)
+            except ValueError as error:
+                raise UnsupportedControl(str(error)) from error
+
+            def context_rows(target, context):
+                provider = self.canvas.context_provider
+                if callable(target.payload):
+                    return (
+                        *target.payload(target, context),
+                        *(provider(target, context) if provider else ()),
+                    )
+                entries = list((provider or default_entries)(target, context))
+                if field.allow_none and binding.valid():
+                    entries.insert(0, field.clear_entry())
+                return entries
+
+            return self.group.add(
+                "pointer",
+                key,
+                label,
+                binding=binding,
+                pointer_field=field,
+                context_menu=context_rows,
+                **options,
+            )
         raise UnsupportedControl(f"prop {meta.type}")
+
+    def prop_decorator(self, data, property, *, index=-1):
+        from .decorator import Decorator
+
+        binding = None
+        model = None
+        if data is not None and property:
+            meta = data.bl_rna.properties[property]
+            if index < -1 or (
+                index >= 0 and (not meta.is_array or index >= meta.array_length)
+            ):
+                raise ValueError("Decorator component index is outside the property")
+            if meta.is_animatable and getattr(data, "id_data", None) is not None:
+                binding = self._binding(data, property, None if index < 0 else index)
+                model = Decorator(binding, self.context)
+        return self.group.add(
+            "decorator",
+            self._key("decorator"),
+            "",
+            binding=binding,
+            decorator=model,
+            width=self.canvas.theme.row_height,
+            enabled=lambda: self.enabled
+            and model is not None
+            and model.editable(self.canvas),
+        )
 
     def _enum_items(self, data, property):
         from .context_enums import items

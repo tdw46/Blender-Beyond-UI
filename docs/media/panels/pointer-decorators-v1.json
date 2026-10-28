@@ -1,0 +1,5 @@
+{
+  "source": "Actual Blender 5.2.2 production frames; no generated pixels",
+  "capture": "../../design/qa/pointer-decorators-v1/capture.json",
+  "sha256": "d41391d06a3d38472a96c7c58cade2cb1326428848d4014f2f6e8926c63d62bc"
+}
