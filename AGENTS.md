@@ -48,6 +48,11 @@ requirements; neither may be traded away to satisfy the other.
   file/network I/O or repeated GPU resource creation in steady-state painting.
 - Share one cached backdrop capture/blur per host and revision. Never add a
   separate capture, blur or framebuffer readback for every control or frame.
+- Use the original BVT liquid-glass lens and stronger shared blur for menus and
+  tooltips by default. Plain alpha transparency that leaves underlying text
+  legible is not liquid glass and does not satisfy acceptance. Keep tint-only
+  fallback explicit for unavailable capabilities; QA previews must exercise the
+  real blur/refraction path over underlying UI.
 - Cull clipped and hidden controls before binding reads or drawing; virtualize
   long lists. Keep draw read-only and avoid full-data scans for visible rows.
 - Drive redraws from input, explicit invalidation and finite animation windows.

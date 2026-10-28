@@ -67,9 +67,19 @@ source is preserved, but there is no validated Windows or Linux binary in this
 repository. `tools/build_bridge.py` is an explicit developer build step, never a
 startup action. Binaries are checked against their package source and manifest.
 
-Glass is optional: pass `backdrop_revision=lambda context: meaningful_revision`
-to PanelHost. This borrows the completed host UI framebuffer. The default stays
-on the readable tint fallback; do not claim the fallback is blurred glass.
+PanelHost enables BVT liquid glass by default, sharing one retained backdrop
+across controls, menus and tooltips. Viewport draws and `Canvas.invalidate()`
+invalidate that source; springs do not. Pass
+`backdrop_revision=lambda context: meaningful_revision` when your host owns
+additional underlay changes. `glass_enabled=False` explicitly requests the tint
+fallback. Capability failures are exposed in the host record as `glass_error`;
+the fallback does not satisfy glass acceptance.
+
+For a host that already owns a completed GPU texture, call
+`gpu.glass.prepare_texture(key, revision, texture, region_rect)` then pass `key`
+as `backdrop` to `Canvas.paint()`. It uses the same retained Gaussian levels and
+refractive lens without CPU readback or native ABI. Call `glass.release(key)` on
+teardown. Keep the texture alive, and advance its revision when its content changes.
 `gpu.glass.draw(..., viewport_present=callback)` lets an extension supply its
 completed viewport presentation without coupling the library to its renderer.
 

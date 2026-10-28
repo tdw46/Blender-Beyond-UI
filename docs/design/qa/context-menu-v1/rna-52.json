@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "checks": [
+    "component reset/copy selected and explicit owner paths",
+    "copy selected rolls back after host transaction failure",
+    "keyframes and drivers use explicit data owner and host undo callback",
+    "read-only values remain readable; animation requires host undo",
+    "public button contributions preserve nested context, poll and operator properties; native button calls disabled",
+    "ramp stop and curve component bind exact RNA elements",
+    "expanded enum buttons retain property menu ownership",
+    "palette swatch property action and deletion identity validation",
+    "deleted RNA owner fails closed"
+  ]
+}

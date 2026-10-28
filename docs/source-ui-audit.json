@@ -8,5 +8,19 @@
     "VRM_ShoostCanvas.py": "d18cf2678bc51784126e4e0434df1c1d5d51dcfcb5c9f5cfd601fa59a6e2f3b7"
   },
   "contract": "docs/SOURCE_UI_CONTRACT.md",
-  "source_modified": false
+  "source_modified": false,
+  "context_menu_followup_date": "2026-10-28",
+  "context_menu_followup_files": {
+    "VRM_ShoostContextMenu.py": "0aec55c8d640ea4c9796e89941951e7333acd72298dc0161e44929f3cf98dd78",
+    "VRM_ShoostCanvas.py": "ab3dd110f4567d94d2d7ef24f0a638a91a8b934838ab80e8717b5ed13306cdf4",
+    "_custom_ui_components.py": "27a35fbf3d10e901e66d71daa68e084770bbf52f252dc4505dbe427b58065782",
+    "VRM_ShoostGlass.py": "06a776f70535ac8b5057819e39e97e144de462d1f57efc039b488c11ae698601"
+  },
+  "context_menu_followup_commit": "ec947ccefc44bd02ad2b175323fa4fc78d60ee4d",
+  "context_menu_followup_worktree_status": "",
+  "glass_function_ast_sha256": {
+    "_ensure_lens": "86478d2b01e03f2450e6d4206ad4759213915256fee2de65d93f89b72d51d208",
+    "_strong_blur": "54b5430c49b5297418e68ad7450153ed7018a055bbf4a30f2a5b76b917aafffe",
+    "lens": "a778a803520488991363d650494c78e9186f0b16d990166885328d93aa999e6a"
+  }
 }

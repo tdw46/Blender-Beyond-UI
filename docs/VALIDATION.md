@@ -9,7 +9,7 @@ unit tests, native forwarding or ordinary CI.
 
 ## Evidence
 
-- 36 pure Python tests pass: transactions/rollback, stale-owner rejection,
+- 45 pure Python tests pass: transactions/rollback, stale-owner rejection,
   retained geometry, clipped input, million-row virtualization, text/arithmetic,
   independent vendor namespaces, and custom color/curve/ramp/picker interactions.
 - Ruff parser/name-error checks pass. No claim of full static type validation.
@@ -97,3 +97,46 @@ All 12 earlier individual resting captures and all 75 frames of the eight-panel
 reference animation remain byte-identical. Real windowed input, animation idle,
 teardown and re-registration checks pass on both installed versions. This
 checkpoint does not grant visual acceptance or full context-menu/API parity.
+
+## Right-click menus and liquid glass — 2026-10-28
+
+[Menu QA and raw evidence](design/qa/context-menu-v1/index.html) records the shared
+contract: exact subtargets, scalar/array reset, selected-owner rollback,
+paths, keyframe/driver undo handoff, nested public callbacks and stale-owner
+rejection. Disposable windowed tests on both 5.1.2 and 5.2.2 pass real mouse and
+keyboard invocation, nested/back/shortcut execution, cancel-before-menu, outside
+pass-through, one-shot tooltip shutdown, default liquid-glass admission, finite
+motion and teardown. Existing background/windowed suites also pass on both.
+
+The initial preview incorrectly exercised tint-only fallback. The corrected host
+default and menu painter use BVT's original lens, 0.7 strong blur and untinted
+refractive body. `_ensure_lens`, `_strong_blur` and `lens` match the audited source
+AST exactly. `prepare_texture` supports host-owned GPU textures without native
+capture or CPU readback. Source/follow-up file hashes are in
+[source-ui-audit.json](source-ui-audit.json).
+
+The 640×560 Metal fixture measures 20 warm-up and 100 timed submissions per mode,
+plus 100 navigation events. [capture.json](design/qa/context-menu-v1/capture.json)
+contains distributions, source hashes and resource counts. Timings are CPU draw
+submission time, not a GPU fence or end-to-end input-latency measurement. One base
+production, one strong-blur production and five texture/framebuffer targets serve
+the tested frames; shader, batch and icon identities remain unchanged. Settled
+and animation-disabled frames exactly equal the resting frame. Glass remains
+enabled when motion is disabled. The source-level speed gate still requires the
+broader dense-controls, DPI, platform and live-host workload matrix.
+
+Exact visual-reference acceptance is not claimed: generated menu v1 altered
+contrast/glyphs/dimensions and represented the rejected tint material. It remains
+immutable and explicitly rejected. Corrected liquid-glass root/nested/tooltip and
+all eight compound targets are actual renders for Tyler's QA. Additional state,
+theme and motion references remain open. No private native-button action is
+silently invoked against another control.
+
+Official documentation checked for the GPU texture/framebuffer surface:
+[5.2 GPU types](https://docs.blender.org/api/5.2/gpu.types.html),
+[5.1 GPU types](https://docs.blender.org/api/5.1/gpu.types.html), and
+[4.2 texture utilities](https://docs.blender.org/api/4.2/gpu.texture.html).
+Exact 4.2 GPU-types and 4.2/5.1/5.2 English Manual menu-page fetches returned 402
+in this session; older/development pages were not substituted as current proof.
+The public API path and existing 4.2 capability fallbacks remain intact, but the
+new menu implementation is not runtime-qualified on 4.2 by these tests.

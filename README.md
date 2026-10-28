@@ -40,6 +40,24 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Context menus
+
+Shared right-click menus now support owner-aware property actions, nested Back
+navigation, keyboard shortcuts, cancellation and delayed descriptions. Menus
+and tooltips use BVT’s liquid-glass blur/refraction by default in the embedded
+host, with one retained backdrop shared across controls and animation frames.
+
+![Actual Blender liquid-glass context menu motion](docs/media/panels/context-menu.gif)
+
+[Glass versus tint and all eight control targets](docs/design/qa/context-menu-v1/index.html) ·
+[Context menu integration](docs/CONTEXT_MENUS.md) ·
+[Menu capture provenance](docs/media/panels/context-menu-provenance.json)
+
+The menu core is execution-tested on Blender 5.1.2 and 5.2.2. Native-button-only
+actions remain explicit adapter gaps; exact generated-reference/motion acceptance
+is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
+preview exercises the real liquid-glass path.
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

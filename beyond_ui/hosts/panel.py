@@ -9,14 +9,20 @@ from .bridge import load, BridgeUnavailable
 
 
 class PanelHost:
-    def __init__(self, owner, *, backdrop_revision=None, animation=None):
+    def __init__(
+        self, owner, *, backdrop_revision=None, animation=None, glass_enabled=True
+    ):
         if not owner:
             raise ValueError("Use a unique extension-qualified owner")
         self.animation = animation or AnimationSettings()
         self._animation_keys = set()
         self._animation_callback = self._animate
+        self._tooltip_keys = set()
+        self._tooltip_callback = self._reveal_tooltips
+        self._in_tooltip_callback = False
         self.owner = owner
         self.backdrop_revision = backdrop_revision
+        self.glass_enabled = bool(glass_enabled)
         self.bridge = None
         self.records = {}
         self.handlers = []
@@ -49,6 +55,10 @@ class PanelHost:
         ):
             handle = space.draw_handler_add(self._after_draw, (), region, "POST_PIXEL")
             self.handlers.append((space, handle, region))
+        handle = bpy.types.SpaceView3D.draw_handler_add(
+            self._viewport_draw, (), "WINDOW", "POST_PIXEL"
+        )
+        self.handlers.append((bpy.types.SpaceView3D, handle, "WINDOW"))
         self.reason = ""
         return True
 
@@ -114,6 +124,7 @@ class PanelHost:
         record["painted"] = False
         canvas.visible = True
         canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
+        canvas._tooltip_wake = lambda delay: self._schedule_tooltip(key, delay)
         raw = getattr(layout, "raw", layout)
         return bool(
             self.bridge.library.bvt_probe_reserve(
@@ -149,10 +160,14 @@ class PanelHost:
         record["rect"] = (x0, y0, x1 - x0, y1 - y0)
         record["clip"] = (left, bottom, right - left, top - bottom)
         backdrop = None
-        if self.backdrop_revision is not None:
+        if self.glass_enabled:
             from ..gpu import glass
 
-            revision = self.backdrop_revision(context)
+            revision = (
+                self.backdrop_revision(context)
+                if self.backdrop_revision
+                else (record["scene"], canvas.backdrop_revision)
+            )
             backdrop = (id(self), key)
             if not glass.draw(
                 backdrop,
@@ -161,8 +176,19 @@ class PanelHost:
                 canvas.theme.radius,
                 self.bridge.library,
                 capture_rect=record["clip"],
+                scale=min(
+                    record["rect"][2] / max(1, canvas._width),
+                    record["rect"][3] / max(1, canvas.height),
+                ),
+                viewport_source=glass.viewport_source(context),
             ):
                 backdrop = None
+        record["backdrop"] = backdrop
+        record["glass_error"] = (
+            ""
+            if backdrop is not None
+            else (glass.error if self.glass_enabled else "Glass explicitly disabled")
+        )
         canvas.paint(
             record["rect"],
             record["clip"],
@@ -170,6 +196,13 @@ class PanelHost:
             font=self.font,
             backdrop=backdrop,
         )
+
+    def _viewport_draw(self):
+        import bpy
+        from ..gpu import glass
+
+        if self.glass_enabled and not self.closed:
+            glass.viewport_changed(bpy.context, self.records)
 
     def _after_draw(self):
         import bpy
@@ -189,7 +222,10 @@ class PanelHost:
         if self.closed:
             return False
         window = context.window
-        for key, record in tuple(self.records.items()):
+        for key, record in sorted(
+            tuple(self.records.items()),
+            key=lambda item: item[1]["canvas"].context_menu is None,
+        ):
             if key[0] != window.as_pointer():
                 continue
             area = next(
@@ -214,21 +250,32 @@ class PanelHost:
             x, y, w, h = record["rect"]
             cx, cy, cw, ch = record["clip"]
             captured = (
-                canvas.edit is not None
+                canvas.context_menu is not None
+                or canvas.edit is not None
                 or canvas.overlay is not None
                 or canvas.widget_capture is not None
                 or (
-                    canvas.keyboard_focus is not None
-                    and event.type in canvas.navigation_keys
+                    (
+                        canvas.keyboard_focus is not None
+                        and event.type in canvas.navigation_keys
+                    )
+                    or (
+                        canvas.context_focus is not None
+                        and (event.type == "APP" or event.type == "F10" and event.shift)
+                    )
                 )
             )
             if not captured and not (cx <= px < cx + cw and cy <= py < cy + ch):
                 if (
                     event.type == "LEFTMOUSE"
                     and event.value == "PRESS"
-                    and canvas.keyboard_focus is not None
+                    and (
+                        canvas.keyboard_focus is not None
+                        or canvas.context_focus is not None
+                    )
                 ):
                     canvas.blur_focus()
+                    canvas.context_focus = None
                     region.tag_redraw()
                 if canvas.hover is not None:
                     canvas.hover = None
@@ -241,6 +288,9 @@ class PanelHost:
             sy = h / max(1.0, canvas.height)
             clip = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
             old_hover = canvas.hover
+            from ..gpu.paint import measure
+            from ..gpu.typography import face
+
             with context.temp_override(window=window, area=area, region=region):
                 consumed = canvas.event(
                     event,
@@ -248,16 +298,89 @@ class PanelHost:
                     (y + h - py) / sy,
                     clip,
                     clipboard=context.window_manager,
+                    context=context,
+                    menu_measure=lambda text, size: measure(
+                        face(self.font, "body"), size, text
+                    )[0],
                 )
             if consumed or old_hover != canvas.hover:
                 region.tag_redraw()
             if consumed:
-                if event.type == "LEFTMOUSE" and event.value == "PRESS":
+                if (
+                    event.type in {"LEFTMOUSE", "RIGHTMOUSE", "APP", "F10"}
+                    and event.value == "PRESS"
+                ):
                     for other_key, other in self.records.items():
                         if other_key != key and other_key[0] == key[0]:
                             other["canvas"].blur_focus()
+                            other["canvas"].close_context()
+                            other["canvas"].context_focus = None
                 return True
         return False
+
+    def _schedule_tooltip(self, key, delay):
+        import bpy
+
+        if delay is None:
+            self._wake_animation(key)  # One final redraw removes a visible description.
+            self._tooltip_keys.discard(key)
+            if (
+                not self._tooltip_keys
+                and not self._in_tooltip_callback
+                and bpy.app.timers.is_registered(self._tooltip_callback)
+            ):
+                bpy.app.timers.unregister(self._tooltip_callback)
+            return
+        if self.closed or key not in self.records:
+            return
+        self._tooltip_keys.add(key)
+        if not bpy.app.timers.is_registered(self._tooltip_callback):
+            bpy.app.timers.register(self._tooltip_callback, first_interval=delay)
+
+    def _reveal_tooltips(self):
+        import bpy
+
+        delays = []
+        self._in_tooltip_callback = True
+        try:
+            for key in tuple(self._tooltip_keys):
+                record = self.records.get(key)
+                menu = record["canvas"].context_menu if record else None
+                owner = next(
+                    (
+                        (w, a, r)
+                        for w in bpy.context.window_manager.windows
+                        for a in w.screen.areas
+                        for r in a.regions
+                        if (w.as_pointer(), a.as_pointer(), r.as_pointer()) == key
+                    ),
+                    None,
+                )
+                visible = (
+                    owner and record and record["valid"] and record["canvas"].visible
+                )
+                if (
+                    owner
+                    and owner[1].type == "VIEW_3D"
+                    and not owner[1].spaces.active.show_region_ui
+                ):
+                    visible = False
+                if not visible or menu is None:
+                    if menu:
+                        menu.hide_tip()
+                    self._tooltip_keys.discard(key)
+                    continue
+                window, area, region = owner
+                with bpy.context.temp_override(window=window, area=area, region=region):
+                    delay = menu.reveal_tip(bpy.context)
+                region.tag_redraw()
+                if delay is None:
+                    self._tooltip_keys.discard(key)
+                else:
+                    delays.append(delay)
+        finally:
+            self._in_tooltip_callback = False
+        return max(0.01, min(delays)) if delays else None
 
     def _wake_animation(self, key):
         if self.closed or key not in self.records:
@@ -334,10 +457,13 @@ class PanelHost:
                 glass._owners.pop(key, None)
         self.records.clear()
         self._animation_keys.clear()
+        self._tooltip_keys.clear()
         import bpy
 
         if bpy.app.timers.is_registered(self._animation_callback):
             bpy.app.timers.unregister(self._animation_callback)
+        if bpy.app.timers.is_registered(self._tooltip_callback):
+            bpy.app.timers.unregister(self._tooltip_callback)
 
     def close(self):
         if self.closed:

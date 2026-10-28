@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "tool": "built-in image_gen",
+  "prompt": "context-menu-v1.prompt.txt",
+  "requested_size": [
+    640,
+    560
+  ],
+  "generated_size": [
+    1341,
+    1173
+  ],
+  "sha256": "2af476afa2496da77200ef81b988aacee210fc0a9af9c58bf95373089261eeb6",
+  "source_style": "Original BVT menu primitives; input tint-fallback screenshot retained as reference-input.png in QA",
+  "states": [
+    "root; More selected"
+  ],
+  "status": "rejected, superseded by explicit liquid-glass requirement",
+  "conflicts": [
+    "Output dimensions differ",
+    "Disabled favorites/shortcut rows made bright",
+    "Added texture and altered glyphs",
+    "Tint-only material is not accepted liquid glass"
+  ],
+  "resolution": "Do not adopt. Correct implementation uses original BVT blur/refraction; fresh matching state references and Tyler QA remain required.",
+  "model_version": "Not exposed by built-in imagegen tool",
+  "input_sha256": "b16dab3c7742798e0e2939e546a970645e8f3f67ee2fa37e8e958ef39614fb56"
+}

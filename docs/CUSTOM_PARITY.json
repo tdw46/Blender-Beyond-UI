@@ -285,7 +285,7 @@
     "prop_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Full data-block actions, right-click menus and theme adaptation remain incomplete.",
+      "notes": "Custom identity-checked searchable list. Full pointer polling, item_search_property, preview/grid, scrollbar dragging and reference match remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. Picker now supports draggable scrollbar, page clicks, focused keyboard navigation/confirmation, stale revalidation and clipped partial rows. Shared right-click target routing and active-theme adaptation now implemented; full data-block actions and exact-reference acceptance remain incomplete.",
       "reference": "docs/design/references/specialized-controls-v1.png",
       "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
       "visual_approval": "docs/design/qa/v2/approval.json"
@@ -969,9 +969,16 @@
   },
   "cross_cutting_gates": {
     "right_click_context_menus": {
-      "status": "unimplemented",
+      "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Full BVT owner-aware nested context-menu/action/shortcut contract required; cancellation and selection menus alone do not count."
+      "notes": "Shared owner-aware mouse/keyboard routing, bounded nested/back navigation, keymap snapshots, scoped public extension callbacks, RNA actions, component identity, cancel-before-open, delayed descriptions, source liquid glass and motion implemented. Blender 5.1.2/5.2.2 execution-tested. Native-only adapters, full callback/tooltip API coverage, exact generated-reference/motion and broader theme/platform qualification remain open.",
+      "execution_evidence": [
+        "docs/design/qa/context-menu-v1/rna-51.json",
+        "docs/design/qa/context-menu-v1/rna-52.json",
+        "docs/design/qa/context-menu-v1/modal-51.json",
+        "docs/design/qa/context-menu-v1/modal-52.json"
+      ],
+      "comparison_evidence": "docs/design/qa/context-menu-v1/comparison.json"
     },
     "active_blender_theme": {
       "status": "partial",

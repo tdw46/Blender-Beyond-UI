@@ -250,4 +250,10 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     with motion.deform(key, target):
                         surface(target, palette["overlay"])
                         text(label, target, palette["text"])
+        if canvas.context_menu is not None and not canvas.context_menu.closed:
+            from .menus import context_menu
+
+            context_menu(
+                canvas.context_menu, mapped, scale, font, palette, backdrop, clip
+            )
     return count

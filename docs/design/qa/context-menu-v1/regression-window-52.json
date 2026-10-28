@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "checks": [
+    "all documented UILayout members resolve in draw",
+    "native nested layouts/operator properties",
+    "custom anchor and GPU shader draw",
+    "animation timer settles and unregisters while hovered",
+    "real modal mouse input toggles custom binding",
+    "warm layout retains geometry",
+    "outside-region input passes through",
+    "host animation disable clears existing springs",
+    "owner invalidation rolls back active edit",
+    "disable/re-enable draws with independent callback ownership"
+  ],
+  "native_draws": 93,
+  "error": "",
+  "platform": "darwin"
+}

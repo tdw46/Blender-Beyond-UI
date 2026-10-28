@@ -1,0 +1,15 @@
+{
+  "exact_match": false,
+  "reference_status": "rejected; not adopted",
+  "generated_dimensions": [
+    1341,
+    1173
+  ],
+  "input_dimensions": [
+    640,
+    560
+  ],
+  "reference_normalized_for_diagnostics_only": true,
+  "liquid_glass_reference_matched": false,
+  "notes": "Generated v1 changed disabled contrast, texture and dimensions. User rejected tint-only material. New liquid-glass captures use source BVT semantics, not this rejected image; reference and motion acceptance remain open."
+}

@@ -191,6 +191,7 @@ class Layout:
                     lambda v: original.write(not v),
                     original.valid,
                     lambda a, b: original.commit(not a, not b),
+                    original.context,
                 )
             return self.group.toggle(key, label, binding, **options)
         if meta.type in {"INT", "FLOAT"}:
@@ -268,7 +269,12 @@ class Layout:
                 source.commit(before, after)
 
         return self.group.button(
-            self._key("enum"), label, action, selected=get, **self._options()
+            self._key("enum"),
+            label,
+            action,
+            selected=get,
+            binding=source,
+            **self._options(),
         )
 
     def props_enum(self, data, property):
@@ -318,12 +324,17 @@ class Layout:
                     return function(invocation, **vars(properties))
             return {"CANCELLED"}
 
+        from .context_extensions import operator_entries
+
         self.group.button(
             self._key(operator),
             label,
             execute,
             selected=depress,
             icon=icon,
+            context_menu=lambda target, ctx: operator_entries(
+                operator, vars(properties), ctx or context
+            ),
             **self._options(),
         )
         return properties
@@ -502,6 +513,7 @@ class Layout:
             selected=selected,
             valid=valid,
         )
+        widget.binding = source
         return self.group.widget(self._key("search"), widget, **self._options())
 
     def template_search(

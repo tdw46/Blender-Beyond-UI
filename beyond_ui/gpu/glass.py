@@ -450,6 +450,93 @@ def draw(
         gpu.state.depth_mask_set(mask)
 
 
+def prepare_texture(key, revision, texture, rect, *, scale=1.0):
+    """Prepare the source blur levels from a host-owned, completed GPU texture.
+
+    No framebuffer readback or extra capture. Hosts call once per underlay
+    revision, then every control/menu borrows the same key through lens().
+    The caller owns texture lifetime and supplies region-pixel coordinates.
+    """
+    global error
+    import gpu
+    from mathutils import Matrix
+    from .paint import gpu_state
+
+    if scale <= 0 or rect[2] <= 0 or rect[3] <= 0:
+        return False
+    signature = (
+        "texture",
+        revision,
+        id(texture),
+        tuple(rect),
+        scale,
+        texture.width,
+        texture.height,
+    )
+    owner = _owners.get(key)
+    if owner is None:
+        if len(_owners) >= 8:
+            _owners.pop(next(iter(_owners)))
+        owner = dict(
+            ring=[None] * 3, slot=-1, signature=None, productions=0, allocations=0
+        )
+        _owners[key] = owner
+    if owner.get("signature") == signature:
+        return True
+    if owner.get("failed") == signature:
+        return False
+    try:
+        with gpu_state():
+            _ensure()
+            bw, bh = (
+                max(1, math.ceil(rect[2] / (2 * scale))),
+                max(1, math.ceil(rect[3] / (2 * scale))),
+            )
+            slot = (owner["slot"] + 1) % 3
+            targets = owner["ring"][slot]
+            dimensions = ("texture", bw, bh)
+            if targets is None or targets[0] != dimensions:
+                targets = (
+                    dimensions,
+                    None,
+                    _target(bw, bh),
+                    _target(bw, bh),
+                    _target(bw, bh),
+                )
+                owner["allocations"] += 3
+                owner["ring"][slot] = targets
+            passes = (
+                (targets[2], texture, (0.25 / bw, 0.25 / bh, 2.0, 0.0)),
+                (targets[3], targets[2][0], (1 / bw, 0.0, 0.0, 0.0)),
+                (targets[4], targets[3][0], (0.0, 1 / bh, 0.0, 0.0)),
+            )
+            gpu.state.blend_set("NONE")
+            for output, source, step in passes:
+                with output[1].bind():
+                    gpu.state.viewport_set(0, 0, bw, bh)
+                    gpu.state.scissor_set(0, 0, bw, bh)
+                    _draw(
+                        source,
+                        (-1.0, -1.0, 2.0, 2.0),
+                        (0.0, 0.0, 1.0, 1.0),
+                        step,
+                        (0.0, 0.0, 0.0, 0.0),
+                        Matrix.Identity(4),
+                    )
+            owner.update(slot=slot, signature=signature, sample_rect=tuple(rect))
+            owner["productions"] += 1
+            return True
+    except Exception as exc:
+        error = str(exc)
+        owner["failed"] = signature
+        return False
+
+
+def release(key):
+    """Release one host-owned backdrop and all its retained blur levels."""
+    _owners.pop(key, None)
+
+
 def clear():
     global _shader, _batch, _lens_shader, _lens_batch, _lens_error, error
     _owners.clear()

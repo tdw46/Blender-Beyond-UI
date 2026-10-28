@@ -1,0 +1,217 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "backend": "METAL",
+  "dimensions": [
+    640,
+    560
+  ],
+  "scale": 1,
+  "theme": "explicit REFERENCE",
+  "transparency": "Production BVT lens, blur=0.7, untinted refracted body; one GPU backdrop revision shared by all menus and motion frames",
+  "frames": 45,
+  "timings": {
+    "closed": {
+      "median_ms": 0.05516601959243417,
+      "p95_ms": 0.07045804522931576,
+      "max_ms": 0.20875001791864634
+    },
+    "tint-fallback": {
+      "median_ms": 0.22091652499511838,
+      "p95_ms": 0.2582920715212822,
+      "max_ms": 0.3237499622628093
+    },
+    "open": {
+      "median_ms": 0.23016700288280845,
+      "p95_ms": 0.26170897763222456,
+      "max_ms": 0.29745895881205797
+    },
+    "nested": {
+      "median_ms": 0.23881252855062485,
+      "p95_ms": 0.260957982391119,
+      "max_ms": 0.2810839796438813
+    },
+    "scroll": {
+      "median_ms": 0.23549998877570033,
+      "p95_ms": 0.2604579785838723,
+      "max_ms": 0.2904580906033516
+    },
+    "navigation": {
+      "median_ms": 0.058312551118433475,
+      "p95_ms": 0.0616670586168766
+    }
+  },
+  "retained_resources": {
+    "skin_shader": 481582223440,
+    "skin_batch": 481582214224,
+    "style_shader": 481582224688,
+    "style_batch": 481582219120,
+    "icon_shader": 481582229680,
+    "icons": {
+      "\u203a": 481582500784,
+      "reset": 481582500880,
+      "\u25c7": 481582500928,
+      "\u25cc": 481582500976,
+      "menu": 481582501024,
+      "shortcut": 481582501072,
+      "globe": 481582501120,
+      "\u2039": 481582500736
+    },
+    "glass_shader": 481582228720,
+    "glass_batches": {
+      "0.3": 481582499776,
+      "0.4": 481582499872,
+      "0.7": 481582499920
+    },
+    "backdrop_productions": 1,
+    "blur_productions": 1,
+    "backdrop_allocations": 5
+  },
+  "stable_resources": true,
+  "compound_targets": {
+    "curve-mapping": [
+      "point_field",
+      3,
+      1,
+      1
+    ],
+    "color-ramp": [
+      "stop",
+      1
+    ],
+    "data-picker": [
+      "row",
+      2
+    ],
+    "color-picker": [
+      "channel",
+      "RGB",
+      0
+    ],
+    "palette": [
+      "swatch",
+      1
+    ],
+    "matrix": [
+      "component",
+      1,
+      1
+    ],
+    "progress-bar": [
+      "progress",
+      "BAR"
+    ],
+    "progress-ring": [
+      "progress",
+      "RING"
+    ]
+  },
+  "hashes": {
+    "root": "910cd09cf574b8e125b8bd0e7addff02738fca5f928b6b3c012e6b61115647bb",
+    "tint-fallback": "ee182921a6f16c07607ef5a19efb6e6422853561f7dbd529e8f3310f0c05a7da",
+    "contrast": "910cd09cf574b8e125b8bd0e7addff02738fca5f928b6b3c012e6b61115647bb",
+    "frame-000": "910cd09cf574b8e125b8bd0e7addff02738fca5f928b6b3c012e6b61115647bb",
+    "frame-001": "ee3148277700319defa22bdfda7374cf8fb1a3b5b2a0be2912bfce7abc0d15c0",
+    "frame-002": "f66ac333286eabdbe2830b1452943c1c329f64f936a42d300db36eec38ae2824",
+    "frame-003": "117c5389c390a8c573b07c64037162bd517630b4788273862f3f58242bf2703c",
+    "frame-004": "7cdd9bb441e701482d570217a3640568103e2c18d06614c343eee9c227e9b329",
+    "frame-005": "c0c7dd85b5fd74cc83a4d0dd144e0406f0d78f88bad966c537d57e5546d0bd93",
+    "frame-006": "923b9adebc43491e0fa15ec4d69ecc323179020dd5f711e9e03f9c577cf80d36",
+    "frame-007": "5a8ba0366388393f70b56a0495e500467695415a2b14655a5ae6e0653b550373",
+    "frame-008": "4228ddfad99663278aaa0db4bbee060c0bfdf29e26bce183d831bae042584fd9",
+    "frame-009": "8cb0cbb25394ce61498a6acf91b14333cd4cbc64f9457fb88d69c23ef97a0d8f",
+    "frame-010": "cc844c1d082ad1206c99e1dda227a216b44c904da63553405201e462abaa7e87",
+    "frame-011": "fa5c05565f96a7933c2338201aa8f91038b567debb6cfa298db732b37f807f2d",
+    "frame-012": "ada049c1ac987a7299c12944edbad91ca54910fb6eb39b1704b63c65a5654f38",
+    "frame-013": "fd4b52778ecbb383a87fe4349579b1d274b4f8644a7b8079c31239df5ab76eb7",
+    "frame-014": "577323884db1b11d4367046c1c75227f4e92252f818fc38f3ac0ab2d28d02b44",
+    "frame-015": "0c85e04458993a08622aa44e94b8d66da46eb17d27f1e7ce85b92a7dfa5af440",
+    "frame-016": "190c5600bda2d827b142d7ce209b57ab83daacd9ced7782f899b324c2628de08",
+    "frame-017": "5d123082ccaad6dc49341a4fd1824132fb4460b238e788a04d59317ae3682c57",
+    "frame-018": "b6e26adb2a94861fa99400036decd6e42088cb521c1ccb5af9736df58cfa9219",
+    "frame-019": "ccb2e7728595b7c670f2a81d0426d25bf05745606fb9ebe89b9bf7c1cebec4c8",
+    "frame-020": "4a1075052dbde611d9415f76c83ddd4ba2f77b33d62c9cdfa9cdec6a358e46ba",
+    "frame-021": "962c8b70663fc4673a99b0d0e27fd8b5f86d5ad2a052c59ff4ecaa4a46de61f7",
+    "frame-022": "16d4b00c66161cea277674bd1638cdce5cd0a2744998883d328e6ea0e2d10acf",
+    "frame-023": "6189779cf57ce537aa42d9d7532076f4ff6167a4295cb69b7658e081bc473203",
+    "frame-024": "8f042f139495a4a523629e4b413dbc9bb215226dff12eb70b470a6b74e07172e",
+    "frame-025": "94ca318a6a1b6cb9f693e1f6a9411557dc5f947952a32dca9e6141aa2b125a33",
+    "frame-026": "9d1823e2ff3a50203c510b4b5269bd5bd5ccabf12cf0f358ef3f40e1ec33c8f2",
+    "frame-027": "dce32d758d81f92fbc3db8190ba748e91bb3efb312cf8c68bf032590e6170a62",
+    "frame-028": "5a71830529b6546adee80a2d179e98de4878e809e88827fcfbbd8b0134b5ee0c",
+    "frame-029": "d5e16d5927b79ed8f69cbcc1154268bd3117b95b3ef188599945e035bddb840b",
+    "frame-030": "4b86e18ad4d4f7d6171fad0c4aac898c157bf36139a816c4f47d7f313d380049",
+    "frame-031": "a1e09b9dfb94d4678aec422c5fe5106441083d91d9a3e5aec2e96e9458a5870c",
+    "frame-032": "a15177aa8a55a82ceba6444b8c5349537793627dea930f99d047677919145985",
+    "frame-033": "84eda44cdb94e570177970d34c69c253e34d9e70c1554b8206b0ec3bb27cdb1d",
+    "frame-034": "ddd91cabd1b10e6355091ee7f0e5df86ace2f57d1c307b90e0fa43897132d719",
+    "frame-035": "6eff9e6341f4a63527e890d27c1ba95369eef2eeabc58af0c2eb30b1d29f4b34",
+    "frame-036": "e5f92ad73ccf09f2af97ba9ecdc490d9249e622765a6744019a7a6e62fe7e9f6",
+    "frame-037": "af6621d4e08e3ff4416d6b2bd00d4fca4f48ff2273720b28acae869783ea9f29",
+    "frame-038": "4228ddfad99663278aaa0db4bbee060c0bfdf29e26bce183d831bae042584fd9",
+    "frame-039": "bdc9bd58e1821f5a9871feb1fe6db482c41b5dd9611cf65b843373d58e5da67d",
+    "frame-040": "3c5fdfce5e663cdc15f8272f36e935afc4fda57f81ae0d518c6bba5dcc5f81da",
+    "frame-041": "84256a38b86a810c2d09d14f9f7c7f9f5fa289af70424b92350a99927cddb543",
+    "frame-042": "48716fa77e9d14f603bb1b6dd3b3708d1e970910621a88c152419237f92b3fe7",
+    "frame-043": "e745c7711f72f32f5067889020274a8881c46337678e29a1effee2333239717a",
+    "frame-044": "58380d42131a85a98b29355f34a330066b15249a98f944aa6132b74fee82a33c",
+    "settled": "910cd09cf574b8e125b8bd0e7addff02738fca5f928b6b3c012e6b61115647bb",
+    "disabled": "910cd09cf574b8e125b8bd0e7addff02738fca5f928b6b3c012e6b61115647bb",
+    "nested": "ed59c8c6fde16e9fa3f67f6c4378ae07202f9b32b3acb9ffb7f97932c9709a3a",
+    "tooltip": "a3c08ce9aef30e89ba0adef12d06bbf35add8a5d7041fd2ed3c8707ef85d6471",
+    "control-curve-mapping": "fc0af62d33e82d61ff8b0b976887d0e7b48ee995462baf4438e18d543d7f28be",
+    "control-color-ramp": "8b9317340b5bd9e37b74fbc5857c3f0d11c7c390070919947e7b54f11bb1370b",
+    "control-data-picker": "092bf07b4eca243eb45e69beb1ea85b1692946f4cf951a763f5b8e4a4c6a049d",
+    "control-color-picker": "2cb0abeac2c24a81137b1ccc1744521ff468aace6645263ac19c946d98d1349d",
+    "control-palette": "8052b755296a8da8f31ea8f02111dca3aa3782d46b888732f5e58d0daeadd15f",
+    "control-matrix": "680c34d9a642e1f6be6b16ebc732981848666fbdb92843bd9f220c556c1f845b",
+    "control-progress-bar": "777d7a942ada6a6ba4468e2e96d8f4310999d282f5ac6c7fe3c81ed19c0f29dd",
+    "control-progress-ring": "1eb712ebdbf63fb156346b05b19e0302b31450b18c18be872f5d20d5a41e439a"
+  },
+  "source_sha256": {
+    "beyond_ui/__init__.py": "d7fa2de009a0c47e94210512af82f66e8fbf86ef345e7a8f060b597d5219bb2c",
+    "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+    "beyond_ui/animation.py": "c15f0a195f7146543f373a1fe3468f62c2c50330641f207b43be34294617b2ac",
+    "beyond_ui/bindings.py": "ec98d5d07ba8172c731a467c517638dc8008380d5c3a302f8f23560a55467f3a",
+    "beyond_ui/canvas.py": "c10581c7330f37009534d7e017cdce47cfd27c08f1ee432875976e7406a394bc",
+    "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+    "beyond_ui/context_extensions.py": "bf6b975527d50123b67fcbba854562ccf161486bb11670ac3c5899f2d3909169",
+    "beyond_ui/context_menu.py": "8962d8aefbb4a1c601df666e04c5d5e12610df8bbe186aabd2165a3904d7962f",
+    "beyond_ui/context_rna.py": "3a3f5eff6e095023721756d4671a3cc97dfff2363315a1f22bb3bff7a03c58f1",
+    "beyond_ui/editing.py": "ad68a307294441d8b52370002a04875963b526f2ed8e89eff790e0d343543f68",
+    "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+    "beyond_ui/gpu/glass.py": "db3f1295d1e404ba6c932342c9c275a1167a3bbc9ffd259bbd84cfd6fcb631ec",
+    "beyond_ui/gpu/menus.py": "241ed5c28d72d1d14126fcd3451213372e4f88cc25b4d2094320c1eeecb6d3d1",
+    "beyond_ui/gpu/paint.py": "2ab3293e42c19be83b20f0721f56c755cdc9ab306dce104141d2be5a81bcce72",
+    "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+    "beyond_ui/gpu/progress.py": "a64b7761751b5bb68e18a5fae4287a24f9c7e87de18d3423165591ecf3118f7d",
+    "beyond_ui/gpu/skin.py": "6628df33bf33d1a14ba315879c96dc520e1c51be5b582106272ce9df48211ece",
+    "beyond_ui/gpu/style.py": "a5350103f2ccdd23ce39299c5d5ef750625d325b8b87208784bb0cb7409854f0",
+    "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+    "beyond_ui/gpu/typography.py": "c5a5f75aa05ed07769b4ff8a9c6c28aec2726ee44d1024fed768b2e021b9dd5a",
+    "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+    "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+    "beyond_ui/hosts/panel.py": "1a6b7d81ec53c47d2671a8fea73a12ee86286ee0dcde2594cdbcd35ad05ae770",
+    "beyond_ui/layout.py": "19d401cfef18f34cf75a51cf765bb35de031555247d41ff2ef3152c1b04cecfa",
+    "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+    "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+    "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+    "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+    "beyond_ui/widgets/__init__.py": "27ef333656b9033c833ea4ffa585f57ef0690cadb5e3381669859707865dff2a",
+    "beyond_ui/widgets/base.py": "a3bf8b8d45d7c2129252d3deb732e35165f9d266d7bc6dfb2255943b0fa108d8",
+    "beyond_ui/widgets/color.py": "413023ca6e272e1315bd753e6b216788d15abdae0264d38ad8d62ba0fc6b66ef",
+    "beyond_ui/widgets/context.py": "5f642cf43872bd75ccb8f0ff050441e07916d60df3c8a02efed3675076621604",
+    "beyond_ui/widgets/curve.py": "ec6fdf5b2cfffa1ff8ec4631009b530218fbf45dc693a54461f93ea0614f4446",
+    "beyond_ui/widgets/icon_paths.py": "a1c30cc74ba25bb5cfe74991358843eb1ae8e73c03c0e4665b8fa9bf3d07350c",
+    "beyond_ui/widgets/matrix.py": "dead09b5cc468354dba253d19c1b995e4da3ef7630d8a7a85531b4fa307b6523",
+    "beyond_ui/widgets/metrics.py": "ffeefff0d10f117684316111a21e5bec6f1ce7f74ee20e5875abd14026f14cca",
+    "beyond_ui/widgets/palette.py": "0a832dbe09307fa3b3359b83aa5b935adc6fcaea5a4cc3dc2a8e75bf10c982fb",
+    "beyond_ui/widgets/picker.py": "d2f888e2d61f9f0acf258fd1216cbc8d77ced84936db496b4874953478d35c52",
+    "beyond_ui/widgets/progress.py": "36b7dd07e489875eb23d18d951cbd6de54b7e5d2bfb140087b932d063a61a47f",
+    "beyond_ui/widgets/ramp.py": "88fa922e8985bd4375c225c823f4b404e39abacb5658e2eb03afcac2a94b0cb0",
+    "beyond_ui/widgets/rna.py": "bf67c6653647f9cc35e7812c6a1b55cd88aee46f4bbe94ef0ecdb7b7d185bec2",
+    "beyond_ui/widgets/socket.py": "7e30dc4d4e3950561e6e2f683850554b6ae5074175047a1a3850f1eb3a2ca7ab"
+  },
+  "acceptance": "Unapproved; generated reference and motion QA required"
+}

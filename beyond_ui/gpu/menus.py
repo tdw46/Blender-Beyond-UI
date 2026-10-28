@@ -90,3 +90,122 @@ def enum_option(
         style.icon("●", right - 4 * scale, y + h / 2, 6 * scale, ink)
         right -= 16 * scale
     text(item["text"], left, right, 11 * scale, ink)
+
+
+def uncovered(rect, covers):
+    """BVT _custom_ui_components: exclude panels above a deferred text run."""
+    regions = (rect,)
+    for a, b, c, d in covers:
+        result = []
+        for x0, y0, x1, y1 in regions:
+            left, right = max(x0, a), min(x1, c)
+            bottom, top = max(y0, b), min(y1, d)
+            if left >= right or bottom >= top:
+                result.append((x0, y0, x1, y1))
+                continue
+            result.extend(
+                r
+                for r in (
+                    (x0, y0, x1, bottom),
+                    (x0, top, x1, y1),
+                    (x0, bottom, left, top),
+                    (right, bottom, x1, top),
+                )
+                if r[0] < r[2] and r[1] < r[3]
+            )
+        regions = tuple(result)
+    return regions
+
+
+def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
+    """Source row painter, shared host backdrop, retained bounded menu motion."""
+    from . import style, glass, skin, typography
+    from .paint import measure
+
+    font = typography.face(font, "body")
+    menu.motion.begin_paint()
+    menu.glass_ready = backdrop is not None
+    pages = (*menu.parents, menu.page)
+    for page_index, page in enumerate(pages):
+        active = page is menu.page
+        panel = mapped(page.rect)
+        covers = []
+        if menu.tooltip:
+            a, b, w, h = mapped(menu.tooltip[0])
+            covers.append((a, b, a + w, b + h))
+        for later in pages[page_index + 1 :]:
+            a, b, w, h = mapped(later.rect)
+            covers.append((a, b, a + w, b + h))
+        from contextlib import nullcontext
+
+        with menu.motion.deform("reveal", panel) if active else nullcontext():
+            if backdrop is None or not glass.lens(
+                backdrop, panel, 10 * scale, (0.0, 0.0, 0.0, 0.0), blur=0.7
+            ):
+                menu.glass_ready = False
+                skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)
+            for index, rect, row in menu.visible_rows(page):
+                target = mapped(rect)
+                key = ("row", index)
+                if active:
+                    menu.motion.region(key, rect)
+                color = palette["selected"] if index == page.highlight else (0, 0, 0, 0)
+                item = dict(
+                    text=row.label,
+                    enabled=page.available[index],
+                    data=False,
+                    menu_icon=row.icon,
+                    shortcut=row.shortcut,
+                    divider=row.divider,
+                    submenu=row.children is not None,
+                )
+
+                def text_clip(bounds):
+                    a, b, c, d = bounds
+                    x, y, w, h = clip
+                    return uncovered(
+                        (max(a, x), max(b, y), min(c, x + w), min(d, y + h)), covers
+                    )
+
+                with menu.motion.deform(key, target) if active else nullcontext():
+                    enum_option(
+                        item,
+                        target,
+                        scale,
+                        font,
+                        palette,
+                        style,
+                        lambda value, size: measure(font, size, value),
+                        glass,
+                        backdrop,
+                        color,
+                        text_clip=text_clip,
+                    )
+
+    if menu.tooltip:
+        rect, lines = menu.tooltip
+        panel = mapped(rect)
+        with menu.motion.deform("tooltip", panel):
+            if backdrop is None or not glass.lens(
+                backdrop, panel, 10 * scale, (0.0, 0.0, 0.0, 0.0), blur=0.7
+            ):
+                menu.glass_ready = False
+                skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)
+            for i, line in enumerate(lines):
+                x, y, w, h = mapped(
+                    (rect[0] + 3, rect[1] + 6 + i * 16, rect[2] - 6, 16)
+                )
+                bounds = (
+                    max(x, clip[0]),
+                    max(y, clip[1]),
+                    min(x + w, clip[0] + clip[2]),
+                    min(y + h, clip[1] + clip[3]),
+                )
+                text_run(
+                    font,
+                    line,
+                    11 * scale,
+                    palette["text"],
+                    (x + 7 * scale, y + (h - measure(font, 11 * scale, "H")[1]) / 2),
+                    (bounds,),
+                )

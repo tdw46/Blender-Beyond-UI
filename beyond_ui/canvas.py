@@ -4,7 +4,7 @@ Hosts own event delivery, redraw, undo, translation and visibility. Paint reads
 only visible controls. Layout caches geometry until structure or width changes.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from .animation import AnimationSettings, Motion
 from .bindings import Edit
 from .editing import Text, number
@@ -143,7 +143,9 @@ class Canvas(Group):
         "ESC",
     }
 
-    def __init__(self, theme=None, *, animation=None):
+    def __init__(
+        self, theme=None, *, animation=None, context_provider=None, menu_commit=None
+    ):
         self.animation = animation or AnimationSettings()
         self._animation_parents = ()
         self._animation_wake = None
@@ -157,10 +159,18 @@ class Canvas(Group):
         self.height = 0.0
         self.layout_count = 0
         self.schema_revision = 0
+        self.backdrop_revision = 0
         self.edit = None
         self.editor = None
         self.active = None
         self.overlay = None
+        self.context_menu = None
+        self.context_provider = context_provider
+        self.menu_commit = menu_commit
+        self.context_focus = None
+        self._context_point = (0.5, 0.5)
+        self.menu_error = None
+        self._tooltip_wake = lambda delay: None
         self.widget_capture = None
         self.keyboard_focus = None
         self.hover = None
@@ -175,6 +185,14 @@ class Canvas(Group):
         self._animation_wake = wake
         for control in self.controls.values():
             self._bind_motion(control.motion)
+
+    def bind_context_tooltips(self, schedule):
+        """Host one-shot scheduler: delay seconds starts/replaces, None cancels."""
+        if self.context_menu:
+            self.context_menu.hide_tip()
+        self._tooltip_wake = schedule or (lambda delay: None)
+        if self.context_menu:
+            self.context_menu.on_tip = self._tooltip_wake
 
     def _wake_motion(self, motion):
         self._moving.add(motion)
@@ -231,6 +249,8 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        self.backdrop_revision += 1
+        self.close_context()
         self._dirty = True
         for control in self.controls.values():
             control.motion.clear()
@@ -320,10 +340,17 @@ class Canvas(Group):
             if a < x + w and a + c > x and b < y + h and b + d > y:
                 yield control
 
-    def hit(self, x, y, clip):
+    def hit(self, x, y, clip, *, include_disabled=False):
+        cx, cy, cw, ch = clip
+        if not (cx <= x < cx + cw and cy <= y < cy + ch):
+            return None
         for control in reversed(tuple(self.visible_controls(clip))):
             a, b, w, h = control.rect
-            if a <= x < a + w and b <= y < b + h and control.enabled:
+            if (
+                a <= x < a + w
+                and b <= y < b + h
+                and (include_disabled or control.enabled)
+            ):
                 return control
         return None
 
@@ -333,6 +360,8 @@ class Canvas(Group):
         self.hover = None
 
     def cancel(self):
+        self.close_context()
+        self.context_focus = None
         self.blur_focus()
         for motion in tuple(self._moving):
             motion.clear()
@@ -365,7 +394,191 @@ class Canvas(Group):
             if self.visible and self._animation_wake:
                 self._animation_wake()
 
-    def event(self, event, x, y, clip, *, clipboard=None):
+    def close_context(self):
+        menu = getattr(self, "context_menu", None)
+        if menu is not None:
+            menu.close()
+            self._moving.discard(menu.motion)
+            self.context_menu = None
+            if self._motion_focus is menu.motion:
+                self._motion_focus = None
+            if self.visible and self._animation_wake:
+                self._animation_wake()
+
+    def open_context(
+        self, control, x, y, clip, *, context=None, measure=None, overlay=None
+    ):
+        from .context_menu import Menu, Target, default_entries
+        from .context_rna import Property
+
+        def scope(ctx):
+            if ctx is None:
+                return None
+            scene = getattr(ctx, "scene", None)
+            prefs = getattr(getattr(ctx, "preferences", None), "view", None)
+            return (
+                scene.as_pointer() if scene else None,
+                getattr(prefs, "show_developer_ui", False),
+            )
+
+        try:
+            if control.kind == "widget" or overlay is not None:
+                from .widgets.context import target as widget_target
+
+                widget = (
+                    overlay["widget"]
+                    if overlay is not None
+                    else control.options["widget"]
+                )
+                a, b, w, h = overlay["rect"] if overlay is not None else control.rect
+                target = widget_target(
+                    widget,
+                    control.key,
+                    (x - a) * widget.width / max(w, 1),
+                    (y - b) * widget.height / max(h, 1),
+                )
+            else:
+                binding = control.binding
+                source = getattr(binding, "context", None)
+                target = Target(
+                    control.key,
+                    (control.kind,),
+                    binding,
+                    source.valid
+                    if isinstance(source, Property)
+                    else binding.valid
+                    if binding
+                    else lambda: True,
+                    payload=control,
+                )
+            valid = target.valid
+            target = replace(
+                target,
+                valid=lambda: self.controls.get(control.key) is control
+                and self.visible
+                and (overlay is None or self.overlay is overlay)
+                and any(c is control for c in self.visible_controls(clip))
+                and bool(valid()),
+                commit=self.menu_commit,
+                editable=lambda: control.enabled,
+            )
+            provider = (
+                control.options.get("context_menu")
+                or self.context_provider
+                or default_entries
+            )
+            rows = provider(target, context)
+            # Empty providers deliberately preserve Blender's outside/unsupported path.
+            from itertools import islice
+
+            rows = tuple(islice(rows, Menu.limit))
+            if not rows or not target.valid():
+                return False
+            self.close_context()
+            menu = Menu(
+                target,
+                rows,
+                (x, y),
+                clip,
+                context=context,
+                measure=measure,
+                scope=scope,
+                on_error=lambda error: setattr(self, "menu_error", str(error)),
+                on_tip=self._tooltip_wake,
+            )
+            menu.motion.bind(
+                (*self._animation_parents, self.animation, control.motion.settings),
+                self._wake_motion,
+            )
+            self.context_menu = menu
+            self.context_focus = control
+            a, b, w, h = control.rect
+            self._context_point = ((x - a) / max(w, 1), (y - b) / max(h, 1))
+            self.menu_error = None
+            menu.motion.pulse("reveal", 0.12)
+            return True
+        except Exception as error:
+            self.menu_error = str(error)
+            return False
+
+    def event(
+        self, event, x, y, clip, *, clipboard=None, context=None, menu_measure=None
+    ):
+        if not self.visible:
+            return False
+        press = event.value in {"PRESS", "DOUBLE_CLICK"}
+        if self.context_menu is not None:
+            menu = self.context_menu
+            if tuple(clip) != tuple(menu.clip):
+                self.close_context()
+                return False
+            used = menu.event(event, x, y, context)
+            if menu.closed:
+                self.close_context()
+                from .context_menu import inside
+
+                if event.type == "LEFTMOUSE" and press and not inside(clip, x, y):
+                    self.context_focus = None
+                    self.blur_focus()
+            return used
+        invocation = press and (
+            event.type == "RIGHTMOUSE"
+            or event.type == "APP"
+            or event.type == "F10"
+            and getattr(event, "shift", False)
+        )
+        if (
+            invocation
+            and self.overlay
+            and "widget" in self.overlay
+            and not self.overlay["widget"].capturing
+        ):
+            owner = self.overlay.get("owner")
+            if owner is not None:
+                from .context_menu import inside
+
+                if event.type != "RIGHTMOUSE":
+                    a, b, w, h = self.overlay["rect"]
+                    px, py = self.overlay.get("context_point", (0.5, 0.5))
+                    x, y = a + w * px, b + h * py
+                if inside(self.overlay["rect"], x, y):
+                    return self.open_context(
+                        owner,
+                        x,
+                        y,
+                        clip,
+                        context=context,
+                        measure=menu_measure,
+                        overlay=self.overlay,
+                    )
+        if invocation and not (self.edit or self.overlay or self.widget_capture):
+            control = self.hit(x, y, clip, include_disabled=True)
+            if event.type != "RIGHTMOUSE" and self.context_focus is not None:
+                control = self.context_focus
+                a, b, w, h = control.rect
+                x, y = a + w * self._context_point[0], b + h * self._context_point[1]
+            if control is not None and any(
+                c is control for c in self.visible_controls(clip)
+            ):
+                return self.open_context(
+                    control, x, y, clip, context=context, measure=menu_measure
+                )
+            return False
+        if event.type == "LEFTMOUSE" and press:
+            if self.overlay and "widget" in self.overlay:
+                from .context_menu import inside
+
+                a, b, w, h = self.overlay["rect"]
+                if inside(self.overlay["rect"], x, y):
+                    self.overlay["context_point"] = (
+                        (x - a) / max(w, 1),
+                        (y - b) / max(h, 1),
+                    )
+            self.context_focus = self.hit(x, y, clip, include_disabled=True)
+            if self.context_focus:
+                a, b, w, h = self.context_focus.rect
+                self._context_point = ((x - a) / max(w, 1), (y - b) / max(h, 1))
+
         if not self.visible:
             return False
         if (
@@ -576,6 +789,7 @@ class Canvas(Group):
                     h = picker.height * scale
                     self.overlay = {
                         "widget": picker,
+                        "owner": control,
                         "rect": (
                             clip[0] + (clip[2] - w) / 2,
                             clip[1] + (clip[3] - h) / 2,

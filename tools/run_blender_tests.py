@@ -15,6 +15,9 @@ def main():
     parser.add_argument("--blender", action="append", required=True)
     parser.add_argument("--windowed", action="store_true")
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--fixture", type=Path, help="Explicit disposable-profile test script"
+    )
     args = parser.parse_args()
     output = args.output or Path(tempfile.mkdtemp(prefix="beyond-ui-tests-"))
     output.mkdir(parents=True, exist_ok=True)
@@ -41,7 +44,9 @@ def main():
         command += [
             "--python",
             str(
-                ROOT
+                args.fixture.resolve()
+                if args.fixture
+                else ROOT
                 / "tests"
                 / ("blender_windowed.py" if args.windowed else "blender_runtime.py")
             ),

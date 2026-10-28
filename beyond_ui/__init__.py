@@ -8,6 +8,7 @@ from .native import Layout as NativeLayout
 from .layout import Layout, UnsupportedControl
 from .canvas import Canvas, Theme
 from .lifecycle import Scope
+from .context_menu import Entry as MenuEntry, Target as MenuTarget, Shortcut
 
 __version__ = "0.1.0"
 __all__ = [
@@ -17,6 +18,9 @@ __all__ = [
     "Layout",
     "NativeLayout",
     "Scope",
+    "MenuEntry",
+    "MenuTarget",
+    "Shortcut",
     "Theme",
     "UnsupportedControl",
 ]

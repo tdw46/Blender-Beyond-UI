@@ -1,6 +1,7 @@
 """RNA adapters with stable element identities across automatic Blender sorting."""
 
-from ..bindings import Binding
+from ..bindings import Binding, rna_binding
+from dataclasses import replace
 
 
 def color_ramp(data, property, commit):
@@ -37,7 +38,21 @@ def color_ramp(data, property, commit):
             element.position = position
             element.color = color
 
-    return Binding(get, set_value, valid, commit), ramp
+    def context_target(hit):
+        if hit.part[0] in {"stop", "position", "color", "remove"}:
+            index = hit.part[1]
+            element = elements[index]
+            pointer = element.as_pointer()
+
+            def resolve():
+                return element if valid() and element.as_pointer() == pointer else None
+
+            prop = "color" if hit.part[0] == "color" else "position"
+            binding = rna_binding(resolve, prop, commit=commit)
+            return replace(hit, binding=binding)
+        return hit
+
+    return Binding(get, set_value, valid, commit, context_target=context_target), ramp
 
 
 def curve_mapping(data, property, commit, channel):
@@ -85,7 +100,37 @@ def curve_mapping(data, property, commit, channel):
             point.location = location
         mapping.update()
 
-    return Binding(get, set_value, valid, commit), mapping, curve
+    def context_target(hit):
+        if hit.part[0] in {"point", "point_field"}:
+            channel_index, index = hit.part[1:3]
+            point = tracked[channel_index][index]
+            pointer = point.as_pointer()
+
+            def resolve():
+                return (
+                    point
+                    if valid()
+                    and current_index() == channel_index
+                    and point.as_pointer() == pointer
+                    else None
+                )
+
+            component = hit.part[3] if hit.part[0] == "point_field" else None
+            binding = rna_binding(
+                resolve,
+                "handle_type" if component == 2 else "location",
+                index=component if component in (0, 1) else None,
+                commit=commit,
+            )
+            binding.context.update = mapping.update
+            return replace(hit, binding=binding)
+        return hit
+
+    return (
+        Binding(get, set_value, valid, commit, context_target=context_target),
+        mapping,
+        curve,
+    )
 
 
 def matrix_components(data, property, resolve=None):
@@ -279,6 +324,24 @@ def palette_source(
         if edit:
             edit(Binding(lambda: tuple(item.color), color_set, color_valid, commit))
 
+    def context_target(hit):
+        if hit.part[0] != "swatch":
+            return hit
+        index = hit.part[1]
+        item = checked()[index]
+        pointer = item.as_pointer()
+
+        def resolve_item():
+            colors = checked()
+            if index >= len(colors) or colors[index].as_pointer() != pointer:
+                raise ReferenceError("Palette swatch owner changed")
+            return colors[index]
+
+        binding = rna_binding(
+            resolve_item, "color" if not value_mode else "weight", commit=commit
+        )
+        return replace(hit, binding=binding)
+
     return PaletteSource(
         lambda: len(checked()),
         lambda i: tuple(checked()[i].color),
@@ -289,4 +352,6 @@ def palette_source(
         remove,
         edit_color if edit else None,
         lambda i: checked()[i].weight,
+        lambda i: checked()[i].as_pointer(),
+        context_target,
     )

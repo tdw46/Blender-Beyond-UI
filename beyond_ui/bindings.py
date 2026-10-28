@@ -10,6 +10,8 @@ class Binding:
     set: object
     valid: object = lambda: True
     commit: object = lambda before, after: None
+    context: object = None
+    context_target: object = None
 
     def read(self):
         if not self.valid():
@@ -94,4 +96,8 @@ def rna_binding(
         else:
             getattr(obj, property_name)[index] = value
 
-    return Binding(get, set_value, valid, commit)
+    from .context_rna import Property
+
+    return Binding(
+        get, set_value, valid, commit, Property(resolve, property_name, index, commit)
+    )

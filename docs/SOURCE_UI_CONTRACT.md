@@ -61,8 +61,17 @@ Use `VRM_ShoostContextMenu.py` and the owning menu branch of
 - Actions that mutate data use the host's undo boundary. Multi-owner operations
   restore previous values if applying the action fails partway through.
 
-The reusable library has compact selection menus, but **does not yet expose the
-full BVT right-click context-menu contract**. Do not count cancellation alone as
-support. Preserve these behaviors through generic callbacks/identity resolvers;
-BVT scene types, IDs, operators, localization and undo ownership stay with the
-consumer. AGENTS.md now makes this a completion gate for every applicable control.
+The library now exposes this shared contract through `MenuEntry`, `MenuTarget`,
+`Canvas.context_provider`, RNA adapters and public Python button-menu collection.
+[Context menu integration](CONTEXT_MENUS.md) documents ownership, undo, disabled
+native-only actions, scoped limitations and execution evidence. The source
+`_custom_ui_components.uncovered` behavior prevents parent text bleeding through
+child menus. Delayed descriptions use a single 0.55-second dwell callback.
+
+Menus and tooltips consume the original BVT lens at blur 0.7 and radius 10,
+without a theme-colored opaque overlay. Parent pages and controls share the same
+backdrop revision. PanelHost enables that path by default; tint fallback is an
+explicit capability fallback, not visual acceptance. BVT scene types, product
+operators, localization and undo ownership remain with the consumer. Exact
+reference, motion, broader theme/platform and native-only action parity remain
+open; see [menu QA](design/qa/context-menu-v1/index.html).

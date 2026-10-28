@@ -17,6 +17,8 @@ class PaletteSource:
     remove: object = None
     edit: object = None
     value: object = None
+    identity: object = None
+    context_target: object = None
 
 
 class Palette(Widget):

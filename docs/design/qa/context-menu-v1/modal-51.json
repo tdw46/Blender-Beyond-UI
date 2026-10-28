@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "production default uses shared BVT liquid glass and strong blur",
+    "right-click owner, nested/back navigation and current shortcut execution",
+    "Shift F10 and right-click cancel edit before opening",
+    "outside click dismisses and clears keyboard context focus",
+    "delayed description reveals once and tooltip timer stops",
+    "host animation disable, invalidation, finite idle and clean teardown"
+  ],
+  "called": [
+    "value"
+  ]
+}
