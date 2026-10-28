@@ -53,12 +53,14 @@ host, with one retained backdrop shared across controls and animation frames.
 [Context menu integration](docs/CONTEXT_MENUS.md) ·
 [Menu capture provenance](docs/media/panels/context-menu-provenance.json)
 
-![Actual Blender shortcut capture with shared liquid glass](docs/media/panels/context-menu-shortcut-v3.gif)
+![Actual Blender shortcut capture with shared liquid glass](docs/media/panels/context-menu-shortcut-v4.gif)
 
-[Current menu adapters and glass captures](docs/design/qa/context-menu-v3/index.html)
+[Current menu adapters and glass captures](docs/design/qa/context-menu-v4/index.html)
 cover real driver clipboard copy/paste, Quick Favorites add/remove, enum-value
 and flag shortcuts, keyboard/mouse/key-modifier capture, contributed boolean/enum
-choices, Edit Source and Python tooltips. These adapters are
+choices, Edit Source and Python tooltips. Capture modes support keyboard selection;
+inline menu contributions preserve disabled state and invocation, and operator
+arguments use bounded snapshots with stale-owner checks. These adapters are
 execution-tested on macOS arm64 Blender 5.1.2 and 5.2.2; private APIs require exact
 source/executable admission. See the [supported cases and gaps](docs/CONTEXT_MENUS.md).
 Exact generated-reference/motion acceptance is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu

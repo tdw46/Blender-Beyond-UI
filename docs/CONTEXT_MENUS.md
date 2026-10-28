@@ -106,7 +106,7 @@ and [GPU backdrop integration](INTEGRATION.md).
 
 ## Evidence and remaining parity
 
-[QA gallery](design/qa/context-menu-v3/index.html) includes real Blender root,
+[QA gallery](design/qa/context-menu-v4/index.html) includes real Blender root,
 nested, tooltip, all eight compound targets, glass-versus-tint comparison and
 motion. Disposable Blender 5.1.2/5.2.2 tests cover RNA transactions, selected-owner
 rollback, keyframes/drivers, public nested menu contributions, stale elements,
@@ -145,8 +145,8 @@ library's minimum Blender version or qualify those runtimes by inference.
   in menu state. Operator buttons expose a Quick Favorites submenu; opening that
   submenu queries through a temporary typed property container, always released.
   Queries leave preferences clean; changes mark them dirty without saving.
-- **Shortcuts:** Assign opens the existing liquid-glass menu as a key-capture
-  surface. Escape/right-click cancels; modifier-only input waits. Conflicting
+- **Shortcuts:** Assign opens a liquid-glass mode chooser. Arrows and Enter
+  select Keyboard, Mouse/NDOF or Key modifier chord before capture is armed. Escape/right-click cancels; modifier-only input waits. Conflicting
   chords in the chosen keymap, global UI/Screen/Window maps and applicable
   View3D/mode maps are rejected without removing somebody else's binding. Existing exact operator/argument matches offer Change and Remove;
   concurrent item/context changes revoke the action. Edits use public user keymaps
@@ -156,8 +156,10 @@ library's minimum Blender version or qualify those runtimes by inference.
   Explicit alternate capture rows support mouse/NDOF buttons and a held ordinary
   key plus a second key. Escape/right-click always cancel; these two inputs cannot
   be assigned through this capture UI. Left-click can be assigned in the mouse
-  capture instruction/body area. Arbitrary editor/modal keymap hierarchy conflicts
-  and keyboard-only selection of alternate capture modes remain open.
+  capture instruction/body area. Cancel returns to the mode chooser; another
+  Escape returns to the originating menu. Navigation keys remain assignable once
+  capture is armed. Mode selection adds no extra nesting beyond the capture page.
+  Arbitrary editor/modal keymap hierarchy conflicts remain open.
 - **Shortcut applicability:** direct boolean property toggles and independent
   `INVOKE_DEFAULT` operator buttons are supported. Numeric fields have no direct
   native-style shortcut action. Expanded enum options assign their exact value;
@@ -175,7 +177,7 @@ library's minimum Blender version or qualify those runtimes by inference.
   only when Blender's `show_tooltips_python` is enabled. Tooltip reveal retains
   the same finite dwell, blur, spring and cleanup as ordinary descriptions.
 
-[Menu parity and glass QA v3](design/qa/context-menu-v3/index.html) records disposable
+[Menu parity and glass QA v4](design/qa/context-menu-v4/index.html) records disposable
 runtime tests and current captures. These are execution results, not a claim of
 exact generated-reference acceptance. The full light/custom-theme, DPI,
 multi-window and platform matrix, arbitrary UILayout callbacks/string context,
@@ -196,3 +198,13 @@ Numeric/string inline editors, arbitrary UILayout templates, dynamic enum
 callbacks without publicly enumerable RNA items, and string-context propagation
 remain explicit host-integration gaps. Unsupported fields stay disabled with an
 explanation; this collector does not claim general UILayout parity.
+
+Inline `menu_contents` inherits its parent's enabled/active state, operator
+invocation and scoped pointers. Its callback failures are isolated so later
+contributions still collect. Operator arguments are snapshotted recursively at
+collection time; mutable lists, nested dictionaries, sets, mathutils values and
+RNA arrays cannot silently change an already-open command. RNA pointer arguments
+retain their owner identity and are rechecked before execution. Snapshots are
+bounded to 512 nodes and eight levels; unsupported/oversized snapshots disable
+the affected action and report a diagnostic. Operator/menu registration identity
+is also rechecked. Collection and snapshot copying never run in painting.

@@ -110,6 +110,7 @@ class Menu:
         self.motion = Motion()
         self.parents = []
         self.capture_row = None
+        self.capture_picker = self.capture_return = None
         self.held_keys = set()
         self.closed = False
         self.glass_ready = False
@@ -316,35 +317,59 @@ class Menu:
         self.parents.clear()
         self.held_keys.clear()
         self.capture_row = None
+        self.capture_picker = self.capture_return = None
 
     def back(self):
+        if self.capture_return is not None:
+            self.hide_tip()
+            self.page, self.capture_return = self.capture_return, None
+            self.capture_row = None
+            self.held_keys.clear()
+            self.motion.clear()
+            self.motion.pulse("reveal", 0.12)
+            return True
         if not self.parents:
             return False
         self.hide_tip()
         self.capture_row = None
         self.held_keys.clear()
         self.page = self.parents.pop()
+        self.capture_picker = None
         self.motion.clear()
         self.motion.pulse("reveal", 0.12)
         return True
 
     def start_capture(self, row, context, *, replace_mode=False):
-        if not replace_mode:
+        # Pick a mode using ordinary menu navigation before arming capture.
+        # Navigation keys remain assignable once capture is explicitly armed.
+        replace_mode = replace_mode or self.page is self.capture_picker
+        if replace_mode:
+            if self.page is self.capture_picker:
+                self.capture_return = self.page
+        else:
             if len(self.parents) >= self.depth_limit:
                 return
             self.parents.append(self.page)
-        options = (
-            row.capture_options(self.target, context) if row.capture_options else ()
-        )
-        self.page = self._page(
-            (
-                Entry("__capture__", row.capture_prompt, enabled=False),
-                *islice(options, self.limit - 2),
-            ),
-            context,
-            "Cancel",
-        )
-        self.capture_row = row
+        if row.capture_options is not None:
+            options = row.capture_options(self.target, context)
+            self.page = self._page(
+                (
+                    replace(row, label="Keyboard…", capture_options=None),
+                    *islice(options, self.limit - 2),
+                ),
+                context,
+                "Capture mode",
+            )
+            self.page.highlight = 1
+            self.capture_picker = self.page
+            self.capture_row = None
+        else:
+            self.page = self._page(
+                (Entry("__capture__", row.capture_prompt, enabled=False),),
+                context,
+                "Cancel",
+            )
+            self.capture_row = row
         self.held_keys.clear()
         self.motion.clear()
         self.motion.pulse("reveal", 0.12)

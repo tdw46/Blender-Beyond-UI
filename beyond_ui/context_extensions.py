@@ -7,6 +7,7 @@ callbacks are isolated and reported; native-button-dependent actions stay absent
 from types import SimpleNamespace
 from dataclasses import replace
 from .context_menu import Entry
+from .context_arguments import Arguments
 
 
 def overrides(source):
@@ -78,8 +79,10 @@ class Collector:
         return values
 
     def operator(self, idname, *, text="", icon="", **kwargs):
+        if len(self.rows) >= 64:
+            return SimpleNamespace()
         props = SimpleNamespace()
-        snapshot = {}
+        snapshot = Arguments()
         self.snapshots.append((props, snapshot))
         if idname.startswith("ui.") or idname.endswith("_button"):
             self._add(
@@ -94,6 +97,7 @@ class Collector:
             return props
         op = operator(idname)
         info = op.get_rna_type()
+        identity = info.as_pointer()
         invocation = self.operator_context
         values = self._scope()
         permitted = self.enabled and self.active
@@ -103,12 +107,19 @@ class Collector:
 
         def poll(target, context):
             with scope(context):
-                return permitted and operator(idname).poll()
+                current = operator(idname)
+                return (
+                    permitted
+                    and snapshot.valid()
+                    and current.get_rna_type().as_pointer() == identity
+                    and current.poll()
+                )
 
         def execute(target, context):
             with scope(context):
-                if operator(idname).poll():
-                    return operator(idname)(invocation, **snapshot)
+                if poll(target, context):
+                    return operator(idname)(invocation, **snapshot.values())
+                raise ReferenceError("Contributed operator changed or is unavailable")
 
         self._add(
             Entry(
@@ -173,9 +184,11 @@ class Collector:
             )
 
     def operator_menu_enum(self, idname, property, *, text="", icon="", **kwargs):
+        if len(self.rows) >= 64:
+            return SimpleNamespace()
         from itertools import islice
 
-        props, snapshot = SimpleNamespace(), {}
+        props, snapshot = SimpleNamespace(), Arguments()
         self.snapshots.append((props, snapshot))
         values, invocation = self._scope(), self.operator_context
         permitted, depth = self.enabled and self.active, self.depth + 1
@@ -187,6 +200,7 @@ class Collector:
             with context.temp_override(**values()):
                 return (
                     permitted
+                    and snapshot.valid()
                     and current.get_rna_type().as_pointer() == identity
                     and current.poll()
                 )
@@ -198,7 +212,7 @@ class Collector:
                 holder.layout.operator_context = invocation
                 for item in islice((i for i in meta.enum_items if i.identifier), 63):
                     settings = holder.layout.operator(idname, text=item.name)
-                    for key, value in snapshot.items():
+                    for key, value in snapshot.values().items():
                         setattr(settings, key, value)
                     setattr(
                         settings,
@@ -235,7 +249,7 @@ class Collector:
             with context.temp_override(**values()):
                 return (
                     permitted
-                    and menu is not None
+                    and menu is cls
                     and (not hasattr(menu, "poll") or menu.poll(context))
                 )
 
@@ -260,15 +274,13 @@ class Collector:
         if cls is not None and self.depth < 3:
             with self.context.temp_override(**self._scope()()):
                 if not hasattr(cls, "poll") or cls.poll(self.context):
-                    self.rows.extend(
-                        collect(
-                            self.context,
-                            self.source,
-                            (cls.draw,),
-                            self.depth + 1,
-                            self.extra,
-                        )[: max(0, 64 - len(self.rows))]
-                    )
+                    # Inline children inherit the same state as an ordinary row.
+                    child = self.row()
+                    child.depth += 1
+                    try:
+                        cls.draw(SimpleNamespace(layout=child), self.context)
+                    except Exception as error:
+                        print("[Beyond UI context extension]", idname, error)
 
 
 def collect(context, source, callbacks, depth=0, extra=None):
@@ -289,7 +301,12 @@ def collect(context, source, callbacks, depth=0, extra=None):
                     error,
                 )
             for props, snapshot in layout.snapshots:
-                snapshot.update(vars(props))
+                snapshot.capture(vars(props))
+                if snapshot.error:
+                    print(
+                        "[Beyond UI context extension] argument snapshot:",
+                        snapshot.error,
+                    )
             rows.extend(pending[: max(0, 64 - len(rows))])
             if len(rows) >= 64:
                 break

@@ -243,3 +243,50 @@ reference is yet approved, and these captures are not labeled reference-matched.
 dispatch, arbitrary editor/modal hierarchy conflicts, keyboard-only alternate
 capture selection, inline scalar fields, dynamic enum callbacks, string contexts,
 and the broader theme/DPI/platform/window and motion acceptance matrix.
+
+## Keyboard capture and contribution ownership — QA v4, 2026-10-28
+
+[QA v4](design/qa/context-menu-v4/index.html) closes keyboard-only selection of
+capture modes. Assign/Change first opens a standard menu page; arrows and Enter
+select the mode before capture is armed. Escape/right-click returns to the mode
+chooser, then the parent menu. Tab/arrows/Enter remain assignable once capturing.
+The chooser and capture share one nesting slot, preserving the three-level limit.
+Both stages reuse the existing glass painter, theme mapping and finite spring.
+
+Inline extension menu contents now inherit disabled/active state, invocation and
+pointer scope. Contributed commands snapshot nested mutable arguments, mathutils
+values and RNA arrays by value. Pointer arguments and operator/menu registration
+identity are revalidated. Snapshots are bounded; unsupported argument trees and
+nested callback failures are isolated from subsequent contributions. Native
+admission and Blender 4.2 fallback behavior are unchanged.
+
+57 pure tests, Ruff, packaging, and disposable Blender 5.1.2/5.2.2 adapter,
+contribution, actual-window input and background regression fixtures pass. New
+cases include keyboard mode navigation, cancellation, deepest-level capture,
+argument mutation after collection, mathutils/RNA array support, inline disabled
+state and EXEC_DEFAULT inheritance, nested callback recovery, unsupported argument
+isolation and operator-unregister revocation. Runtime inspection caught that
+mathutils classes report a `builtins` module on these executables; the snapshot
+adapter now checks the actual loaded classes instead of trusting module names.
+
+The unchanged warm root workload records CPU median/p95 0.242/0.293 ms versus
+v3's 0.237/0.280 ms; navigation median is 0.079 ms in both. Resources remain one
+backdrop production, one strong blur and five offscreens, with stable identities
+through both mode-chooser and capture animations. These small sample differences
+do not establish a speed change or full source-level performance qualification.
+No shader, geometry rebuild, blur pass or idle timer was introduced. Source/fixture
+hashes, raw captures, GIF frame hashes and logs are versioned with this evidence.
+
+Exact 4.2, 5.1 and 5.2 UILayout API and Manual menu pages were searched/opened.
+Most exact pages remained inaccessible to the fetch tool; the indexed
+[4.2 UILayout API](https://docs.blender.org/api/4.2/bpy.types.UILayout.html) and
+[5.2 Operator API](https://docs.blender.org/api/5.2/bpy.types.Operator.html)
+provide the public layout/operator contract. Installed runtime checks supply
+separate execution evidence for 5.1.2/5.2.2; stale 5.0/5.3 search hits were not used
+as proof for those versions. This is not new runtime qualification for 4.2.
+
+Prior references and galleries remain unchanged. Exact generated-reference and
+motion acceptance, custom-popup shortcut dispatch, inline scalar contribution
+editors, dynamic enum/string contexts and the broader platform/theme/DPI matrix
+remain open. The ledger remains 137 documented members, 39 partial and zero
+reference-matched.

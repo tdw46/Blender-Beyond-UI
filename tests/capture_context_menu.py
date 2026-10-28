@@ -286,6 +286,19 @@ def run():
                 )
                 canvas.context_menu.choose(0, bpy.context)
                 canvas.context_menu.motion.clear()
+                render("capture-mode-picker")
+                canvas.context_menu.motion.clock = lambda: now[0]
+                now[0] = 0
+                canvas.context_menu.motion.pulse("reveal", 0.12)
+                mode_resources = resources()
+                for frame in range(36):
+                    now[0] = frame / 30
+                    render(f"mode-{frame:03}")
+                    canvas.advance_animations()
+                assert resources() == mode_resources
+                modes = canvas.context_menu.page.rows
+                canvas.context_menu.choose(1, bpy.context)
+                canvas.context_menu.motion.clear()
                 render("shortcut-capture")
                 assert canvas.context_menu.glass_ready
                 capture_menu = canvas.context_menu
@@ -298,7 +311,7 @@ def run():
                     render(f"shortcut-{frame:03}")
                     canvas.advance_animations()
                 assert resources() == capture_resources
-                modes = capture_menu.page.rows
+                capture_menu.back()
                 capture_menu.start_capture(modes[2], bpy.context, replace_mode=True)
                 capture_menu.motion.clear()
                 render("mouse-capture")

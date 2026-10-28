@@ -1,0 +1,74 @@
+{
+  "exact_match": false,
+  "reference_status": "No accepted generated liquid-glass reference; rejected v1 retained unchanged",
+  "reference_matched": false,
+  "theme": "explicit REFERENCE",
+  "dimensions": [
+    640,
+    560
+  ],
+  "warm_cpu_submission_before_ms": {
+    "closed": {
+      "median_ms": 0.054562464356422424,
+      "p95_ms": 0.08437503129243851,
+      "max_ms": 0.3013330278918147
+    },
+    "tint-fallback": {
+      "median_ms": 0.22322952281683683,
+      "p95_ms": 0.24512491654604673,
+      "max_ms": 0.32883300445973873
+    },
+    "open": {
+      "median_ms": 0.23666647030040622,
+      "p95_ms": 0.2797089982777834,
+      "max_ms": 0.339917023666203
+    },
+    "nested": {
+      "median_ms": 0.2412914764136076,
+      "p95_ms": 0.26745907962322235,
+      "max_ms": 0.2817079657688737
+    },
+    "scroll": {
+      "median_ms": 0.24208298418670893,
+      "p95_ms": 0.2690419787541032,
+      "max_ms": 0.29904209077358246
+    },
+    "navigation": {
+      "median_ms": 0.07902097422629595,
+      "p95_ms": 0.08212495595216751
+    }
+  },
+  "warm_cpu_submission_after_ms": {
+    "closed": {
+      "median_ms": 0.05579151911661029,
+      "p95_ms": 0.0992919085547328,
+      "max_ms": 0.19525003153830767
+    },
+    "tint-fallback": {
+      "median_ms": 0.23072946351021528,
+      "p95_ms": 0.25741709396243095,
+      "max_ms": 0.32783299684524536
+    },
+    "open": {
+      "median_ms": 0.2419165102764964,
+      "p95_ms": 0.29270804952830076,
+      "max_ms": 0.4865420050919056
+    },
+    "nested": {
+      "median_ms": 0.24629099061712623,
+      "p95_ms": 0.27154095005244017,
+      "max_ms": 0.6977500161156058
+    },
+    "scroll": {
+      "median_ms": 0.2483339630998671,
+      "p95_ms": 0.28895901050418615,
+      "max_ms": 0.3333750646561384
+    },
+    "navigation": {
+      "median_ms": 0.07929198909550905,
+      "p95_ms": 0.0827909680083394
+    }
+  },
+  "scope": "Equivalent 640x560 root/nested/scroll fixture, 20 warmups and 100 samples; CPU submission only, no GPU completion fence or end-to-end latency claim.",
+  "capture_shutdown": "Current capture log has no allocation warning. Historical v1/v2 MTLSafeFreeList warning remains an unresolved intermittent backend observation, not a demonstrated fix."
+}

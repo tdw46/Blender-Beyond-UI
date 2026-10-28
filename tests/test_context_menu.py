@@ -111,6 +111,54 @@ class ContextMenus(unittest.TestCase):
         menu.choose(0, None)
         self.assertEqual(len(menu.page.rows), Menu.limit)
 
+    def test_keyboard_capture_mode_selection_preserves_assignable_navigation_keys(self):
+        calls = []
+        row = Entry(
+            "capture",
+            "Assign",
+            capture=lambda t, c, e: calls.append(e.type) or True,
+            capture_options=lambda t, c: (
+                Entry("chord", "Chord", capture=lambda t, c, e: False),
+            ),
+        )
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.event(event("RET"), 20, 20)
+        self.assertIsNone(menu.capture_row)
+        self.assertEqual(menu.page.highlight, 1)
+        menu.event(event("DOWN_ARROW"), 20, 20)
+        menu.event(event("RET"), 20, 20)
+        self.assertEqual(menu.capture_row.key, "chord")
+        menu.event(event("ESC"), 20, 20)
+        self.assertIsNone(menu.capture_row)
+        menu.event(event("UP_ARROW"), 20, 20)
+        menu.event(event("RET"), 20, 20)
+        menu.event(event("TAB"), 20, 20)
+        self.assertEqual(calls, ["TAB"])
+        self.assertIsNone(menu.capture_picker)
+        self.assertIsNone(menu.capture_return)
+
+    def test_capture_modes_do_not_consume_extra_nesting_budget(self):
+        capture = Entry(
+            "capture",
+            "Capture",
+            capture=lambda t, c, e: False,
+            capture_options=lambda t, c: (),
+        )
+        middle = Entry("middle", "Middle", children=lambda t, c: (capture,))
+        root = Entry("root", "Root", children=lambda t, c: (middle,))
+        menu = Menu(Target("owner"), [root], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        menu.choose(1, None)
+        menu.choose(1, None)
+        self.assertEqual(len(menu.parents), 3)
+        menu.choose(1, None)
+        self.assertIsNotNone(menu.capture_row)
+        self.assertEqual(len(menu.parents), 3)
+        menu.back()
+        self.assertIsNone(menu.capture_row)
+        menu.back()
+        self.assertEqual(len(menu.parents), 2)
+
     def test_checked_values_snapshot_on_input_and_modifier_chords(self):
         state, calls = [False], []
         row = Entry(

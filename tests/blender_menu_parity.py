@@ -82,6 +82,7 @@ def run():
         try:
             m = menu_for(action)
             m.choose(0, ctx)
+            m.choose(1, ctx)
             m.event(event("F17", ctrl=True, alt=True, shift=True), 20, 20, ctx)
             assert not m.closed and "already used" in m.error, m.error
             assert action.existing is None
@@ -171,7 +172,20 @@ def run():
 
         from beyond_ui.context_extensions import collect
 
-        observed = []
+        from beyond_ui.context_arguments import Arguments
+        from mathutils import Vector
+
+        arguments = Arguments()
+        vector = Vector((3.0, 4.0))
+        arguments.capture({"vector": vector, "rna_array": obj.lock_location})
+        vector.x = 99
+        assert arguments.values()["vector"] == (3.0, 4.0)
+        assert arguments.values()["rna_array"] == tuple(obj.lock_location)
+        checks.append(
+            "mathutils and RNA arrays snapshot by value without rejecting supported operator inputs"
+        )
+
+        observed, vectors, invocations = [], [], []
 
         class BEYONDUI_OT_parity_choice(bpy.types.Operator):
             bl_idname = "beyondui.parity_choice"
@@ -180,12 +194,18 @@ def run():
                 items=[("A", "Alpha", ""), ("B", "Beta", "")]
             )
             amount: bpy.props.IntProperty()
+            vector: bpy.props.FloatVectorProperty(size=2)
 
             @classmethod
             def poll(cls, context):
                 return context.button_pointer == obj
 
+            def invoke(self, context, event):
+                invocations.append("INVOKE")
+                return self.execute(context)
+
             def execute(self, context):
+                vectors.append(tuple(self.vector))
                 observed.append((self.choice, self.amount))
                 return {"FINISHED"}
 
@@ -238,8 +258,80 @@ def run():
             checks.append(
                 "operator enum submenu preserves invocation, clicked-button context and argument snapshots"
             )
+            mutable = [1.0, 2.0]
+
+            class BEYONDUI_MT_parity_inline(bpy.types.Menu):
+                bl_label = "Inline contribution"
+
+                def draw(self, context):
+                    settings = self.layout.operator("beyondui.parity_choice")
+                    settings.vector = mutable
+                    settings.amount = 9
+                    if mutable[0] < 0:
+                        raise RuntimeError("fixture nested contribution failure")
+
+            bpy.utils.register_class(BEYONDUI_MT_parity_inline)
+            try:
+
+                def inline(holder, context):
+                    holder.layout.operator_context = "EXEC_DEFAULT"
+                    holder.layout.menu_contents("BEYONDUI_MT_parity_inline")
+                    disabled = holder.layout.row()
+                    disabled.enabled = False
+                    disabled.menu_contents("BEYONDUI_MT_parity_inline")
+
+                inline_rows = collect(ctx, source, (inline,))
+                mutable[0] = 99.0
+                m = Menu(target, inline_rows, (10, 10), (0, 0, 640, 700), context=ctx)
+                assert m.page.available == (True, False)
+                m.choose(0, ctx)
+                assert vectors[-1] == (1.0, 2.0) and not invocations
+                assert observed[-1] == ("A", 9)
+                checks.append(
+                    "inline menu contents inherit disabled state, pointer scope and EXEC_DEFAULT; mutable vector arguments snapshotted"
+                )
+                mutable[0] = -1
+
+                def broken(holder, context):
+                    holder.layout.operator_context = "EXEC_DEFAULT"
+                    holder.layout.menu_contents("BEYONDUI_MT_parity_inline")
+                    holder.layout.operator("beyondui.parity_choice").amount = 11
+
+                recovered = collect(ctx, source, (broken,))
+                assert len(recovered) == 2
+                m = Menu(target, recovered, (10, 10), (0, 0, 640, 700), context=ctx)
+                m.choose(1, ctx)
+                assert observed[-1] == ("A", 11)
+
+                def unsupported(holder, context):
+                    holder.layout.operator_context = "EXEC_DEFAULT"
+                    holder.layout.operator("beyondui.parity_choice").vector = object()
+                    holder.layout.operator("beyondui.parity_choice").amount = 12
+
+                recovered = collect(ctx, source, (unsupported,))
+                m = Menu(target, recovered, (10, 10), (0, 0, 640, 700), context=ctx)
+                assert m.page.available == (False, True)
+                m.choose(1, ctx)
+                assert observed[-1] == ("A", 12)
+                checks.append(
+                    "nested callback and unsupported argument failures isolate to their own contribution"
+                )
+                m = Menu(target, inline_rows, (10, 10), (0, 0, 640, 700), context=ctx)
+                bpy.utils.unregister_class(BEYONDUI_OT_parity_choice)
+                m.refresh(ctx)
+                assert not any(m.page.available)
+                before = len(observed)
+                m.choose(0, ctx)
+                assert len(observed) == before
+                m.close()
+                checks.append(
+                    "unregistered contributed operators are revoked before execution"
+                )
+            finally:
+                bpy.utils.unregister_class(BEYONDUI_MT_parity_inline)
         finally:
-            bpy.utils.unregister_class(BEYONDUI_OT_parity_choice)
+            if BEYONDUI_OT_parity_choice.is_registered:
+                bpy.utils.unregister_class(BEYONDUI_OT_parity_choice)
 
     result = dict(
         passed=True,

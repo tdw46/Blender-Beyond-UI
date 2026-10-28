@@ -223,9 +223,13 @@ def tick():
             _, canvas = current()
             with bpy.context.temp_override(window=window, area=area, region=region):
                 canvas.context_menu.choose(1, bpy.context)
+            assert canvas.context_menu.capture_row is None
+            emit("RET")
+        elif stage == 17:
+            _, canvas = current()
             assert canvas.context_menu.capture_row is not None
             emit("F19", shift=True, ctrl=True, alt=True)
-        elif stage == 17:
+        elif stage == 18:
             _, canvas = current()
             assert canvas.context_menu is None, canvas.menu_error
             with bpy.context.temp_override(window=window, area=area, region=region):
@@ -238,7 +242,7 @@ def tick():
                 assert item.type == "F19" and item.shift and item.ctrl and item.alt
             state["old_toggle"] = bpy.context.scene.render.use_file_extension
             emit("F19", outside=True, shift=True, ctrl=True, alt=True)
-        elif stage == 18:
+        elif stage == 19:
             assert bpy.context.scene.render.use_file_extension != state["old_toggle"]
             with bpy.context.temp_override(window=window, area=area, region=region):
                 Action(
@@ -247,7 +251,7 @@ def tick():
                     bpy.context,
                 ).remove(None, bpy.context)
             state["checks"].append(
-                "real window key capture persists a working shortcut, invokes outside canvas, and removes it"
+                "real window keyboard mode selection and capture persist a working shortcut, invokes outside canvas, and removes it"
             )
             finish(True)
             return None

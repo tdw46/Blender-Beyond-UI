@@ -150,12 +150,13 @@ def run():
         row = action.entry(ctx)
         capture = Menu(target, (row,), (0, 0), (0, 0, 640, 800), context=ctx)
         capture.choose(0, ctx)
+        capture.choose(1, ctx)
         assert capture.capture_row is not None and len(capture.parents) == 1
         capture.event(event("LEFT_SHIFT", shift=True), 4, 4, ctx)
         assert capture.capture_row is not None and len(km.keymap_items) == before_count
         capture.event(event("ESC"), 4, 4, ctx)
         assert capture.capture_row is None and len(km.keymap_items) == before_count
-        capture.choose(0, ctx)
+        capture.choose(1, ctx)
         capture.event(event("F19", shift=True, ctrl=True, alt=True), 4, 4, ctx)
         assert capture.closed and capture.error is None, capture.error
         assert len(km.keymap_items) == before_count + 1
@@ -173,6 +174,7 @@ def run():
             target, (action.entry(ctx),), (0, 0), (0, 0, 640, 800), context=ctx
         )
         capture.choose(0, ctx)
+        capture.choose(1, ctx)
         capture.choose(1, ctx)
         capture.event(event("F18"), 4, 4, ctx)
         assert not capture.closed and "already used" in capture.error

@@ -971,7 +971,7 @@
     "right_click_context_menus": {
       "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Owner-aware menus retain BVT glass/motion. Real property/operator Favorites add/remove, enum value/flag shortcuts, keyboard/mouse/key-modifier capture, common-scope conflict checks and contributed bool/enum/operator-choice rows are execution-tested on exact macOS arm64 Blender 5.1.2/5.2.2. Full custom-popup shortcut dispatch, arbitrary editor/modal conflicts, keyboard-only alternate capture mode selection, inline scalar fields, dynamic enum callbacks, arbitrary callbacks/string contexts, broader platforms/themes/DPI/windows and exact generated-reference/motion acceptance remain open; see docs/CONTEXT_MENUS.md.",
+      "notes": "Owner-aware menus retain BVT glass/motion. Keyboard-accessible capture mode selection, inline menu state/invocation inheritance, deep bounded argument snapshots and registration revocation are implemented. Real property/operator Favorites add/remove, enum value/flag shortcuts, keyboard/mouse/key-modifier capture, common-scope conflict checks and contributed bool/enum/operator-choice rows are execution-tested on exact macOS arm64 Blender 5.1.2/5.2.2. Full custom-popup shortcut dispatch, arbitrary editor/modal conflicts, inline scalar fields, dynamic enum callbacks, arbitrary callbacks/string contexts, broader platforms/themes/DPI/windows and exact generated-reference/motion acceptance remain open; see docs/CONTEXT_MENUS.md.",
       "execution_evidence": [
         "docs/design/qa/context-menu-v1/rna-51.json",
         "docs/design/qa/context-menu-v1/rna-52.json",
@@ -988,9 +988,15 @@
         "docs/design/qa/context-menu-v3/modal-51.json",
         "docs/design/qa/context-menu-v3/modal-52.json",
         "docs/design/qa/context-menu-v3/regression-51.json",
-        "docs/design/qa/context-menu-v3/regression-52.json"
+        "docs/design/qa/context-menu-v3/regression-52.json",
+        "docs/design/qa/context-menu-v4/adapters-51.json",
+        "docs/design/qa/context-menu-v4/adapters-52.json",
+        "docs/design/qa/context-menu-v4/parity-51.json",
+        "docs/design/qa/context-menu-v4/parity-52.json",
+        "docs/design/qa/context-menu-v4/modal-51.json",
+        "docs/design/qa/context-menu-v4/modal-52.json"
       ],
-      "comparison_evidence": "docs/design/qa/context-menu-v3/comparison.json"
+      "comparison_evidence": "docs/design/qa/context-menu-v4/comparison.json"
     },
     "active_blender_theme": {
       "status": "partial",
@@ -1007,7 +1013,7 @@
       "required": true,
       "policy": "AGENTS.md#hard-rule-real-bvt-liquid-glass",
       "notes": "Mandatory BVT shared backdrop, Gaussian strong blur, refraction/rim and finite motion for every translucent surface. Default embedded host and new shortcut capture use this material. Tint/opaque fallback is degraded and cannot count as parity. Exact generated-reference acceptance and broader theme/platform matrix remain open.",
-      "comparison_evidence": "docs/design/qa/context-menu-v3/comparison.json"
+      "comparison_evidence": "docs/design/qa/context-menu-v4/comparison.json"
     }
   }
 }
