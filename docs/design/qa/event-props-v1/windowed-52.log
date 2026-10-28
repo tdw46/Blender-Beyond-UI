@@ -1,0 +1,4 @@
+EVENT_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['Real window click, keyboard mode selection, chord capture and shared liquid glass', 'Right-click cancels capture, targets exact property, and leaves no timers on invalidation']}
+00:08.957  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

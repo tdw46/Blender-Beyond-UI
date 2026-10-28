@@ -82,9 +82,18 @@ Relevant documentation: [4.2 units](https://docs.blender.org/api/4.2/bpy.utils.u
 [5.2 units](https://docs.blender.org/api/5.2/bpy.utils.units.html), and
 [5.2 numeric fields](https://docs.blender.org/manual/en/5.2/interface/controls/buttons/fields.html).
 
-This is still partial `prop` parity. Remaining work includes pointer/event fields,
+This is still partial `prop` parity. Remaining work includes pointer fields, remaining event variants,
 decorators, step arrows, Tab/multiple-field editing, full mathematical expressions
 and expression-to-driver input, additional unit categories (time, mass, power,
 temperature, velocity and others), complete subtype/keyword semantics, and exact
 visual/motion acceptance. These are tracked in `CUSTOM_PARITY.json`; they are not
 silently counted as implemented.
+
+## Wide-field motion correction
+
+Wide numeric controls now use 15% of their otherwise-resolved bounce amplitude.
+Compact fields and menu motion are unchanged. Configure
+`canvas.wide_numeric_motion_scale` before layout or live; shared disabled/zero
+strength settings continue to win. [QA v2](design/qa/numeric-props-v2/index.html)
+preserves v1 and compares the actual original/reduced motion side by side.
+[Event property support](EVENT_PROPERTIES.md) is the next implemented prop slice.

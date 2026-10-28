@@ -1,0 +1,235 @@
+{
+  "52": {
+    "matching_animation_frames": 153,
+    "batched_pixels_equal_unbatched": true,
+    "settled_and_disabled_equal_rest": true,
+    "stable_resources": true,
+    "timings": {
+      "animated-menu": {
+        "median_ms": 0.22002047626301646,
+        "p95_ms": 0.28241705149412155,
+        "max_ms": 0.3041669260710478
+      },
+      "closed": {
+        "median_ms": 0.05502096610143781,
+        "p95_ms": 0.06570899859070778,
+        "max_ms": 0.0964159844443202
+      },
+      "tint-fallback": {
+        "median_ms": 0.19054202130064368,
+        "p95_ms": 0.21491700317710638,
+        "max_ms": 0.22820895537734032
+      },
+      "open": {
+        "median_ms": 0.188187463209033,
+        "p95_ms": 0.20933302585035563,
+        "max_ms": 0.2305000089108944
+      },
+      "nested": {
+        "median_ms": 0.19541650544852018,
+        "p95_ms": 0.22350007202476263,
+        "max_ms": 0.24295796174556017
+      },
+      "scroll": {
+        "median_ms": 0.2018750528804958,
+        "p95_ms": 0.2210419625043869,
+        "max_ms": 0.25387504138052464
+      },
+      "navigation": {
+        "median_ms": 0.07731298683211207,
+        "p95_ms": 0.08120806887745857
+      },
+      "inline-edit": {
+        "median_ms": 0.12093753321096301,
+        "p95_ms": 0.17487502191215754,
+        "max_ms": 0.31987507827579975
+      }
+    },
+    "retained_resources": {
+      "skin_shader": 481497552176,
+      "skin_batch": 481495901920,
+      "style_shader": 481497552496,
+      "style_batch": 481495902016,
+      "icon_shader": 481497556816,
+      "icons": {
+        "\u203a": 481495904128,
+        "reset": 481495872272,
+        "\u25c7": 481495903600,
+        "\u25cc": 481495904080,
+        "menu": 481495903888,
+        "shortcut": 481495904224,
+        "globe": 481495904272,
+        "\u2039": 481495904320
+      },
+      "glass_shader": 481497555856,
+      "glass_batches": {
+        "0.3": 481495903168,
+        "0.4": 481495903264,
+        "0.7": 481495903312
+      },
+      "backdrop_productions": 1,
+      "blur_productions": 1,
+      "backdrop_allocations": 5
+    }
+  },
+  "51": {
+    "matching_animation_frames": 153,
+    "batched_pixels_equal_unbatched": true,
+    "settled_and_disabled_equal_rest": true,
+    "stable_resources": true,
+    "timings": {
+      "animated-menu": {
+        "median_ms": 0.23866695119068027,
+        "p95_ms": 0.266459072008729,
+        "max_ms": 0.35550002939999104
+      },
+      "closed": {
+        "median_ms": 0.06212451262399554,
+        "p95_ms": 0.08870800957083702,
+        "max_ms": 0.13412500265985727
+      },
+      "tint-fallback": {
+        "median_ms": 0.20906259305775166,
+        "p95_ms": 0.2293749712407589,
+        "max_ms": 0.3146659582853317
+      },
+      "open": {
+        "median_ms": 0.21097896387800574,
+        "p95_ms": 0.23479200899600983,
+        "max_ms": 0.27195794973522425
+      },
+      "nested": {
+        "median_ms": 0.21143752383068204,
+        "p95_ms": 0.23304193746298552,
+        "max_ms": 0.2777079353109002
+      },
+      "scroll": {
+        "median_ms": 0.2185835037380457,
+        "p95_ms": 0.2380840014666319,
+        "max_ms": 0.2566250041127205
+      },
+      "navigation": {
+        "median_ms": 0.07827102672308683,
+        "p95_ms": 0.08079200051724911
+      },
+      "inline-edit": {
+        "median_ms": 0.11306250235065818,
+        "p95_ms": 0.13399997260421515,
+        "max_ms": 0.15849992632865906
+      }
+    },
+    "retained_resources": {
+      "skin_shader": 6146138704,
+      "skin_batch": 6148607360,
+      "style_shader": 481584635344,
+      "style_batch": 481586302592,
+      "icon_shader": 481586214880,
+      "icons": {
+        "\u203a": 481586352896,
+        "reset": 481751561152,
+        "\u25c7": 481586314496,
+        "\u25cc": 481586314240,
+        "menu": 481586309440,
+        "shortcut": 481751843712,
+        "globe": 481586483712,
+        "\u2039": 481751664128
+      },
+      "glass_shader": 6143167200,
+      "glass_batches": {
+        "0.3": 481586309248,
+        "0.4": 481586309184,
+        "0.7": 481586309120
+      },
+      "backdrop_productions": 1,
+      "blur_productions": 1,
+      "backdrop_allocations": 5
+    }
+  },
+  "baseline_defect_reproduced_frames": [
+    "frame-001",
+    "frame-002",
+    "frame-003",
+    "frame-004",
+    "frame-005",
+    "frame-006",
+    "frame-007",
+    "frame-008",
+    "frame-009",
+    "frame-010",
+    "frame-011",
+    "frame-012",
+    "frame-013",
+    "frame-014",
+    "frame-016",
+    "frame-017",
+    "frame-018",
+    "frame-019",
+    "frame-020",
+    "frame-021",
+    "frame-022",
+    "frame-023",
+    "frame-024",
+    "frame-025",
+    "frame-026",
+    "frame-027",
+    "frame-028",
+    "frame-029",
+    "frame-031",
+    "frame-032",
+    "frame-033",
+    "frame-034",
+    "frame-035",
+    "frame-036",
+    "frame-037",
+    "frame-038",
+    "frame-039",
+    "frame-040",
+    "frame-041",
+    "frame-042",
+    "frame-043",
+    "frame-044"
+  ],
+  "rest_pixels_unchanged": true,
+  "baseline_timings": {
+    "animated-menu": {
+      "median_ms": 0.19006198272109032,
+      "p95_ms": 0.22300006821751595,
+      "max_ms": 0.3148330142721534
+    },
+    "closed": {
+      "median_ms": 0.055625103414058685,
+      "p95_ms": 0.07075001485645771,
+      "max_ms": 0.1028330298140645
+    },
+    "tint-fallback": {
+      "median_ms": 0.18743745749816298,
+      "p95_ms": 0.20424998365342617,
+      "max_ms": 0.2728330437093973
+    },
+    "open": {
+      "median_ms": 0.18699950305745006,
+      "p95_ms": 0.20812498405575752,
+      "max_ms": 0.2501249546185136
+    },
+    "nested": {
+      "median_ms": 0.1892709988169372,
+      "p95_ms": 0.2108750632032752,
+      "max_ms": 0.23737503215670586
+    },
+    "scroll": {
+      "median_ms": 0.1985415001399815,
+      "p95_ms": 0.22554199676960707,
+      "max_ms": 0.2536670072004199
+    },
+    "navigation": {
+      "median_ms": 0.07670803461223841,
+      "p95_ms": 0.08220807649195194
+    },
+    "inline-edit": {
+      "median_ms": 0.09302102262154222,
+      "p95_ms": 0.10495795868337154,
+      "max_ms": 0.13266701716929674
+    }
+  },
+  "exact_reference_acceptance": false
+}

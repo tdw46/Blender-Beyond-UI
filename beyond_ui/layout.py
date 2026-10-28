@@ -178,7 +178,21 @@ class Layout:
         )
         label = self._text(text or meta.name, text_ctxt, translate)
         if event or full_event:
-            raise UnsupportedControl("prop event binding")
+            from .event_field import EventField
+
+            binding = self._binding(data, property)
+            try:
+                field = EventField(binding, full=full_event)
+            except ValueError as error:
+                raise UnsupportedControl(str(error)) from error
+            return self.group.add(
+                "event",
+                self._key(property),
+                label,
+                binding=binding,
+                event_field=field,
+                **self._options(),
+            )
         if (
             getattr(meta, "is_array", False)
             and index < 0

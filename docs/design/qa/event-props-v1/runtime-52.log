@@ -1,0 +1,4 @@
+EVENT_FIELDS {"passed": true, "version": "5.2.2 LTS", "checks": ["full-event captures keyboard modifiers, preserves activation value and commits the chord once", "right-click cancellation, exact RNA context target and stale modifier rejection", "event-only capture changes the key without changing modifier properties", "explicit mouse mode and held-key chord mode use shared capture navigation", "existing chord collisions and failed host commits leave the entire keymap item unchanged", "deleted keymap owner revokes capture without redirecting the edit", "standalone integer event properties retain native event codes; unsupported full-event owners fail explicitly"]}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

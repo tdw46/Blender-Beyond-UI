@@ -1,0 +1,4 @@
+00:02.597  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+BEYOND_UI_RESULT={"passed": true, "version": "5.2.2 LTS", "checks": ["inline numeric arithmetic, deferred commit, cancellation, invalid text and concurrent-value rejection", "string fields, numeric array components and rollback through the host commit boundary", "real keymap and registered host dispatcher reopen custom enum, commit selection, revoke hidden/replaced controls", "host editor/modal conflict maps reject colliding shortcuts without changing existing assignments", "host callbacks support custom invocation routing without dropping their context", "dispatcher teardown clears callbacks and unregisters its owned operator"]}
+
+Blender quit

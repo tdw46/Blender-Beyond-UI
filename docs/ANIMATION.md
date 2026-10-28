@@ -2,7 +2,8 @@
 
 Custom controls use the Effect Layers spring equations already extracted into
 `gpu/style.py`. Animation affects presentation, never logical layout, hit bounds,
-RNA values or undo. The default amplitude is the source amplitude. Importing the
+RNA values or undo. The default amplitude is the source amplitude, except wide numeric fields as
+described below. Importing the
 library installs no timers or callbacks.
 
 ```python
@@ -70,7 +71,8 @@ redraw; disabled and settled UI has no animation polling loop.
   picker rows and compact enum menus use retained chrome deformation.
 - Color popovers use reveal motion; read-only matrices, progress and sockets can
   use explicit reveal/change notifications.
-- Text stays stable under chrome hover motion, as in the source hover-lens path.
+- Basic control text stays stable under chrome hover motion, as in the source
+  hover-lens path. Menu labels and shortcuts follow their menu/row transforms.
   Primitive geometry and glass backdrop ownership remain retained.
 
 This is **not complete source animation parity**. The source's full highlight
@@ -89,3 +91,41 @@ Blender 5.1.2 and 5.2.2 Metal captures verify identical pixels at rest, after
 settling and after disabling; retained line batches do not change. Windowed
 modal tests verify timer termination while hovered and cleanup on invalidation.
 See [validation](VALIDATION.md) for scope and outstanding platform checks.
+
+## Wide numeric fields
+
+Numeric controls occupying at least 75% of the usable panel width multiply the
+otherwise-resolved strength by **0.15**, per Tyler's motion correction. Compact
+numeric controls and menus retain their existing strength. Spring timing,
+area-preserving deformation, resting pixels and logical hit targets are unchanged.
+
+```python
+canvas.wide_numeric_motion_scale = 0.15  # Set before layout or change live.
+```
+
+The multiplier accepts finite nonnegative values. Global/host disable still wins;
+zero stops motion. Updates clear active tracks and request the final resting
+frame without reloading, relayout, or another glass capture. Classification is
+updated when layout width changes, outside steady-state painting. See the
+[original/current motion comparison](design/qa/numeric-props-v2/index.html).
+
+## Menu text follows every opening transform
+
+Every menu option participates in the shared opening/reveal transform, including
+labels, shortcut hints, disabled rows, checkmarks, submenu arrows and inline
+values. Hover motion remains separate from the whole-menu reveal. Logical targets
+and keyboard selection never move with the rendered transform.
+
+During finite menu motion, the privately owned BLF font uses public zero-angle
+`ROTATION` mode to submit glyphs while the corresponding GPU matrix is still
+active. A non-rendering space first drains earlier text at the incoming matrix.
+This avoids deferred native text batches painting the final rows after the menu
+matrix has been popped. The flag is reset in `finally`; settled menus retain
+the original batching path. There is no GPU wait, framebuffer readback, extra
+texture, glyph-size churn, offscreen, glass pass or persistent timer.
+
+The regression fixture deliberately enables Blender's enclosing native text
+batch and compares every animation frame against an unbatched capture. These
+test-only native calls require exact build/source/executable admission; production
+uses public `blf.rotation`/`enable`/`disable` APIs only. See
+[menu motion QA v6](design/qa/context-menu-v6/index.html).

@@ -1,0 +1,14 @@
+{
+  "v4.2.0": {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_ui_api.cc",
+    "sha256": "2ca0ada7be7641ccd485cfdf919f350c5d6a1f825c4c388a8d1f6be7be364b50"
+  },
+  "ec6e62d40fa9": {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_ui_api.cc",
+    "sha256": "53ff057c9948263c1a7338653f6052d14e53999084f21952741f784e1d00a20e"
+  },
+  "d13f752e3b9c": {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_ui_api.cc",
+    "sha256": "238b66bbb5063d1a18452471470eabb726ce96d3083664952c6054d2356e3b62"
+  }
+}

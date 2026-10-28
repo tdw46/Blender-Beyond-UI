@@ -295,56 +295,7 @@ class Action:
         context.preferences.is_dirty = True
 
     def capture_entry(self, label="Assign Shortcut"):
-        def modes(target, context):
-            held = [None]
-
-            def chord(t, c, e):
-                if e.type in MODIFIERS:
-                    return False
-                if e.value == "RELEASE" and e.type == held[0]:
-                    held[0] = None
-                    return "Hold one key, then press another…"
-                if (
-                    e.value != "PRESS"
-                    or "MOUSE" in e.type
-                    or e.type.startswith(("NDOF", "TIMER", "TRACKPAD"))
-                ):
-                    return False
-                if held[0] is None:
-                    held[0] = e.type
-                    return f"Hold {e.type}; press the shortcut key…"
-                if e.type == held[0]:
-                    return False
-                return self.capture(t, c, e, key_modifier=held[0])
-
-            return (
-                Entry(
-                    "MOUSE_CAPTURE",
-                    "Mouse / NDOF button…",
-                    enabled=self.enabled,
-                    capture=lambda t, c, e: self.capture(t, c, e, mouse=True),
-                    capture_mouse=True,
-                    capture_prompt="Click below, or use a device button…",
-                    tip="Escape or right-click cancels. Click outside the menu inside this panel to bind left mouse.",
-                ),
-                Entry(
-                    "CHORD_CAPTURE",
-                    "Key modifier chord…",
-                    enabled=self.enabled,
-                    capture=chord,
-                    capture_prompt="Hold one key, then press another…",
-                ),
-            )
-
-        return Entry(
-            "SHORTCUT",
-            label,
-            enabled=self.enabled,
-            capture=self.capture,
-            capture_options=modes,
-            icon="shortcut",
-            tip="Assign a key; alternate capture modes are available inside.",
-        )
+        return capture_entry(self.capture, self.enabled, label)
 
     def entry(self, context):
         if self.existing is None:
@@ -462,4 +413,59 @@ def property_entry(source, context):
         enabled=False,
         icon="shortcut",
         tip="This property has no direct shortcut action; a host dispatcher can provide one.",
+    )
+
+
+def capture_entry(capture, enabled, label="Assign Shortcut", *, allow_chord=True):
+    def modes(target, context):
+        held = [None]
+
+        def chord(t, c, e):
+            if e.type in MODIFIERS:
+                return False
+            if e.value == "RELEASE" and e.type == held[0]:
+                held[0] = None
+                return "Hold one key, then press another…"
+            if (
+                e.value != "PRESS"
+                or "MOUSE" in e.type
+                or e.type.startswith(("NDOF", "TIMER", "TRACKPAD"))
+            ):
+                return False
+            if held[0] is None:
+                held[0] = e.type
+                return f"Hold {e.type}; press the shortcut key…"
+            if e.type == held[0]:
+                return False
+            return capture(t, c, e, key_modifier=held[0])
+
+        rows = (
+            Entry(
+                "MOUSE_CAPTURE",
+                "Mouse / NDOF button…",
+                enabled=enabled,
+                capture=lambda t, c, e: capture(t, c, e, mouse=True),
+                capture_mouse=True,
+                capture_prompt="Click below, or use a device button…",
+                tip="Escape or right-click cancels. Click outside the menu inside this panel to bind left mouse.",
+            ),
+            Entry(
+                "CHORD_CAPTURE",
+                "Key modifier chord…",
+                enabled=enabled,
+                capture=chord,
+                capture_prompt="Hold one key, then press another…",
+            ),
+        )
+
+        return rows if allow_chord else rows[:1]
+
+    return Entry(
+        "SHORTCUT",
+        label,
+        enabled=enabled,
+        capture=capture,
+        capture_options=modes,
+        icon="shortcut",
+        tip="Assign a key; alternate capture modes are available inside.",
     )

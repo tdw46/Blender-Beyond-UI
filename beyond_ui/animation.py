@@ -68,6 +68,7 @@ class Motion:
         self.settings = settings or AnimationSettings()
         self.clock = clock
         self.toggle = False
+        self._amplitude_scale = 1.0
         self.wake = None
         self.regions = {}
         self.tracks = {}
@@ -87,6 +88,19 @@ class Motion:
         self.wake = wake
 
     @property
+    def amplitude_scale(self):
+        return self._amplitude_scale
+
+    @amplitude_scale.setter
+    def amplitude_scale(self, value):
+        value = AnimationSettings._validate(value)
+        if value is None:
+            raise ValueError("Amplitude scale must be a finite nonnegative number")
+        if value != self._amplitude_scale:
+            self._amplitude_scale = value
+            self.clear()
+
+    @property
     def strength(self):
         value = 1.0
         for policy in self.parents:
@@ -94,7 +108,7 @@ class Motion:
                 return 0.0
             if policy.strength is not None:
                 value = policy.strength
-        return value
+        return value * self.amplitude_scale
 
     def clear(self):
         changed = bool(self.tracks)

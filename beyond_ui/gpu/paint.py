@@ -127,6 +127,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 if control.enabled and kind in {
                     "button",
                     "number",
+                    "event",
                     "text",
                     "enum",
                     "color",
@@ -139,7 +140,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 control.motion.deform("reveal", r),
                 nullcontext() if kind == "toggle" else control.motion.deform("body", r),
             ):
-                if kind in {"button", "number", "text", "enum", "color"}:
+                if kind in {"button", "number", "event", "text", "enum", "color"}:
                     surface(
                         r,
                         palette["selected"]
@@ -165,6 +166,13 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         palette=palette,
                         backdrop=backdrop,
                     )
+                elif kind == "event":
+                    label = (
+                        control.options["event_field"].format(value)
+                        if value is not None
+                        else "Unavailable"
+                    )
+                    text(f"{control.label}  {label}", r, ink)
                 elif kind == "number":
                     numeric = control.options.get("numeric")
                     numeric_state = None

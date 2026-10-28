@@ -98,3 +98,33 @@ URLs and hashes](design/qa/numeric-props-v1/api-source-audit.json) for the 4.2.0
 and exact installed 5.1.2/5.2.2 revisions. No native adapter is introduced. A
 bounded unit-token/arithmetic gate precedes public parsing; arbitrary Python
 expressions are not forwarded.
+
+### Numeric motion correction and event fields
+
+The numeric v2 revision applies Tyler's explicit 15% amplitude correction to
+panel-spanning numeric fields. It retains the existing audited BVT spring formula,
+shared glass and theme mapping. The v1 generated/reference and actual QA history
+is unchanged; v2 compares verified historical implementation frames with current
+frames and does not claim a new generated-reference approval.
+
+Event fields reuse the existing custom field painter and the original BVT-derived
+menu/capture path. Capture mode construction is shared with operator shortcuts;
+no separate native dialog, menu theme, spring or glass implementation was added.
+`docs/design/qa/event-props-v1/api-source-audit.json` identifies exact official
+Blender UILayout event/full_event flag sources. Runtime scripts record the tested
+public KeyMapItem setter behavior and rollback; arbitrary native variants are not
+inferred from the existence of an API flag. New GIFs are actual production renders,
+with source/fixture hashes in each capture record.
+
+### Menu text motion v6
+
+The immutable v6 baseline stores the pre-fix `gpu/menus.py` and its SHA. The
+fixture enables native BLF batching to reproduce text escaping its GPU transform;
+current batched/unbatched animation frames are compared directly. Official
+`blf.cc`, `blf_font.cc` and `blf_py_api.cc` snapshots at 4.2.0, ec6e62d40fa9 and
+d13f752e3b9c document the public zero-angle ROTATION submission path and are
+recorded in `docs/design/qa/context-menu-v6/blf-source-audit.json`. No private
+font symbol is used by production; the admitted batch symbols are test-only.
+The original BVT context-menu and Canvas deferred-text handling were re-inspected
+for ownership, clipping and retained glass behavior. User-requested animation
+coverage now includes every menu label/shortcut, including disabled and final rows.

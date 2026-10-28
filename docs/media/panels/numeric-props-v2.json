@@ -1,0 +1,5 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/numeric-props-v2/capture.json",
+  "sha256": "10023b8bf5d3b9444c144b69f1ac4672817de28838c0dcefd0a30b4ddb312113"
+}

@@ -123,3 +123,34 @@ class NumericSemantics(unittest.TestCase):
         canvas.event(NS(type="RET", value="PRESS"), 20, 20, clip)
         self.assertEqual(writes, [])
         self.assertIsNone(canvas.edit)
+
+    def test_wide_numeric_motion_is_fifteen_percent_with_parent_policy(self):
+        from beyond_ui import Canvas
+        from beyond_ui.bindings import Binding
+        from beyond_ui.animation import AnimationSettings
+
+        canvas = Canvas(animation=AnimationSettings(strength=2))
+        canvas.wide_numeric_motion_scale = 0.15  # Configure before first arrange.
+        binding = Binding(lambda: 0, lambda value: None)
+        wide = canvas.number("wide", "Wide", binding)
+        row = canvas.row()
+        small = row.number("small", "Small", binding)
+        row.number("other", "Other", binding)
+        button = canvas.button("button", "Button", lambda: None)
+        canvas.arrange(600)
+        self.assertAlmostEqual(wide.motion.strength, 0.3)
+        self.assertEqual(small.motion.strength, 2)
+        self.assertEqual(button.motion.strength, 2)
+        wide.motion.clock = lambda: 0
+        wide.motion.pulse("body", 0.2)
+        self.assertAlmostEqual(wide.motion.tracks["body"][1], 0.06)
+        rect = wide.rect
+        canvas.wide_numeric_motion_scale = 0.1
+        self.assertEqual(wide.rect, rect)
+        self.assertFalse(wide.motion.tracks)
+        self.assertAlmostEqual(wide.motion.strength, 0.2)
+        canvas.animation.enabled = False
+        self.assertEqual(wide.motion.strength, 0)
+        for bad in (float("nan"), -1, None):
+            with self.assertRaises(ValueError):
+                canvas.wide_numeric_motion_scale = bad

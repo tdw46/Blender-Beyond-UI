@@ -265,3 +265,12 @@ custom enum popup and commits with keyboard navigation. Scope and transaction
 fixtures also reject hidden/replaced owners, reject concurrent edits, roll back
 host commit failures, and cleanly unregister. These are execution checks, not
 exact visual acceptance.
+
+### Opening motion includes every option
+
+All row labels, shortcut hints, disabled options, checkmarks, arrows and inline
+values follow the menu's shared reveal transform. Native deferred font batching
+is covered by the [v6 pixel regression](design/qa/context-menu-v6/index.html);
+153 animation frames match unbatched drawing on each tested Blender version.
+The correction is scoped to finite motion and preserves resting batching,
+logical hit targets, theme roles and the cached liquid-glass backdrop.

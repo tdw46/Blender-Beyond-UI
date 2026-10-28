@@ -4,6 +4,7 @@ import bpy, gpu, json, os, sys, hashlib, traceback, time, statistics
 from pathlib import Path
 from mathutils import Matrix
 from types import SimpleNamespace as NS
+from contextlib import nullcontext
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "tests")]
@@ -26,6 +27,11 @@ OUT.mkdir(parents=True, exist_ok=True)
 def run():
     off = fonts = underlay = None
     try:
+        text_batch, batch_info = nullcontext, {"native_text_batch": False}
+        if os.environ.get("BEYOND_UI_TEST_TEXT_BATCH"):
+            from menu_motion_batch import configure
+
+            text_batch, batch_info = configure()
         width, height = 640, 560
         fonts = Fonts()
         off = gpu.types.GPUOffScreen(width, height, format="RGBA8")
@@ -130,18 +136,19 @@ def run():
                     gpu.matrix.get_projection_matrix()
                     @ gpu.matrix.get_model_view_matrix(),
                 )
-                canvas.paint(
-                    (
-                        0,
-                        height - canvas.height * ratio,
-                        width * ratio,
-                        canvas.height * ratio,
-                    ),
-                    (0, 0, width, height),
-                    font=fonts,
-                    backdrop="menu-fixture" if useglass else None,
-                    preferences=bpy.context.preferences,
-                )
+                with text_batch():
+                    canvas.paint(
+                        (
+                            0,
+                            height - canvas.height * ratio,
+                            width * ratio,
+                            canvas.height * ratio,
+                        ),
+                        (0, 0, width, height),
+                        font=fonts,
+                        backdrop="menu-fixture" if useglass else None,
+                        preferences=bpy.context.preferences,
+                    )
                 if name:
                     data = fb.read_color(0, 0, width, height, 4, 0, "UBYTE")
                     data.dimensions = width * height * 4
@@ -217,6 +224,21 @@ def run():
             menu.back()
             menu.motion.clear()
             timing = {}
+            menu.motion.clear()
+            menu.motion.pulse("reveal", 0.12)
+            now[0] += 2 / 30
+            samples = []
+            for i in range(120):
+                started = time.perf_counter()
+                render()
+                if i >= 20:
+                    samples.append((time.perf_counter() - started) * 1000)
+            timing["animated-menu"] = dict(
+                median_ms=statistics.median(samples),
+                p95_ms=sorted(samples)[94],
+                max_ms=max(samples),
+            )
+            menu.motion.clear()
             for mode in ("closed", "tint-fallback", "open", "nested", "scroll"):
                 canvas.context_menu = None if mode == "closed" else menu
                 if mode == "nested":
@@ -527,6 +549,7 @@ def run():
                 "render_scales": [1, 1.5],
                 "acceptance": "Execution/capture fixtures; not approved references or a system-DPI matrix",
             },
+            native_batch_fixture=batch_info,
             timings=timing,
             retained_resources=before,
             stable_resources=before == after,

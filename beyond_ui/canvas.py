@@ -73,6 +73,7 @@ class Group:
             "button",
             "toggle",
             "number",
+            "event",
             "text",
             "enum",
             "color",
@@ -81,7 +82,10 @@ class Group:
             "widget",
         }:
             raise ValueError(f"Unsupported custom control: {kind}")
-        if kind in {"toggle", "number", "text", "enum", "color"} and binding is None:
+        if (
+            kind in {"toggle", "number", "event", "text", "enum", "color"}
+            and binding is None
+        ):
             raise ValueError(f"{kind} requires a Binding")
         control = Control(key, kind, label, binding, action, options)
         if kind == "widget":
@@ -154,6 +158,7 @@ class Canvas(Group):
         shortcut_namespace="canvas",
     ):
         self.animation = animation or AnimationSettings()
+        self._wide_numeric_motion_scale = 0.15
         self._animation_parents = ()
         self._animation_wake = None
         self._moving = set()
@@ -185,6 +190,30 @@ class Canvas(Group):
         self.hover = None
         self.visible = True
         super().__init__(self)
+
+    @property
+    def wide_numeric_motion_scale(self):
+        return self._wide_numeric_motion_scale
+
+    @wide_numeric_motion_scale.setter
+    def wide_numeric_motion_scale(self, value):
+        value = AnimationSettings._validate(value)
+        if value is None:
+            raise ValueError("Numeric motion scale must be finite and nonnegative")
+        self._wide_numeric_motion_scale = value
+        self._scale_numeric_motion()
+
+    def _scale_numeric_motion(self):
+        if self._width is None:
+            return
+        width = max(1, self._width - 2 * self.theme.padding)
+        for control in self.controls.values():
+            if control.kind == "number":
+                control.motion.amplitude_scale = (
+                    self._wide_numeric_motion_scale
+                    if control.rect[2] >= width * 0.75
+                    else 1.0
+                )
 
     def _bind_motion(self, motion):
         motion.bind((*self._animation_parents, self.animation), self._wake_motion)
@@ -336,6 +365,7 @@ class Canvas(Group):
         place(self, t.padding, t.padding, max(0.0, width - 2 * t.padding))
         self.height = height(self, max(0.0, width - 2 * t.padding)) + 2 * t.padding
         self._width = width
+        self._scale_numeric_motion()
         self._dirty = False
         self.layout_count += 1
         return self.height
@@ -761,6 +791,48 @@ class Canvas(Group):
                 self.keyboard_focus = None
             return used
         self._motion_input(event, x, y, clip)
+        control = self.hit(x, y, clip) if event.type == "LEFTMOUSE" and press else None
+        if (
+            control is not None
+            and control.kind == "event"
+            and event.type == "LEFTMOUSE"
+            and press
+            and not (self.edit or self.overlay or self.widget_capture)
+        ):
+            from .context_menu import Menu, Target
+
+            target = Target(
+                control.key,
+                binding=control.binding,
+                valid=lambda: self.visible
+                and self.controls.get(control.key) is control
+                and control.enabled
+                and any(c is control for c in self.visible_controls(clip)),
+            )
+            field = control.options["event_field"]
+            try:
+                row = field.entry(context)
+                self.menu_error = None
+                menu = Menu(
+                    target,
+                    (row,),
+                    (x, y),
+                    clip,
+                    context=context,
+                    measure=menu_measure,
+                    on_tip=self._tooltip_wake,
+                    on_error=lambda error: setattr(self, "menu_error", str(error)),
+                )
+                menu.motion.bind(
+                    (*self._animation_parents, self.animation, control.motion.settings),
+                    self._wake_motion,
+                )
+                menu.choose(0, context)
+                self.context_menu = menu
+                self.context_focus = control
+            except (ReferenceError, RuntimeError, ValueError) as error:
+                self.menu_error = str(error)
+            return True
         previous = self.overlay
         used = self._event(event, x, y, clip, clipboard=clipboard)
         if self.keyboard_focus and not self.keyboard_focus.options["widget"].focused:

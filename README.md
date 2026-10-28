@@ -66,14 +66,33 @@ source/executable admission. See the [supported cases and gaps](docs/CONTEXT_MEN
 Exact generated-reference/motion acceptance is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
 preview exercises the real liquid-glass path.
 
+Every right-click option now follows the opening bounce, including labels,
+shortcut hints and disabled rows. Native deferred-text batching is covered by
+pixel comparisons on both tested Blender versions.
+
+![Actual Blender menu motion with every option animated](docs/media/panels/context-menu-motion-v6.gif)
+
+[Before/after menu motion QA](docs/design/qa/context-menu-v6/index.html)
+
 Numeric properties now support scene units, angles, percentage factors and source-style
 dragging through the same glass/theme/motion path.
 
-![Actual Blender numeric property motion](docs/media/panels/numeric-props-v1.gif)
+![Actual Blender numeric property motion](docs/media/panels/numeric-props-v2.gif)
 
-[Numeric property QA](docs/design/qa/numeric-props-v1/index.html) ·
+[Numeric property QA](docs/design/qa/numeric-props-v2/index.html) ·
 [Supported semantics and remaining gaps](docs/NUMERIC_PROPERTIES.md)
 
+
+Wide numeric fields now use **15% bounce amplitude**, with the same spring timing.
+The QA page includes an original/current motion comparison.
+
+Event properties now use the shared custom glass capture menu for keyboard, mouse
+and held-key chords, with owner validation and host-owned commit/rollback.
+
+![Actual Blender event property capture](docs/media/panels/event-props-v1.gif)
+
+[Event property QA](docs/design/qa/event-props-v1/index.html) ·
+[Supported semantics and open gaps](docs/EVENT_PROPERTIES.md)
 
 ## Requirements
 

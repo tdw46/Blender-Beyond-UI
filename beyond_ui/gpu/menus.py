@@ -120,6 +120,31 @@ def uncovered(rect, covers):
 
 
 def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
+    """Keep every label/shortcut in the same transform as its menu geometry."""
+    import blf
+    from . import typography
+
+    font = typography.face(font, "body")
+    # BLF's ordinary batch may be submitted after a row/menu matrix is popped.
+    # Zero-angle rotation opts this owned font into immediate BLF submission; it
+    # does not resize glyphs, wait for the GPU or create an offscreen/texture.
+    # Drain any earlier text at the incoming matrix before entering menu motion.
+    # A space has no visible quad. Keep this scoped to finite menu motion so
+    # settled menus retain their existing batched/resting path.
+    moving = bool(menu.motion.tracks) and bool(menu.motion.strength)
+    if moving:
+        blf.rotation(font, 0.0)
+        blf.enable(font, blf.ROTATION)
+        blf.position(font, 0, 0, 0)
+        blf.draw(font, " ")
+    try:
+        _context_menu(menu, mapped, scale, font, palette, backdrop, clip)
+    finally:
+        if moving:
+            blf.disable(font, blf.ROTATION)
+
+
+def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
     """Source row painter, shared host backdrop, retained bounded menu motion."""
     from . import style, glass, skin, typography
     from .paint import measure

@@ -104,6 +104,11 @@ animation implementation or silently omit its animation integration.
   finite, nonnegative strength values and keep deformation nonsingular at every
   supported strength. A global/host disable must override child settings. Apply
   setting changes to existing controls without requiring an add-on reload.
+- Tyler's numeric-field correction: numeric controls spanning at least 75% of the
+  usable panel width use 15% of their otherwise resolved motion amplitude.
+  Preserve the source spring/timing and area preservation; keep compact controls
+  and menus unchanged. Expose this as `Canvas.wide_numeric_motion_scale` and apply
+  changes to existing controls. Parent disable/zero strength still wins.
 - Keep animation state per host/control, retarget from the current state during
   rapid input, and bound its lifetime. Share retained GPU geometry and the cached
   glass backdrop. Never add a blur/capture pass or rebuild geometry on each tick.
@@ -132,6 +137,11 @@ behavior. Keep BVT-specific resolution and operators in the consuming extension.
 - Use one shared, host-extensible context-menu contract. Preserve the source's
   menu appearance, ordering, nested navigation, shortcuts, keyboard selection,
   dismissal, clipping, glass treatment and bounded squash-and-stretch motion.
+- Every visible menu option must follow the opening squash/stretch transform,
+  including labels, shortcut hints, disabled rows, checks, arrows and inline values.
+  Submit text under its owning transform; deferred font batches must not leave
+  final rows or specific actions stationary. Verify with native text batching
+  enabled as well as standalone captures, and preserve the settled batching path.
 - Resolve actions against the exact clicked control/subcontrol and current owner.
   Revalidate bindings and capabilities before execution. Expose applicable
   property/data actions through the consuming extension's context and undo policy;

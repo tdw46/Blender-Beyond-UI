@@ -1,0 +1,5 @@
+{
+  "source": "Actual production Blender frames with enclosing native BLF batch",
+  "capture": "../../design/qa/context-menu-v6/batched-after.json",
+  "sha256": "a2ceb0e35ee265b8ab032907b5b827409b4bbb9cfe01a7ac3335a4300a2cdcaf"
+}

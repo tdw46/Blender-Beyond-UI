@@ -375,3 +375,74 @@ they were not replaced with stale-version compatibility evidence. Blender 4.2
 runtime and broader platform/DPI qualification remain untested in this pass.
 [Numeric integration](NUMERIC_PROPERTIES.md) lists the remaining property semantics;
 full API parity remains false (137 members, 39 partial, zero reference-matched).
+
+## Wide numeric motion and event properties — 2026-10-28
+
+Wide numeric fields (at least 75% of usable panel width) now multiply the resolved
+motion strength by 0.15. Pure tests cover inheritance, compact controls, unchanged
+buttons, pre-layout configuration, runtime changes, unchanged geometry, disabling
+and invalid values. The 69-test suite, Ruff, parity checker and package build pass.
+
+[Numeric QA v2](design/qa/numeric-props-v2/index.html) retains the earlier v1 gallery
+and verifies its historical raw frame hashes before building the paired recording.
+Resting pixels remain byte-identical to v1; settled and disabled pixels equal rest.
+The shared shader/batch/layout resources remain stable, with one backdrop capture,
+one strong blur and five offscreens for the entire motion sequence. At 640×560,
+16 fields with clipped-row culling, 20 warmups and 100 CPU paint submissions,
+formatted-field median/p95 was 0.213/0.292 ms (v1: 0.230/0.309 ms). The same-renderer
+raw formatter baseline was 0.197/0.225 ms. These are submission timings on the
+recorded macOS/Metal runtime, not GPU completion, physical input latency or a
+cross-platform/source-binary performance qualification.
+
+[Event QA v1](design/qa/event-props-v1/index.html) adds `event=True` scalar INT/ENUM
+and `full_event=True` existing KeyMapItem.type support. Disposable-profile tests on
+Blender 5.1.2 and 5.2.2 cover modifiers, event-only preservation, keyboard↔mouse
+map-type changes, held-key chords, exact right-click owners, cancellation, stale
+chords/deleted owners, collision rejection and host-commit rollback. Real window
+input exercises click→mode choice→capture, active liquid glass, cancellation,
+right-click actions and idle/teardown timer cleanup. Numeric, general runtime,
+menu transaction and existing menu-window input regressions are rerun on both.
+
+Event captures share the existing field/menu painters, theme roles, fonts and
+spring policy. Two event fields at 640×560 measured 0.070/0.088 ms median/p95 CPU
+paint submission after 20 warmups, over 100 samples excluding readback. The full
+capture sequence retains one backdrop, one strong blur and five offscreens.
+This small event workload does not establish dense-event or all-theme performance.
+
+The feature uses public RNA; optional KeyMapItem fields are capability checked.
+Official UILayout source snapshots for 4.2.0 and both tested build revisions are
+recorded with hashes. Blender 4.2, other platforms and physical NDOF devices remain
+unexecuted. No native ABI admission, minimum supported version, registration or
+preference-persistence policy changed. Exact generated-reference/motion acceptance,
+all editor scopes and the remaining prop keywords/subtypes stay open in the ledger.
+
+## Every menu option follows the reveal transform — 2026-10-28
+
+[Menu motion QA v6](design/qa/context-menu-v6/index.html) reproduces native BLF
+batching in an exact-build disposable fixture. With the original painter, final
+text runs could be submitted after the menu's matrix was popped. Public
+zero-angle BLF rotation mode now keeps text submission inside the finite menu
+transform, including labels, shortcut hints, disabled rows and inline values.
+Earlier text is drained at the incoming matrix, and the font flag is always
+restored. Settled menus retain their original batching behavior.
+
+For each of Blender 5.1.2 and 5.2.2, **153 animated frames are byte-identical**
+between native-batched and unbatched rendering: 45 root/nested/back, 36 capture
+mode, 36 shortcut capture and 36 inline-field frames. The original painter fails
+the native-batched comparison. Resting pixels match the old painter; settling and
+disabling restore rest. The full resource snapshot stays stable: no new font
+loads, geometry, backdrop captures, blur productions or offscreen allocations.
+All menu and event real-window regressions pass again after the painter change.
+
+At 640×560, 20 warmups and 100 CPU submissions with a fixed active reveal sample,
+5.2 animated-menu median/p95 changes from 0.190/0.223 ms to 0.220/0.282 ms. The
+roughly 0.030 ms median cost is bounded per-label submission during animation;
+settled-menu median remains 0.188 ms (baseline 0.187 ms). On 5.1 the active result
+is 0.239/0.266 ms. This intentionally preserves all text motion and does not add
+GPU synchronization or an offscreen workaround. Timings exclude framebuffer
+readback and do not establish cross-platform input latency or full source speed.
+
+Test-only calls to BLF batch begin/end are source/executable admitted for the two
+exact installed builds. Production adds no private ABI calls. The audit includes
+official 4.2.0 and exact 5.1.2/5.2.2 font/Python API sources; 4.2 execution and
+other platforms remain open. Historical v1-v5 captures are untouched.

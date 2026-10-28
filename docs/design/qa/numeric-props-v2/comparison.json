@@ -1,0 +1,9 @@
+{
+  "resting_pixels_equal_v1": true,
+  "old_capture": "../numeric-props-v1/capture.json",
+  "new_capture": "capture.json",
+  "historical_frames_verified": true,
+  "motion_comparison_sha256": "83d0f21076b2f9701d5ed17519ecd2b41053a209e16535a4560938af9e072374",
+  "amplitude_multiplier": 0.15,
+  "exact_reference_acceptance": false
+}
