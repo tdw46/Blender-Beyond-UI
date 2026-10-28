@@ -70,6 +70,30 @@ def item_signature(item):
     )
 
 
+def conflict_maps(context, selected):
+    """Only called when committing a chord; never scans keymaps on paint/move."""
+    config = context.window_manager.keyconfigs.user
+    names = {"Window", "Screen", "User Interface", selected.name}
+    area = getattr(context, "area", None)
+    if area and area.type == "VIEW_3D":
+        names.update(("3D View", "Object Non-modal"))
+        mode = getattr(context, "mode", "")
+        name = {
+            "OBJECT": "Object Mode",
+            "EDIT_MESH": "Mesh",
+            "POSE": "Pose",
+            "SCULPT": "Sculpt",
+        }.get(mode)
+        if name:
+            names.add(name)
+    maps = [selected]
+    for name in sorted(names):
+        km = config.keymaps.get(name)
+        if km is not None and km.as_pointer() != selected.as_pointer():
+            maps.append(km)
+    return maps
+
+
 class Action:
     def __init__(
         self, idname, properties, context, *, valid=lambda c: True, keymap=None
@@ -156,7 +180,7 @@ class Action:
         except (ReferenceError, RuntimeError, AttributeError):
             return False
 
-    def capture(self, target, context, event):
+    def capture(self, target, context, event, *, mouse=False, key_modifier="NONE"):
         import bpy
 
         if event.value != "PRESS" or event.type in MODIFIERS:
@@ -168,10 +192,15 @@ class Action:
             "WINDOW_DEACTIVATE",
         }:
             return False
-        # Only keyboard events are assigned; navigation/mouse still dismisses safely.
-        if "MOUSE" in event.type or event.type.startswith(
-            ("TIMER", "TRACKPAD", "NDOF")
-        ):
+        # Device bindings require an explicit capture mode; cancellation stays reserved.
+        device = "MOUSE" in event.type or event.type.startswith("NDOF_BUTTON")
+        if event.type.startswith(("TIMER", "TRACKPAD")) or event.type in {
+            "NDOF_MOTION",
+            "ESC",
+            "RIGHTMOUSE",
+        }:
+            return False
+        if device != mouse:
             return False
         km, old = self.current(context)
         modifiers = {
@@ -179,7 +208,9 @@ class Action:
         }
         if "hyper" in bpy.types.KeyMapItem.bl_rna.properties:
             modifiers["hyper"] = bool(getattr(event, "hyper", False))
-        for item in km.keymap_items:
+        for item in (
+            item for scope in conflict_maps(context, km) for item in scope.keymap_items
+        ):
             if (
                 item == old
                 or not item.active
@@ -187,7 +218,10 @@ class Action:
                 or item.value not in {"PRESS", "ANY"}
             ):
                 continue
-            if item.key_modifier != "NONE":
+            if key_modifier != "NONE" and item.key_modifier not in {
+                "NONE",
+                key_modifier,
+            }:
                 continue
             if item.any or all(
                 getattr(item, k) == -1 or bool(getattr(item, k)) == v
@@ -202,7 +236,9 @@ class Action:
                 for i in km.keymap_items
             ):
                 raise ReferenceError("Shortcut was added; reopen the menu")
-            item = km.keymap_items.new(self.idname, event.type, "PRESS", **modifiers)
+            item = km.keymap_items.new(
+                self.idname, event.type, "PRESS", key_modifier=key_modifier, **modifiers
+            )
             try:
                 for key, value in self.properties.items():
                     setattr(item.properties, key, value)
@@ -221,7 +257,7 @@ class Action:
                     event.type,
                     "PRESS",
                     False,
-                    "NONE",
+                    key_modifier,
                 )
                 for key, value in modifiers.items():
                     setattr(old, key, value)
@@ -239,17 +275,61 @@ class Action:
         km.keymap_items.remove(item)
         context.preferences.is_dirty = True
 
-    def entry(self, context):
-        reason = "Requires an applicable keymap and a context-independent operator or boolean property."
-        if self.existing is None:
-            return Entry(
-                "SHORTCUT",
-                "Assign Shortcut",
-                enabled=self.enabled,
-                capture=self.capture,
-                icon="shortcut",
-                tip=reason,
+    def capture_entry(self, label="Assign Shortcut"):
+        def modes(target, context):
+            held = [None]
+
+            def chord(t, c, e):
+                if e.type in MODIFIERS:
+                    return False
+                if e.value == "RELEASE" and e.type == held[0]:
+                    held[0] = None
+                    return "Hold one key, then press another…"
+                if (
+                    e.value != "PRESS"
+                    or "MOUSE" in e.type
+                    or e.type.startswith(("NDOF", "TIMER", "TRACKPAD"))
+                ):
+                    return False
+                if held[0] is None:
+                    held[0] = e.type
+                    return f"Hold {e.type}; press the shortcut key…"
+                if e.type == held[0]:
+                    return False
+                return self.capture(t, c, e, key_modifier=held[0])
+
+            return (
+                Entry(
+                    "MOUSE_CAPTURE",
+                    "Mouse / NDOF button…",
+                    enabled=self.enabled,
+                    capture=lambda t, c, e: self.capture(t, c, e, mouse=True),
+                    capture_mouse=True,
+                    capture_prompt="Click below, or use a device button…",
+                    tip="Escape or right-click cancels. Click outside the menu inside this panel to bind left mouse.",
+                ),
+                Entry(
+                    "CHORD_CAPTURE",
+                    "Key modifier chord…",
+                    enabled=self.enabled,
+                    capture=chord,
+                    capture_prompt="Hold one key, then press another…",
+                ),
             )
+
+        return Entry(
+            "SHORTCUT",
+            label,
+            enabled=self.enabled,
+            capture=self.capture,
+            capture_options=modes,
+            icon="shortcut",
+            tip="Assign a key; alternate capture modes are available inside.",
+        )
+
+    def entry(self, context):
+        if self.existing is None:
+            return self.capture_entry()
         _, item = self.current(context)
         chord = item.to_string()
         return Entry(
@@ -258,12 +338,7 @@ class Action:
             enabled=self.enabled,
             icon="shortcut",
             children=lambda t, c: (
-                Entry(
-                    "CHANGE_SHORTCUT",
-                    "Change Shortcut",
-                    enabled=self.enabled,
-                    capture=self.capture,
-                ),
+                self.capture_entry("Change Shortcut"),
                 Entry("REMOVE_SHORTCUT", "Remove Shortcut", self.remove, self.enabled),
             ),
         )
@@ -271,27 +346,91 @@ class Action:
 
 def property_entry(source, context):
     from .context_paths import property_path
+    from dataclasses import replace
+    from itertools import islice
 
     path = property_path(source, context)
     meta = source.owner().bl_rna.properties[source.name]
-    if (
-        path is None
-        or meta.type != "BOOLEAN"
-        or (meta.is_array and source.index is None)
-    ):
+
+    def valid(c):
+        return source.valid() and source.editable() and property_path(source, c) == path
+
+    if path is None or (getattr(meta, "is_array", False) and source.index is None):
         return Entry(
             "SHORTCUT",
             "Assign Shortcut",
             enabled=False,
             icon="shortcut",
-            tip="This property has no direct custom shortcut action. Enum popup shortcuts require host dispatch.",
+            tip="Requires a scalar/component with an exact context-relative path.",
         )
-    action = Action(
-        "wm.context_toggle",
-        {"data_path": path},
-        context,
-        valid=lambda c: source.valid()
-        and source.editable()
-        and property_path(source, c) == path,
+    if meta.type == "BOOLEAN":
+        return Action(
+            "wm.context_toggle", {"data_path": path}, context, valid=valid
+        ).entry(context)
+    if meta.type == "ENUM":
+
+        def value_entry(value, label, c):
+            def current(ctx):
+                return (
+                    valid(ctx)
+                    and value
+                    in source.owner().bl_rna.properties[source.name].enum_items
+                )
+
+            if meta.is_enum_flag:
+                # Blender's context_set_value supplies its normal property undo.
+                # Only a validated RNA path plus a quoted enum identifier enters
+                # the expression; no arbitrary host expression is evaluated here.
+                import ast
+
+                tree = ast.parse("context." + path, mode="eval")
+                allowed = (
+                    ast.Expression,
+                    ast.Attribute,
+                    ast.Name,
+                    ast.Load,
+                    ast.Subscript,
+                    ast.Constant,
+                )
+                if not all(isinstance(node, allowed) for node in ast.walk(tree)):
+                    return Entry("SHORTCUT", label, enabled=False)
+                op = "wm.context_set_value"
+                props = {
+                    "data_path": path,
+                    "value": f"(context.{path}) ^ {{{value!r}}}",
+                }
+            else:
+                op, props = "wm.context_set_enum", {"data_path": path, "value": value}
+            row = Action(op, props, c, valid=current).entry(c)
+            return replace(row, label=label) if label else row
+
+        if source.enum_value is not None:
+            item = meta.enum_items.get(source.enum_value)
+            return value_entry(
+                source.enum_value,
+                None if item else "Unavailable enum item",
+                context,
+            )
+
+        def choices(t, c):
+            current = source.owner().bl_rna.properties[source.name]
+            return tuple(
+                value_entry(item.identifier, item.name, c)
+                for item in islice((i for i in current.enum_items if i.identifier), 63)
+            )
+
+        return Entry(
+            "SHORTCUT",
+            "Shortcut to Value",
+            children=choices,
+            enabled=lambda t, c: valid(c) and t.editable(),
+            icon="shortcut",
+            tip="Choose the enum value to assign, change or remove a shortcut for.",
+        )
+    return Entry(
+        "SHORTCUT",
+        "Assign Shortcut",
+        enabled=False,
+        icon="shortcut",
+        tip="This property has no direct shortcut action; a host dispatcher can provide one.",
     )
-    return action.entry(context)

@@ -39,3 +39,20 @@ Unmodified Inter Regular and SemiBold WOFF2 assets are vendored from the officia
 The [source UI contract audit](SOURCE_UI_CONTRACT.md) records the original
 examples, exact source commit/file hashes, reusable behavior and remaining
 extraction gaps. BVT-specific data resolution and operators remain host-owned.
+
+## Menu parity v3
+
+New action adapters follow Blender's exact tested-build sources, while appearance
+and motion continue through the extracted BVT painter, lens and spring. The
+[native audit manifest](../beyond_ui/hosts/menu-native-audit.json) records SHA256s
+for both build revisions, including `screen_user_menu.cc`, `MEM_guardedalloc.h`,
+`mallocn_intern_function_pointers.hh`, and `scripts/startup/bl_operators/wm.py`.
+Favorite removal uses `ED_screen_user_menus_find` / `ED_screen_user_menu_item_remove`
+and releases the returned array using the active `mem_freeN_ex` dispatcher with
+`DestructorType::NonTrivial`, matching the exact upstream `MEM_delete` path.
+Public enum shortcuts use Blender's `wm.context_set_enum` / `wm.context_set_value`.
+Only validated RNA paths and quoted known flag identifiers enter flag expressions.
+
+[QA v3](design/qa/context-menu-v3/index.html) preserves source and fixture hashes,
+raw captures, runtime results and logs. Its GIF contains actual production-rendered
+frames. Existing generated references and earlier QA versions remain immutable.

@@ -97,14 +97,21 @@ def run():
         args = (menu + 88, owner_path(source, ctx).encode(), b"location", 1)
         first = functions["find_property"](*args)
         assert first
-        execute("FAVORITE")
+        native.add_property_favorite(source, ctx)
         assert functions["find_property"](*args) == first
+        ctx.preferences.is_dirty = False
+        for _ in range(20):
+            assert native.property_favorite(source, ctx)
+        assert not ctx.preferences.is_dirty
+        execute("REMOVE_FAVORITE")
+        assert not native.property_favorite(source, ctx)
+        execute("FAVORITE")
         assert ctx.preferences.is_dirty
         other = bpy.data.objects.new("Unlinked owner", None)
         assert owner_path(rna_binding(lambda: other, "location").context, ctx) is None
         bpy.data.objects.remove(other)
         checks.append(
-            "real native Quick Favorites stores exact property/component idempotently; unrelated owner rejected"
+            "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected"
         )
         from beyond_ui.context_shortcuts import Action, property_entry
         from beyond_ui.context_extensions import operator_entries
@@ -114,8 +121,23 @@ def run():
         native.add_operator_favorite("wm.context_toggle", props, "INVOKE_DEFAULT", ctx)
         native.add_operator_favorite("wm.context_toggle", props, "INVOKE_DEFAULT", ctx)
         assert len(ctx.window_manager.keyconfigs) == config_count
+        ctx.preferences.is_dirty = False
+        assert native.operator_favorite(
+            "wm.context_toggle", props, "INVOKE_DEFAULT", ctx, operation="QUERY"
+        )
+        assert not ctx.preferences.is_dirty
+        assert native.operator_favorite(
+            "wm.context_toggle", props, "INVOKE_DEFAULT", ctx, operation="REMOVE"
+        )
+        assert not native.operator_favorite(
+            "wm.context_toggle", props, "INVOKE_DEFAULT", ctx, operation="QUERY"
+        )
+        assert not native.operator_favorite(
+            "wm.context_toggle", props, "INVOKE_DEFAULT", ctx, operation="REMOVE"
+        )
+        assert len(ctx.window_manager.keyconfigs) == config_count
         checks.append(
-            "real operator favorite copies typed arguments; temporary configuration is always released"
+            "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released"
         )
 
         def event(kind, **modifiers):

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "version": "5.1.2",
+  "build": "ec6e62d40fa9",
+  "checks": [
+    "explicit mouse capture writes real keymap; exact properties retained",
+    "key-modifier chord capture handles release/reset and persists both keys",
+    "cross-map conflicts reject without mutation; outside right-click cancels and passes through",
+    "menu shortcut dispatch supports held key modifiers and wildcard modifiers",
+    "expanded enum binds exact item; collapsed enum offers custom value choices",
+    "enum-flag shortcut toggles only its exact flag and preserves other flags",
+    "contributed boolean/enum rows use prepared checked states, exact owner, disabled inheritance and undo rollback",
+    "operator enum submenu preserves invocation, clicked-button context and argument snapshots"
+  ]
+}

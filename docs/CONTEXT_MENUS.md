@@ -54,7 +54,8 @@ canvas.button("tools", "Tools", open_tools, context_menu=actions)
 
 `MenuEntry` accepts `key`, `label`, `action(target, context)`, boolean/callable
 `enabled`, on-demand `children(target, context)`, `icon`, `tip`, `divider`,
-`shortcut` and a tuple of `Shortcut` event bindings. Providers are called on open,
+`shortcut`, a tuple of `Shortcut` event bindings, and boolean/callable `checked`.
+Checked state is resolved on input/opening; painting never reads bound RNA. Providers are called on open,
 not paint. Rows are capped at 64, nesting at three child pages, visible rows at
 18. Logical hit targets never follow visual spring deformation.
 
@@ -84,8 +85,8 @@ hidden owners, changed scene/developer context, invalidated layouts and teardown
 revoke the menu. Each host window keeps one active menu.
 
 User keymaps are snapshotted on opening; execution rechecks target identity and
-capability. Key-modifier chords are intentionally not dispatched, matching the
-source's safe behavior. Disabled actions cannot execute. Public Python
+capability. Key-modifier chords track held/released keys and honor wildcard modifiers;
+focus loss clears the held-key state. Disabled actions cannot execute. Public Python
 `UI_MT_button_context_menu` contributions are collected on demand with explicit
 `button_pointer` / `button_prop`; nested pointer contexts and operator properties
 are snapshotted and revalidated. Native-button-dependent operators are disabled.
@@ -105,7 +106,7 @@ and [GPU backdrop integration](INTEGRATION.md).
 
 ## Evidence and remaining parity
 
-[QA gallery](design/qa/context-menu-v1/index.html) includes real Blender root,
+[QA gallery](design/qa/context-menu-v3/index.html) includes real Blender root,
 nested, tooltip, all eight compound targets, glass-versus-tint comparison and
 motion. Disposable Blender 5.1.2/5.2.2 tests cover RNA transactions, selected-owner
 rollback, keyframes/drivers, public nested menu contributions, stale elements,
@@ -139,23 +140,30 @@ library's minimum Blender version or qualify those runtimes by inference.
   menu never creates a favorite or changes preferences. Context-relative property
   paths must resolve the exact clicked owner; unrelated/unlinked owners are
   disabled. Operator pointer overrides cannot be persisted and remain disabled.
-  The adapter marks preferences dirty after adding, but never saves preferences.
-  Remove Favorite from this custom menu is not implemented yet; Add does not
-  pretend to toggle/remove existing items.
+  Add/Remove resolves the exact current item again when clicked, including
+  inherited Topbar/Properties favorites. Native item pointers are never retained
+  in menu state. Operator buttons expose a Quick Favorites submenu; opening that
+  submenu queries through a temporary typed property container, always released.
+  Queries leave preferences clean; changes mark them dirty without saving.
 - **Shortcuts:** Assign opens the existing liquid-glass menu as a key-capture
   surface. Escape/right-click cancels; modifier-only input waits. Conflicting
-  chords in the chosen keymap are rejected without removing somebody else's
-  binding. Existing exact operator/argument matches offer Change and Remove;
+  chords in the chosen keymap, global UI/Screen/Window maps and applicable
+  View3D/mode maps are rejected without removing somebody else's binding. Existing exact operator/argument matches offer Change and Remove;
   concurrent item/context changes revoke the action. Edits use public user keymaps
   and mark preferences dirty without saving them. The admitted helper chooses
   Blender's native keymap; `context_shortcuts.Action(..., keymap="Window")` also
   supports an explicit host-selected public keymap without native guessing.
-  This implementation captures keyboard chords. Mouse/NDOF/key-modifier chord
-  assignment and conflict discovery across other keymap scopes remain open.
+  Explicit alternate capture rows support mouse/NDOF buttons and a held ordinary
+  key plus a second key. Escape/right-click always cancel; these two inputs cannot
+  be assigned through this capture UI. Left-click can be assigned in the mouse
+  capture instruction/body area. Arbitrary editor/modal keymap hierarchy conflicts
+  and keyboard-only selection of alternate capture modes remain open.
 - **Shortcut applicability:** direct boolean property toggles and independent
   `INVOKE_DEFAULT` operator buttons are supported. Numeric fields have no direct
-  native-style shortcut action. Enum-popup shortcuts, enum option/flag actions,
-  custom invocations and context pointer overrides need a host dispatcher; they
+  native-style shortcut action. Expanded enum options assign their exact value;
+  collapsed enums offer a Shortcut to Value submenu. Enum flags toggle only the
+  specified flag and preserve the other flags. Shortcuts that reopen a custom
+  enum popup, custom invocations and context pointer overrides need a host dispatcher; they
   never silently launch a native enum widget or drop invocation context.
 - **Edit Source:** provide `source=your_authoring_function` to `Layout(...)` or
   `rna_binding(...)`; child layouts and component bindings inherit it. Python
@@ -167,9 +175,24 @@ library's minimum Blender version or qualify those runtimes by inference.
   only when Blender's `show_tooltips_python` is enabled. Tooltip reveal retains
   the same finite dwell, blur, spring and cleanup as ordinary descriptions.
 
-[Adapter and glass QA v2](design/qa/context-menu-v2/index.html) records disposable
+[Menu parity and glass QA v3](design/qa/context-menu-v3/index.html) records disposable
 runtime tests and current captures. These are execution results, not a claim of
 exact generated-reference acceptance. The full light/custom-theme, DPI,
 multi-window and platform matrix, arbitrary UILayout callbacks/string context,
 and the limitations above remain tracked gaps. The rejected v1 generation remains
 immutable provenance and is not a specification for corrected liquid glass.
+
+## Extension-contributed fields
+
+The bounded public menu collector supports `prop` boolean scalars/components,
+`prop_enum`, `props_enum`, enum `prop` submenus, `operator_enum` and
+`operator_menu_enum`. Choices use the existing BVT menu renderer, checked
+indicator, theme roles, liquid glass and spring. Operator choices preserve their
+arguments, invocation and pointer override scope. Property commands require the
+host's `menu_commit("PROPERTY")` boundary and roll back if it rejects the change.
+Disabled parent rows and stale owners cannot execute.
+
+Numeric/string inline editors, arbitrary UILayout templates, dynamic enum
+callbacks without publicly enumerable RNA items, and string-context propagation
+remain explicit host-integration gaps. Unsupported fields stay disabled with an
+explanation; this collector does not claim general UILayout parity.

@@ -122,6 +122,104 @@ class Collector:
         )
         return props
 
+    def prop(self, data, property, *, text="", index=-1, expand=False, **kwargs):
+        from .context_fields import property_row
+
+        if expand and data.bl_rna.properties[property].type == "ENUM":
+            return self.props_enum(data, property)
+        self._add(
+            property_row(
+                data,
+                property,
+                text=text,
+                index=index,
+                permitted=self.enabled and self.active,
+            )
+        )
+
+    def prop_enum(self, data, property, value, *, text="", **kwargs):
+        from .context_fields import property_row
+
+        item = data.bl_rna.properties[property].enum_items.get(value)
+        self._add(
+            property_row(
+                data,
+                property,
+                text=text or (item.name if item else value),
+                value=value,
+                permitted=self.enabled and self.active,
+            )
+        )
+
+    def props_enum(self, data, property):
+        from itertools import islice
+
+        for item in islice(
+            (i for i in data.bl_rna.properties[property].enum_items if i.identifier), 64
+        ):
+            self.prop_enum(data, property, item.identifier)
+
+    def operator_enum(self, operator, property, **kwargs):
+        from itertools import islice
+
+        op = globals()["operator"](operator)
+        meta = op.get_rna_type().properties[property]
+        for item in islice((i for i in meta.enum_items if i.identifier), 64):
+            props = self.operator(operator, text=item.name)
+            setattr(
+                props,
+                property,
+                {item.identifier} if meta.is_enum_flag else item.identifier,
+            )
+
+    def operator_menu_enum(self, idname, property, *, text="", icon="", **kwargs):
+        from itertools import islice
+
+        props, snapshot = SimpleNamespace(), {}
+        self.snapshots.append((props, snapshot))
+        values, invocation = self._scope(), self.operator_context
+        permitted, depth = self.enabled and self.active, self.depth + 1
+        info = operator(idname).get_rna_type()
+        identity = info.as_pointer()
+
+        def enabled(target, context):
+            current = operator(idname)
+            with context.temp_override(**values()):
+                return (
+                    permitted
+                    and current.get_rna_type().as_pointer() == identity
+                    and current.poll()
+                )
+
+        def children(target, context):
+            meta = operator(idname).get_rna_type().properties[property]
+
+            def draw(holder, current):
+                holder.layout.operator_context = invocation
+                for item in islice((i for i in meta.enum_items if i.identifier), 63):
+                    settings = holder.layout.operator(idname, text=item.name)
+                    for key, value in snapshot.items():
+                        setattr(settings, key, value)
+                    setattr(
+                        settings,
+                        property,
+                        {item.identifier} if meta.is_enum_flag else item.identifier,
+                    )
+
+            return collect(context, self.source, (draw,), depth, values())
+
+        self._add(
+            Entry(
+                idname + ":" + property,
+                text or info.name,
+                enabled=enabled,
+                children=children,
+                icon=icon,
+                tip=info.description,
+            )
+        )
+        return props
+
     def menu(self, idname, *, text="", icon="", **kwargs):
         import bpy
 
@@ -236,18 +334,40 @@ def operator_entries(
 
     properties = dict(properties)
     independent = not pointers and portable(properties)
+
+    def favorites(target, ctx):
+        found = menu_native.operator_favorite(
+            idname, properties, invocation, ctx, operation="QUERY"
+        )
+
+        def remove(t, c):
+            if not menu_native.operator_favorite(
+                idname, properties, invocation, c, operation="REMOVE"
+            ):
+                raise ReferenceError("Favorite no longer exists")
+
+        return (
+            Entry(
+                "REMOVE_FAVORITE" if found else "FAVORITE",
+                "Remove from Quick Favorites" if found else "Add to Quick Favorites",
+                remove
+                if found
+                else lambda t, c: menu_native.add_operator_favorite(
+                    idname, properties, invocation, c
+                ),
+            ),
+        )
+
     rows.append(
         Entry(
-            "FAVORITE",
-            "Add to Quick Favorites",
-            lambda t, c: menu_native.add_operator_favorite(
-                idname, properties, invocation, c
-            ),
-            lambda t, c: independent
+            "FAVORITES",
+            "Quick Favorites",
+            children=favorites,
+            enabled=lambda t, c: independent
             and c.area is not None
             and invocation in menu_native.INVOCATIONS
             and menu_native.api() is not None,
-            tip="Store this operator and its arguments in Blender's Quick Favorites.",
+            tip="Manage this operator and its exact arguments in Quick Favorites.",
             icon="menu",
         )
     )

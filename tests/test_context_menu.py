@@ -71,6 +71,68 @@ class ContextMenus(unittest.TestCase):
         self.assertEqual(calls, [])
         self.assertIsNone(menu.capture_row)
 
+    def test_capture_mode_clicks_and_right_click_pass_through(self):
+        calls = []
+        alternate = Entry(
+            "mouse",
+            "Mouse",
+            capture=lambda t, c, e: calls.append(e.type) or True,
+            capture_mouse=True,
+        )
+        row = Entry(
+            "keyboard",
+            "Keyboard",
+            capture=lambda t, c, e: False,
+            capture_options=lambda t, c: [alternate],
+        )
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        hit = next(r for i, r, row in menu.visible_rows() if row.key == "mouse")
+        menu.event(event("LEFTMOUSE"), hit[0] + 5, hit[1] + 5)
+        self.assertIs(menu.capture_row, alternate)
+        menu.event(event("MIDDLEMOUSE"), 300, 300)
+        self.assertEqual(calls, ["MIDDLEMOUSE"])
+        self.assertTrue(menu.closed)
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        self.assertFalse(menu.event(event("RIGHTMOUSE"), -10, -10))
+        self.assertTrue(menu.closed)
+
+    def test_capture_options_are_bounded_and_failures_isolated(self):
+        from itertools import repeat
+
+        row = Entry(
+            "capture",
+            "Capture",
+            capture=lambda t, c, e: False,
+            capture_options=lambda t, c: repeat(Entry("alt", "Alt")),
+        )
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        self.assertEqual(len(menu.page.rows), Menu.limit)
+
+    def test_checked_values_snapshot_on_input_and_modifier_chords(self):
+        state, calls = [False], []
+        row = Entry(
+            "checked",
+            "Checked",
+            lambda t, c: calls.append(True),
+            checked=lambda t, c: state[0],
+            bindings=(Shortcut("K", ctrl=-1, key_modifier="A"),),
+        )
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        self.assertEqual(menu.page.checked, (False,))
+        state[0] = True
+        menu.event(event("A"), 20, 20)
+        self.assertEqual(menu.page.checked, (True,))
+        menu.event(event("A", "RELEASE"), 20, 20)
+        menu.event(event("K", ctrl=True), 20, 20)
+        self.assertFalse(calls)
+        menu.event(event("A"), 20, 20)
+        menu.event(event("K", ctrl=True), 20, 20)
+        self.assertEqual(calls, [True])
+        self.assertFalse(menu.held_keys)
+
     def test_navigation_nested_back_disabled_and_shortcut(self):
         calls = []
         rows = (

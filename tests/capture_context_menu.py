@@ -298,7 +298,74 @@ def run():
                     render(f"shortcut-{frame:03}")
                     canvas.advance_animations()
                 assert resources() == capture_resources
+                modes = capture_menu.page.rows
+                capture_menu.start_capture(modes[2], bpy.context, replace_mode=True)
+                capture_menu.motion.clear()
+                render("mouse-capture")
+                capture_menu.start_capture(modes[3], bpy.context, replace_mode=True)
+                capture_menu.event(NS(type="B", value="PRESS"), 200, 200, bpy.context)
+                capture_menu.motion.clear()
+                render("chord-capture")
                 canvas.close_context()
+
+                from beyond_ui.context_fields import property_row
+                from beyond_ui.context_rna import Property
+                from beyond_ui.hosts.menu_native import property_favorite
+
+                owner = bpy.context.active_object
+                source = Property(lambda: owner, "show_name")
+                target = Target("contribution", commit=lambda key: None)
+                canvas.context_menu = Menu(
+                    target,
+                    (
+                        property_row(owner, "show_name"),
+                        property_row(owner, "rotation_mode"),
+                    ),
+                    (170, 100),
+                    clip,
+                    context=bpy.context,
+                )
+                canvas.context_menu.motion.clear()
+                render("contributed-fields")
+                canvas.context_menu.choose(1, bpy.context)
+                canvas.context_menu.motion.clear()
+                render("enum-choices")
+                canvas.close_context()
+                from beyond_ui.context_shortcuts import property_entry
+
+                canvas.context_menu = Menu(
+                    target,
+                    (
+                        property_entry(
+                            Property(lambda: owner, "rotation_mode"), bpy.context
+                        ),
+                    ),
+                    (170, 100),
+                    clip,
+                    context=bpy.context,
+                )
+                canvas.context_menu.choose(0, bpy.context)
+                canvas.context_menu.motion.clear()
+                render("enum-shortcuts")
+                canvas.close_context()
+                for favorite in (False, True):
+                    if favorite:
+                        from beyond_ui.hosts.menu_native import add_property_favorite
+
+                        add_property_favorite(source, bpy.context)
+                    canvas.open_context(control, 170, 65, clip, context=bpy.context)
+                    # Use the exact property being displayed by this fixture.
+                    shown_source = control.binding.context
+                    if favorite:
+                        add_property_favorite(shown_source, bpy.context)
+                        canvas.close_context()
+                        canvas.open_context(control, 170, 65, clip, context=bpy.context)
+                    canvas.context_menu.motion.clear()
+                    render("favorite-remove" if favorite else "favorite-add")
+                    canvas.close_context()
+                    if favorite:
+                        property_favorite(shown_source, bpy.context, remove=True)
+                        property_favorite(source, bpy.context, remove=True)
             targets = {}
             for (slug, title, widget), (px, py) in zip(widgets, points):
                 canvas = Canvas(Theme(palette="REFERENCE"))

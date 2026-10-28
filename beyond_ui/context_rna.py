@@ -65,6 +65,7 @@ def decorate(rows, context):
                         item.oskey,
                         item.any,
                         item.key_modifier,
+                        hyper=getattr(item, "hyper", 0),
                     )
                 )
         result.append(
@@ -86,10 +87,12 @@ class Property:
         commit=lambda before, after: None,
         update=lambda: None,
         source=None,
+        enum_value=None,
     ):
         self.resolve, self.name, self.index, self.commit = resolve, name, index, commit
         self.update = update
         self.source = source
+        self.enum_value = enum_value
         owner = resolve()
         self.identity = self._identity(owner)
 
@@ -130,7 +133,13 @@ class Property:
     def component(self, index):
         self.owner()
         return Property(
-            self.resolve, self.name, index, self.commit, self.update, self.source
+            self.resolve,
+            self.name,
+            index,
+            self.commit,
+            self.update,
+            self.source,
+            self.enum_value,
         )
 
     def paths(self):
@@ -188,6 +197,12 @@ class Property:
             from .hosts.menu_native import driver_apply
 
             return driver_apply(key, self, target)
+        if key == "REMOVE_FAVORITE":
+            from .hosts.menu_native import property_favorite
+
+            if not property_favorite(self, context, remove=True):
+                raise ReferenceError("Favorite no longer exists")
+            return
         if key == "FAVORITE":
             from .hosts.menu_native import add_property_favorite
 
@@ -322,11 +337,14 @@ class Property:
                     lambda t, c, k=key: menu_native.driver_enabled(k, self, t),
                     "Uses Blender's driver clipboard on admitted builds; paste requires host undo.",
                 )
+        is_favorite = menu_native.property_favorite(self, context)
+        favorite_path = owner_path(self, context)
         add(
-            "FAVORITE",
-            "Add to Quick Favorites",
+            "REMOVE_FAVORITE" if is_favorite else "FAVORITE",
+            "Remove from Quick Favorites" if is_favorite else "Add to Quick Favorites",
             lambda t, c: c.area is not None
-            and owner_path(self, c) is not None
+            and favorite_path is not None
+            and owner_path(self, c) == favorite_path
             and menu_native.api() is not None,
             "Add this context-relative property to Blender's real Quick Favorites.",
             True,

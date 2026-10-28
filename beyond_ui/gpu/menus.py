@@ -153,7 +153,7 @@ def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                 item = dict(
                     text=row.label,
                     enabled=page.available[index],
-                    data=False,
+                    data=page.checked[index] if page.checked else False,
                     menu_icon=row.icon,
                     shortcut=row.shortcut,
                     divider=row.divider,

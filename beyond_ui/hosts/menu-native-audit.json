@@ -1,5 +1,5 @@
 {
-  "adapter_sha256": "398363be69ed9d211839aef34f644e3901e84a623c5eabea60945c571e07b921",
+  "adapter_sha256": "6acaee758ff507fb0f4c9ad360930378e51543e4e631028b4a83c060be8f0390",
   "builds": {
     "ec6e62d40fa9": {
       "version": "5.1.2",
@@ -12,23 +12,33 @@
   },
   "source_files": {
     "ec6e62d40fa9/interface_context_menu.cc": "1ee1bed83900f053da4be6b889c414e9b5c43f38bf0059e0ad398435a7a49076",
+    "ec6e62d40fa9/mallocn_intern_function_pointers.hh": "80d417c3afbd2c537f318e4343122be6e6690e44036b74e22b7e596658ed7334",
     "ec6e62d40fa9/screen_user_menu.cc": "87fcd3e111f3fd5a20f89334f98e786ed21b2980bb302ab5b3e9d0f3b880c0fb",
+    "ec6e62d40fa9/context.cc": "7a083e4e24fcdafdc801dbf4a18f82dd5609343849fb1e870d2aa8daa6c5d9c9",
     "ec6e62d40fa9/WM_types.hh": "d30a0345f62acde21088bd872a2d13054842d7991d5e3ad69409c8f0054910ad",
     "ec6e62d40fa9/WM_api.hh": "1838a0beb1a978d337ef1a9fff60d2792b2115176ddb54da7612c59f8fe2321c",
     "ec6e62d40fa9/DNA_userdef_types.h": "7b2cca28e2e095142041fcd1d982cd157a04bbc70e7c62fe1ca7d4a8bfbe8786",
     "ec6e62d40fa9/ED_screen.hh": "6613ac7df884f5a521e08fb7a03c5ed8e2b47372e7dd9e8cbdcd895087d3339f",
     "ec6e62d40fa9/wm_keymap.cc": "4a25f8aa599565f7680659e65a4663560873a9b0523c3d9c0a971f1053e59fd2",
+    "ec6e62d40fa9/MEM_guardedalloc.h": "1f138ca702e57fe7dcbdc2e662f48890a27c69ffc2ba722e33e4bf91da52484c",
     "ec6e62d40fa9/wm_keymap_utils.cc": "b6df56d6689c861ebe2967715f6f51b600a196c6036c8e223f3e231871cadc0b",
+    "ec6e62d40fa9/BKE_context.hh": "8f69b046dd1b1db6e48a8211c46910ad3eda273c3684d9d3c5baf676bd5ab1b2",
     "ec6e62d40fa9/drivers.cc": "e650023064888fa378bc94bf765bda096555d4ae3eb6064115446c47eb05ebcc",
     "d13f752e3b9c/interface_context_menu.cc": "0e37028e6748d24813ce096086d8216f2fa1299576ac927f6132ac82c0f55771",
+    "d13f752e3b9c/mallocn_intern_function_pointers.hh": "80d417c3afbd2c537f318e4343122be6e6690e44036b74e22b7e596658ed7334",
     "d13f752e3b9c/screen_user_menu.cc": "f0775aa162b97dee22d381c1664e1318c27440e9b12940b5a057f244c45f4c94",
+    "d13f752e3b9c/context.cc": "e5a3318ed49bb07323255aa5bddf144b1c3db712424a2dbbd37247731cb6b298",
     "d13f752e3b9c/WM_types.hh": "b1a1713f8f97182c84398e6bf3681324fd3f5470cbe4438c58c1046fd8c598d3",
     "d13f752e3b9c/WM_api.hh": "b876745dbf99d75f6d9339228113facecb9d74760dd31f2e8be22d6f57362d2a",
     "d13f752e3b9c/DNA_userdef_types.h": "ed1edc00be3ce9c794d6c86f1c29c671a9b50624cd018a6333e9cdf378841d81",
     "d13f752e3b9c/ED_screen.hh": "da69beb9e277ae35031b2720038c24177e4c72848ad4f72ec170db99a61afa07",
     "d13f752e3b9c/wm_keymap.cc": "8af4c87f861a854fb4bae3e962e5e7d021ce22020bb2935842edd4d663c34079",
+    "d13f752e3b9c/MEM_guardedalloc.h": "13d12fb253cd33812dd612a75521519c8f6ab8ba06f5f717efe8aeba4d90f40b",
     "d13f752e3b9c/wm_keymap_utils.cc": "a350e21afa0bd15c7d3796f0a98432d664e17a762a317181bf6e19772572ce54",
-    "d13f752e3b9c/drivers.cc": "ef3e2c8f06f6d72483f5dd4f99ffa6720de9e9d710cfdf54cd406516f3c0146f"
+    "d13f752e3b9c/BKE_context.hh": "34d2ed81a4375949031404326c2b6172a3cd37c2c628224809a1820826676dde",
+    "d13f752e3b9c/drivers.cc": "ef3e2c8f06f6d72483f5dd4f99ffa6720de9e9d710cfdf54cd406516f3c0146f",
+    "ec6e62d40fa9/wm.py": "a89e23d0652dfd448cee7c1808012302ce0fdd3fa956febc91375cc63f062eac",
+    "d13f752e3b9c/wm.py": "5001d88f6530a63f7c8b457d9a8d4bc81cce96de393946329187648d74826995"
   },
   "favorites_items_offset": 88,
   "platform": "Darwin",

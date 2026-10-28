@@ -31,16 +31,19 @@ class Shortcut:
     any: bool = False
     key_modifier: str = "NONE"
 
-    def matches(self, event):
+    hyper: int = 0
+
+    def matches(self, event, held=()):
         return (
             event.value == "PRESS"
             and event.type == self.type
-            and self.key_modifier == "NONE"
+            and (self.key_modifier == "NONE" or self.key_modifier in held)
             and (
                 self.any
                 or all(
-                    getattr(event, name, False) == getattr(self, name)
-                    for name in ("shift", "ctrl", "alt", "oskey")
+                    getattr(self, name) == -1
+                    or bool(getattr(event, name, False)) == bool(getattr(self, name))
+                    for name in ("shift", "ctrl", "alt", "oskey", "hyper")
                 )
             )
         )
@@ -58,7 +61,11 @@ class Entry:
     divider: bool = False
     shortcut: str = ""
     bindings: tuple = ()
-    capture: object = None  # (target, context, event) -> True on accepted key
+    capture: object = None  # True accepts; a string updates the capture prompt.
+    capture_prompt: str = "Press a key…"
+    capture_options: object = None  # on-demand alternate capture modes
+    capture_mouse: bool = False
+    checked: object = False  # prepared on open/input, never read from paint
 
 
 @dataclass
@@ -69,6 +76,7 @@ class Page:
     highlight: int = 0
     offset: int = 0
     title: str = ""
+    checked: tuple = ()
 
 
 def inside(rect, x, y):
@@ -102,6 +110,7 @@ class Menu:
         self.motion = Motion()
         self.parents = []
         self.capture_row = None
+        self.held_keys = set()
         self.closed = False
         self.glass_ready = False
         self.error = None
@@ -144,7 +153,13 @@ class Menu:
             width,
             height,
         )
-        return Page(rows, available, rect, title=title)
+        return Page(
+            rows,
+            available,
+            rect,
+            title=title,
+            checked=tuple(self._checked(row, context) for row in rows),
+        )
 
     def _enabled(self, row, context):
         try:
@@ -155,6 +170,16 @@ class Menu:
             )
         except Exception as error:
             self._error(error)
+            return False
+
+    def _checked(self, row, context):
+        try:
+            return bool(
+                row.checked(self.target, context)
+                if callable(row.checked)
+                else row.checked
+            )
+        except (AttributeError, ReferenceError, RuntimeError, TypeError):
             return False
 
     def _error(self, error):
@@ -182,6 +207,7 @@ class Menu:
         self.page.available = tuple(
             self._enabled(row, context) for row in self.page.rows
         )
+        self.page.checked = tuple(self._checked(row, context) for row in self.page.rows)
         return True
 
     @property
@@ -288,6 +314,7 @@ class Menu:
         self.closed = True
         self.motion.clear()
         self.parents.clear()
+        self.held_keys.clear()
         self.capture_row = None
 
     def back(self):
@@ -295,10 +322,39 @@ class Menu:
             return False
         self.hide_tip()
         self.capture_row = None
+        self.held_keys.clear()
         self.page = self.parents.pop()
         self.motion.clear()
         self.motion.pulse("reveal", 0.12)
         return True
+
+    def start_capture(self, row, context, *, replace_mode=False):
+        if not replace_mode:
+            if len(self.parents) >= self.depth_limit:
+                return
+            self.parents.append(self.page)
+        options = (
+            row.capture_options(self.target, context) if row.capture_options else ()
+        )
+        self.page = self._page(
+            (
+                Entry("__capture__", row.capture_prompt, enabled=False),
+                *islice(options, self.limit - 2),
+            ),
+            context,
+            "Cancel",
+        )
+        self.capture_row = row
+        self.held_keys.clear()
+        self.motion.clear()
+        self.motion.pulse("reveal", 0.12)
+
+    def capture_prompt(self, text):
+        self.page.rows = (
+            self.page.rows[0],
+            replace(self.page.rows[1], label=text[:64]),
+            *self.page.rows[2:],
+        )
 
     def choose(self, index, context):
         if not self.refresh(context) or not 0 <= index < len(self.page.rows):
@@ -312,17 +368,7 @@ class Menu:
             return
         try:
             if row.capture is not None:
-                if len(self.parents) >= self.depth_limit:
-                    return
-                self.parents.append(self.page)
-                self.page = self._page(
-                    (Entry("__capture__", "Press a key…", enabled=False),),
-                    context,
-                    "Cancel",
-                )
-                self.capture_row = row
-                self.motion.clear()
-                self.motion.pulse("reveal", 0.12)
+                self.start_capture(row, context)
             elif row.children is not None:
                 if len(self.parents) >= self.depth_limit:
                     return
@@ -362,41 +408,72 @@ class Menu:
         if kind == "WINDOW_DEACTIVATE":
             self.close()
             return False
+        self.motion.input(event, x, y)
+        if event.value == "RELEASE":
+            self.held_keys.discard(kind)
+        elif press and len(self.held_keys) < 64:
+            self.held_keys.add(kind)
         if self.capture_row is not None:
+            hit = next((i for i, r, _ in self.visible_rows() if inside(r, x, y)), None)
             if press and kind in {"ESC", "RIGHTMOUSE"}:
+                if kind == "RIGHTMOUSE" and not inside(self.clip, x, y):
+                    self.close()
+                    return False
                 self.back()
                 return True
+            if kind == "MOUSEMOVE":
+                if hit is not None:
+                    self.page.highlight = hit
+                self.hover_tip(hit, x, y, context)
+                return over
             if kind == "LEFTMOUSE" and press:
-                if over:
+                if hit == 0:
                     self.back()
-                else:
+                    return True
+                if (
+                    hit is not None
+                    and self.page.rows[hit].capture
+                    and self.page.available[hit]
+                ):
+                    try:
+                        self.start_capture(
+                            self.page.rows[hit], context, replace_mode=True
+                        )
+                    except Exception as error:
+                        self.close()
+                        self._error(error)
+                    return True
+                if not self.capture_row.capture_mouse:
+                    if not over:
+                        self.close()
+                    return inside(self.clip, x, y)
+            if not inside(self.clip, x, y) and kind.endswith("MOUSE"):
+                self.close()
+                return False
+            try:
+                row = self.capture_row
+                if not self._enabled(row, context):
                     self.close()
-                return inside(self.clip, x, y)
-            if press:
-                try:
-                    row = self.capture_row
-                    if not self._enabled(row, context):
+                else:
+                    outcome = row.capture(self.target, context, event)
+                    if outcome is True:
+                        self.error = None
                         self.close()
-                    elif row.capture(self.target, context, event):
-                        self.close()
-                except Exception as error:
-                    self._error(error)
-                    # Keep capture active for a different key after a conflict.
-                    self.page.rows = (
-                        self.page.rows[0],
-                        Entry("__capture__", str(error)[:48], enabled=False),
-                    )
+                    elif isinstance(outcome, str):
+                        self.capture_prompt(outcome)
+            except Exception as error:
+                self._error(error)
+                self.capture_prompt(str(error))
             return True
         if press and kind in {"ESC", "LEFT_ARROW"} and self.back():
             return True
         if press and kind in {"ESC", "RIGHTMOUSE"}:
             self.close()
             return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
-        self.motion.input(event, x, y)
         if press:
             for i, row in enumerate(self.page.rows):
                 if self.page.available[i] and any(
-                    s.matches(event) for s in row.bindings
+                    s.matches(event, self.held_keys) for s in row.bindings
                 ):
                     self.choose(i, context)
                     return True

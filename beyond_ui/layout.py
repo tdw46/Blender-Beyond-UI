@@ -247,6 +247,7 @@ class Layout:
     ):
         meta = data.bl_rna.properties[property]
         source = self._binding(data, property)
+        source.context.enum_value = value
         flag = getattr(meta, "is_enum_flag", False)
         item = meta.enum_items.get(value)
         label = self._text(text or (item.name if item else value), text_ctxt, translate)

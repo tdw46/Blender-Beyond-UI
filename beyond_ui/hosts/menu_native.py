@@ -104,11 +104,33 @@ def api():
                 ),
             }
         )
+        signatures.update(
+            {
+                "find_favorites": (
+                    "_ZN7blender25ED_screen_user_menus_findEPKNS_8bContextEPj",
+                    ptr,
+                    [ptr, C.POINTER(C.c_uint)],
+                ),
+                "remove_favorite": (
+                    "_ZN7blender31ED_screen_user_menu_item_removeEPNS_9ListBaseTINS_13bUserMenuItemEEEPS1_",
+                    None,
+                    [ptr, ptr],
+                ),
+            }
+        )
         functions = {}
         for key, (symbol, restype, arguments) in signatures.items():
             fn = getattr(lib, symbol)
             fn.restype, fn.argtypes = restype, arguments
             functions[key] = fn
+        # MEM_delete on the returned trivial pointer array uses NonTrivial=1.
+        # Read the active allocator dispatcher at deletion time (guarded/lockfree).
+        free_slot = C.c_void_p.in_dll(lib, "_ZN11mem_guarded8internal12mem_freeN_exE")
+
+        def free_array(pointer):
+            C.CFUNCTYPE(None, ptr, C.c_int)(free_slot.value)(pointer, 1)
+
+        functions["free_array"] = free_array
         _REASON = ""
         return functions
     except (OSError, ValueError, KeyError, AttributeError, RuntimeError) as error:
@@ -217,6 +239,46 @@ def driver_apply(kind, source, target):
         identity.update_tag()
 
 
+def _favorite_menus(context):
+    functions = api()
+    if functions is None or context.area is None:
+        return ()
+    size = C.c_uint()
+    pointer = functions["find_favorites"](context.as_pointer(), C.byref(size))
+    if not pointer:
+        return ()
+    try:
+        if size.value > 3:
+            raise RuntimeError("Unexpected Favorites context count")
+        values = C.cast(pointer, C.POINTER(C.c_void_p))
+        return tuple(dict.fromkeys(values[i] for i in range(size.value) if values[i]))
+    finally:
+        functions["free_array"](pointer)
+
+
+def property_favorite(source, context, *, remove=False):
+    from ..context_paths import owner_path
+
+    path = owner_path(source, context)
+    if path is None or api() is None:
+        return False
+    args = (
+        path.encode(),
+        source.name.encode(),
+        -1 if source.index is None else source.index,
+    )
+    found = False
+    for menu in _favorite_menus(context):
+        item = api()["find_property"](menu + 88, *args)
+        if item:
+            found = True
+            if remove:
+                api()["remove_favorite"](menu + 88, item)
+    if remove and found:
+        context.preferences.is_dirty = True
+    return found
+
+
 def add_property_favorite(source, context):
     from ..context_paths import owner_path
 
@@ -279,7 +341,7 @@ INVOCATIONS = (
 )
 
 
-def add_operator_favorite(idname, properties, invocation, context):
+def operator_favorite(idname, properties, invocation, context, *, operation="ADD"):
     from ..context_extensions import operator
     from uuid import uuid4
 
@@ -291,6 +353,8 @@ def add_operator_favorite(idname, properties, invocation, context):
     op_type = functions["operator_type"](operator_identifier(idname).encode(), True)
     if not op_type:
         raise ReferenceError("Operator was unregistered")
+    if operation not in {"ADD", "REMOVE", "QUERY"}:
+        raise ValueError(operation)
     # A short-lived public RNA key configuration owns the typed IDProperty group.
     # Native add_operator copies it; no pointer survives its removal. This only
     # runs after an explicit click, never when polling/opening/painting a menu.
@@ -302,6 +366,23 @@ def add_operator_favorite(idname, properties, invocation, context):
         for key, value in properties.items():
             setattr(item.properties, key, value)
         prop_pointer = item.properties.as_pointer() if properties else None
+        matches = []
+        for existing in _favorite_menus(context):
+            match = functions["find_operator"](
+                existing + 88, op_type, prop_pointer, b"", INVOCATIONS.index(invocation)
+            )
+            if match:
+                matches.append((existing + 88, match))
+        if operation == "QUERY":
+            return bool(matches)
+        if operation == "REMOVE":
+            for items, match in matches:
+                functions["remove_favorite"](items, match)
+            if matches:
+                context.preferences.is_dirty = True
+            return bool(matches)
+        if matches:
+            return True
         menu = functions["favorites"](context.as_pointer())
         if not menu:
             raise RuntimeError("Blender could not resolve Quick Favorites")
@@ -313,3 +394,7 @@ def add_operator_favorite(idname, properties, invocation, context):
             raise RuntimeError("Blender did not retain the operator favorite")
     finally:
         configs.remove(temporary)
+
+
+def add_operator_favorite(idname, properties, invocation, context):
+    return operator_favorite(idname, properties, invocation, context)

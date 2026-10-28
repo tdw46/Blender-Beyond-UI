@@ -194,3 +194,52 @@ Explicit library owner/view/shader/batch cleanup assertions pass, and separate
 menu modal/action fixture logs do not report this warning. Its Metal backend
 cause remains unresolved; zero-allocation shutdown is not claimed for the
 screenshot fixture.
+
+## Right-click gap closure — QA v3, 2026-10-28
+
+[QA v3](design/qa/context-menu-v3/index.html) adds property/operator Favorites
+removal, direct enum-value and enum-flag shortcuts, explicit mouse/NDOF-button
+and held-key capture modes, common global/View3D keymap conflict checks, prepared
+checked states, and contributed boolean/enum/operator-choice rows. These reuse
+the existing BVT menu painter, theme roles, liquid glass and finite spring.
+No new shader, blur pass or redraw timer was added.
+
+Both exact macOS arm64 Blender 5.1.2 and 5.2.2 builds pass adapter, new parity,
+actual-window input and background regression fixtures in disposable profiles.
+The new fixture tests middle-mouse assignment, held-key release/reset and
+assignment, cross-map conflict rejection, exact enum values, preservation of
+other enum flags, disabled contributions, host-commit rollback and scoped
+operator arguments. Physical NDOF hardware is not qualified by these tests.
+53 pure tests, Ruff and the package build pass. The parity ledger remains
+137 documented members, 39 partial, zero reference-matched.
+
+Favorites queries search the active editor plus Blender's inherited menu scopes.
+Removal repeats exact matching at execution rather than retaining item pointers.
+Temporary native arrays are freed through Blender's active allocator dispatcher,
+with the exact source-defined destructor type. Query loops leave preferences
+clean; writes mark preferences dirty without saving. Operator query containers
+are always released. Native admission remains limited to the audited executables;
+this work does not extend native support to 4.2, Windows or Linux.
+
+The equivalent 640×560 warm fixture records root CPU submission median/p95
+0.237/0.280 ms (v2: 0.248/0.344 ms), nested 0.241/0.267 ms, and navigation
+0.079/0.082 ms. One backdrop, one strong blur and five retained offscreens serve
+all tested states and motion. Resource identities stay stable, and resting and
+animation-disabled root pixels match. These samples do not establish GPU latency,
+full source-level speed or a significant speedup. The broader workload gate stays
+open. Current capture shutdown has no allocation warning; the historical Metal
+`MTLSafeFreeList` observation remains unresolved and is not declared fixed.
+
+Official evidence consulted: [5.2 KeyMapItem](https://docs.blender.org/api/5.2/bpy.types.KeyMapItem.html),
+[5.2 keymap customization](https://docs.blender.org/manual/en/5.2/advanced/keymap_editing.html),
+and exact tested-build source listed in the native audit manifest. Exact 4.2/5.1
+KeyMapItem and several Manual pages were unavailable during lookup; runtime and
+exact-source verification are identified separately rather than substituting
+older/latest pages as proof. Existing capability fallbacks remain.
+
+Reference v1 and QA v2 are unchanged. No corrected generated liquid-glass
+reference is yet approved, and these captures are not labeled reference-matched.
+[Remaining cases](CONTEXT_MENUS.md) explicitly include custom-popup shortcut
+dispatch, arbitrary editor/modal hierarchy conflicts, keyboard-only alternate
+capture selection, inline scalar fields, dynamic enum callbacks, string contexts,
+and the broader theme/DPI/platform/window and motion acceptance matrix.
