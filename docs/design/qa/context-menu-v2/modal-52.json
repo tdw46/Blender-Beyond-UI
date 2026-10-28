@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.2.2 LTS",
+  "checks": [
+    "production default uses shared BVT liquid glass and strong blur",
+    "right-click owner, nested/back navigation and current shortcut execution",
+    "Shift F10 and right-click cancel edit before opening",
+    "outside click dismisses and clears keyboard context focus",
+    "delayed description reveals once and tooltip timer stops",
+    "host animation disable, invalidation, finite idle and clean teardown",
+    "real window key capture persists a working shortcut, invokes outside canvas, and removes it"
+  ],
+  "called": [
+    "value"
+  ]
+}

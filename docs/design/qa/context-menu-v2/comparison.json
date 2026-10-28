@@ -1,0 +1,74 @@
+{
+  "exact_match": false,
+  "reference_status": "No accepted generated liquid-glass reference; v1 rejected and retained",
+  "reference_matched": false,
+  "theme": "explicit REFERENCE",
+  "dimensions": [
+    640,
+    560
+  ],
+  "warm_cpu_submission_before_ms": {
+    "closed": {
+      "median_ms": 0.05516601959243417,
+      "p95_ms": 0.07045804522931576,
+      "max_ms": 0.20875001791864634
+    },
+    "tint-fallback": {
+      "median_ms": 0.22091652499511838,
+      "p95_ms": 0.2582920715212822,
+      "max_ms": 0.3237499622628093
+    },
+    "open": {
+      "median_ms": 0.23016700288280845,
+      "p95_ms": 0.26170897763222456,
+      "max_ms": 0.29745895881205797
+    },
+    "nested": {
+      "median_ms": 0.23881252855062485,
+      "p95_ms": 0.260957982391119,
+      "max_ms": 0.2810839796438813
+    },
+    "scroll": {
+      "median_ms": 0.23549998877570033,
+      "p95_ms": 0.2604579785838723,
+      "max_ms": 0.2904580906033516
+    },
+    "navigation": {
+      "median_ms": 0.058312551118433475,
+      "p95_ms": 0.0616670586168766
+    }
+  },
+  "warm_cpu_submission_after_ms": {
+    "closed": {
+      "median_ms": 0.05770847201347351,
+      "p95_ms": 0.08700008038431406,
+      "max_ms": 0.3370000049471855
+    },
+    "tint-fallback": {
+      "median_ms": 0.2405619597993791,
+      "p95_ms": 0.33362500835210085,
+      "max_ms": 0.4363330081105232
+    },
+    "open": {
+      "median_ms": 0.24804152781143785,
+      "p95_ms": 0.34412508830428123,
+      "max_ms": 0.5821250379085541
+    },
+    "nested": {
+      "median_ms": 0.2621249877847731,
+      "p95_ms": 0.3470410592854023,
+      "max_ms": 0.49241597298532724
+    },
+    "scroll": {
+      "median_ms": 0.26941654505208135,
+      "p95_ms": 0.3572910791262984,
+      "max_ms": 0.40091597475111485
+    },
+    "navigation": {
+      "median_ms": 0.082354003097862,
+      "p95_ms": 0.08625001646578312
+    }
+  },
+  "capture_shutdown_warning": "One 65,624-byte MTLSafeFreeList allocation reported by Blender Metal at capture shutdown; also present in historical v1 capture logs. Owned glass caches are explicitly empty after release. Backend cause remains unresolved.",
+  "scope": "Same 640x560 root/nested/scroll fixture, 20 warmups, 100 samples; no GPU completion fence. Navigation includes new native capability checks; not an end-to-end latency or cross-platform speed claim."
+}

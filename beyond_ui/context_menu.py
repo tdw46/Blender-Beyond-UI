@@ -58,6 +58,7 @@ class Entry:
     divider: bool = False
     shortcut: str = ""
     bindings: tuple = ()
+    capture: object = None  # (target, context, event) -> True on accepted key
 
 
 @dataclass
@@ -100,7 +101,9 @@ class Menu:
         self.on_error = on_error or (lambda error: None)
         self.motion = Motion()
         self.parents = []
+        self.capture_row = None
         self.closed = False
+        self.glass_ready = False
         self.error = None
         self.on_tip = on_tip or (lambda delay: None)
         self.tooltip = None
@@ -285,11 +288,13 @@ class Menu:
         self.closed = True
         self.motion.clear()
         self.parents.clear()
+        self.capture_row = None
 
     def back(self):
         if not self.parents:
             return False
         self.hide_tip()
+        self.capture_row = None
         self.page = self.parents.pop()
         self.motion.clear()
         self.motion.pulse("reveal", 0.12)
@@ -306,7 +311,19 @@ class Menu:
             self.back()
             return
         try:
-            if row.children is not None:
+            if row.capture is not None:
+                if len(self.parents) >= self.depth_limit:
+                    return
+                self.parents.append(self.page)
+                self.page = self._page(
+                    (Entry("__capture__", "Press a key…", enabled=False),),
+                    context,
+                    "Cancel",
+                )
+                self.capture_row = row
+                self.motion.clear()
+                self.motion.pulse("reveal", 0.12)
+            elif row.children is not None:
                 if len(self.parents) >= self.depth_limit:
                     return
                 old_anchor = self.anchor
@@ -345,6 +362,31 @@ class Menu:
         if kind == "WINDOW_DEACTIVATE":
             self.close()
             return False
+        if self.capture_row is not None:
+            if press and kind in {"ESC", "RIGHTMOUSE"}:
+                self.back()
+                return True
+            if kind == "LEFTMOUSE" and press:
+                if over:
+                    self.back()
+                else:
+                    self.close()
+                return inside(self.clip, x, y)
+            if press:
+                try:
+                    row = self.capture_row
+                    if not self._enabled(row, context):
+                        self.close()
+                    elif row.capture(self.target, context, event):
+                        self.close()
+                except Exception as error:
+                    self._error(error)
+                    # Keep capture active for a different key after a conflict.
+                    self.page.rows = (
+                        self.page.rows[0],
+                        Entry("__capture__", str(error)[:48], enabled=False),
+                    )
+            return True
         if press and kind in {"ESC", "LEFT_ARROW"} and self.back():
             return True
         if press and kind in {"ESC", "RIGHTMOUSE"}:

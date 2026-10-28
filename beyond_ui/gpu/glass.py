@@ -535,6 +535,10 @@ def prepare_texture(key, revision, texture, rect, *, scale=1.0):
 def release(key):
     """Release one host-owned backdrop and all its retained blur levels."""
     _owners.pop(key, None)
+    if not _owners:
+        # Last host released: shared shaders/batches and borrowed view textures
+        # must not survive teardown. Other active hosts retain their resources.
+        clear()
 
 
 def clear():

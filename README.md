@@ -53,9 +53,14 @@ host, with one retained backdrop shared across controls and animation frames.
 [Context menu integration](docs/CONTEXT_MENUS.md) ·
 [Menu capture provenance](docs/media/panels/context-menu-provenance.json)
 
-The menu core is execution-tested on Blender 5.1.2 and 5.2.2. Native-button-only
-actions remain explicit adapter gaps; exact generated-reference/motion acceptance
-is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
+![Actual Blender shortcut capture with shared liquid glass](docs/media/panels/context-menu-shortcut.gif)
+
+[Current menu adapters and glass captures](docs/design/qa/context-menu-v2/index.html)
+cover real driver clipboard copy/paste, Quick Favorites, custom shortcut
+assignment/change/removal, Edit Source and Python tooltips. These adapters are
+execution-tested on macOS arm64 Blender 5.1.2 and 5.2.2; private APIs require exact
+source/executable admission. See the [supported cases and gaps](docs/CONTEXT_MENUS.md).
+Exact generated-reference/motion acceptance is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
 preview exercises the real liquid-glass path.
 
 ## Requirements

@@ -114,10 +114,62 @@ Pure tests cover clipping, bounds, disabled actions, provider exceptions and
 compound target resolution. Older supported runtimes/platforms are not freshly
 qualified by these tests.
 
-Native favorites/shortcut editing, Blender's private driver clipboard, source
-editing, Python API tooltips and arbitrary UILayout callback surfaces remain
-explicit host-adapter/parity gaps. Exact generated-reference/motion acceptance
-and the full light/custom-theme, DPI and multi-window matrix remain open. The
-initial generated menu image was rejected: it altered disabled contrast and
-specified tint-only glass. It is preserved as rejected provenance, not an
-accepted specification or a target for the corrected liquid-glass implementation.
+## Driver clipboard, favorites, shortcuts and developer actions
+
+The menu adapters now implement Blender's real driver clipboard, property and
+operator Quick Favorites, custom keyboard capture, Edit Source and Python tooltip
+text. The clipboard and Favorites adapters are experimental on **macOS arm64,
+exact Blender 5.1.2 and 5.2.2 executables only**. Their admission requires the
+allowlisted build, platform, adapter source hash and executable SHA256 in
+[`menu-native-audit.json`](../beyond_ui/hosts/menu-native-audit.json). Unknown builds,
+4.2, Windows and Linux retain explicit disabled entries. This does not raise the
+library's minimum Blender version or qualify those runtimes by inference.
+`PanelHost.start()` warms admission once; direct Canvas hosts can call
+`beyond_ui.hosts.menu_native.api()` during their explicit initialization.
+`reason()` and `PanelHost.menu_adapter_reason` expose degraded capability.
+
+- **Copy/Paste Driver:** uses the actual Blender clipboard, including Copy as New
+  Driver for an exact scalar/component. Whole-array clipboard targets are disabled.
+  Read-only/non-animatable numeric inputs can be copied as driver sources. Paste
+  stages on an unlinked temporary object, copies the complete FCurve through RNA,
+  replaces only the requested component, and restores the previous driver if the
+  host's undo callback rejects the transaction. Temporary IDs are always removed.
+- **Quick Favorites:** stores exact properties/components or operators plus their
+  arguments in Blender's real context menu. Add is idempotent. Opening/polling the
+  menu never creates a favorite or changes preferences. Context-relative property
+  paths must resolve the exact clicked owner; unrelated/unlinked owners are
+  disabled. Operator pointer overrides cannot be persisted and remain disabled.
+  The adapter marks preferences dirty after adding, but never saves preferences.
+  Remove Favorite from this custom menu is not implemented yet; Add does not
+  pretend to toggle/remove existing items.
+- **Shortcuts:** Assign opens the existing liquid-glass menu as a key-capture
+  surface. Escape/right-click cancels; modifier-only input waits. Conflicting
+  chords in the chosen keymap are rejected without removing somebody else's
+  binding. Existing exact operator/argument matches offer Change and Remove;
+  concurrent item/context changes revoke the action. Edits use public user keymaps
+  and mark preferences dirty without saving them. The admitted helper chooses
+  Blender's native keymap; `context_shortcuts.Action(..., keymap="Window")` also
+  supports an explicit host-selected public keymap without native guessing.
+  This implementation captures keyboard chords. Mouse/NDOF/key-modifier chord
+  assignment and conflict discovery across other keymap scopes remain open.
+- **Shortcut applicability:** direct boolean property toggles and independent
+  `INVOKE_DEFAULT` operator buttons are supported. Numeric fields have no direct
+  native-style shortcut action. Enum-popup shortcuts, enum option/flag actions,
+  custom invocations and context pointer overrides need a host dispatcher; they
+  never silently launch a native enum widget or drop invocation context.
+- **Edit Source:** provide `source=your_authoring_function` to `Layout(...)` or
+  `rna_binding(...)`; child layouts and component bindings inherit it. Python
+  operators resolve their registered class automatically. Native C operators have
+  no Python source and remain disabled. Source location checks use code metadata;
+  files are read only after the user clicks Edit Source. The action opens the
+  precise file/line in the owning area's Text Editor, like BVT, without saving it.
+- **Python tooltips:** prepared RNA/operator rows include their Python API target
+  only when Blender's `show_tooltips_python` is enabled. Tooltip reveal retains
+  the same finite dwell, blur, spring and cleanup as ordinary descriptions.
+
+[Adapter and glass QA v2](design/qa/context-menu-v2/index.html) records disposable
+runtime tests and current captures. These are execution results, not a claim of
+exact generated-reference acceptance. The full light/custom-theme, DPI,
+multi-window and platform matrix, arbitrary UILayout callbacks/string context,
+and the limitations above remain tracked gaps. The rejected v1 generation remains
+immutable provenance and is not a specification for corrected liquid glass.

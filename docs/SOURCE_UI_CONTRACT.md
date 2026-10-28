@@ -75,3 +75,24 @@ explicit capability fallback, not visual acceptance. BVT scene types, product
 operators, localization and undo ownership remain with the consumer. Exact
 reference, motion, broader theme/platform and native-only action parity remain
 open; see [menu QA](design/qa/context-menu-v1/index.html).
+
+
+## Menu action adapters — 2026-10-28
+
+The additional BVT `_shoost_driver_clipboard.py` audit is recorded in
+[menu-adapter-source-audit.json](menu-adapter-source-audit.json). Its opaque-pointer
+clipboard calls and temporary-ID staging inform the reusable adapter. The library
+adds source/executable fingerprint admission, host-undo failure rollback, and no
+BVT-specific Windows imports. Blender's exact `ec6e62d40fa9` and `d13f752e3b9c`
+`drivers.cc`, `screen_user_menu.cc`, `interface_context_menu.cc`,
+`DNA_userdef_types.h`, `wm_keymap_utils.cc` and `WM_types.hh` were audited; source
+hashes are in [the native menu manifest](../beyond_ui/hosts/menu-native-audit.json).
+
+Quick Favorites and shortcut assignment go beyond the original BVT disabled rows.
+Their semantics come from those exact Blender sources, including context-relative
+properties, typed operator arguments, user keymaps and invocation values. The
+private favorite list offset is admitted only with the tested executable hashes;
+all keymap edits use public RNA. BVT's source-location behavior is retained with
+an explicit authoring callable instead of a product-specific global plan.
+The shared BVT menu painter, lens/strong blur, theme roles and bounded spring are
+also used for shortcut capture. No new material or animation system was added.

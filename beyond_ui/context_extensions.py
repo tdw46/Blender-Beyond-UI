@@ -210,7 +210,15 @@ def entries(context, source):
     )
 
 
-def operator_entries(idname, properties, context):
+def operator_entries(
+    idname,
+    properties,
+    context,
+    *,
+    invocation="INVOKE_DEFAULT",
+    pointers=None,
+    keymap=None,
+):
     if context is None:
         return ()
     rows = []
@@ -223,30 +231,54 @@ def operator_entries(idname, properties, context):
                 lambda t, c: setattr(c.window_manager, "clipboard", command),
             )
         )
-    reason = "Requires a native Blender button; unavailable on the custom canvas."
-    rows.extend(
-        (
-            Entry(
-                "FAVORITE",
-                "Add to Quick Favorites",
-                enabled=False,
-                tip=reason,
-                icon="menu",
+    from .hosts import menu_native
+    from .context_shortcuts import Action, portable
+
+    properties = dict(properties)
+    independent = not pointers and portable(properties)
+    rows.append(
+        Entry(
+            "FAVORITE",
+            "Add to Quick Favorites",
+            lambda t, c: menu_native.add_operator_favorite(
+                idname, properties, invocation, c
             ),
+            lambda t, c: independent
+            and c.area is not None
+            and invocation in menu_native.INVOCATIONS
+            and menu_native.api() is not None,
+            tip="Store this operator and its arguments in Blender's Quick Favorites.",
+            icon="menu",
+        )
+    )
+    if independent and invocation == "INVOKE_DEFAULT":
+        rows.append(Action(idname, properties, context, keymap=keymap).entry(context))
+    else:
+        rows.append(
             Entry(
                 "SHORTCUT",
                 "Assign Shortcut",
                 enabled=False,
-                tip=reason,
                 icon="shortcut",
-            ),
-            Entry(
-                "MANUAL",
-                "Online Manual",
-                lambda t, c: operator("wm.doc_view_manual")(doc_id=idname),
-                icon="globe",
-            ),
+                tip="This operator's invocation or pointer overrides require a host shortcut dispatcher.",
+            )
+        )
+    rows.append(
+        Entry(
+            "MANUAL",
+            "Online Manual",
+            lambda t, c: operator("wm.doc_view_manual")(doc_id=idname),
+            icon="globe",
         )
     )
+    if getattr(context.preferences.view, "show_developer_ui", False):
+        from .context_source import entry, operator_subject
+
+        rows.append(entry(operator_subject(idname)))
+    if getattr(context.preferences.view, "show_tooltips_python", False):
+        rows = [
+            replace(row, tip=(row.tip + f"\nPython: bpy.ops.{idname}()").strip())
+            for row in rows
+        ]
     rows.extend(entries(context, None))
     return rows

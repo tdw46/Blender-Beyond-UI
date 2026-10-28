@@ -1,0 +1,7 @@
+{
+  "source_file": "/Users/tylerwalker/Documents/Blender/extensions/user_default/beyond_vrm_extension_suite/_shoost_driver_clipboard.py",
+  "sha256": "6a1467d0a2e3737c1ae6037f6f2e7551445553e974a5be556aeb598f06ec2edb",
+  "commit": "ec947ccefc44bd02ad2b175323fa4fc78d60ee4d",
+  "native_source_url": "https://github.com/blender/blender/blob/{build}/source/blender/editors/animation/drivers.cc",
+  "favorites_source_url": "https://github.com/blender/blender/blob/{build}/source/blender/editors/screen/screen_user_menu.cc"
+}

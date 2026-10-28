@@ -26,6 +26,51 @@ def binding(value):
 
 
 class ContextMenus(unittest.TestCase):
+    def test_key_capture_cancellation_conflict_and_acceptance(self):
+        calls = []
+
+        def capture(target, context, event):
+            if event.type == "LEFT_SHIFT":
+                return False
+            if event.type == "C":
+                raise ValueError("Key already used")
+            calls.append(event.type)
+            return True
+
+        row = Entry("key", "Assign Shortcut", capture=capture)
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        self.assertEqual(len(menu.parents), 1)
+        menu.event(event("LEFT_SHIFT"), 20, 20)
+        self.assertIsNotNone(menu.capture_row)
+        menu.event(event("C"), 20, 20)
+        self.assertFalse(menu.closed)
+        self.assertEqual(calls, [])
+        self.assertIn("already used", menu.page.rows[1].label)
+        menu.event(event("RIGHTMOUSE"), 20, 20)
+        self.assertIsNone(menu.capture_row)
+        menu.choose(0, None)
+        menu.event(event("K", ctrl=True), 20, 20)
+        self.assertTrue(menu.closed)
+        self.assertEqual(calls, ["K"])
+
+    def test_key_capture_rechecks_target_and_capability(self):
+        allowed = [True]
+        calls = []
+        row = Entry(
+            "key",
+            "Assign",
+            enabled=lambda t, c: allowed[0],
+            capture=lambda t, c, e: calls.append(e.type),
+        )
+        menu = Menu(Target("owner"), [row], (10, 10), (0, 0, 500, 400))
+        menu.choose(0, None)
+        allowed[0] = False
+        menu.event(event("K"), 20, 20)
+        self.assertTrue(menu.closed)
+        self.assertEqual(calls, [])
+        self.assertIsNone(menu.capture_row)
+
     def test_navigation_nested_back_disabled_and_shortcut(self):
         calls = []
         rows = (

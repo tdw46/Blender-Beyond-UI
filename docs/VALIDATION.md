@@ -9,7 +9,7 @@ unit tests, native forwarding or ordinary CI.
 
 ## Evidence
 
-- 45 pure Python tests pass: transactions/rollback, stale-owner rejection,
+- 50 pure Python tests pass: transactions/rollback, stale-owner rejection,
   retained geometry, clipped input, million-row virtualization, text/arithmetic,
   independent vendor namespaces, and custom color/curve/ramp/picker interactions.
 - Ruff parser/name-error checks pass. No claim of full static type validation.
@@ -140,3 +140,57 @@ Exact 4.2 GPU-types and 4.2/5.1/5.2 English Manual menu-page fetches returned 40
 in this session; older/development pages were not substituted as current proof.
 The public API path and existing 4.2 capability fallbacks remain intact, but the
 new menu implementation is not runtime-qualified on 4.2 by these tests.
+
+
+## Menu adapters and mandatory glass — 2026-10-28
+
+The local AGENTS.md now has a dedicated **real BVT liquid glass** hard rule.
+Every translucent panel/menu/nested menu/tooltip/popover/control must use the
+source shared backdrop, Gaussian levels, refraction and rim. Source material and
+performance are simultaneous completion criteria; tint-only fallback is degraded.
+
+[Versioned QA v2](design/qa/context-menu-v2/index.html) adds exact-build native
+driver clipboard and Quick Favorites tests, public keymap assign/change/remove,
+Edit Source, and Python tooltip targets. Both macOS arm64 5.1.2 (`ec6e62d40fa9`)
+and 5.2.2 (`d13f752e3b9c`) pass in disposable profiles. A separate real window
+fixture assigns a shortcut through the custom menu, invokes it outside the canvas,
+and removes it. Clipboard tests cover replacement and host-commit rollback;
+Favorites tests cover typed arguments, exact components, repeated adds, unrelated
+owners, and temporary configuration cleanup. No live user scene/preferences were
+saved. Imports remain free of Blender registration and timers.
+
+Warm 640×560 CPU submission timings remain around 0.23 ms for the root menu.
+The same fixture uses 20 warmups, 100 samples and 100 navigation events; current
+and prior distributions are retained in [comparison.json](design/qa/context-menu-v2/comparison.json).
+The added capability checks increase navigation CPU time by about 0.02 ms in the
+initial comparison (roughly 0.06 to 0.08 ms); they revalidate the clicked owner and
+clipboard/favorite availability on input and do not run in paint or idle timers.
+Painting retains one backdrop preparation, one strong blur and five offscreens,
+with no resource rebuild through menu motion/navigation. Shared glass shaders,
+batches and borrowed view caches now release when the final host releases its
+backdrop; other active hosts retain their resources. These are CPU submission
+measurements, not GPU-completion or end-to-end input latency claims. Exact-binary
+hashing is cached at host startup, outside menu interaction/painting.
+
+The native menu manifest records audited exact Blender source hashes and tested
+executable hashes. Official version-specific API/Manual lookup was attempted for
+4.2/5.1/5.2; several exact pages returned 402/cache misses or stale search indexes.
+No newer/older search result was substituted as version proof. Exact upstream
+[5.1 driver source](https://github.com/blender/blender/blob/ec6e62d40fa9/source/blender/editors/animation/drivers.cc),
+[5.2 driver source](https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/editors/animation/drivers.cc),
+[5.1 menu source](https://github.com/blender/blender/blob/ec6e62d40fa9/source/blender/editors/interface/interface_context_menu.cc),
+and [5.2 keymap source](https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/windowmanager/intern/wm_keymap_utils.cc)
+plus installed-runtime RNA supplied the compatibility evidence. Unsupported native
+builds/platforms, including 4.2, fail closed; public paths remain available.
+
+Full menu/API parity is not claimed. See [explicit remaining adapter cases](CONTEXT_MENUS.md).
+The rejected generated reference is retained, and no new capture is labeled an
+exact reference match or visual approval on Tyler's behalf.
+
+The screenshot process retains a shutdown warning also present in historical v1
+capture logs: one 65,624-byte allocation. A guarded-allocator diagnostic names it
+`MTLSafeFreeList`; see [raw diagnostic](design/qa/context-menu-v2/metal-shutdown-diagnostic.log).
+Explicit library owner/view/shader/batch cleanup assertions pass, and separate
+menu modal/action fixture logs do not report this warning. Its Metal backend
+cause remains unresolved; zero-allocation shutdown is not claimed for the
+screenshot fixture.

@@ -48,11 +48,6 @@ requirements; neither may be traded away to satisfy the other.
   file/network I/O or repeated GPU resource creation in steady-state painting.
 - Share one cached backdrop capture/blur per host and revision. Never add a
   separate capture, blur or framebuffer readback for every control or frame.
-- Use the original BVT liquid-glass lens and stronger shared blur for menus and
-  tooltips by default. Plain alpha transparency that leaves underlying text
-  legible is not liquid glass and does not satisfy acceptance. Keep tint-only
-  fallback explicit for unavailable capabilities; QA previews must exercise the
-  real blur/refraction path over underlying UI.
 - Cull clipped and hidden controls before binding reads or drawing; virtualize
   long lists. Keep draw read-only and avoid full-data scans for visible rows.
 - Drive redraws from input, explicit invalidation and finite animation windows.
@@ -65,6 +60,29 @@ requirements; neither may be traded away to satisfy the other.
 - Keep measurement and framebuffer capture out of the production paint path.
   Do not remove transparency, blur, animations, correct interactions, older
   supported API fallbacks or exact-reference requirements as a speed shortcut.
+
+## Hard rule: real BVT liquid glass
+
+Real liquid glass is mandatory for every translucent custom UI surface, including
+panels, menus, nested menus, tooltips, popovers and compound controls. Use the
+original BVT shared backdrop, Gaussian blur levels, refractive lens and rim
+behavior. Menus/tooltips use the source's stronger blur; underlying text must
+be softened rather than clearly readable through a plain alpha overlay.
+
+- This is a completion and publication gate, not an optional polish step. Never
+  label tint-only alpha blending, an opaque sheet, baked artwork or a CSS-style
+  imitation as liquid glass. Generated references must preserve real source
+  glass behavior; reject conflicting references explicitly.
+- Default supported hosts to real glass. Keep capability fallback explicit and
+  observable; unavailable/disabled glass is degraded behavior and cannot count
+  as visual acceptance or parity. Do not quietly default new hosts to fallback.
+- Share one retained backdrop/blur revision across surfaces and animations.
+  No per-control/per-frame capture, blur, readback or idle refresh loop. Disabling
+  motion must not disable glass. Apply theme roles without flattening the glass.
+- Verify actual Blender-rendered glass over text, controls and contrasting
+  backgrounds, at rest and during motion, including nested overlays. Keep raw
+  captures, before/after comparisons and resource/revision counts. Unexplained
+  legibility, blur, refraction or rim mismatches remain open defects.
 
 ## Hard rule: shared source squash-and-stretch animation
 

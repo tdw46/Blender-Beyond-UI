@@ -33,11 +33,13 @@ class Layout:
         resolve=None,
         commit=None,
         state=None,
+        source=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
         self.group = group if group is not None else self.canvas
         self.resolve = resolve
+        self.source = source
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
@@ -71,6 +73,7 @@ class Layout:
             resolve=self.resolve,
             commit=self.commit,
             state=self.state,
+            source=self.source,
         )
         for name in (
             "_text_role",
@@ -141,7 +144,9 @@ class Layout:
 
     def _binding(self, data, property, index=None):
         resolver = self.resolve(data) if self.resolve else lambda: data
-        return rna_binding(resolver, property, index=index, commit=self.commit)
+        return rna_binding(
+            resolver, property, index=index, commit=self.commit, source=self.source
+        )
 
     def prop(
         self,
@@ -333,7 +338,11 @@ class Layout:
             selected=depress,
             icon=icon,
             context_menu=lambda target, ctx: operator_entries(
-                operator, vars(properties), ctx or context
+                operator,
+                vars(properties),
+                ctx or context,
+                invocation=invocation,
+                pointers=pointers,
             ),
             **self._options(),
         )

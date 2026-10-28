@@ -50,7 +50,12 @@ class Edit:
 
 
 def rna_binding(
-    resolve, property_name, *, index=None, commit=lambda before, after: None
+    resolve,
+    property_name,
+    *,
+    index=None,
+    commit=lambda before, after: None,
+    source=None,
 ):
     """resolve() must reacquire a stable owner, never search by mutable name/index.
 
@@ -99,5 +104,9 @@ def rna_binding(
     from .context_rna import Property
 
     return Binding(
-        get, set_value, valid, commit, Property(resolve, property_name, index, commit)
+        get,
+        set_value,
+        valid,
+        commit,
+        Property(resolve, property_name, index, commit, source=source),
     )

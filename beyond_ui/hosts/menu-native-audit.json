@@ -1,0 +1,37 @@
+{
+  "adapter_sha256": "398363be69ed9d211839aef34f644e3901e84a623c5eabea60945c571e07b921",
+  "builds": {
+    "ec6e62d40fa9": {
+      "version": "5.1.2",
+      "executable_sha256": "e0b80264bea559673212e0afc819fb33f3cef8b3dcfcc8d994b195132857ac8a"
+    },
+    "d13f752e3b9c": {
+      "version": "5.2.2",
+      "executable_sha256": "f5c1f2a0c0bca3389ec772d355242b700975ea84e66cbb3f5257a7bce8e5adeb"
+    }
+  },
+  "source_files": {
+    "ec6e62d40fa9/interface_context_menu.cc": "1ee1bed83900f053da4be6b889c414e9b5c43f38bf0059e0ad398435a7a49076",
+    "ec6e62d40fa9/screen_user_menu.cc": "87fcd3e111f3fd5a20f89334f98e786ed21b2980bb302ab5b3e9d0f3b880c0fb",
+    "ec6e62d40fa9/WM_types.hh": "d30a0345f62acde21088bd872a2d13054842d7991d5e3ad69409c8f0054910ad",
+    "ec6e62d40fa9/WM_api.hh": "1838a0beb1a978d337ef1a9fff60d2792b2115176ddb54da7612c59f8fe2321c",
+    "ec6e62d40fa9/DNA_userdef_types.h": "7b2cca28e2e095142041fcd1d982cd157a04bbc70e7c62fe1ca7d4a8bfbe8786",
+    "ec6e62d40fa9/ED_screen.hh": "6613ac7df884f5a521e08fb7a03c5ed8e2b47372e7dd9e8cbdcd895087d3339f",
+    "ec6e62d40fa9/wm_keymap.cc": "4a25f8aa599565f7680659e65a4663560873a9b0523c3d9c0a971f1053e59fd2",
+    "ec6e62d40fa9/wm_keymap_utils.cc": "b6df56d6689c861ebe2967715f6f51b600a196c6036c8e223f3e231871cadc0b",
+    "ec6e62d40fa9/drivers.cc": "e650023064888fa378bc94bf765bda096555d4ae3eb6064115446c47eb05ebcc",
+    "d13f752e3b9c/interface_context_menu.cc": "0e37028e6748d24813ce096086d8216f2fa1299576ac927f6132ac82c0f55771",
+    "d13f752e3b9c/screen_user_menu.cc": "f0775aa162b97dee22d381c1664e1318c27440e9b12940b5a057f244c45f4c94",
+    "d13f752e3b9c/WM_types.hh": "b1a1713f8f97182c84398e6bf3681324fd3f5470cbe4438c58c1046fd8c598d3",
+    "d13f752e3b9c/WM_api.hh": "b876745dbf99d75f6d9339228113facecb9d74760dd31f2e8be22d6f57362d2a",
+    "d13f752e3b9c/DNA_userdef_types.h": "ed1edc00be3ce9c794d6c86f1c29c671a9b50624cd018a6333e9cdf378841d81",
+    "d13f752e3b9c/ED_screen.hh": "da69beb9e277ae35031b2720038c24177e4c72848ad4f72ec170db99a61afa07",
+    "d13f752e3b9c/wm_keymap.cc": "8af4c87f861a854fb4bae3e962e5e7d021ce22020bb2935842edd4d663c34079",
+    "d13f752e3b9c/wm_keymap_utils.cc": "a350e21afa0bd15c7d3796f0a98432d664e17a762a317181bf6e19772572ce54",
+    "d13f752e3b9c/drivers.cc": "ef3e2c8f06f6d72483f5dd4f99ffa6720de9e9d710cfdf54cd406516f3c0146f"
+  },
+  "favorites_items_offset": 88,
+  "platform": "Darwin",
+  "machine": "arm64",
+  "qualification": "experimental; only exact tested executables; no 4.2 or Windows admission"
+}

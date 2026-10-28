@@ -267,6 +267,38 @@ def run():
                 (200, 200),
                 (200, 200),
             ]
+            # Shortcut assignment shares the same painter and backdrop owner.
+            from beyond_ui.context_shortcuts import Action
+            from beyond_ui.context_menu import Menu, Target
+
+            with bpy.context.temp_override(
+                area=next(a for a in bpy.context.screen.areas if a.type == "VIEW_3D")
+            ):
+                shortcut = Action(
+                    "wm.context_toggle", {"data_path": "object.show_name"}, bpy.context
+                )
+                canvas.context_menu = Menu(
+                    Target("shortcut"),
+                    (shortcut.entry(bpy.context),),
+                    (170, 100),
+                    clip,
+                    context=bpy.context,
+                )
+                canvas.context_menu.choose(0, bpy.context)
+                canvas.context_menu.motion.clear()
+                render("shortcut-capture")
+                assert canvas.context_menu.glass_ready
+                capture_menu = canvas.context_menu
+                capture_menu.motion.clock = lambda: now[0]
+                now[0] = 0
+                capture_menu.motion.pulse("reveal", 0.12)
+                capture_resources = resources()
+                for frame in range(36):
+                    now[0] = frame / 30
+                    render(f"shortcut-{frame:03}")
+                    canvas.advance_animations()
+                assert resources() == capture_resources
+                canvas.close_context()
             targets = {}
             for (slug, title, widget), (px, py) in zip(widgets, points):
                 canvas = Canvas(Theme(palette="REFERENCE"))
@@ -303,12 +335,15 @@ def run():
                 str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted((ROOT / "beyond_ui").rglob("*.py"))
             },
+            fixture_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             acceptance="Unapproved; generated reference and motion QA required",
         )
     except Exception:
         result = dict(passed=False, error=traceback.format_exc())
     finally:
         glass.release("menu-fixture")
+        assert not glass._owners and not glass._views and not glass._lens_batches
+        assert glass._lens_shader is None and glass._shader is None
         if underlay:
             underlay.free()
         if off:
@@ -320,7 +355,13 @@ def run():
         json.dumps(result, indent=2) + "\n"
     )
     print("MENU_CAPTURE", result.get("passed"), result.get("error", ""), flush=True)
+    # Release local GPU wrappers before Blender destroys its drawing context.
+    bpy.app.timers.register(quit_after_capture, first_interval=0.1)
+
+
+def quit_after_capture():
     bpy.ops.wm.quit_blender()
+    return None
 
 
 bpy.app.timers.register(run, first_interval=1)

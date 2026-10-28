@@ -971,14 +971,18 @@
     "right_click_context_menus": {
       "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Shared owner-aware mouse/keyboard routing, bounded nested/back navigation, keymap snapshots, scoped public extension callbacks, RNA actions, component identity, cancel-before-open, delayed descriptions, source liquid glass and motion implemented. Blender 5.1.2/5.2.2 execution-tested. Native-only adapters, full callback/tooltip API coverage, exact generated-reference/motion and broader theme/platform qualification remain open.",
+      "notes": "Owner-aware routing, nested navigation, keymap snapshots, scoped callbacks, RNA transactions, source glass/motion, real driver clipboard, property/operator Quick Favorites, custom keyboard shortcut assign/change/remove, Edit Source and Python tooltip targets are implemented in supported cases and execution-tested on exact macOS arm64 Blender 5.1.2/5.2.2. Favorite removal, enum/mouse/host-dispatch shortcut cases, arbitrary callbacks/string contexts, broader platforms/themes/DPI/windows and exact generated-reference/motion acceptance remain open; see docs/CONTEXT_MENUS.md.",
       "execution_evidence": [
         "docs/design/qa/context-menu-v1/rna-51.json",
         "docs/design/qa/context-menu-v1/rna-52.json",
         "docs/design/qa/context-menu-v1/modal-51.json",
-        "docs/design/qa/context-menu-v1/modal-52.json"
+        "docs/design/qa/context-menu-v1/modal-52.json",
+        "docs/design/qa/context-menu-v2/adapters-51.json",
+        "docs/design/qa/context-menu-v2/adapters-52.json",
+        "docs/design/qa/context-menu-v2/modal-51.json",
+        "docs/design/qa/context-menu-v2/modal-52.json"
       ],
-      "comparison_evidence": "docs/design/qa/context-menu-v1/comparison.json"
+      "comparison_evidence": "docs/design/qa/context-menu-v2/comparison.json"
     },
     "active_blender_theme": {
       "status": "partial",
@@ -989,6 +993,13 @@
         "docs/design/qa/theme-v1/runtime-51.json",
         "docs/design/qa/theme-v1/runtime-52.json"
       ]
+    },
+    "liquid_glass": {
+      "status": "partial",
+      "required": true,
+      "policy": "AGENTS.md#hard-rule-real-bvt-liquid-glass",
+      "notes": "Mandatory BVT shared backdrop, Gaussian strong blur, refraction/rim and finite motion for every translucent surface. Default embedded host and new shortcut capture use this material. Tint/opaque fallback is degraded and cannot count as parity. Exact generated-reference acceptance and broader theme/platform matrix remain open.",
+      "comparison_evidence": "docs/design/qa/context-menu-v2/comparison.json"
     }
   }
 }

@@ -28,6 +28,7 @@ class PanelHost:
         self.handlers = []
         self.font = -1
         self.reason = "Not started"
+        self.menu_adapter_reason = "Not started"
         self.closed = False
 
     def start(self):
@@ -42,6 +43,11 @@ class PanelHost:
             return False
         import bpy
         from ..gpu.typography import Fonts
+        from . import menu_native
+
+        # Admission hashes once at host startup, never on the first menu paint.
+        menu_native.api()
+        self.menu_adapter_reason = menu_native.reason()
 
         try:
             self.font = Fonts()

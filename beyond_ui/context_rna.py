@@ -1,6 +1,7 @@
 """Capability-checked public RNA context actions; host owns undo and registration.
 
-No active native button operators, private driver ABI, or BVT product imports.
+No active native button operators or BVT product imports. Native actions are
+separately admitted by exact platform, source and executable fingerprints.
 """
 
 from copy import deepcopy
@@ -15,6 +16,9 @@ _SHORTCUTS = {
     "DELETE_KEY": ("anim.keyframe_delete_button", {}),
     "DRIVER": ("anim.driver_button_add", {}),
     "REMOVE_DRIVER": ("anim.driver_button_remove", {}),
+    "COPY_DRIVER": ("anim.copy_driver_button", {}),
+    "PASTE_DRIVER": ("anim.paste_driver_button", {}),
+    "NATIVE_DRIVER": ("ui.copy_as_driver_button", {}),
     "MANUAL": ("wm.doc_view_manual_ui_context", {}),
 }
 
@@ -81,9 +85,11 @@ class Property:
         index=None,
         commit=lambda before, after: None,
         update=lambda: None,
+        source=None,
     ):
         self.resolve, self.name, self.index, self.commit = resolve, name, index, commit
         self.update = update
+        self.source = source
         owner = resolve()
         self.identity = self._identity(owner)
 
@@ -123,7 +129,9 @@ class Property:
 
     def component(self, index):
         self.owner()
-        return Property(self.resolve, self.name, index, self.commit, self.update)
+        return Property(
+            self.resolve, self.name, index, self.commit, self.update, self.source
+        )
 
     def paths(self):
         owner = self.owner()
@@ -176,6 +184,14 @@ class Property:
                 bpy.ops.wm.doc_view_manual if key == "MANUAL" else bpy.ops.wm.doc_view
             )
             return operator(doc_id=f"{owner.bl_rna.identifier}.{self.name}")
+        if key in {"COPY_DRIVER", "PASTE_DRIVER", "NATIVE_DRIVER"}:
+            from .hosts.menu_native import driver_apply
+
+            return driver_apply(key, self, target)
+        if key == "FAVORITE":
+            from .hosts.menu_native import add_property_favorite
+
+            return add_property_favorite(self, context)
         if not self.editable():
             raise PermissionError("Property is read-only")
         if key == "RESET":
@@ -291,6 +307,10 @@ class Property:
                     key == "KEY",
                     "◇" if "KEY" in key else "◌",
                 )
+        from .hosts import menu_native
+        from .context_paths import owner_path
+
+        if meta.type in {"FLOAT", "INT", "BOOLEAN", "ENUM"}:
             for key, label in (
                 ("COPY_DRIVER", "Copy Driver"),
                 ("PASTE_DRIVER", "Paste Driver"),
@@ -299,21 +319,34 @@ class Property:
                 add(
                     key,
                     label,
-                    False,
-                    "Requires an explicitly supplied, admitted driver clipboard adapter.",
+                    lambda t, c, k=key: menu_native.driver_enabled(k, self, t),
+                    "Uses Blender's driver clipboard on admitted builds; paste requires host undo.",
                 )
-        reason = "Requires a native Blender button; unavailable on the custom canvas."
-        add("FAVORITE", "Add to Quick Favorites", False, reason, True, "menu")
-        add("SHORTCUT", "Assign Shortcut", False, reason, True, "shortcut")
+        add(
+            "FAVORITE",
+            "Add to Quick Favorites",
+            lambda t, c: c.area is not None
+            and owner_path(self, c) is not None
+            and menu_native.api() is not None,
+            "Add this context-relative property to Blender's real Quick Favorites.",
+            True,
+            "menu",
+        )
+        from .context_shortcuts import property_entry
+
+        rows.append(replace(property_entry(self, context), divider=True))
         add("MANUAL", "Online Manual", True, divider=True, icon="globe")
         if getattr(context.preferences.view, "show_developer_ui", False):
             add("API", "Online Python Reference")
-            add(
-                "SOURCE", "Edit Source", False, "Host source-location adapter required."
-            )
+            from .context_source import entry
+
+            rows.append(entry(self.source))
         from .context_extensions import entries
 
         extra = entries(context, self)
         if extra:
             extra[0] = replace(extra[0], divider=True)
+        if getattr(context.preferences.view, "show_tooltips_python", False):
+            hint = f"Python: {owner.bl_rna.identifier}.{self.name}"
+            rows = [replace(row, tip=(row.tip + "\n" + hint).strip()) for row in rows]
         return decorate(rows, context) + list(extra)

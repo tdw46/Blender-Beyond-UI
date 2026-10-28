@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 from beyond_ui import Canvas, MenuEntry, Shortcut
 from beyond_ui.bindings import rna_binding
 from beyond_ui.context_menu import default_entries
+from beyond_ui.context_shortcuts import Action
 
 spec = importlib.util.spec_from_file_location("menu_demo", ROOT / "examples/demo.py")
 demo = importlib.util.module_from_spec(spec)
@@ -36,6 +37,11 @@ def provider(target, context):
                 )
             ],
         ),
+        Action(
+            "wm.context_toggle",
+            {"data_path": "scene.render.use_file_extension"},
+            context,
+        ).entry(context),
         *default_entries(target, context),
     ]
 
@@ -118,6 +124,10 @@ def tick():
             assert canvas.context_menu.target.key == "value"
             record, _ = current()
             assert record["backdrop"] is not None, record.get("glass_error")
+            if not canvas.context_menu.glass_ready and state.get("paint_waits", 0) < 5:
+                state["paint_waits"] = state.get("paint_waits", 0) + 1
+                area.tag_redraw()
+                return 0.2
             assert canvas.context_menu.glass_ready
             from beyond_ui.gpu import glass
 
@@ -207,6 +217,37 @@ def tick():
             assert not demo._host.bridge.errors, demo._host.bridge.errors
             state["checks"].append(
                 "host animation disable, invalidation, finite idle and clean teardown"
+            )
+            emit("RIGHTMOUSE")
+        elif stage == 16:
+            _, canvas = current()
+            with bpy.context.temp_override(window=window, area=area, region=region):
+                canvas.context_menu.choose(1, bpy.context)
+            assert canvas.context_menu.capture_row is not None
+            emit("F19", shift=True, ctrl=True, alt=True)
+        elif stage == 17:
+            _, canvas = current()
+            assert canvas.context_menu is None, canvas.menu_error
+            with bpy.context.temp_override(window=window, area=area, region=region):
+                action = Action(
+                    "wm.context_toggle",
+                    {"data_path": "scene.render.use_file_extension"},
+                    bpy.context,
+                )
+                _, item = action.current(bpy.context)
+                assert item.type == "F19" and item.shift and item.ctrl and item.alt
+            state["old_toggle"] = bpy.context.scene.render.use_file_extension
+            emit("F19", outside=True, shift=True, ctrl=True, alt=True)
+        elif stage == 18:
+            assert bpy.context.scene.render.use_file_extension != state["old_toggle"]
+            with bpy.context.temp_override(window=window, area=area, region=region):
+                Action(
+                    "wm.context_toggle",
+                    {"data_path": "scene.render.use_file_extension"},
+                    bpy.context,
+                ).remove(None, bpy.context)
+            state["checks"].append(
+                "real window key capture persists a working shortcut, invokes outside canvas, and removes it"
             )
             finish(True)
             return None
