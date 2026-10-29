@@ -8,7 +8,7 @@ Successful selection closes the owned popover; rejected commits preserve the
 edit for correction. Escape, right-click during an edit, or an outside click
 cancel without changing the property. Right-click on a resting field or candidate
 uses the shared owner-aware menu. It supports RNA string
-properties searched against an RNA collection, and supported ID pointers searched
+properties searched against an RNA collection, and supported ID or named non-ID pointers searched
 within an explicit collection. `template_search` inherits the same selection
 validation; its optional New/Unlink operators remain consumer-owned.
 
@@ -26,12 +26,13 @@ control = ui.prop_search(settings, "tag", settings, "tags",
 
 `item_search_property` must name an RNA string on non-ID collection items. The
 keyword is capability-gated against the runtime UILayout signature; Blender 4.2
-continues using default names and rejects this newer optional keyword explicitly.
+continues using RNA default names and rejects this newer optional keyword explicitly.
 ID collections use their actual names, as in the audited native implementation.
 Unknown pointer polls still require `Layout.pointer_sources` / `PointerItems`;
 merely supplying a search collection does not bypass the pointer's candidate policy, poll or type.
-Non-ID pointer targets remain unsupported (string searches over bones or other
-non-ID collections are supported).
+Named non-ID pointers are supported with explicit candidate/poll policies and a
+mandatory host revision and transaction callbacks; see [non-ID pointers](POINTERS_AND_DECORATORS.md#non-id-pointers-and-collection-owned-properties).
+String searches over non-ID collections remain supported without pointer policies.
 
 Closed compact fields read only their current bound value: they do not build or
 scan the candidate collection. Candidate snapshots are built when opening the
@@ -93,7 +94,7 @@ opening/typing/selection/cancellation checks, 503-candidate preparation timings,
 and 100 native-batched/unbatched animation frames per runtime. The prior full-card
 QA gallery remains unchanged; it is now selected with `search_popovers=False`.
 
-This remains partial API parity. Open gaps include non-ID pointers, native icons/previews, native fuzzy-ranking details,
+This remains partial API parity. Open gaps include unnamed/nonassignable pointer targets, native icons/previews, native fuzzy-ranking details,
 all native RNA name-property variants (including Action-slot special naming),
 drag/drop/eyedropper, complete keyboard focus traversal, all theme/DPI/platform
 coverage and generated-reference acceptance. Blender 4.2 fallback has source

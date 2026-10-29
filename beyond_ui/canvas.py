@@ -949,7 +949,7 @@ class Canvas(Group):
                     and (
                         not widget.capturing
                         or self.overlay.get("owner") is not None
-                        and self.overlay["owner"].kind == "search"
+                        and self.overlay["owner"].kind in {"pointer", "search"}
                     )
                 ):
                     self.cancel()

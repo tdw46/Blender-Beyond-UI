@@ -185,3 +185,26 @@ before `Canvas.paint` applies its tint. The original BVT canvas likewise draws
 base glass before the background style. This is fixture setup, not an added
 production glass or capture pass. The popup uses the retained strong-blur level;
 the closed field reuses the existing custom pointer surface and search icon.
+
+### Named non-ID pointers and collection owners — 2026-10-29
+
+The existing pointer field and Data Picker paint paths are reused unchanged for
+named RNA targets. Non-ID policies require host-owned revision and transaction
+callbacks; no candidate poll, data creation, RNA registration or undo policy is
+invented. Public collection wrappers use owning-ID/path/type identity when they
+lack `as_pointer`, with metadata read-only checks when the struct method is absent.
+The normal struct identity and read-only-query paths remain capability-selected.
+
+Exact 4.2/5.1/5.2 API and Manual URLs were searched/opened; access was unavailable.
+[Official source audit](design/qa/non-id-pointers-v1/api-source-audit.json) records
+`rna_armature.cc` and `rna_nodetree.cc` at v4.2.0, ec6e62d40fa9 and d13f752e3b9c,
+including active-property setters and related selection/output flags. Existing
+versioned search-source evidence supplies RNA name-property behavior. Disposable
+5.1.2/5.2.2 tests supplement this evidence; 4.2 is not execution-qualified here.
+
+The host rollback hook explicitly owns setter side effects. Public Bone-field and
+Value-node transactions are tested; hidden legacy bone flags and all specialized
+node/output setters remain open. The tests also record that public Blender context
+overrides turn collection `button_pointer` values into lists: native struct-based
+extension callbacks remain unqualified. Host providers retain the exact owner.
+No new private API or broader native ABI admission was added.

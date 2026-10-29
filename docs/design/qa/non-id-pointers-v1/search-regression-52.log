@@ -1,0 +1,4 @@
+COLLECTION_SEARCH {'passed': True, 'version': '5.2.2 LTS', 'checks': ['String collection selection, renamed-item identity, host commit and explicit refresh', 'Failed commit rollback, concurrent property change and removed search item rejected', 'Exact candidate right-click and zero collection scans in repeated paint-facing reads', 'Custom item string property, free suggestions, Escape cancellation and no invented data creation', 'ID search intersects collection with host candidate policy and retains camera type/poll enforcement', 'Standalone vector decorator expansion, exact component writes and aggregate nonexpanded color decorators', 'Removed collection RNA rejects stale selection before reading old items']}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

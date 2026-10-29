@@ -1,5 +1,7 @@
 """Bounded context-relative property paths for Blender favorites/keymaps."""
 
+from .rna_owner import identity as owner_identity
+
 # Context-relative actions intentionally follow Blender's future active owner,
 # just like native favorites. At creation, resolve the exact clicked owner.
 ROOTS = (
@@ -22,19 +24,19 @@ ROOTS = (
 
 def owner_path(source, context):
     owner = source.owner()
-    pointer = owner.as_pointer()
+    pointer = owner_identity(owner)
     for name in ROOTS:
         root = getattr(context, name, None)
         if root is None or not hasattr(root, "as_pointer"):
             continue
-        if root.as_pointer() == pointer:
+        if owner_identity(root) == pointer:
             return name
         identity = getattr(owner, "id_data", None)
         if identity is None or root.as_pointer() != identity.as_pointer():
             continue
         try:
             nested = owner.path_from_id()
-            if nested and root.path_resolve(nested).as_pointer() == pointer:
+            if nested and owner_identity(root.path_resolve(nested)) == pointer:
                 return name + ("" if nested.startswith("[") else ".") + nested
         except (ValueError, AttributeError, ReferenceError):
             continue

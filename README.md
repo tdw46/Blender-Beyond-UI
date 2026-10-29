@@ -120,6 +120,14 @@ Type immediately after opening; full-card mode remains an explicit backend optio
 [Compact search QA](docs/design/qa/search-popover-v1/index.html) ·
 [Search integration](docs/SEARCH_PROPERTIES.md)
 
+Named non-ID pointers now support active bones/nodes and collection-owned search
+properties, with host revision checks and shared glass/motion/context menus.
+
+![Non-ID pointer selection and context menus](docs/media/panels/non-id-pointers-v1.gif)
+
+[Non-ID pointer QA](docs/design/qa/non-id-pointers-v1/index.html) ·
+[Host policy and revision setup](docs/POINTERS_AND_DECORATORS.md#non-id-pointers-and-collection-owned-properties)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

@@ -1,0 +1,5 @@
+{
+  "source": "Actual Blender production frames; no generated pixels",
+  "capture": "../../design/qa/non-id-pointers-v1/capture.json",
+  "sha256": "c10bbdf4079b3eb71dcdae74c3473c82c94819815771119c1396f475e16b876a"
+}

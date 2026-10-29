@@ -7,6 +7,7 @@ separately admitted by exact platform, source and executable fingerprints.
 from copy import deepcopy
 from dataclasses import replace
 from .context_menu import Entry, Shortcut
+from .rna_owner import identity, readonly
 
 _SHORTCUTS = {
     "RESET": ("ui.reset_default_button", {}),
@@ -96,12 +97,7 @@ class Property:
         owner = resolve()
         self.identity = self._identity(owner)
 
-    @staticmethod
-    def _identity(owner):
-        if owner is None:
-            raise ReferenceError("Property owner is unavailable")
-        data = getattr(owner, "id_data", None)
-        return (data.as_pointer() if data is not None else None, owner.as_pointer())
+    _identity = staticmethod(identity)
 
     def owner(self):
         owner = self.resolve()
@@ -126,9 +122,9 @@ class Property:
     def editable(self):
         owner = self.owner()
         data = getattr(owner, "id_data", None)
-        return (
-            data is None or getattr(data, "is_editable", True)
-        ) and not owner.is_property_readonly(self.name)
+        return (data is None or getattr(data, "is_editable", True)) and not readonly(
+            owner, self.name
+        )
 
     def component(self, index):
         self.owner()
@@ -144,7 +140,11 @@ class Property:
 
     def paths(self):
         owner = self.owner()
-        path = owner.path_from_id(self.name)
+        path = (
+            owner.path_from_id(self.name)
+            if callable(getattr(owner, "as_pointer", None))
+            else owner.path_from_id() + "." + self.name
+        )
         if self.index is not None:
             path += f"[{self.index}]"
         return path, repr(owner.id_data) + "." + path
@@ -246,7 +246,11 @@ class Property:
             if target.commit is None:
                 raise RuntimeError("Host undo callback is required")
             data = owner.id_data
-            path = owner.path_from_id(self.name)
+            path = (
+                owner.path_from_id(self.name)
+                if callable(getattr(owner, "as_pointer", None))
+                else owner.path_from_id() + "." + self.name
+            )
             index = -1 if self.index is None else self.index
             if key in {"KEY", "DELETE_KEY"}:
                 fn = data.keyframe_insert if key == "KEY" else data.keyframe_delete

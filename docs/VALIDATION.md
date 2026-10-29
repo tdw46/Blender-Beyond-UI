@@ -583,3 +583,63 @@ existing shared spring and owner settings. No per-frame capture or blur is added
 These timings establish a compact-search baseline, not equivalent-workload BVT
 performance, GPU completion time or input latency. Exact generated-reference,
 theme/DPI and motion acceptance remain open, as do 4.2 and non-macOS runtime checks.
+
+## Named non-ID pointers and collection owners — 2026-10-29
+
+[Non-ID pointer QA](design/qa/non-id-pointers-v1/index.html) adds Bone and Node
+selection through explicit candidate/poll, revision and rollback policies. Pointer
+fields and prop_search/template_search share the same strong-glass picker. The
+public binding adapter now handles collection-owned properties such as
+bones.active and nodes.active without native control delegation.
+
+Both Blender 5.1.2 and 5.2.2 pass selection, clear, copy paths, rejected commits,
+host snapshot restoration, stale revisions, renamed/removed candidates and deleted
+containing-ID checks. Candidate Copy Name revalidates membership. Existing ID
+pointer, search, compact-popover and general RNA regressions pass. Actual window
+runs pass non-ID pointer/search typing, selection, field/candidate menus, Escape/
+right-click cancellation and idle teardown; existing pointer/decorator and public
+context-menu window fixtures pass too. 84 unit tests, Ruff, compilation, package
+build and ledger validation pass. The ledger remains 40 partial / 137 documented
+members, with zero reference-matched members.
+
+The 640×560 scale-1 Metal fixture has one non-ID pointer and one compact search,
+500 nodes plus the None row. Paint uses 20 warmups and 100 CPU submission samples;
+opening uses 25 event-preparation samples. Readback is outside both measurements.
+
+| Runtime | Non-ID workload | Median ms | p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | closed fields | 0.119 | 0.164 |
+| 5.2.2 LTS | prepare 501-row picker | 1.111 | 1.261 |
+| 5.2.2 LTS | open picker paint | 0.231 | 0.273 |
+| 5.1.2 | closed fields | 0.114 | 0.141 |
+| 5.1.2 | prepare 501-row picker | 1.128 | 1.248 |
+| 5.1.2 | open picker paint | 0.214 | 0.239 |
+
+The unchanged 503-ID search fixture was rerun against its prior published record.
+The same five 5.2.2 static states have identical RGB pixels (rest, open, filtered,
+field context and disabled). Equivalent-workload median timings are:
+
+| Runtime | Workload | Previous ms | Current ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | closed fields | 0.119 | 0.114 |
+| 5.2.2 LTS | prepare 503-row picker | 0.568 | 0.545 |
+| 5.2.2 LTS | open picker paint | 0.235 | 0.235 |
+| 5.1.2 | closed fields | 0.107 | 0.115 |
+| 5.1.2 | prepare 503-row picker | 0.535 | 0.543 |
+| 5.1.2 | open picker paint | 0.224 | 0.224 |
+
+These separate-process samples show no material regression for this small fixture;
+they are not controlled BVT source comparisons, GPU completion timing or input
+latency guarantees. Each current capture retains one backdrop production, one
+strong blur, five offscreens and recorded shader/batch/font/layout identities.
+All 100 frames per version match with native BLF batching enabled and disabled.
+No new production paint path, per-frame capture or candidate enumeration was added.
+
+Non-ID revision/transaction callbacks are mandatory because public RNA addresses
+and bound-pointer rollback alone cannot establish lifetime or setter-side-effect
+safety. The host must qualify specialized setters. Hidden legacy bone flags and
+all output-node transactions remain open. Native extension button-pointer overrides
+for collection owners become lists and remain unsupported for struct-dependent
+callbacks; shared host providers and normal property/candidate actions retain the
+exact owner. Type-specific icons, broader non-ID models, exact generated-reference/
+theme/DPI/motion acceptance, Blender 4.2 and non-macOS execution remain open.

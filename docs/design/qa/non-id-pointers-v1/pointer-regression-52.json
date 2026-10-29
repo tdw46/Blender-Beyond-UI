@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Scene camera and registered Python PointerProperty polls filter candidates; clear, rename-safe assignment and one host commit",
+    "Exact property/row context ownership, failed commit rollback, stale value/deleted candidate rejection and parent-cycle exclusion",
+    "Unexposed native polls fail closed; consumers can provide explicit candidate/poll policy",
+    "Commit-time poll/membership changes rejected; read-only ID pointers remain visible, disabled and inspectable by context menu",
+    "Decorator empty/keyed/changed/animated/driven states; exact component insert/delete; driver context and action replacement",
+    "Automatic split-layout decoration, fixed compact width, preserved wide-field 15% motion, opt-out and disabled/no-undo placeholders",
+    "Animation-state colors come directly from active theme widget-state roles"
+  ]
+}

@@ -1,6 +1,7 @@
-"""Owner-checked ID pointer selection. Candidate/poll policy belongs to the host."""
+"""Owner-checked RNA pointer selection. Candidate/poll policy belongs to the host."""
 
 from dataclasses import dataclass, replace
+from contextlib import nullcontext
 from .context_menu import Entry
 
 
@@ -11,6 +12,8 @@ class PointerItems:
     items: object
     poll: object = lambda owner, candidate: True
     allow_none: bool = True
+    revision: object = None  # Callable returning an immutable host generation token.
+    transaction: object = None  # (owner, before, after) -> rollback context manager.
 
 
 def automatic(source):
@@ -76,9 +79,20 @@ class PointerField:
         import bpy
 
         self.type = getattr(bpy.types, meta.fixed_type.identifier, None)
-        if self.type is None or not issubclass(self.type, bpy.types.ID):
+        if self.type is None:
+            raise ValueError("Pointer target RNA type is unavailable")
+        self.stable_ids = issubclass(self.type, bpy.types.ID)
+        name = getattr(meta.fixed_type, "name_property", None)
+        self.name = name.identifier if name is not None else "name"
+        if self.name not in meta.fixed_type.properties:
+            raise ValueError("Pointer target requires an RNA name property")
+        if not self.stable_ids and (
+            policy is None
+            or not callable(policy.revision)
+            or not callable(policy.transaction)
+        ):
             raise ValueError(
-                "Only ID pointers are supported; non-ID pointers need a separate adapter"
+                "Non-ID pointers require PointerItems with host revision and transaction callbacks"
             )
         self.policy = policy or automatic(self.source)
         self.allow_none = self.policy.allow_none and not meta.is_never_none
@@ -86,9 +100,27 @@ class PointerField:
     def label(self):
         try:
             value = getattr(self.source.owner(), self.source.name)
-            return value.name if value is not None else "None"
+            return self.item_label(value)
         except (ReferenceError, RuntimeError):
             return "Unavailable"
+
+    def item_label(self, value):
+        return getattr(value, self.name) if value is not None else "None"
+
+    def revision(self):
+        return self.policy.revision() if self.policy.revision is not None else None
+
+    def signature(self, values):
+        """Only on opening/actions; never enumerate candidates during painting."""
+        return tuple(
+            (
+                self.identity(v),
+                v.id_data.as_pointer() if v.id_data is not None else None,
+                v.bl_rna.identifier,
+                self.item_label(v),
+            )
+            for v in values
+        )
 
     @staticmethod
     def identity(value):
@@ -110,29 +142,44 @@ class PointerField:
             raise ValueError("Pointer candidate is no longer eligible")
         if self.identity(before) == self.identity(chosen):
             return
-        try:
-            self.binding.write(chosen)
-            if self.identity(self.binding.read()) != self.identity(chosen):
-                raise ValueError("The property rejected this pointer")
-            self.binding.commit(before, chosen)
-        except Exception:
-            if self.binding.valid():
-                self.binding.write(before)
-            raise
+        transaction = (
+            self.policy.transaction(self.source.owner(), before, chosen)
+            if self.policy.transaction is not None
+            else nullcontext()
+        )
+        # Restore the bound pointer before the host restores related setter state.
+        with transaction:
+            try:
+                self.binding.write(chosen)
+                if self.identity(self.binding.read()) != self.identity(chosen):
+                    raise ValueError("The property rejected this pointer")
+                self.binding.commit(before, chosen)
+            except Exception:
+                if self.binding.valid():
+                    self.binding.write(before)
+                raise
 
     def clear_entry(self):
         before = self.binding.read()
         identity = self.identity(before)
+        revision = self.revision()
+
+        def clear(t, c):
+            if self.revision() != revision:
+                raise ReferenceError("Pointer collection revision changed")
+            self.assign(before, None)
+
         return Entry(
             "CLEAR_POINTER",
             "Clear",
-            lambda t, c: self.assign(before, None),
+            clear,
             lambda t, c: t.editable()
             and self.allow_none
             and before is not None
             and self.binding.valid()
             and self.source.editable()
-            and self.identity(self.binding.read()) == identity,
+            and self.identity(self.binding.read()) == identity
+            and self.revision() == revision,
             icon="unlink",
         )
 
@@ -141,7 +188,9 @@ class PointerField:
 
         before = self.binding.read()
         before_id = self.identity(before)
-        collection = self.policy.items()
+        revision = self.revision()
+        collection = tuple(self.policy.items())
+        signature = None if self.stable_ids else self.signature(collection)
         values = {
             self.identity(v): v
             for v in collection
@@ -157,6 +206,7 @@ class PointerField:
                 and canvas.controls.get(control.key) is control
                 and control.enabled
                 and self.identity(self.binding.read()) == before_id
+                and self.revision() == revision
             )
 
         def valid(key):
@@ -165,31 +215,47 @@ class PointerField:
             except (ReferenceError, RuntimeError):
                 return False
 
-        def select(key):
+        def candidate(key):
+            if not valid(key):
+                raise ReferenceError(
+                    "Pointer owner or candidate changed; reopen the picker"
+                )
+            collection = tuple(self.policy.items())
+            if signature is not None and self.signature(collection) != signature:
+                raise ReferenceError("Pointer collection changed; reopen the picker")
+            chosen = values[key]
+            if chosen is not None and (
+                not any(self.identity(v) == key for v in collection)
+                or not self.policy.poll(self.source.owner(), chosen)
+            ):
+                raise ReferenceError("Pointer candidate is no longer eligible")
+            return chosen
+
+        def attempt(action):
             try:
-                if not valid(key):
-                    raise ReferenceError(
-                        "Pointer owner or candidate changed; reopen the picker"
-                    )
-                chosen = values[key]
-                if chosen is not None and (
-                    not any(self.identity(v) == key for v in self.policy.items())
-                    or not self.policy.poll(self.source.owner(), chosen)
-                ):
-                    raise ReferenceError("Pointer candidate is no longer eligible")
-                if key == before_id:
-                    canvas.cancel()
-                    return
-                self.assign(before, chosen)
-                canvas.cancel()
+                action()
+                return True
             except (ReferenceError, RuntimeError, ValueError, TypeError) as error:
                 canvas.menu_error = str(error)
+                return False
+
+        def select(key):
+            def apply():
+                chosen = candidate(key)
+                self.assign(before, chosen)
+                canvas.cancel()
+
+            return attempt(apply)
+
+        def copy_name(key, context):
+            return attempt(
+                lambda: setattr(
+                    context.window_manager, "clipboard", self.item_label(candidate(key))
+                )
+            )
 
         widget = DataPicker(
-            (
-                (key, v.name if v is not None else "None", "object")
-                for key, v in values.items()
-            ),
+            ((key, self.item_label(v), "object") for key, v in values.items()),
             select,
             selected=lambda: before_id,
             valid=valid,
@@ -199,6 +265,7 @@ class PointerField:
         widget.disabled_actions = True
         widget.binding = self.binding
         widget.focus()
+        widget.type_to_search = True
 
         # Rows act on the hovered candidate; property actions retain the owner.
         def target(hit):
@@ -216,11 +283,7 @@ class PointerField:
                         Entry(
                             "COPY_NAME",
                             "Copy Name",
-                            lambda t, c: setattr(
-                                c.window_manager,
-                                "clipboard",
-                                values[key].name if key else "None",
-                            ),
+                            lambda t, c: copy_name(key, c),
                             lambda t, c: valid(key),
                         ),
                     )

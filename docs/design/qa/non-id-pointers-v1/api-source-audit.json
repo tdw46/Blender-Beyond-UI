@@ -1,0 +1,385 @@
+{
+  "source": [
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_armature.cc",
+      "sha256": "f7199f3e5914a754aaa04c692f34d02a5822be0fa42ef102f906849c8996553c",
+      "markers": [
+        {
+          "line": 110,
+          "text": "static void rna_Armature_act_bone_set(PointerRNA *ptr, PointerRNA value, ReportList * /*reports*/)"
+        },
+        {
+          "line": 128,
+          "text": "arm->act_bone->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 132,
+          "text": "static void rna_Armature_act_edit_bone_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 147,
+          "text": "((EditBone *)arm->act_edbone)->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 701,
+          "text": "bone->flag &= ~(BONE_SELECTED | BONE_TIPSEL | BONE_ROOTSEL);"
+        },
+        {
+          "line": 1352,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 1708,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", BONE_SELECTED);"
+        },
+        {
+          "line": 1870,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", BONE_SELECTED);"
+        },
+        {
+          "line": 1925,
+          "text": "RNA_def_property_pointer_funcs(prop, nullptr, \"rna_Armature_act_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 1953,
+          "text": "prop, nullptr, \"rna_Armature_act_edit_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 2311,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_nodetree.cc",
+      "sha256": "98e02554ffb3634711894c1f373a38aefdf49f619d97c4bbc97e1f0c7c5ac2f9",
+      "markers": [
+        {
+          "line": 1197,
+          "text": "static void rna_NodeTree_active_node_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 1207,
+          "text": "/* Handle NODE_DO_OUTPUT as well. */"
+        },
+        {
+          "line": 1213,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 1216,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3755,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3758,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3761,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3773,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3776,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 3779,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4227,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 4605,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 6387,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 6405,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 8548,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 9039,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 9722,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 10056,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 10439,
+          "text": "prop, \"rna_NodeTree_active_node_get\", \"rna_NodeTree_active_node_set\", nullptr, nullptr);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_armature.cc",
+      "sha256": "0d1e9866d74de29187d4c32444dbf6cc68b74aa87a967a4ccdaf734ecde73f84",
+      "markers": [
+        {
+          "line": 117,
+          "text": "static void rna_Armature_act_bone_set(PointerRNA *ptr, PointerRNA value, ReportList * /*reports*/)"
+        },
+        {
+          "line": 135,
+          "text": "arm->act_bone->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 139,
+          "text": "static void rna_Armature_act_edit_bone_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 154,
+          "text": "(static_cast<EditBone *>(arm->act_edbone))->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 718,
+          "text": "ebone->flag &= ~(BONE_SELECTED | BONE_TIPSEL | BONE_ROOTSEL);"
+        },
+        {
+          "line": 731,
+          "text": "bone->flag &= ~(BONE_SELECTED | BONE_TIPSEL | BONE_ROOTSEL);"
+        },
+        {
+          "line": 1396,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 1903,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", BONE_SELECTED);"
+        },
+        {
+          "line": 1958,
+          "text": "RNA_def_property_pointer_funcs(prop, nullptr, \"rna_Armature_act_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 1986,
+          "text": "prop, nullptr, \"rna_Armature_act_edit_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 2350,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_nodetree.cc",
+      "sha256": "f2af07d648ba0b69c3c1ec1ba9b234f4ca0035f7193b9241fd9a4ec9396a85cf",
+      "markers": [
+        {
+          "line": 1352,
+          "text": "static void rna_NodeTree_active_node_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 1362,
+          "text": "/* Handle NODE_DO_OUTPUT as well. */"
+        },
+        {
+          "line": 1368,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 1371,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4025,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4028,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4031,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4043,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4046,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4049,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4430,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 4534,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 4908,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 6861,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 8518,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 8879,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 9304,
+          "text": "prop, \"rna_NodeTree_active_node_get\", \"rna_NodeTree_active_node_set\", nullptr, nullptr);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_armature.cc",
+      "sha256": "715ab90cbc3b7f12eb7c635e533d09dcd210bb6757e9f15894e4f6c4625c2868",
+      "markers": [
+        {
+          "line": 117,
+          "text": "static void rna_Armature_act_bone_set(PointerRNA *ptr, PointerRNA value, ReportList * /*reports*/)"
+        },
+        {
+          "line": 135,
+          "text": "arm->act_bone->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 139,
+          "text": "static void rna_Armature_act_edit_bone_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 154,
+          "text": "(static_cast<EditBone *>(arm->act_edbone))->flag |= BONE_SELECTED;"
+        },
+        {
+          "line": 727,
+          "text": "ebone->flag &= ~(BONE_SELECTED | BONE_TIPSEL | BONE_ROOTSEL);"
+        },
+        {
+          "line": 740,
+          "text": "bone->flag &= ~(BONE_SELECTED | BONE_TIPSEL | BONE_ROOTSEL);"
+        },
+        {
+          "line": 1407,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 1914,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", BONE_SELECTED);"
+        },
+        {
+          "line": 1969,
+          "text": "RNA_def_property_pointer_funcs(prop, nullptr, \"rna_Armature_act_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 1997,
+          "text": "prop, nullptr, \"rna_Armature_act_edit_bone_set\", nullptr, nullptr);"
+        },
+        {
+          "line": 2361,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_nodetree.cc",
+      "sha256": "a03c62855eb25780389fb67d16fecdd98c3a27f6899ae262bc4f99610753ce1c",
+      "markers": [
+        {
+          "line": 1366,
+          "text": "static void rna_NodeTree_active_node_set(PointerRNA *ptr,"
+        },
+        {
+          "line": 1376,
+          "text": "/* Handle NODE_DO_OUTPUT as well. */"
+        },
+        {
+          "line": 1382,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 1385,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4131,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4134,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4137,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4149,
+          "text": "other_node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4152,
+          "text": "node->flag |= NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4155,
+          "text": "node->flag &= ~NODE_DO_OUTPUT;"
+        },
+        {
+          "line": 4683,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 4787,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 5215,
+          "text": "RNA_def_property_boolean_sdna(prop, nullptr, \"flag\", NODE_DO_OUTPUT);"
+        },
+        {
+          "line": 7237,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 8973,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 9387,
+          "text": "RNA_def_struct_name_property(srna, prop);"
+        },
+        {
+          "line": 9838,
+          "text": "prop, \"rna_NodeTree_active_node_get\", \"rna_NodeTree_active_node_set\", nullptr, nullptr);"
+        }
+      ]
+    }
+  ],
+  "docs_access": "Exact 4.2/5.1/5.2 API and Manual URLs searched/opened; access failed. Runtime probes supplement exact official source."
+}

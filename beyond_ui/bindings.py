@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from copy import deepcopy
+from .rna_owner import identity, readonly
 
 
 @dataclass
@@ -70,20 +71,19 @@ def rna_binding(
     owner = resolve()
     if owner is None:
         raise ReferenceError("RNA owner is unavailable")
-    pointer = owner.as_pointer()
+    pointer = identity(owner)
 
     def current():
         obj = resolve()
-        if obj is None or obj.as_pointer() != pointer:
+        if obj is None or identity(obj) != pointer:
             raise ReferenceError("RNA owner changed")
         return obj
 
     def valid():
         try:
             obj = current()
-            return (
-                property_name in obj.bl_rna.properties
-                and not obj.is_property_readonly(property_name)
+            return property_name in obj.bl_rna.properties and not readonly(
+                obj, property_name
             )
         except (ReferenceError, AttributeError, RuntimeError):
             return False

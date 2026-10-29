@@ -28,9 +28,7 @@ class CollectionSearch:
             raise ValueError("Search source must be an RNA collection")
         target = self.source.owner().bl_rna.properties[self.source.name]
         if target.type not in {"STRING", "POINTER"}:
-            raise ValueError(
-                "Collection search requires a string or ID pointer property"
-            )
+            raise ValueError("Collection search requires a string or pointer property")
         self.pointer = None
         if target.type == "POINTER":
             policy = policy or automatic(self.source)
@@ -42,7 +40,12 @@ class CollectionSearch:
             item_type = item_type.base
         is_id = item_type is not None
         self.stable_ids = is_id
-        self.item_name = "name" if is_id else item_name or "name"
+        native_name = getattr(meta.fixed_type, "name_property", None)
+        self.item_name = (
+            "name"
+            if is_id
+            else item_name or (native_name.identifier if native_name else "name")
+        )
         prop = meta.fixed_type.properties.get(self.item_name)
         if prop is None or prop.type != "STRING":
             raise ValueError("Search item property must be an RNA string")
@@ -63,9 +66,7 @@ class CollectionSearch:
     def label(self):
         try:
             value = self.binding.get()
-            return (
-                (value.name if value is not None else "None") if self.pointer else value
-            )
+            return self.pointer.item_label(value) if self.pointer else value
         except (ReferenceError, RuntimeError):
             return "Unavailable"
 
@@ -100,14 +101,17 @@ class CollectionSearch:
             if menu is not None and menu.target.key == self.control.key:
                 self.canvas.close_context()
         self.expected = self.value_identity(self.binding.get())
+        self.pointer_revision = self.pointer.revision() if self.pointer else None
+        policy_items = tuple(self.pointer.policy.items()) if self.pointer else ()
+        self.pointer_signature = (
+            self.pointer.signature(policy_items)
+            if self.pointer and not self.pointer.stable_ids
+            else None
+        )
         values = {}
         rows = []
         keys = {}
-        allowed = (
-            {v.as_pointer() for v in self.pointer.policy.items()}
-            if self.pointer
-            else None
-        )
+        allowed = {v.as_pointer() for v in policy_items} if self.pointer else None
         for value in self.collection():
             if self.pointer and (
                 value.as_pointer() not in allowed
@@ -129,6 +133,8 @@ class CollectionSearch:
         if not self.source.valid():
             return False
         self.collection()
+        if self.pointer and self.pointer.revision() != self.pointer_revision:
+            return False
         return self.value_identity(self.binding.get()) == self.expected and (
             self.control is None
             or (
@@ -199,6 +205,12 @@ class CollectionSearch:
             raise ReferenceError(
                 "Search owner or candidate changed; refresh the search"
             )
+        if (
+            self.pointer_signature is not None
+            and self.pointer.signature(self.pointer.policy.items())
+            != self.pointer_signature
+        ):
+            raise ReferenceError("Pointer collection changed; refresh the search")
         if self.pointer and not any(
             v.as_pointer() == key for v in self.pointer.policy.items()
         ):
