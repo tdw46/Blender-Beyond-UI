@@ -24,6 +24,38 @@ shared tooltip path. Right-click on a resting field or expanded choice still
 resolves the exact property and, for expanded choices, its enum identifier.
 Regular context menus keep their existing 64-entry admission bound.
 
+## Grouping, modifiers and metadata
+
+The v2 pass preserves enum headings and separators in the admitted dynamic-RNA
+copy path. Headings are read-only, use the retained 12-unit title face, receive
+menu opening motion, and are skipped by keyboard selection. Separators attach
+to the following row. `props_enum` creates columns separated by named groups,
+matching Blender's source structure. `prop(..., expand=True)` and flag `prop`
+retain their expanded strip presentation.
+
+Expanded flag strips select one flag on a normal click; Shift toggles the clicked
+flag without disturbing others, including clearing the final flag. A normal
+click on the sole selected flag leaves it selected. Individual `prop_enum`
+buttons, `props_enum` entries and explicit menu entries toggle their own flag.
+Those are distinct Blender code paths; a universal Shift rule would be wrong.
+Menu selections still close. Context-dependent multi-choice persistence has not
+been qualified and is not claimed as a newly completed feature.
+
+`Layout.enum_item_name`, `Layout.enum_item_description`, and
+`Layout.enum_item_icon` are now available as class methods. They resolve current
+items using the existing item adapter, return translated name/description or the
+numeric icon ID, and return empty text/zero for missing identifiers or unsuitable
+properties. Their static and dynamic results match native methods in the tested
+runtimes. Returning an icon ID does not yet implement every custom icon drawing.
+
+The optional separator-copy change retains existing ABI structs, allocation
+ownership and exact build/platform admission. The adapter's reviewed source
+fingerprint is updated. **Public-RNA fallback omits structural rows** on tested
+runtimes: choices and static metadata still work, but heading/separator parity
+is not qualified there. `hosts.menu_native.reason()` exposes unavailable native
+admission; no native UI is drawn as a fallback. Expanded orientation, wrapping,
+specialized tabs and all keyword combinations still need broader qualification.
+
 ## Transactions and dynamic choices
 
 The library snapshots choices at layout construction and again when opening a
@@ -62,17 +94,17 @@ No 4.2 executable is installed for this validation.
 
 ## Evidence and open parity
 
-[Enum QA v1](design/qa/enum-properties-v1/index.html) contains actual Blender
+[Enum QA v2](design/qa/enum-properties-v2/index.html) contains actual Blender
 implementation captures, motion GIF, source hashes, before/after performance
 records, and runtime/window input results. Existing menu artwork/geometry is
 reused; captures are not newly approved generated references. All new enum
 surfaces are captured at 1×, 1.5× and 2× beside ordinary panel controls.
 
-Still open: native Shift/multi-toggle menu persistence and modifier-specific
-flag selection rules; enum headings/separators and every icon variant; popup
+Still open: context-dependent multi-toggle menu persistence; full custom icon
+variants and grouping on unqualified adapters; popup
 search/fuzzy ranking; specialized tab highlights and full focus traversal;
 complete translation/keyword combinations; native callbacks on unqualified
 platforms/builds; exact generated-reference and all theme/display/platform
-acceptance. `prop_tabs_enum` still uses the existing expanded-button route; its
+acceptance. `prop_tabs_enum` retains the expanded strip route; its
 specialized tab semantics are not complete. These changes close discrete enum
 interaction/transaction gaps, not full UILayout or enum API parity.

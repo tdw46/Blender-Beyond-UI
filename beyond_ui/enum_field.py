@@ -34,11 +34,11 @@ class EnumField:
                 getattr(i, "value", None),
             )
             for i in rows
-            if i.identifier != ""
         )
-        if len({i.identifier for i in result}) != len(result):
+        choices = tuple(i for i in result if i.identifier != "")
+        if len({i.identifier for i in choices}) != len(choices):
             raise ValueError("Enum identifiers must be unique")
-        self.labels = {i.identifier: i.name for i in result}
+        self.labels = {i.identifier: i.name for i in choices}
         return result
 
     def format(self, value):
@@ -52,7 +52,9 @@ class EnumField:
         value = self.binding.read() if value is None else value
         return identifier in value if self.flag else identifier == value
 
-    def choose(self, item, *, original=_UNSET):
+    def choose(self, item, *, original=_UNSET, exclusive=False):
+        if item.identifier == "":
+            raise ValueError("Enum headings and separators cannot be selected")
         before = deepcopy(self.binding.read())
         if original is not _UNSET and before != original:
             raise ReferenceError("Enum value changed; reopen the menu")
@@ -64,7 +66,11 @@ class EnumField:
         # Dynamic callbacks are host code: reject a value change during evaluation.
         if self.binding.read() != before:
             raise ReferenceError("Enum value changed while resolving choices")
-        after = (set(before) ^ {item.identifier}) if self.flag else item.identifier
+        after = (
+            ({item.identifier} if exclusive else set(before) ^ {item.identifier})
+            if self.flag
+            else item.identifier
+        )
         if before == after:
             return
         try:

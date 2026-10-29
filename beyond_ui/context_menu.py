@@ -67,6 +67,7 @@ class Entry:
     capture_mouse: bool = False
     checked: object = False  # prepared on open/input, never read from paint
     field: object = None  # context_edit.Field
+    heading: bool = False
 
 
 @dataclass
@@ -622,6 +623,14 @@ class Menu:
                 if kind == "END"
                 else max(0, min(len(p.rows) - 1, p.highlight + delta))
             )
+            step = -1 if kind in {"END", "UP_ARROW", "PAGE_UP", "WHEELUPMOUSE"} else 1
+            while 0 <= p.highlight < len(p.rows) and p.rows[p.highlight].heading:
+                p.highlight += step
+            if not 0 <= p.highlight < len(p.rows):
+                p.highlight = max(0, min(len(p.rows) - 1, p.highlight))
+                while 0 <= p.highlight < len(p.rows) and p.rows[p.highlight].heading:
+                    p.highlight -= step
+                p.highlight = max(0, min(len(p.rows) - 1, p.highlight))
             self.reveal()
             return True
         if kind == "MOUSEMOVE":

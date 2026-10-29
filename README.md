@@ -144,6 +144,13 @@ transactional expanded buttons while retaining the shared styling and scale:
 [Enum QA gallery](docs/design/qa/enum-properties-v1/index.html) ·
 [Enum integration and remaining gaps](docs/ENUM_PROPERTIES.md)
 
+The next enum pass adds grouped menus, headings/separators, Shift-aware flag strips
+and enum metadata helpers:
+
+![Grouped enums and flag modifiers](docs/media/panels/enum-properties-v2.gif)
+
+[Enum groups QA gallery](docs/design/qa/enum-properties-v2/index.html)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

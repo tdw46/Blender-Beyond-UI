@@ -1,15 +1,17 @@
 """Context-aware enum items with an explicit public-RNA compatibility fallback."""
 
 
-def items(owner, name, context):
+def items(owner, name, context, *, include_separators=False):
     meta = owner.bl_rna.properties[name]
     if context is not None:
         from .hosts.menu_native import enum_items
 
-        resolved = enum_items(owner, name, context)
+        resolved = enum_items(
+            owner, name, context, include_separators=include_separators
+        )
         if resolved is not None:
             return resolved
-    return tuple(meta.enum_items)
+    return tuple(i for i in meta.enum_items if include_separators or i.identifier)
 
 
 def contains(owner, name, identifier, context):

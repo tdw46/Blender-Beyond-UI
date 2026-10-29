@@ -24,6 +24,70 @@ class Enums(unittest.TestCase):
         field = EnumField(binding, lambda: rows, flag=flag)
         return values, rows, commits, binding, field
 
+    def test_heading_rows_preserve_structure_but_cannot_write(self):
+        values, rows, commits, binding, field = self.fixture()
+        rows[:] = [
+            Item("", "First"),
+            rows[0],
+            Item("", ""),
+            Item("", "Second"),
+            rows[1],
+        ]
+        self.assertEqual(len(field.snapshot()), 5)
+        self.assertEqual(field.format("A"), "Alpha")
+        with self.assertRaises(ValueError):
+            field.choose(rows[0])
+        self.assertEqual(commits, [])
+
+    def test_expanded_flag_mode_distinguishes_exclusive_and_toggle(self):
+        values, rows, commits, binding, field = self.fixture({"A"}, True)
+        field.choose(rows[1], exclusive=True)
+        self.assertEqual(values[0], {"B"})
+        field.choose(rows[1], exclusive=True)
+        self.assertEqual(len(commits), 1)
+        field.choose(rows[0])
+        self.assertEqual(values[0], {"A", "B"})
+
+    def test_menu_navigation_skips_headers_without_wrapping_at_boundary(self):
+        from beyond_ui.context_menu import Menu, Target, Entry
+
+        menu = Menu(
+            Target("x"),
+            [
+                Entry("h", "Heading", heading=True, enabled=False),
+                Entry("a", "Alpha", lambda t, c: None),
+                Entry("h2", "Heading", heading=True, enabled=False),
+                Entry("b", "Beta", lambda t, c: None),
+                Entry("tail", "Tail", heading=True, enabled=False),
+            ],
+            (0, 0),
+            (0, 0, 360, 300),
+        )
+        for key, expected in (
+            ("HOME", 1),
+            ("UP_ARROW", 1),
+            ("DOWN_ARROW", 3),
+            ("DOWN_ARROW", 3),
+            ("END", 3),
+            ("UP_ARROW", 1),
+        ):
+            menu.event(event(key), 10, 10)
+            self.assertEqual(menu.page.highlight, expected, key)
+
+    def test_enum_identifier_cannot_collide_with_menu_navigation_commands(self):
+        values = ["A"]
+        canvas = Canvas()
+        c = canvas.enum(
+            "e",
+            "Reserved-looking value",
+            Binding(lambda: values[0], lambda v: values.__setitem__(0, v)),
+            items=(("A", "Alpha"), ("__back__", "Legitimate enum value")),
+        )
+        canvas.arrange(360)
+        canvas.open_enum_menu(c, (0, 0, 360, 300), None)
+        canvas.context_menu.choose(1, None)
+        self.assertEqual(values[0], "__back__")
+
     def test_noop_and_flag_transactions_preserve_authoritative_values(self):
         values, rows, commits, binding, field = self.fixture()
         field.choose(rows[0])
@@ -115,7 +179,7 @@ class Enums(unittest.TestCase):
         canvas.event(event("ESC"), 10, 10, clip)
         rows[1] = Item("C", "Charlie", value=4)
         canvas.open_enum_menu(c, clip, None)
-        self.assertEqual(canvas.context_menu.page.rows[1].key, "C")
+        self.assertEqual(canvas.context_menu.page.rows[1].key, "enum:C")
         canvas.event(event("RIGHTMOUSE"), -1, -1, clip)
         self.assertEqual(commits, [])
         self.assertIsNone(canvas.context_menu)

@@ -57,6 +57,10 @@ def enum_option(
 
     TEXT = palette["text"]
     MUTED = palette["muted"]
+    if item.get("heading"):
+        from . import typography
+
+        font = typography.face(font, "title")
     if item.get("divider"):
         style.draw(
             x + 4 * scale,
@@ -69,11 +73,11 @@ def enum_option(
     if color[3] > 0:
         if not glass.lens(backdrop, (x, y, w, h), 4 * scale, color, blur=0.4):
             style.draw(x, y, w, h, color, radius=4 * scale)
-    ink = TEXT if item["enabled"] else MUTED
+    ink = TEXT if item["enabled"] or item.get("heading") else MUTED
     blf.size(font, 11 * scale)
     left = x + 8 * scale
     right = x + w - 8 * scale
-    if "menu_icon" in item:
+    if "menu_icon" in item and not item.get("heading"):
         style.icon(item["menu_icon"], x + 11 * scale, y + h / 2, 14 * scale, ink)
         left = x + 27 * scale
     if item.get("submenu"):
@@ -91,7 +95,7 @@ def enum_option(
         right -= 16 * scale
     if item.get("field"):
         right = min(right, x + w * 0.44)
-    text(item["text"], left, right, 11 * scale, ink)
+    text(item["text"], left, right, (12 if item.get("heading") else 11) * scale, ink)
 
 
 def uncovered(rect, covers):
@@ -121,27 +125,11 @@ def uncovered(rect, covers):
 
 def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
     """Keep every label/shortcut in the same transform as its menu geometry."""
-    import blf
     from . import typography
 
-    font = typography.face(font, "body")
-    # BLF's ordinary batch may be submitted after a row/menu matrix is popped.
-    # Zero-angle rotation opts this owned font into immediate BLF submission; it
-    # does not resize glyphs, wait for the GPU or create an offscreen/texture.
-    # Drain any earlier text at the incoming matrix before entering menu motion.
-    # A space has no visible quad. Keep this scoped to finite menu motion so
-    # settled menus retain their existing batched/resting path.
-    moving = bool(menu.motion.tracks) and bool(menu.motion.strength)
-    if moving:
-        blf.rotation(font, 0.0)
-        blf.enable(font, blf.ROTATION)
-        blf.position(font, 0, 0, 0)
-        blf.draw(font, " ")
-    try:
+    # Include both retained type faces so headings follow the same menu transform.
+    with typography.motion_text(font, menu.motion):
         _context_menu(menu, mapped, scale, font, palette, backdrop, clip)
-    finally:
-        if moving:
-            blf.disable(font, blf.ROTATION)
 
 
 def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
@@ -149,7 +137,8 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
     from . import style, glass, skin, typography
     from .paint import measure
 
-    font = typography.face(font, "body")
+    fonts = font
+    font = typography.face(fonts, "body")
     menu.motion.begin_paint()
     menu.glass_ready = backdrop is not None
     pages = (*menu.parents, menu.page)
@@ -174,9 +163,13 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
             for index, rect, row in menu.visible_rows(page):
                 target = mapped(rect)
                 key = ("row", index)
-                if active:
+                if active and not row.heading:
                     menu.motion.region(key, rect)
-                color = palette["selected"] if index == page.highlight else (0, 0, 0, 0)
+                color = (
+                    palette["selected"]
+                    if index == page.highlight and not row.heading
+                    else (0, 0, 0, 0)
+                )
                 item = dict(
                     text=row.label,
                     enabled=page.available[index],
@@ -184,6 +177,7 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     menu_icon=row.icon,
                     shortcut=row.shortcut,
                     divider=row.divider,
+                    heading=row.heading,
                     submenu=row.children is not None,
                     field=row.field is not None,
                 )
@@ -195,15 +189,16 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                         (max(a, x), max(b, y), min(c, x + w), min(d, y + h)), covers
                     )
 
+                row_font = typography.face(fonts, "title" if row.heading else "body")
                 with menu.motion.deform(key, target) if active else nullcontext():
                     enum_option(
                         item,
                         target,
                         scale,
-                        font,
+                        row_font,
                         palette,
                         style,
-                        lambda value, size: measure(font, size, value),
+                        lambda value, size: measure(row_font, size, value),
                         glass,
                         backdrop,
                         color,

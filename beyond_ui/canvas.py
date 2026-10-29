@@ -504,16 +504,40 @@ class Canvas(Group):
             items = field.snapshot()
             if not items:
                 raise ValueError("No enum choices are available in this context")
-            rows = tuple(
-                Entry(
-                    item.identifier,
-                    item.name,
-                    lambda target, ctx, item=item: field.choose(item, original=before),
-                    checked=field.selected(item.identifier, before),
-                    tip=item.description,
+            rows = []
+            divider = False
+            for index, item in enumerate(items):
+                if item.identifier == "":
+                    if item.name:
+                        rows.append(
+                            Entry(
+                                f"__heading_{index}",
+                                item.name,
+                                enabled=False,
+                                heading=True,
+                                divider=divider,
+                                tip=item.description,
+                            )
+                        )
+                        divider = False
+                    else:
+                        divider = True
+                    continue
+                rows.append(
+                    Entry(
+                        f"enum:{item.identifier}",
+                        item.name,
+                        lambda target, ctx, item=item: field.choose(
+                            item, original=before
+                        ),
+                        checked=field.selected(item.identifier, before),
+                        tip=item.description,
+                        divider=divider,
+                    )
                 )
-                for item in items
-            )
+                divider = False
+            if not any(row.action is not None for row in rows):
+                raise ValueError("No enum choices are available in this context")
             self.cancel()
             target = Target(
                 control.key,
@@ -538,9 +562,16 @@ class Canvas(Group):
                 (
                     i
                     for i, checked in enumerate(self.context_menu.page.checked)
-                    if checked
+                    if checked and self.context_menu.page.available[i]
                 ),
-                0,
+                next(
+                    (
+                        i
+                        for i, available in enumerate(self.context_menu.page.available)
+                        if available
+                    ),
+                    0,
+                ),
             )
             self.context_menu.reveal()
             self.context_focus = control
@@ -1080,7 +1111,9 @@ class Canvas(Group):
         if control is None or kind != "LEFTMOUSE" or not press:
             return False
         if control.kind == "button":
-            if control.action:
+            if control.options.get("action_event"):
+                control.options["action_event"](event)
+            elif control.action:
                 control.action()
         elif control.kind in {"pointer", "search"}:
             try:

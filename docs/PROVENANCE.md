@@ -253,3 +253,26 @@ The benchmark asserts the loaded package path before importing shared capture
 helpers, preventing the current checkout from masking the baseline. Raw timings
 compare equivalent short-enum workloads; they do not establish GPU completion
 time or a controlled BVT/source benchmark.
+
+## 2026-10-29 — enum group and modifier follow-up
+
+Official Blender source at `v4.2.0`, `ec6e62d40fa9` and `d13f752e3b9c` was
+reviewed for `item_enum_expand_handle`, `Layout::props_enum`, enum metadata
+helpers and menu handlers. Exact URLs/hashes are in the v2 QA `source-audit.json`.
+API/Manual fetches remained unavailable; installed runtime assertions supplement
+source evidence. Expanded flag strips use exclusive plain selection and Shift
+toggling; individual enum-value buttons use the direct flag toggle path. No
+universal Shift-keeps-menu-open behavior is inferred from the general Manual.
+Context-dependent persistence remains unqualified.
+
+The existing admitted enum-copy adapter gained an opt-in to preserve empty
+identifiers representing headings/separators. No ABI layouts, symbols, calls,
+allocation bounds or free policy changed; the source admission hash was updated
+and both admitted runtimes rechecked. Legacy callers still receive choices only.
+Public-RNA metadata was tested separately and omits structural rows: that fallback
+remains explicitly degraded for grouping, without changing the Blender 4.2 floor.
+
+Headings reuse the library's retained semibold title face, theme text and menu
+material. Both font faces now share the existing finite-motion text-submission
+scope. No new fonts, shaders, timer loops or backdrop passes were added. Old
+references and galleries remain immutable; new states await Tyler's visual QA.

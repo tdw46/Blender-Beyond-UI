@@ -261,9 +261,9 @@ class Layout:
             )
         if meta.type == "ENUM":
             if getattr(meta, "is_enum_flag", False):
-                return self.props_enum(data, property)
+                return self._expanded_enum(data, property)
             if expand:
-                return self.props_enum(data, property)
+                return self._expanded_enum(data, property)
             return self._enum_control(data, property, label, binding, key, options)
         if meta.type == "POINTER":
             from .pointer import PointerField
@@ -337,10 +337,62 @@ class Layout:
             and model.editable(self.canvas),
         )
 
-    def _enum_items(self, data, property):
+    @staticmethod
+    def _enum_metadata(data, property, identifier, attribute):
+        import bpy
         from .context_enums import items
 
-        return items(data, property, self.context)
+        default = 0 if attribute == "icon" else ""
+        meta = data.bl_rna.properties.get(property)
+        if meta is None or meta.type != "ENUM" or not identifier:
+            return default
+        item = next(
+            (
+                i
+                for i in items(data, property, bpy.context)
+                if i.identifier == identifier
+            ),
+            None,
+        )
+        if item is None:
+            return default
+        value = getattr(item, attribute, default)
+        if attribute == "icon":
+            if isinstance(value, int):
+                return value
+            # Public-RNA EnumPropertyItem.icon uses an identifier on older paths.
+            icons = (
+                bpy.types.UILayout.bl_rna.functions["prop"]
+                .parameters["icon"]
+                .enum_items
+            )
+            icon = icons.get(value)
+            return icon.value if icon is not None else 0
+        translator = (
+            bpy.app.translations.pgettext_tip
+            if attribute == "description"
+            else bpy.app.translations.pgettext_iface
+        )
+        return translator(value, getattr(meta, "translation_context", "*") or "*")
+
+    @classmethod
+    def enum_item_name(cls, data, property, identifier):
+        return cls._enum_metadata(data, property, identifier, "name")
+
+    @classmethod
+    def enum_item_description(cls, data, property, identifier):
+        return cls._enum_metadata(data, property, identifier, "description")
+
+    @classmethod
+    def enum_item_icon(cls, data, property, identifier):
+        return cls._enum_metadata(data, property, identifier, "icon")
+
+    def _enum_items(self, data, property, *, include_separators=False):
+        from .context_enums import items
+
+        return items(
+            data, property, self.context, include_separators=include_separators
+        )
 
     def _enum_field(self, binding):
         from .enum_field import EnumField
@@ -348,7 +400,9 @@ class Layout:
         source = binding.context
         return EnumField(
             binding,
-            lambda: self._enum_items(source.owner(), source.name),
+            lambda: self._enum_items(
+                source.owner(), source.name, include_separators=True
+            ),
             flag=getattr(
                 source.owner().bl_rna.properties[source.name], "is_enum_flag", False
             ),
@@ -362,13 +416,21 @@ class Layout:
             key,
             label,
             binding,
-            items=tuple((i.identifier, i.name) for i in rows),
+            items=tuple((i.identifier, i.name) for i in rows if i.identifier != ""),
             enum_field=field,
             **options,
         )
 
     def _enum_button(
-        self, data, property, item, *, text="", text_ctxt="", translate=True
+        self,
+        data,
+        property,
+        item,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        modifier_select=False,
     ):
         source = self._binding(data, property)
         source.context.enum_value = item.identifier
@@ -381,9 +443,12 @@ class Layout:
             except (ReferenceError, RuntimeError):
                 return False
 
-        def action():
+        def action(event=None):
             try:
-                field.choose(item)
+                field.choose(
+                    item,
+                    exclusive=modifier_select and not getattr(event, "shift", False),
+                )
                 self.canvas.menu_error = None
             except Exception as error:
                 self.canvas.menu_error = str(error)
@@ -393,6 +458,7 @@ class Layout:
             self._text(text or item.name, text_ctxt, translate),
             action,
             selected=selected,
+            action_event=action,
             binding=source,
             **self._options(),
         )
@@ -416,12 +482,35 @@ class Layout:
             data, property, item, text=text, text_ctxt=text_ctxt, translate=translate
         )
 
-    def props_enum(self, data, property):
-        # Resolve dynamic items once per group, not once per expanded button.
+    def _expanded_enum(self, data, property):
         field = self._enum_field(self._binding(data, property))
         row = self.row()
         for item in field.snapshot():
-            row._enum_button(data, property, item, translate=False)
+            if item.identifier != "":
+                row._enum_button(
+                    data, property, item, translate=False, modifier_select=True
+                )
+            elif item.name:
+                row.title(text=item.name, translate=False)
+            else:
+                row.separator()
+
+    def props_enum(self, data, property):
+        # Native props_enum groups choices into columns under optional headings.
+        field = self._enum_field(self._binding(data, property))
+        split = self.row()
+        column = split.column()
+        populated = False
+        for item in field.snapshot():
+            if item.identifier != "":
+                column._enum_button(data, property, item, translate=False)
+            elif item.name:
+                if populated:
+                    column = split.column()
+                column.title(text=item.name, translate=False)
+            else:
+                column.separator()
+            populated = True
 
     def prop_menu_enum(
         self,
@@ -446,7 +535,7 @@ class Layout:
         )
 
     def prop_tabs_enum(self, data, property, **kwargs):
-        return self.props_enum(data, property)
+        return self._expanded_enum(data, property)
 
     def operator(
         self,

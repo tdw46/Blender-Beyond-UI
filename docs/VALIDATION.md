@@ -720,3 +720,52 @@ for collection owners become lists and remain unsupported for struct-dependent
 callbacks; shared host providers and normal property/candidate actions retain the
 exact owner. Type-specific icons, broader non-ID models, exact generated-reference/
 theme/DPI/motion acceptance, Blender 4.2 and non-macOS execution remain open.
+
+
+## Enum grouping, modifiers and metadata — 2026-10-29
+
+[Enum QA v2](design/qa/enum-properties-v2/index.html) adds nonselectable headings,
+separators, grouped `props_enum` columns and native expanded-flag selection:
+plain clicks select exclusively; Shift toggles individual flags. Individual
+`prop_enum` buttons retain toggle behavior. Metadata helpers for item names,
+descriptions and icon IDs match native results for tested static, dynamic and
+missing choices. This is metadata coverage, not complete custom icon artwork.
+
+Blender 5.1.2 and 5.2.2 pass RNA, real window input, menu/context regressions and
+general runtime fixtures in disposable profiles. 102 unit tests, Ruff, compilation,
+package build and ledger validation pass. The ledger has 43 partial members out
+of 137, with zero reference-matched members. Three previously unimplemented
+metadata helpers now have execution evidence.
+
+At 1×, 1.5× and 2×, all 600 capture frames match with native BLF batching enabled
+and disabled, including both heading and body fonts during opening motion.
+Retained resources remain stable: one shared backdrop production, one strong blur,
+five offscreens and recorded font/shader/batch/layout identities. These capture
+checks do not establish exact generated-reference acceptance; Tyler owns visual QA.
+
+The equivalent ungrouped workload uses the prior published revision `1e95dc8`
+and the current checkout in separate processes. It contains one three-choice
+scalar field and three individual enum buttons, 640×560 at scale 1 on Metal,
+with 20 warmups and 100 CPU paint-submission samples. Readback is outside timing.
+
+| Runtime | Workload | Before median / p95 ms | After median / p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | closed fields | 0.184 / 0.224 | 0.179 / 0.212 |
+| 5.2.2 LTS | open scalar menu | 0.219 / 0.247 | 0.215 / 0.233 |
+| 5.2.2 LTS | retained menu | 0.223 / 0.255 | 0.220 / 0.249 |
+| 5.1.2 | closed fields | 0.187 / 0.244 | 0.180 / 0.204 |
+| 5.1.2 | open scalar menu | 0.221 / 0.237 | 0.219 / 0.239 |
+| 5.1.2 | retained menu | 0.231 / 0.274 | 0.222 / 0.260 |
+
+The 5.2.2 resting and open benchmark images have identical RGB pixels before and
+after. This small workload shows no material regression; it does not measure GPU
+completion, input latency or equivalent BVT source performance.
+
+Official versioned source was audited for 4.2, 5.1.2 and 5.2.2. The native adapter
+change only opts into copying structural enum rows; ABI, bounds and ownership
+remain unchanged, and both exact-build admissions pass. Public RNA fallback
+preserves static choices and metadata but omits headings/separators on tested
+runtimes. Grouping on other adapters, context-dependent menu persistence, custom
+icons, popup search, specialized tab/focus behavior, complete localization and
+broader theme/platform acceptance remain open. Blender 4.2 paths are retained;
+no 4.2 executable was available for runtime qualification.

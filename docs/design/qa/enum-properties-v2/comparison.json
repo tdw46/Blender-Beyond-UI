@@ -1,0 +1,17 @@
+{
+  "exact_match": false,
+  "baseline_commit": "1e95dc8e8648430a4f0ae9b4f5750c6593cde7f8",
+  "differences": "Equivalent ungrouped controls retain existing pixels. Group headings and source-like props_enum columns appear in the new implementation captures.",
+  "pairs": {
+    "rest": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "b7bfc411e613db31f3d79a7a6b1df4609e06f5b3c79593e834a7a8ceac91d7e9",
+      "after_sha256": "b7bfc411e613db31f3d79a7a6b1df4609e06f5b3c79593e834a7a8ceac91d7e9"
+    },
+    "scalar": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "2a3a7ba8721b647a37d8008cf8796abdc9d4e665283188a8b65acdf06901982c",
+      "after_sha256": "2a3a7ba8721b647a37d8008cf8796abdc9d4e665283188a8b65acdf06901982c"
+    }
+  }
+}

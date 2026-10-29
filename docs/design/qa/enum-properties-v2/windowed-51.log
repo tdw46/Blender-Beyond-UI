@@ -1,0 +1,4 @@
+POINTER_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Actual click opens 200-choice shared strong-glass enum menu', 'End/Enter selects last item and commits once', 'Reopening reveals current choice; Escape and right-click cancel', 'Resting right-click retains exact property context', 'Actual expanded flag clicks distinguish plain exclusive and Shift toggle', 'Motion disable and teardown leave no timers']}
+00:10.419  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

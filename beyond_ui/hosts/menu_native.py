@@ -425,7 +425,7 @@ def _enum_api():
     return pointer, items, free
 
 
-def enum_items(owner, name, context):
+def enum_items(owner, name, context, *, include_separators=False):
     """Copy dynamic RNA items and immediately release Blender-owned temporary data."""
     from types import SimpleNamespace
 
@@ -469,7 +469,7 @@ def enum_items(owner, name, context):
                 value=rows[i].value,
             )
             for i in range(count.value)
-            if rows[i].identifier
+            if rows[i].identifier or include_separators
         )
     finally:
         if owned.value and raw.value:
