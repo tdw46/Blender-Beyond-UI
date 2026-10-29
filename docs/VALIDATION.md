@@ -1,5 +1,43 @@
 # Validation record — 2026-10-28
 
+## 2026-10-29 — enum property interaction pass
+
+Scalar enum clicks now share the existing strong-glass menu route with shortcuts.
+Explicit flag menus stay compact, long lists scroll instead of failing/truncating,
+and expanded choices use verified transactions with rollback. Dynamic selection
+checks both identifier and numeric enum value; concurrent property edits reject
+an old menu. Bounded admission is 4096 choices; ordinary context menus remain 64.
+
+- 98 unit tests pass. New cases cover no-op/flag transactions, failed commits,
+  setter rejection, dynamic removal/remapping, concurrent writes, retained label
+  lookup, 200-choice navigation, cancellation, integer Canvas keys including zero,
+  duplicate identifiers and explicit oversized-input rejection.
+- Disposable Blender 5.1.2 / 5.2.2 runtime and actual-window fixtures pass. Real
+  input selects choice 199 with End/Enter, reveals the current choice on reopen,
+  retains exact-property right-click routing and cancels without writes. Existing
+  menu shortcut, native context, enum context and general runtime regressions pass.
+- [Enum QA v1](design/qa/enum-properties-v1/index.html) retains 100 motion frames
+  at each of 1×/1.5×/2× on each runtime: 600 native-batched/standalone pairs match
+  byte-for-byte. Stable one-backdrop/one-blur/five-offscreen counts and retained
+  font/shader/batch/layout identities pass. The README includes the motion GIF.
+- Equivalent short-enum benchmark against exported revision `44f055a` asserts
+  the actual loaded package root. Closed-field median/p95 on 5.2 is
+  0.181/0.211 → 0.175/0.199 ms; on 5.1, 0.181/0.210 → 0.187/0.220 ms.
+  Open-menu median/p95: 5.2 0.220/0.243 → 0.208/0.230 ms; 5.1
+  0.221/0.237 → 0.220/0.238 ms. An initial duplicate expanded-button ownership
+  check was removed; Binding.read already performs it. These separate-process
+  CPU submission samples show comparable warm costs, not a speedup or GPU timing
+  claim. Each workload uses 20 warmups/100 samples and excludes framebuffer reads.
+- Resting benchmark pixels are unchanged. The open-menu comparison intentionally
+  differs because menus now anchor below the field instead of at its top edge.
+  No other visual-match acceptance is inferred from that comparison.
+
+Full enum and UILayout parity remains partial. Shift/multi-toggle persistence,
+headings/separators/icons, specialized tabs, full focus traversal and wider
+platform/theme/reference qualification remain tracked in
+[ENUM_PROPERTIES.md](ENUM_PROPERTIES.md). Blender 4.2 fallback remains intact but
+was not executed. No unrelated live scene, preferences or BVT source was changed.
+
 ## 2026-10-29 — consistent host scale audit
 
 The user-reported oversized Active Node, collection search and Target popovers

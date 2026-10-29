@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Ordinary enum clicks and explicit enum menus use shared glass Menu",
+    "Scalar and expanded enum commit failures restore authoritative RNA values",
+    "Flag menu toggles preserve unrelated flags and commit real sets",
+    "Dynamic callbacks refresh on open and removed choices are rejected on selection",
+    "Long enum menus reach item 199 with keyboard scrolling; no truncation",
+    "Concurrent property writes invalidate old menus; exact expanded enum context retained"
+  ]
+}

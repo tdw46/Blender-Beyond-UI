@@ -488,47 +488,66 @@ class Canvas(Group):
 
         if not control.enabled or not control.binding.valid():
             return False
-        rows = []
-        for value, label in control.options["items"][:63]:
+        from copy import deepcopy
+        from types import SimpleNamespace
+        from .enum_field import EnumField
 
-            def apply(target, ctx, selected=value):
-                before = control.binding.read()
-                try:
-                    control.binding.write(selected)
-                    control.binding.commit(before, control.binding.read())
-                except Exception:
-                    if control.binding.valid():
-                        control.binding.write(before)
-                    raise
-
-            rows.append(
+        field = control.options.get("enum_field") or EnumField(
+            control.binding,
+            lambda: (
+                SimpleNamespace(identifier=v, name=label)
+                for v, label in control.options["items"]
+            ),
+        )
+        try:
+            before = deepcopy(control.binding.read())
+            items = field.snapshot()
+            if not items:
+                raise ValueError("No enum choices are available in this context")
+            rows = tuple(
                 Entry(
-                    str(value),
-                    label,
-                    apply,
-                    checked=lambda t, c, v=value: control.binding.read() == v,
+                    item.identifier,
+                    item.name,
+                    lambda target, ctx, item=item: field.choose(item, original=before),
+                    checked=field.selected(item.identifier, before),
+                    tip=item.description,
                 )
+                for item in items
             )
-        if not rows:
+            self.cancel()
+            target = Target(
+                control.key,
+                binding=control.binding,
+                valid=lambda: self.visible
+                and self.controls.get(control.key) is control
+                and control.enabled
+                and control.binding.valid()
+                and control.binding.read() == before,
+            )
+            self.context_menu = Menu(
+                target,
+                rows,
+                (control.rect[0], control.rect[1] + control.rect[3]),
+                clip,
+                context=context,
+                row_limit=len(rows),
+                on_tip=self._tooltip_wake,
+                on_error=lambda error: setattr(self, "menu_error", str(error)),
+            )
+            self.context_menu.page.highlight = next(
+                (
+                    i
+                    for i, checked in enumerate(self.context_menu.page.checked)
+                    if checked
+                ),
+                0,
+            )
+            self.context_menu.reveal()
+            self.context_focus = control
+            self.menu_error = None
+        except Exception as error:
+            self.menu_error = str(error)
             return False
-        self.cancel()
-        target = Target(
-            control.key,
-            binding=control.binding,
-            valid=lambda: self.visible
-            and self.controls.get(control.key) is control
-            and control.enabled
-            and control.binding.valid(),
-        )
-        self.context_menu = Menu(
-            target,
-            rows,
-            control.rect[:2],
-            clip,
-            context=context,
-            on_tip=self._tooltip_wake,
-            on_error=lambda error: setattr(self, "menu_error", str(error)),
-        )
         self.context_menu.motion.bind(
             (*self._animation_parents, self.animation, control.motion.settings),
             self._wake_motion,
@@ -1110,24 +1129,7 @@ class Canvas(Group):
                 self._drag_last = x
                 self._dragged = False
         elif control.kind == "enum":
-            self._begin(control)
-            a, b, w, h = control.rect
-            items = control.options["items"]
-            rh = self.theme.row_height
-            # Keep this compact picker inside the host clip. Long lists belong
-            # in VirtualList, rather than constructing an unbounded overlay.
-            count = len(items)
-            if count * rh > clip[3]:
-                self.cancel()
-                return False
-            top = max(clip[1], min(b + h, clip[1] + clip[3] - count * rh))
-            self.overlay = {
-                "rect": (a, top, w, count * rh),
-                "items": [
-                    ((a, top + i * rh, w, rh), value, label)
-                    for i, (value, label) in enumerate(items)
-                ],
-            }
+            self.open_enum_menu(control, clip, context)
         else:
             return False
         return True

@@ -230,3 +230,26 @@ Manual interface-preference pages for 4.2, 5.1 and 5.2 were requested during thi
 audit but unavailable through the documentation fetcher; they are not cited as
 new compatibility proof. Installed 5.1.2/5.2.2 runtimes provide the execution
 evidence; 4.2 and non-macOS qualification remain open.
+
+## 2026-10-29 — enum transactions and shared menu routing
+
+Scalar enum clicks now reuse the existing BVT-derived custom context-menu renderer,
+strong backdrop material, typography and animation; explicit flag menus use that
+same route. No new generated artwork or private ABI entry point was added.
+Snapshots retain identifier/name/description/numeric value from the existing
+`context_enums.items` and admitted `hosts.menu_native.enum_items` adapter. The
+public-RNA fallback and exact build/platform admission remain unchanged.
+
+Exact UILayout API and Manual menu/field pages for Blender 4.2, 5.1 and 5.2 were
+requested and searched; the documentation fetcher returned access/402 errors.
+Existing versioned `api_inventory.json` signatures were consulted; installed
+5.1.2/5.2.2 RNA and actual-window fixtures supply current execution evidence.
+This is not new 4.2 or all-platform qualification. Native flag modifier/persistence
+semantics and headings/icon variants remain explicitly open.
+
+`docs/design/qa/enum-properties-v1/` records actual production captures at three
+scales, source/fixture hashes and a baseline package exported from `44f055a`.
+The benchmark asserts the loaded package path before importing shared capture
+helpers, preventing the current checkout from masking the baseline. Raw timings
+compare equivalent short-enum workloads; they do not establish GPU completion
+time or a controlled BVT/source benchmark.

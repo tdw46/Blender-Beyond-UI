@@ -257,9 +257,15 @@
     "prop": {
       "kind": "method",
       "status": "partial",
-      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, remaining pointer/decorator and event variants, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md. Custom ID pointer popovers support camera/parent/registered polls or explicit PointerItems policies, stale candidate validation, clear and host commit rollback. See docs/POINTERS_AND_DECORATORS.md. Named non-ID pointer fields and searches now use explicit PointerItems policies with mandatory host revision tokens and rollback context managers; collection-owned active Bone/Node properties, transactional edits, stale structural snapshots, copy paths and candidate menus are execution-tested on 5.1.2/5.2.2. Pointer typing starts immediately; rejected commits preserve the editor. Native button-pointer callback overrides for collection owners, unqualified setter side effects, unnamed/nonassignable targets, broader collection coverage and exact reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md.",
+      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, remaining pointer/decorator and event variants, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md. Custom ID pointer popovers support camera/parent/registered polls or explicit PointerItems policies, stale candidate validation, clear and host commit rollback. See docs/POINTERS_AND_DECORATORS.md. Named non-ID pointer fields and searches now use explicit PointerItems policies with mandatory host revision tokens and rollback context managers; collection-owned active Bone/Node properties, transactional edits, stale structural snapshots, copy paths and candidate menus are execution-tested on 5.1.2/5.2.2. Pointer typing starts immediately; rejected commits preserve the editor. Native button-pointer callback overrides for collection owners, unqualified setter side effects, unnamed/nonassignable targets, broader collection coverage and exact reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/non-id-pointers-v1/capture.json"
+      "comparison_evidence": "docs/design/qa/non-id-pointers-v1/capture.json",
+      "enum_execution_evidence": [
+        "docs/design/qa/enum-properties-v1/runtime-52.json",
+        "docs/design/qa/enum-properties-v1/runtime-51.json",
+        "docs/design/qa/enum-properties-v1/windowed-52.json",
+        "docs/design/qa/enum-properties-v1/windowed-51.json"
+      ]
     },
     "prop_decorator": {
       "kind": "method",
@@ -271,16 +277,28 @@
     "prop_enum": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "enum_execution_evidence": [
+        "docs/design/qa/enum-properties-v1/runtime-52.json",
+        "docs/design/qa/enum-properties-v1/runtime-51.json",
+        "docs/design/qa/enum-properties-v1/windowed-52.json",
+        "docs/design/qa/enum-properties-v1/windowed-51.json"
+      ]
     },
     "prop_menu_enum": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "enum_execution_evidence": [
+        "docs/design/qa/enum-properties-v1/runtime-52.json",
+        "docs/design/qa/enum-properties-v1/runtime-51.json",
+        "docs/design/qa/enum-properties-v1/windowed-52.json",
+        "docs/design/qa/enum-properties-v1/windowed-51.json"
+      ]
     },
     "prop_search": {
       "kind": "method",
@@ -293,9 +311,15 @@
     "prop_tabs_enum": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "enum_execution_evidence": [
+        "docs/design/qa/enum-properties-v1/runtime-52.json",
+        "docs/design/qa/enum-properties-v1/runtime-51.json",
+        "docs/design/qa/enum-properties-v1/windowed-52.json",
+        "docs/design/qa/enum-properties-v1/windowed-51.json"
+      ]
     },
     "prop_with_menu": {
       "kind": "method",
@@ -314,9 +338,15 @@
     "props_enum": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "enum_execution_evidence": [
+        "docs/design/qa/enum-properties-v1/runtime-52.json",
+        "docs/design/qa/enum-properties-v1/runtime-51.json",
+        "docs/design/qa/enum-properties-v1/windowed-52.json",
+        "docs/design/qa/enum-properties-v1/windowed-51.json"
+      ]
     },
     "row": {
       "kind": "method",

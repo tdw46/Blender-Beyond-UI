@@ -104,7 +104,11 @@ class Menu:
         scope=lambda context: None,
         on_error=None,
         on_tip=None,
+        row_limit=64,
     ):
+        if not 1 <= row_limit <= 4096:
+            raise ValueError("Menu row limit must be between 1 and 4096")
+        self.limit = row_limit
         self.target, self.anchor, self.clip = target, anchor, clip
         self.scope, self.scope_id = scope, scope(context)
         self.measure = measure or (lambda text, size: len(text) * size * 0.6)

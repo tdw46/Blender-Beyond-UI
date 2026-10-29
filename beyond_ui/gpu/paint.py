@@ -277,13 +277,18 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         f"{control.label}  {value if value is not None else ''}", r, ink
                     )
                 elif kind == "enum":
-                    label = next(
-                        (
-                            label
-                            for key, label in control.options["items"]
-                            if key == value
-                        ),
-                        str(value),
+                    field = control.options.get("enum_field")
+                    label = (
+                        field.format(value)
+                        if field and value is not None
+                        else next(
+                            (
+                                label
+                                for key, label in control.options["items"]
+                                if key == value
+                            ),
+                            str(value),
+                        )
                     )
                     text(
                         f"{control.label}  {label}",

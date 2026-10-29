@@ -262,14 +262,9 @@ class Layout:
         if meta.type == "ENUM":
             if getattr(meta, "is_enum_flag", False):
                 return self.props_enum(data, property)
-            items = tuple(
-                (item.identifier, self._text(item.name))
-                for item in self._enum_items(data, property)
-                if item.identifier
-            )
             if expand:
                 return self.props_enum(data, property)
-            return self.group.enum(key, label, binding, items=items, **options)
+            return self._enum_control(data, property, label, binding, key, options)
         if meta.type == "POINTER":
             from .pointer import PointerField
             from .context_menu import default_entries
@@ -347,6 +342,61 @@ class Layout:
 
         return items(data, property, self.context)
 
+    def _enum_field(self, binding):
+        from .enum_field import EnumField
+
+        source = binding.context
+        return EnumField(
+            binding,
+            lambda: self._enum_items(source.owner(), source.name),
+            flag=getattr(
+                source.owner().bl_rna.properties[source.name], "is_enum_flag", False
+            ),
+            translate=self._text,
+        )
+
+    def _enum_control(self, data, property, label, binding, key, options):
+        field = self._enum_field(binding)
+        rows = field.snapshot()
+        return self.group.enum(
+            key,
+            label,
+            binding,
+            items=tuple((i.identifier, i.name) for i in rows),
+            enum_field=field,
+            **options,
+        )
+
+    def _enum_button(
+        self, data, property, item, *, text="", text_ctxt="", translate=True
+    ):
+        source = self._binding(data, property)
+        source.context.enum_value = item.identifier
+        field = self._enum_field(source)
+
+        def selected():
+            try:
+                # Binding.read already validates; do not repeat RNA ownership work.
+                return field.selected(item.identifier)
+            except (ReferenceError, RuntimeError):
+                return False
+
+        def action():
+            try:
+                field.choose(item)
+                self.canvas.menu_error = None
+            except Exception as error:
+                self.canvas.menu_error = str(error)
+
+        return self.group.button(
+            self._key("enum"),
+            self._text(text or item.name, text_ctxt, translate),
+            action,
+            selected=selected,
+            binding=source,
+            **self._options(),
+        )
+
     def prop_enum(
         self,
         data,
@@ -358,61 +408,42 @@ class Layout:
         translate=True,
         icon="NONE",
     ):
-        meta = data.bl_rna.properties[property]
-        source = self._binding(data, property)
-        source.context.enum_value = value
-        flag = getattr(meta, "is_enum_flag", False)
-        item = (
-            None
-            if text
-            else next(
-                (i for i in self._enum_items(data, property) if i.identifier == value),
-                None,
-            )
-        )
-        label = self._text(text or (item.name if item else value), text_ctxt, translate)
-
-        def get():
-            return value in source.read() if flag else source.read() == value
-
-        def set_value(selected):
-            if flag:
-                values = set(source.read())
-                if selected:
-                    values.add(value)
-                else:
-                    values.discard(value)
-                source.write(values)
-            elif selected:
-                source.write(value)
-
-        # Snapshot authoritative enum values so undo sees the real old/new state.
-        def action():
-            before = source.read()
-            set_value(not get())
-            after = source.read()
-            if before != after:
-                source.commit(before, after)
-
-        return self.group.button(
-            self._key("enum"),
-            label,
-            action,
-            selected=get,
-            binding=source,
-            **self._options(),
+        field = self._enum_field(self._binding(data, property))
+        item = next((i for i in field.snapshot() if i.identifier == value), None)
+        if item is None:
+            raise ValueError(f"Unknown enum choice: {value}")
+        return self._enum_button(
+            data, property, item, text=text, text_ctxt=text_ctxt, translate=translate
         )
 
     def props_enum(self, data, property):
+        # Resolve dynamic items once per group, not once per expanded button.
+        field = self._enum_field(self._binding(data, property))
         row = self.row()
-        for item in self._enum_items(data, property):
-            if item.identifier:
-                row.prop_enum(
-                    data, property, item.identifier, text=item.name or item.identifier
-                )
+        for item in field.snapshot():
+            row._enum_button(data, property, item, translate=False)
 
-    def prop_menu_enum(self, data, property, **kwargs):
-        return self.prop(data, property, **kwargs)
+    def prop_menu_enum(
+        self,
+        data,
+        property,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+    ):
+        meta = data.bl_rna.properties[property]
+        if meta.type != "ENUM":
+            raise ValueError("prop_menu_enum requires an enum property")
+        return self._enum_control(
+            data,
+            property,
+            self._text(text or meta.name, text_ctxt, translate),
+            self._binding(data, property),
+            self._key(property),
+            self._options(),
+        )
 
     def prop_tabs_enum(self, data, property, **kwargs):
         return self.props_enum(data, property)

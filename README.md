@@ -136,6 +136,14 @@ all compound controls now use the surrounding panel's logical UI scale.
 [All-control scale audit and before/after](docs/design/qa/ui-scale-v1/index.html) ·
 [Logical sizing contract](docs/UI_SCALING.md)
 
+The enum-property pass unifies mouse/shortcut menus, long lists, flag choices and
+transactional expanded buttons while retaining the shared styling and scale:
+
+![Enum property menus](docs/media/panels/enum-properties-v1.gif)
+
+[Enum QA gallery](docs/design/qa/enum-properties-v1/index.html) ·
+[Enum integration and remaining gaps](docs/ENUM_PROPERTIES.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

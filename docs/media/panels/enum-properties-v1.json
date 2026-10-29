@@ -1,0 +1,5 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/enum-properties-v1/capture.json",
+  "sha256": "bd97134f42270fce425d043f98c5e6b88d4a41c1b7bc32aed4e245ab8b71b605"
+}
