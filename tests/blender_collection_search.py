@@ -5,9 +5,15 @@ from pathlib import Path
 from types import SimpleNamespace as NS
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from beyond_ui import Canvas, Layout, PointerItems, UnsupportedControl
+from beyond_ui import Canvas, Layout as _Layout, PointerItems, UnsupportedControl
 from beyond_ui.editing import Text
 from beyond_ui.widgets.context import target
+
+
+def Layout(*args, **kwargs):
+    ui = _Layout(*args, **kwargs)
+    ui.search_popovers = False
+    return ui
 
 
 class SearchItem(bpy.types.PropertyGroup):

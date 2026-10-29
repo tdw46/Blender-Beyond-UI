@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Actual window End/Enter selects collection item with one commit",
+    "Row right-click actions and arbitrary string suggestion entry",
+    "Right-click cancels typed edit; standalone component decorator targets exact channel",
+    "Host disable settles all motion and teardown releases ownership"
+  ]
+}

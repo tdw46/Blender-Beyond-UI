@@ -130,6 +130,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     "number",
                     "event",
                     "pointer",
+                    "search",
                     "decorator",
                     "text",
                     "enum",
@@ -149,6 +150,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     "number",
                     "event",
                     "pointer",
+                    "search",
                     "decorator",
                     "text",
                     "enum",
@@ -179,14 +181,22 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         palette=palette,
                         backdrop=backdrop,
                     )
-                elif kind == "pointer":
-                    label = control.options["pointer_field"].label()
+                elif kind in {"pointer", "search"}:
+                    label = control.options[
+                        "search_field" if kind == "search" else "pointer_field"
+                    ].label()
                     text(
                         f"{control.label}  {label}",
                         (a, b, max(0, c - 22 * scale), d),
                         ink,
                     )
-                    style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
+                    style.icon(
+                        "search" if kind == "search" else "▾",
+                        a + c - 12 * scale,
+                        b + d / 2,
+                        (18 if kind == "search" else 10) * scale,
+                        ink,
+                    )
                 elif kind == "decorator":
                     model = control.options["decorator"]
                     if model is not None:

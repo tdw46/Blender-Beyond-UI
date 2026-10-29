@@ -170,6 +170,16 @@ class DataPicker(Widget):
             if press and kind == "ESC" and not self.text_edit:
                 self.blur()
                 return True
+        if (
+            self.focused
+            and self.text_edit is None
+            and press
+            and getattr(self, "type_to_search", False)
+            and getattr(event, "unicode", "")
+            and not (getattr(event, "ctrl", False) or getattr(event, "oskey", False))
+        ):
+            self.text_edit = Text(self.query)
+            self.capturing = True
         if self.text_edit:
             if kind == "RIGHTMOUSE" and press:
                 self.text_edit = None

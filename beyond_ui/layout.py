@@ -50,6 +50,7 @@ class Layout:
         self.active = True
         self.alert = False
         self.operator_context = "INVOKE_DEFAULT"
+        self.search_popovers = True
         self.use_property_split = False
         self.use_property_decorate = True
         self.alignment = "EXPAND"
@@ -84,6 +85,7 @@ class Layout:
             "active",
             "alert",
             "operator_context",
+            "search_popovers",
             "use_property_split",
             "use_property_decorate",
             "alignment",
@@ -628,12 +630,15 @@ class Layout:
                 ),
                 item_name=item_search_property,
                 suggestions=results_are_suggestions,
+                eager=not self.search_popovers,
             )
         except ValueError as error:
             raise UnsupportedControl(str(error)) from error
-        control = self.group.widget(
+        control = self.group.add(
+            "search" if self.search_popovers else "widget",
             self._key("search"),
-            model.widget,
+            model.widget.title,
+            widget=model.widget,
             binding=model.binding,
             search_field=model,
             context_menu=model.entries,

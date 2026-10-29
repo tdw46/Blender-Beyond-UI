@@ -541,3 +541,45 @@ This evidence uses actual Blender pixels, not generated images. Exact reference,
 theme/DPI and remaining search/decorator semantics are still open in the ledger.
 Blender 4.2's default-name path is preserved and the newer item-string keyword is
 capability gated; 4.2 and non-macOS runtimes remain unexecuted here.
+
+## Compact search popovers — 2026-10-28
+
+[Compact search QA v1](design/qa/search-popover-v1/index.html) records the default
+compact `prop_search` / `template_search` presentation. The retained full-card
+mode remains available through `Layout.search_popovers = False`. Closed fields
+read the current property without enumerating candidates; opening builds a fresh
+snapshot and gives keyboard focus without starting an edit until text arrives.
+
+Both Blender 5.1.2 and 5.2.2 pass RNA and real-window checks for opening, immediate
+typing, navigation, selection, field/candidate context menus, Escape/right-click/
+outside-click cancellation, rejected host commits, stale values, per-control
+motion disable, refresh cancellation and teardown. Successful selection closes
+only the owning popover; rejection rolls back and leaves it open for correction.
+Existing full-card, pointer/decorator and general runtime regressions pass, as do
+full-card and pointer real-window tests. 79 unit tests, Ruff, compilation,
+distribution build and parity-ledger checks pass. The ledger remains 40 partial
+members of 137 and zero reference-matched members.
+
+The 640×560, scale-1 Metal fixture uses two compact fields and optionally a
+503-candidate virtualized picker. Paint measurements are 100 CPU submissions
+after 20 warmups, excluding readback. Opening measurements are 25 event-preparation
+samples, excluding drawing and readback:
+
+| Runtime | Workload | Median ms | p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 LTS | closed fields | 0.119 | 0.154 |
+| 5.2.2 LTS | prepare 503-row popover | 0.568 | 0.629 |
+| 5.2.2 LTS | open picker paint | 0.235 | 0.267 |
+| 5.1.2 | closed fields | 0.107 | 0.141 |
+| 5.1.2 | prepare 503-row popover | 0.535 | 0.684 |
+| 5.1.2 | open picker paint | 0.224 | 0.260 |
+
+All 100 sampled frames per runtime match with native text batching enabled and
+disabled. Resources retain one backdrop production, one strong blur, five
+offscreens, one layout and unchanged recorded shader/batch/font identities.
+The capture reproduces PanelHost's existing root glass pass before the canvas
+tint; production root glass behavior is unchanged. New popup motion uses the
+existing shared spring and owner settings. No per-frame capture or blur is added.
+These timings establish a compact-search baseline, not equivalent-workload BVT
+performance, GPU completion time or input latency. Exact generated-reference,
+theme/DPI and motion acceptance remain open, as do 4.2 and non-macOS runtime checks.

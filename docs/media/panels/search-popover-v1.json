@@ -1,0 +1,5 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/search-popover-v1/capture.json",
+  "sha256": "c4e36fa2d0790c4637f694d593faa41b9c23b16ba87b4d1dde9035907bcfd357"
+}

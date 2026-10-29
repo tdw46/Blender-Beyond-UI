@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Compact prop_search/template_search geometry and lazy closed-field candidates",
+    "Immediate typing, successful commit closes owned popover, failed commit preserves edit",
+    "Escape/right-click/outside-click cancellation and stale owner value rejection",
+    "Exact property/row context, per-control animation disable, refresh teardown and full-card opt-out"
+  ]
+}

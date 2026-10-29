@@ -166,3 +166,22 @@ item-string labels and decorator expansion exceptions for color/direction.
 Exact versioned API/Manual pages were searched; fetch access failures were
 supplemented with these sources and the installed public-RNA/runtime fixtures.
 No native control delegation or private production API was added.
+
+### Compact search fields and owned popovers
+
+Compact search uses the existing pointer-field surface, title/body fonts and
+retained source search icon. Its popover uses the same Data Picker and stronger
+BVT glass as the existing pointer popover, with the same owner motion policy.
+No new shader, animation system, native control or RNA registration was added.
+The previously audited exact Blender search sources identify `SearchMenu` as the
+native property surface; [the audit](design/qa/collection-search-v1/api-source-audit.json)
+remains the API evidence. Exact 4.2/5.1/5.2 API/Manual URLs were checked again;
+fetch failures do not count as runtime evidence. Disposable installed-runtime
+checks qualify the new interaction path. Full-card v1 galleries are immutable;
+current full-card regression fixtures now set `search_popovers=False` explicitly.
+
+The compact-search capture reproduces the existing `PanelHost` root-glass pass
+before `Canvas.paint` applies its tint. The original BVT canvas likewise draws
+base glass before the background style. This is fixture setup, not an added
+production glass or capture pass. The popup uses the retained strong-blur level;
+the closed field reuses the existing custom pointer surface and search icon.

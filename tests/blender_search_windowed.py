@@ -23,6 +23,7 @@ def build(key):
         bpy.context,
         commit=lambda a, b: commits.append("POINTER"),
     )
+    ui.search_popovers = False
     ui.prop_search(
         bpy.context.scene,
         "search_fixture",

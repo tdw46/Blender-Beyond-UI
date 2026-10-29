@@ -31,6 +31,7 @@ def run():
         commits = []
         canvas = Canvas(menu_commit=commits.append)
         ui = Layout(canvas, context=ctx, commit=lambda a, b: commits.append((a, b)))
+        ui.search_popovers = False
         full = ui.prop_search(
             ctx.scene,
             "search_capture",

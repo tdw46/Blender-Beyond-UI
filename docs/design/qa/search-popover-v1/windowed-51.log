@@ -1,0 +1,4 @@
+POINTER_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Actual click opens compact search with shared strong glass', 'End/Enter and immediate typed suggestion commit once and close', 'Candidate context, Escape and right-click cancellation', 'Motion disable and teardown leave no timers']}
+00:10.382  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

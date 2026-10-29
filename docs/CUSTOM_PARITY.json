@@ -285,9 +285,9 @@
     "prop_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Transactional custom collection search for strings and supported ID pointers. Snapshot refresh, collection/owner/value validation, pointer poll, commit rollback, candidate right-click, custom item string labels and explicit free suggestions. Virtual visible rows; no collection scans during paint. Runtime/window tested on 5.1.2/5.2.2. Compact search layout, non-ID pointers, native ranking/icons/name variants and exact-reference acceptance remain open. See docs/SEARCH_PROPERTIES.md.",
+      "notes": "Transactional custom collection search for strings and supported ID pointers. Snapshot refresh, collection/owner/value validation, pointer poll, commit rollback, candidate right-click, custom item string labels and explicit free suggestions. Virtual visible rows; no collection scans during paint. Runtime/window tested on 5.1.2/5.2.2. non-ID pointers, native ranking/icons/name variants and exact-reference acceptance remain open. See docs/SEARCH_PROPERTIES.md. Compact fields now open strong-glass popovers with lazy snapshots, immediate typing and owned close-on-commit; search_popovers=False retains full cards. Both modes execution-tested.",
       "reference": "docs/design/references/specialized-controls-v1.png",
-      "comparison_evidence": "docs/design/qa/collection-search-v1/capture.json",
+      "comparison_evidence": "docs/design/qa/search-popover-v1/capture.json",
       "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "prop_tabs_enum": {
@@ -856,9 +856,9 @@
     "template_search": {
       "kind": "method",
       "status": "partial",
-      "notes": "Uses the transactional prop_search implementation with host-owned optional New/Unlink operators. Full native template layout, action variants and exact visual acceptance remain open. See docs/SEARCH_PROPERTIES.md.",
+      "notes": "Uses the transactional prop_search implementation with host-owned optional New/Unlink operators. Full native template layout, action variants and exact visual acceptance remain open. See docs/SEARCH_PROPERTIES.md. Defaults to the same compact field/popover; host New/Unlink buttons remain separate layout items.",
       "reference": "docs/design/references/specialized-controls-v1.png",
-      "comparison_evidence": "docs/design/qa/collection-search-v1/capture.json",
+      "comparison_evidence": "docs/design/qa/search-popover-v1/capture.json",
       "visual_approval": "docs/design/qa/v2/approval.json"
     },
     "template_search_preview": {

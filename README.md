@@ -112,6 +112,14 @@ Standalone vector decorators expand into exact component controls.
 [Search QA and before/after row motion](docs/design/qa/collection-search-v1/index.html) ·
 [Search integration and remaining gaps](docs/SEARCH_PROPERTIES.md)
 
+Search properties now default to compact fields with on-demand glass popovers.
+Type immediately after opening; full-card mode remains an explicit backend option.
+
+![Actual Blender compact search popover](docs/media/panels/search-popover-v1.gif)
+
+[Compact search QA](docs/design/qa/search-popover-v1/index.html) ·
+[Search integration](docs/SEARCH_PROPERTIES.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

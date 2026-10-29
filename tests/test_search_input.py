@@ -41,3 +41,22 @@ class SearchInput(unittest.TestCase):
         self.assertTrue(picker._accept())
         self.assertEqual(selected, [1])
         self.assertEqual(typed, ["Other"])
+
+    def test_popup_type_to_search_waits_for_real_text_input(self):
+        picker = DataPicker([(1, "Zebra", "object")], lambda key: None)
+        picker.focus()
+        picker.type_to_search = True
+        self.assertFalse(picker.capturing)
+        picker.event(NS(type="Z", value="PRESS", unicode="z"), 0, 0)
+        self.assertEqual(picker.query, "z")
+        self.assertTrue(picker.capturing)
+        picker.cancel()
+        self.assertFalse(picker.capturing)
+
+    def test_full_card_setting_inherits_to_nested_layouts(self):
+        from beyond_ui import Layout
+
+        ui = Layout()
+        self.assertTrue(ui.row().search_popovers)
+        ui.search_popovers = False
+        self.assertFalse(ui.column().row().search_popovers)

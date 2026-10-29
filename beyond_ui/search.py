@@ -17,6 +17,7 @@ class CollectionSearch:
         label="",
         item_name="",
         suggestions=False,
+        eager=True,
     ):
         self.binding, self.source = binding, binding.context
         self.resolve, self.name = resolve, name
@@ -56,7 +57,25 @@ class CollectionSearch:
         self.widget.accept_text = self.accept_text if suggestions else None
         self.canvas = self.control = None
         self.values, self.keys_by_name = {}, {}
+        if eager:
+            self.refresh()
+
+    def label(self):
+        try:
+            value = self.binding.get()
+            return (
+                (value.name if value is not None else "None") if self.pointer else value
+            )
+        except (ReferenceError, RuntimeError):
+            return "Unavailable"
+
+    def open(self):
         self.refresh()
+        self.widget.query = ""
+        self.widget._filter()
+        self.widget.focus()
+        self.widget.type_to_search = True
+        return self.widget
 
     def collection(self):
         owner = self.resolve()
@@ -71,6 +90,8 @@ class CollectionSearch:
         """Host calls after collection edits/undo; never called by paint."""
         self.widget.cancel()
         if self.canvas is not None:
+            if self.canvas.overlay and self.canvas.overlay.get("owner") is self.control:
+                self.canvas.cancel()
             if self.canvas.widget_capture is self.control:
                 self.canvas.widget_capture = None
             if self.canvas.keyboard_focus is self.control:
@@ -160,6 +181,8 @@ class CollectionSearch:
         self.expected = self.value_identity(self.binding.get())
         if self.canvas:
             self.canvas.menu_error = None
+            if self.canvas.overlay and self.canvas.overlay.get("owner") is self.control:
+                self.canvas.cancel()
 
     def attempt(self, callback):
         try:

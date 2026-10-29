@@ -75,6 +75,7 @@ class Group:
             "number",
             "event",
             "pointer",
+            "search",
             "decorator",
             "text",
             "enum",
@@ -945,7 +946,11 @@ class Canvas(Group):
                     kind == "LEFTMOUSE"
                     and press
                     and not (a <= x < a + w and b <= y < b + h)
-                    and not widget.capturing
+                    and (
+                        not widget.capturing
+                        or self.overlay.get("owner") is not None
+                        and self.overlay["owner"].kind == "search"
+                    )
                 ):
                     self.cancel()
                     return True
@@ -1040,9 +1045,13 @@ class Canvas(Group):
         if control.kind == "button":
             if control.action:
                 control.action()
-        elif control.kind == "pointer":
+        elif control.kind in {"pointer", "search"}:
             try:
-                picker = control.options["pointer_field"].picker(self, control)
+                picker = (
+                    control.options["search_field"].open()
+                    if control.kind == "search"
+                    else control.options["pointer_field"].picker(self, control)
+                )
                 picker.glass_blur = 0.7
                 scale = min(1.0, clip[2] / picker.width, clip[3] / picker.height)
                 w, h = picker.width * scale, picker.height * scale
