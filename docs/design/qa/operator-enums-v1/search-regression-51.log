@@ -1,0 +1,9 @@
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.011s
+
+OK
+MENU_SEARCH_RUNTIME {'passed': True, 'version': '5.1.2', 'checks': ['Shared menu search tests: grouped, nested, empty, disabled, stale, clipboard, cancellation, clipping, flag ownership', 'RNA enum type-to-search makes no writes until Enter; exact identifier commits once', 'Enter control characters do not become query text', 'Concurrent RNA changes reject stale filtered selection']}
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)
+
+Blender quit

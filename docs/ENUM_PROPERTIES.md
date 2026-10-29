@@ -115,3 +115,8 @@ platforms/builds; exact generated-reference and all theme/display/platform
 acceptance. `prop_tabs_enum` retains the expanded strip route; its
 specialized tab semantics are not complete. These changes close discrete enum
 interaction/transaction gaps, not full UILayout or enum API parity.
+
+
+Operator-backed choices now have their own [custom action/menu path](OPERATOR_CHOICES.md).
+They execute an operator with a selected enum argument; property enums retain
+their existing binding and transaction semantics.

@@ -592,6 +592,92 @@ class Layout:
         )
         return properties
 
+    def _operator_enum(self, operator, property):
+        from .operator_enum import OperatorEnum
+
+        return OperatorEnum(
+            operator,
+            property,
+            self.context,
+            self.operator_context,
+            {**self._context_pointers, **self._context_strings},
+            self._text,
+        )
+
+    def operator_enum(self, operator, property, *, icon_only=False):
+        if icon_only:
+            raise UnsupportedControl("operator_enum icon_only")
+        model = self._operator_enum(operator, property)
+        from .operator_enum import context_key
+
+        enabled = self.enabled and model.available(
+            self.context, model.arguments(), context_key(self.context)
+        )
+        for item in model.snapshot():
+            if not item.identifier:
+                if item.name:
+                    self.title(text=item.name, translate=False)
+                else:
+                    self.separator()
+                continue
+
+            def action(item=item):
+                try:
+                    result = model.execute(item, self.context)
+                    self.canvas.menu_error = None
+                    return result
+                except Exception as error:
+                    self.canvas.menu_error = str(error)
+                    return {"CANCELLED"}
+
+            self.group.button(
+                self._key(operator),
+                item.name,
+                action,
+                context_menu=lambda target, ctx, item=item: model.context_rows(
+                    item, ctx or self.context
+                ),
+                enabled=enabled,
+            )
+
+    def operator_menu_enum(
+        self,
+        operator,
+        property,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+    ):
+        if icon != "NONE":
+            raise UnsupportedControl("operator_menu_enum custom icon")
+        from .context_menu import Entry
+
+        model = self._operator_enum(operator, property)
+        label = self._text(text or model.label, text_ctxt, translate)
+        self.group.button(
+            self._key(operator),
+            label,
+            None,
+            operator_enum=model,
+            context_menu=lambda target, ctx: (
+                Entry(
+                    "CHOICES",
+                    "Choose " + label,
+                    children=lambda t, c: model.rows(c or self.context)[0],
+                ),
+                Entry(
+                    "SHORTCUT",
+                    "Shortcut to Open Menu",
+                    enabled=False,
+                    tip="The consuming host must provide a ShortcutRegistry for this custom popup.",
+                ),
+            ),
+            **self._options(),
+        )
+        return model.properties
+
     def context_pointer_set(self, name, data):
         self._context_pointers[name] = data
 

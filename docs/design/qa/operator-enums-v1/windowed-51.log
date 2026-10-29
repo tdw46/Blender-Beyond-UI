@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Actual dropdown mouse input, type-to-filter and Enter execute the 200th operator choice exactly once with supplied arguments', 'Escape cancels without executing; expanded button uses its selected enum value', 'Right-click covers expanded operator actions and custom popup choices', 'Disabled animation and teardown leave no host timers or bridge errors']}
+00:10.522  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

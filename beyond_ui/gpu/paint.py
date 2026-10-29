@@ -353,6 +353,9 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     text(
                         f"{control.label}  {value if value is not None else ''}", r, ink
                     )
+                elif kind == "button" and control.options.get("operator_enum"):
+                    text(control.label, (a, b, max(0, c - 20 * scale), d), ink)
+                    style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
                 elif kind == "enum":
                     field = control.options.get("enum_field")
                     label = (

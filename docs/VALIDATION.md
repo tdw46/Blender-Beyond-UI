@@ -886,3 +886,75 @@ exact reference acceptance is claimed. These requests supersede older scalar
 artwork while preserving prior reference versions. Blender 4.2 paths remain;
 4.2 execution, broader theme/platform coverage and full API parity are unverified.
 The ledger remains partial; no member is promoted to reference-matched.
+
+
+## Operator enum actions — 2026-10-29
+
+[Operator choices QA](design/qa/operator-enums-v1/index.html) covers the new custom
+`operator_enum` and `operator_menu_enum` paths. Expanded action buttons, grouped
+choices, searchable 200-action dropdowns and exact operator context menus reuse
+the existing BVT glass/button/menu painters. No new generated artwork or visual
+approval is claimed; Tyler owns visual QA.
+
+130 unit tests pass. Blender 5.1.2 and 5.2.2 pass disposable-profile operator tests,
+real window input, enum/search regressions, context/menu regressions and general
+runtime checks. Tests cover explicit EXEC/INVOKE behavior, pointer overrides,
+extra arguments, singleton enum flags, public static fallback, dynamic numeric
+remaps, changed arguments/selections, removed operators, poll failures, exact
+command copy and host-registered shortcuts that reopen the custom popup. The
+real-window fixture searches for action 199, verifies no execution while typing,
+executes once with supplied arguments, cancels, clicks an expanded choice, opens
+both right-click routes and verifies timer/bridge cleanup.
+
+At 1×, 1.5× and 2× on both runtimes, 600 production motion frames are identical
+with native BLF batching enabled/disabled. The captured workload retains one
+backdrop production, one strong blur, five offscreens, fonts, style/skin shaders
+and batches, lens batches and layout identity. Warm painting asserts zero dynamic
+enum callback evaluations and no keyconfig creation. Scratch keyconfigs used for
+input-time RNA preparation are released; neither scenes nor preferences are saved.
+
+### Performance
+
+Actual new controls: two dropdown buttons and expanded grouped operator actions,
+then a 200-action menu and filtered result. Metal, 640×560, scale 1, 20 warmups,
+100 CPU submission samples per state; framebuffer readback excluded.
+
+| Runtime | Workload | Median / p95 ms |
+| --- | --- | ---: |
+| 5.2.2 | closed controls | 0.125 / 0.154 |
+| 5.2.2 | open actions | 0.185 / 0.231 |
+| 5.2.2 | open 200 actions | 0.295 / 0.332 |
+| 5.2.2 | filtered actions | 0.170 / 0.195 |
+| 5.1.2 | closed controls | 0.118 / 0.156 |
+| 5.1.2 | open actions | 0.169 / 0.204 |
+| 5.1.2 | open 200 actions | 0.272 / 0.330 |
+| 5.1.2 | filtered actions | 0.160 / 0.190 |
+
+The separate regression benchmark compares published `adbe5d6` with this change:
+six identical action buttons and a searchable 48-action context menu using APIs
+available in both revisions. It checks the shared renderer, not an older version
+of the new operator-authoring methods. Resting and open-menu RGB pixels match
+exactly on both runtimes. Same dimensions, warmups and CPU sample count as above.
+
+| Runtime | Workload | Before median / p95 ms | After median / p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 | closed buttons | 0.098 / 0.140 | 0.085 / 0.140 |
+| 5.2.2 | open 48-action menu | 0.277 / 0.327 | 0.233 / 0.304 |
+| 5.2.2 | retained open menu | 0.288 / 0.363 | 0.246 / 0.309 |
+| 5.1.2 | closed buttons | 0.095 / 0.125 | 0.089 / 0.119 |
+| 5.1.2 | open 48-action menu | 0.268 / 0.323 | 0.239 / 0.271 |
+| 5.1.2 | retained open menu | 0.273 / 0.335 | 0.263 / 0.358 |
+
+No regression is evident in this sample; separate-process timing variation does
+not establish an optimization. These measurements exclude operator execution,
+dynamic callback work, GPU completion and end-to-end input latency. They do not
+establish equivalence with a complete source BVT workload. Raw source hashes,
+loaded-package paths, retained resources and timing records are in the gallery.
+
+No new private ABI dependency or minimum Blender version was introduced. Exact
+versioned API/Manual requests were blocked by the documentation service; official
+4.2.0 and installed 5.1.2/5.2.2 source signatures were audited instead. Static
+public RNA remains the compatibility fallback. Blender 4.2 execution, broader
+theme/platform acceptance, custom icons/icon-only actions, complete native
+OperatorProperties semantics and all layout/invocation contexts remain open.
+The ledger now has 45 partial members out of 137, with zero reference-matched.

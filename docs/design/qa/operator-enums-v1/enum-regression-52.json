@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Static and dynamic RNA headings/separators survive opt-in copy; old callers still receive choices only",
+    "Expanded flag strips: exclusive plain clicks, Shift toggles including empty; individual prop_enum still toggles",
+    "Headings use nonselectable rows, separators stay attached, arrows skip headings",
+    "Name, description and icon metadata equal native class methods for static/dynamic/missing choices",
+    "Public-RNA fallback preserves static choices and metadata; grouping remains unavailable",
+    "Exact-build native adapter admitted after reviewed Python-only item-copy change"
+  ]
+}

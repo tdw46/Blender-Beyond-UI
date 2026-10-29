@@ -212,17 +212,29 @@
     },
     "operator_enum": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom expanded actions and searchable operator dropdowns reuse BVT glass, theme and finite springs. Exact argument/context/selection snapshots, dynamic choice remap checks, operator poll/identity, flags, context menus and host popup shortcuts are execution-tested on Blender 5.1.2/5.2.2. Icon-only/custom icons, full native OperatorProperties semantics, all layout/invocation combinations, broader platforms and exact visual acceptance remain open. See docs/OPERATOR_CHOICES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/operator-enums-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/operator-enums-v1/runtime-52.json",
+        "docs/design/qa/operator-enums-v1/runtime-51.json",
+        "docs/design/qa/operator-enums-v1/windowed-52.json",
+        "docs/design/qa/operator-enums-v1/windowed-51.json"
+      ]
     },
     "operator_menu_enum": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom expanded actions and searchable operator dropdowns reuse BVT glass, theme and finite springs. Exact argument/context/selection snapshots, dynamic choice remap checks, operator poll/identity, flags, context menus and host popup shortcuts are execution-tested on Blender 5.1.2/5.2.2. Icon-only/custom icons, full native OperatorProperties semantics, all layout/invocation combinations, broader platforms and exact visual acceptance remain open. See docs/OPERATOR_CHOICES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/operator-enums-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/operator-enums-v1/runtime-52.json",
+        "docs/design/qa/operator-enums-v1/runtime-51.json",
+        "docs/design/qa/operator-enums-v1/windowed-52.json",
+        "docs/design/qa/operator-enums-v1/windowed-51.json"
+      ]
     },
     "operator_menu_hold": {
       "kind": "method",

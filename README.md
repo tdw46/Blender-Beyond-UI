@@ -40,6 +40,16 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Operator choices
+
+Expanded operator actions and searchable operator dropdowns now use the shared
+BVT controls, with exact argument snapshots and checks before execution.
+
+![Actual Blender operator choice animation](docs/media/panels/operator-enums-v1.gif)
+
+[Operator choice QA](docs/design/qa/operator-enums-v1/index.html) ·
+[Integration and remaining gaps](docs/OPERATOR_CHOICES.md)
+
 ## Sliders and switches
 
 Sliders use BVT’s label, thin rail, animated bubble handle and separate number

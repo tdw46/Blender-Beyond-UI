@@ -597,6 +597,46 @@ class Canvas(Group):
         self.context_menu.motion.pulse("reveal", 0.12)
         return True
 
+    def open_operator_menu(self, control, clip, context):
+        from .context_menu import Menu, Target
+
+        if not control.enabled:
+            return False
+        try:
+            model = control.options["operator_enum"]
+            context = context or model.context
+            rows, valid = model.rows(context)
+            self.cancel()
+            menu = Menu(
+                Target(
+                    control.key,
+                    valid=lambda: self.visible
+                    and self.controls.get(control.key) is control
+                    and control.enabled
+                    and valid(),
+                ),
+                rows,
+                (control.rect[0], control.rect[1] + control.rect[3]),
+                clip,
+                context=context,
+                row_limit=len(rows),
+                search_threshold=self.menu_search_threshold,
+                on_tip=self._tooltip_wake,
+                on_error=lambda error: setattr(self, "menu_error", str(error)),
+            )
+            self.context_menu = menu
+            self.context_focus = control
+            menu.motion.bind(
+                (*self._animation_parents, self.animation, control.motion.settings),
+                self._wake_motion,
+            )
+            menu.motion.pulse("reveal", 0.12)
+            self.menu_error = None
+            return True
+        except Exception as error:
+            self.menu_error = str(error)
+            return False
+
     def _bind_shortcut(self, control, target, context, clip):
         registry = self.shortcut_registry
         if registry is None or control.kind not in {"enum", "button"}:
@@ -612,7 +652,9 @@ class Canvas(Group):
         scene = context.scene.as_pointer() if context.scene else None
 
         def run(ctx, event):
-            if control.kind == "enum":
+            if control.options.get("operator_enum"):
+                result = self.open_operator_menu(control, clip, ctx)
+            elif control.kind == "enum":
                 result = self.open_enum_menu(control, clip, ctx)
             else:
                 result = control.action()
@@ -722,7 +764,8 @@ class Canvas(Group):
                     self.shortcut_registry.entry(command, context) if command else None
                 )
                 if routed is not None:
-                    if control.kind == "enum":
+                    if control.kind == "enum" or control.options.get("operator_enum"):
+                        rows = [r for r in rows if r.key != "SHORTCUT"]
                         rows.insert(
                             0,
                             replace(
@@ -748,6 +791,7 @@ class Canvas(Group):
                 context=context,
                 measure=measure,
                 scope=scope,
+                row_limit=4096 if control.options.get("operator_enum") else Menu.limit,
                 search_threshold=self.menu_search_threshold,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
                 on_tip=self._tooltip_wake,
@@ -1128,7 +1172,9 @@ class Canvas(Group):
         if control is None or kind != "LEFTMOUSE" or not press:
             return False
         if control.kind == "button":
-            if control.options.get("action_event"):
+            if control.options.get("operator_enum"):
+                self.open_operator_menu(control, clip, context)
+            elif control.options.get("action_event"):
                 control.options["action_event"](event)
             elif control.action:
                 control.action()

@@ -1,0 +1,9 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/operator-enums-v1/capture.json",
+  "sha256": "6e47865ea0b732917ac3c63edb18c84ea5ff7ccb702b7d6931d686b524512f4b",
+  "source_frames": 100,
+  "encoded_frames": 75,
+  "duration_ms": 3330,
+  "encoding": "Duplicate static frames share a longer duration; 30 fps source timing preserved at GIF centisecond resolution"
+}

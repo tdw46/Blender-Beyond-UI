@@ -1,0 +1,27 @@
+{
+  "exact_match": false,
+  "baseline_commit": "adbe5d62d3d8162fd5d85ba8627ae60483551919",
+  "acceptance": "Shared BVT button/menu surfaces reused; new operator semantics are execution-tested. Exact reference and motion acceptance remain with Tyler.",
+  "pairs": {
+    "rest": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "36e641c0de0dd3af86690435343fcbccdd9fd43b697314de0a8206331353a7a1",
+      "after_sha256": "36e641c0de0dd3af86690435343fcbccdd9fd43b697314de0a8206331353a7a1"
+    },
+    "scalar": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "3c323b7493867559ea49f87b9452305db0e19ee2dca62d7b80cb36d2b763efa3",
+      "after_sha256": "3c323b7493867559ea49f87b9452305db0e19ee2dca62d7b80cb36d2b763efa3"
+    },
+    "rest-51": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "36e641c0de0dd3af86690435343fcbccdd9fd43b697314de0a8206331353a7a1",
+      "after_sha256": "36e641c0de0dd3af86690435343fcbccdd9fd43b697314de0a8206331353a7a1"
+    },
+    "scalar-51": {
+      "rgb_pixels_equal": true,
+      "before_sha256": "3c323b7493867559ea49f87b9452305db0e19ee2dca62d7b80cb36d2b763efa3",
+      "after_sha256": "3c323b7493867559ea49f87b9452305db0e19ee2dca62d7b80cb36d2b763efa3"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Expanded and dropdown actions use exact enum arguments, context overrides and invocation",
+    "Dynamic menus are searchable and use supplied operator arguments; scratch keyconfigs are released",
+    "Stale arguments, numeric remaps, selection changes, poll failures and removed operators reject execution",
+    "Flag choices pass singleton sets; public static fallback remains available",
+    "Choice right-click command contains selected value; host shortcuts open custom popup and revoke hidden controls",
+    "Unsupported icon-only and non-enum requests fail explicitly"
+  ]
+}
