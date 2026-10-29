@@ -39,11 +39,18 @@ def target(widget, key, x, y):
         for name in ("sv", "hue", "alpha_track", "hex", "eyedropper"):
             if contains(COLOR[name], x, y):
                 part = (name,)
-        if contains((374, 294, 230, 48), x, y):
+        if any(
+            contains(COLOR[key], x, y)
+            for key in ("alpha_label", "alpha_field", "alpha_hit")
+        ):
             part = ("channel", "ALPHA", 3)
         for i, r in enumerate(COLOR["tabs"]):
             if contains(r, x, y):
                 part = ("mode", i)
+        if any(
+            contains(COLOR[key], x, y) for key in ("hue_label", "hue_hit", "hue_field")
+        ):
+            part = ("channel", "HSV", 0)
         if part[0] == "channel":
             index = part[-1]
             value = (

@@ -72,6 +72,7 @@ class Motion:
         self.wake = None
         self.regions = {}
         self.tracks = {}
+        self.positions = {}
         self.hover = self.pressed = self.pointer = None
         self.parents = ()
         self.bind(())
@@ -111,8 +112,9 @@ class Motion:
         return value * self.amplitude_scale
 
     def clear(self):
-        changed = bool(self.tracks)
+        changed = bool(self.tracks or self.positions)
         self.tracks.clear()
+        self.positions.clear()
         self.hover = self.pressed = self.pointer = None
         if changed and self.wake:
             self.wake(self)
@@ -160,7 +162,30 @@ class Motion:
             duration = SWITCH_DURATION if track[4] else HANDLE_DURATION
             if not self.strength or now - track[0] >= duration:
                 del self.tracks[key]
-        return bool(self.tracks)
+        for key, (start, _, _) in tuple(self.positions.items()):
+            if not self.strength or now - start >= 0.36:
+                del self.positions[key]
+        return bool(self.tracks or self.positions)
+
+    def position(self, key, value):
+        """Read-only eased switch travel; external changes settle immediately."""
+        track = self.positions.get(key)
+        if not self.strength or track is None or track[2] != float(value):
+            return float(value)
+        from .gpu.style import switch_position
+
+        return switch_position(
+            track[1], track[2], self.clock() - track[0], duration=0.36
+        )
+
+    def retarget(self, key, before, after):
+        if not self.strength:
+            return
+        start = self.position(key, before)
+        if len(self.positions) >= 32 and key not in self.positions:
+            self.positions.pop(next(iter(self.positions)))
+        self.positions[key] = (self.clock(), start, float(after))
+        self.pulse(key, 0.24, toggle=True)
 
     def input(self, event, x, y):
         from .gpu.style import hover_impulse, velocity_impulse

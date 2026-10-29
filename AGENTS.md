@@ -47,6 +47,17 @@ ratio, logical hit mapping, owner menus, glass and animation. Audit every new
 control beside ordinary fields at 1×, 1.5× and 2×, including narrow/wide bounds.
 See docs/UI_SCALING.md for the 2026-10-29 user correction and reference precedence.
 
+## Hard rule: BVT scalar layouts
+
+Every custom scalar slider uses the source label, thin track, animated bubble
+handle and separate right-hand number field. Use shared source geometry for
+painting and hit testing; narrow rows stack the label without enlarging fonts.
+All boolean properties use source toggle switches, including contributed menu
+rows. Plain numeric entry fields and enum selection markers retain their distinct
+semantics. Preserve exact owner menus, Blender theme colors, shared glass, source
+motion and the 15% wide-numeric amplitude rule. See docs/SCALAR_CONTROLS.md and the
+immutable user screenshots in docs/design/references/bvt-scalars-v1/.
+
 ## Hard rule: source-level UI performance
 
 Tyler requires this library to remain exceptionally fast and responsive, like

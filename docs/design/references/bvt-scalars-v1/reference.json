@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "source": "Tyler-provided screenshots, 2026-10-29; not generated",
+  "instruction": "All scalar sliders: label, track and squash/stretch bubble, right number entry. All booleans: source toggle switches. This request supersedes prior scalar layout artwork.",
+  "dimensions": {
+    "slider.png": [
+      518,
+      68
+    ],
+    "switches.png": [
+      538,
+      214
+    ]
+  },
+  "context": "Source theme/UI scale/backdrop not fully specified by screenshot. Production continues to use active Blender theme; reference screenshots remain immutable.",
+  "source_sha256": {
+    "VRM_ShoostCanvas.py": "ab3dd110f4567d94d2d7ef24f0a638a91a8b934838ab80e8717b5ed13306cdf4",
+    "_shoost_canvas_style.py": "01d050fe912ea90a45ca997b3b0276d25f01b31eda6b15e4bc1d9042eb0ab621",
+    "VRM_ShoostContextMenu.py": "0aec55c8d640ea4c9796e89941951e7333acd72298dc0161e44929f3cf98dd78"
+  }
+}

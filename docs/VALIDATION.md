@@ -831,3 +831,58 @@ rows, up to 4096 enum rows); query length is bounded at 4096 characters. No new
 Blender/native API dependency was introduced. Blender 4.2 runtime execution,
 IME composition, broader themes/platforms and exact reference acceptance remain
 unqualified. The ledger remains 43 partial / 137 members, zero reference-matched.
+
+
+## BVT scalar layouts — 2026-10-29
+
+[Slider/switch QA](design/qa/scalar-layout-v1/index.html) retains Tyler's original
+screenshots beside production-rendered wide/compact sliders, switches, menu bools,
+number entry and hue/alpha controls. Production follows the active theme; red is
+an explicit comparison fixture without preference mutation. Geometry, shaders,
+source spring behavior and 0.36-second switch easing come from audited BVT files.
+
+121 unit tests pass. Blender 5.1.2 and 5.2.2 pass disposable-profile RNA tests,
+real-window input, numeric regressions, context/menu regressions and the general
+runtime fixture. Input covers absolute track positioning, relative drag, numeric
+entry, rollback, exact owner menus, single boolean commits and idle teardown.
+Hue/alpha tests preserve the other color components and route exact context parts.
+
+150 frames per runtime/scale at 1×, 1.5× and 2× (900 total) are pixel-identical
+with native text batching enabled/disabled. Motion includes handle dragging,
+rapid switch retargeting, number entry, boolean menu reveal and hue/alpha input.
+One backdrop production, one strong blur, five offscreens, font handles and
+recorded shader/batch/layout identities remain stable. Static captures cover
+motion disabled and settled appearance; no live scene or preferences were saved.
+
+### Equivalent workload performance
+
+Published `f048ce0` and the new implementation paint the same eight sliders and
+three booleans, then the same property context menu. Both packages are loaded
+from their verified paths, with fixture/source hashes in the gallery. Metal,
+640×560, scale 1, 20 warmups and 100 CPU submission samples per state; framebuffer
+readback is excluded. These are separate disposable processes.
+
+| Runtime | Workload | Before median / p95 ms | After median / p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 | closed fields | 0.361 / 0.489 | 0.529 / 0.656 |
+| 5.2.2 | open property menu | 0.557 / 0.694 | 0.674 / 0.827 |
+| 5.2.2 | retained open menu | 0.598 / 0.827 | 0.731 / 0.939 |
+| 5.1.2 | closed fields | 0.351 / 0.480 | 0.552 / 0.773 |
+| 5.1.2 | open property menu | 0.542 / 0.654 | 0.740 / 0.872 |
+| 5.1.2 | retained open menu | 0.556 / 0.796 | 0.757 / 0.891 |
+
+The eight-slider layout adds about 0.17–0.20 ms median closed-field CPU submission
+in these runs. Inspection attributes additional work to retained rail/fill,
+handle/shadow draws and separate label/value text in place of the former minimal
+underline field. Each slider retains its single number-cell glass lens; no new
+backdrop/blur producer or steady-state shader/font/resource creation was added.
+The new closed workload stays below 0.56 ms median here. This is a measured drawing
+cost, not a speed improvement or proof of source-equivalent BVT performance.
+GPU completion, input latency and broader dense/scrolling workloads remain outside
+this fixture's qualification.
+
+Source screenshots have unknown exact UI scale/theme/background, so no pixel-
+exact reference acceptance is claimed. These requests supersede older scalar
+artwork while preserving prior reference versions. Blender 4.2 paths remain;
+4.2 execution, broader theme/platform coverage and full API parity are unverified.
+The ledger remains partial; no member is promoted to reference-matched.

@@ -1,0 +1,4 @@
+POINTER_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Actual BVT track click/drag uses the rendered rail and cancels to original value', 'Independent right-side number entry commits once', 'Actual switch click writes its bool once; finite travel and squash/stretch share host settings', 'Track and number-field right-click retain the exact RNA owner', 'Disabled animation and teardown leave no timers or bridge errors']}
+00:10.315  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

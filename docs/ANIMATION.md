@@ -66,7 +66,9 @@ redraw; disabled and settled UI has no animation polling loop.
 ## Current integration and remaining parity
 
 - Basic controls use shared entry/press/drag/release springs. Toggle knobs use
-  the source's reciprocal-axis shape and longer switch settling time.
+  the source's reciprocal-axis shape, 0.36-second eased travel and longer switch
+  settling time. Travel retargets from the current position; backend disable
+  clears both travel and shape. See [scalar QA](design/qa/scalar-layout-v1/index.html).
 - Compound fields/tabs, palette swatches, curve points, ramp stops, color handles,
   picker rows and compact enum menus use retained chrome deformation.
 - Color popovers use reveal motion; read-only matrices, progress and sockets can
@@ -76,7 +78,7 @@ redraw; disabled and settled UI has no animation polling loop.
   Primitive geometry and glass backdrop ownership remain retained.
 
 This is **not complete source animation parity**. The source's full highlight
-wipe, eased switch travel, elastic tab travel, every toolbar sub-action, focus/
+wipe, elastic tab travel, every toolbar sub-action, focus/
 keyboard state and all popup/reveal combinations still require dedicated
 integration and visual references. New surfaces must meet AGENTS.md's motion
 rule; none of these gaps may be silently marked complete.

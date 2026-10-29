@@ -1,0 +1,9 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/scalar-layout-v1/capture.json",
+  "sha256": "c9e506291e88afe73e1ee0cf759ae54eaddb5c8afbe3e6dae77096a4d9ce925e",
+  "source_frames": 150,
+  "encoded_frames": 100,
+  "duration_ms": 5000,
+  "encoding": "Duplicate static frames share a longer duration; 30 fps source timing preserved at GIF centisecond resolution"
+}

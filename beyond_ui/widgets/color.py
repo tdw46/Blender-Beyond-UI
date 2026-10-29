@@ -20,7 +20,7 @@ class ColorPicker(Widget):
     design_font_size = 22.0
     width, height = SIZE
     sv = COLOR["sv"]
-    hue = COLOR["hue"]
+    hue = COLOR["hue_track"]
 
     def __init__(self, binding, *, linear=True, eyedropper=None):
         super().__init__()
@@ -101,6 +101,12 @@ class ColorPicker(Widget):
                     current = self.binding.read()
                     if field == "hex":
                         value = parse_color_hex(result, current, self.linear)
+                    elif field == "HUE":
+                        _, s, v = color_hsv(current, self.linear, self.hue_value)
+                        hue = max(0.0, min(1.0, number(result)))
+                        rgb = color_rgb((hue, s, v), self.linear)
+                        self.hue_value = hue
+                        value = rgb + (current[3],) if len(current) > 3 else rgb
                     elif field == 3:
                         value = (*current[:3], max(0.0, min(1.0, number(result))))
                     else:
@@ -143,8 +149,8 @@ class ColorPicker(Widget):
                 return True
         for name, rect in (
             ("sv", self.sv),
-            ("hue", self.hue),
-            ("alpha", COLOR["alpha_track"]),
+            ("hue", COLOR["hue_hit"]),
+            ("alpha", COLOR["alpha_hit"]),
         ):
             if contains(rect, x, y):
                 self._begin()
@@ -152,8 +158,15 @@ class ColorPicker(Widget):
                 self._move(x, y)
                 return True
         current = self.binding.read()
+        if any(contains(COLOR[key], x, y) for key in ("hue_field", "hue_label")):
+            self._begin()
+            self.field = "HUE"
+            self.text_edit = Text(color_hsv(current, self.linear, self.hue_value)[0])
+            return True
         for i in range(4 if len(current) > 3 else 3):
-            if contains((COLOR["fields"][i] if i < 3 else (374, 294, 230, 48)), x, y):
+            if contains(
+                COLOR["fields"][i] if i < 3 else COLOR["alpha_field"], x, y
+            ) or (i == 3 and contains(COLOR["alpha_label"], x, y)):
                 channels = (
                     color_hsv(current, self.linear, self.hue_value)
                     if self.mode == "HSV"
@@ -192,7 +205,6 @@ class ColorPicker(Widget):
                 align="center",
             )
         skin.draw(p.map(self.sv), (1, 1, 1, 1), radius=6 * p.scale, mode=1, hue=h)
-        skin.draw(p.map(self.hue), (1, 1, 1, 1), radius=6 * p.scale, mode=2)
         a, b, w, d = p.map(self.sv)
         with p.deform(
             "sv",
@@ -213,11 +225,32 @@ class ColorPicker(Widget):
                 palette=palette,
             )
         self.motion.region("sv", self.sv, circular=True)
-        a, b, w, d = self.hue
-        p.surface(
-            (a + h * w - 4, b - 3, 8, d + 6), palette["text"], 1, 0.6, motion_key="hue"
+        from ..gpu import glass
+
+        p.text(COLOR["hue_label"], "Hue", size=22, inset=0)
+        a, b, w, d = p.map(self.hue)
+        style.slider(
+            (a, b + d / 2, w),
+            h,
+            shape=self.motion.sample("hue")[0],
+            scale=2 * p.scale,
+            palette=palette,
+            hue=True,
         )
-        self.motion.region("hue", self.hue)
+        self.motion.region("hue", COLOR["hue_hit"], circular=True)
+        field = COLOR["hue_field"]
+        with p.deform("hue_field", field):
+            if not glass.lens(backdrop, p.map(field), 12 * p.scale, palette["field"]):
+                skin.draw(p.map(field), palette["field"], radius=12 * p.scale)
+            p.text(
+                field,
+                self.text_edit.text
+                if self.text_edit and self.field == "HUE"
+                else f"{h:.2f}",
+                size=22,
+                align="center",
+                inset=0,
+            )
         channels = (
             color_hsv(value, self.linear, self.hue_value)
             if self.mode == "HSV"
@@ -235,25 +268,33 @@ class ColorPicker(Widget):
             )
             p.field(COLOR["fields"][i], label, txt, size=21)
         if len(value) > 3:
-            p.surface(COLOR["alpha"])
-            p.field(
-                (374, 294, 230, 48),
-                "Alpha",
-                self.text_edit.text
-                if self.text_edit and self.field == 3
-                else f"{value[3]:.2f}",
-                split=126,
-                size=21,
+            from ..gpu import glass
+
+            p.text(COLOR["alpha_label"], "Alpha", size=22, inset=0)
+            a, b, w, d = p.map(COLOR["alpha_track"])
+            style.slider(
+                (a, b + d / 2, w),
+                value[3],
+                shape=self.motion.sample("alpha")[0],
+                scale=2 * p.scale,
+                palette=palette,
             )
-            r = COLOR["alpha_track"]
-            a, b, w, d = r
-            p.surface(r, "track", 8, 0)
-            ratio = max(0, min(1, value[3]))
-            p.surface((a, b, w * ratio, d), "fill", 8, 0)
-            p.circle(
-                (a + w * ratio, b + d / 2), 11, palette["text"], 0.7, motion_key="alpha"
-            )
-            self.motion.region("alpha", COLOR["alpha_track"], circular=True)
+            self.motion.region("alpha", COLOR["alpha_hit"], circular=True)
+            field = COLOR["alpha_field"]
+            with p.deform("alpha_field", field):
+                if not glass.lens(
+                    backdrop, p.map(field), 12 * p.scale, palette["field"]
+                ):
+                    skin.draw(p.map(field), palette["field"], radius=12 * p.scale)
+                p.text(
+                    field,
+                    self.text_edit.text
+                    if self.text_edit and self.field == 3
+                    else f"{value[3]:.2f}",
+                    size=22,
+                    align="center",
+                    inset=0,
+                )
         p.surface(COLOR["hex"], "input")
         p.text(
             COLOR["hex"],

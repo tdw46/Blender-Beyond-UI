@@ -1,0 +1,15 @@
+{
+  "exact_match": false,
+  "baseline_commit": "f048ce0bab12beae99a7906176a38b10499d87c4",
+  "reference": "../../references/bvt-scalars-v1/reference.json",
+  "acceptance": "Source geometry and behavior reused. Screenshot UI scale, exact theme and backdrop are unknown; this is not a pixel-match claim. Tyler owns visual acceptance.",
+  "states": [
+    "rest",
+    "red-reference-theme",
+    "number-entry",
+    "boolean-menu",
+    "color-alpha",
+    "settled",
+    "disabled"
+  ]
+}

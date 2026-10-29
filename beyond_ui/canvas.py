@@ -345,10 +345,18 @@ class Canvas(Group):
                 return node.options["widget"].dimensions(
                     t.font_size, available, node.options.get("height")
                 )
+            extra = (
+                20
+                if node.kind == "number"
+                and node.label
+                and node.options.get("slider", True)
+                and available < 260
+                else 0
+            )
             return available, max(
                 0.0,
                 node.options.get(
-                    "height", 8.0 if node.kind == "separator" else t.row_height
+                    "height", 8.0 if node.kind == "separator" else t.row_height + extra
                 ),
             )
 
@@ -1052,11 +1060,8 @@ class Canvas(Group):
             if kind == "MOUSEMOVE" and self.active.kind == "number":
                 minimum = self.active.options.get("min", 0.0)
                 maximum = self.active.options.get("max", 1.0)
-                delta = (
-                    (x - self._drag_x)
-                    * (maximum - minimum)
-                    / max(1.0, self.active.rect[2])
-                )
+                track_width = self._drag_width
+                delta = (x - self._drag_x) * (maximum - minimum) / max(1.0, track_width)
                 if getattr(event, "shift", False):
                     delta *= 0.25
                 numeric = self.active.options.get("numeric")
@@ -1068,9 +1073,8 @@ class Canvas(Group):
                         return True
                     self._dragged = True
                     step = (
-                        ((maximum - minimum) / max(1.0, self.active.rect[2]))
-                        if self.active.options.get("slider")
-                        and 0 < maximum - minimum < 1e6
+                        ((maximum - minimum) / max(1.0, track_width))
+                        if self._drag_part == "track" and 0 < maximum - minimum < 1e6
                         else numeric.drag(self._numeric_state)
                     )
                     if getattr(event, "shift", False):
@@ -1090,9 +1094,17 @@ class Canvas(Group):
                     value = max(minimum, min(maximum, value))
                     self._write(value)
                 else:
-                    self._write(self._drag_start + delta)
+                    if not self._dragged and abs(x - self._drag_x) <= 3:
+                        return True
+                    self._dragged = True
+                    value = self._drag_start + delta
+                    if self._drag_part == "track":
+                        value = max(minimum, min(maximum, value))
+                    self._write(value)
             elif kind == "LEFTMOUSE" and event.value == "RELEASE":
-                if self.active.options.get("numeric") and not self._dragged:
+                if (
+                    self.active.options.get("numeric") or self._drag_part == "field"
+                ) and not self._dragged:
                     self.editor = Text(self._initial_text)
                 else:
                     self.finish()
@@ -1142,9 +1154,11 @@ class Canvas(Group):
                 except (ReferenceError, RuntimeError, ValueError) as error:
                     self.menu_error = str(error)
         elif control.kind == "toggle":
+            before = control.binding.read()
             self._begin(control)
-            self._write(not control.binding.read())
+            self._write(not before)
             self.finish()
+            control.motion.retarget("body", before, control.binding.read())
         elif control.kind in {"number", "text", "color"}:
             self._begin(control)
             if control.kind == "color":
@@ -1166,6 +1180,30 @@ class Canvas(Group):
                 self._drag_start = control.binding.read()
                 self._drag_last = x
                 self._dragged = False
+                self._drag_part = "field"
+                self._drag_width = control.rect[2]
+                if control.kind == "number" and control.options.get("slider", True):
+                    from .scalar_geometry import slider_parts, usable_range
+
+                    _, (tx, ty, tw), field = slider_parts(
+                        control.rect, bool(control.label)
+                    )
+                    lo, hi = (
+                        control.options.get("min", 0.0),
+                        control.options.get("max", 1.0),
+                    )
+                    if (
+                        tx - 7 <= x < field[0]
+                        and abs(y - ty) <= 12
+                        and usable_range(lo, hi)
+                    ):
+                        self._drag_part = "track"
+                        self._drag_width = tw
+                        self._dragged = True
+                        value = lo + min(1.0, max(0.0, (x - tx) / tw)) * (hi - lo)
+                        self._write(value)
+                        self._drag_start = control.binding.read()
+                        control.motion.pulse("handle", 0.55)
         elif control.kind == "enum":
             self.open_enum_menu(control, clip, context)
         else:
@@ -1187,7 +1225,8 @@ class Canvas(Group):
             value = max(lo, min(hi, value))
             if self.active.options.get("integer"):
                 value = round(value)
-        self.edit.update(value)
+        if self.active.binding.read() != value:
+            self.edit.update(value)
 
     def paint(self, rect, clip, *, preferences=None, font=0, backdrop=None):
         from .gpu.paint import paint

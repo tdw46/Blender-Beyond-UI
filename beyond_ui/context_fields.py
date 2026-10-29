@@ -121,7 +121,13 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
 
     if meta.type == "BOOLEAN" and not (getattr(meta, "is_array", False) and index < 0):
         return Entry(
-            name, label, execute, enabled, checked=selected, tip=meta.description
+            name,
+            label,
+            execute,
+            enabled,
+            checked=selected,
+            tip=meta.description,
+            toggle=True,
         )
     if meta.type == "ENUM":
         if value is not None:

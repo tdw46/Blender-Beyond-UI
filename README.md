@@ -40,6 +40,17 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Sliders and switches
+
+Sliders use BVT’s label, thin rail, animated bubble handle and separate number
+entry. Boolean properties use glass toggle switches, including menu rows.
+Hue and alpha use the same slider layout; narrow rows stack their labels.
+
+![Actual Blender BVT slider and switch animation](docs/media/panels/scalar-layout-v1.gif)
+
+[Your screenshots versus implementation](docs/design/qa/scalar-layout-v1/index.html) ·
+[Behavior and integration](docs/SCALAR_CONTROLS.md)
+
 ## Context menus
 
 Shared right-click menus now support owner-aware property actions, nested Back

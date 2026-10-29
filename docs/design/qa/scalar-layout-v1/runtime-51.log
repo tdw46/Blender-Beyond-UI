@@ -1,0 +1,9 @@
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.006s
+
+OK
+SCALAR_LAYOUT_RUNTIME {'passed': True, 'version': '5.1.2', 'checks': ['Source geometry and gestures, independent number entry, narrow bounds, transaction rollback, bounded retargetable switch travel', 'Hue/alpha sliders and numeric entries retain color components and exact context targets', 'Contributed RNA booleans render as switches; enum checks remain enum checks; bool commit executes once', 'All Layout boolean paths use switches, including legacy toggle=False']}
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)
+
+Blender quit

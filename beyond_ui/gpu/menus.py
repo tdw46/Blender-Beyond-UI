@@ -90,7 +90,22 @@ def enum_option(
         if right - sw - left >= 32 * scale:
             text(shortcut, right - sw, right, size, MUTED)
             right -= sw + 14 * scale
-    if item["data"]:
+    if item.get("toggle"):
+        style.switch(
+            right - 46 * scale,
+            y + (h - 24 * scale) / 2,
+            46 * scale,
+            24 * scale,
+            float(bool(item["data"])),
+            shape=item.get("shape", (1.0, 1.0)),
+            scale=scale,
+            palette=palette
+            if item["enabled"]
+            else dict(palette, text=MUTED, toggle_on=palette["toggle_off"]),
+            backdrop=backdrop,
+        )
+        right -= 50 * scale
+    elif item["data"]:
         style.icon("●", right - 4 * scale, y + h / 2, 6 * scale, ink)
         right -= 16 * scale
     if item.get("field"):
@@ -218,10 +233,16 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     heading=row.heading,
                     submenu=row.children is not None,
                     field=row.field is not None,
+                    toggle=row.toggle,
+                    shape=menu.motion.sample(key)[0] if active else (1.0, 1.0),
                 )
 
                 row_font = typography.face(fonts, "title" if row.heading else "body")
-                with menu.motion.deform(key, target) if active else nullcontext():
+                with (
+                    menu.motion.deform(key, target)
+                    if active and not row.toggle
+                    else nullcontext()
+                ):
                     enum_option(
                         item,
                         target,

@@ -68,6 +68,7 @@ class Entry:
     checked: object = False  # prepared on open/input, never read from paint
     field: object = None  # context_edit.Field
     heading: bool = False
+    toggle: bool = False  # Boolean property; enum selections retain their checks.
 
 
 @dataclass

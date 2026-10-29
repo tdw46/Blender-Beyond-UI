@@ -681,6 +681,67 @@ def slider_parts(x, y, width, height, scale=1.0):
     )
 
 
+def slider(
+    track, value, *, shape=(1.0, 1.0), scale=1.0, palette=None, enabled=True, hue=False
+):
+    """BVT track and bubble; reuse the retained style shader/batch."""
+    palette = palette or theme_palette()
+    tx, ty, tw = track
+    ratio = max(0.0, min(1.0, value))
+    if hue:
+        from . import skin
+
+        skin.draw(
+            (tx, ty - 2.5 * scale, tw, 5 * scale),
+            (1, 1, 1, 1),
+            radius=3 * scale,
+            mode=2,
+        )
+    else:
+        draw(
+            tx,
+            ty - 2.5 * scale,
+            tw,
+            5 * scale,
+            palette["slider_track"],
+            radius=3 * scale,
+            border=0.5 * scale,
+        )
+    fill = tw * ratio
+    color = palette["slider_fill"] if enabled else palette["muted"]
+    if fill > 0 and not hue:
+        draw(
+            tx,
+            ty - 2.5 * scale,
+            fill,
+            5 * scale,
+            color,
+            radius=3 * scale,
+            top=shade(color, 0.06),
+        )
+    ax, ay = shape
+    r = 6.5 * scale
+    draw(
+        tx + fill - r * ax - scale,
+        ty - r * ay - 2 * scale,
+        2 * r * ax + 2 * scale,
+        2 * r * ay + 2 * scale,
+        shade(palette["switch_shadow"], 0, 0.65),
+        mode=3,
+    )
+    color = palette["text"] if enabled else palette["muted"]
+    draw(
+        tx + fill - r * ax,
+        ty - r * ay,
+        2 * r * ax,
+        2 * r * ay,
+        shade(color, -0.18),
+        top=shade(color, 0.15),
+        mode=3,
+        border=0.5 * scale,
+    )
+
+
 HANDLE_DURATION = 1.0
 OVERLAY_DURATION = 0.7
 HOVER_WIPE_DURATION = 0.25

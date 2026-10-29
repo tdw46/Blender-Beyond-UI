@@ -64,7 +64,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
         a, b, c, d = r
         return x + a * sx, y + h - (b + d) * sy, c * sx, d * sy
 
-    def text(value, r, ink, role="body"):
+    def text(value, r, ink, role="body", *, center=False, editor=None):
         active_font = typography.face(font, role)
         a, b, c, d = r
         size = t.font_size * scale * (12 / 11 if role == "title" else 1)
@@ -75,13 +75,42 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
         top = min(b + d, cy + ch)
         if right <= left or top <= bottom:
             return
+        origin = (
+            max(left, a + (c - measure(active_font, size, str(value))[0]) / 2)
+            if center
+            else left
+        )
+        if editor is not None:
+            cursor = measure(active_font, size, value[: editor.cursor])[0]
+            origin = left - max(0, cursor - max(0, right - left - 2 * scale))
+            start, end = sorted((editor.anchor, editor.cursor))
+            start = max(left, origin + measure(active_font, size, value[:start])[0])
+            end = min(right, origin + measure(active_font, size, value[:end])[0])
+            if end > start:
+                style.draw(
+                    start,
+                    bottom + 2 * scale,
+                    end - start,
+                    top - bottom - 4 * scale,
+                    palette["selected"],
+                    radius=0,
+                )
+            caret = max(left, min(right - scale, origin + cursor))
+            style.draw(
+                caret,
+                bottom + 4 * scale,
+                scale,
+                max(0, top - bottom - 8 * scale),
+                ink,
+                radius=0,
+            )
         blf.enable(active_font, blf.CLIPPING)
         try:
             blf.clipping(active_font, left, bottom, right, top)
             blf.color(active_font, *ink)
             blf.position(
                 active_font,
-                a + 6 * scale,
+                origin,
                 b + (d - measure(active_font, size, "H")[1]) / 2,
                 0,
             )
@@ -113,6 +142,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
             r = mapped(control.rect)
             a, b, c, d = r
             kind = control.kind
+            slider = kind == "number" and control.options.get("slider", True)
             ink = palette["text"] if control.enabled else palette["muted"]
             # No binding reads for fully clipped controls or hidden canvases.
             try:
@@ -140,22 +170,38 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     control.motion.region(
                         "body", control.rect, circular=(abs(c - d) < 8)
                     )
+                    if slider:
+                        from ..scalar_geometry import slider_parts
+
+                        _, (tx, ty, tw), field = slider_parts(
+                            control.rect, bool(control.label)
+                        )
+                        control.motion.region(
+                            "handle", (tx - 7, ty - 12, tw + 14, 24), circular=True
+                        )
+                        control.motion.region("field", field)
             with (
                 typography.motion_text(font, control.motion),
                 control.motion.deform("reveal", r),
-                nullcontext() if kind == "toggle" else control.motion.deform("body", r),
+                nullcontext()
+                if kind == "toggle" or slider
+                else control.motion.deform("body", r),
             ):
-                if kind in {
-                    "button",
-                    "number",
-                    "event",
-                    "pointer",
-                    "search",
-                    "decorator",
-                    "text",
-                    "enum",
-                    "color",
-                }:
+                if (
+                    kind
+                    in {
+                        "button",
+                        "number",
+                        "event",
+                        "pointer",
+                        "search",
+                        "decorator",
+                        "text",
+                        "enum",
+                        "color",
+                    }
+                    and not slider
+                ):
                     surface(
                         r,
                         palette["selected"]
@@ -169,16 +215,22 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 elif kind == "separator":
                     style.draw(a, b + d / 2, c, scale, palette["muted"], radius=0)
                 elif kind == "toggle":
-                    text(control.label, (a, b, max(0.0, c - 48 * scale), d), ink)
+                    from ..scalar_geometry import switch_rect
+
+                    switch = mapped(switch_rect(control.rect))
+                    text(control.label, (a, b, max(0.0, c - 52 * scale), d), ink)
                     style.switch(
-                        a + c - 48 * scale,
-                        b,
-                        48 * scale,
-                        d,
-                        float(bool(value)),
+                        *switch,
+                        control.motion.position("body", bool(value)),
                         shape=control.motion.sample("body")[0],
                         scale=scale,
-                        palette=palette,
+                        palette=palette
+                        if control.enabled
+                        else dict(
+                            palette,
+                            text=palette["muted"],
+                            toggle_on=palette["toggle_off"],
+                        ),
                         backdrop=backdrop,
                     )
                 elif kind in {"pointer", "search"}:
@@ -243,16 +295,6 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         numeric_state = numeric_states[owner]
                     lo = control.options.get("min", 0.0)
                     hi = control.options.get("max", 1.0)
-                    if value is not None and control.options.get("slider", True):
-                        ratio = max(0.0, min(1.0, (value - lo) / max(1e-12, hi - lo)))
-                        style.draw(
-                            a,
-                            b,
-                            c * ratio,
-                            3 * scale,
-                            palette["slider_fill"],
-                            radius=scale,
-                        )
                     label = (
                         canvas.editor.text
                         if canvas.active is control and canvas.editor
@@ -266,7 +308,42 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                             else "Unavailable"
                         )
                     )
-                    text(f"{control.label}  {label}", r, ink)
+                    if slider:
+                        from ..scalar_geometry import slider_parts, usable_range
+
+                        label_rect, (tx, ty, tw), field = slider_parts(
+                            control.rect, bool(control.label)
+                        )
+                        if control.label:
+                            text(control.label, mapped(label_rect), ink)
+                        px, py, pw, _ = mapped((tx, ty, tw, 0))
+                        ratio = (
+                            (value - lo) / (hi - lo)
+                            if value is not None and usable_range(lo, hi)
+                            else 0.0
+                        )
+                        style.slider(
+                            (px, py, pw),
+                            ratio,
+                            shape=control.motion.sample("handle")[0],
+                            scale=scale,
+                            palette=palette,
+                            enabled=control.enabled,
+                        )
+                        field = mapped(field)
+                        with control.motion.deform("field", field):
+                            surface(field, palette["field"], radius=6)
+                            text(
+                                label,
+                                field,
+                                ink,
+                                center=True,
+                                editor=canvas.editor
+                                if canvas.active is control
+                                else None,
+                            )
+                    else:
+                        text(f"{control.label}  {label}", r, ink)
                 elif kind == "text":
                     value = (
                         canvas.editor.text
