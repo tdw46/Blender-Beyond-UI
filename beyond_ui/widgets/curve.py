@@ -7,6 +7,7 @@ from ..editing import Text, number
 
 
 class CurveMapping(Widget):
+    design_font_size = 22.0
     width, height = SIZE
     graph = CURVE["graph"]
 

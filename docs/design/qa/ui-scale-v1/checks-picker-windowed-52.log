@@ -1,0 +1,4 @@
+PICKER_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['keyboard selection survives pointer leaving owned region', 'actual scrollbar drag moves virtualized list and releases capture', 'keyboard confirmation revalidates stale identity', 'outside click clears focus without stealing viewport input'], 'selected': [0, 1]}
+00:06.094  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

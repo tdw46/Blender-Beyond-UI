@@ -36,6 +36,17 @@ EXACTLY. A generated reference is a visual specification, not loose inspiration.
 - Keep reference versions immutable. Retain prior versions and record which
   version each implementation and validation result targets.
 
+## Hard rule: consistent host UI scale
+
+Tyler requires approximately consistent UI scale across all controls and popovers.
+Use host logical units for body text, titles, icons and interaction rows. Authored
+reference/artboard pixels must not be treated as host pixels or magnified to fill
+available panel width. Normalize compound controls through the shared dimensions
+policy and all compound popovers through `Canvas.open_widget`; preserve aspect
+ratio, logical hit mapping, owner menus, glass and animation. Audit every new
+control beside ordinary fields at 1×, 1.5× and 2×, including narrow/wide bounds.
+See docs/UI_SCALING.md for the 2026-10-29 user correction and reference precedence.
+
 ## Hard rule: source-level UI performance
 
 Tyler requires this library to remain exceptionally fast and responsive, like

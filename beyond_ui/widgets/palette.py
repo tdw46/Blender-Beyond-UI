@@ -22,6 +22,7 @@ class PaletteSource:
 
 
 class Palette(Widget):
+    design_font_size = 22.0
     width = 630.0
     height = 436.0
     columns = 6

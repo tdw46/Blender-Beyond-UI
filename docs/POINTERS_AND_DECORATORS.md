@@ -1,5 +1,8 @@
 # Pointer properties and animation decorators
 
+The current [UI scale audit](design/qa/ui-scale-v1/index.html) supersedes the
+oversized popover presentation in older galleries. See [sizing integration](UI_SCALING.md).
+
 `Layout.prop` supports custom ID pointer fields and named non-ID pointer fields
 with explicit host policies. Clicking opens the existing
 searchable Data Picker as a popover with the shared BVT strong liquid glass,

@@ -8,6 +8,7 @@ from .metrics import PICKER, SIZE
 
 
 class DataPicker(Widget):
+    design_font_size = 22.0
     width, height = SIZE
     focusable = True
     navigation_keys = {"UP_ARROW", "DOWN_ARROW", "HOME", "END", "PAGE_UP", "PAGE_DOWN"}

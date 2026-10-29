@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Collection-owned Bone and Node pointer selection, labels, RNA paths and exact host commits",
+    "Collection search intersects explicit non-ID policy with the search collection",
+    "Host revision, structural rename and rejected-commit guards preserve pointer, host snapshot and pending editor",
+    "Candidate right-click Copy Name and Select reject stale structural snapshots",
+    "Clear respects nullability, host generation and transactional property owner",
+    "Explicit revision policy admission, zero candidate scans in paint-facing reads and quiescent teardown",
+    "Native collection button-pointer override becomes a list; callback parity remains explicitly unsupported",
+    "Deleted containing ID invalidates collection-owned bindings"
+  ]
+}

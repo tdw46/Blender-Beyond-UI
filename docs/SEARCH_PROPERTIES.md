@@ -1,5 +1,8 @@
 # Collection search properties
 
+The current [UI scale audit](design/qa/ui-scale-v1/index.html) supersedes the
+oversized popover presentation in older galleries. See [sizing integration](UI_SCALING.md).
+
 `Layout.prop_search` now draws a compact field showing the bound value. Click it
 to open the shared Data Picker with strong liquid glass, active-theme colors,
 virtual scrolling, keyboard navigation and the source spring. Type immediately

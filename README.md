@@ -128,6 +128,14 @@ properties, with host revision checks and shared glass/motion/context menus.
 [Non-ID pointer QA](docs/design/qa/non-id-pointers-v1/index.html) ·
 [Host policy and revision setup](docs/POINTERS_AND_DECORATORS.md#non-id-pointers-and-collection-owned-properties)
 
+The current scale audit supersedes the oversized presentation in earlier galleries:
+all compound controls now use the surrounding panel's logical UI scale.
+
+![Corrected compact popover scale](docs/media/panels/ui-scale-v1.gif)
+
+[All-control scale audit and before/after](docs/design/qa/ui-scale-v1/index.html) ·
+[Logical sizing contract](docs/UI_SCALING.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

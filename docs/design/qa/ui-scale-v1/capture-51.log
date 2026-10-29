@@ -1,0 +1,5 @@
+UI_SCALE_CAPTURE True 
+00:03.654  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit
+Error: Not freed memory blocks: 2, total unfreed memory 0.125168 MB

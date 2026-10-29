@@ -179,6 +179,7 @@ class Canvas(Group):
         self.editor = None
         self.active = None
         self.overlay = None
+        self._event_clip = None
         self.context_menu = None
         self.context_provider = context_provider
         self.menu_commit = menu_commit
@@ -256,6 +257,18 @@ class Canvas(Group):
                 self._moving.discard(motion)
         return bool(self._moving)
 
+    def open_widget(self, widget, owner, clip=None):
+        """One host-relative scale and clip policy for every compound popover."""
+        clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
+        w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
+        widget.glass_blur = 0.7
+        self.overlay = {
+            "widget": widget,
+            "owner": owner,
+            "clip": tuple(clip),
+            "rect": (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h),
+        }
+
     def notify_changed(self, key):
         """Host revision hook, including read-only indicators; never polls RNA."""
         control = self.controls[key]
@@ -324,26 +337,25 @@ class Canvas(Group):
             flex = max(0.0, usable - total) / max(1, fixed.count(None))
             return [v * factor if v is not None else flex for v in fixed]
 
+        def control_size(node, available):
+            available = min(available, node.options.get("width", available))
+            if node.kind == "widget":
+                return node.options["widget"].dimensions(
+                    t.font_size, available, node.options.get("height")
+                )
+            return available, max(
+                0.0,
+                node.options.get(
+                    "height", 8.0 if node.kind == "separator" else t.row_height
+                ),
+            )
+
         def height(node, available):
             cache_key = (id(node), available)
             if cache_key in heights:
                 return heights[cache_key]
             if isinstance(node, Control):
-                default_height = (
-                    (
-                        node.options["widget"].height
-                        * available
-                        / node.options["widget"].width
-                    )
-                    if node.kind == "widget"
-                    else 8.0
-                    if node.kind == "separator"
-                    else t.row_height
-                )
-                return max(
-                    0.0,
-                    node.options.get("height", default_height),
-                )
+                return control_size(node, available)[1]
             inner = max(0.0, available - (2 * t.padding if node.kind == "box" else 0.0))
             widths = (
                 row_widths(node, inner)
@@ -360,12 +372,12 @@ class Canvas(Group):
             return heights[cache_key]
 
         def place(node, x, y, w):
-            if isinstance(node, Control) and "width" in node.options:
-                w = min(w, node.options["width"])
+            if isinstance(node, Control):
+                w, h = control_size(node, w)
+                node.rect = (x, y, max(0.0, w), h)
+                return
             h = height(node, w)
             node.rect = (x, y, max(0.0, w), h)
-            if isinstance(node, Control):
-                return
             if node.kind == "box":
                 x += t.padding
                 y += t.padding
@@ -698,6 +710,12 @@ class Canvas(Group):
     ):
         if not self.visible:
             return False
+        self._event_clip = clip
+        if self.overlay and "widget" in self.overlay and "clip" in self.overlay:
+            if tuple(clip) != self.overlay["clip"]:
+                self.open_widget(
+                    self.overlay["widget"], self.overlay.get("owner"), clip
+                )
         press = event.value in {"PRESS", "DOUBLE_CLICK"}
         if self.context_menu is not None:
             menu = self.context_menu
@@ -1052,19 +1070,7 @@ class Canvas(Group):
                     if control.kind == "search"
                     else control.options["pointer_field"].picker(self, control)
                 )
-                picker.glass_blur = 0.7
-                scale = min(1.0, clip[2] / picker.width, clip[3] / picker.height)
-                w, h = picker.width * scale, picker.height * scale
-                self.overlay = {
-                    "widget": picker,
-                    "owner": control,
-                    "rect": (
-                        clip[0] + (clip[2] - w) / 2,
-                        clip[1] + (clip[3] - h) / 2,
-                        w,
-                        h,
-                    ),
-                }
+                self.open_widget(picker, control, clip)
                 self.menu_error = None
             except (ReferenceError, RuntimeError, ValueError) as error:
                 self.menu_error = str(error)
@@ -1094,19 +1100,7 @@ class Canvas(Group):
                     picker = ColorPicker(
                         control.binding, linear=control.options.get("linear", True)
                     )
-                    scale = min(1.0, clip[2] / picker.width, clip[3] / picker.height)
-                    w = picker.width * scale
-                    h = picker.height * scale
-                    self.overlay = {
-                        "widget": picker,
-                        "owner": control,
-                        "rect": (
-                            clip[0] + (clip[2] - w) / 2,
-                            clip[1] + (clip[3] - h) / 2,
-                            w,
-                            h,
-                        ),
-                    }
+                    self.open_widget(picker, control, clip)
                 return True
             if control.kind == "text" or event.value == "DOUBLE_CLICK":
                 self.editor = Text(self._initial_text)

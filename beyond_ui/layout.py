@@ -729,22 +729,7 @@ class Layout:
 
         def edit(binding):
             widget = ColorPicker(binding, linear=True)
-            x, y, w, h = control.rect
-            scale = min(
-                1.0,
-                max(1.0, self.canvas._width or w) / widget.width,
-                max(1.0, self.canvas.height) / widget.height,
-            )
-            width, height = widget.width * scale, widget.height * scale
-            self.canvas.overlay = {
-                "widget": widget,
-                "rect": (
-                    max(0.0, min(x, (self.canvas._width or w) - width)),
-                    max(0.0, min(y, self.canvas.height - height)),
-                    width,
-                    height,
-                ),
-            }
+            self.canvas.open_widget(widget, control)
 
         resolver = self.resolve(data) if self.resolve else None
         source = palette_source(

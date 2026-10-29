@@ -119,7 +119,7 @@ class NextWidgets(unittest.TestCase):
         )
         self.assertEqual(control.options["widget"].value(), 0.65)
         ui.canvas.arrange(336)
-        self.assertEqual(control.rect[3], 36)
+        self.assertEqual(control.rect[3], 33)
 
 
 if __name__ == "__main__":

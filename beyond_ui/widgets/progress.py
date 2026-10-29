@@ -12,6 +12,7 @@ def factor_value(value):
 
 
 class Progress(Widget):
+    design_font_size = 22.0
     width = 630.0
     height = 390.0
 
@@ -27,6 +28,7 @@ class Progress(Widget):
         self.detail = detail
         self.framed = framed
         if not framed:
+            self.design_font_size = 12.0
             self.width = 320.0
             self.height = 36.0 if type == "BAR" else 160.0
 

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Pointer, search and color popovers retain 315x236 logical size at 360/560/960 panel widths",
+    "Rescaled color hit mapping edits and right-click cancellation restores the bound color",
+    "Palette editing uses the shared scale, current viewport clip, exact owner and strong glass"
+  ]
+}

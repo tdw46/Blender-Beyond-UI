@@ -123,7 +123,7 @@ class Painter:
         self.text(
             (title_inset, 0, self.width - title_inset - 48, 60),
             title,
-            size=28,
+            size=24,
             inset=0,
             weight="title",
         )
@@ -383,8 +383,19 @@ def contains(rect, x, y):
 
 
 class Widget:
+    # Authoring-unit font size; Canvas normalizes it to the host body font.
+    design_font_size = 11.0
     width = 320.0
     height = 240.0
+
+    def dimensions(self, font_size, available_width, available_height=None):
+        """Uniform logical sizing: extra panel width must not magnify controls."""
+        scale = max(
+            0.0, min(font_size / self.design_font_size, available_width / self.width)
+        )
+        if available_height is not None:
+            scale = min(scale, max(0.0, available_height / self.height))
+        return self.width * scale, self.height * scale
 
     def __init__(self):
         self.motion = Motion()

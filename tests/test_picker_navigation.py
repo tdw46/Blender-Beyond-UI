@@ -70,7 +70,10 @@ class PickerNavigation(unittest.TestCase):
         canvas.arrange(646)
         clip = (0, 0, 646, canvas.height)
         canvas.event(
-            event("LEFTMOUSE"), control.rect[0] + 100, control.rect[1] + 175, clip
+            event("LEFTMOUSE"),
+            control.rect[0] + 100 * control.rect[2] / widget.width,
+            control.rect[1] + 175 * control.rect[3] / widget.height,
+            clip,
         )
         self.assertIs(canvas.keyboard_focus, control)
         canvas.event(event("DOWN_ARROW"), -100, -100, clip)
@@ -80,7 +83,10 @@ class PickerNavigation(unittest.TestCase):
         self.assertIsNone(canvas.keyboard_focus)
         self.assertFalse(widget.focused)
         canvas.event(
-            event("LEFTMOUSE"), control.rect[0] + 100, control.rect[1] + 175, clip
+            event("LEFTMOUSE"),
+            control.rect[0] + 100 * control.rect[2] / widget.width,
+            control.rect[1] + 175 * control.rect[3] / widget.height,
+            clip,
         )
         canvas.park()
         self.assertIsNone(canvas.keyboard_focus)

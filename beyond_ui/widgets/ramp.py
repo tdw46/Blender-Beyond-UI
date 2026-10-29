@@ -8,6 +8,7 @@ from .metrics import RAMP, SIZE
 
 
 class ColorRamp(Widget):
+    design_font_size = 22.0
     width, height = SIZE
 
     def __init__(

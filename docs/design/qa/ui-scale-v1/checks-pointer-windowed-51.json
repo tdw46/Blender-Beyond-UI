@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "Real click opens shared strong-glass picker; End/Enter selects exact ID with one host commit",
+    "Candidate row context, Escape dismissal and exact component decorator insert/delete/context menu",
+    "Host disable/invalidation settles all motion and teardown releases ownership"
+  ]
+}

@@ -4,6 +4,7 @@ from .base import Widget, Painter
 
 
 class MatrixView(Widget):
+    design_font_size = 22.0
     width = 630.0
     height = 436.0
 

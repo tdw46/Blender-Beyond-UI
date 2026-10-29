@@ -1,0 +1,28 @@
+{
+  "exact_match": false,
+  "change": "User-requested host-relative scale correction; prior oversized presentation superseded",
+  "pairs": [
+    {
+      "before": "../non-id-pointers-v1/picker.png",
+      "after": "popover-picker.png",
+      "before_sha256": "bf49986bc8df12100fdbebf4f127bda3e919e04ded09ef6a25809abc3743d6c2",
+      "after_sha256": "197e5e85ed8f1ece31a45293725e3abd6ccca4b3ccda85b7adbeee1a3800879c",
+      "dimensions": [
+        640,
+        560
+      ],
+      "fixture_unchanged": true
+    },
+    {
+      "before": "../search-popover-v1/picker.png",
+      "after": "target-picker.png",
+      "before_sha256": "7222222b59f2b6bdc5f7a3eb7d6887f2c662c8cee0298f42066cafca955bb0dc",
+      "after_sha256": "c154cf19bdb403e5186c044f49cfe5d04f343370893d4c0e6bc0cc89f0ffa205",
+      "dimensions": [
+        640,
+        560
+      ],
+      "fixture_unchanged": true
+    }
+  ]
+}

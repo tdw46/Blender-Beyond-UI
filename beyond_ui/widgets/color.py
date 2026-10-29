@@ -17,6 +17,7 @@ from .metrics import COLOR, SIZE
 
 
 class ColorPicker(Widget):
+    design_font_size = 22.0
     width, height = SIZE
     sv = COLOR["sv"]
     hue = COLOR["hue"]
@@ -178,7 +179,7 @@ class ColorPicker(Widget):
         p = Painter(
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
         )
-        p.card("Color Picker")
+        p.card("Color Picker", blur=getattr(self, "glass_blur", 0.4))
         value = self.binding.read()
         h, s, v = color_hsv(value, self.linear, self.hue_value)
         for label, r in zip(("RGB", "HSV"), COLOR["tabs"]):

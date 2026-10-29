@@ -1026,6 +1026,22 @@
       "policy": "AGENTS.md#hard-rule-real-bvt-liquid-glass",
       "notes": "Mandatory BVT shared backdrop, Gaussian strong blur, refraction/rim and finite motion for every translucent surface. Default embedded host and new shortcut capture use this material. Tint/opaque fallback is degraded and cannot count as parity. Exact generated-reference acceptance and broader theme/platform matrix remain open.",
       "comparison_evidence": "docs/design/qa/context-menu-v5/comparison.json"
+    },
+    "consistent_ui_scale": {
+      "status": "partial",
+      "required": true,
+      "policy": "AGENTS.md#hard-rule-consistent-host-ui-scale",
+      "notes": "2026-10-29 correction: all current Canvas widget families use authored-font-to-host-font sizing; pointer/search/color/palette popovers share owner, clip and strong-glass sizing. Standard body 11 and section titles 12; cards normally 315 logical units wide. 39 captures per installed runtime cover 13 families at 1x/1.5x/2x; native text batching matches. Prior oversized presentation is superseded, historical references remain immutable. Final generated-reference acceptance, future controls and broader display/platform qualification remain open.",
+      "comparison_evidence": "docs/design/qa/ui-scale-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/ui-scale-v1/capture.json",
+        "docs/design/qa/ui-scale-v1/capture-51.json",
+        "docs/design/qa/ui-scale-v1/popover.json",
+        "docs/design/qa/ui-scale-v1/popover-51.json",
+        "docs/design/qa/ui-scale-v1/target.json",
+        "docs/design/qa/ui-scale-v1/checks-scaling-52.json",
+        "docs/design/qa/ui-scale-v1/checks-scaling-51.json"
+      ]
     }
   }
 }

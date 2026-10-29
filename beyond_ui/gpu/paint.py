@@ -67,7 +67,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
     def text(value, r, ink, role="body"):
         active_font = typography.face(font, role)
         a, b, c, d = r
-        size = t.font_size * scale
+        size = t.font_size * scale * (12 / 11 if role == "title" else 1)
         blf.size(active_font, size)
         left = max(a + 6 * scale, cx)
         bottom = max(b, cy)

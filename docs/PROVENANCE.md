@@ -208,3 +208,25 @@ node/output setters remain open. The tests also record that public Blender conte
 overrides turn collection `button_pointer` values into lists: native struct-based
 extension callbacks remain unqualified. Host providers retain the exact owner.
 No new private API or broader native ABI admission was added.
+
+## 2026-10-29 — host-relative scale correction
+
+Re-read original BVT `VRM_ShoostCanvas.py::TYPE_SIZES` (line 86): body `P=11`,
+section heading `H2=12`, major heading `H1=14`. Audited file SHA-256:
+`ab3dd110f4567d94d2d7ef24f0a638a91a8b934838ab80e8717b5ed13306cdf4`. Compound cards previously treated 630-unit
+artboards with 22-unit body text as fill-width host pixels. The new authored font
+metric normalizes those coordinates to the surrounding host text; section titles
+use 24 authored units (12 host units). Input shares the same uniform transform.
+
+Tyler explicitly requested consistent scale across every element after observing
+oversized Active Node, Target and collection-search popovers. That correction
+supersedes the prior oversized presentation, while old generated references and
+evidence remain immutable. No new generated artwork or exact-match acceptance is
+claimed. Current evidence and source hashes live in `docs/design/qa/ui-scale-v1/`.
+
+No Blender API access or compatibility path changed. The existing host DPI and
+capability fallbacks remain intact. Exact versioned PreferencesSystem API and
+Manual interface-preference pages for 4.2, 5.1 and 5.2 were requested during this
+audit but unavailable through the documentation fetcher; they are not cited as
+new compatibility proof. Installed 5.1.2/5.2.2 runtimes provide the execution
+evidence; 4.2 and non-macOS qualification remain open.

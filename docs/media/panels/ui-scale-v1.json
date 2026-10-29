@@ -1,0 +1,5 @@
+{
+  "source": "Actual Blender production frames; no generated pixels",
+  "capture": "../../design/qa/ui-scale-v1/popover.json",
+  "sha256": "db2e87d7d953f4d55f4eb47d80887a9194ca065715a79cb37773acf30ee70c7e"
+}

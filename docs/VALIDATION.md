@@ -1,5 +1,44 @@
 # Validation record — 2026-10-28
 
+## 2026-10-29 — consistent host scale audit
+
+The user-reported oversized Active Node, collection search and Target popovers
+shared width-driven artboard scaling. Canvas now normalizes authored body text to
+its host font (normally 11 logical units); section titles are 12. The same sizing
+covers embedded curve/ramp/color/picker/palette/matrix/progress cards, compact
+progress and sockets. Pointer/search/color/palette popovers use one owner-aware,
+visible-clip-bounded route with source strong glass. Open popovers reflow before
+input on clip resize; layout and hit transforms preserve uniform aspect ratio.
+
+- 90 Python tests pass, including width/height bounds, popup resizing, logical
+  hit mapping, socket layout and no magnification at 360/560/960 logical widths.
+- Blender 5.1.2 `ec6e62d40fa9` and 5.2.2 `d13f752e3b9c`, macOS arm64/Metal:
+  scale/color/palette RNA checks, existing non-ID/pointer/search/general runtime
+  checks and real window pointer/picker/menu input regressions pass in disposable
+  profiles. No user scene or preferences were saved.
+- [Current QA gallery](design/qa/ui-scale-v1/index.html): 13 families × three
+  physical rendering scales = 39 images per version. All match byte-for-byte
+  with native text batching enabled/disabled. Warm resource counts and layout
+  identities remain stable. Recorded CPU submission medians span 0.043–0.217 ms
+  on 5.2 and 0.044–0.212 ms on 5.1; p95 spans 0.052–0.310 / 0.053–0.240 ms.
+  Each workload uses 10 warmups and 50 samples; framebuffer readback is excluded.
+- The unchanged 500-node fixture supplies 100 opening/filter/context-motion
+  frames per version, all matching both text paths. One backdrop production,
+  one blur, five offscreens and retained font/shader/batch identities remain
+  stable. A refreshed Target/ID-search fixture also passes all 100 frames on 5.2.
+- Same-fixture before/after warm open-picker CPU median/p95: 5.2
+  0.231/0.273 → 0.223/0.258 ms; 5.1 0.214/0.239 → 0.217/0.249 ms.
+  These separate process runs show comparable timings, not a speedup claim or
+  controlled BVT benchmark. Geometry is intentionally smaller; source-equivalent
+  performance and GPU completion latency are not established by these numbers.
+
+Historical generated references/galleries are preserved. The user's scale
+correction supersedes their oversized presentation; exact reference acceptance
+remains open. Physical-scale captures do not qualify every OS display setting.
+Blender 4.2 and other platforms were not executed. Extremely constrained bounds
+shrink uniformly; arbitrary tiny-viewport readability is not claimed. Full API
+parity remains incomplete (137 members, 40 partial, zero reference-matched).
+
 ## Current status
 
 The modular extraction and initial custom implementation are execution-tested.

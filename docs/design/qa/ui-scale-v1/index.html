@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Consistent UI scale · QA v1</title>
+<style>
+body{background:#151719;color:#eee;font:15px system-ui;margin:28px}a{color:#8bcafb}p{max-width:1050px;line-height:1.6}
+h2{margin-top:36px}img{max-width:100%;height:auto;display:block}figure{margin:0}figcaption{padding:10px 0}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,640px));gap:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,380px));gap:20px}
+.grid img{width:380px}select{font:inherit;padding:6px;background:#292c30;color:white;border:1px solid #73777d;border-radius:6px}
+@media(max-width:760px){.pair{grid-template-columns:1fr}body{margin:16px}}
+</style>
+<h1>Consistent control and popover scale</h1>
+<p>Active Node, collection search, Target and color popovers now follow the surrounding panel's text scale. Wider panels no longer enlarge them. Standard body text is 11 logical units and section titles are 12; compound cards normally render at 315 logical units wide. Original BVT glass, theme roles, spring motion and exact-owner context menus remain shared.</p>
+<h2>Active Node · before / corrected</h2>
+<div class="pair"><figure><img src="../non-id-pointers-v1/picker.png" alt="Oversized Active Node popover before correction"><figcaption>Before · width-driven scale</figcaption></figure><figure><img src="popover-picker.png" alt="Active Node scaled consistently with its panel"><figcaption>Corrected · host-relative scale</figcaption></figure></div>
+<h2>Target / collection search · before / corrected</h2>
+<div class="pair"><figure><img src="../search-popover-v1/picker.png" alt="Oversized Target and collection search picker"><figcaption>Before · same 640 × 560 fixture</figcaption></figure><figure><img src="target-picker.png" alt="Corrected Target and collection search picker"><figcaption>Corrected · same geometry and input transform</figcaption></figure></div>
+<h2>Opening, filtering and context menu motion</h2>
+<img src="../../../media/panels/ui-scale-v1.gif" alt="Actual corrected Blender picker animation and candidate context menu">
+<p>All 100 animation frames match with native text batching enabled and disabled on each tested runtime. One shared backdrop production, one blur and five offscreens remain retained. These are Blender captures, not browser recreations.</p>
+<h2>Every implemented control family</h2>
+<p>Each capture includes surrounding standard fields for scale comparison. Choose the physical rendering scale; images stay at the same logical display width below. Click an image for its full-resolution file. This audits rendered scale, not every OS display configuration.</p>
+<label for="dpi">Capture scale </label><select id="dpi"><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+<div class="grid"><figure><figcaption>Curve Mapping</figcaption><a class="capture" data-slug="curve-mapping" href="curve-mapping-1x.png"><img loading="lazy" src="curve-mapping-1x.png" alt="Curve Mapping at host scale"></a></figure>
+<figure><figcaption>Color Ramp</figcaption><a class="capture" data-slug="color-ramp" href="color-ramp-1x.png"><img loading="lazy" src="color-ramp-1x.png" alt="Color Ramp at host scale"></a></figure>
+<figure><figcaption>Data Picker</figcaption><a class="capture" data-slug="data-picker" href="data-picker-1x.png"><img loading="lazy" src="data-picker-1x.png" alt="Data Picker at host scale"></a></figure>
+<figure><figcaption>Color Picker</figcaption><a class="capture" data-slug="color-picker" href="color-picker-1x.png"><img loading="lazy" src="color-picker-1x.png" alt="Color Picker at host scale"></a></figure>
+<figure><figcaption>Palette</figcaption><a class="capture" data-slug="palette" href="palette-1x.png"><img loading="lazy" src="palette-1x.png" alt="Palette at host scale"></a></figure>
+<figure><figcaption>Matrix</figcaption><a class="capture" data-slug="matrix" href="matrix-1x.png"><img loading="lazy" src="matrix-1x.png" alt="Matrix at host scale"></a></figure>
+<figure><figcaption>Progress Bar</figcaption><a class="capture" data-slug="progress-bar" href="progress-bar-1x.png"><img loading="lazy" src="progress-bar-1x.png" alt="Progress Bar at host scale"></a></figure>
+<figure><figcaption>Progress Ring</figcaption><a class="capture" data-slug="progress-ring" href="progress-ring-1x.png"><img loading="lazy" src="progress-ring-1x.png" alt="Progress Ring at host scale"></a></figure>
+<figure><figcaption>Compact progress bar</figcaption><a class="capture" data-slug="compact-progress-bar" href="compact-progress-bar-1x.png"><img loading="lazy" src="compact-progress-bar-1x.png" alt="Compact progress bar at host scale"></a></figure>
+<figure><figcaption>Compact progress ring</figcaption><a class="capture" data-slug="compact-progress-ring" href="compact-progress-ring-1x.png"><img loading="lazy" src="compact-progress-ring-1x.png" alt="Compact progress ring at host scale"></a></figure>
+<figure><figcaption>Node socket</figcaption><a class="capture" data-slug="socket" href="socket-1x.png"><img loading="lazy" src="socket-1x.png" alt="Node socket at host scale"></a></figure>
+<figure><figcaption>Standard controls</figcaption><a class="capture" data-slug="standard-controls" href="standard-controls-1x.png"><img loading="lazy" src="standard-controls-1x.png" alt="Standard controls at host scale"></a></figure>
+<figure><figcaption>Context menu and tooltip</figcaption><a class="capture" data-slug="context-menu" href="context-menu-1x.png"><img loading="lazy" src="context-menu-1x.png" alt="Context menu and tooltip at host scale"></a></figure></div>
+<h2>Evidence and limits</h2>
+<p>39 captures per Blender version cover 13 families at three scales, with byte-identical native/standalone text output and stable warm rendering resources. RNA and window-input checks cover pointer/search selection, color edits and cancellation, exact palette ownership, resized clips, context actions and teardown. Large progress percentages intentionally remain larger data readouts.</p>
+<p>Blender 5.1.2 and 5.2.2 / macOS arm64 / Metal / factory active theme. Existing generated references and older galleries remain immutable; Tyler's scale correction supersedes their oversized presentation. <strong>Exact generated-reference acceptance and full API parity remain open.</strong> Blender 4.2 execution, other platforms and arbitrary tiny viewport readability are not established here.</p>
+<p><a href="capture.json">5.2 all-family capture/timings</a> · <a href="capture-51.json">5.1 all-family capture/timings</a> · <a href="popover.json">5.2 Active Node motion/timings</a> · <a href="popover-51.json">5.1 Active Node motion/timings</a> · <a href="target.json">Target/search capture</a> · <a href="comparison.json">Before/after provenance</a> · <a href="checks-scaling-52.json">Scale/input checks</a> · <a href="../../../UI_SCALING.md">Sizing contract</a></p>
+<script>document.getElementById('dpi').addEventListener('change',event=>{for(const link of document.querySelectorAll('a.capture')){const file=`${link.dataset.slug}-${event.target.value}x.png`;link.href=file;link.querySelector('img').src=file;}});</script></html>
