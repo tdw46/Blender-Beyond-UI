@@ -80,6 +80,7 @@ class Page:
     title: str = ""
     checked: tuple = ()
     values: tuple = ()
+    search: object = None
 
 
 def inside(rect, x, y):
@@ -106,10 +107,14 @@ class Menu:
         on_error=None,
         on_tip=None,
         row_limit=64,
+        search_threshold=12,
     ):
         if not 1 <= row_limit <= 4096:
             raise ValueError("Menu row limit must be between 1 and 4096")
         self.limit = row_limit
+        if not isinstance(search_threshold, int) or search_threshold < 1:
+            raise ValueError("Search threshold must be a positive integer")
+        self.search_threshold = search_threshold
         self.target, self.anchor, self.clip = target, anchor, clip
         self.scope, self.scope_id = scope, scope(context)
         self.measure = measure or (lambda text, size: len(text) * size * 0.6)
@@ -136,6 +141,14 @@ class Menu:
             rows = (Entry("__back__", title, icon="‹"),) + rows[: self.limit - 1]
         if not rows:
             raise ValueError("Empty context menu")
+        from .menu_search import Search
+
+        search = (
+            Search(rows)
+            if sum(not r.heading and r.key != "__back__" for r in rows)
+            >= self.search_threshold
+            else None
+        )
         available = tuple(self._enabled(row, context) for row in rows)
         cx, cy, cw, ch = self.clip
         width = min(
@@ -154,7 +167,10 @@ class Menu:
             ch,
             sum(self.row_height + (8 if r.divider else 0) for r in rows[:18])
             + 2 * self.padding,
+            # The search stays pinned above the scrolling result rows.
         )
+        if search is not None:
+            height = min(ch, height + 28)
         x, y = self.anchor
         rect = (
             max(cx, min(x, cx + cw - width)),
@@ -162,6 +178,8 @@ class Menu:
             width,
             height,
         )
+        if search is not None:
+            search.rect = rect
         return Page(
             rows,
             available,
@@ -169,9 +187,144 @@ class Menu:
             title=title,
             checked=tuple(self._checked(row, context) for row in rows),
             values=tuple(self._value(row, context) for row in rows),
+            search=search,
         )
 
+    def search_rect(self, page=None):
+        p = page or self.page
+        if p.search is None:
+            return None
+        x, y, w, h = p.rect
+        return (
+            x + self.padding,
+            y + self.padding,
+            w - 2 * self.padding,
+            min(28, max(0, h - 2 * self.padding - self.row_height)),
+        )
+
+    def filter_search(self, context=None):
+        p = self.page
+        rows = p.search.filtered()
+        if not any(not r.heading and r.key != "__back__" for r in rows):
+            rows = (
+                *rows,
+                Entry("__no_matches__", "No matches", enabled=False, heading=True),
+            )
+        p.rows = rows
+        x, y, w, h = p.search.rect
+        p.rect = (
+            x,
+            y,
+            w,
+            min(
+                h,
+                28
+                + 2 * self.padding
+                + sum(self.row_height + (8 if r.divider else 0) for r in rows[:18]),
+            ),
+        )
+        p.offset = 0
+        self.refresh(context)
+        p.highlight = next(
+            (
+                i
+                for i, ok in enumerate(p.available)
+                if ok and p.rows[i].key != "__back__"
+            ),
+            0,
+        )
+        self.hide_tip()
+        # Row indices now refer to different options. Retire their tracks while
+        # preserving the current reveal/search springs during rapid typing.
+        for key in tuple(self.motion.tracks):
+            if isinstance(key, tuple) and key[0] == "row":
+                del self.motion.tracks[key]
+        self.motion.regions.clear()
+        self.motion.hover = self.motion.pressed = None
+        self.motion.pulse("search", 0.06)
+
+    def search_event(self, event, x, y, context):
+        """Handle text before shortcuts; navigation and actions keep normal routing."""
+        search = self.page.search
+        if search is None:
+            return False
+        rect = self.search_rect()
+        field = (rect[0], rect[1], max(0, rect[2] - 22), rect[3])
+        kind = event.type
+        press = event.value in {"PRESS", "DOUBLE_CLICK"}
+        command = getattr(event, "ctrl", False) or getattr(event, "oskey", False)
+        if press and kind in {"ESC", "RIGHTMOUSE"} and search.text.text:
+            if kind == "RIGHTMOUSE" and not inside(self.clip, x, y):
+                return False
+            from .editing import Text
+
+            search.text = Text("")
+            search.focused = search.dragging = False
+            self.filter_search(context)
+            return True
+        if kind == "LEFTMOUSE" and event.value == "RELEASE":
+            dragging, search.dragging = search.dragging, False
+            return dragging
+        if kind == "MOUSEMOVE" and search.dragging:
+            search.pointer(event, x, field, self.measure)
+            return True
+        if kind == "LEFTMOUSE" and press:
+            search.focused = inside(rect, x, y)
+            if search.focused:
+                if x >= field[0] + field[2]:
+                    from .editing import Text
+
+                    search.text = Text("")
+                    self.filter_search(context)
+                else:
+                    search.pointer(event, x, field, self.measure)
+                self.motion.pulse("search", 0.08)
+                return True
+        if press and kind in {"UP_ARROW", "DOWN_ARROW", "PAGE_UP", "PAGE_DOWN"}:
+            search.focused = False
+            return False
+        if not press:
+            return False
+        if command and kind == "F":
+            search.focused = True
+            search.text.anchor, search.text.cursor = 0, len(search.text.text)
+            return True
+        if command and not search.focused:
+            if any(
+                self.page.available[i]
+                and any(s.matches(event, self.held_keys) for s in row.bindings)
+                for i, row in enumerate(self.page.rows)
+            ):
+                return False
+        typing = (
+            bool(getattr(event, "unicode", ""))
+            and event.unicode.isprintable()
+            and not command
+            and not getattr(event, "alt", False)
+        )
+        editing = search.focused and kind in {
+            "LEFT_ARROW",
+            "RIGHT_ARROW",
+            "HOME",
+            "END",
+        }
+        editing |= (
+            bool(search.focused or search.text.text) and kind in {"BACK_SPACE", "DEL"}
+        ) or (
+            command and (kind in {"A", "V"} or (search.focused and kind in {"C", "X"}))
+        )
+        if typing or editing:
+            before = search.text.text
+            search.focused = True
+            search.event(event, getattr(context, "window_manager", None))
+            if before != search.text.text:
+                self.filter_search(context)
+            return True
+        return False
+
     def _enabled(self, row, context):
+        if row.heading:
+            return False
         try:
             return bool(
                 row.enabled(self.target, context)
@@ -233,14 +386,25 @@ class Menu:
 
     @property
     def capacity(self):
+        search = self.search_rect()
         return max(
-            1, int(max(0, self.page.rect[3] - 2 * self.padding) // self.row_height)
+            1,
+            int(
+                max(
+                    0,
+                    self.page.rect[3] - 2 * self.padding - (search[3] if search else 0),
+                )
+                // self.row_height
+            ),
         )
 
     def visible_rows(self, page=None):
         p = page or self.page
         a, b, w, h = p.rect
         top = b + self.padding
+        search = self.search_rect(p)
+        if search:
+            top += search[3]
         bottom = b + h - self.padding
         for i in range(p.offset, min(len(p.rows), p.offset + 18)):
             divider = 8 if p.rows[i].divider else 0
@@ -339,6 +503,7 @@ class Menu:
         self.editor = None
         self.capture_row = None
         self.capture_picker = self.capture_return = None
+        self.page.search = None
 
     def back(self):
         if self.capture_return is not None:
@@ -570,6 +735,8 @@ class Menu:
             except Exception as error:
                 self._error(error)
                 self.capture_prompt(str(error))
+            return True
+        if self.search_event(event, x, y, context):
             return True
         if press and kind in {"ESC", "LEFT_ARROW"} and self.back():
             return True

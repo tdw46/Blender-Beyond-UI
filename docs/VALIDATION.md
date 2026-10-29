@@ -769,3 +769,65 @@ runtimes. Grouping on other adapters, context-dependent menu persistence, custom
 icons, popup search, specialized tab/focus behavior, complete localization and
 broader theme/platform acceptance remain open. Blender 4.2 paths are retained;
 no 4.2 executable was available for runtime qualification.
+
+
+## Searchable long dropdowns — 2026-10-29
+
+[Search QA](design/qa/menu-search-v1/index.html) covers shared menu search at the
+default 12-option threshold. Labels and group names are matched on input; the
+original Entry/action remains authoritative. Search covers enum and generic/nested
+menus, no matches, disabled choices, clipboard/caret editing, query-first
+cancellation, current owner validation and flag transactions. Existing pointer
+and collection pickers retain their search path.
+
+114 unit tests, Ruff, compilation and package build pass. Blender 5.1.2 and 5.2.2
+pass RNA search tests, real window typing/selection/cancellation, enum regressions,
+menu/context regressions and the general runtime fixture in disposable profiles.
+The window test types 199 into a 200-choice dropdown, verifies no intermediate RNA
+writes, accepts I199 once, then checks no-match clearing and exact property
+right-click support. Concurrent RNA changes reject stale filtered selections.
+
+At 1×, 1.5× and 2× on both runtimes, 600 actual production frames are identical
+with native BLF batching enabled and disabled. Search/clear text participates in
+the menu transform. One backdrop production, one strong blur and five offscreens
+remain stable, along with recorded font/shader/batch/layout identities. Filtering
+retires obsolete row motion while preserving the current reveal/search springs.
+Disabling motion still leaves glass active, with no idle animation/tooltip timers.
+Generated-reference, theme and motion visual acceptance remain with Tyler.
+
+### Performance
+
+The 200-choice capture filters a query over its cached labels in approximately
+0.051 ms median / 0.055 ms p95 on 5.2.2 and 0.051 / 0.053 ms on 5.1.2 (100
+input-only samples). Filtering and RNA preparation are outside the paint loop.
+
+The separate equivalent-workload benchmark compares published `8085cb7` against
+the current implementation: one 200-choice scalar field, three individual enum
+buttons, 640×560, scale 1, Metal, 20 warmups and 100 CPU submission samples.
+Framebuffer readback is excluded. Adding search intentionally adds one retained
+field lens/text draw; it adds no capture, blur, font load or shader allocation.
+
+| Runtime | Workload | Before median / p95 ms | After median / p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 | closed fields | 0.198 / 0.241 | 0.188 / 0.229 |
+| 5.2.2 | open 200-choice menu | 0.356 / 0.384 | 0.339 / 0.362 |
+| 5.2.2 | retained open menu | 0.374 / 0.424 | 0.352 / 0.388 |
+| 5.1.2 | closed fields | 0.198 / 0.263 | 0.182 / 0.203 |
+| 5.1.2 | open 200-choice menu | 0.356 / 0.397 | 0.325 / 0.358 |
+| 5.1.2 | retained open menu | 0.369 / 0.456 | 0.341 / 0.420 |
+
+These separate-process samples vary by a few hundredths of a millisecond; they
+cannot isolate the marginal field-drawing cost or establish a speed improvement.
+Short three-choice menu/resting benchmark pixels remain identical before and
+after. Current short-menu medians are 0.222–0.243 ms. The new search field adds
+one lens/text draw while retaining the existing backdrop and GPU resources.
+These are CPU submission checks, not GPU completion/input-latency guarantees or
+equivalent BVT source-speed claims. Raw timings, loaded-package paths and source
+hashes are in the gallery.
+
+Matching is stable all-word substring search, not fuzzy ranking. Search does not
+scan unopened child providers. Existing admission limits remain (64 general menu
+rows, up to 4096 enum rows); query length is bounded at 4096 characters. No new
+Blender/native API dependency was introduced. Blender 4.2 runtime execution,
+IME composition, broader themes/platforms and exact reference acceptance remain
+unqualified. The ledger remains 43 partial / 137 members, zero reference-matched.

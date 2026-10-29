@@ -154,12 +154,50 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
             covers.append((a, b, a + w, b + h))
         from contextlib import nullcontext
 
+        def text_clip(bounds):
+            a, b, c, d = bounds
+            x, y, w, h = clip
+            return uncovered(
+                (max(a, x), max(b, y), min(c, x + w), min(d, y + h)), covers
+            )
+
         with menu.motion.deform("reveal", panel) if active else nullcontext():
             if backdrop is None or not glass.lens(
                 backdrop, panel, 10 * scale, (0.0, 0.0, 0.0, 0.0), blur=0.7
             ):
                 menu.glass_ready = False
                 skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)
+            search_rect = menu.search_rect(page)
+            if search_rect and search_rect[3] > 0:
+                search = page.search
+                rect = mapped(search_rect)
+                if active:
+                    menu.motion.region("search", search_rect)
+                with menu.motion.deform("search", rect) if active else nullcontext():
+                    field_value(
+                        font,
+                        (rect[0], rect[1], rect[2] - 22 * scale, rect[3]),
+                        scale,
+                        palette,
+                        backdrop,
+                        search.text.text or "Search options…",
+                        search if active and search.focused else None,
+                        text_clip,
+                        bool(search.text.text),
+                        full_width=True,
+                    )
+                    x, y, w, h = rect
+                    text_run(
+                        font,
+                        "×" if search.text.text else "",
+                        11 * scale,
+                        palette["muted"],
+                        (
+                            x + w - 17 * scale,
+                            y + (h - measure(font, 11 * scale, "H")[1]) / 2,
+                        ),
+                        text_clip((x, y, x + w, y + h)),
+                    )
             for index, rect, row in menu.visible_rows(page):
                 target = mapped(rect)
                 key = ("row", index)
@@ -181,13 +219,6 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     submenu=row.children is not None,
                     field=row.field is not None,
                 )
-
-                def text_clip(bounds):
-                    a, b, c, d = bounds
-                    x, y, w, h = clip
-                    return uncovered(
-                        (max(a, x), max(b, y), min(c, x + w), min(d, y + h)), covers
-                    )
 
                 row_font = typography.face(fonts, "title" if row.heading else "body")
                 with menu.motion.deform(key, target) if active else nullcontext():
@@ -251,14 +282,28 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                 )
 
 
-def field_value(font, rect, scale, palette, backdrop, value, editor, clips, enabled):
+def field_value(
+    font,
+    rect,
+    scale,
+    palette,
+    backdrop,
+    value,
+    editor,
+    clips,
+    enabled,
+    *,
+    full_width=False,
+):
     """Prepared field text and shared lens; no binding access or new GPU resources."""
     from . import style, glass
     from .paint import measure
 
     x, y, w, h = rect
-    x += w * 0.45
-    w = w * 0.55 - 4 * scale
+    if not full_width:
+        x += w * 0.45
+        w *= 0.55
+    w -= 4 * scale
     y += 2 * scale
     h -= 4 * scale
     if not glass.lens(backdrop, (x, y, w, h), 4 * scale, palette["field"], blur=0.7):

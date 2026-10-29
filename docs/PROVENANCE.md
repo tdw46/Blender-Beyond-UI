@@ -276,3 +276,25 @@ Headings reuse the library's retained semibold title face, theme text and menu
 material. Both font faces now share the existing finite-motion text-submission
 scope. No new fonts, shaders, timer loops or backdrop passes were added. Old
 references and galleries remain immutable; new states await Tyler's visual QA.
+
+
+## Searchable dropdowns — 2026-10-29
+
+Long dropdown search is Tyler-requested behavior implemented in the shared menu
+controller. It reuses BVT-derived menu glass, source motion and retained typography;
+the field uses the existing inline menu editor/painter at full width. Original
+`VRM_ShoostContextMenu.py` and `VRM_ShoostCanvas.py` were inspected; source hashes
+and documentation-access attempts are retained in
+`docs/design/qa/menu-search-v1/source-audit.json`. Search uses the same case-folded,
+all-word substring policy as existing custom pickers, with labels cached per page.
+
+No new private ABI or Blender API was introduced. Exact 4.2/5.1/5.2 Event API and
+Manual menu pages were requested but unavailable through the web tool. Installed
+5.1.2 and 5.2.2 runtime/window tests qualify the existing event/clipboard path;
+4.2 execution and IME composition remain unqualified. Search only changes the
+visible Entry tuple; each row retains its original action, enabled predicate,
+checked state and owner, and child providers are evaluated only on navigation.
+
+The gallery reuses established menu/field styling and contains actual Blender
+frames. It is implementation evidence for Tyler's QA, not generated-reference
+approval. Prior immutable references and galleries are unchanged.

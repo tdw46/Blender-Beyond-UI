@@ -92,6 +92,14 @@ choices, opening fails explicitly with `canvas.menu_error`; it does not guess or
 use a native widget. Static fallback behavior remains available for Blender 4.2.
 No 4.2 executable is installed for this validation.
 
+## Searching long menus
+
+Dropdowns with 12 or more options now use the shared pinned search field.
+Type to match option labels and group names; arrows/Enter choose the original
+option. Filtering makes no property writes. Escape/right-click clears the query
+before returning or dismissing. [Search behavior and configuration](MENU_SEARCH.md)
+and [QA evidence](design/qa/menu-search-v1/index.html) cover enum and general menus.
+
 ## Evidence and open parity
 
 [Enum QA v2](design/qa/enum-properties-v2/index.html) contains actual Blender
@@ -101,8 +109,7 @@ reused; captures are not newly approved generated references. All new enum
 surfaces are captured at 1×, 1.5× and 2× beside ordinary panel controls.
 
 Still open: context-dependent multi-toggle menu persistence; full custom icon
-variants and grouping on unqualified adapters; popup
-search/fuzzy ranking; specialized tab highlights and full focus traversal;
+variants and grouping on unqualified adapters; fuzzy popup ranking; specialized tab highlights and full focus traversal;
 complete translation/keyword combinations; native callbacks on unqualified
 platforms/builds; exact generated-reference and all theme/display/platform
 acceptance. `prop_tabs_enum` retains the expanded strip route; its

@@ -1,0 +1,5 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/menu-search-v1/capture.json",
+  "sha256": "6ccf325504075e370ed5c2212c75d6d4da6fcdbba704aaf544daadb7aa0ad993"
+}

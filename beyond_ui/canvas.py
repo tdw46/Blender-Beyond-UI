@@ -159,6 +159,7 @@ class Canvas(Group):
         menu_commit=None,
         shortcut_registry=None,
         shortcut_namespace="canvas",
+        menu_search_threshold=12,
     ):
         self.animation = animation or AnimationSettings()
         self._wide_numeric_motion_scale = 0.15
@@ -185,6 +186,7 @@ class Canvas(Group):
         self.menu_commit = menu_commit
         self.shortcut_registry = shortcut_registry
         self.shortcut_namespace = shortcut_namespace
+        self.menu_search_threshold = menu_search_threshold
         self.context_focus = None
         self._context_point = (0.5, 0.5)
         self.menu_error = None
@@ -555,6 +557,7 @@ class Canvas(Group):
                 clip,
                 context=context,
                 row_limit=len(rows),
+                search_threshold=self.menu_search_threshold,
                 on_tip=self._tooltip_wake,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
             )
@@ -737,6 +740,7 @@ class Canvas(Group):
                 context=context,
                 measure=measure,
                 scope=scope,
+                search_threshold=self.menu_search_threshold,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
                 on_tip=self._tooltip_wake,
             )
@@ -905,6 +909,7 @@ class Canvas(Group):
                     clip,
                     context=context,
                     measure=menu_measure,
+                    search_threshold=self.menu_search_threshold,
                     on_tip=self._tooltip_wake,
                     on_error=lambda error: setattr(self, "menu_error", str(error)),
                 )

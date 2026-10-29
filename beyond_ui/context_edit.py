@@ -24,9 +24,9 @@ class Editor:
         self.error = None
         self.dragging = False
 
-    def pointer(self, event, x, rect, measure):
+    def pointer(self, event, x, rect, measure, *, full_width=False):
         """Caret/selection in logical row space, matching the shared field painter."""
-        left = rect[0] + rect[2] * 0.45 + 5
+        left = rect[0] + (0 if full_width else rect[2] * 0.45) + 5
         right = rect[0] + rect[2] - 9
         text = self.text
         cursor = measure(text.text[: text.cursor], 11)

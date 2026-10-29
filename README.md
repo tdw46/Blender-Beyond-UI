@@ -151,6 +151,13 @@ and enum metadata helpers:
 
 [Enum groups QA gallery](docs/design/qa/enum-properties-v2/index.html)
 
+Long enum and action dropdowns now search as you type, retaining their original
+owners, glass and motion. Small menus keep their existing layout.
+
+![Searchable dropdowns](docs/media/panels/menu-search-v1.gif)
+
+[Searchable dropdown QA](docs/design/qa/menu-search-v1/index.html) · [Configuration](docs/MENU_SEARCH.md)
+
 ## Requirements
 
 Every control must have custom appearance **and** custom interactions. Generated

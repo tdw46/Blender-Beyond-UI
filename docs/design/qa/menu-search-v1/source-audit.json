@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "8085cb71329be5bc6a6e220903c13e7c161569be",
+  "scope": "Custom search behavior requested by Tyler; shared BVT menu glass/motion/action ownership retained. No new Blender or native ABI API.",
+  "source_files": {
+    "VRM_ShoostContextMenu.py": "0aec55c8d640ea4c9796e89941951e7333acd72298dc0161e44929f3cf98dd78",
+    "VRM_ShoostCanvas.py": "ab3dd110f4567d94d2d7ef24f0a638a91a8b934838ab80e8717b5ed13306cdf4"
+  },
+  "official_documentation_attempts": [
+    {
+      "version": "4.2",
+      "api": "https://docs.blender.org/api/4.2/bpy.types.Event.html",
+      "manual": "https://docs.blender.org/manual/en/4.2/interface/controls/buttons/menus.html",
+      "outcome": "Unavailable from web tool (402 or inaccessible); existing event API checked in installed 5.1.2 and 5.2.2 runtimes; 4.2 execution unqualified."
+    },
+    {
+      "version": "5.1",
+      "api": "https://docs.blender.org/api/5.1/bpy.types.Event.html",
+      "manual": "https://docs.blender.org/manual/en/5.1/interface/controls/buttons/menus.html",
+      "outcome": "Unavailable from web tool (402 or inaccessible); existing event API checked in installed 5.1.2 and 5.2.2 runtimes; 4.2 execution unqualified."
+    },
+    {
+      "version": "5.2",
+      "api": "https://docs.blender.org/api/5.2/bpy.types.Event.html",
+      "manual": "https://docs.blender.org/manual/en/5.2/interface/controls/buttons/menus.html",
+      "outcome": "Unavailable from web tool (402 or inaccessible); existing event API checked in installed 5.1.2 and 5.2.2 runtimes; 4.2 execution unqualified."
+    }
+  ]
+}
