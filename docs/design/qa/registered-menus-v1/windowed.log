@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['Real N-panel clicks open registered and property-attached menus and apply their exact RNA values', 'Right-click menu row opens exact property context actions; Back restores the parent', 'Native keyboard input edits an inline menu field and commits its value', 'Inline menu contents retain source toggle interactions and shared motion teardown']}
+00:11.698  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

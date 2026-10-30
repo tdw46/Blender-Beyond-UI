@@ -69,6 +69,7 @@ class Entry:
     field: object = None  # context_edit.Field
     heading: bool = False
     toggle: bool = False  # Boolean property; enum selections retain their checks.
+    context: object = None  # Optional exact-row context actions (target, context).
 
 
 @dataclass
@@ -109,6 +110,7 @@ class Menu:
         on_tip=None,
         row_limit=64,
         search_threshold=12,
+        visible_refresh=False,
     ):
         if not 1 <= row_limit <= 4096:
             raise ValueError("Menu row limit must be between 1 and 4096")
@@ -116,6 +118,7 @@ class Menu:
         if not isinstance(search_threshold, int) or search_threshold < 1:
             raise ValueError("Search threshold must be a positive integer")
         self.search_threshold = search_threshold
+        self.visible_refresh = visible_refresh
         self.target, self.anchor, self.clip = target, anchor, clip
         self.scope, self.scope_id = scope, scope(context)
         self.measure = measure or (lambda text, size: len(text) * size * 0.6)
@@ -225,7 +228,7 @@ class Menu:
             ),
         )
         p.offset = 0
-        self.refresh(context)
+        self.refresh(context, all_rows=True)
         p.highlight = next(
             (
                 i
@@ -374,10 +377,31 @@ class Menu:
             self._error(error)
             return False
 
-    def refresh(self, context):
+    def refresh(self, context, index=None, *, all_rows=False):
         if not self.valid(context):
             self.close()
             return False
+        if self.visible_refresh and not all_rows:
+            page = self.page
+            indices = {i for i, _, _ in self.visible_rows()}
+            indices.add(page.highlight)
+            if index is not None:
+                indices.add(index)
+            available, checked, values = map(
+                list, (page.available, page.checked, page.values)
+            )
+            for i in indices:
+                if 0 <= i < len(page.rows):
+                    row = page.rows[i]
+                    available[i] = self._enabled(row, context)
+                    checked[i] = self._checked(row, context)
+                    values[i] = self._value(row, context)
+            page.available, page.checked, page.values = (
+                tuple(available),
+                tuple(checked),
+                tuple(values),
+            )
+            return True
         self.page.available = tuple(
             self._enabled(row, context) for row in self.page.rows
         )
@@ -569,7 +593,7 @@ class Menu:
         )
 
     def choose(self, index, context):
-        if not self.refresh(context) or not 0 <= index < len(self.page.rows):
+        if not self.refresh(context, index) or not 0 <= index < len(self.page.rows):
             return
         self.hide_tip()
         row = self.page.rows[index]
@@ -577,6 +601,7 @@ class Menu:
             return
         if row.key == "__back__":
             self.back()
+            self.refresh(context)
             return
         try:
             if row.field is not None:
@@ -613,6 +638,29 @@ class Menu:
         except Exception as error:
             self.close()
             self._error(error)
+
+    def open_row_context(self, index, context):
+        """Use the same glass/motion/navigation stack for a dropdown row's menu."""
+        if not self.refresh(context, index) or not 0 <= index < len(self.page.rows):
+            return False
+        row = self.page.rows[index]
+        if row.context is None or len(self.parents) >= self.depth_limit:
+            return False
+        try:
+            rows = tuple(row.context(self.target, context))
+            if not rows:
+                return False
+            child = self._page(rows, context, row.label)
+            self.parents.append(self.page)
+            self.page = child
+            self.hide_tip()
+            self.motion.clear()
+            self.motion.pulse("reveal", 0.12)
+            return True
+        except Exception as error:
+            self.close()
+            self._error(error)
+            return True
 
     def event(self, event, x, y, context=None):
         if event.type.startswith("TIMER"):
@@ -739,16 +787,29 @@ class Menu:
             return True
         if self.search_event(event, x, y, context):
             return True
+        if press and (
+            kind in {"RIGHTMOUSE", "APP"}
+            or kind == "F10"
+            and getattr(event, "shift", False)
+        ):
+            index = (
+                next((i for i, r, _ in self.visible_rows() if inside(r, x, y)), -1)
+                if kind == "RIGHTMOUSE"
+                else self.page.highlight
+            )
+            if self.open_row_context(index, context):
+                return True
         if press and kind in {"ESC", "LEFT_ARROW"} and self.back():
+            self.refresh(context)
             return True
         if press and kind in {"ESC", "RIGHTMOUSE"}:
             self.close()
             return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
         if press:
             for i, row in enumerate(self.page.rows):
-                if self.page.available[i] and any(
+                if any(
                     s.matches(event, self.held_keys) for s in row.bindings
-                ):
+                ) and self._enabled(row, context):
                     self.choose(i, context)
                     return True
         if kind == "LEFTMOUSE" and press and not over:
@@ -758,6 +819,7 @@ class Menu:
                     del self.parents[depth:]
                     self.motion.clear()
                     self.motion.pulse("reveal", 0.12)
+                    self.refresh(context)
                     return True
         hit = next((i for i, r, _ in self.visible_rows() if inside(r, x, y)), None)
         if kind == "LEFTMOUSE" and press:
@@ -800,6 +862,8 @@ class Menu:
                     p.highlight -= step
                 p.highlight = max(0, min(len(p.rows) - 1, p.highlight))
             self.reveal()
+            if self.visible_refresh:
+                self.refresh(context)
             return True
         if kind == "MOUSEMOVE":
             self.hover_tip(hit, x, y, context)

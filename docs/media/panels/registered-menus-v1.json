@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/registered-menus-v1/capture.json",
+  "sha256": "a82954eefc8aaebd40f7efff85dfcd4aac2a0642cbea184b83cc66b0f25eb00f",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

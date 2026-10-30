@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from copy import deepcopy
-from .rna_owner import identity, readonly
+from .rna_owner import identity, readonly, guarded
 
 
 @dataclass
@@ -73,6 +73,7 @@ def rna_binding(
     The initial RNA pointer is checked on every access. Undo/load invalidates the
     binding; rebuild it after those events. Host owns undo and invalidation.
     """
+    resolve = guarded(resolve)
     owner = resolve()
     if owner is None:
         raise ReferenceError("RNA owner is unavailable")

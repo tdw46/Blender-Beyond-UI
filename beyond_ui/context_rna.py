@@ -90,6 +90,9 @@ class Property:
         source=None,
         enum_value=None,
     ):
+        from .rna_owner import guarded
+
+        resolve = guarded(resolve)
         self.resolve, self.name, self.index, self.commit = resolve, name, index, commit
         self.update = update
         self.source = source

@@ -1051,3 +1051,69 @@ No measured regression appeared in these workloads. The new ID-template layout
 was measured separately with 20 warmups and 100 paint samples; per-runtime/scale
 results and exact source hashes are in the gallery. Blender 4.2 runtime, additional
 platforms/themes, specialized ID operations and full visual acceptance remain open.
+
+## Registered menus — 2026-10-30
+
+`menu`, `menu_contents` and enum `prop_with_menu` now use the custom menu engine
+and current Layout controls. [Registered menu QA](design/qa/registered-menus-v1/index.html)
+contains actual captures and an animated README overview. The ledger now records
+**90 unimplemented and 47 partial members, zero reference-matched**. Full custom
+parity and generated-reference acceptance remain unfinished.
+
+- 154 pure-Python tests pass. Ruff, compilation, ledger consistency and source/
+  wheel packaging pass; the wheel contains the new registered-menu module.
+- Blender 5.2.2 LTS and 5.1.2 disposable runtime and N-panel input fixtures pass:
+  scalar/toggle commits, enum property context, nested Python draw helpers,
+  operator arguments/overrides, search over 100 actions, exact-row clipboard
+  actions, edit cancellation, stale/unregistered definitions, input-time polls,
+  inherited disabled state and disabled parent/child execution. Unsupported draw
+  calls fail atomically; oversized row collections fail explicitly.
+- Existing general, pointer/decorator, ID-template, operator-enum and context-menu
+  regression fixtures pass in both versions. The clipboard context fixture runs
+  in a disposable window because background mode cannot qualify that behavior.
+- Six production capture sets cover 1×/1.5×/2× on both runtimes, narrow hosts,
+  inline controls, nested row context, search and property-attached menus. All
+  360 motion frames match with native text batching enabled versus disabled.
+  Painting invokes zero menu draw or poll callbacks. Font/shader/batch/layout
+  identities remain stable; glass retains one backdrop, one strong blur and five
+  offscreens. No user scene or preferences were saved.
+- Hover in a 100-action registered menu invokes at most 19 operator polls rather
+  than repolling every hidden action. Offscreen shortcut execution rechecks
+  eligibility. Draw-time selection snapshots are shared by equivalent context
+  overrides; full selection revalidation occurs on activation.
+- Before/after sparse and dense/scrolled workloads use published `cf97828` as the
+  baseline. All ten settled image pairs are RGB-equal. The following warm CPU
+  submission samples use 20 warmups and 100 samples per state, excluding capture.
+  They do not measure GPU completion or full source-addon equivalence.
+
+| Blender | Workload | Before median / p95 ms | After median / p95 ms |
+|---|---|---:|---:|
+| 5.2.2 LTS | benchmark: closed_fields | 0.080 / 0.101 | 0.080 / 0.113 |
+| 5.2.2 LTS | benchmark: open_scalar | 0.229 / 0.252 | 0.222 / 0.258 |
+| 5.2.2 LTS | benchmark: open_scalar_retained | 0.237 / 0.290 | 0.224 / 0.252 |
+| 5.2.2 LTS | dense: closed_fields | 0.735 / 0.815 | 0.689 / 0.776 |
+| 5.2.2 LTS | dense: open_scalar | 0.872 / 0.972 | 0.805 / 0.861 |
+| 5.2.2 LTS | dense: open_scalar_retained | 1.286 / 1.437 | 1.124 / 1.212 |
+| 5.2.2 LTS | dense: scrolled_controls | 1.106 / 1.276 | 1.011 / 1.098 |
+| 5.1.2 | benchmark: closed_fields | 0.083 / 0.113 | 0.079 / 0.098 |
+| 5.1.2 | benchmark: open_scalar | 0.227 / 0.274 | 0.222 / 0.250 |
+| 5.1.2 | benchmark: open_scalar_retained | 0.236 / 0.283 | 0.230 / 0.279 |
+| 5.1.2 | dense: closed_fields | 0.710 / 0.799 | 0.734 / 0.884 |
+| 5.1.2 | dense: open_scalar | 0.829 / 0.978 | 0.885 / 0.991 |
+| 5.1.2 | dense: open_scalar_retained | 1.244 / 1.396 | 1.291 / 1.453 |
+| 5.1.2 | dense: scrolled_controls | 1.076 / 1.249 | 1.143 / 1.272 |
+
+The 5.1.2 dense samples are modestly higher while the 5.2.2 samples are lower.
+A [reverse-order investigation](design/qa/registered-menus-v1/performance-investigation.json)
+on the preceding candidate showed the 5.1.2
+scrolled median changing from 1.100 ms baseline to 1.076 ms candidate, with a
+higher candidate p95 (1.416 versus 1.226 ms). This variability does not establish
+a speedup or exclude a small regression. The production change adds a constant
+eligibility lookup to ordinary controls; registered-menu guards and polls run
+only for their owners/input. No additional GPU resource production was observed.
+Broader controlled source-speed qualification remains open.
+
+Blender 4.2 runtime, other platforms/themes, native-instance draw semantics,
+specialized controls and exact visual/motion acceptance remain open. See
+[REGISTERED_MENUS.md](REGISTERED_MENUS.md) for the supported draw subset and limits.
+The strict completion gate still correctly fails.

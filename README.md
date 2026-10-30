@@ -40,6 +40,16 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Registered menus
+
+Registered Python menus render through custom searchable dropdowns, inline
+contents and property-attached menus, with exact-row right-click actions.
+
+![Actual Blender registered menu animation](docs/media/panels/registered-menus-v1.gif)
+
+[Registered menu QA](docs/design/qa/registered-menus-v1/index.html) ·
+[Authoring and remaining gaps](docs/REGISTERED_MENUS.md)
+
 ## Data-block selectors and tabs
 
 Searchable ID selectors, editable names, user counts, Fake User switches and

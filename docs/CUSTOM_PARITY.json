@@ -213,17 +213,29 @@
     },
     "menu": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Registered Python menus collect custom vertical scalar, enum, operator and nested menu rows with shared searchable glass menus, exact-row context actions, registration/poll/context/owner guards and bounded motion. Unsupported draw calls fail atomically. Full draw/layout/icon/native-instance semantics and exact-reference acceptance remain open. See docs/REGISTERED_MENUS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/registered-menus-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/registered-menus-v1/runtime.json",
+        "docs/design/qa/registered-menus-v1/runtime-51.json",
+        "docs/design/qa/registered-menus-v1/windowed.json",
+        "docs/design/qa/registered-menus-v1/windowed-51.json"
+      ]
     },
     "menu_contents": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Registered Python menu draw callbacks author currently supported custom Layout controls atomically with inherited context and input-time poll checks. Failed or recursive authoring rejects without leaving partial controls. Full Blender draw/layout/template semantics and exact-reference acceptance remain open. See docs/REGISTERED_MENUS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/registered-menus-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/registered-menus-v1/runtime.json",
+        "docs/design/qa/registered-menus-v1/runtime-51.json",
+        "docs/design/qa/registered-menus-v1/windowed.json",
+        "docs/design/qa/registered-menus-v1/windowed-51.json"
+      ]
     },
     "menu_pie": {
       "kind": "method",
@@ -415,10 +427,16 @@
     },
     "prop_with_menu": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Enum property fields open registered custom menus with exact button_pointer/button_prop context, current display values, owner validation and shared context menus. Icon-only/preview presentation, complete menu semantics and exact-reference acceptance remain open. See docs/REGISTERED_MENUS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/registered-menus-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/registered-menus-v1/runtime.json",
+        "docs/design/qa/registered-menus-v1/runtime-51.json",
+        "docs/design/qa/registered-menus-v1/windowed.json",
+        "docs/design/qa/registered-menus-v1/windowed-51.json"
+      ]
     },
     "prop_with_popover": {
       "kind": "method",

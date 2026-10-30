@@ -59,6 +59,7 @@ class Layout:
         self.activate_init = self.active_default = False
         self._context_pointers = {}
         self._context_strings = {}
+        self._menu_stack = ()
 
     def _key(self, kind):
         self._sequence += 1
@@ -152,6 +153,7 @@ class Layout:
             "ui_units_x",
             "ui_units_y",
             "emboss",
+            "_menu_stack",
         ):
             setattr(child, name, getattr(self, name))
         child._context_pointers = dict(self._context_pointers)
@@ -908,6 +910,58 @@ class Layout:
             **self._options(),
         )
         return model.properties
+
+    def menu(
+        self, menu, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
+    ):
+        if icon_value:
+            raise UnsupportedControl("menu preview icon")
+        from .registered_menu import RegisteredMenu
+
+        model = RegisteredMenu(self, menu)
+        self.group.button(
+            self._key("menu"),
+            self._text(text or model.label, text_ctxt, translate),
+            None,
+            menu_model=model,
+            context_menu=model.context_rows,
+            icon=icon,
+        )
+
+    def prop_with_menu(
+        self,
+        data,
+        property,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        icon_only=False,
+        menu,
+    ):
+        if icon_only or data.bl_rna.properties[property].type != "ENUM":
+            raise UnsupportedControl("prop_with_menu requires a text enum field")
+        from .registered_menu import RegisteredMenu
+
+        binding = self._binding(data, property)
+        model = RegisteredMenu(self, menu, source=binding.context)
+        control = self._enum_control(
+            data,
+            property,
+            self._text(
+                text or data.bl_rna.properties[property].name, text_ctxt, translate
+            ),
+            binding,
+            self._key("menu-property"),
+            dict(icon=icon),
+        )
+        control.options.update(menu_model=model, context_menu=model.context_rows)
+
+    def menu_contents(self, menu):
+        from .registered_menu import inline
+
+        inline(self, menu)
 
     def context_pointer_set(self, name, data):
         self._context_pointers[name] = data

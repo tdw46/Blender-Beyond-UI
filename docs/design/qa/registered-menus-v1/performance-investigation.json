@@ -1,0 +1,13 @@
+{
+  "qualification": "Earlier candidate before descendant guards; run-order investigation only, not final-source qualification. Original source hashes retained in each capture.",
+  "execution_order": [
+    {
+      "revision": "after",
+      "evidence": "dense-repeat-after-51.json"
+    },
+    {
+      "revision": "before",
+      "evidence": "dense-repeat-before-51.json"
+    }
+  ]
+}

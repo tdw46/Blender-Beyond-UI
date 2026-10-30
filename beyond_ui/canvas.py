@@ -41,6 +41,9 @@ class Control:
     def enabled(self):
         if not self._layout_enabled:
             return False
+        valid = self.options.get("valid_context")
+        if valid is not None and not valid():
+            return False
         value = self.options.get("enabled", True)
         return bool(value() if callable(value) else value) and (
             self.binding is None or self.binding.valid()
@@ -571,7 +574,9 @@ class Canvas(Group):
         if not control.enabled:
             return False
         try:
-            model = control.options["operator_enum"]
+            model = (
+                control.options.get("menu_model") or control.options["operator_enum"]
+            )
             context = context or model.context
             rows, valid = model.rows(context)
             self.cancel()
@@ -582,13 +587,15 @@ class Canvas(Group):
                     and self.controls.get(control.key) is control
                     and control.enabled
                     and valid(),
+                    commit=self.menu_commit,
                 ),
                 rows,
                 (control.rect[0], control.rect[1] + control.rect[3]),
                 clip,
                 context=context,
-                row_limit=len(rows),
+                row_limit=4096 if control.options.get("menu_model") else len(rows),
                 search_threshold=self.menu_search_threshold,
+                visible_refresh=bool(control.options.get("menu_model")),
                 on_tip=self._tooltip_wake,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
             )
@@ -620,7 +627,9 @@ class Canvas(Group):
         scene = context.scene.as_pointer() if context.scene else None
 
         def run(ctx, event):
-            if control.options.get("operator_enum"):
+            if control.options.get("operator_enum") or control.options.get(
+                "menu_model"
+            ):
                 result = self.open_operator_menu(control, clip, ctx)
             elif control.kind == "enum":
                 result = self.open_enum_menu(control, clip, ctx)
@@ -712,6 +721,10 @@ class Canvas(Group):
                 target,
                 valid=lambda: self.controls.get(control.key) is control
                 and self.visible
+                and (
+                    not control.options.get("valid_context")
+                    or control.options["valid_context"]()
+                )
                 and (overlay is None or self.overlay is overlay)
                 and any(c is control for c in self.visible_controls(clip))
                 and bool(valid()),
@@ -732,7 +745,11 @@ class Canvas(Group):
                     self.shortcut_registry.entry(command, context) if command else None
                 )
                 if routed is not None:
-                    if control.kind == "enum" or control.options.get("operator_enum"):
+                    if (
+                        control.kind == "enum"
+                        or control.options.get("operator_enum")
+                        or control.options.get("menu_model")
+                    ):
                         rows = [r for r in rows if r.key != "SHORTCUT"]
                         rows.insert(
                             0,
@@ -759,7 +776,10 @@ class Canvas(Group):
                 context=context,
                 measure=measure,
                 scope=scope,
-                row_limit=4096 if control.options.get("operator_enum") else Menu.limit,
+                row_limit=4096
+                if control.options.get("operator_enum")
+                or control.options.get("menu_model")
+                else Menu.limit,
                 search_threshold=self.menu_search_threshold,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
                 on_tip=self._tooltip_wake,
@@ -785,6 +805,29 @@ class Canvas(Group):
         if not self.visible:
             return False
         self._event_clip = clip
+        # Registered inline menu draws retain a context, not just RNA addresses.
+        candidate = None
+        if getattr(self, "_context_guarded", False) and (
+            self.edit or event.value in {"PRESS", "DOUBLE_CLICK"}
+        ):
+            candidate = (
+                self.active
+                or (self.overlay.get("owner") if self.overlay else None)
+                or (self.context_focus if self.context_menu else None)
+                or self.hit(x, y, clip, include_disabled=True)
+            )
+        guard = candidate.options.get("activation_guard") if candidate else None
+        if guard is not None:
+            try:
+                guard(context)
+            except (ReferenceError, RuntimeError, ValueError, AttributeError) as error:
+                self.cancel()
+                self.menu_error = str(error)
+                from .context_menu import inside
+
+                return event.value in {"PRESS", "DOUBLE_CLICK"} and (
+                    event.type != "RIGHTMOUSE" or inside(clip, x, y)
+                )
         if self.overlay and "widget" in self.overlay and "clip" in self.overlay:
             if tuple(clip) != self.overlay["clip"]:
                 self.open_widget(
@@ -1144,7 +1187,9 @@ class Canvas(Group):
         if control is None or kind != "LEFTMOUSE" or not press:
             return False
         if control.kind == "button":
-            if control.options.get("operator_enum"):
+            if control.options.get("operator_enum") or control.options.get(
+                "menu_model"
+            ):
                 self.open_operator_menu(control, clip, context)
             elif control.options.get("action_event"):
                 control.options["action_event"](event)
@@ -1223,7 +1268,10 @@ class Canvas(Group):
                         self._drag_start = control.binding.read()
                         control.motion.pulse("handle", 0.55)
         elif control.kind == "enum":
-            self.open_enum_menu(control, clip, context)
+            if control.options.get("menu_model"):
+                self.open_operator_menu(control, clip, context)
+            else:
+                self.open_enum_menu(control, clip, context)
         else:
             return False
         return True

@@ -1,6 +1,20 @@
 """Public-RNA identities for structs and collection-owned properties."""
 
 
+def guarded(resolve):
+    """Retain the original ID wrapper to reject removal before embedded access."""
+    owner = resolve()
+    data = getattr(owner, "id_data", None)
+    key = data.as_pointer() if data is not None else None
+
+    def current():
+        if data is not None and data.as_pointer() != key:
+            raise ReferenceError("Property's owning ID disappeared")
+        return resolve()
+
+    return current
+
+
 def identity(owner):
     if owner is None:
         raise ReferenceError("Property owner is unavailable")

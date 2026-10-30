@@ -5,16 +5,33 @@ from .context_rna import Property
 from .context_enums import items, contains
 
 
-def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
-    source = Property(lambda: data, name, None if index < 0 else index)
+def property_row(
+    data,
+    name,
+    *,
+    text="",
+    index=-1,
+    value=None,
+    permitted=True,
+    source=None,
+    commit=None,
+    limit=63,
+    context_factory=None,
+):
+    source = source or Property(lambda: data, name, None if index < 0 else index)
     meta = source.owner().bl_rna.properties[name]
     label = text or meta.name
 
+    def entry(*args, **kwargs):
+        if context_factory is not None:
+            kwargs["context"] = context_factory(source)
+        return Entry(*args, **kwargs)
+
     def enabled(target, context):
         return (
-            permitted
+            (permitted() if callable(permitted) else permitted)
             and target.editable()
-            and target.commit is not None
+            and (commit is not None or target.commit is not None)
             and source.valid()
             and source.editable()
         )
@@ -44,7 +61,10 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
             after = value
         try:
             source.assign(owner, after)
-            target.commit("PROPERTY")
+            if commit is not None:
+                commit(before, source.read())
+            else:
+                target.commit("PROPERTY")
         except Exception:
             source.assign(owner, before)
             raise
@@ -54,6 +74,8 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
         def components(target, context):
             from itertools import islice
 
+            if len(source.read()) > limit:
+                raise ValueError("Property array exceeds the menu row limit")
             return tuple(
                 property_row(
                     source.owner(),
@@ -61,11 +83,15 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
                     text=f"{label} [{i}]",
                     index=i,
                     permitted=permitted,
+                    source=source.component(i),
+                    commit=commit,
+                    limit=limit,
+                    context_factory=context_factory,
                 )
-                for i in islice(range(len(source.read())), 63)
+                for i in islice(range(len(source.read())), limit)
             )
 
-        return Entry(
+        return entry(
             name, label, enabled=enabled, children=components, tip=meta.description
         )
     if meta.type in {"INT", "FLOAT", "STRING"}:
@@ -96,13 +122,16 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
             try:
                 source.assign(source.owner(), value)
                 if read(target, context) != original:
-                    target.commit("PROPERTY")
+                    if commit is not None:
+                        commit(before, source.read())
+                    else:
+                        target.commit("PROPERTY")
             except Exception:
                 if source.valid():
                     source.assign(source.owner(), before)
                 raise
 
-        return Entry(
+        return entry(
             name,
             label,
             enabled=enabled,
@@ -120,7 +149,7 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
         )
 
     if meta.type == "BOOLEAN" and not (getattr(meta, "is_array", False) and index < 0):
-        return Entry(
+        return entry(
             name,
             label,
             execute,
@@ -131,7 +160,7 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
         )
     if meta.type == "ENUM":
         if value is not None:
-            return Entry(
+            return entry(
                 name + ":" + value,
                 label,
                 execute,
@@ -145,6 +174,9 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
 
             owner = source.owner()
             choices = items(owner, name, context)
+            choices = tuple(islice((i for i in choices if i.identifier), limit + 1))
+            if len(choices) > limit:
+                raise ValueError("Enum exceeds the menu row limit")
             return tuple(
                 property_row(
                     owner,
@@ -152,14 +184,18 @@ def property_row(data, name, *, text="", index=-1, value=None, permitted=True):
                     text=item.name,
                     value=item.identifier,
                     permitted=permitted,
+                    source=source,
+                    commit=commit,
+                    limit=limit,
+                    context_factory=context_factory,
                 )
-                for item in islice((i for i in choices if i.identifier), 63)
+                for item in choices
             )
 
-        return Entry(
+        return entry(
             name, label, enabled=enabled, children=children, tip=meta.description
         )
-    return Entry(
+    return entry(
         name,
         label,
         enabled=False,
