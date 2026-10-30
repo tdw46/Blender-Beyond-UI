@@ -63,10 +63,18 @@ class ShortcutRegistry:
             context.area.as_pointer() if context.area else 0,
             command,
         )
-        self.commands[key] = (callback, valid)
+        entry = (callback, valid)
+        self.commands[key] = entry
         self.commands.move_to_end(key)
         while len(self.commands) > self.limit:
             self.commands.popitem(last=False)
+        return key, entry
+
+    def release(self, token):
+        """Release only this binding; a newer same-key owner must survive."""
+        key, entry = token
+        if self.commands.get(key) is entry:
+            self.commands.pop(key, None)
 
     def available(self, command, context):
         if self.operator_class is None or context.window is None:

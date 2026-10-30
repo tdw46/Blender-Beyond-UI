@@ -40,6 +40,16 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Panel popovers
+
+Registered panels open as custom canvases with nested controls, scrolling,
+property-attached panels and exact-owner context menus.
+
+![Actual Blender panel popover animation](docs/media/panels/panel-popovers-v1.gif)
+
+[Panel popover QA](docs/design/qa/panel-popovers-v1/index.html) ·
+[Authoring and remaining gaps](docs/POPOVERS.md)
+
 ## Registered menus
 
 Registered Python menus render through custom searchable dropdowns, inline

@@ -307,17 +307,29 @@
     },
     "popover": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Registered Python panels author retained custom canvases with guarded headers/body callbacks, scoped context/shortcuts, bounded nesting, scrolling, vertical/horizontal host-clipped placement and shared BVT glass/theme/motion. Native-instance, subpanel/instancing, preview-icon, complete focus semantics and exact-reference acceptance remain open. See docs/POPOVERS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/panel-popovers-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/panel-popovers-v1/runtime.json",
+        "docs/design/qa/panel-popovers-v1/runtime-51.json",
+        "docs/design/qa/panel-popovers-v1/windowed.json",
+        "docs/design/qa/panel-popovers-v1/windowed-51.json"
+      ]
     },
     "popover_group": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Bounded registered Python Panel discovery filters space/region/context/category, top-level membership and polls, then authors custom popover buttons ordered by bl_order and discovery ties. Native-only panels and exact native registration ordering remain open. See docs/POPOVERS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/panel-popovers-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/panel-popovers-v1/runtime.json",
+        "docs/design/qa/panel-popovers-v1/runtime-51.json",
+        "docs/design/qa/panel-popovers-v1/windowed.json",
+        "docs/design/qa/panel-popovers-v1/windowed-51.json"
+      ]
     },
     "progress": {
       "kind": "method",
@@ -440,10 +452,16 @@
     },
     "prop_with_popover": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Enum and color fields open registered custom panels with exact button_pointer/button_prop context, current values, source owner guards and per-control context menus. Icon-only presentation, full panel behaviors and exact-reference acceptance remain open. See docs/POPOVERS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/panel-popovers-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/panel-popovers-v1/runtime.json",
+        "docs/design/qa/panel-popovers-v1/runtime-51.json",
+        "docs/design/qa/panel-popovers-v1/windowed.json",
+        "docs/design/qa/panel-popovers-v1/windowed-51.json"
+      ]
     },
     "props_enum": {
       "kind": "method",

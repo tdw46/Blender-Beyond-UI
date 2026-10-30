@@ -60,6 +60,8 @@ class Layout:
         self._context_pointers = {}
         self._context_strings = {}
         self._menu_stack = ()
+        self._is_popover = False
+        self._panel_stack = ()
 
     def _key(self, kind):
         self._sequence += 1
@@ -154,6 +156,8 @@ class Layout:
             "ui_units_y",
             "emboss",
             "_menu_stack",
+            "_is_popover",
+            "_panel_stack",
         ):
             setattr(child, name, getattr(self, name))
         child._context_pointers = dict(self._context_pointers)
@@ -910,6 +914,76 @@ class Layout:
             **self._options(),
         )
         return model.properties
+
+    @property
+    def is_popover(self):
+        return self._is_popover
+
+    def popover(
+        self,
+        panel,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        icon_value=0,
+        direction="VERTICAL",
+    ):
+        if icon_value or direction not in {"VERTICAL", "HORIZONTAL"}:
+            raise UnsupportedControl("popover preview icon or attachment direction")
+        from .popover import author
+
+        author(
+            self,
+            panel,
+            text=text,
+            text_ctxt=text_ctxt,
+            translate=translate,
+            icon=icon,
+            direction=direction,
+        )
+
+    def popover_group(self, space_type, region_type, context, category):
+        from .popover import panel_group
+
+        for panel in panel_group(self, space_type, region_type, context, category):
+            self.popover(panel)
+
+    def prop_with_popover(
+        self,
+        data,
+        property,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        icon_only=False,
+        panel,
+    ):
+        from .popover import RegisteredPanel
+
+        meta = data.bl_rna.properties[property]
+        if icon_only or (
+            meta.type != "ENUM" and meta.subtype not in {"COLOR", "COLOR_GAMMA"}
+        ):
+            raise UnsupportedControl(
+                "prop_with_popover requires a text enum or color field"
+            )
+        binding = self._binding(data, property)
+        model = RegisteredPanel(self, panel, source=binding.context)
+        label = self._text(text or meta.name, text_ctxt, translate)
+        key = self._key("popover-property")
+        if meta.type == "ENUM":
+            control = self._enum_control(
+                data, property, label, binding, key, dict(icon=icon)
+            )
+        else:
+            control = self.group.color(
+                key, label, binding, linear=meta.subtype == "COLOR"
+            )
+        model.attach(control)
 
     def menu(
         self, menu, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0

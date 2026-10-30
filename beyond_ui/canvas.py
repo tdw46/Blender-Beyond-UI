@@ -244,6 +244,9 @@ class Canvas(Group):
             raise ValueError("Numeric motion scale must be finite and nonnegative")
         self._wide_numeric_motion_scale = value
         self._scale_numeric_motion()
+        widget = (self.overlay or {}).get("widget")
+        if hasattr(widget, "canvas"):
+            widget.canvas.wide_numeric_motion_scale = value
 
     def _scale_numeric_motion(self):
         if self._width is None:
@@ -293,19 +296,59 @@ class Canvas(Group):
                     motion.clear()
             if not motion.advance():
                 self._moving.discard(motion)
-        return bool(self._moving)
+        child_active = False
+        if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
+            child_active = self.overlay["widget"].advance()
+        return bool(self._moving) or child_active
 
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
         clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
         w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
         widget.glass_blur = 0.7
+        rect = (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h)
+        if owner is not None and hasattr(widget, "anchor"):
+            rect = widget.anchor(owner.rect, clip)
         self.overlay = {
             "widget": widget,
             "owner": owner,
             "clip": tuple(clip),
-            "rect": (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h),
+            "rect": rect,
         }
+
+    def active_menu(self):
+        if self.context_menu is not None:
+            return self.context_menu
+        widget = (self.overlay or {}).get("widget")
+        if hasattr(widget, "canvas"):
+            return widget.canvas.active_menu()
+        return None
+
+    def open_panel(self, control, clip, context=None):
+        model = control.options["panel_model"]
+        context = context or model.context
+        clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
+        widget = None
+        try:
+            model.refresh_poll(context)
+            if not control.enabled:
+                return False
+            widget = model.build(self, control, context)
+            self.cancel()
+            self.open_widget(widget, control, clip)
+            widget.canvas.bind_shortcuts(context, widget.clip)
+            self._bind_motion(widget.motion, control)
+            widget.motion.pulse("reveal", 0.12)
+            self.menu_error = None
+            return True
+        except Exception as error:
+            if widget is not None:
+                if (self.overlay or {}).get("widget") is widget:
+                    self.cancel()
+                else:
+                    widget.cancel()
+            self.menu_error = str(error)
+            return False
 
     def notify_changed(self, key):
         """Host revision hook, including read-only indicators; never polls RNA."""
@@ -345,6 +388,8 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        if hasattr((self.overlay or {}).get("widget"), "canvas"):
+            self.cancel()
         self.backdrop_revision += 1
         self.close_context()
         self._dirty = True
@@ -627,7 +672,12 @@ class Canvas(Group):
         scene = context.scene.as_pointer() if context.scene else None
 
         def run(ctx, event):
-            if control.options.get("operator_enum") or control.options.get(
+            guard = control.options.get("activation_guard")
+            if guard is not None:
+                guard(ctx)
+            if control.options.get("panel_model"):
+                result = self.open_panel(control, clip, ctx)
+            elif control.options.get("operator_enum") or control.options.get(
                 "menu_model"
             ):
                 result = self.open_operator_menu(control, clip, ctx)
@@ -640,7 +690,7 @@ class Canvas(Group):
                     region.tag_redraw()
             return result
 
-        registry.bind(
+        token = registry.bind(
             command,
             context,
             run,
@@ -648,6 +698,8 @@ class Canvas(Group):
             and control.enabled
             and (ctx.scene.as_pointer() if ctx.scene else None) == scene,
         )
+        if hasattr(self, "_scoped_shortcuts"):
+            self._scoped_shortcuts[token[0]] = token
         return command
 
     def bind_shortcuts(self, context, clip):
@@ -749,6 +801,7 @@ class Canvas(Group):
                         control.kind == "enum"
                         or control.options.get("operator_enum")
                         or control.options.get("menu_model")
+                        or control.options.get("panel_model")
                     ):
                         rows = [r for r in rows if r.key != "SHORTCUT"]
                         rows.insert(
@@ -833,7 +886,27 @@ class Canvas(Group):
                 self.open_widget(
                     self.overlay["widget"], self.overlay.get("owner"), clip
                 )
+        panel_widget = (self.overlay or {}).get("widget")
+        if hasattr(panel_widget, "dispatch"):
+            a, b, w, h = self.overlay["rect"]
+            return panel_widget.dispatch(
+                event,
+                (x - a) * panel_widget.width / max(1, w),
+                (y - b) * panel_widget.height / max(1, h),
+                context=context,
+                clipboard=clipboard,
+                menu_measure=menu_measure,
+            )
         press = event.value in {"PRESS", "DOUBLE_CLICK"}
+        if (
+            getattr(self, "_panel_buttons", False)
+            and not self.context_menu
+            and (press or event.type == "MOUSEMOVE")
+        ):
+            candidate = self.hit(x, y, clip, include_disabled=True)
+            model = candidate.options.get("panel_model") if candidate else None
+            if model is not None:
+                model.refresh_poll(context)
         if self.context_menu is not None:
             menu = self.context_menu
             if tuple(clip) != tuple(menu.clip):
@@ -994,7 +1067,8 @@ class Canvas(Group):
             motion = self.overlay["widget"].motion
             owner = self.overlay.get("owner")
             self._bind_motion(motion, owner)
-            motion.pulse("reveal", 0.12)
+            if "reveal" not in motion.tracks:
+                motion.pulse("reveal", 0.12)
         return used
 
     def _event(self, event, x, y, clip, *, clipboard=None, context=None):
@@ -1186,6 +1260,9 @@ class Canvas(Group):
             return used
         if control is None or kind != "LEFTMOUSE" or not press:
             return False
+        if control.options.get("panel_model"):
+            self.open_panel(control, clip, context)
+            return True
         if control.kind == "button":
             if control.options.get("operator_enum") or control.options.get(
                 "menu_model"

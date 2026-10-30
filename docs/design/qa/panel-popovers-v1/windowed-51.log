@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.1.2', 'checks': ['Actual N-panel input opens custom panel popovers and toggles their RNA fields', 'Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field', 'Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners', 'Shared animation/tooltip timers settle and teardown clears all child state']}
+00:11.504  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

@@ -250,7 +250,7 @@ class PanelHost:
         window = context.window
         for key, record in sorted(
             tuple(self.records.items()),
-            key=lambda item: item[1]["canvas"].context_menu is None,
+            key=lambda item: item[1]["canvas"].active_menu() is None,
         ):
             if key[0] != window.as_pointer():
                 continue
@@ -371,7 +371,7 @@ class PanelHost:
         try:
             for key in tuple(self._tooltip_keys):
                 record = self.records.get(key)
-                menu = record["canvas"].context_menu if record else None
+                menu = record["canvas"].active_menu() if record else None
                 owner = next(
                     (
                         (w, a, r)

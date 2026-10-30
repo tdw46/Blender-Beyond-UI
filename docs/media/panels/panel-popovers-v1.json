@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/panel-popovers-v1/capture.json",
+  "sha256": "78e4929601b86c33f2d8aa20781e2e29c9df0a6a8f7bcd79768f39a732a20192",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

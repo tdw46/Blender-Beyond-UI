@@ -1117,3 +1117,69 @@ Blender 4.2 runtime, other platforms/themes, native-instance draw semantics,
 specialized controls and exact visual/motion acceptance remain open. See
 [REGISTERED_MENUS.md](REGISTERED_MENUS.md) for the supported draw subset and limits.
 The strict completion gate still correctly fails.
+
+## Panel popovers — 2026-10-30
+
+`popover`, `prop_with_popover` and `popover_group` now author custom registered
+Python panels with nested canvases, host-scale layout, source sliders/switches,
+scrolling and exact-owner context actions. [Panel popover QA](design/qa/panel-popovers-v1/index.html)
+contains the actual captures and README animation. The ledger is now **87
+unimplemented and 50 partial UILayout members, zero reference-matched**.
+The convenience custom Layout.is_popover flag is not counted as a Blender
+UILayout member. Full custom parity and exact-reference acceptance remain open.
+
+- 160 pure-Python tests pass. Ruff, compilation, ledger consistency and source/
+  wheel packaging pass; the wheel includes the new popover module.
+- Disposable Blender 5.1.2 and 5.2.2 runtime fixtures pass scalar/toggle edits,
+  nested menus, exact property clipboard actions, enum/color property context,
+  short/narrow scrolling, group filtering/order, poll invalidation/reactivation,
+  invalidated panel definitions and atomic body/header callback failure.
+  Deferred actions reject after dismissal or poll failure. Scoped shortcut
+  bindings release on dismissal and cannot silently bind old row positions to
+  different controls when a panel reopens.
+- Actual N-panel input passes opening, toggle interaction, right-click context
+  actions, keyboard entry in the slider's number field, nested Escape dismissal,
+  property-attached enum selection and timer-free settled teardown on both
+  installed versions. Existing registered-menu, general, pointer/decorator,
+  ID-template, context-menu and operator-enum regression fixtures also pass.
+- Six production capture sets cover 1×/1.5×/2×, nested popovers, context menus,
+  narrow/short bounds, scrolling and disabled motion on both runtimes. All 360
+  motion frames are pixel-equal with admitted native text batching enabled versus
+  disabled. Panel draw/poll callbacks during painting are zero. Retained resources
+  remain stable: one backdrop production, one strong blur and five offscreens,
+  with retained font/shader/batch/layout identities.
+- Native operator shortcuts keep their existing behavior. Persistent custom canvas
+  shortcuts across reopened popovers still require explicit host command
+  identities; per-opening commands are intentionally not inferred from row order.
+- The baseline is published `c90956c`. All ten settled sparse/dense/scrolled
+  image comparisons are RGB-equal. Warm CPU submission samples below use 20
+  warmups and 100 samples, with readback excluded. These are not GPU completion
+  timings or proof of full source-addon performance parity.
+
+| Blender | Workload | Before median / p95 ms | After median / p95 ms |
+|---|---|---:|---:|
+| 5.2.2 LTS | benchmark: closed_fields | 0.083 / 0.177 | 0.082 / 0.117 |
+| 5.2.2 LTS | benchmark: open_scalar | 0.230 / 0.254 | 0.227 / 0.273 |
+| 5.2.2 LTS | benchmark: open_scalar_retained | 0.244 / 0.345 | 0.238 / 0.283 |
+| 5.2.2 LTS | dense: closed_fields | 0.789 / 0.958 | 0.793 / 1.007 |
+| 5.2.2 LTS | dense: open_scalar | 0.951 / 1.187 | 0.939 / 1.148 |
+| 5.2.2 LTS | dense: open_scalar_retained | 1.413 / 1.849 | 1.375 / 1.548 |
+| 5.2.2 LTS | dense: scrolled_controls | 1.214 / 1.727 | 1.179 / 1.374 |
+| 5.1.2 | benchmark: closed_fields | 0.080 / 0.122 | 0.081 / 0.102 |
+| 5.1.2 | benchmark: open_scalar | 0.223 / 0.255 | 0.230 / 0.262 |
+| 5.1.2 | benchmark: open_scalar_retained | 0.231 / 0.277 | 0.238 / 0.283 |
+| 5.1.2 | dense: closed_fields | 0.738 / 0.794 | 0.718 / 0.803 |
+| 5.1.2 | dense: open_scalar | 0.861 / 0.969 | 0.844 / 0.969 |
+| 5.1.2 | dense: open_scalar_retained | 1.334 / 1.497 | 1.247 / 1.361 |
+| 5.1.2 | dense: scrolled_controls | 1.154 / 1.278 | 1.127 / 1.248 |
+
+The equivalent workload results vary modestly by state/runtime; no additional
+GPU producer was added. New closed/open-popover workload timings are recorded
+separately in each capture JSON. No overall speedup, universal absence of
+regression or source-speed qualification is inferred from these samples.
+
+Blender 4.2 paths remain available, but no 4.2 runtime is installed for execution.
+Native-only/instanced/subpanel semantics, additional themes/platforms, complete
+keyboard/accessibility behavior and exact visual/motion acceptance remain open.
+No unrelated live scene or preferences were saved. The strict completion gate
+still correctly fails; see [POPOVERS.md](POPOVERS.md) for supported behavior.

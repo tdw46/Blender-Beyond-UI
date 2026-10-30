@@ -38,7 +38,7 @@ def measure(font, size, text):
     return blf.dimensions(font, text)
 
 
-def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
+def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None, palette=None):
     """rect/clip use bottom-left region pixels; logical layout is top-down.
 
     Use a privately loaded font: BLF has no getters for all font state, so font
@@ -55,9 +55,10 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
     sy = h / max(1.0, canvas.height)
     scale = min(sx, sy)
     logical = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
-    palette = style.theme_palette(
-        preferences, reference=canvas.theme.palette == "REFERENCE"
-    )
+    if palette is None:
+        palette = style.theme_palette(
+            preferences, reference=canvas.theme.palette == "REFERENCE"
+        )
     t = canvas.theme
 
     def mapped(r):
@@ -357,6 +358,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                 elif kind == "button" and (
                     control.options.get("operator_enum")
                     or control.options.get("menu_model")
+                    or control.options.get("panel_model")
                 ):
                     text(control.label, (a, b, max(0, c - 20 * scale), d), ink)
                     style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)

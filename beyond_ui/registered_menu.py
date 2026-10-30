@@ -140,9 +140,11 @@ def retarget(rows, target):
 
 
 class RegisteredMenu:
+    lookup = staticmethod(menu_class)
+
     def __init__(self, layout, name, *, source=None, depth=0):
         self.layout, self.context, self.name = layout, layout.context, name
-        self.cls, self.depth, self.source = menu_class(name), depth, source
+        self.cls, self.depth, self.source = self.lookup(name), depth, source
         self.draw_identity = draw_key(self.cls)
         self.parent_check = None
         self.label = self.cls.bl_label
@@ -161,7 +163,7 @@ class RegisteredMenu:
         if not self.pointers.valid():
             raise ReferenceError("Menu context owners changed")
         if (
-            menu_class(self.name) is not self.cls
+            self.lookup(self.name) is not self.cls
             or draw_key(self.cls) != self.draw_identity
         ):
             raise ReferenceError(

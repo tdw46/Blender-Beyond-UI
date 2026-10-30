@@ -80,7 +80,8 @@ factor do not establish full native layout/presentation semantics.
 C-only menu definitions and helpers requiring a real native RNA menu instance
 are not admitted as custom widgets. Active-native-button operators require a
 host-owned action and are rejected by the collector. Full icon coverage,
-interactive tab menus, menu pies, hold menus, popovers, all templates and full
+interactive tab menus, menu pies, hold menus, remaining [panel popover](POPOVERS.md)
+behaviors, all templates and full
 keyboard/accessibility equivalence remain open. Registered menus do not close
 those separate API entries.
 
