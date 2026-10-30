@@ -45,6 +45,10 @@ class CollectionSource:
             commit=layout.commit,
             source=layout.source,
         )
+        self.active_resolve = guarded(
+            layout.resolve(active_data) if layout.resolve else lambda: active_data
+        )
+        self.active_prop = active_prop
         self.items = ()
         self.refresh()
 

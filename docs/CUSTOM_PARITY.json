@@ -871,14 +871,18 @@
     "template_list": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom UI_UL_list DEFAULT/COMPACT/GRID rendering, original-index selection, wildcard filter/invert, alphabetical/reverse ordering, scroll/resize, keyboard navigation, active-row rename and exact property context menus. Retained snapshots and clipped visible cells; host stable identity keys are mandatory for PropertyGroup storage. Registered UIList callbacks, dynamic tips/icons, native height heuristics, full editing/focus semantics and generated-reference acceptance remain open. See docs/COLLECTION_LISTS.md.",
+      "notes": "Custom default/compact/grid collection lists plus registered Python draw_item/draw_filter/filter_items on retained visible child canvases. Original-index filter mapping, custom scalar list settings, exact-owner editing/menus, modal routing and spring transfer; no callbacks in paint. Pre-4.5 inversion preserved by version gate. Stable host identity required for PropertyGroup moves. Native-only callbacks, callback-backed/array/flag settings, icons, dynamic tooltips, multiline/nested callbacks, drag/drop, full native semantics and exact-reference acceptance remain open. See docs/COLLECTION_LISTS.md and docs/REGISTERED_LISTS.md.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/collection-lists-v1/comparison.json",
+      "comparison_evidence": "docs/design/qa/registered-lists-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/collection-lists-v1/runtime.json",
         "docs/design/qa/collection-lists-v1/runtime-51.json",
         "docs/design/qa/collection-lists-v1/windowed.json",
-        "docs/design/qa/collection-lists-v1/windowed-51.json"
+        "docs/design/qa/collection-lists-v1/windowed-51.json",
+        "docs/design/qa/registered-lists-v1/runtime.json",
+        "docs/design/qa/registered-lists-v1/runtime-51.json",
+        "docs/design/qa/registered-lists-v1/windowed.json",
+        "docs/design/qa/registered-lists-v1/windowed-51.json"
       ]
     },
     "template_marker": {

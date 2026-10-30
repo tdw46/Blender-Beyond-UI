@@ -517,18 +517,7 @@ class CollectionList(Widget):
                         and self.field == "name"
                         and self.edit_item == item
                     )
-                    if editing:
-                        self.paint_editor(
-                            p, r, role="selected_text" if active else "text"
-                        )
-                    else:
-                        p.text(
-                            r,
-                            item.name,
-                            "selected_text" if active else "text",
-                            11,
-                            inset=8,
-                        )
+                    self.paint_row(p, item, r, active, editing)
                 self.motion.region(
                     key,
                     (
@@ -580,6 +569,18 @@ class CollectionList(Widget):
                         (self.width / 2 + dx, self.viewport + 12), 0.9, palette["muted"]
                     )
         if self.state.get("show_filter"):
+            self.paint_filters(p, backdrop)
+
+    def paint_row(self, p, item, r, active, editing):
+        if editing:
+            self.paint_editor(p, r, role="selected_text" if active else "text")
+        else:
+            p.text(r, item.name, "selected_text" if active else "text", 11, inset=8)
+
+    def paint_filters(self, p, backdrop):
+        from ..gpu import style
+
+        if self.state.get("show_filter"):
             for key, label, r in self.filters():
                 with p.deform(("filter", key), r):
                     if key == "query":
@@ -608,7 +609,7 @@ class CollectionList(Widget):
                                 ("filter", key), bool(self.state.get(key, False))
                             ),
                             scale=p.scale,
-                            palette=palette,
+                            palette=p.palette,
                             backdrop=backdrop,
                         )
 

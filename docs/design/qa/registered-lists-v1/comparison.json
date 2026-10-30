@@ -1,0 +1,596 @@
+{
+  "exact_match": false,
+  "full_custom_parity": false,
+  "baseline": "37ec91de8022e4f4e5e67ac4ba7f15ef16676dd2",
+  "acceptance": "Existing BVT controls reused. Generated-reference and visual QA remain open. Code and execution checks only.",
+  "native_text_batching_equal_frames": 360,
+  "stress_text_batching_equal_frames": 120,
+  "existing_workload_pixel_comparisons": [
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    }
+  ],
+  "performance": [
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07470801938325167,
+          "p95_ms": 0.10233290959149599,
+          "max_ms": 0.2032080665230751
+        },
+        "open_scalar": {
+          "median_ms": 0.2055834629572928,
+          "p95_ms": 0.24999992456287146,
+          "max_ms": 0.3112920094281435
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.21202099742367864,
+          "p95_ms": 0.25704200379550457,
+          "max_ms": 0.32112502958625555
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07283297600224614,
+          "p95_ms": 0.09462493471801281,
+          "max_ms": 0.1865000231191516
+        },
+        "open_scalar": {
+          "median_ms": 0.20352104911580682,
+          "p95_ms": 0.2502079587429762,
+          "max_ms": 0.2998329000547528
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.21393800852820277,
+          "p95_ms": 0.2683750353753567,
+          "max_ms": 0.3558750031515956
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6445420440286398,
+          "p95_ms": 0.704042031429708,
+          "max_ms": 0.7994159823283553
+        },
+        "open_scalar": {
+          "median_ms": 0.7608125451952219,
+          "p95_ms": 0.8215419948101044,
+          "max_ms": 0.9410830680280924
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.0852294508367777,
+          "p95_ms": 1.2656670296564698,
+          "max_ms": 1.5059590805321932
+        },
+        "scrolled_controls": {
+          "median_ms": 0.9527085348963737,
+          "p95_ms": 1.0616659419611096,
+          "max_ms": 1.1631669476628304
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7073539891280234,
+          "p95_ms": 0.7656249217689037,
+          "max_ms": 0.825915951281786
+        },
+        "open_scalar": {
+          "median_ms": 0.8349170093424618,
+          "p95_ms": 0.9290829766541719,
+          "max_ms": 1.1144999880343676
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2050835648551583,
+          "p95_ms": 1.3057499891147017,
+          "max_ms": 1.3594169868156314
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0635624639689922,
+          "p95_ms": 1.143750036135316,
+          "max_ms": 1.3556660851463675
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07383344927802682,
+          "p95_ms": 0.09537499863654375,
+          "max_ms": 0.17983291763812304
+        },
+        "open_scalar": {
+          "median_ms": 0.20604149904102087,
+          "p95_ms": 0.2422090619802475,
+          "max_ms": 0.34020794555544853
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.21283351816236973,
+          "p95_ms": 0.2621249295771122,
+          "max_ms": 0.3042500466108322
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07983297109603882,
+          "p95_ms": 0.09858398698270321,
+          "max_ms": 0.21016609389334917
+        },
+        "open_scalar": {
+          "median_ms": 0.22079149493947625,
+          "p95_ms": 0.24104199837893248,
+          "max_ms": 0.3285419661551714
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.22862496552988887,
+          "p95_ms": 0.26012491434812546,
+          "max_ms": 0.34666690044105053
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6813955260440707,
+          "p95_ms": 0.7757910061627626,
+          "max_ms": 0.8254580898210406
+        },
+        "open_scalar": {
+          "median_ms": 0.7983755203895271,
+          "p95_ms": 0.8687499212101102,
+          "max_ms": 0.9988329838961363
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1644790647551417,
+          "p95_ms": 1.2658750638365746,
+          "max_ms": 1.3847079826518893
+        },
+        "scrolled_controls": {
+          "median_ms": 0.9978955495171249,
+          "p95_ms": 1.0900419438257813,
+          "max_ms": 1.1447909055277705
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7168125594034791,
+          "p95_ms": 0.7830419344827533,
+          "max_ms": 0.836416962556541
+        },
+        "open_scalar": {
+          "median_ms": 0.8557705441489816,
+          "p95_ms": 0.9172919671982527,
+          "max_ms": 1.1077080853283405
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2500625452958047,
+          "p95_ms": 1.3285840395838022,
+          "max_ms": 1.4134579105302691
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0188959422521293,
+          "p95_ms": 1.0950419818982482,
+          "max_ms": 1.2313330080360174
+        }
+      }
+    }
+  ],
+  "interleaved_dense_repeats": [
+    {
+      "runtime": "5.2.2 LTS",
+      "order": 0,
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7095624459907413,
+          "p95_ms": 0.7823340129107237,
+          "max_ms": 0.8322499925270677
+        },
+        "open_scalar": {
+          "median_ms": 0.8177709532901645,
+          "p95_ms": 0.8815419860184193,
+          "max_ms": 1.196958008222282
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2079794541932642,
+          "p95_ms": 1.3217920204624534,
+          "max_ms": 1.4122501015663147
+        },
+        "scrolled_controls": {
+          "median_ms": 1.046479505021125,
+          "p95_ms": 1.123082940466702,
+          "max_ms": 1.2935419799759984
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "order": 1,
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6412295624613762,
+          "p95_ms": 0.7067919941619039,
+          "max_ms": 0.7852499838918447
+        },
+        "open_scalar": {
+          "median_ms": 0.7459580083377659,
+          "p95_ms": 0.8027079747989774,
+          "max_ms": 1.0401250328868628
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.0688125039450824,
+          "p95_ms": 1.1948749888688326,
+          "max_ms": 1.2454999377951026
+        },
+        "scrolled_controls": {
+          "median_ms": 0.9636870236136019,
+          "p95_ms": 1.0289580095559359,
+          "max_ms": 1.4743750216439366
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "order": 2,
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7033334695734084,
+          "p95_ms": 0.7948750862851739,
+          "max_ms": 0.850624986924231
+        },
+        "open_scalar": {
+          "median_ms": 0.8328754920512438,
+          "p95_ms": 0.8929170435294509,
+          "max_ms": 1.083333045244217
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.228437467943877,
+          "p95_ms": 1.334875007160008,
+          "max_ms": 1.434125006198883
+        },
+        "scrolled_controls": {
+          "median_ms": 1.061521004885435,
+          "p95_ms": 1.1227501090615988,
+          "max_ms": 1.1685830540955067
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "order": 3,
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6475410191342235,
+          "p95_ms": 0.7061250507831573,
+          "max_ms": 0.8026249706745148
+        },
+        "open_scalar": {
+          "median_ms": 0.767833087593317,
+          "p95_ms": 0.8406250271946192,
+          "max_ms": 1.0105420369654894
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.0970839648507535,
+          "p95_ms": 1.2037500273436308,
+          "max_ms": 1.305249985307455
+        },
+        "scrolled_controls": {
+          "median_ms": 0.9738744702190161,
+          "p95_ms": 1.064250012859702,
+          "max_ms": 1.1334168957546353
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "order": 0,
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7337499991990626,
+          "p95_ms": 0.8011669851839542,
+          "max_ms": 0.9079170413315296
+        },
+        "open_scalar": {
+          "median_ms": 0.8395210024900734,
+          "p95_ms": 0.939916935749352,
+          "max_ms": 1.0861250339075923
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2445410247892141,
+          "p95_ms": 1.3583749532699585,
+          "max_ms": 1.5363750280812383
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0902710491791368,
+          "p95_ms": 1.2036249972879887,
+          "max_ms": 1.3340000296011567
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "order": 1,
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6814579828642309,
+          "p95_ms": 0.7466670358553529,
+          "max_ms": 0.8098749676719308
+        },
+        "open_scalar": {
+          "median_ms": 0.775916560087353,
+          "p95_ms": 0.8462909609079361,
+          "max_ms": 1.0455000447109342
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1128124897368252,
+          "p95_ms": 1.2125829234719276,
+          "max_ms": 1.3070829445496202
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0143750114366412,
+          "p95_ms": 1.0896249441429973,
+          "max_ms": 1.2193749425932765
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "order": 2,
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.698749499861151,
+          "p95_ms": 0.7900830823928118,
+          "max_ms": 0.8329160045832396
+        },
+        "open_scalar": {
+          "median_ms": 0.8008339209482074,
+          "p95_ms": 0.8617080748081207,
+          "max_ms": 0.9906250052154064
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1612289818003774,
+          "p95_ms": 1.2610419653356075,
+          "max_ms": 1.361084054224193
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0037499596364796,
+          "p95_ms": 1.101542031392455,
+          "max_ms": 1.1764579685404897
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "order": 3,
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7051665452308953,
+          "p95_ms": 0.7779999868944287,
+          "max_ms": 0.8733330760151148
+        },
+        "open_scalar": {
+          "median_ms": 0.8306250092573464,
+          "p95_ms": 0.919290934689343,
+          "max_ms": 1.0849169921129942
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2156250304542482,
+          "p95_ms": 1.291917054913938,
+          "max_ms": 1.3550000730901957
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0814164415933192,
+          "p95_ms": 1.175292069092393,
+          "max_ms": 1.2216250179335475
+        }
+      }
+    }
+  ],
+  "paired_paint": [
+    {
+      "runtime": "5.2.2 LTS",
+      "method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; exact baseline paint and visible_controls functions. 20 warmups each; readback excluded.",
+      "timings": {
+        "closed_fields": {
+          "before": {
+            "median_ms": 0.7676245295442641,
+            "p95_ms": 0.9891670197248459,
+            "max_ms": 1.1260409373790026
+          },
+          "after": {
+            "median_ms": 0.753625005017966,
+            "p95_ms": 1.0055839084088802,
+            "max_ms": 1.1217090068385005
+          }
+        },
+        "open_scalar": {
+          "before": {
+            "median_ms": 1.1746874661184847,
+            "p95_ms": 1.2565420474857092,
+            "max_ms": 1.379041001200676
+          },
+          "after": {
+            "median_ms": 1.1730834958143532,
+            "p95_ms": 1.2701249215751886,
+            "max_ms": 1.450041076168418
+          }
+        },
+        "open_scalar_retained": {
+          "before": {
+            "median_ms": 1.271625456865877,
+            "p95_ms": 1.3781669549643993,
+            "max_ms": 3.1789580825716257
+          },
+          "after": {
+            "median_ms": 1.281103992369026,
+            "p95_ms": 1.4068339951336384,
+            "max_ms": 5.650875042192638
+          }
+        },
+        "scrolled_controls": {
+          "before": {
+            "median_ms": 1.192103954963386,
+            "p95_ms": 1.2834579683840275,
+            "max_ms": 1.542625017464161
+          },
+          "after": {
+            "median_ms": 1.1878539808094501,
+            "p95_ms": 1.2831250205636024,
+            "max_ms": 1.4580830466002226
+          }
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; exact baseline paint and visible_controls functions. 20 warmups each; readback excluded.",
+      "timings": {
+        "closed_fields": {
+          "before": {
+            "median_ms": 0.7121874950826168,
+            "p95_ms": 0.9740829700604081,
+            "max_ms": 1.1183329625055194
+          },
+          "after": {
+            "median_ms": 0.727562524843961,
+            "p95_ms": 0.9761250112205744,
+            "max_ms": 1.1309169931337237
+          }
+        },
+        "open_scalar": {
+          "before": {
+            "median_ms": 1.1626670020632446,
+            "p95_ms": 1.240209094248712,
+            "max_ms": 1.3680419651791453
+          },
+          "after": {
+            "median_ms": 1.1628330103121698,
+            "p95_ms": 1.2150839902460575,
+            "max_ms": 1.4541249256581068
+          }
+        },
+        "open_scalar_retained": {
+          "before": {
+            "median_ms": 1.3272499782033265,
+            "p95_ms": 1.4431249583140016,
+            "max_ms": 1.8019999843090773
+          },
+          "after": {
+            "median_ms": 1.3328749919310212,
+            "p95_ms": 1.4709170209243894,
+            "max_ms": 2.0797919714823365
+          }
+        },
+        "scrolled_controls": {
+          "before": {
+            "median_ms": 1.180833496619016,
+            "p95_ms": 1.2699579820036888,
+            "max_ms": 2.535915933549404
+          },
+          "after": {
+            "median_ms": 1.1825619731098413,
+            "p95_ms": 1.2979588937014341,
+            "max_ms": 1.4102919958531857
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+00:04.842  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+ENUM_CAPTURE True 
+
+Blender quit
+Error: Not freed memory blocks: 19, total unfreed memory 1.189095 MB

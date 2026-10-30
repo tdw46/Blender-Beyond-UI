@@ -1,5 +1,56 @@
 # Validation record — 2026-10-28
 
+## Registered UIList callbacks — 2026-10-30
+
+Registered Python `draw_item`, `draw_filter` and `filter_items` now feed custom
+retained row/filter canvases. Embedded controls keep exact-owner edits/menus,
+shared glass/theme roles and source springs across row rebuilds. See the
+[callback contract](REGISTERED_LISTS.md) and
+[production QA](design/qa/registered-lists-v1/index.html).
+The ledger remains **86 unimplemented / 51 partial / 0 reference-matched**:
+this extends `template_list`; full parity is not complete.
+
+- 171 pure tests pass alongside Ruff, compilation, ledger consistency and
+  wheel/source checks. Filter order/flags, bounded malformed outputs, clipped
+  animation cancellation and composite-registry rollback have regressions.
+- Disposable Blender 5.1.2/5.2.2 fixtures exercise actual registered callbacks,
+  selection followed by field editing, scalar/enum commits, exact property menus,
+  moving a row during an edit without writing or rolling back into its replacement,
+  custom filter settings/search/cancellation, disabled owner cleanup, callback
+  replacement, invalid callback atomicity and default/grid/compact layouts.
+  Actual N-panel mouse/keyboard and teardown tests pass. Existing default lists,
+  registered menus, popovers, pointers/decorators, ID templates, context menus,
+  operators and general runtime checks pass (20 execution records).
+- Six capture sets cover normal/narrow bounds at 1×/1.5×/2×. The README GIF uses
+  actual production frames. All 360 animation frames match with native text
+  batching enabled/disabled, including embedded property menu reveal. Two
+  10,000-item stress fixtures add 120 matching pairs. One backdrop, one strong
+  blur, five offscreens and retained font/shader/geometry identities stay stable.
+  No UIList draw/filter callbacks run in paint. Only viewport rows are retained.
+- CPU submission measurements use 20 warmups and 100 samples, excluding capture
+  readback; source snapshot/authoring time is separate. Sparse/dense existing
+  workloads compare against `37ec91d`; all ten before/after RGB images match.
+  Runtime/scale/workload, timing distributions and source hashes are stored in
+  the QA records. These are bounded measurements, not source-equivalent speed,
+  end-to-end latency, GPU timing or exact visual fidelity claims.
+- Separate-process dense timings initially rose by roughly 5–12% in some
+  cases. Eight alternating process runs are retained, including their variation.
+  A diagnostic then alternates the exact baseline/current painter and visible-row
+  functions in the same process, canvas, fonts, GPU context and backdrop: 200
+  samples per revision/state, 20 warmups each. Median differences span −1.82% to
+  +2.16% across both versions; the earlier gap does not reproduce in this paired
+  comparison. This does not prove zero regression or source-level speed parity.
+- Callback filter inversion changed at Blender 4.5. The explicit older-version
+  branch retains the pre-4.5 engine behavior. Official source URLs/hashes cover
+  v4.2–v5.0 transitions plus the exact installed 5.1/5.2 builds. Blender 4.2 and
+  Windows execution remain unqualified; no minimum support version was raised.
+
+The tests also caught incorrect input ownership when an active child menu/field
+extended over an earlier row. Modal input now stays with its child. Hidden/clipped
+children stop animating, parent numeric motion settings reach existing rows, and
+released row resolvers fail closed. No unrelated live scene or preferences were
+changed. Full theme/reference acceptance remains open; visual judgment is Tyler's.
+
 ## Collection lists — 2026-10-30
 
 The default `template_list` route now has custom DEFAULT/COMPACT/GRID lists,

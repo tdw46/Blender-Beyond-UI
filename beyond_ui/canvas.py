@@ -204,6 +204,7 @@ class Canvas(Group):
         self._motion_focus = None
         self.theme = theme or Theme()
         self.controls = {}
+        self._composites = {}
         self._dirty = True
         self._width = None
         self.height = 0.0
@@ -244,6 +245,10 @@ class Canvas(Group):
             raise ValueError("Numeric motion scale must be finite and nonnegative")
         self._wide_numeric_motion_scale = value
         self._scale_numeric_motion()
+        for control in self._composites.values():
+            widget = control.options["widget"]
+            for child, _, _ in widget.all_children():
+                child.wide_numeric_motion_scale = value
         widget = (self.overlay or {}).get("widget")
         if hasattr(widget, "canvas"):
             widget.canvas.wide_numeric_motion_scale = value
@@ -297,8 +302,20 @@ class Canvas(Group):
             if not motion.advance():
                 self._moving.discard(motion)
         child_active = False
+        for control in self._composites.values() if self.visible else ():
+            widget = control.options["widget"]
+            local_clip = None
+            if clip is not None:
+                a, b, w, h = control.rect
+                x, y, cw, ch = clip
+                if not (a < x + cw and a + w > x and b < y + ch and b + h > y):
+                    widget.cancel()
+                    continue
+                sx, sy = widget.width / max(1, w), widget.height / max(1, h)
+                local_clip = ((x - a) * sx, (y - b) * sy, cw * sx, ch * sy)
+            child_active = widget.advance(local_clip) or child_active
         if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
-            child_active = self.overlay["widget"].advance()
+            child_active = self.overlay["widget"].advance() or child_active
         return bool(self._moving) or child_active
 
     def open_widget(self, widget, owner, clip=None):
@@ -322,6 +339,12 @@ class Canvas(Group):
         widget = (self.overlay or {}).get("widget")
         if hasattr(widget, "canvas"):
             return widget.canvas.active_menu()
+        for control in self._composites.values():
+            widget = control.options["widget"]
+            if hasattr(widget, "active_menu"):
+                menu = widget.active_menu()
+                if menu is not None:
+                    return menu
         return None
 
     def open_panel(self, control, clip, context=None):
@@ -393,7 +416,11 @@ class Canvas(Group):
         self.backdrop_revision += 1
         self.close_context()
         self._dirty = True
+        self._composites.clear()
         for control in self.controls.values():
+            if hasattr(control.options.get("widget"), "route"):
+                self._composites[control.key] = control
+                control.options["widget"].cancel()
             control.motion.clear()
             if control.kind == "decorator" and control.options["decorator"] is not None:
                 try:
@@ -425,11 +452,12 @@ class Canvas(Group):
         self.layout_count += 1
         return self.height
 
-    def visible_controls(self, clip):
+    def visible_controls(self, clip, *, composites=False):
         if not self.visible:
             return
         x, y, w, h = clip
-        for control in self.controls.values():
+        controls = self._composites if composites else self.controls
+        for control in controls.values():
             a, b, c, d = control.rect
             if a < x + w and a + c > x and b < y + h and b + d > y:
                 yield control
@@ -921,6 +949,45 @@ class Canvas(Group):
                     self.context_focus = None
                     self.blur_focus()
             return used
+        if self._composites and not self.overlay:
+            routed = (
+                self.widget_capture
+                or (
+                    self.keyboard_focus
+                    if event.type
+                    not in {
+                        "LEFTMOUSE",
+                        "RIGHTMOUSE",
+                        "MOUSEMOVE",
+                        "WHEELUPMOUSE",
+                        "WHEELDOWNMOUSE",
+                        "TRACKPADPAN",
+                    }
+                    else None
+                )
+                or self.hit(x, y, clip, include_disabled=True)
+            )
+            widget = routed.options.get("widget") if routed else None
+            if hasattr(widget, "route"):
+                a, b, w, h = routed.rect
+                sx, sy = widget.width / max(1, w), widget.height / max(1, h)
+                used = widget.route(
+                    event,
+                    (x - a) * sx,
+                    (y - b) * sy,
+                    (
+                        (clip[0] - a) * sx,
+                        (clip[1] - b) * sy,
+                        clip[2] * sx,
+                        clip[3] * sy,
+                    ),
+                    context=context,
+                    clipboard=clipboard,
+                    menu_measure=menu_measure,
+                )
+                if used is not None:
+                    self.widget_capture = routed if widget.capturing else None
+                    return used
         invocation = press and (
             event.type == "RIGHTMOUSE"
             or event.type == "APP"

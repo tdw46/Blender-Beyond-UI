@@ -1,0 +1,66 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/scripts/startup/bl_ui/__init__.py",
+    "sha256": "463b4a0fca371fbfa6088084c90ffcbce8915532f0912a38ff24ed06f7da8688"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "978c70f274b35c9127c764c107495927ddfeef8dd381e07ed9e42defd71acd6a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/scripts/startup/bl_ui/__init__.py",
+    "sha256": "653f948e632b46e43392416d82bf96be20ab240a381aadb96127ea175182c584"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "6b427eb1a2be553dc5dc67bf4af16f0a35d245f8b9da99756b143a8e3478e226"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/scripts/startup/bl_ui/__init__.py",
+    "sha256": "1843f54e6b668e93d765aa408a57e7f37a87ded7449408daecbe0387a541eda1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "70601eb51639e2a9b12ff3b8676cf8f73aa85e983069be964a7e8acf27b01a60"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesdna/DNA_screen_types.h",
+    "sha256": "e84562efec82d9227ad987405b3852ca55f0182559d1cb5f1d370dd696971264"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/makesrna/intern/rna_ui.cc",
+    "sha256": "945c267406ea5636d88e7e5fc95002aff86d804b92e36cb285751109caed1fb4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesdna/DNA_screen_types.h",
+    "sha256": "ff1a8963244a551ba2e57579382dc6a2bf227177d75ccce381107f68bede9ca1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/makesrna/intern/rna_ui.cc",
+    "sha256": "a1f7fe37edf4c4d6391c812f561ce00ffce57919d68819904fd5f3ab71802126"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesdna/DNA_screen_types.h",
+    "sha256": "9695eee7cae8f435a5704558b44056b1aabcbfdc75a761d25c0d52ebfb186601"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/makesrna/intern/rna_ui.cc",
+    "sha256": "40a40ab1249c1ff1248283095be78765b604f369da49ca4d8842773623f1e012"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.3.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "5ec4d0873bcfe2b1713268e24b0862bc4bb1235a8a5fe85fe2679b5acde56be4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.4.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "c706e853b024c9b0a2d5c5944243e2827ca76ad79e7fecd53ee4c2807994773a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "b47a70611ef8c1a62da7e7f1faa76f62d8d76f1a623c37a561726e36ba66289f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v5.0.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "485437ffd893f4c8c55d8f2fa9c9436f55b7a4327327ba674f2173fb2fd971e4"
+  }
+]

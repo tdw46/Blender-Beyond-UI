@@ -90,8 +90,9 @@ show selection/caret and keep the keyboard caret in view.
 
 ## Open parity and acceptance gates
 
-Registered Python/native `draw_item`, `draw_filter` and `filter_items` callbacks
-are explicitly unsupported. So are `item_dyntip_propname`, native data-type icons,
+Registered Python `draw_item`, `draw_filter` and `filter_items` callbacks now
+have a [bounded custom implementation](REGISTERED_LISTS.md). Native-only callbacks
+and the limitations listed there remain open, as do `item_dyntip_propname`, native data-type icons,
 drag/drop reordering, native compact count/index presentation, automatic height
 heuristics, mouse caret placement/selection, full focus traversal/accessibility,
 and Blender's context-specific UIList operators. Unsupported parameters fail

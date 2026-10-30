@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "Actual N-panel mouse selects collection rows; Ctrl-click starts rename and keyboard commits",
+    "Exact row context actions use the shared menu; keyboard navigation changes original active index",
+    "Host animation timers settle; unregister releases all owned runtime state"
+  ]
+}

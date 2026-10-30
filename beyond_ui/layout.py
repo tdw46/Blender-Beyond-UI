@@ -289,6 +289,10 @@ class Layout:
     ):
         arguments = dict(locals())
         arguments.pop("self")
+        from .registered_list import ListProxy
+
+        if isinstance(data, ListProxy):
+            return data.property(self, property, arguments)
         meta = data.bl_rna.properties[property]
         if (
             self.use_property_split
@@ -1359,13 +1363,15 @@ class Layout:
         from .list_source import CollectionSource
         from .widgets.collection_list import CollectionList
 
-        if listtype_name != "UI_UL_list":
-            raise UnsupportedControl(
-                "template_list registered draw_item/filter callbacks"
-            )
+        if self.state.get("_inside_list_callback"):
+            raise UnsupportedControl("recursive template_list callback")
         if item_dyntip_propname:
             raise UnsupportedControl("template_list item_dyntip_propname")
-        if not list_id:
+        if listtype_name != "UI_UL_list":
+            from .registered_list import list_class
+
+            list_class(listtype_name)
+        if not list_id and listtype_name == "UI_UL_list":
             raise ValueError("UI_UL_list requires a nonempty list_id")
         if type not in {"DEFAULT", "COMPACT", "GRID"}:
             raise ValueError("Unknown list layout type")
@@ -1382,7 +1388,14 @@ class Layout:
             # Geometry-only change: retain the shared backdrop, menus and springs.
             self.canvas._dirty = True
 
-        widget = CollectionList(
+        widget_type = CollectionList
+        extra = {}
+        if listtype_name != "UI_UL_list":
+            from .registered_list import RegisteredList
+
+            widget_type = RegisteredList
+            extra = dict(name=listtype_name, list_id=list_id)
+        widget = widget_type(
             source,
             state,
             rows=rows,
@@ -1391,7 +1404,10 @@ class Layout:
             columns=columns,
             sort_lock=bool(sort_lock),
             changed=relayout,
+            **extra,
         )
+        if listtype_name != "UI_UL_list":
+            widget.dimensions(self.canvas.theme.font_size, 560)
         control = self.group.widget(
             self._key("list"), widget, context_menu=widget.entries, **self._options()
         )
@@ -1405,6 +1421,8 @@ class Layout:
                 self.canvas.widget_capture = self.canvas.keyboard_focus = control
 
         widget.begin_capture = capture
+        if hasattr(widget, "route"):
+            widget.owner = control
         return control
 
     def template_node_socket(self, *, color=(0.0, 0.0, 0.0, 1.0)):

@@ -114,7 +114,10 @@ def run():
         else:
             raise AssertionError("Missing commit rejection")
         assert ctx.scene.bui_list_active == previous
-        for kind in ("NOT_A_LIST", "MESH_UL_vgroups"):
+        for kind, expected in (
+            ("NOT_A_LIST", UnsupportedControl),
+            ("MESH_UL_vgroups", AttributeError),
+        ):
             try:
                 ui.template_list(
                     kind,
@@ -124,13 +127,13 @@ def run():
                     ctx.scene,
                     "bui_list_active",
                 )
-            except UnsupportedControl:
+            except expected:
                 pass
             else:
-                raise AssertionError("Unsupported list silently admitted")
+                raise AssertionError("Invalid list silently admitted")
         assert len([c for c in canvas.controls.values() if c.kind == "widget"]) == 3
         checks.append(
-            "Host commit failure rolls back; custom callbacks fail atomically without native fallback"
+            "Host commit failure rolls back; missing lists and incompatible callback data fail atomically"
         )
         try:
             Layout(context=ctx).template_list(

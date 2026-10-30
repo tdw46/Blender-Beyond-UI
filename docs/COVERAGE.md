@@ -8,17 +8,21 @@ Panel, Menu, Header and UIList remain ordinary host-registered Blender classes. 
 
 ## Custom backend
 
-| Family | Custom support | Full Blender behavior |
+The member-by-member [custom parity ledger](CUSTOM_PARITY.json) is authoritative:
+**86 unimplemented / 51 partial / 0 reference-matched** members. Native delegation
+does not count toward these totals. The table below groups current partial work.
+
+| Family | Custom support | Remaining examples |
 | --- | --- | --- |
-| Rounded surfaces, vector icons, glass and springs | Extracted GPU primitives | Host controls presentation and lifetime |
-| Labels, buttons, booleans, scalar numbers, text, compact enums | Canvas controls | Native Layout for complete keymaps/context menus/accessibility |
-| Colors | Custom RGB/HSV/hex math and swatches; host picker action | Native prop/template_color_picker for full picker |
-| Images, thumbnails, material previews | Retained GPU textures and bounded caches | Native templates for Blender preview jobs |
-| Rows, columns, boxes, search, grouping, clipping | Custom geometry helpers | Native Layout for exact sizing/translation/panel state |
-| Large lists | Custom default template_list with filtering, sorting, row editing and virtualized cells; host identities for PropertyGroups | Registered UIList callbacks and full native semantics remain open; see COLLECTION_LISTS.md |
-| Color ramps, curve editors, histograms, scopes, direction spheres | Native route only | All installed native templates exposed |
-| Assets, ID/search pickers, file browser, operator popups, pie menus | Native route only | All installed native templates exposed |
-| Animatable property decorators, driver clipboard, keymaps | Native route only | No active-native-button impersonation |
+| Surfaces, vector icons, glass and springs | Retained BVT primitives and host-owned lifetime | Exact reference/theme/platform and source-equivalent performance qualification |
+| Labels, buttons, booleans, numbers, text and enums | Shared Canvas fields, source switches/sliders, searchable menus | Full property combinations, focus/accessibility and exact acceptance |
+| Color editing | Custom SV/hue/RGB/HSV/alpha/hex controls | Host eyedropper, locking/cubic modes and full native semantics |
+| Layout | Retained rows, columns, flows, grids, boxes and panel popovers | Remaining UILayout settings and complete sizing/alignment semantics |
+| Large lists | Default lists and registered Python row/filter callbacks on retained visible canvases | Bounded callback settings/layouts, native-only callbacks, drag/drop and full native semantics; see [registered lists](REGISTERED_LISTS.md) |
+| Color ramps and curves | Custom stop/point editing and channel controls | Remaining interpolation, handles, bounds and specialized modes |
+| Data selectors | Searchable ID and supported non-ID pointers, collection searches, ID tabs and ID actions | Unsupported pointer categories and preview/template families |
+| Property decorators and menus | Custom keyframe/driver states, property actions, registered menus and scoped shortcuts | Full context coverage, platform admission and native semantics |
+| Scopes, specialized previews, asset/file browsers and pie menus | Unimplemented members remain explicitly tracked | Custom implementations and interaction/reference evidence |
 
 ## Version inventory
 

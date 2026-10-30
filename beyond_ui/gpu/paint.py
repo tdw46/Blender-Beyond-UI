@@ -38,7 +38,19 @@ def measure(font, size, text):
     return blf.dimensions(font, text)
 
 
-def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None, palette=None):
+def paint(
+    canvas,
+    rect,
+    clip,
+    *,
+    preferences=None,
+    font=0,
+    backdrop=None,
+    palette=None,
+    background=True,
+    controls=True,
+    overlays=True,
+):
     """rect/clip use bottom-left region pixels; logical layout is top-down.
 
     Use a privately loaded font: BLF has no getters for all font state, so font
@@ -138,8 +150,9 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None, palett
         import gpu
 
         gpu.state.scissor_set(int(cx), int(cy), max(0, int(cw)), max(0, int(ch)))
-        style.draw(*rect, palette["bg"], radius=t.radius * scale)
-        for control in canvas.visible_controls(logical):
+        if background:
+            style.draw(*rect, palette["bg"], radius=t.radius * scale)
+        for control in canvas.visible_controls(logical) if controls else ():
             r = mapped(control.rect)
             a, b, c, d = r
             kind = control.kind
@@ -409,6 +422,19 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None, palett
                         control.options.get("text_role", "body"),
                     )
             count += 1
+        if not overlays:
+            return count
+        if controls:
+            for control in canvas.visible_controls(logical, composites=True):
+                widget = control.options.get("widget")
+                if hasattr(widget, "paint_overlays"):
+                    widget.paint_overlays(
+                        mapped(control.rect),
+                        font,
+                        palette,
+                        backdrop=backdrop,
+                        clip=clip,
+                    )
         if canvas.overlay or canvas.context_menu is not None:
             typography.flush_text(font)
         if canvas.overlay and "widget" in canvas.overlay:

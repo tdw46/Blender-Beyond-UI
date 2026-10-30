@@ -1,0 +1,9 @@
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.003s
+
+OK
+OPERATOR_ENUM_RUNTIME {'passed': True, 'version': '5.1.2', 'checks': ['Expanded and dropdown actions use exact enum arguments, context overrides and invocation', 'Dynamic menus are searchable and use supplied operator arguments; scratch keyconfigs are released', 'Stale arguments, numeric remaps, selection changes, poll failures and removed operators reject execution', 'Flag choices pass singleton sets; public static fallback remains available', 'Choice right-click command contains selected value; host shortcuts open custom popup and revoke hidden controls', 'Unsupported icon-only and non-enum requests fail explicitly']}
+00:01.607  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit
