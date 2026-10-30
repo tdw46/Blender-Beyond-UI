@@ -40,6 +40,14 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Layout sizing
+
+![Actual Blender layout sizing animation](docs/media/panels/layout-sizing-v1.gif)
+
+[Layout sizing QA](docs/design/qa/layout-sizing-v1/index.html) ·
+[Scale and fixed-unit behavior](docs/LAYOUT_SIZING.md). Explicit sizing retains
+source typography, proportional compound controls and exact-owner menus.
+
 ## Collection lists
 
 Default collection lists now support original-index selection, rename, filtering,
@@ -319,6 +327,10 @@ uv run python tools/check_custom_parity.py
 python3 tools/run_blender_tests.py --blender /path/to/blender
 python3 tools/run_blender_tests.py --blender /path/to/blender --windowed
 ```
+
+Tests preserve your foreground app: headless by default; windowed GPU captures
+and panel input use Blender's `--no-window-focus`, with no foreground fallback.
+See [background testing and the focus audit](docs/BACKGROUND_TESTING.md).
 
 `tools/check_custom_parity.py --require-complete` is the strict release gate.
 It currently fails because full custom parity and exact reference matches are

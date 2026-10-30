@@ -1,0 +1,160 @@
+{
+  "exact_match": false,
+  "reference_acceptance": "Open; existing BVT controls reused. Tyler owns visual QA.",
+  "baseline": "d3d6565",
+  "unchanged_shared_renderer": [
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    }
+  ],
+  "scale_factors": [
+    1,
+    1.5,
+    2
+  ],
+  "batching_equal_frames": 360,
+  "layout_timings": [
+    {
+      "runtime": "5.2.2 LTS",
+      "revision": "before",
+      "timings": {
+        "invalidated": {
+          "median_ms": 0.1302505,
+          "p95_ms": 0.260666,
+          "max_ms": 1.683667
+        },
+        "retained": {
+          "median_ms": 8.3e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000208
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "revision": "after",
+      "timings": {
+        "invalidated": {
+          "median_ms": 0.1366665,
+          "p95_ms": 0.330292,
+          "max_ms": 1.164125
+        },
+        "retained": {
+          "median_ms": 8.3e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000167
+        },
+        "configured_invalidated": {
+          "median_ms": 0.26791699999999996,
+          "p95_ms": 0.295541,
+          "max_ms": 0.588041
+        },
+        "configured_retained": {
+          "median_ms": 8.3e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000208
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "revision": "before",
+      "timings": {
+        "invalidated": {
+          "median_ms": 0.12956299999999998,
+          "p95_ms": 0.135417,
+          "max_ms": 0.384291
+        },
+        "retained": {
+          "median_ms": 8.3e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000125
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "revision": "after",
+      "timings": {
+        "invalidated": {
+          "median_ms": 0.1373335,
+          "p95_ms": 0.259542,
+          "max_ms": 0.482
+        },
+        "retained": {
+          "median_ms": 8.3e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000167
+        },
+        "configured_invalidated": {
+          "median_ms": 0.2718545,
+          "p95_ms": 0.291083,
+          "max_ms": 0.541458
+        },
+        "configured_retained": {
+          "median_ms": 8.4e-05,
+          "p95_ms": 0.000125,
+          "max_ms": 0.000167
+        }
+      }
+    }
+  ],
+  "remaining": "82 API members unimplemented; 55 partial; no reference-matched members"
+}

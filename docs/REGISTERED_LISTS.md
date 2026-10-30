@@ -103,8 +103,8 @@ accessibility, compact count presentation, automatic height heuristics, mouse
 caret placement and Blender's context-specific UIList operators remain open.
 External dependent data requires host invalidation rather than polling.
 
-The public API ledger still reports **86 unimplemented / 51 partial /
-0 reference-matched** UILayout members. This closes part of `template_list`'s
+The public API ledger continues to track unimplemented members and partial
+behaviors. This closes part of `template_list`'s
 behavior, not its full completion gate. Blender 4.2 execution, Windows, the full
 theme matrix, exact generated-reference acceptance and source-equivalent
 performance qualification remain open.

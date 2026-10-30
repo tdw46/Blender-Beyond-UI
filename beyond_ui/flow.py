@@ -4,7 +4,7 @@ Grid packing and height-balanced column flow follow Blender's interface_layout.c
 custom control dimensions and source spacing remain in host logical units.
 """
 
-from math import ceil
+from math import ceil, isfinite
 
 
 def weighted_width(widths):
@@ -39,11 +39,51 @@ def grid_shape(count, width, average, columns=0, row_major=False):
 class Plan:
     """One invalidation's measurement cache, discarded after geometry is retained."""
 
-    def __init__(self, theme, measure=None):
+    def __init__(self, theme, measure=None, root=None):
         self.theme = theme
         self.measure = measure
         self.natural_cache = {}
         self.plans = {}
+        self.slot_ratios = {}
+        self.sized = root is not None
+        self.scales = {}
+        self.ancestors = {}
+        if root is not None:
+            self.prepare(root)
+        else:
+            self.place = self.place_plain
+            self.control_size = self.control_size_plain
+
+    def prepare(self, node, sx=1.0, sy=1.0):
+        self.ancestors[id(node)] = (sx, sy)
+        if hasattr(node, "children"):
+            sx *= node.options.get("scale_x", 0) or 1.0
+            sy *= node.options.get("scale_y", 0) or 1.0
+        if not all(isfinite(v) and 0 < v <= 4096 for v in (sx, sy)):
+            raise ValueError("Combined layout scale must be positive and at most 4096")
+        self.scales[id(node)] = (sx, sy)
+        for child in getattr(node, "children", ()):
+            self.prepare(child, sx, sy)
+
+    def scale(self, node):
+        return self.scales.get(id(node), (1.0, 1.0))
+
+    def fixed(self, node, axis):
+        if not hasattr(node, "children"):
+            if axis == 0 and "width" in node.options:
+                return node.options["width"] * self.scale(node)[0]
+            return None
+        if not node.children:
+            return None
+        units = node.options.get("ui_units_x" if axis == 0 else "ui_units_y", 0)
+        if units:
+            # A source logical unit is one ordinary row, not an artboard pixel.
+            return (
+                units
+                * self.theme.row_height
+                * self.ancestors.get(id(node), (1, 1))[axis]
+            )
+        return None
 
     def gap(self, node):
         return 0.0 if node.options.get("align") else self.theme.gap
@@ -89,10 +129,16 @@ class Plan:
             )
             if node.kind == "box":
                 width += 2 * self.theme.padding
+        if self.sized:
+            if not hasattr(node, "children"):
+                width *= self.scale(node)[0]
+            fixed = self.fixed(node, 0)
+            if fixed is not None:
+                width = fixed
         self.natural_cache[key] = max(0.0, width)
         return self.natural_cache[key]
 
-    def control_size(self, node, available):
+    def control_size_plain(self, node, available):
         available = max(0.0, min(available, node.options.get("width", available)))
         if node.kind == "widget":
             return node.options["widget"].dimensions(
@@ -110,6 +156,30 @@ class Plan:
             "height", 8 if node.kind == "separator" else self.theme.row_height + extra
         )
         return available, max(0.0, height)
+
+    def control_size(self, node, available):
+        sx, sy = self.scale(node) if self.sized else (1.0, 1.0)
+        fixed = node.options.get("width")
+        available = max(
+            0.0, min(available, fixed * sx if fixed is not None else available)
+        )
+        if node.kind == "widget":
+            w, h = node.options["widget"].dimensions(
+                self.theme.font_size, available, node.options.get("height")
+            )
+            return min(available, w * sx), h * sy
+        extra = (
+            20
+            if node.kind == "number"
+            and node.label
+            and node.options.get("slider", True)
+            and available < 260
+            else 0
+        )
+        height = node.options.get(
+            "height", 8 if node.kind == "separator" else self.theme.row_height + extra
+        )
+        return available, max(0.0, height * sy)
 
     def row_widths(self, node, width):
         children, gap = node.children, self.gap(node)
@@ -135,16 +205,32 @@ class Plan:
             total = sum(widths)
             shrink = min(1, usable / total) if total else 1
             return [w * shrink for w in widths]
-        fixed = [
-            c.options.get("width") if not hasattr(c, "children") else None
-            for c in children
-        ]
+        fixed = (
+            [self.fixed(c, 0) for c in children]
+            if self.sized
+            else [
+                c.options.get("width") if not hasattr(c, "children") else None
+                for c in children
+            ]
+        )
         total = sum(w for w in fixed if w is not None)
         shrink = min(1, usable / total) if total else 1
-        flex = max(0, usable - total) / max(1, fixed.count(None))
-        return [w * shrink if w is not None else flex for w in fixed]
+        if not self.sized:
+            flex = max(0, usable - total) / max(1, fixed.count(None))
+            return [w * shrink if w is not None else flex for w in fixed]
+        weights = [
+            self.scale(c)[0] if w is None else 0 for c, w in zip(children, fixed)
+        ]
+        flex = max(0, usable - total) / max(1e-30, sum(weights))
+        return [
+            w * shrink if w is not None else flex * weight
+            for w, weight in zip(fixed, weights)
+        ]
 
     def layout(self, node, width):
+        fixed_width = self.fixed(node, 0) if self.sized else None
+        if fixed_width is not None:
+            width = min(width, fixed_width)
         key = (id(node), width)
         if key in self.plans:
             return self.plans[key]
@@ -229,14 +315,25 @@ class Plan:
                 h = self.layout(child, w)[0]
                 cells.append((child, (available - w) * shift, y, w, h))
                 y += h + gap
-        result = (
-            max((y + h for _, x, y, w, h in cells), default=0) + 2 * padding,
-            cells,
-        )
+        height = max((y + h for _, x, y, w, h in cells), default=0) + 2 * padding
+        fixed_height = self.fixed(node, 1) if self.sized else None
+        slot_ratio = 1.0
+        if fixed_height is not None and cells:
+            # Fit the explicit slot without changing typography or logical ownership.
+            # Compound controls re-fit uniformly during placement.
+            inset = min(padding, fixed_height / 2)
+            ratio = max(0, fixed_height - 2 * inset) / max(1e-30, height - 2 * padding)
+            slot_ratio = ratio
+            cells = [(c, x, y * ratio, w, h * ratio) for c, x, y, w, h in cells]
+            height = fixed_height
+        result = (height, cells)
+        if slot_ratio != 1.0:
+            self.slot_ratios[key] = slot_ratio
         self.plans[key] = result
         return result
 
-    def place(self, node, x, y, width):
+    def place_plain(self, node, x, y, width):
+        """Keep ordinary layouts on the small unconstrained placement path."""
         if not hasattr(node, "children"):
             w, h = self.control_size(node, width)
             node.rect = (x, y, w, h)
@@ -246,3 +343,36 @@ class Plan:
         padding = self.theme.padding if node.kind == "box" else 0
         for child, a, b, w, h in cells:
             self.place(child, x + padding + a, y + padding + b, w)
+
+    def place(self, node, x, y, width, allocated_height=None):
+        fixed_width = self.fixed(node, 0) if self.sized else None
+        if fixed_width is not None:
+            width = min(width, fixed_width)
+        if not hasattr(node, "children"):
+            w, h = self.control_size(node, width)
+            if node.kind == "widget" and (
+                allocated_height is not None or self.scale(node) != (1.0, 1.0)
+            ):
+                w, h = node.options["widget"].dimensions(
+                    self.theme.font_size,
+                    w,
+                    h if allocated_height is None else allocated_height,
+                )
+            elif allocated_height is not None:
+                h = allocated_height
+            node.rect = (x, y, w, h)
+            return
+        height, cells = self.layout(node, width)
+        ratio = (
+            allocated_height / height
+            if allocated_height is not None and height
+            else 1.0
+        )
+        node.rect = (x, y, width, height * ratio)
+        padding = min(self.theme.padding, height / 2) if node.kind == "box" else 0
+        child_scale = ratio * self.slot_ratios.get((id(node), width), 1.0)
+        for child, a, b, w, h in cells:
+            allocated = (
+                self.layout(child, w)[0] * child_scale if child_scale != 1.0 else None
+            )
+            self.place(child, x + padding + a, y + (padding + b) * ratio, w, allocated)

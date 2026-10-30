@@ -1,0 +1,234 @@
+{
+  "passed": true,
+  "monitor": {
+    "child_exit": 0,
+    "events": [
+      {
+        "kind": "initial",
+        "pid": 15124,
+        "seconds": 0.0013729333877563477
+      },
+      {
+        "kind": "final",
+        "pid": 15124,
+        "seconds": 128.98462200164795
+      }
+    ],
+    "sampled_frontmost_pids": [
+      15124
+    ],
+    "seconds": 128.9847059249878
+  },
+  "launches": [
+    {
+      "label": "benchmark-after-51-run",
+      "pid": 24395,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "benchmark-after-run",
+      "pid": 23701,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "benchmark-before-51-run",
+      "pid": 24378,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "benchmark-before-run",
+      "pid": 23669,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-1.5x-run",
+      "pid": 23600,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-2x-run",
+      "pid": 23626,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-51-1.5x-run",
+      "pid": 24311,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-51-2x-run",
+      "pid": 24344,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-51-run",
+      "pid": 24287,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "capture-run",
+      "pid": 23584,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "context",
+      "pid": 24232,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "context-51",
+      "pid": 24605,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "default-lists",
+      "pid": 23830,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "default-lists-51",
+      "pid": 24486,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "dense-after-51-run",
+      "pid": 24444,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "dense-after-run",
+      "pid": 23773,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "dense-before-51-run",
+      "pid": 24416,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "dense-before-run",
+      "pid": 23733,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "flow",
+      "pid": 23818,
+      "policy": "headless"
+    },
+    {
+      "label": "flow-51",
+      "pid": 24483,
+      "policy": "headless"
+    },
+    {
+      "label": "general",
+      "pid": 24143,
+      "policy": "headless"
+    },
+    {
+      "label": "general-51",
+      "pid": 24584,
+      "policy": "headless"
+    },
+    {
+      "label": "id-templates",
+      "pid": 24196,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "id-templates-51",
+      "pid": 24593,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "layout-after",
+      "pid": 23796,
+      "policy": "headless"
+    },
+    {
+      "label": "layout-after-51",
+      "pid": 24463,
+      "policy": "headless"
+    },
+    {
+      "label": "layout-before",
+      "pid": 23792,
+      "policy": "headless"
+    },
+    {
+      "label": "layout-before-51",
+      "pid": 24455,
+      "policy": "headless"
+    },
+    {
+      "label": "lists",
+      "pid": 23807,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "lists-51",
+      "pid": 24474,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "menus",
+      "pid": 24013,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "menus-51",
+      "pid": 24542,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "operators",
+      "pid": 24271,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "operators-51",
+      "pid": 24621,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "pointer",
+      "pid": 24159,
+      "policy": "headless"
+    },
+    {
+      "label": "pointer-51",
+      "pid": 24586,
+      "policy": "headless"
+    },
+    {
+      "label": "popovers",
+      "pid": 24078,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "popovers-51",
+      "pid": 24560,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "runtime",
+      "pid": 23800,
+      "policy": "headless"
+    },
+    {
+      "label": "runtime-51",
+      "pid": 24465,
+      "policy": "headless"
+    },
+    {
+      "label": "windowed",
+      "pid": 23882,
+      "policy": "no-window-focus"
+    },
+    {
+      "label": "windowed-51",
+      "pid": 24506,
+      "policy": "no-window-focus"
+    }
+  ]
+}

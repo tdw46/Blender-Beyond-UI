@@ -1,0 +1,9 @@
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.017s
+
+OK
+FLOW_RUNTIME {'passed': True, 'version': '5.2.2 LTS', 'build': 'd13f752e3b9c', 'checks': ['unit suite in Blender Python', 'real RNA grid owner hit after reflow', 'ancestor disable rolls back RNA edit', 'descendant active state retained', 'teardown quiescent']}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

@@ -55,8 +55,6 @@ class Layout:
         self.search_popovers = True
         self.use_property_split = False
         self.use_property_decorate = True
-        self.scale_x = self.scale_y = 1.0
-        self.ui_units_x = self.ui_units_y = 0.0
         self.emboss = "NORMAL"
         self.activate_init = self.active_default = False
         self._context_pointers = {}
@@ -115,6 +113,50 @@ class Layout:
             self.group.options["alignment"] = value
             self.canvas.invalidate()
 
+    def _size_policy(self, name, value):
+        from math import isfinite
+
+        value = float(value)
+        if not isfinite(value) or not 0 <= value <= 4096:
+            raise ValueError(f"{name} must be finite and between zero and 4096")
+        if value != self.group.options.get(name, 0.0):
+            self.group.options[name] = value
+            self.group._sync_size_policy()
+            self.canvas.cancel()
+            self.canvas.invalidate()
+
+    @property
+    def scale_x(self):
+        return self.group.options.get("scale_x", 0.0)
+
+    @scale_x.setter
+    def scale_x(self, value):
+        self._size_policy("scale_x", value)
+
+    @property
+    def scale_y(self):
+        return self.group.options.get("scale_y", 0.0)
+
+    @scale_y.setter
+    def scale_y(self, value):
+        self._size_policy("scale_y", value)
+
+    @property
+    def ui_units_x(self):
+        return self.group.options.get("ui_units_x", 0.0)
+
+    @ui_units_x.setter
+    def ui_units_x(self, value):
+        self._size_policy("ui_units_x", value)
+
+    @property
+    def ui_units_y(self):
+        return self.group.options.get("ui_units_y", 0.0)
+
+    @ui_units_y.setter
+    def ui_units_y(self, value):
+        self._size_policy("ui_units_y", value)
+
     @property
     def direction(self):
         if self.group is self.canvas or self.group.kind == "row":
@@ -153,10 +195,6 @@ class Layout:
             "use_property_split",
             "use_property_decorate",
             "alignment",
-            "scale_x",
-            "scale_y",
-            "ui_units_x",
-            "ui_units_y",
             "emboss",
             "_menu_stack",
             "_is_popover",
@@ -1097,10 +1135,6 @@ class Layout:
             "active_default",
             "alert",
             "emboss",
-            "scale_x",
-            "scale_y",
-            "ui_units_x",
-            "ui_units_y",
         }:
             return False
         return (

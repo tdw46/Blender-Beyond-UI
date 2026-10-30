@@ -9,7 +9,7 @@ Panel, Menu, Header and UIList remain ordinary host-registered Blender classes. 
 ## Custom backend
 
 The member-by-member [custom parity ledger](CUSTOM_PARITY.json) is authoritative:
-**86 unimplemented / 51 partial / 0 reference-matched** members. Native delegation
+**82 unimplemented / 55 partial / 0 reference-matched** members. Native delegation
 does not count toward these totals. The table below groups current partial work.
 
 | Family | Custom support | Remaining examples |
@@ -17,7 +17,7 @@ does not count toward these totals. The table below groups current partial work.
 | Surfaces, vector icons, glass and springs | Retained BVT primitives and host-owned lifetime | Exact reference/theme/platform and source-equivalent performance qualification |
 | Labels, buttons, booleans, numbers, text and enums | Shared Canvas fields, source switches/sliders, searchable menus | Full property combinations, focus/accessibility and exact acceptance |
 | Color editing | Custom SV/hue/RGB/HSV/alpha/hex controls | Host eyedropper, locking/cubic modes and full native semantics |
-| Layout | Retained rows, columns, flows, grids, boxes and panel popovers | Remaining UILayout settings and complete sizing/alignment semantics |
+| Layout | Retained rows, columns, flows, grids, boxes, sizing policies and panel popovers | Remaining UILayout settings and complete sizing/alignment semantics |
 | Large lists | Default lists and registered Python row/filter callbacks on retained visible canvases | Bounded callback settings/layouts, native-only callbacks, drag/drop and full native semantics; see [registered lists](REGISTERED_LISTS.md) |
 | Color ramps and curves | Custom stop/point editing and channel controls | Remaining interpolation, handles, bounds and specialized modes |
 | Data selectors | Searchable ID and supported non-ID pointers, collection searches, ID tabs and ID actions | Unsupported pointer categories and preview/template families |

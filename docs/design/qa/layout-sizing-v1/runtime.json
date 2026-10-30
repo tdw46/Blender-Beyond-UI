@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "checks": [
+    "Sizing geometry suite in Blender Python",
+    "Real RNA hit mapping at narrow/normal/wide bounds",
+    "Compound aspect retained inside fixed height",
+    "Live sizing cancels edits with rollback and closes stale menus",
+    "Source motion teardown remains quiescent"
+  ]
+}

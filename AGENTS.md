@@ -205,6 +205,20 @@ this repository's provenance notes.
   Compare exact fidelity under the reference theme and validate light/dark/custom
   themes separately. Track missing theme plumbing as a parity defect.
 
+## Hard rule: automated tests must preserve user focus
+
+Never activate Blender or steal focus from Tyler's current app during automated
+tests. Run nonvisual fixtures with `--background`. Window-dependent GPU captures
+and simulated N-panel input must use `--no-window-focus` before file/script
+arguments through `tools/run_blender_tests.py`; it checks the installed executable
+for that capability and refuses a windowed launch if unavailable. Use disposable
+profiles and Blender-internal simulated events, never desktop input injection or
+an activate/raise/restore-focus workaround. Revalidate no activation when changing
+the runtime, platform or window workflow, including additional windows. If a test
+needs foreground focus, leave it explicitly unverified and continue safe work
+unless Tyler authorizes foreground testing. Stop only owned test processes.
+See `docs/BACKGROUND_TESTING.md` for the verified capture/input path and limits.
+
 ## Evidence and publication
 
 Maintain a member-by-member API inventory and custom parity ledger. Distinguish

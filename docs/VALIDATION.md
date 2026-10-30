@@ -1,5 +1,61 @@
 # Validation record — 2026-10-28
 
+## Focus-preserving tests and layout sizing — 2026-10-30
+
+The test runner defaults to headless execution. Windowed tests now require
+Blender's advertised `--no-window-focus` capability and cannot silently fall back
+to foreground execution. It records the command and child PID, rejects stale
+success markers and terminates only its owned child on timeout. Global and local
+AGENTS rules require preserving Tyler's current application focus. See the
+[procedure and activation audit](BACKGROUND_TESTING.md).
+
+- An AppKit activation observer plus 10 ms foreground sampling covered six
+  production GPU captures and two actual N-panel input tests on 5.1.2 and 5.2.2.
+  All eight passed; no Blender activation was observed and the same non-Blender
+  app remained foreground throughout the 51.5-second run. The monitor does not
+  restore focus or activate apps. This qualifies those workflows, not arbitrary
+  future windows or other platforms. The subsequent complete 42-process batch
+  also passed with no observed focus change over 129 seconds; its launch records
+  and monitor output are in the sizing gallery's `focus.json`.
+- 183 pure tests pass, including missing no-focus capability, mandatory launch
+  flags, stale result rejection and owned-process timeout cleanup.
+
+`scale_x/y` and `ui_units_x/y` now affect retained custom geometry. Children keep
+local zero defaults; inherited scales apply once, explicit logical-unit slots
+constrain geometry, and live changes cancel old edits before rearrangement.
+Fonts and compound-control aspect ratios retain the host scaling policy. See the
+[sizing contract](LAYOUT_SIZING.md) and [QA gallery](design/qa/layout-sizing-v1/index.html).
+
+- Native default/setter/child-property probes, RNA rollback, exact-owner menus,
+  real N-panel input, disabled motion and teardown pass on Blender 5.1.2/5.2.2.
+  Existing flow, registered/default lists, menus, popovers, pointers, ID templates,
+  operators and general runtime tests also pass: 24 execution records.
+- Six capture sets exercise normal/narrow/wide bounds, fixed dimensions, live
+  resizing, owner menus and disabled motion at 1×/1.5×/2×. All 360 motion-frame
+  pairs match with native font batching enabled/disabled. The retained one
+  backdrop, one strong blur and five offscreens stay stable. The README GIF uses
+  actual production frames; visual judgment remains Tyler's.
+- Equivalent sparse/dense paint workloads compare against `d3d6565`; ten
+  before/after RGB captures match. Timing distributions and resource/source hashes
+  are retained. A 144-control layout benchmark records 20 warmups / 200 samples
+  for invalidated and retained arrangement, separately from GPU paint. Configured
+  sizing has no implemented baseline equivalent. An initial ordinary-layout
+  slowdown prompted a weak registry and separate ordinary sizing/placement paths;
+  the new constraint walk runs only when a nonzero policy exists. These bounded
+  measurements do not establish source-equivalent speed or end-to-end latency.
+  Ordinary invalidated-layout medians were 0.1303 → 0.1367 ms (5.2) and
+  0.1296 → 0.1373 ms (5.1), a residual 5–6% increase in this microbenchmark;
+  retained-layout medians stayed 0.000083 ms. Configured invalidated layouts were
+  0.2679/0.2719 ms. Tail variation is retained in the records. This is not a claim
+  of zero overhead; sizing work remains outside painting and idle layout.
+
+All four sizing members remain partial: native height negotiation, minimum-size
+heuristics and pixel-exact spacing are not fully reproduced. The ledger is now
+**82 unimplemented / 55 partial / 0 reference-matched**. Full parity remains
+incomplete. The exact-reference, broader theme and platform gates remain open;
+Blender 4.2 has source evidence but no installed-runtime qualification. No live
+scene, original BVT code or user preferences were changed.
+
 ## Registered UIList callbacks — 2026-10-30
 
 Registered Python `draw_item`, `draw_filter` and `filter_items` now feed custom

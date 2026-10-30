@@ -1,0 +1,9 @@
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.007s
+
+OK
+SIZING {'passed': True, 'version': '5.1.2', 'build': 'ec6e62d40fa9', 'checks': ['Sizing geometry suite in Blender Python', 'Real RNA hit mapping at narrow/normal/wide bounds', 'Compound aspect retained inside fixed height', 'Live sizing cancels edits with rollback and closes stale menus', 'Source motion teardown remains quiescent']}
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)
+
+Blender quit

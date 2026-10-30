@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "version": "5.1.2",
+  "build": "ec6e62d40fa9",
+  "checks": [
+    "unit suite in Blender Python",
+    "real RNA grid owner hit after reflow",
+    "ancestor disable rolls back RNA edit",
+    "descendant active state retained",
+    "teardown quiescent"
+  ]
+}

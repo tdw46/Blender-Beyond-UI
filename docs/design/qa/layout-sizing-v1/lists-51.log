@@ -1,0 +1,4 @@
+REGISTERED_LISTS {'passed': True, 'checks': ['First click only selects; active row switches commit once and retain springs; menus target the clicked property', 'Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement', 'Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks', 'Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query', 'Disabling the parent invalidates row bindings and releases retained child canvases', 'Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter', 'Deferred child menu actions recheck callback registration even without another mouse event'], 'version': '5.1.2', 'build': 'ec6e62d40fa9'}
+00:01.825  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

@@ -493,17 +493,29 @@
     },
     "scale_x": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-sizing-v1/runtime.json",
+        "docs/design/qa/layout-sizing-v1/runtime-51.json",
+        "docs/design/qa/layout-sizing-v1/windowed.json",
+        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+      ]
     },
     "scale_y": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-sizing-v1/runtime.json",
+        "docs/design/qa/layout-sizing-v1/runtime-51.json",
+        "docs/design/qa/layout-sizing-v1/windowed.json",
+        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+      ]
     },
     "separator": {
       "kind": "method",
@@ -1140,17 +1152,29 @@
     },
     "ui_units_x": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-sizing-v1/runtime.json",
+        "docs/design/qa/layout-sizing-v1/runtime-51.json",
+        "docs/design/qa/layout-sizing-v1/windowed.json",
+        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+      ]
     },
     "ui_units_y": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-sizing-v1/runtime.json",
+        "docs/design/qa/layout-sizing-v1/runtime-51.json",
+        "docs/design/qa/layout-sizing-v1/windowed.json",
+        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+      ]
     },
     "use_property_decorate": {
       "kind": "property",

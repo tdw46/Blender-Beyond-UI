@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/layout-sizing-v1/capture.json",
+  "sha256": "b75e335b2eca05b70d24582a095bb88fbe7a8f5ee07692dffa028fefa6630001",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

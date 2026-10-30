@@ -1,0 +1,4 @@
+LAYOUT_BENCHMARK True {'invalidated': {'median_ms': 0.1366665, 'p95_ms': 0.330292, 'max_ms': 1.164125}, 'retained': {'median_ms': 8.3e-05, 'p95_ms': 0.000125, 'max_ms': 0.000167}, 'configured_invalidated': {'median_ms': 0.26791699999999996, 'p95_ms': 0.295541, 'max_ms': 0.588041}, 'configured_retained': {'median_ms': 8.3e-05, 'p95_ms': 0.000125, 'max_ms': 0.000208}}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

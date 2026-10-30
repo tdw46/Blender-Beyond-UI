@@ -5,6 +5,7 @@ only visible controls. Layout caches geometry until structure or width changes.
 """
 
 from dataclasses import dataclass, field, replace
+from weakref import WeakSet
 from .animation import AnimationSettings, Motion
 from .bindings import Edit
 from .editing import Text, number
@@ -61,6 +62,17 @@ class Group:
         )
         self.children = []
         self.rect = (0.0, 0.0, 0.0, 0.0)
+        self._sync_size_policy()
+
+    def _sync_size_policy(self):
+        registry = self.canvas._sized_groups
+        if any(
+            self.options.get(name, 0)
+            for name in ("scale_x", "scale_y", "ui_units_x", "ui_units_y")
+        ):
+            registry.add(self)
+        else:
+            registry.discard(self)
 
     def _refresh_enabled(self):
         """Resolve inherited eligibility on policy changes, never during paint."""
@@ -204,6 +216,7 @@ class Canvas(Group):
         self._motion_focus = None
         self.theme = theme or Theme()
         self.controls = {}
+        self._sized_groups = WeakSet()
         self._composites = {}
         self._dirty = True
         self._width = None
@@ -442,7 +455,7 @@ class Canvas(Group):
         from .flow import Plan
 
         t = self.theme
-        plan = Plan(t, self.text_measure)
+        plan = Plan(t, self.text_measure, self if self._sized_groups else None)
         inner = max(0.0, width - 2 * t.padding)
         plan.place(self, t.padding, t.padding, inner)
         self.height = self.rect[3] + 2 * t.padding

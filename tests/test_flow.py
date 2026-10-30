@@ -121,10 +121,6 @@ class Flow(unittest.TestCase):
             "active_default",
             "alert",
             "emboss",
-            "scale_x",
-            "scale_y",
-            "ui_units_x",
-            "ui_units_y",
         ):
             self.assertFalse(ui.supports(name), name)
         for name in (

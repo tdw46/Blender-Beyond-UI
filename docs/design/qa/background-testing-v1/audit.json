@@ -1,0 +1,164 @@
+{
+  "passed": true,
+  "date": "2026-10-30",
+  "platform": "macOS",
+  "runs": [
+    {
+      "pid": 22831,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-run"
+    },
+    {
+      "pid": 22855,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-1.5x-run"
+    },
+    {
+      "pid": 22882,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-2x-run"
+    },
+    {
+      "pid": 22922,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_sizing_windowed.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "windowed"
+    },
+    {
+      "pid": 22957,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-51-run"
+    },
+    {
+      "pid": 22986,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-51-1.5x-run"
+    },
+    {
+      "pid": 23018,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_sizing.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "capture-51-2x-run"
+    },
+    {
+      "pid": 23077,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_sizing_windowed.py"
+      ],
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "label": "windowed-51"
+    }
+  ],
+  "monitor": {
+    "child_exit": 0,
+    "events": [
+      {
+        "kind": "initial",
+        "pid": 15124,
+        "seconds": 0.0017029047012329102
+      },
+      {
+        "kind": "final",
+        "pid": 15124,
+        "seconds": 51.49781394004822
+      }
+    ],
+    "sampled_frontmost_pids": [
+      15124
+    ],
+    "seconds": 51.49792492389679
+  },
+  "monitor_source_sha256": "a96200f694b4563ced4671b5543cfa992c6b94c03d48bd821a4522911157b952",
+  "limits": "This launch/capture/N-panel workflow only; repeat for changed runtimes or additional-window behavior."
+}

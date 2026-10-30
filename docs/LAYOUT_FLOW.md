@@ -84,7 +84,8 @@ and hashes used for split/flow/grid signatures and packing behavior. Additional
 runtimes exercise real RNA and N-panel mouse/context input in disposable profiles.
 No installed 4.2 runtime is available, and no older API path was removed.
 
-`scale_x/y`, `ui_units_x/y`, complete property-split alignment, automatic root-block
+[Explicit scales and unit slots](LAYOUT_SIZING.md) now affect custom geometry.
+Complete native size negotiation, property-split alignment, automatic root-block
 width equivalence, joined corners, every compound-child sizing combination,
 platform/theme qualification and exact generated-reference acceptance remain
 open. These methods are partial in the member ledger. They do not close the

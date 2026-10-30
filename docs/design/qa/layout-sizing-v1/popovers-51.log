@@ -1,0 +1,4 @@
+POPOVER_RUNTIME {'passed': True, 'version': '5.1.2', 'checks': ['Shared scalar and registered-menu edits commit through the host; right-click retains exact property ownership', 'Nested dismissal preserves the parent; narrow/short bounds scroll without rebuilding draw callbacks; teardown clears children', 'Enum and color property popovers receive exact button_pointer/button_prop context', 'Group filtering/order, poll reactivation, guarded deferred actions, outside right-click and atomic body/header rejection pass']}
+00:02.536  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

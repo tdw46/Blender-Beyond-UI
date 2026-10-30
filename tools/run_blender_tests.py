@@ -6,8 +6,19 @@ import os
 from pathlib import Path
 import subprocess
 import tempfile
+from functools import lru_cache
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@lru_cache(maxsize=8)
+def require_no_focus(executable):
+    """Fail closed before opening a window on an unqualified executable."""
+    help_text = subprocess.run(
+        [executable, "--help"], capture_output=True, text=True, timeout=15, check=True
+    ).stdout
+    if "--no-window-focus" not in help_text:
+        raise RuntimeError("Windowed testing requires Blender --no-window-focus")
 
 
 def main():
@@ -34,13 +45,15 @@ def main():
             path.mkdir(parents=True, exist_ok=True)
             env[key] = str(path)
         result = output / f"result-{i}.json"
+        result.unlink(missing_ok=True)
         log = output / f"blender-{i}.log"
         env["BEYOND_UI_TEST_RESULT"] = str(result)
         command = [executable, "--factory-startup", "--python-exit-code", "1"]
         if not args.windowed:
             command += ["--background"]
         else:
-            command += ["--enable-event-simulate"]
+            require_no_focus(executable)
+            command += ["--no-window-focus", "--enable-event-simulate"]
         command += [
             "--python",
             str(
@@ -53,13 +66,19 @@ def main():
         ]
         try:
             with log.open("w") as stream:
-                code = subprocess.run(
+                with subprocess.Popen(
                     command,
                     env=env,
                     stdout=stream,
                     stderr=subprocess.STDOUT,
-                    timeout=90,
-                ).returncode
+                ) as process:
+                    pid = process.pid
+                    try:
+                        code = process.wait(timeout=90)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        process.wait()
+                        raise
         except subprocess.TimeoutExpired:
             code = "timeout"
         record = json.loads(result.read_text()) if result.exists() else {}
@@ -70,6 +89,9 @@ def main():
         )
         summary = {
             "blender": str(executable),
+            "pid": pid,
+            "command": command,
+            "focus_policy": "no-window-focus" if args.windowed else "headless",
             "passed": passed,
             "returncode": code,
             "result": record,

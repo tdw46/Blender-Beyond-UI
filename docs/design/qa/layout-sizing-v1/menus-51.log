@@ -1,0 +1,4 @@
+REGISTERED_MENUS {'passed': True, 'version': '5.1.2', 'checks': ['Scalar/toggle edits commit once; nested Python draw helpers, operator arguments and context pointers execute correctly', '100-row menus remain searchable without truncation; prop_with_menu exposes the exact property context', 'Per-row context menus copy exact property paths/operator arguments; right-click cancels pending edits before menu navigation', 'Poll changes prevent deferred and inline actions; unsupported draw aborts atomically instead of retaining a partial menu', 'Disabled parent layouts gate submenu right-click opening and pending nested/operator-enum execution', 'Unregistered definitions invalidate open menus before execution', 'Long nested menus retain all rows; hover polls only visible rows; row bounds fail explicitly']}
+00:02.590  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit
