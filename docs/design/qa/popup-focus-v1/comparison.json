@@ -1,0 +1,378 @@
+{
+  "exact_match": false,
+  "full_custom_parity": false,
+  "remaining": "80 unimplemented / 57 partial / 0 reference-matched",
+  "baseline": "54dd612eb3152fc45ebbc1aaa5e3cd651dc31a68",
+  "acceptance": "Existing BVT controls reused; initial text and numeric editing plus default operator activation. Generated-reference and visual QA remain open. Code and execution checks only.",
+  "native_text_batching_equal_frames": 360,
+  "existing_workload_pixel_comparisons": [
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    }
+  ],
+  "performance": [
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07325049955397844,
+          "p95_ms": 0.09466602932661772,
+          "max_ms": 0.20700006280094385
+        },
+        "open_scalar": {
+          "median_ms": 0.22352102678269148,
+          "p95_ms": 0.25112496223300695,
+          "max_ms": 0.2880000974982977
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.23800000781193376,
+          "p95_ms": 0.30383304692804813,
+          "max_ms": 0.390209024772048
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07887545507401228,
+          "p95_ms": 0.10370800737291574,
+          "max_ms": 0.24524994660168886
+        },
+        "open_scalar": {
+          "median_ms": 0.22514548618346453,
+          "p95_ms": 0.25166699197143316,
+          "max_ms": 0.2967079635709524
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.24079205468297005,
+          "p95_ms": 0.3032080130651593,
+          "max_ms": 0.41129207238554955
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7083539967425168,
+          "p95_ms": 0.7568750297650695,
+          "max_ms": 0.8691670373082161
+        },
+        "open_scalar": {
+          "median_ms": 0.8331875433214009,
+          "p95_ms": 0.9503749897703528,
+          "max_ms": 1.1240829480811954
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2009164784103632,
+          "p95_ms": 1.3437500456348062,
+          "max_ms": 1.4637920539826155
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0625625145621598,
+          "p95_ms": 1.2063750764355063,
+          "max_ms": 1.3665829319506884
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.716416456270963,
+          "p95_ms": 0.7973749889060855,
+          "max_ms": 0.9096249705180526
+        },
+        "open_scalar": {
+          "median_ms": 0.8467915467917919,
+          "p95_ms": 0.9471670491620898,
+          "max_ms": 1.0304159950464964
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1812709853984416,
+          "p95_ms": 1.3114999746903777,
+          "max_ms": 1.3637919910252094
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0439580073580146,
+          "p95_ms": 1.1522499844431877,
+          "max_ms": 1.232040929608047
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07924996316432953,
+          "p95_ms": 0.10787497740238905,
+          "max_ms": 0.25929207913577557
+        },
+        "open_scalar": {
+          "median_ms": 0.2201875322498381,
+          "p95_ms": 0.2412919420748949,
+          "max_ms": 0.3404580056667328
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.23874995531514287,
+          "p95_ms": 0.3022090531885624,
+          "max_ms": 0.37591601721942425
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.08104147855192423,
+          "p95_ms": 0.10699999984353781,
+          "max_ms": 0.261958921328187
+        },
+        "open_scalar": {
+          "median_ms": 0.2232920378446579,
+          "p95_ms": 0.2387920394539833,
+          "max_ms": 0.2536249812692404
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.22943801013752818,
+          "p95_ms": 0.29462494421750307,
+          "max_ms": 0.37949997931718826
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.6841669674031436,
+          "p95_ms": 0.7650420302525163,
+          "max_ms": 0.868291943334043
+        },
+        "open_scalar": {
+          "median_ms": 0.8123749285005033,
+          "p95_ms": 0.858957995660603,
+          "max_ms": 1.0165419662371278
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1553334770724177,
+          "p95_ms": 1.2880000285804272,
+          "max_ms": 1.392874983139336
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0043540387414396,
+          "p95_ms": 1.143125002272427,
+          "max_ms": 1.4009999576956034
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7205834845080972,
+          "p95_ms": 0.8066250011324883,
+          "max_ms": 0.8565420284867287
+        },
+        "open_scalar": {
+          "median_ms": 0.8250620448961854,
+          "p95_ms": 0.8910420583561063,
+          "max_ms": 1.0162079706788063
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1819374631159008,
+          "p95_ms": 1.314750057645142,
+          "max_ms": 1.4563750009983778
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0975414770655334,
+          "p95_ms": 1.2293329928070307,
+          "max_ms": 1.2961250031366944
+        }
+      }
+    }
+  ],
+  "paired_performance": [
+    {
+      "runtime": "5.2.2 LTS",
+      "method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; exact baseline paint and visible_controls functions. 20 warmups each; readback excluded.",
+      "timings": {
+        "closed_fields": {
+          "before": {
+            "median_ms": 0.7774999248795211,
+            "p95_ms": 1.0994169861078262,
+            "max_ms": 1.283082994632423
+          },
+          "after": {
+            "median_ms": 0.7624580175615847,
+            "p95_ms": 1.1157919652760029,
+            "max_ms": 1.2810840271413326
+          }
+        },
+        "open_scalar": {
+          "before": {
+            "median_ms": 1.21127103921026,
+            "p95_ms": 1.3451660051941872,
+            "max_ms": 1.704416936263442
+          },
+          "after": {
+            "median_ms": 1.2084165355190635,
+            "p95_ms": 1.376166008412838,
+            "max_ms": 1.844584010541439
+          }
+        },
+        "open_scalar_retained": {
+          "before": {
+            "median_ms": 1.3228750322014093,
+            "p95_ms": 1.6351670492440462,
+            "max_ms": 2.093916991725564
+          },
+          "after": {
+            "median_ms": 1.3141250237822533,
+            "p95_ms": 1.7025830456987023,
+            "max_ms": 2.567416988313198
+          }
+        },
+        "scrolled_controls": {
+          "before": {
+            "median_ms": 1.1682285112328827,
+            "p95_ms": 1.5392090426757932,
+            "max_ms": 1.9366659689694643
+          },
+          "after": {
+            "median_ms": 1.1689795064739883,
+            "p95_ms": 1.457334030419588,
+            "max_ms": 1.610749983228743
+          }
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; exact baseline paint and visible_controls functions. 20 warmups each; readback excluded.",
+      "timings": {
+        "closed_fields": {
+          "before": {
+            "median_ms": 0.7787290378473699,
+            "p95_ms": 1.0735000250861049,
+            "max_ms": 1.285084057599306
+          },
+          "after": {
+            "median_ms": 0.7894375012256205,
+            "p95_ms": 1.0281669674441218,
+            "max_ms": 1.3087079860270023
+          }
+        },
+        "open_scalar": {
+          "before": {
+            "median_ms": 1.2587705277837813,
+            "p95_ms": 1.4202079037204385,
+            "max_ms": 2.1463329903781414
+          },
+          "after": {
+            "median_ms": 1.2603744980879128,
+            "p95_ms": 1.4762079808861017,
+            "max_ms": 1.9832919351756573
+          }
+        },
+        "open_scalar_retained": {
+          "before": {
+            "median_ms": 1.2739580124616623,
+            "p95_ms": 1.399958971887827,
+            "max_ms": 1.7333750147372484
+          },
+          "after": {
+            "median_ms": 1.2714374461211264,
+            "p95_ms": 1.3992079766467214,
+            "max_ms": 1.9905000226572156
+          }
+        },
+        "scrolled_controls": {
+          "before": {
+            "median_ms": 1.2051875237375498,
+            "p95_ms": 1.4216250274330378,
+            "max_ms": 2.487707999534905
+          },
+          "after": {
+            "median_ms": 1.2134374701417983,
+            "p95_ms": 1.43324991222471,
+            "max_ms": 2.6116250082850456
+          }
+        }
+      }
+    }
+  ]
+}

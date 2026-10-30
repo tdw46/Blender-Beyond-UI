@@ -155,6 +155,12 @@ class PanelPopover(Widget):
         self.scroll_drag = None
         units = getattr(model.cls, "bl_ui_units_x", 0) or 16
         self.preferred_width = min(960.0, max(160.0, float(units) * 20.0))
+        from .popup_focus import PopupFocus
+
+        self.focus = PopupFocus(self)
+
+    def opened(self, context):
+        self.focus.open(context)
 
     def dimensions(self, font_size, available_width, available_height=None):
         self.canvas.theme = self.parent.theme
@@ -187,6 +193,7 @@ class PanelPopover(Widget):
         return (0, self.scroll, self.width, self.height)
 
     def cancel(self):
+        self.focus.close()
         self.scroll_drag = None
         if self.canvas.shortcut_registry:
             for token in self.canvas._scoped_shortcuts.values():
@@ -228,6 +235,14 @@ class PanelPopover(Widget):
             self.parent.menu_error = "Popover owner, registration or context changed"
             return inside((0, 0, self.width, self.height), x, y)
         child = self.canvas
+        if child.active is not None and (
+            child.controls.get(child.active.key) is not child.active
+            or not child.active.enabled
+        ):
+            child.cancel()
+            child.menu_error = "The edited popup control is no longer available"
+            self.parent.menu_error = child.menu_error
+            return True
         self.motion.input(event, x, y)
         press = event.value in {"PRESS", "DOUBLE_CLICK"}
         thumb, track, travel, limit = self.scrollbar()
@@ -315,6 +330,11 @@ class PanelPopover(Widget):
             )
             if old != self.scroll:
                 child.blur_focus()
+            return True
+        used = self.focus.event(event, context)
+        if used:
+            if child.menu_error:
+                self.parent.menu_error = child.menu_error
             return True
         used = child.event(
             event,

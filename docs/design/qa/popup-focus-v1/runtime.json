@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Array components and property-split decorators preserve the author's initial activation flag",
+    "Initial selection edits exact RNA; Return commits before default action; repeats do not execute",
+    "Numeric expressions commit; invalid text keeps edit; keypad Return invokes default",
+    "Nested default stays in child popup; edit cancellation preserves exact-property context menus",
+    "Stale poll and removed registration reject default actions and release popup state"
+  ]
+}

@@ -4,10 +4,16 @@
   "members": {
     "activate_init": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Registered custom panel popovers start the first eligible marked text/numeric edit with selection, including internal array/property-split rows. Fields scroll into view once; invalid or disabled owners reject edits; no OS focus change. Other control kinds, native dialog focus/Tab semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/popup-focus-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/popup-focus-v1/runtime.json",
+        "docs/design/qa/popup-focus-v1/runtime-51.json",
+        "docs/design/qa/popup-focus-v1/windowed.json",
+        "docs/design/qa/popup-focus-v1/windowed-51.json"
+      ]
     },
     "active": {
       "kind": "property",
@@ -24,10 +30,16 @@
     },
     "active_default": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Registered custom panel popovers invoke the first eligible marked ordinary operator button on Return/keypad Enter when no editor, menu, nested popup or compound widget owns input. Repeats/modifiers and stale owners are guarded; editor Return commits first. Finished/modal results dismiss only the originating popup. Operator variants, full native acceptance semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/popup-focus-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/popup-focus-v1/runtime.json",
+        "docs/design/qa/popup-focus-v1/runtime-51.json",
+        "docs/design/qa/popup-focus-v1/windowed.json",
+        "docs/design/qa/popup-focus-v1/windowed-51.json"
+      ]
     },
     "alert": {
       "kind": "property",

@@ -141,6 +141,25 @@ def paint(
                 border=0.6 * scale,
             )
 
+    def editing_text(control, value, r, ink):
+        """Keep the label outside the editable value's selection and caret."""
+        a, b, c, d = r
+        label_width = (
+            min(
+                max(0, c - 40 * scale),
+                measure(
+                    typography.face(font, "body"),
+                    t.font_size * scale,
+                    control.label + "  ",
+                )[0],
+            )
+            if control.label
+            else 0
+        )
+        if label_width:
+            text(control.label, (a, b, label_width + 6 * scale, d), ink)
+        text(value, (a + label_width, b, c - label_width, d), ink, editor=canvas.editor)
+
     count = 0
     animation_colors = None
     numeric_states = {}  # Resolve shared scene/view settings once per visible host paint.
@@ -358,16 +377,24 @@ def paint(
                                 else None,
                             )
                     else:
-                        text(f"{control.label}  {label}", r, ink)
+                        if canvas.active is control and canvas.editor:
+                            editing_text(control, label, r, ink)
+                        else:
+                            text(f"{control.label}  {label}", r, ink)
                 elif kind == "text":
                     value = (
                         canvas.editor.text
                         if canvas.active is control and canvas.editor
                         else value
                     )
-                    text(
-                        f"{control.label}  {value if value is not None else ''}", r, ink
-                    )
+                    if canvas.active is control and canvas.editor:
+                        editing_text(control, value or "", r, ink)
+                    else:
+                        text(
+                            f"{control.label}  {value if value is not None else ''}",
+                            r,
+                            ink,
+                        )
                 elif kind == "button" and (
                     control.options.get("operator_enum")
                     or control.options.get("menu_model")

@@ -172,7 +172,7 @@ class Layout:
         return "VERTICAL"
 
     def _options(self):
-        return {}
+        return {"activate_init": bool(self.activate_init)} if self.activate_init else {}
 
     def _child(self, group):
         child = Layout(
@@ -339,6 +339,7 @@ class Layout:
         ):
             row = self.row()
             row.use_property_decorate = False
+            row.activate_init = self.activate_init
             result = row.prop(**arguments)
             row.prop_decorator(data, property, index=index)
             return result
@@ -370,6 +371,7 @@ class Layout:
             and subtype not in {"COLOR", "COLOR_GAMMA"}
         ):
             row = self.row()
+            row.activate_init = self.activate_init
             for i in range(meta.array_length):
                 row.prop(
                     data, property, text=f"{label} {i + 1}", index=i, slider=slider
@@ -861,7 +863,9 @@ class Layout:
             self._key(operator),
             label,
             execute,
-            selected=depress,
+            selected=depress or bool(self.active_default and self.is_popover),
+            active_default=bool(self.active_default),
+            operator_button=True,
             icon=icon,
             context_menu=lambda target, ctx: operator_entries(
                 operator,
@@ -1131,8 +1135,6 @@ class Layout:
     def supports(self, name):
         # Accepted legacy attributes without custom behavior are not capabilities.
         if name in {
-            "activate_init",
-            "active_default",
             "alert",
             "emboss",
         }:

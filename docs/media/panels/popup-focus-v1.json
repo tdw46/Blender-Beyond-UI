@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/popup-focus-v1/capture.json",
+  "sha256": "0fbacad0bda22612299fc1407440dd8907b526f8981d0a9550e951b783bcd802",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

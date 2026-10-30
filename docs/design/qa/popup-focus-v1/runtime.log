@@ -1,0 +1,4 @@
+POPUP_FOCUS {'passed': True, 'version': '5.2.2 LTS', 'checks': ["Array components and property-split decorators preserve the author's initial activation flag", 'Initial selection edits exact RNA; Return commits before default action; repeats do not execute', 'Numeric expressions commit; invalid text keeps edit; keypad Return invokes default', 'Nested default stays in child popup; edit cancellation preserves exact-property context menus', 'Stale poll and removed registration reject default actions and release popup state']}
+00:02.584  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

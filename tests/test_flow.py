@@ -117,8 +117,6 @@ class Flow(unittest.TestCase):
     def test_inert_attributes_do_not_claim_capability(self):
         ui = Layout()
         for name in (
-            "activate_init",
-            "active_default",
             "alert",
             "emboss",
         ):

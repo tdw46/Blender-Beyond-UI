@@ -373,6 +373,7 @@ class Canvas(Group):
             self.cancel()
             self.open_widget(widget, control, clip)
             widget.canvas.bind_shortcuts(context, widget.clip)
+            widget.opened(context)
             self._bind_motion(widget.motion, control)
             widget.motion.pulse("reveal", 0.12)
             self.menu_error = None

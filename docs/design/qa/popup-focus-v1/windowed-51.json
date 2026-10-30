@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "Actual no-focus N-panel input opens a preselected text/numeric edit without clicking the field",
+    "Typing replaces the selection; Return commits before a second Return invokes the exact default operator",
+    "Right-click retains exact owner actions; keypad Return, native local-flag probes and timer teardown pass"
+  ],
+  "native_probes": {
+    "defaults": [
+      false,
+      false
+    ],
+    "setters": [
+      true,
+      true
+    ],
+    "children": [
+      false,
+      false
+    ]
+  }
+}

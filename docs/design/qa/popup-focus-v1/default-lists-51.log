@@ -1,0 +1,4 @@
+COLLECTION_LISTS {'passed': True, 'checks': ['First click selects the original index; active double-click rename commits through host', 'Mouse/keyboard menus target exact row name; menu-started rename captures and right-click cancels', 'Wildcard sorting preserves source indices; moved/deleted deferred row bindings fail closed', 'Host commit failure rolls back; missing lists and incompatible callback data fail atomically', 'PropertyGroup rows require host keys; ID collections work with public RNA identity', 'Retained original RNA wrappers reject deleted ID rows, even after equal-count replacement'], 'version': '5.1.2', 'build': 'ec6e62d40fa9'}
+00:01.799  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

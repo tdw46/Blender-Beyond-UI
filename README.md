@@ -40,6 +40,15 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Popup keyboard actions
+
+Popovers can open with a selected text/numeric field and a default Return action.
+Edits commit before execution; nested menus and stale owners retain their guards.
+[Keyboard QA](docs/design/qa/popup-focus-v1/index.html) ·
+[Behavior and remaining gaps](docs/POPUP_KEYBOARD.md)
+
+![Actual popup editing and source menu motion](docs/media/panels/popup-focus-v1.gif)
+
 ## Layout sizing
 
 ![Actual Blender layout sizing animation](docs/media/panels/layout-sizing-v1.gif)

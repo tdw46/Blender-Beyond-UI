@@ -1,5 +1,47 @@
 # Validation record — 2026-10-28
 
+## Popup initial editing and default actions — 2026-10-30
+
+Custom registered-panel popovers now consume `activate_init` and `active_default`.
+Text/numeric fields open selected, with no data write or operator invocation.
+Return commits an edit before a subsequent Return invokes a guarded ordinary
+operator. Default buttons reuse the selected theme role; text/plain-number
+selection and carets now cover the value separately from the label. See the
+[keyboard contract](POPUP_KEYBOARD.md) and [production QA](design/qa/popup-focus-v1/index.html).
+
+- 193 pure tests pass: initial selection, scroll reveal, cancellation, invalid
+  numeric text, repeated/modified Return, disabled/replaced controls, stale
+  owners, context-menu priority and replacement-overlay protection.
+- Disposable Blender 5.1.2/5.2.2 fixtures verify real RNA commits, array and
+  property-split requests, nested default ownership, poll/registration changes,
+  exact-property right-click actions and teardown. Actual N-panel event tests
+  type into preselected fields, commit, invoke defaults and check native flag
+  defaults/setters/child-local behavior. Existing popover, numeric, list, flow,
+  menu, pointer, ID-template, context and operator regressions pass: 28 records.
+- Six captures cover normal/narrow bounds at 1×/1.5×/2×, selected text/numeric
+  fields, committed values, nested popovers, context menus and disabled motion.
+  All 360 animation-frame pairs match with native text batching on/off. One
+  backdrop, one strong blur and five offscreens stay stable; painting calls no
+  panel draw/poll callbacks. The README GIF contains production frames.
+- All 42 main-batch Blender processes passed with no observed activation or
+  foreground change during 156 seconds of AppKit monitoring. Tests use
+  `--background` or `--no-window-focus`; they never activate Blender.
+- Equivalent sparse/dense workloads compare against `54dd612`: ten before/after
+  RGB captures match. New and existing workloads retain CPU timing distributions
+  and resource/source hashes. Separate-process dense measurements varied up to
+  roughly 9%; a same-process diagnostic alternated the exact old/new painters and
+  visible-control functions with shared canvas/fonts/GPU/backdrop (20 warmups,
+  200 samples per revision/state). Median differences were −1.93% to +1.38% across
+  both versions. The larger gap did not reproduce in this paired comparison;
+  this is not proof of zero overhead, GPU latency or source-equivalent speed.
+
+Both members remain partial. Other initial-control kinds, operator variants,
+complete dialog acceptance and Tab navigation are still open. The ledger is
+**80 unimplemented / 57 partial / 0 reference-matched**; full custom parity is
+not complete. Exact-reference/theme acceptance remains Tyler's QA. Blender 4.2
+has source evidence but no installed execution qualification; Windows remains
+unqualified. No source BVT files, unrelated live scenes or preferences changed.
+
 ## Focus-preserving tests and layout sizing — 2026-10-30
 
 The test runner defaults to headless execution. Windowed tests now require
