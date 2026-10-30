@@ -47,6 +47,17 @@ class OperatorChoices(unittest.TestCase):
             "test.choice", "choice", self.context, "EXEC_DEFAULT", {}, lambda x: x
         )
 
+    def test_parent_disabled_before_build_can_be_reenabled(self):
+        from beyond_ui import Layout
+
+        ui = Layout(context=self.context)
+        ui.enabled = False
+        with patch.object(ui, "_operator_enum", return_value=self.model):
+            ui.operator_enum("test.choice", "choice")
+        self.assertFalse(any(c.enabled for c in ui.canvas.controls.values()))
+        ui.enabled = True
+        self.assertTrue(all(c.enabled for c in ui.canvas.controls.values()))
+
     def test_prepare_does_not_execute_and_selection_uses_exact_arguments(self):
         self.model.properties.amount = 3
         rows, valid = self.model.rows(self.context)

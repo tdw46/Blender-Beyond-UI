@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['Custom layout direction matches live native RNA for root, row, column, split, grid, flow and box', 'Real N-panel grid toggle mouse input writes its exact RNA property', 'Right-click menu resolves the clicked grid cell owner', 'Runtime ancestor disable blocks input and reenable restores input', 'Disabled animation and teardown leave no host timers or bridge errors']}
+00:07.147  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

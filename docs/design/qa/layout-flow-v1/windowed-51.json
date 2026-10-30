@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "Custom layout direction matches live native RNA for root, row, column, split, grid, flow and box",
+    "Real N-panel grid toggle mouse input writes its exact RNA property",
+    "Right-click menu resolves the clicked grid cell owner",
+    "Runtime ancestor disable blocks input and reenable restores input",
+    "Disabled animation and teardown leave no host timers or bridge errors"
+  ]
+}

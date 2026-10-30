@@ -143,19 +143,20 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
             a, b, c, d = r
             kind = control.kind
             slider = kind == "number" and control.options.get("slider", True)
-            ink = palette["text"] if control.enabled else palette["muted"]
             # No binding reads for fully clipped controls or hidden canvases.
             try:
                 value = control.binding.read() if control.binding else None
             except (ReferenceError, RuntimeError):
                 value = None
+            enabled = control.enabled
+            ink = palette["text"] if enabled else palette["muted"]
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
-            if selected and control.enabled:
+            if selected and enabled:
                 ink = palette["selected_text"]
             if kind != "widget":
                 control.motion.begin_paint()
-                if control.enabled and kind in {
+                if enabled and kind in {
                     "button",
                     "number",
                     "event",
@@ -225,7 +226,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         shape=control.motion.sample("body")[0],
                         scale=scale,
                         palette=palette
-                        if control.enabled
+                        if enabled
                         else dict(
                             palette,
                             text=palette["muted"],
@@ -260,7 +261,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                         colors = animation_colors
                         color = (
                             colors.get(state, palette["muted"])
-                            if control.enabled
+                            if enabled
                             else palette["muted"]
                         )
                         glyph = {
@@ -328,7 +329,7 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                             shape=control.motion.sample("handle")[0],
                             scale=scale,
                             palette=palette,
-                            enabled=control.enabled,
+                            enabled=enabled,
                         )
                         field = mapped(field)
                         with control.motion.deform("field", field):

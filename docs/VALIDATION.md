@@ -958,3 +958,41 @@ public RNA remains the compatibility fallback. Blender 4.2 execution, broader
 theme/platform acceptance, custom icons/icon-only actions, complete native
 OperatorProperties semantics and all layout/invocation contexts remain open.
 The ledger now has 45 partial members out of 137, with zero reference-matched.
+
+## Retained layout foundations — 2026-10-30
+
+[Layout QA](design/qa/layout-flow-v1/index.html) records split layouts, balanced column flow, weighted/even grids, flexible row spacers, live inherited enable/active state and intrinsic row/column alignment. Every visible control uses the existing BVT material, theme, scalar geometry and motion paths. The user owns visual acceptance.
+
+144 unit tests pass. Disposable Blender 5.1.2 and 5.2.2 runs pass real RNA, N-panel mouse/context input, operator regressions, native direction comparisons, vendorability and general runtime checks. The direction audit includes source snapshots across 4.2–5.2; a version gate preserves the grid-direction change in 4.5. No 4.2 runtime is installed.
+
+360 motion frames at 1×, 1.5× and 2× match exactly with native font batching enabled/disabled. Captures preserve one shared backdrop, one strong blur, five offscreens and stable fonts/shaders/batches/layout. Closed painting evaluates each visible control eligibility predicate once. Reflow performs no binding reads; unchanged arrangement does not measure again.
+
+### Performance
+
+Metal, 640×560, logical scale 1. Each state uses 20 warmups and 100 CPU submission samples, excluding readback. The new layout fixture includes two numeric fields, six grid switches, four flow buttons and a disabled row.
+
+| Runtime | New layout median / p95 ms |
+| --- | ---: |
+| 5.2.2 | 0.318 / 0.344 |
+| 5.1.2 | 0.319 / 0.383 |
+
+The unchanged-workload regression uses 144 buttons in 24 rows, a clipped/scrolled 520-pixel viewport and a 48-action menu. Published `d2be324` and current RGB pixels match in all ten sparse/dense comparison states across both runtimes.
+
+| Runtime | Dense workload | Before median / p95 ms | After median / p95 ms |
+| --- | --- | ---: | ---: |
+| 5.2.2 | closed controls | 0.719 / 0.818 | 0.727 / 0.806 |
+| 5.2.2 | open menu | 0.839 / 0.937 | 0.853 / 0.958 |
+| 5.2.2 | retained menu | 1.189 / 1.261 | 1.239 / 1.390 |
+| 5.2.2 | scrolled controls | 1.030 / 1.106 | 1.120 / 1.268 |
+| 5.1.2 | closed controls | 0.734 / 0.810 | 0.700 / 0.740 |
+| 5.1.2 | open menu | 0.878 / 0.987 | 0.870 / 0.976 |
+| 5.1.2 | retained menu | 1.327 / 1.486 | 1.294 / 1.448 |
+| 5.1.2 | scrolled controls | 1.134 / 1.280 | 1.123 / 1.243 |
+
+The initial implementation walked ancestors during painting. Profiling workloads exposed that cost; inherited eligibility now updates on policy changes, spacers have no paint/hit-test entry, and painting resolves eligibility once per visible control. The final samples still vary by runtime/state: the 5.2.2 scrolled median is about 0.09 ms higher, while the 5.1.2 sample is slightly lower. These separate-process CPU timings do not establish a speedup, absence of every regression, GPU completion/input latency or full source-BVT workload equivalence. That broader performance gate remains open.
+
+### Honest remaining scope
+
+The ledger contains **95 unimplemented and 42 partial members**, zero reference-matched. Five missing authoring members gained implementations in this change. The audit also corrected eight inert attributes previously counted as partial: `activate_init`, `active_default`, `alert`, `emboss`, `scale_x/y` and `ui_units_x/y`. Their stored attributes remain compatible, but `supports()` now returns false. Full parity is not finished and `check_custom_parity.py --require-complete` correctly fails.
+
+Remaining work includes specialized ID/list/preview, image/movie/scope, node/modifier/constraint, asset/menu/popover, header/status and multiline templates, the inert settings above, incomplete existing-editor semantics and exact-reference/theme/platform acceptance. No stub, generic form or native forwarding was counted as custom completion. See [layout limits](LAYOUT_FLOW.md) and the [member ledger](CUSTOM_PARITY.json).

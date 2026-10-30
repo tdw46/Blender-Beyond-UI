@@ -35,9 +35,12 @@ class Control:
     rect: tuple = (0.0, 0.0, 0.0, 0.0)
 
     motion: object = field(default_factory=Motion, repr=False)
+    _layout_enabled: bool = field(default=True, repr=False, compare=False)
 
     @property
     def enabled(self):
+        if not self._layout_enabled:
+            return False
         value = self.options.get("enabled", True)
         return bool(value() if callable(value) else value) and (
             self.binding is None or self.binding.valid()
@@ -45,22 +48,42 @@ class Control:
 
 
 class Group:
-    def __init__(self, canvas, kind="column", parent=None):
+    def __init__(self, canvas, kind="column", parent=None, **options):
         self.canvas, self.kind, self.parent = canvas, kind, parent
+        self.options = options
+        self._effective_enabled = bool(
+            (parent is None or parent._effective_enabled)
+            and options.get("enabled", True)
+            and options.get("active", True)
+        )
         self.children = []
         self.rect = (0.0, 0.0, 0.0, 0.0)
 
-    def _group(self, kind):
-        child = Group(self.canvas, kind, self)
+    def _refresh_enabled(self):
+        """Resolve inherited eligibility on policy changes, never during paint."""
+        inherited = self.parent._effective_enabled if self.parent is not None else True
+        self._effective_enabled = bool(
+            inherited
+            and self.options.get("enabled", True)
+            and self.options.get("active", True)
+        )
+        for child in self.children:
+            if isinstance(child, Group):
+                child._refresh_enabled()
+            else:
+                child._layout_enabled = self._effective_enabled
+
+    def _group(self, kind, **options):
+        child = Group(self.canvas, kind, self, **options)
         self.children.append(child)
         self.canvas.invalidate()
         return child
 
-    def row(self):
-        return self._group("row")
+    def row(self, **options):
+        return self._group("row", **options)
 
-    def column(self):
-        return self._group("column")
+    def column(self, **options):
+        return self._group("column", **options)
 
     def box(self):
         return self._group("box")
@@ -90,7 +113,15 @@ class Group:
             and binding is None
         ):
             raise ValueError(f"{kind} requires a Binding")
-        control = Control(key, kind, label, binding, action, options)
+        control = Control(
+            key,
+            kind,
+            label,
+            binding,
+            action,
+            options,
+            _layout_enabled=self._effective_enabled,
+        )
         if kind == "widget":
             control.motion = options["widget"].motion
         if "animation" in options:
@@ -174,6 +205,8 @@ class Canvas(Group):
         self._width = None
         self.height = 0.0
         self.layout_count = 0
+        self.text_measure = None
+        self._text_measure_key = None
         self.schema_revision = 0
         self.backdrop_revision = 0
         self.edit = None
@@ -320,89 +353,24 @@ class Canvas(Group):
                 except (ReferenceError, RuntimeError):
                     pass
 
+    def set_text_measure(self, callback, key):
+        """Host-owned, retained font measurement; change key on font/size revision."""
+        if key != self._text_measure_key:
+            self.text_measure = callback
+            self._text_measure_key = key
+            self.invalidate()
+
     def arrange(self, width):
         width = max(1.0, float(width))
         if not self._dirty and width == self._width:
             return self.height
+        from .flow import Plan
+
         t = self.theme
-
-        heights = {}
-
-        def row_widths(node, width):
-            usable = max(0.0, width - max(0, len(node.children) - 1) * t.gap)
-            fixed = [
-                c.options.get("width") if isinstance(c, Control) else None
-                for c in node.children
-            ]
-            total = sum(v for v in fixed if v is not None)
-            factor = min(1.0, usable / total) if total else 1.0
-            flex = max(0.0, usable - total) / max(1, fixed.count(None))
-            return [v * factor if v is not None else flex for v in fixed]
-
-        def control_size(node, available):
-            available = min(available, node.options.get("width", available))
-            if node.kind == "widget":
-                return node.options["widget"].dimensions(
-                    t.font_size, available, node.options.get("height")
-                )
-            extra = (
-                20
-                if node.kind == "number"
-                and node.label
-                and node.options.get("slider", True)
-                and available < 260
-                else 0
-            )
-            return available, max(
-                0.0,
-                node.options.get(
-                    "height", 8.0 if node.kind == "separator" else t.row_height + extra
-                ),
-            )
-
-        def height(node, available):
-            cache_key = (id(node), available)
-            if cache_key in heights:
-                return heights[cache_key]
-            if isinstance(node, Control):
-                return control_size(node, available)[1]
-            inner = max(0.0, available - (2 * t.padding if node.kind == "box" else 0.0))
-            widths = (
-                row_widths(node, inner)
-                if node.kind == "row"
-                else [inner] * len(node.children)
-            )
-            values = [height(c, width) for c, width in zip(node.children, widths)]
-            h = (
-                max(values, default=0.0)
-                if node.kind == "row"
-                else sum(values) + max(0, len(values) - 1) * t.gap
-            )
-            heights[cache_key] = h + (2 * t.padding if node.kind == "box" else 0.0)
-            return heights[cache_key]
-
-        def place(node, x, y, w):
-            if isinstance(node, Control):
-                w, h = control_size(node, w)
-                node.rect = (x, y, max(0.0, w), h)
-                return
-            h = height(node, w)
-            node.rect = (x, y, max(0.0, w), h)
-            if node.kind == "box":
-                x += t.padding
-                y += t.padding
-                w = max(0.0, w - 2 * t.padding)
-            if node.kind == "row":
-                for child, cell in zip(node.children, row_widths(node, w)):
-                    place(child, x, y, cell)
-                    x += cell + t.gap
-            else:
-                for child in node.children:
-                    place(child, x, y, w)
-                    y += height(child, w) + t.gap
-
-        place(self, t.padding, t.padding, max(0.0, width - 2 * t.padding))
-        self.height = height(self, max(0.0, width - 2 * t.padding)) + 2 * t.padding
+        plan = Plan(t, self.text_measure)
+        inner = max(0.0, width - 2 * t.padding)
+        plan.place(self, t.padding, t.padding, inner)
+        self.height = self.rect[3] + 2 * t.padding
         self._width = width
         self._scale_numeric_motion()
         self._dirty = False

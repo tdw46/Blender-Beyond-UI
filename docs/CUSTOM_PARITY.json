@@ -4,38 +4,50 @@
   "members": {
     "activate_init": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "active": {
       "kind": "property",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Live inherited active state; descendants cannot override inactive ancestors. Disabling an active owner cancels edits, captured/focused widgets and popovers. Existing property read-only context semantics retained. Full Blender semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "active_default": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "alert": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "alignment": {
       "kind": "property",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Rows and columns support EXPAND/LEFT/CENTER/RIGHT using retained host BLF measurements without changing fonts. Grid/flow alignment semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "bl_rna_get_subclass": {
       "kind": "method",
@@ -67,10 +79,16 @@
     },
     "column_flow": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Retained height-balanced columns, explicit/automatic counts and shared child controls. Auto sizing uses local host width rather than native root emw. Full alignment and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "context_pointer_set": {
       "kind": "method",
@@ -88,24 +106,36 @@
     },
     "direction": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Read-only local direction mirrors native RNA: horizontal root/row, vertical split/column/flow/box, grid vertical in 4.2-4.4 and horizontal from 4.5 via an explicit version gate. Pure-Python fallback uses 4.2. Installed-runtime comparisons cover all seven types; 4.2 execution and visual acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "emboss": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "enabled": {
       "kind": "property",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Live inherited enable state; descendants cannot override disabled ancestors, and reenable restores local eligibility. Active edits cancel safely. Operator choices created disabled can be reenabled. Full Blender semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "enum_item_description": {
       "kind": "method",
@@ -142,10 +172,16 @@
     },
     "grid_flow": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Retained row/column-major packing, automatic/explicit/negative-multiple counts, weighted/even columns and equal row cells. Full alignment, all compound-child sizing and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "icon": {
       "kind": "method",
@@ -421,15 +457,15 @@
     },
     "scale_x": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "scale_y": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
@@ -442,17 +478,29 @@
     },
     "separator_spacer": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Invisible flexible horizontal spacing with no paint/input/binding target. Native header/popup-specific semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "split": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Retained factor/automatic split with shared controls, validation and remainder allocation. Native joined-corner appearance and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/layout-flow-v1/runtime.json",
+        "docs/design/qa/layout-flow-v1/runtime-51.json",
+        "docs/design/qa/layout-flow-v1/windowed.json",
+        "docs/design/qa/layout-flow-v1/windowed-51.json"
+      ]
     },
     "template_ID": {
       "kind": "method",
@@ -1034,15 +1082,15 @@
     },
     "ui_units_x": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },
     "ui_units_y": {
       "kind": "property",
-      "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "status": "unimplemented",
+      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
       "reference": null,
       "comparison_evidence": null
     },

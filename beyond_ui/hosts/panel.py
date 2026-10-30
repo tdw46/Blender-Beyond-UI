@@ -107,6 +107,18 @@ class PanelHost:
             ),
         )
         width = max(1.0, context.region.width / scale - 20.0)
+        from ..gpu.paint import measure
+        from ..gpu.typography import face
+
+        font, size = self.font, canvas.theme.font_size
+        measure_key = (id(self), int(font), getattr(font, "title", int(font)), size)
+        if canvas._text_measure_key != measure_key:
+            canvas.set_text_measure(
+                lambda text, role: measure(
+                    face(font, role), size * (12 / 11 if role == "title" else 1), text
+                )[0],
+                measure_key,
+            )
         height = canvas.arrange(width)
         record = self.records.get(key)
         if record is None:
@@ -462,6 +474,7 @@ class PanelHost:
         """Call from undo_pre/load_pre; never retain old RNA transactions."""
         for record in self.records.values():
             record["canvas"].park()
+            record["canvas"].set_text_measure(None, None)
             if self.bridge:
                 self.bridge.records.pop(record["token"], None)
         from ..gpu import glass

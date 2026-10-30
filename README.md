@@ -40,6 +40,17 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Split layouts and responsive grids
+
+Split columns, automatic grids and height-balanced flows retain the shared BVT
+controls. Parent enable/active state and horizontal flexible spacing work across
+the layout tree.
+
+![Actual Blender split and grid control animation](docs/media/panels/layout-flow-v1.gif)
+
+[Layout QA](docs/design/qa/layout-flow-v1/index.html) ·
+[Layout behavior and remaining gaps](docs/LAYOUT_FLOW.md)
+
 ## Operator choices
 
 Expanded operator actions and searchable operator dropdowns now use the shared

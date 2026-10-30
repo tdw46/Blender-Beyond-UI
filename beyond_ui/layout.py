@@ -46,14 +46,11 @@ class Layout:
         self.state = state if state is not None else {}
         self._sequence = 0
         self._text_role = "body"
-        self.enabled = True
-        self.active = True
         self.alert = False
         self.operator_context = "INVOKE_DEFAULT"
         self.search_popovers = True
         self.use_property_split = False
         self.use_property_decorate = True
-        self.alignment = "EXPAND"
         self.scale_x = self.scale_y = 1.0
         self.ui_units_x = self.ui_units_y = 0.0
         self.emboss = "NORMAL"
@@ -65,8 +62,68 @@ class Layout:
         self._sequence += 1
         return f"{id(self.group)}:{kind}:{self._sequence}"
 
+    @property
+    def enabled(self):
+        return self.group.options.get("enabled", True)
+
+    @enabled.setter
+    def enabled(self, value):
+        self._policy("enabled", value)
+
+    @property
+    def active(self):
+        return self.group.options.get("active", True)
+
+    @active.setter
+    def active(self, value):
+        self._policy("active", value)
+
+    def _policy(self, name, value):
+        value = bool(value)
+        if self.group.options.get(name, True) == value:
+            return
+        self.group.options[name] = value
+        self.group._refresh_enabled()
+        if any(
+            c is not None and not c.enabled
+            for c in (
+                self.canvas.active,
+                self.canvas.widget_capture,
+                self.canvas.keyboard_focus,
+                (self.canvas.overlay or {}).get("owner"),
+            )
+        ):
+            self.canvas.cancel()
+        self.canvas.invalidate()
+
+    @property
+    def alignment(self):
+        return self.group.options.get("alignment", "EXPAND")
+
+    @alignment.setter
+    def alignment(self, value):
+        if value not in {"EXPAND", "LEFT", "CENTER", "RIGHT"}:
+            raise ValueError("alignment must be EXPAND, LEFT, CENTER or RIGHT")
+        if value != self.alignment:
+            self.group.options["alignment"] = value
+            self.canvas.invalidate()
+
+    @property
+    def direction(self):
+        if self.group is self.canvas or self.group.kind == "row":
+            return "HORIZONTAL"
+        if self.group.kind == "grid":
+            try:
+                import bpy
+
+                if bpy.app.version >= (4, 5, 0):
+                    return "HORIZONTAL"
+            except ImportError:
+                pass  # Pure-Python hosts retain the oldest supported convention.
+        return "VERTICAL"
+
     def _options(self):
-        return {"enabled": self.enabled}
+        return {}
 
     def _child(self, group):
         child = Layout(
@@ -81,8 +138,6 @@ class Layout:
         )
         for name in (
             "_text_role",
-            "enabled",
-            "active",
             "alert",
             "operator_context",
             "search_popovers",
@@ -111,16 +166,61 @@ class Layout:
             return text
 
     def row(self, *, align=False, heading="", heading_ctxt="", translate=True):
-        row = self._child(self.group.row())
+        row = self._child(self.group.row(align=align))
         if heading:
             row.title(text=heading, text_ctxt=heading_ctxt, translate=translate)
         return row
 
     def column(self, *, align=False, heading="", heading_ctxt="", translate=True):
-        column = self._child(self.group.column())
+        column = self._child(self.group.column(align=align))
         if heading:
             column.title(text=heading, text_ctxt=heading_ctxt, translate=translate)
         return column
+
+    def split(self, *, factor=0.0, align=False):
+        from math import isfinite
+
+        factor = float(factor)
+        if not isfinite(factor) or not 0 <= factor <= 1:
+            raise ValueError("split factor must be finite and between zero and one")
+        return self._child(self.group._group("split", factor=factor, align=bool(align)))
+
+    def column_flow(self, *, columns=0, align=False):
+        from operator import index
+
+        columns = index(columns)
+        if columns < 0:
+            raise ValueError("column_flow columns must be nonnegative")
+        return self._child(
+            self.group._group("flow", columns=columns, align=bool(align))
+        )
+
+    def grid_flow(
+        self,
+        *,
+        row_major=False,
+        columns=0,
+        even_columns=False,
+        even_rows=False,
+        align=False,
+    ):
+        from operator import index
+
+        return self._child(
+            self.group._group(
+                "grid",
+                columns=index(columns),
+                row_major=bool(row_major),
+                even_columns=bool(even_columns),
+                even_rows=bool(even_rows),
+                align=bool(align),
+            )
+        )
+
+    def separator_spacer(self):
+        if self.group.kind != "row":
+            raise ValueError("separator_spacer requires a horizontal row")
+        self.group._group("spacer", spacer=True)
 
     def box(self):
         return self._child(self.group.box())
@@ -610,7 +710,7 @@ class Layout:
         model = self._operator_enum(operator, property)
         from .operator_enum import context_key
 
-        enabled = self.enabled and model.available(
+        enabled = model.available(
             self.context, model.arguments(), context_key(self.context)
         )
         for item in model.snapshot():
@@ -725,7 +825,23 @@ class Layout:
         return header, self.column() if getattr(data, property) else None
 
     def supports(self, name):
-        return callable(getattr(type(self), name, None)) or name in self.__dict__
+        # Accepted legacy attributes without custom behavior are not capabilities.
+        if name in {
+            "activate_init",
+            "active_default",
+            "alert",
+            "emboss",
+            "scale_x",
+            "scale_y",
+            "ui_units_x",
+            "ui_units_y",
+        }:
+            return False
+        return (
+            isinstance(getattr(type(self), name, None), property)
+            or callable(getattr(type(self), name, None))
+            or name in self.__dict__
+        )
 
     def __getattr__(self, name):
         if name.startswith("_"):

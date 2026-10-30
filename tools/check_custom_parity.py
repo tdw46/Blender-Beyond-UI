@@ -43,6 +43,9 @@ def main():
     ]
     summary = {
         "documented_members": len(expected),
+        "unimplemented_members": sum(
+            r["status"] == "unimplemented" for r in ledger["members"].values()
+        ),
         "partial_members": sum(
             r["status"] == "partial" for r in ledger["members"].values()
         ),

@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/layout-flow-v1/capture.json",
+  "sha256": "d928bc726a0061cb273bcbd5e61e205290929fb64f7aa0bcb7e4df1034837913",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

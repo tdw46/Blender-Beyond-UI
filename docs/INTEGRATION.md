@@ -32,7 +32,10 @@ undo state, silently saves a file, or changes unrelated scene data.
 
 Custom API support is intentionally explicit. `ui.supports(name)` reports an
 implemented authoring method, not that every mode or visual state is accepted.
-Unimplemented calls raise `UnsupportedControl`. Consult the parity ledger before
+Unimplemented methods raise `UnsupportedControl`. Legacy inert settings such as
+`scale_x/y`, `ui_units_x/y`, `alert`, `emboss`, `activate_init` and `active_default`
+remain accepted attributes for compatibility, but `supports()` returns false for
+them until behavior is implemented. Consult the parity ledger before
 integrating specialized controls. The present editors have known incomplete
 features, listed in the ledger.
 
