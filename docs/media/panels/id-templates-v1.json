@@ -1,0 +1,7 @@
+{
+  "source": "Actual production Blender frames; no generated pixels",
+  "capture": "../../design/qa/id-templates-v1/capture.json",
+  "sha256": "019e00653870d080db04dfe28800b2fabb3b68c84a71799fb15820d6b5148ca7",
+  "source_frames": 60,
+  "duration_ms": 2000
+}

@@ -40,6 +40,17 @@ over a neutral backdrop. Production defaults to Blender’s active theme across
 all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
 host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
 
+## Data-block selectors and tabs
+
+Searchable ID selectors, editable names, user counts, Fake User switches and
+New/Open/Unlink actions reuse the shared BVT controls. Pending edits and menus
+stay tied to their original selection.
+
+![Actual Blender data-block control animation](docs/media/panels/id-templates-v1.gif)
+
+[ID template QA](docs/design/qa/id-templates-v1/index.html) ·
+[Integration and remaining gaps](docs/ID_TEMPLATES.md)
+
 ## Split layouts and responsive grids
 
 Split columns, automatic grids and height-balanced flows retain the shared BVT

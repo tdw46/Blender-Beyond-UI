@@ -1,0 +1,267 @@
+{
+  "exact_match": false,
+  "full_custom_parity": false,
+  "baseline": "8a321cb0e50211ffe3635a1593b996dcfd9f7303",
+  "acceptance": "Existing BVT controls reused. Generated-reference and visual QA remain open. Code and execution checks only.",
+  "native_text_batching_equal_frames": 360,
+  "existing_workload_pixel_comparisons": [
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.2.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "rest",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scalar",
+      "rgb_equal": true
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "state": "scrolled",
+      "rgb_equal": true
+    }
+  ],
+  "performance": [
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.08204206824302673,
+          "p95_ms": 0.11366698890924454,
+          "max_ms": 0.2615830162540078
+        },
+        "open_scalar": {
+          "median_ms": 0.22841698955744505,
+          "p95_ms": 0.2531670033931732,
+          "max_ms": 0.3112080739811063
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.24270854191854596,
+          "p95_ms": 0.292167067527771,
+          "max_ms": 0.4621250554919243
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.07799995364621282,
+          "p95_ms": 0.10295899119228125,
+          "max_ms": 0.21358300000429153
+        },
+        "open_scalar": {
+          "median_ms": 0.22227101726457477,
+          "p95_ms": 0.25174999609589577,
+          "max_ms": 0.2882919507101178
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.2329580020159483,
+          "p95_ms": 0.2810420701280236,
+          "max_ms": 0.36437506787478924
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.702937482856214,
+          "p95_ms": 0.7692920044064522,
+          "max_ms": 0.8676249999552965
+        },
+        "open_scalar": {
+          "median_ms": 0.8243749616667628,
+          "p95_ms": 0.9046660270541906,
+          "max_ms": 1.0723749874159694
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1762080248445272,
+          "p95_ms": 1.2488749343901873,
+          "max_ms": 1.4108329778537154
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0509580024518073,
+          "p95_ms": 1.1492500780150294,
+          "max_ms": 1.360708032734692
+        }
+      }
+    },
+    {
+      "runtime": "5.2.2 LTS",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7028954569250345,
+          "p95_ms": 0.7882500067353249,
+          "max_ms": 0.9017499396577477
+        },
+        "open_scalar": {
+          "median_ms": 0.8279375033453107,
+          "p95_ms": 0.8955830708146095,
+          "max_ms": 1.0132500901818275
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.1901455000042915,
+          "p95_ms": 1.3318749843165278,
+          "max_ms": 1.4120410196483135
+        },
+        "scrolled_controls": {
+          "median_ms": 1.0649374453350902,
+          "p95_ms": 1.1846250854432583,
+          "max_ms": 1.2745410203933716
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.0810210476629436,
+          "p95_ms": 0.11620798613876104,
+          "max_ms": 0.22849999368190765
+        },
+        "open_scalar": {
+          "median_ms": 0.2269584801979363,
+          "p95_ms": 0.25170797016471624,
+          "max_ms": 0.3002909943461418
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.2406665007583797,
+          "p95_ms": 0.2853749319911003,
+          "max_ms": 0.39966602344065905
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "benchmark",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.08039554813876748,
+          "p95_ms": 0.09937502909451723,
+          "max_ms": 0.20562508143484592
+        },
+        "open_scalar": {
+          "median_ms": 0.21972903050482273,
+          "p95_ms": 0.23999996483325958,
+          "max_ms": 0.26245799381285906
+        },
+        "open_scalar_retained": {
+          "median_ms": 0.2344790264032781,
+          "p95_ms": 0.28675002977252007,
+          "max_ms": 0.3453330136835575
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "before",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7028125110082328,
+          "p95_ms": 0.787916942499578,
+          "max_ms": 0.8743330836296082
+        },
+        "open_scalar": {
+          "median_ms": 0.8528539910912514,
+          "p95_ms": 0.9598750621080399,
+          "max_ms": 1.108334050513804
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.2863539741374552,
+          "p95_ms": 1.444583060219884,
+          "max_ms": 1.4990000054240227
+        },
+        "scrolled_controls": {
+          "median_ms": 1.079437555745244,
+          "p95_ms": 1.2149170506745577,
+          "max_ms": 1.325499964877963
+        }
+      }
+    },
+    {
+      "runtime": "5.1.2",
+      "workload": "dense",
+      "revision": "after",
+      "timings": {
+        "closed_fields": {
+          "median_ms": 0.7335414993576705,
+          "p95_ms": 0.8216670248657465,
+          "max_ms": 1.025209086947143
+        },
+        "open_scalar": {
+          "median_ms": 0.8581039728596807,
+          "p95_ms": 0.9804590372368693,
+          "max_ms": 1.0715830139815807
+        },
+        "open_scalar_retained": {
+          "median_ms": 1.266270992346108,
+          "p95_ms": 1.4152079820632935,
+          "max_ms": 1.4946659794077277
+        },
+        "scrolled_controls": {
+          "median_ms": 1.069937541615218,
+          "p95_ms": 1.1606250191107392,
+          "max_ms": 1.290749991312623
+        }
+      }
+    }
+  ]
+}

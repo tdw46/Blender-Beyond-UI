@@ -396,8 +396,12 @@ def paint(canvas, rect, clip, *, preferences=None, font=0, backdrop=None):
                     if texture is not None:
                         style.preview(texture, *r, radius=t.radius * scale)
                 else:
+                    label_get = control.options.get("label_get")
                     text(
-                        control.label, r, ink, control.options.get("text_role", "body")
+                        label_get() if label_get else control.label,
+                        r,
+                        ink,
+                        control.options.get("text_role", "body"),
                     )
             count += 1
         if canvas.overlay or canvas.context_menu is not None:

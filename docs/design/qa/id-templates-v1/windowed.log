@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['Real N-panel Fake User toggle writes its selected material', 'Right-click field menu resolves the selected material and exact property', 'Native text input renames the selected ID and keyboard picker selection closes the overlay', 'Right-click cancels editing before opening a menu', 'Disabled animation and teardown leave no host timers or bridge errors']}
+00:10.389  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

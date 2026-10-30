@@ -35,6 +35,7 @@ class Layout:
         state=None,
         source=None,
         pointer_sources=None,
+        id_actions=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
@@ -42,6 +43,7 @@ class Layout:
         self.resolve = resolve
         self.source = source
         self.pointer_sources = pointer_sources
+        self.id_actions = id_actions
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
@@ -135,6 +137,7 @@ class Layout:
             state=self.state,
             source=self.source,
             pointer_sources=self.pointer_sources,
+            id_actions=self.id_actions,
         )
         for name in (
             "_text_role",
@@ -399,6 +402,134 @@ class Layout:
                 **options,
             )
         raise UnsupportedControl(f"prop {meta.type}")
+
+    def template_ID(
+        self,
+        data,
+        property,
+        *,
+        new="",
+        open="",
+        unlink="",
+        filter="ALL",
+        live_icon=False,
+        text="",
+        text_ctxt="",
+        translate=True,
+    ):
+        if live_icon:
+            raise UnsupportedControl("template_ID live preview icons")
+        from .id_template import IDTemplate
+
+        try:
+            model = IDTemplate(
+                self,
+                data,
+                property,
+                filter=filter,
+                operators={
+                    k: v
+                    for k, v in (("new", new), ("open", open), ("unlink", unlink))
+                    if v
+                },
+            )
+        except ValueError as error:
+            raise UnsupportedControl(str(error)) from error
+        column = self.column()
+        head = column.row()
+        picker = head.group.add(
+            "pointer",
+            self._key("id-picker"),
+            self._text(text, text_ctxt, translate),
+            binding=model.binding,
+            pointer_field=model,
+            context_menu=model.property_entries,
+            width=160,
+        )
+        picker.options["id_template"] = model
+        head.group.text(
+            self._key("id-name"),
+            "",
+            model.field_binding("name"),
+            placeholder="Data-block name",
+        )
+        actions = column.grid_flow(row_major=True)
+        model.button(
+            actions.group,
+            self._key("id-users"),
+            "Make Single User",
+            model.duplicate,
+            lambda: model.can_copy() and model.users() > 1,
+            label_get=lambda: f"Users: {model.users()}",
+            width=80,
+        )
+        actions.group.toggle(
+            self._key("id-fake"),
+            self._text("Fake User"),
+            model.field_binding("use_fake_user"),
+            enabled=model.fake_user_allowed,
+            width=132,
+        )
+        for operation, label in (("new", "New"), ("open", "Open")):
+            if operation in model.operators:
+                model.button(
+                    actions.group,
+                    self._key("id-" + operation),
+                    self._text(label),
+                    lambda token, op=operation: model.invoke(op, token),
+                    lambda op=operation: model.operator_available(op),
+                    width=64,
+                )
+        if unlink:
+            model.button(
+                actions.group,
+                self._key("id-unlink"),
+                self._text("Unlink"),
+                lambda token: model.invoke("unlink", token),
+                lambda: model.operator_available("unlink")
+                and model.current() is not None,
+                width=64,
+            )
+        else:
+            model.button(
+                actions.group,
+                self._key("id-unlink"),
+                self._text("Unlink"),
+                model.clear,
+                lambda: model.editable()
+                and model.field.allow_none
+                and model.current() is not None,
+                width=64,
+            )
+        return None
+
+    def template_ID_tabs(self, data, property, *, new="", menu="", filter="ALL"):
+        if menu:
+            raise UnsupportedControl("template_ID_tabs registered context menu")
+        from .id_template import IDTemplate
+
+        try:
+            model = IDTemplate(
+                self,
+                data,
+                property,
+                filter=filter,
+                operators={"new": new} if new else {},
+            )
+            row = self.grid_flow(row_major=True, even_columns=True)
+            model.add_tabs(row.group)
+        except ValueError as error:
+            raise UnsupportedControl(str(error)) from error
+        if new:
+            model.button(
+                row.group,
+                self._key("id-new"),
+                self._text("New"),
+                lambda token: model.invoke("new", token),
+                lambda: model.operator_available("new"),
+                width=64,
+            )
+        return None
 
     def prop_decorator(self, data, property, *, index=-1):
         from .decorator import Decorator

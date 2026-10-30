@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/interface_templates.cc",
+    "sha256": "fdb982d3fecb941e95d9a70c322f248fdd8fca732898149ae4079042d49df38e"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/templates/interface_template_id.cc",
+    "sha256": "2465249aef0ce53c988468e81db98921f80ed2fd4be873375d47cfb8c44195ad"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/templates/interface_template_id.cc",
+    "sha256": "e8616169cfa4ea71f87946c5e803ae3c23834c90364c527f89a9937c96d17bc7"
+  }
+]

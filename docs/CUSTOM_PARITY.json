@@ -504,10 +504,16 @@
     },
     "template_ID": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom searchable data-block selector, dynamic owner-frozen name and Fake User fields, real user count/single-user copy, unlink and safe New/Open operator dispatch. Explicit host dispatcher required for native active-button operators. Real 5.1.2/5.2.2 RNA and N-panel input, scale/motion/glass resource checks passed. Live preview, library/override/packed-file actions, Shift-Unlink, type-specific copy/layout rules and exact reference acceptance remain open. See docs/ID_TEMPLATES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/id-templates-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/id-templates-v1/runtime.json",
+        "docs/design/qa/id-templates-v1/runtime-51.json",
+        "docs/design/qa/id-templates-v1/windowed.json",
+        "docs/design/qa/id-templates-v1/windowed-51.json"
+      ]
     },
     "template_ID_preview": {
       "kind": "method",
@@ -525,10 +531,16 @@
     },
     "template_ID_tabs": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom bounded ID tabs with live selection/name display, stale candidate/poll/revision checks and owner-aware selection/copy-name menus. Uses shared BVT buttons, theme, glass and motion. Real RNA, scale and motion checks passed in 5.1.2/5.2.2. Inline rename, drag/drop, registered tab-menu authoring, collections over 256 items and exact reference acceptance remain open. See docs/ID_TEMPLATES.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/id-templates-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/id-templates-v1/runtime.json",
+        "docs/design/qa/id-templates-v1/runtime-51.json",
+        "docs/design/qa/id-templates-v1/windowed.json",
+        "docs/design/qa/id-templates-v1/windowed-51.json"
+      ]
     },
     "template_action": {
       "kind": "method",

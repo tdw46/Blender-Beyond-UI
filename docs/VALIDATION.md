@@ -996,3 +996,58 @@ The initial implementation walked ancestors during painting. Profiling workloads
 The ledger contains **95 unimplemented and 42 partial members**, zero reference-matched. Five missing authoring members gained implementations in this change. The audit also corrected eight inert attributes previously counted as partial: `activate_init`, `active_default`, `alert`, `emboss`, `scale_x/y` and `ui_units_x/y`. Their stored attributes remain compatible, but `supports()` now returns false. Full parity is not finished and `check_custom_parity.py --require-complete` correctly fails.
 
 Remaining work includes specialized ID/list/preview, image/movie/scope, node/modifier/constraint, asset/menu/popover, header/status and multiline templates, the inert settings above, incomplete existing-editor semantics and exact-reference/theme/platform acceptance. No stub, generic form or native forwarding was counted as custom completion. See [layout limits](LAYOUT_FLOW.md) and the [member ledger](CUSTOM_PARITY.json).
+
+## Data-block templates — 2026-10-30
+
+[ID template QA](design/qa/id-templates-v1/index.html) records custom ID selectors,
+name fields, user counts, Fake User switches, New/Open/Unlink routing and ID tabs.
+The fixture includes ordinary fields to make host-scale comparison possible.
+Generated-reference and user visual acceptance remain open; the new API entries
+are partial. Remaining API coverage is 93 unimplemented and 44 partial members.
+
+- 148 pure-Python tests passed, including dynamic binding ownership, stale editor
+  dismissal, context snapshots and picker visibility filtering. Ruff, compilation,
+  custom-ledger consistency and source/wheel packaging passed.
+- Blender 5.2.2 LTS and 5.1.2 disposable-profile tests passed for real RNA name and
+  Fake User edits, single-user copy/rollback, unlink, hidden names, rename-safe
+  identity, deleted candidates, scene filtering and exact operator context.
+  Native active-button operators require host dispatch; stale delayed requests,
+  disabled layouts and unregistered operators reject execution. Deleting the
+  owning ID disables all template controls before touching embedded RNA.
+- Real N-panel input passed in both versions: Fake User mouse toggling, selected-ID
+  property menus, text input renaming, keyboard picker selection, right-click edit
+  cancellation and timer-free disabled-animation teardown. General and pointer/
+  decorator regression fixtures passed in both versions.
+- Six production GPU capture sets cover both runtimes at 1×, 1.5× and 2×,
+  narrow width, picker and owner/tab menus. All 360 motion frames are pixel-equal
+  with admitted native text batching enabled versus disabled. Candidate
+  enumeration during painting is zero. Shader/batch/font/layout resources remain
+  stable; shared glass produces one backdrop, one strong blur and five retained
+  offscreens per capture host. No live user scene or preferences were saved.
+- Equivalent sparse and dense/scrolled workloads were compared to published
+  `8a321cb0e50211ffe3635a1593b996dcfd9f7303`. All ten settled image comparisons
+  are RGB-equal. Warm CPU submission medians/p95 are recorded below; measurements
+  exclude framebuffer readback and do not establish end-to-end GPU latency or
+  full source-addon performance parity.
+
+| Blender | Workload | Before median / p95 ms | After median / p95 ms |
+|---|---|---:|---:|
+| 5.2.2 | benchmark: closed_fields | 0.082 / 0.114 | 0.078 / 0.103 |
+| 5.2.2 | benchmark: open_scalar | 0.228 / 0.253 | 0.222 / 0.252 |
+| 5.2.2 | benchmark: open_scalar_retained | 0.243 / 0.292 | 0.233 / 0.281 |
+| 5.2.2 | dense: closed_fields | 0.703 / 0.769 | 0.703 / 0.788 |
+| 5.2.2 | dense: open_scalar | 0.824 / 0.905 | 0.828 / 0.896 |
+| 5.2.2 | dense: open_scalar_retained | 1.176 / 1.249 | 1.190 / 1.332 |
+| 5.2.2 | dense: scrolled_controls | 1.051 / 1.149 | 1.065 / 1.185 |
+| 5.1.2 | benchmark: closed_fields | 0.081 / 0.116 | 0.080 / 0.099 |
+| 5.1.2 | benchmark: open_scalar | 0.227 / 0.252 | 0.220 / 0.240 |
+| 5.1.2 | benchmark: open_scalar_retained | 0.241 / 0.285 | 0.234 / 0.287 |
+| 5.1.2 | dense: closed_fields | 0.703 / 0.788 | 0.734 / 0.822 |
+| 5.1.2 | dense: open_scalar | 0.853 / 0.960 | 0.858 / 0.980 |
+| 5.1.2 | dense: open_scalar_retained | 1.286 / 1.445 | 1.266 / 1.415 |
+| 5.1.2 | dense: scrolled_controls | 1.079 / 1.215 | 1.070 / 1.161 |
+
+No measured regression appeared in these workloads. The new ID-template layout
+was measured separately with 20 warmups and 100 paint samples; per-runtime/scale
+results and exact source hashes are in the gallery. Blender 4.2 runtime, additional
+platforms/themes, specialized ID operations and full visual acceptance remain open.

@@ -39,7 +39,10 @@ class DataPicker(Widget):
 
     def _filter(self):
         self.filtered = tuple(
-            item for item in self.items if matches(self.query, item[1])
+            item
+            for item in self.items
+            if matches(self.query, item[1])
+            and (not hasattr(self, "filter_item") or self.filter_item(item, self.query))
         )
         self.rows.replace([70] * len(self.filtered))
         self.rows.offset = 0

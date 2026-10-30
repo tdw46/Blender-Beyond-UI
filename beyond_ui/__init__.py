@@ -4,6 +4,7 @@ No bpy import, registration, native loading, threads or timers at import time.
 """
 
 from .pointer import PointerItems
+from .id_template import IDAction
 from .animation import AnimationSettings, animation_defaults
 from .native import Layout as NativeLayout
 from .layout import Layout, UnsupportedControl
@@ -17,6 +18,7 @@ __all__ = [
     "AnimationSettings",
     "animation_defaults",
     "Canvas",
+    "IDAction",
     "PointerItems",
     "Layout",
     "NativeLayout",

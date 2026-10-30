@@ -694,7 +694,7 @@ class Canvas(Group):
                     (y - b) * widget.height / max(h, 1),
                 )
             else:
-                binding = control.binding
+                binding = control.binding.frozen() if control.binding else None
                 source = getattr(binding, "context", None)
                 target = Target(
                     control.key,
@@ -971,6 +971,10 @@ class Canvas(Group):
         if kind in {"ESC", "RIGHTMOUSE"} and press and (self.edit or self.overlay):
             self.cancel()
             return True
+        if self.edit is not None and not self.edit.binding.valid():
+            self.cancel()
+            self.menu_error = "The edited owner or selection changed"
+            return True
         if self.widget_capture is not None:
             control = self.widget_capture
             widget = control.options["widget"]
@@ -994,7 +998,7 @@ class Canvas(Group):
                     )
                     if (
                         self.active.kind != "number"
-                        or value != self.active.binding.read()
+                        or value != self.edit.binding.read()
                     ):
                         self._write(value)
                     self.finish()
@@ -1239,7 +1243,7 @@ class Canvas(Group):
             value = max(lo, min(hi, value))
             if self.active.options.get("integer"):
                 value = round(value)
-        if self.active.binding.read() != value:
+        if self.edit.binding.read() != value:
             self.edit.update(value)
 
     def paint(self, rect, clip, *, preferences=None, font=0, backdrop=None):

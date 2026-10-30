@@ -13,6 +13,11 @@ class Binding:
     commit: object = lambda before, after: None
     context: object = None
     context_target: object = None
+    snapshot: object = None
+
+    def frozen(self):
+        """Capture dynamic selection ownership once before edits or menus."""
+        return self.snapshot() if self.snapshot is not None else self
 
     def read(self):
         if not self.valid():
@@ -27,8 +32,8 @@ class Binding:
 
 class Edit:
     def __init__(self, binding):
-        self.binding = binding
-        self.before = deepcopy(binding.read())
+        self.binding = binding.frozen()
+        self.before = deepcopy(self.binding.read())
         self.closed = False
 
     def update(self, value):
