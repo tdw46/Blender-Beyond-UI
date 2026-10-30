@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "First click selects the original index; active double-click rename commits through host",
+    "Mouse/keyboard menus target exact row name; menu-started rename captures and right-click cancels",
+    "Wildcard sorting preserves source indices; moved/deleted deferred row bindings fail closed",
+    "Host commit failure rolls back; custom callbacks fail atomically without native fallback",
+    "PropertyGroup rows require host keys; ID collections work with public RNA identity",
+    "Retained original RNA wrappers reject deleted ID rows, even after equal-count replacement"
+  ],
+  "version": "5.1.2",
+  "build": "ec6e62d40fa9"
+}

@@ -42,6 +42,15 @@ host can provide the shared blurred viewport backdrop. [Capture provenance](docs
 
 ## Panel popovers
 
+Default collection lists now support original-index selection, rename, filtering,
+sorting, virtual scrolling, compact/grid layouts and exact row context menus.
+PropertyGroup collections require host-owned stable identity keys.
+
+![Actual Blender collection list animation](docs/media/panels/collection-lists-v1.gif)
+
+[Collection list QA](docs/design/qa/collection-lists-v1/index.html) ·
+[Supported cases and remaining list gaps](docs/COLLECTION_LISTS.md)
+
 Registered panels open as custom canvases with nested controls, scrolling,
 property-attached panels and exact-owner context menus.
 

@@ -1,0 +1,6 @@
+/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_menu.py:162: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  material.use_nodes = True
+00:02.388  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+CONTEXT_MENU_PASS {'passed': True, 'version': '5.1.2', 'build': 'ec6e62d40fa9', 'checks': ['component reset/copy selected and explicit owner paths', 'copy selected rolls back after host transaction failure', 'keyframes and drivers use explicit data owner and host undo callback', 'read-only values remain readable; animation requires host undo', 'public button contributions preserve nested context, poll and operator properties; native button calls disabled', 'ramp stop and curve component bind exact RNA elements', 'expanded enum buttons retain property menu ownership', 'palette swatch property action and deletion identity validation', 'deleted RNA owner fails closed']}
+
+Blender quit

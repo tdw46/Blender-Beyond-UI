@@ -110,6 +110,7 @@ class RegisteredPanel(RegisteredMenu):
             source=self.layout.source,
             pointer_sources=self.layout.pointer_sources,
             id_actions=self.layout.id_actions,
+            list_identity=self.layout.list_identity,
         )
         ui._is_popover = True
         ui.operator_context = self.invocation

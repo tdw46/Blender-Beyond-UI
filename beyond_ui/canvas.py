@@ -1001,7 +1001,12 @@ class Canvas(Group):
                     focus.options["widget"].focus()
         if (
             self.keyboard_focus
-            and event.type in self.navigation_keys
+            and (
+                event.type in self.navigation_keys
+                or getattr(
+                    self.keyboard_focus.options["widget"], "wants_key", lambda e: False
+                )(event)
+            )
             and not (self.overlay or self.widget_capture or self.edit)
         ):
             control = self.keyboard_focus

@@ -1,0 +1,4 @@
+OPERATOR_ENUM_WINDOWED {'passed': True, 'error': '', 'version': '5.2.2 LTS', 'checks': ['Actual N-panel mouse selects collection rows; Ctrl-click starts rename and keyboard commits', 'Exact row context actions use the shared menu; keyboard navigation changes original active index', 'Host animation timers settle; unregister releases all owned runtime state']}
+00:08.363  blend            | Saved session recovery to "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/quit.blend"
+
+Blender quit

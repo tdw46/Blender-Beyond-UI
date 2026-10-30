@@ -870,10 +870,16 @@
     },
     "template_list": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom UI_UL_list DEFAULT/COMPACT/GRID rendering, original-index selection, wildcard filter/invert, alphabetical/reverse ordering, scroll/resize, keyboard navigation, active-row rename and exact property context menus. Retained snapshots and clipped visible cells; host stable identity keys are mandatory for PropertyGroup storage. Registered UIList callbacks, dynamic tips/icons, native height heuristics, full editing/focus semantics and generated-reference acceptance remain open. See docs/COLLECTION_LISTS.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/collection-lists-v1/comparison.json",
+      "execution_evidence": [
+        "docs/design/qa/collection-lists-v1/runtime.json",
+        "docs/design/qa/collection-lists-v1/runtime-51.json",
+        "docs/design/qa/collection-lists-v1/windowed.json",
+        "docs/design/qa/collection-lists-v1/windowed-51.json"
+      ]
     },
     "template_marker": {
       "kind": "method",

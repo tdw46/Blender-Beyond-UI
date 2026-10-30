@@ -9,6 +9,9 @@ from ..editing import color_hsv
 
 
 def target(widget, key, x, y):
+    resolver = getattr(widget, "target_at", None)
+    if resolver is not None:
+        return resolver(key, x, y)
     from . import (
         ColorPicker,
         ColorRamp,

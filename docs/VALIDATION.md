@@ -1,5 +1,49 @@
 # Validation record — 2026-10-28
 
+## Collection lists — 2026-10-30
+
+The default `template_list` route now has custom DEFAULT/COMPACT/GRID lists,
+original-index selection, name editing, wildcard filtering, sorting, scrolling,
+bounded resize and exact-row property menus. See
+[the list contract and remaining gaps](COLLECTION_LISTS.md) and
+[production QA](design/qa/collection-lists-v1/index.html).
+The ledger is **86 unimplemented / 51 partial / 0 reference-matched**. Registered
+UIList callbacks and visual acceptance remain open; full parity is not complete.
+
+- 167 pure tests pass, together with Ruff, compilation, ledger consistency and
+  wheel/source checks. Importing the new modules adds no registration or timer.
+- Disposable Blender 5.1.2 and 5.2.2 fixtures execute selection, active-row rename,
+  commit rollback, search/sort mapping, moved/deleted owners, equal-count ID
+  replacement, exact property clipboard menus, menu-started editing, right-click
+  cancellation, unsupported-callback atomicity and register/unregister cycles.
+  Actual N-panel mouse/keyboard tests pass, including timer cleanup. Existing
+  menu, popover, pointer/decorator, ID-template, context, operator and general
+  runtime regressions pass: 18 execution records across both versions.
+- The ownership tests exposed PropertyGroup collection moves retaining slot
+  addresses. Such collections now require unique stable host keys through
+  `Layout.list_identity`; generic pointer-only admission fails explicitly. The
+  snapshot also retains original RNA wrappers to reject deleted/replaced IDs.
+  No hidden properties or UUIDs are written into a consuming extension's data.
+- Six capture sets cover normal and narrow bounds at 1×/1.5×/2×. The README GIF
+  uses actual production frames. All 360 sampled frames match with native text
+  batching enabled/disabled. Two additional 10,000-item fixtures add 120 matching
+  frames. One backdrop, one strong-blur production, five offscreens and retained
+  font/shader/vector-icon/batch identities remain stable through the motion run.
+  Collection traversal during paint is zero; host clipping limits drawn cells.
+- New workload measurements use 20 warmups and 100 CPU paint submissions,
+  excluding framebuffer readback. Separate snapshot authoring time is recorded.
+  Equivalent existing sparse/dense workloads compare against `9f3b3ba`; all ten
+  before/after RGB images match. Timing distributions, runtime, workload, scale
+  and source hashes are retained in `comparison.json` and capture/stress records.
+  These are bounded CPU submission observations, not source-equivalent speed,
+  end-to-end latency, GPU timing, or exact visual fidelity claims.
+
+The original BVT files and unrelated live Blender scenes/preferences were not
+changed. Blender 4.2 source compatibility was audited without an installed 4.2
+execution claim; Windows and the complete theme matrix remain unqualified.
+Generated-reference acceptance remains open and the strict completion gate
+continues to fail intentionally. Visual judgment is left to Tyler.
+
 ## 2026-10-29 — enum property interaction pass
 
 Scalar enum clicks now share the existing strong-glass menu route with shortcuts.

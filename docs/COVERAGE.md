@@ -15,7 +15,7 @@ Panel, Menu, Header and UIList remain ordinary host-registered Blender classes. 
 | Colors | Custom RGB/HSV/hex math and swatches; host picker action | Native prop/template_color_picker for full picker |
 | Images, thumbnails, material previews | Retained GPU textures and bounded caches | Native templates for Blender preview jobs |
 | Rows, columns, boxes, search, grouping, clipping | Custom geometry helpers | Native Layout for exact sizing/translation/panel state |
-| Large lists | Indexed visible ranges; host builds visible items | template_list/UIList for native selection/filtering |
+| Large lists | Custom default template_list with filtering, sorting, row editing and virtualized cells; host identities for PropertyGroups | Registered UIList callbacks and full native semantics remain open; see COLLECTION_LISTS.md |
 | Color ramps, curve editors, histograms, scopes, direction spheres | Native route only | All installed native templates exposed |
 | Assets, ID/search pickers, file browser, operator popups, pie menus | Native route only | All installed native templates exposed |
 | Animatable property decorators, driver clipboard, keymaps | Native route only | No active-native-button impersonation |

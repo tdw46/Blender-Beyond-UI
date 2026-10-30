@@ -36,6 +36,7 @@ class Layout:
         source=None,
         pointer_sources=None,
         id_actions=None,
+        list_identity=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
@@ -44,6 +45,7 @@ class Layout:
         self.source = source
         self.pointer_sources = pointer_sources
         self.id_actions = id_actions
+        self.list_identity = list_identity
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
@@ -141,6 +143,7 @@ class Layout:
             source=self.source,
             pointer_sources=self.pointer_sources,
             id_actions=self.id_actions,
+            list_identity=self.list_identity,
         )
         for name in (
             "_text_role",
@@ -1333,6 +1336,75 @@ class Layout:
             ),
             **self._options(),
         )
+        return control
+
+    def template_list(
+        self,
+        listtype_name,
+        list_id,
+        dataptr,
+        propname,
+        active_dataptr,
+        active_propname,
+        *,
+        item_dyntip_propname="",
+        rows=5,
+        maxrows=5,
+        type="DEFAULT",
+        columns=9,
+        sort_reverse=False,
+        sort_lock=False,
+    ):
+        from operator import index
+        from .list_source import CollectionSource
+        from .widgets.collection_list import CollectionList
+
+        if listtype_name != "UI_UL_list":
+            raise UnsupportedControl(
+                "template_list registered draw_item/filter callbacks"
+            )
+        if item_dyntip_propname:
+            raise UnsupportedControl("template_list item_dyntip_propname")
+        if not list_id:
+            raise ValueError("UI_UL_list requires a nonempty list_id")
+        if type not in {"DEFAULT", "COMPACT", "GRID"}:
+            raise ValueError("Unknown list layout type")
+        rows, maxrows, columns = index(rows), index(maxrows), index(columns)
+        if not 0 <= rows <= 128 or not 0 <= maxrows <= 128 or not 1 <= columns <= 128:
+            raise ValueError("List rows/maxrows must be 0..128 and columns 1..128")
+        source = CollectionSource(
+            self, dataptr, propname, active_dataptr, active_propname
+        )
+        state = self.state.setdefault(("template_list", listtype_name, list_id), {})
+        state.setdefault("reverse", bool(sort_reverse))
+
+        def relayout():
+            # Geometry-only change: retain the shared backdrop, menus and springs.
+            self.canvas._dirty = True
+
+        widget = CollectionList(
+            source,
+            state,
+            rows=rows,
+            maxrows=maxrows,
+            type=type,
+            columns=columns,
+            sort_lock=bool(sort_lock),
+            changed=relayout,
+        )
+        control = self.group.widget(
+            self._key("list"), widget, context_menu=widget.entries, **self._options()
+        )
+
+        def capture():
+            if (
+                self.canvas.visible
+                and self.canvas.controls.get(control.key) is control
+                and control.enabled
+            ):
+                self.canvas.widget_capture = self.canvas.keyboard_focus = control
+
+        widget.begin_capture = capture
         return control
 
     def template_node_socket(self, *, color=(0.0, 0.0, 0.0, 1.0)):

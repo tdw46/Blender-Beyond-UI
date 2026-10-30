@@ -104,7 +104,7 @@ class BUI_PT_bad(bpy.types.Panel):
 
     def draw(self, context):
         self.layout.label(text="Must not leak")
-        self.layout.template_list("UI_UL_list", "", None, "", None, "")
+        self.layout.template_list("BUI_UL_UNSUPPORTED", "", None, "", None, "")
 
 
 class BUI_PT_bad_header(BUI_PT_bad):
@@ -113,7 +113,7 @@ class BUI_PT_bad_header(BUI_PT_bad):
 
     def draw_header(self, context):
         self.layout.prop(context.scene.render, "film_transparent", text="Must not leak")
-        self.layout.template_list("UI_UL_list", "", None, "", None, "")
+        self.layout.template_list("BUI_UL_UNSUPPORTED", "", None, "", None, "")
 
 
 class BUI_PT_failed(BUI_PT_bad):

@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/scripts/startup/bl_ui/__init__.py",
+    "sha256": "463b4a0fca371fbfa6088084c90ffcbce8915532f0912a38ff24ed06f7da8688"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "978c70f274b35c9127c764c107495927ddfeef8dd381e07ed9e42defd71acd6a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/scripts/startup/bl_ui/__init__.py",
+    "sha256": "653f948e632b46e43392416d82bf96be20ab240a381aadb96127ea175182c584"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "6b427eb1a2be553dc5dc67bf4af16f0a35d245f8b9da99756b143a8e3478e226"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/scripts/startup/bl_ui/__init__.py",
+    "sha256": "1843f54e6b668e93d765aa408a57e7f37a87ded7449408daecbe0387a541eda1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/templates/interface_template_list.cc",
+    "sha256": "70601eb51639e2a9b12ff3b8676cf8f73aa85e983069be964a7e8acf27b01a60"
+  }
+]

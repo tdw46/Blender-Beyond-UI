@@ -112,7 +112,7 @@ class BUI_MT_bad(bpy.types.Menu):
 
     def draw(self, context):
         self.layout.label(text="This must not leak")
-        self.layout.template_list("UI_UL_list", "", "objects", "objects", None, "")
+        self.layout.template_list("BUI_UL_UNSUPPORTED", "", "objects", "objects", None, "")
 
 
 classes = (
