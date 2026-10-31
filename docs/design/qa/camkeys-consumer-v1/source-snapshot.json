@@ -1,0 +1,12 @@
+{
+  "source": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys",
+  "checkout": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+  "branch": "codex/camkeys-beyond-ui",
+  "head": "f16d7dc383067277edcf7fc8645a14adf10918ed",
+  "status_before": " M billboard_emulation.py\u0000 M camkeys_translations.json\u0000?? docs/gitbook/\u0000?? docs/showcases/camera-locks-2026-10-27/\u0000?? tests/blender_billboard_manual_dialog.py\u0000?? tests/blender_billboard_manual_roots.py\u0000",
+  "copied_local_changes": {
+    "billboard_emulation.py": "efc90dae1d290ac74965c65ff6820b89c9fab510ca858ea0075013040bb6a1b8",
+    "camkeys_translations.json": "207badac87006cad80cfaf9885f82e7ccc17926b49b5624330027f91e654e93f"
+  },
+  "live_source_unchanged_after_tests": true
+}

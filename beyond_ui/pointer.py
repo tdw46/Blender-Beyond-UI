@@ -273,6 +273,9 @@ class PointerField:
                 key = hit.part[1]
 
                 def rows(t, c):
+                    from .context_assets import entries as asset_entries
+                    from .context_jump import entries as jump_entries
+
                     return (
                         Entry(
                             "SELECT_POINTER",
@@ -286,6 +289,8 @@ class PointerField:
                             lambda t, c: copy_name(key, c),
                             lambda t, c: valid(key),
                         ),
+                        *asset_entries(lambda: candidate(key), c),
+                        *jump_entries(lambda: candidate(key)),
                     )
 
                 return replace(hit, payload=rows)

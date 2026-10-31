@@ -73,6 +73,12 @@ def rna_binding(
     The initial RNA pointer is checked on every access. Undo/load invalidates the
     binding; rebuild it after those events. Host owns undo and invalidation.
     """
+    from .context_custom import custom_key, binding as custom_binding
+
+    if custom_key(property_name) is not None:
+        return custom_binding(
+            resolve, property_name, index=index, commit=commit, source=source
+        )
     resolve = guarded(resolve)
     owner = resolve()
     if owner is None:

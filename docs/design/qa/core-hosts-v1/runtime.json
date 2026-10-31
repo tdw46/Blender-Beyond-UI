@@ -1,0 +1,134 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 4816,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_hosts.py"
+    ],
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "error": "",
+      "host": "N_PANEL",
+      "version": "5.1.2",
+      "checks": [
+        "Real host GPU anchor and simulated modal toggle input",
+        "Real right-click reaches exact property context menu",
+        "Registered confirmation popup opens through real host input",
+        "Host clip bounds, retained warm layout and runtime motion disable",
+        "Host invalidation rolls back editing and stops owned modal input"
+      ],
+      "visual_acceptance": false
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/core-hosts-v1/5.1.2-n_panel/blender-0.log",
+    "focus_passed": true
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 4868,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_hosts.py"
+    ],
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "error": "",
+      "host": "PROPERTIES",
+      "version": "5.1.2",
+      "checks": [
+        "Real host GPU anchor and simulated modal toggle input",
+        "Real right-click reaches exact property context menu",
+        "Registered confirmation popup opens through real host input",
+        "Host clip bounds, retained warm layout and runtime motion disable",
+        "Host invalidation rolls back editing and stops owned modal input"
+      ],
+      "visual_acceptance": false
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/core-hosts-v1/5.1.2-properties/blender-0.log",
+    "focus_passed": true
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 4739,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_hosts.py"
+    ],
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "error": "",
+      "host": "N_PANEL",
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Real host GPU anchor and simulated modal toggle input",
+        "Real right-click reaches exact property context menu",
+        "Registered confirmation popup opens through real host input",
+        "Host clip bounds, retained warm layout and runtime motion disable",
+        "Host invalidation rolls back editing and stops owned modal input"
+      ],
+      "visual_acceptance": false
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/core-hosts-v1/5.2.2-n_panel/blender-0.log",
+    "focus_passed": true
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 4782,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_hosts.py"
+    ],
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "error": "",
+      "host": "PROPERTIES",
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Real host GPU anchor and simulated modal toggle input",
+        "Real right-click reaches exact property context menu",
+        "Registered confirmation popup opens through real host input",
+        "Host clip bounds, retained warm layout and runtime motion disable",
+        "Host invalidation rolls back editing and stops owned modal input"
+      ],
+      "visual_acceptance": false
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/core-hosts-v1/5.2.2-properties/blender-0.log",
+    "focus_passed": true
+  }
+]

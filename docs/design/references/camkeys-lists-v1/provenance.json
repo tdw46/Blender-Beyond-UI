@@ -1,0 +1,16 @@
+{
+  "prompt": "Create a precise front-on UI reference image, 768 by 640 pixels, for a compact Blender extension UIList using restrained macOS design language and the BVT liquid glass style. This is a reference specification for a real GPU implementation. Show a single dark charcoal translucent glass card over a softly defocused Blender-like dark viewport with subtle cool and warm shapes. Strong Gaussian backdrop diffusion, thin luminous rim, rounded corners, restrained refraction; never show legible background text through the glass. No branding, no perspective. Bold heading 'Tracked Objects' at top left. Main list occupies most width, with a slim 36-logical-pixel action column at right, NOT half the panel. List has four tightly spaced 32-logical-pixel rows. Each row in order: small BVT pill toggle (on for first three, off for fourth), simple white cube outline icon, readable object name: 'Hero mesh', 'Hair strands', 'Jacket folds', 'Accessories'. All text visible and consistently sized. Only selected first row has a subtle purple-blue highlight spanning the row; other rows have no individual border or button box. Compact switches and arrow icons remain host scale. In the narrow right rail show centered plus, minus, down-chevron, up-arrow, down-arrow icons in compact square buttons with light inset outlines, arranged vertically. Bottom of list: small disclosure chevron and 'Filter' left; small drag grip center; '4 / 4' right. A separate slim search field underneath: magnifier icon, smaller placeholder 'Search objects...', darker flat inset fill with a light hairline outline. Generous outer card padding, much smaller gaps between rows. Clear hierarchy: heading bold, ordinary text regular, no cropped names, no duplicate labels 'Enabled' or 'Object'. Use exact consistent spacing and clean vector-like glyphs. All interactive elements appear resting, not distorted; their eventual opening/hover behavior will use shared squash-and-stretch. Do not add extra labels or explanatory annotations. Render at 2x UI density, not giant oversized typography.",
+  "generation_tool": "image_gen.imagegen",
+  "version": "v1",
+  "source_style": "BVT liquid glass and approved macOS menu rhythm",
+  "state": "resting selected list and icon rail",
+  "exact_match": false,
+  "acceptance": "Generated reference awaiting implementation comparison",
+  "actual_dimensions": [
+    1374,
+    1145
+  ],
+  "reference_conflicts": [
+    "Reference omits consumer-authored No Armature status; implementation retains it on a second line in narrow hosts. Reference is a target for list chrome, not permission to remove consumer controls."
+  ]
+}

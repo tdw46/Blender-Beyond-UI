@@ -141,7 +141,7 @@ class Group:
             control.motion = options["widget"].motion
         if "animation" in options:
             control.motion.settings = options["animation"]
-        control.motion.toggle = kind == "toggle"
+        control.motion.toggle = kind == "toggle" and not options.get("bool_button")
         self.canvas._bind_motion(control.motion)
         self.canvas._motion_owners[control.motion] = control
         self.canvas.controls[key] = control
@@ -206,7 +206,11 @@ class Canvas(Group):
         shortcut_registry=None,
         shortcut_namespace="canvas",
         menu_search_threshold=12,
+        icon_renderer=None,
     ):
+        if icon_renderer is not None and not callable(icon_renderer):
+            raise TypeError("icon_renderer must be callable or None")
+        self.icon_renderer = icon_renderer
         self.animation = animation or AnimationSettings()
         self._wide_numeric_motion_scale = 0.15
         self._animation_parents = ()
@@ -231,6 +235,7 @@ class Canvas(Group):
         self.active = None
         self.overlay = None
         self._event_clip = None
+        self._event_point = None
         self.context_menu = None
         self.context_provider = context_provider
         self.menu_commit = menu_commit
@@ -304,7 +309,17 @@ class Canvas(Group):
         if self._animation_wake and self.visible:
             self._animation_wake()
 
-    def advance_animations(self, clip=None):
+    def advance_animations(self, clip=None, context=None):
+        press = getattr(self, "_button_press", None)
+        if press and clip is not None and tuple(clip) != press.clip:
+            press.cancelled = True
+            press.control.motion.clear()
+        temporal = press.advance(context) if press else False
+        menu = self.context_menu
+        if menu is not None and hasattr(menu, "advance"):
+            temporal = menu.advance(context) or temporal
+            if menu.closed and self.context_menu is menu:
+                self.close_context()
         for motion in tuple(self._moving):
             control = self._motion_owners.get(motion)
             if clip is not None and control is not None:
@@ -329,7 +344,7 @@ class Canvas(Group):
             child_active = widget.advance(local_clip) or child_active
         if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
             child_active = self.overlay["widget"].advance() or child_active
-        return bool(self._moving) or child_active
+        return bool(self._moving) or child_active or temporal
 
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
@@ -425,6 +440,7 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        self._button_press = None
         if hasattr((self.overlay or {}).get("widget"), "canvas"):
             self.cancel()
         self.backdrop_revision += 1
@@ -453,12 +469,29 @@ class Canvas(Group):
         width = max(1.0, float(width))
         if not self._dirty and width == self._width:
             return self.height
-        from .flow import Plan
+        from .flow import Plan, compact_paragraphs
 
+        self.refresh_status()
         t = self.theme
-        plan = Plan(t, self.text_measure, self if self._sized_groups else None)
+        compact_paragraphs(self, t.font_size)
+        panel_layout = getattr(self, "panel_layout", False)
+        if panel_layout:
+            from .panel_metrics import prepare
+
+            prepare(self)
+        plan = Plan(
+            t,
+            self.text_measure,
+            self if self._sized_groups else None,
+            panel_layout=panel_layout,
+        )
         inner = max(0.0, width - 2 * t.padding)
+        plan.panel_label_column = max(0, inner - 2 * t.padding) * 0.36
         plan.place(self, t.padding, t.padding, inner)
+        if panel_layout:
+            from .panel_metrics import span_labels
+
+            span_labels(self)
         self.height = self.rect[3] + 2 * t.padding
         self._width = width
         self._scale_numeric_motion()
@@ -482,6 +515,8 @@ class Canvas(Group):
             return None
         for control in reversed(tuple(self.visible_controls(clip))):
             a, b, w, h = control.rect
+            if b <= y < b + min(20, control.options.get("_label_band", 0)):
+                w = max(w, control.options.get("_label_span", w))
             if (
                 a <= x < a + w
                 and b <= y < b + h
@@ -496,6 +531,7 @@ class Canvas(Group):
         self.hover = None
 
     def cancel(self):
+        self._button_press = None
         self.close_context()
         self.context_focus = None
         self.blur_focus()
@@ -538,6 +574,23 @@ class Canvas(Group):
             self.keyboard_focus = None
             if self.visible and self._animation_wake:
                 self._animation_wake()
+
+    def _navigate_menu(self, previous, menu):
+        """Swap visible rings without forwarding a consumed click to the child."""
+        if self.context_menu is not previous:
+            menu.close()
+            return
+        self._moving.discard(previous.motion)
+        previous.motion.clear()
+        if self._motion_focus is previous.motion:
+            self._motion_focus = None
+        self.context_menu = menu
+        menu.on_navigate = self._navigate_menu
+        if menu.closed:
+            self.close_context()
+            return
+        if self.visible and self._animation_wake:
+            self._animation_wake()
 
     def close_context(self):
         menu = getattr(self, "context_menu", None)
@@ -655,19 +708,25 @@ class Canvas(Group):
         self.context_menu.motion.pulse("reveal", 0.12)
         return True
 
-    def open_operator_menu(self, control, clip, context):
+    def open_operator_menu(
+        self, control, clip, context, *, anchor=None, trigger=None, model=None
+    ):
         from .context_menu import Menu, Target
+        from .pie_menu import PieMenu
 
         if not control.enabled:
             return False
         try:
             model = (
-                control.options.get("menu_model") or control.options["operator_enum"]
+                model
+                or control.options.get("menu_model")
+                or control.options["operator_enum"]
             )
             context = context or model.context
             rows, valid = model.rows(context)
             self.cancel()
-            menu = Menu(
+            menu_type = PieMenu if getattr(model, "pie", False) else Menu
+            menu = menu_type(
                 Target(
                     control.key,
                     valid=lambda: self.visible
@@ -677,22 +736,94 @@ class Canvas(Group):
                     commit=self.menu_commit,
                 ),
                 rows,
-                (control.rect[0], control.rect[1] + control.rect[3]),
+                (
+                    anchor
+                    or (
+                        control.rect[0] + control.rect[2] / 2,
+                        control.rect[1] + control.rect[3],
+                    )
+                )
+                if menu_type is PieMenu
+                else (control.rect[0], control.rect[1] + control.rect[3]),
                 clip,
                 context=context,
-                row_limit=4096 if control.options.get("menu_model") else len(rows),
+                row_limit=4096
+                if control.options.get("menu_model") or control.options.get("hold_menu")
+                else len(rows),
                 search_threshold=self.menu_search_threshold,
-                visible_refresh=bool(control.options.get("menu_model")),
+                visible_refresh=bool(
+                    control.options.get("menu_model")
+                    or control.options.get("hold_menu")
+                ),
                 on_tip=self._tooltip_wake,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
+                **(
+                    {
+                        "trigger": trigger,
+                        "title": getattr(model, "pie_title", ""),
+                        "icon": getattr(model, "pie_icon", "NONE"),
+                    }
+                    if menu_type is PieMenu
+                    else {}
+                ),
             )
             self.context_menu = menu
+            menu.on_navigate = self._navigate_menu
             self.context_focus = control
             menu.motion.bind(
                 (*self._animation_parents, self.animation, control.motion.settings),
                 self._wake_motion,
             )
             menu.motion.pulse("reveal", 0.12)
+            self.menu_error = None
+            return True
+        except Exception as error:
+            self.menu_error = str(error)
+            return False
+
+    def open_pie(
+        self,
+        target,
+        rows,
+        anchor,
+        clip,
+        *,
+        context=None,
+        trigger=None,
+        dead_zone=None,
+        settings=None,
+        scope=lambda context: None,
+    ):
+        """Host keymap entry point; coordinates use canvas logical units.
+
+        Supply the invoking held key/button as trigger for directional release.
+        The host owns keymaps and redraw scheduling; this installs no timers.
+        """
+        from .pie_menu import PieMenu
+
+        self.cancel()
+        try:
+            menu = PieMenu(
+                target,
+                rows,
+                anchor,
+                clip,
+                context=context,
+                trigger=trigger,
+                dead_zone=dead_zone,
+                settings=settings,
+                scope=scope,
+                on_tip=self._tooltip_wake,
+                on_error=lambda error: setattr(self, "menu_error", str(error)),
+            )
+            self.context_menu = menu
+            menu.on_navigate = self._navigate_menu
+            menu.motion.bind(
+                (*self._animation_parents, self.animation), self._wake_motion
+            )
+            menu.motion.pulse("reveal", 0.12)
+            if self._animation_wake:
+                self._animation_wake()
             self.menu_error = None
             return True
         except Exception as error:
@@ -722,7 +853,9 @@ class Canvas(Group):
             elif control.options.get("operator_enum") or control.options.get(
                 "menu_model"
             ):
-                result = self.open_operator_menu(control, clip, ctx)
+                result = self.open_operator_menu(
+                    control, clip, ctx, anchor=self._event_point, trigger=event.type
+                )
             elif control.kind == "enum":
                 result = self.open_enum_menu(control, clip, ctx)
             else:
@@ -834,6 +967,15 @@ class Canvas(Group):
 
             rows = list(islice(provider(target, context), Menu.limit))
             if self.shortcut_registry is not None:
+                from .context_custom import CustomProperty
+                from .context_shortcuts import numeric_property_entry
+
+                source = getattr(target.binding, "context", None)
+                if isinstance(source, CustomProperty):
+                    rows = [r for r in rows if r.key != "SHORTCUT"]
+                    rows.append(
+                        numeric_property_entry(source, context, self.shortcut_registry)
+                    )
                 command = self._bind_shortcut(control, target, context, clip)
                 routed = (
                     self.shortcut_registry.entry(command, context) if command else None
@@ -884,6 +1026,7 @@ class Canvas(Group):
                 self._wake_motion,
             )
             self.context_menu = menu
+            menu.on_navigate = self._navigate_menu
             self.context_focus = control
             a, b, w, h = control.rect
             self._context_point = ((x - a) / max(w, 1), (y - b) / max(h, 1))
@@ -894,12 +1037,49 @@ class Canvas(Group):
             self.menu_error = str(error)
             return False
 
+    def refresh_status(self, clip=None):
+        """Host invalidation/input hook; no RNA animation scans during paint."""
+        controls = self.visible_controls(clip) if clip else self.controls.values()
+        for control in controls:
+            model = control.options.get("status_model") or control.options.get(
+                "decorator"
+            )
+            if model is not None:
+                control.options["status"] = model.state()
+
     def event(
+        self, event, x, y, clip, *, clipboard=None, context=None, menu_measure=None
+    ):
+        try:
+            return self._dispatch_event(
+                event,
+                x,
+                y,
+                clip,
+                clipboard=clipboard,
+                context=context,
+                menu_measure=menu_measure,
+            )
+        finally:
+            if (
+                self.visible
+                and not event.type.startswith("TIMER")
+                and (event.type != "MOUSEMOVE" or self.edit is not None)
+            ):
+                self.refresh_status(clip)
+
+    def _dispatch_event(
         self, event, x, y, clip, *, clipboard=None, context=None, menu_measure=None
     ):
         if not self.visible:
             return False
         self._event_clip = clip
+        self._event_point = (x, y)
+        owned_press = getattr(self, "_button_press", None)
+        if owned_press:
+            used = owned_press.event(event, x, y, clip, context)
+            if used is not None:
+                return used
         # Registered inline menu draws retain a context, not just RNA addresses.
         candidate = None
         if getattr(self, "_context_guarded", False) and (
@@ -954,8 +1134,9 @@ class Canvas(Group):
             if tuple(clip) != tuple(menu.clip):
                 self.close_context()
                 return False
+            menu.on_navigate = self._navigate_menu
             used = menu.event(event, x, y, context)
-            if menu.closed:
+            if menu.closed and self.context_menu is menu:
                 self.close_context()
                 from .context_menu import inside
 
@@ -1141,6 +1322,7 @@ class Canvas(Group):
                 )
                 menu.choose(0, context)
                 self.context_menu = menu
+                menu.on_navigate = self._navigate_menu
                 self.context_focus = control
             except (ReferenceError, RuntimeError, ValueError) as error:
                 self.menu_error = str(error)
@@ -1350,10 +1532,19 @@ class Canvas(Group):
             self.open_panel(control, clip, context)
             return True
         if control.kind == "button":
+            if control.options.get("hold_menu") or control.options.get(
+                "release_action"
+            ):
+                from .button_press import ButtonPress
+
+                self._button_press = ButtonPress(self, control, (x, y), clip, context)
+                if self._animation_wake:
+                    self._animation_wake()
+                return True
             if control.options.get("operator_enum") or control.options.get(
                 "menu_model"
             ):
-                self.open_operator_menu(control, clip, context)
+                self.open_operator_menu(control, clip, context, anchor=(x, y))
             elif control.options.get("action_event"):
                 control.options["action_event"](event)
             elif control.action:
@@ -1412,7 +1603,10 @@ class Canvas(Group):
                     from .scalar_geometry import slider_parts, usable_range
 
                     _, (tx, ty, tw), field = slider_parts(
-                        control.rect, bool(control.label)
+                        control.rect,
+                        bool(control.label),
+                        stacked=control.options.get("_slider_stacked"),
+                        label_band=control.options.get("_label_band", 24),
                     )
                     lo, hi = (
                         control.options.get("min", 0.0),
@@ -1432,7 +1626,7 @@ class Canvas(Group):
                         control.motion.pulse("handle", 0.55)
         elif control.kind == "enum":
             if control.options.get("menu_model"):
-                self.open_operator_menu(control, clip, context)
+                self.open_operator_menu(control, clip, context, anchor=(x, y))
             else:
                 self.open_enum_menu(control, clip, context)
         else:

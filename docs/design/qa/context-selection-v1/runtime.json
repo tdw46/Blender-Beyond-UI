@@ -1,0 +1,304 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 53106,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_selection.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Replace wording follows current subframe, insertion remains available elsewhere",
+        "Animated channels reject Add/Paste Driver; driven channels reject key insertion",
+        "Open menus and direct actions revalidate conflicts; sibling component stays independent",
+        "Selected object data is type checked and shared datablocks deduplicated",
+        "Selected nodes, pose bones and data bones resolve exact owners",
+        "Selection changes, no-op suppression and rejected component commits are respected"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/selection/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 53109,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_selection.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Replace wording follows current subframe, insertion remains available elsewhere",
+        "Animated channels reject Add/Paste Driver; driven channels reject key insertion",
+        "Open menus and direct actions revalidate conflicts; sibling component stays independent",
+        "Selected object data is type checked and shared datablocks deduplicated",
+        "Selected nodes, pose bones and data bones resolve exact owners",
+        "Selection changes, no-op suppression and rejected component commits are respected"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/selection/blender-1.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 53184,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/availability/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 53192,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/availability/blender-1.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 53183,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_transactions.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Unchanged component Reset/Copy to Selected skip host commits",
+        "Failed transactions restore only the owned component",
+        "Changed copy commits once and repeated copy is a no-op"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/transactions/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 53189,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_transactions.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Unchanged component Reset/Copy to Selected skip host commits",
+        "Failed transactions restore only the owned component",
+        "Changed copy commits once and repeated copy is a no-op"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/transactions/blender-1.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 53307,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_keying_actions.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Create keying set on first add; rejected creation removes only the owned set",
+        "Exact component and whole-array paths; repeat add skips commit",
+        "Rejected remove restores path; changing active set revokes stale menu",
+        "Insert all and clear single/all channels preserve sibling animation",
+        "All-component reset and host-undo availability"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/keying/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 53310,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_keying_actions.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Create keying set on first add; rejected creation removes only the owned set",
+        "Exact component and whole-array paths; repeat add skips commit",
+        "Rejected remove restores path; changing active set revokes stale menu",
+        "Insert all and clear single/all channels preserve sibling animation",
+        "All-component reset and host-undo availability"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/keying/blender-1.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 53464,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_menu.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "checks": [
+        "component reset/copy selected and explicit owner paths",
+        "copy selected rolls back after host transaction failure",
+        "keyframes and drivers use explicit data owner and host undo callback",
+        "read-only values remain readable; animation requires host undo",
+        "public button contributions preserve nested context, poll and operator properties; native button calls disabled",
+        "ramp stop and curve component bind exact RNA elements",
+        "expanded enum buttons retain property menu ownership",
+        "palette swatch property action and deletion identity validation",
+        "deleted RNA owner fails closed"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/context-final/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 53467,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_menu.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "checks": [
+        "component reset/copy selected and explicit owner paths",
+        "copy selected rolls back after host transaction failure",
+        "keyframes and drivers use explicit data owner and host undo callback",
+        "read-only values remain readable; animation requires host undo",
+        "public button contributions preserve nested context, poll and operator properties; native button calls disabled",
+        "ramp stop and curve component bind exact RNA elements",
+        "expanded enum buttons retain property menu ownership",
+        "palette swatch property action and deletion identity validation",
+        "deleted RNA owner fails closed"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-selection-v1/context-final/blender-1.log"
+  }
+]

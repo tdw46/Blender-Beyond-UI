@@ -270,7 +270,8 @@ class ColorPicker(Widget):
         if len(value) > 3:
             from ..gpu import glass
 
-            p.text(COLOR["alpha_label"], "Alpha", size=22, inset=0)
+            # Match the channel fields' label gutter; keep the alpha hit region stable.
+            p.text(COLOR["alpha_label"], "Alpha", size=22, inset=16)
             a, b, w, d = p.map(COLOR["alpha_track"])
             style.slider(
                 (a, b + d / 2, w),

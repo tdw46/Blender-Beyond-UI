@@ -1,0 +1,1160 @@
+{
+  "qualified-final": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 29312,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "org.blenderfoundation.blender",
+            "kind": "activation",
+            "pid": 12179,
+            "seconds": 3.6090999841690063
+          }
+        ],
+        "final_frontmost_pid": 12179,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 29312,
+        "restore_requests": 0,
+        "seconds": 12.6737060546875,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.1.2",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 20,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {},
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/qualified-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 29362,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 12179,
+        "initial_frontmost_pid": 12179,
+        "new_instance": true,
+        "pid": 29362,
+        "restore_requests": 0,
+        "seconds": 12.81459093093872,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.2.2 LTS",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 20,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 15,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 26,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {},
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/qualified-final/blender-1.log"
+    }
+  ],
+  "popup-final": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 28912,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 12179,
+        "initial_frontmost_pid": 12179,
+        "new_instance": true,
+        "pid": 28912,
+        "restore_requests": 0,
+        "seconds": 14.756778001785278,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Property-only popup edits/check refresh without executing; Escape cancels once",
+          "Confirmation message and action execute the original instance exactly once",
+          "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+          "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+          "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+          "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "calls": [
+          [
+            "cancel",
+            3
+          ],
+          [
+            "execute",
+            3,
+            false
+          ],
+          [
+            "search",
+            "JPEG"
+          ],
+          [
+            "search-cancel"
+          ],
+          [
+            "menu"
+          ],
+          [
+            "search-cancel"
+          ]
+        ],
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/popup-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 29072,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.openai.codex",
+            "kind": "activation",
+            "pid": 13701,
+            "seconds": 9.696153998374939
+          }
+        ],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 12179,
+        "new_instance": true,
+        "pid": 29072,
+        "restore_requests": 0,
+        "seconds": 14.503016948699951,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Property-only popup edits/check refresh without executing; Escape cancels once",
+          "Confirmation message and action execute the original instance exactly once",
+          "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+          "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+          "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+          "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "calls": [
+          [
+            "cancel",
+            3
+          ],
+          [
+            "execute",
+            3,
+            false
+          ],
+          [
+            "search",
+            "JPEG"
+          ],
+          [
+            "search-cancel"
+          ],
+          [
+            "menu"
+          ],
+          [
+            "search-cancel"
+          ]
+        ],
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/popup-final/blender-1.log"
+    }
+  ],
+  "list-final": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 29019,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 12179,
+        "initial_frontmost_pid": 12179,
+        "new_instance": true,
+        "pid": 29019,
+        "restore_requests": 0,
+        "seconds": 2.712104082107544,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ],
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/list-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 29046,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 12179,
+        "initial_frontmost_pid": 12179,
+        "new_instance": true,
+        "pid": 29046,
+        "restore_requests": 0,
+        "seconds": 2.9895089864730835,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ],
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/list-final/blender-1.log"
+    }
+  ],
+  "context-final": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 29075,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_menu.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9",
+        "checks": [
+          "component reset/copy selected and explicit owner paths",
+          "copy selected rolls back after host transaction failure",
+          "keyframes and drivers use explicit data owner and host undo callback",
+          "read-only values remain readable; animation requires host undo",
+          "public button contributions preserve nested context, poll and operator properties; native button calls disabled",
+          "ramp stop and curve component bind exact RNA elements",
+          "expanded enum buttons retain property menu ownership",
+          "palette swatch property action and deletion identity validation",
+          "deleted RNA owner fails closed"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/context-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 29095,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_menu.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c",
+        "checks": [
+          "component reset/copy selected and explicit owner paths",
+          "copy selected rolls back after host transaction failure",
+          "keyframes and drivers use explicit data owner and host undo callback",
+          "read-only values remain readable; animation requires host undo",
+          "public button contributions preserve nested context, poll and operator properties; native button calls disabled",
+          "ramp stop and curve component bind exact RNA elements",
+          "expanded enum buttons retain property menu ownership",
+          "palette swatch property action and deletion identity validation",
+          "deleted RNA owner fails closed"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/context-final/blender-1.log"
+    }
+  ]
+}

@@ -160,7 +160,7 @@ class OperatorEnum:
         self.check(context, arguments, scope, item)
         with override(context, self.pointers.values()):
             return operator(self.idname)(
-                self.invocation, **self.values(item, arguments)
+                self.invocation, True, **self.values(item, arguments)
             )
 
     def rows(self, context):

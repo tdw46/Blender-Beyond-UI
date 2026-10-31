@@ -89,6 +89,7 @@ class ContextMenus(unittest.TestCase):
         menu.choose(0, None)
         hit = next(r for i, r, row in menu.visible_rows() if row.key == "mouse")
         menu.event(event("LEFTMOUSE"), hit[0] + 5, hit[1] + 5)
+        menu.event(event("LEFTMOUSE", "RELEASE"), hit[0] + 5, hit[1] + 5)
         self.assertIs(menu.capture_row, alternate)
         menu.event(event("MIDDLEMOUSE"), 300, 300)
         self.assertEqual(calls, ["MIDDLEMOUSE"])
@@ -334,7 +335,11 @@ class ContextMenus(unittest.TestCase):
             lambda k: None,
             valid=lambda k: k in live,
         )
-        hit = target(picker, "picker", 130, 230)
+        from beyond_ui.widgets.metrics import PICKER
+
+        hit = target(
+            picker, "picker", 130, PICKER["list"][1] + 1.5 * PICKER["row_height"]
+        )
         self.assertEqual(hit.part, ("row", 2))
         live.remove(2)
         self.assertFalse(hit.valid())
@@ -416,16 +421,18 @@ class ContextMenus(unittest.TestCase):
             (0, 0, 400, 200),
             on_tip=schedules.append,
         )
+        _, rect, _ = next(menu.visible_rows())
+        px, py = rect[0] + 2, rect[1] + 2
         now = [0.0]
         menu.motion.clock = lambda: now[0]
-        menu.event(event("MOUSEMOVE"), 20, 20)
+        menu.event(event("MOUSEMOVE"), px, py)
         self.assertEqual(schedules, [0.55])
         self.assertIsNone(menu.tooltip)
         self.assertAlmostEqual(menu.reveal_tip(None), 0.55)
         now[0] = 0.6
         self.assertIsNone(menu.reveal_tip(None))
         self.assertEqual(menu.tooltip[1], ("Read only field",))
-        menu.event(event("MOUSEMOVE"), 20, 20)
+        menu.event(event("MOUSEMOVE"), px, py)
         self.assertEqual(schedules, [0.55])
         menu.event(event("MOUSEMOVE"), 0, 0)
         self.assertIsNone(menu.tooltip)

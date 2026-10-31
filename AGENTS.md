@@ -3,9 +3,32 @@
 ## Scope
 
 Build a product-independent, vendorable Blender custom UI library from the
-Effect Layers controls. Every Blender UI control must ultimately have custom
-appearance AND custom interactions. Native delegation is an explicit optional
-compatibility route and must never count toward custom API parity.
+Effect Layers controls for custom third-party extension panels. Tyler narrowed
+scope on 2026-10-30: do not recreate Blender's entire native UI or pursue every
+UILayout template merely to complete an API inventory. Prioritize common panel
+layouts, properties, buttons, menus, popovers, lists, data selectors and useful
+specialized controls. Full reusable-control parity is required for extension-authored
+N-panels, Properties panels, popovers, invoke dialogs/menus, dropdowns/enums and
+nested menus. This is not a request to recreate built-in modifier stacks, Grease
+Pencil feature panels or other Blender application/editor interfaces. Add such
+feature-specific templates only on an explicit consumer requirement. See
+docs/PARITY_SCOPE.md.
+
+Full applicable right-click/context-menu parity remains in scope, including every
+supported control and its individual subcontrols. Scope exclusions for built-in
+feature panels must never be used to omit relevant property/operator/data context
+actions. Preserve exact-owner resolution, dynamic availability, shortcuts, nested
+navigation, keyboard invocation, cancellation, clipping, stale-owner protection,
+glass, theming and animation. Missing applicable actions are release defects;
+unsupported native-button-dependent actions must remain explicit gaps, not be
+silently omitted or counted as complete.
+
+Every supported control must have custom appearance AND custom interactions.
+The BVT glass, motion, theming, right-click, scale, performance and exact-reference
+requirements remain mandatory. Native delegation is an explicit optional
+compatibility route and must never count toward custom parity. Keep the full API
+inventory for transparency, but distinguish out-of-scope members from supported
+core defects; full Blender API coverage is no longer the product release goal.
 
 Read the canonical shared Blender guidance AGENTS.md, guidance/core.md and
 relevant routed topics before implementation. Do not edit the shared guidance.
@@ -53,7 +76,10 @@ Every custom scalar slider uses the source label, thin track, animated bubble
 handle and separate right-hand number field. Use shared source geometry for
 painting and hit testing; narrow rows stack the label without enlarging fonts.
 All boolean properties use source toggle switches, including contributed menu
-rows. Plain numeric entry fields and enum selection markers retain their distinct
+rows. Explicitly authored unembossed Boolean action buttons (such as HOW TO)
+retain centered/aligned button presentation without a switch; ordinary Boolean
+fields retain switches. Honor author alignment and keep icon-only menu carets
+centered. This is Tyler’s 2026-10-31 semantic correction. Plain numeric entry fields and enum selection markers retain their distinct
 semantics. Preserve exact owner menus, Blender theme colors, shared glass, source
 motion and the 15% wide-numeric amplitude rule. See docs/SCALAR_CONTROLS.md and the
 immutable user screenshots in docs/design/references/bvt-scalars-v1/.
@@ -144,6 +170,15 @@ animation implementation or silently omit its animation integration.
   settings are implemented and verified. Keep generated motion references and
   actual implementation evidence available side by side for Tyler's QA.
 
+### Pie landing exception — Tyler's 2026-10-30 correction
+
+Pie surface tension applies only while approaching. Once the pointer is inside
+an item's logical petal (including compound padding), immediately restore its
+resting shape/position and discard the approach springs. Do not add row, toggle
+or field hover/press deformation on top. Keep the opening reveal, proximity
+highlight, origin guide, stable hit geometry, shared glass and ordinary nested
+list/context-menu motion. Leaving the petal restarts approach motion from rest.
+
 ## Hard rule: consistent right-click menus
 
 Preserve the source Effect Layers UI's right-click/context-menu support across
@@ -213,11 +248,20 @@ and simulated N-panel input must use `--no-window-focus` before file/script
 arguments through `tools/run_blender_tests.py`; it checks the installed executable
 for that capability and refuses a windowed launch if unavailable. Use disposable
 profiles and Blender-internal simulated events, never desktop input injection or
-an activate/raise/restore-focus workaround. Revalidate no activation when changing
+deliberate activation or raising of Blender. Revalidate no activation when changing
 the runtime, platform or window workflow, including additional windows. If a test
 needs foreground focus, leave it explicitly unverified and continue safe work
 unless Tyler authorizes foreground testing. Stop only owned test processes.
 See `docs/BACKGROUND_TESTING.md` for the verified capture/input path and limits.
+
+Standing authorization (2026-10-30): Tyler permits no-focus launched windows
+whenever needed, without per-run permission. This supersedes the earlier one-time
+exception and blanket windowed-test suspension. The shared runner admits these
+launches while retaining mandatory `--no-window-focus` capability checks.
+The prior unsolicited activation remains recorded in `docs/BACKGROUND_TESTING.md`;
+authorization does not establish focus safety. Audit changed workflows, report
+unexpected activation and investigate without deliberately activating or raising Blender.
+Deliberate foreground activation still requires explicit authorization.
 
 ## Evidence and publication
 
@@ -230,3 +274,82 @@ Use disposable Blender profiles for runtime fixtures. Do not save unrelated live
 .blend files or preferences. Native ABI adapters require exact build/platform
 and source/binary admission; unverified platforms fail closed. Importing the
 library must not register RNA, install timers, mutate scenes or compile code.
+
+## Hard rule: keep the overview estimate current
+
+After every project turn, review docs/design/qa/overview/estimate.json and the
+overview header. Update remaining work, turn/time ranges, assumptions, media gaps
+and the review record as evidence changes, then regenerate with
+`python3 tools/build_overview.py`. Discussion-only turns do not automatically
+reduce remaining implementation turns. Estimates must remain explicitly uncertain;
+never invent measured timing or promote execution evidence to visual acceptance.
+Keep the overview's recorded GIF inventory aligned with implemented features,
+and identify missing dedicated captures explicitly until they are produced.
+
+Estimate accounting must record completed planned work and newly added scope.
+When planned implementation work closes, reduce the remaining budget or explain
+the specific new work/revised workload that offsets it. Generic pending QA or
+uncertainty is not a reason to erase progress. Distinguish observed duration,
+user-reported pace, simple extrapolation and an actual completion forecast.
+
+## Approved menu rhythm and capture correction (2026-10-30)
+
+Use `beyond_ui/menu_metrics.py` for menu/popover row spacing, title/search gaps,
+insets and title sizing. The approved macOS reference supersedes the older
+boxed-option designs. Inactive options have no individual surface; preserve the
+selected/hovered highlight. All search bars include a left magnifier and reserve
+the same inset for text, selection and caret. Keep titles in the retained bold
+font. Popup reflow must preserve its menu metrics while inheriting current parent
+theme roles; never overwrite compact menu geometry with ordinary panel rows.
+Normalize pointer/collection pickers as well as enum, registered, nested and
+right-click menus. Keep ordinary panel controls at host scale, with their BVT
+slider/switch semantics. Reference geometry is a logical-unit specification, not
+permission to enlarge controls to artboard pixels.
+
+Tyler additionally authorized restoring the prior app after an owned test launch
+if needed. Prefer the test-only LaunchServices launcher with `activates=false`
+and Blender's `--no-window-focus`. The bounded restoration fallback may target
+only the most recent non-owned app, only when the owned test process becomes
+frontmost. Record any activation/restoration; restoration is not zero focus
+theft. Never deliberately activate Blender, close unrelated sessions or restore
+focus over a different app the user chose. This supersedes the older restoration
+prohibition for these test launches; it does not establish general focus safety.
+
+## External field labels and optional icons (2026-10-30)
+
+Keep labels outside editable values at the left throughout the library. Use the
+shared entry geometry; sliders keep their original BVT scalar layout. Every
+label must support an optional icon, with a consistent silhouette/gutter and
+shared theme/motion. Preserve exact field ownership and value-only editing.
+Center action-button text/icon groups, including confirmation and cancellation.
+Menu highlight expansion is visual only: do not displace adjacent text or hit
+targets. Use macOS restraint for new generated references. See FIELD_LABELS.md
+under docs for the public icon contract and reference versions.
+
+## Centered button artwork and shared panel grid (2026-10-31)
+
+Every icon-only button centers its visible glyph in both axes, including locks,
+list toolbar dropdowns and vector fallback glyphs. Transparent source-art margins
+must not offset the silhouette. Retain original glyph proportions and theme tint;
+center icon/text action groups together. Compute atlas ink bounds offline and
+vector bounds once when building their retained batch; never scan pixels in paint.
+Keep this in shared rendering code, with actual raster checks at 1x/1.5x/2x.
+
+All external panel labels, switches and color controls share the same left inset.
+Use shared logical design tokens, intrinsic/minimum widths, gutters, row-spanning
+captions and synchronized label stacking for paired fields. Do not patch consumer
+labels or add product-name checks to achieve reference spacing. Preserve authored
+explicit sizing, property ownership, BVT motion, glass and theme extraction.
+
+
+## Responsive panel hierarchy and utility lanes (2026-10-31)
+
+For adopted third-party panels, infer section headings from structure, never from
+product-specific label strings. Keep full-size ordinary switches, compact icon
+buttons and short unit suffixes at their intrinsic widths. Clamp percentage splits
+to usable minimums and reflow a group when it cannot fit. Keep labels outside values;
+stack a field label before truncating it when space is insufficient. Wrap long
+section titles. Align input accessories with the editable value while preserving
+top-aligned list toolbars. Apply shared gutters and label columns during retained
+layout only. Menus, source animation, exact owners and glass remain independent.
+See docs/PANEL_LAYOUT.md for the policy and explicit low-level opt-out.

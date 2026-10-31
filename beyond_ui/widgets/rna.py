@@ -60,6 +60,14 @@ def curve_mapping(data, property, commit, channel):
     mapping = getattr(data, property)
     pointer = mapping.as_pointer()
     tracked = {i: list(curve.points) for i, curve in enumerate(mapping.curves)}
+    epoch = [0]
+
+    def changed():
+        mapping.update()
+        owner = getattr(data, "id_data", data)
+        update = getattr(owner, "update_tag", None)
+        if update is not None:
+            update()
 
     def current_index():
         return min(channel[0], len(mapping.curves) - 1)
@@ -91,25 +99,31 @@ def curve_mapping(data, property, commit, channel):
         if len(values) < 2:
             raise ValueError("A curve requires at least two points")
         selected = curve()
-        points = tracked[current_index()]
-        while len(points) > len(values):
-            selected.points.remove(points.pop())
-        while len(points) < len(values):
-            points.append(selected.points.new(0.5, 0.5))
-        for point, location in zip(points, values):
+        handles = [p.handle_type for p in tracked[current_index()]]
+        # CurveMapPoint is a packed array: resize invalidates EVERY old wrapper.
+        while len(selected.points) > len(values):
+            selected.points.remove(selected.points[-1])
+        while len(selected.points) < len(values):
+            selected.points.new(0.5, 0.5)
+        refresh()
+        for i, (point, location) in enumerate(zip(tracked[current_index()], values)):
             point.location = location
-        mapping.update()
+            point.handle_type = handles[i] if i < len(handles) else "AUTO"
+        changed()
+        refresh()
 
     def context_target(hit):
         if hit.part[0] in {"point", "point_field"}:
             channel_index, index = hit.part[1:3]
             point = tracked[channel_index][index]
             pointer = point.as_pointer()
+            generation = epoch[0]
 
             def resolve():
                 return (
                     point
-                    if valid()
+                    if epoch[0] == generation
+                    and valid()
                     and current_index() == channel_index
                     and point.as_pointer() == pointer
                     else None
@@ -122,15 +136,76 @@ def curve_mapping(data, property, commit, channel):
                 index=component if component in (0, 1) else None,
                 commit=commit,
             )
-            binding.context.update = mapping.update
+            binding.context.update = changed
             return replace(hit, binding=binding)
         return hit
 
-    return (
-        Binding(get, set_value, valid, commit, context_target=context_target),
-        mapping,
-        curve,
+    binding = Binding(get, set_value, valid, commit, context_target=context_target)
+
+    def refresh():
+        if (
+            data.as_pointer() != owner_pointer
+            or getattr(data, property).as_pointer() != pointer
+        ):
+            raise ReferenceError("Curve owner changed")
+        epoch[0] += 1
+        tracked.clear()
+        tracked.update({i: list(c.points) for i, c in enumerate(mapping.curves)})
+
+    def handle(index):
+        point = tracked[current_index()][index]
+        ptr = point.as_pointer()
+        generation = epoch[0]
+
+        def resolve():
+            return (
+                point
+                if epoch[0] == generation and valid() and point.as_pointer() == ptr
+                else None
+            )
+
+        value = rna_binding(resolve, "handle_type", commit=commit)
+        value.context.update = changed
+        original = value.set
+
+        def set_handle(mode):
+            original(mode)
+            changed()
+
+        value.set = set_handle
+        return value
+
+    def remove(index):
+        points = tracked[current_index()]
+        if not valid() or len(points) <= 2:
+            return
+        before = tuple((tuple(p.location), p.handle_type) for p in points)
+        curve().points.remove(points[index])
+        changed()
+        refresh()
+        after = tuple(
+            (tuple(p.location), p.handle_type) for p in tracked[current_index()]
+        )
+        try:
+            commit(before, after)
+        except Exception:
+            if valid():
+                set_value(tuple(location for location, _ in before))
+                for point, (_, mode) in zip(tracked[current_index()], before):
+                    point.handle_type = mode
+                changed()
+            raise
+
+    binding.refresh = refresh
+    binding.handle = handle
+    binding.handle_value = lambda index: tracked[current_index()][index].handle_type
+    binding.remove = remove
+    binding.revision = lambda: (
+        tuple(p.handle_type for p in tracked[current_index()]),
+        mapping.extend,
+        mapping.use_clip,
     )
+    return binding, mapping, curve
 
 
 def matrix_components(data, property, resolve=None):

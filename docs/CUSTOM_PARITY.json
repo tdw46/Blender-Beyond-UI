@@ -5,14 +5,15 @@
     "activate_init": {
       "kind": "property",
       "status": "partial",
-      "notes": "Registered custom panel popovers start the first eligible marked text/numeric edit with selection, including internal array/property-split rows. Fields scroll into view once; invalid or disabled owners reject edits; no OS focus change. Other control kinds, native dialog focus/Tab semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md.",
+      "notes": "Registered custom panel popovers start the first eligible marked text/numeric edit with selection, including internal array/property-split rows. Fields scroll into view once; invalid or disabled owners reject edits; no OS focus change. Other control kinds, native dialog focus/Tab semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md. V5 compound pies start the first eligible marked field on open with selected text; no operator execution or OS focus action. Remaining dialog/focus traversal semantics stay open.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/popup-focus-v1/comparison.json",
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
       "execution_evidence": [
         "docs/design/qa/popup-focus-v1/runtime.json",
         "docs/design/qa/popup-focus-v1/runtime-51.json",
         "docs/design/qa/popup-focus-v1/windowed.json",
-        "docs/design/qa/popup-focus-v1/windowed-51.json"
+        "docs/design/qa/popup-focus-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v5/launches.json"
       ]
     },
     "active": {
@@ -31,34 +32,40 @@
     "active_default": {
       "kind": "property",
       "status": "partial",
-      "notes": "Registered custom panel popovers invoke the first eligible marked ordinary operator button on Return/keypad Enter when no editor, menu, nested popup or compound widget owns input. Repeats/modifiers and stale owners are guarded; editor Return commits first. Finished/modal results dismiss only the originating popup. Operator variants, full native acceptance semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md.",
+      "notes": "Registered custom panel popovers invoke the first eligible marked ordinary operator button on Return/keypad Enter when no editor, menu, nested popup or compound widget owns input. Repeats/modifiers and stale owners are guarded; editor Return commits first. Finished/modal results dismiss only the originating popup. Operator variants, full native acceptance semantics and exact-reference acceptance remain open. See docs/POPUP_KEYBOARD.md. V5 compound pies initially select the first eligible marked action for ordinary Return activation. Owner checks remain live; opening never dispatches it. Full native popup/dialog semantics remain open.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/popup-focus-v1/comparison.json",
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
       "execution_evidence": [
         "docs/design/qa/popup-focus-v1/runtime.json",
         "docs/design/qa/popup-focus-v1/runtime-51.json",
         "docs/design/qa/popup-focus-v1/windowed.json",
-        "docs/design/qa/popup-focus-v1/windowed-51.json"
+        "docs/design/qa/popup-focus-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v5/launches.json"
       ]
     },
     "alert": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Registered and standalone compound pies consume inherited alert styling through active Blender semantic error colors, capability-gated to legacy Info error backgrounds. Shared glass and readable theme text remain intact. Other themes/platforms and exact-reference acceptance remain open. Ordinary Canvas fields now consume alert/NONE/NONE_OR_STATUS and method emboss=False; status is prepared outside paint. Scalar BVT geometry remains mandatory. See docs/ACTION_PARITY.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v5/launches.json",
+        "docs/design/qa/action-parity-v1/launches.json"
+      ]
     },
     "alignment": {
       "kind": "property",
       "status": "partial",
-      "notes": "Rows and columns support EXPAND/LEFT/CENTER/RIGHT using retained host BLF measurements without changing fonts. Grid/flow alignment semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
+      "notes": "Rows and columns support EXPAND/LEFT/CENTER/RIGHT using retained host BLF measurements without changing fonts. Grid/flow alignment semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-flow-v1/runtime.json",
         "docs/design/qa/layout-flow-v1/runtime-51.json",
         "docs/design/qa/layout-flow-v1/windowed.json",
-        "docs/design/qa/layout-flow-v1/windowed-51.json"
+        "docs/design/qa/layout-flow-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "bl_rna_get_subclass": {
@@ -78,28 +85,35 @@
     "box": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v4/launches.json"
+      ]
     },
     "column": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v4/launches.json"
+      ]
     },
     "column_flow": {
       "kind": "method",
       "status": "partial",
-      "notes": "Retained height-balanced columns, explicit/automatic counts and shared child controls. Auto sizing uses local host width rather than native root emw. Full alignment and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
+      "notes": "Retained height-balanced columns, explicit/automatic counts and shared child controls. Auto sizing uses local host width rather than native root emw. Full alignment and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-flow-v1/runtime.json",
         "docs/design/qa/layout-flow-v1/runtime-51.json",
         "docs/design/qa/layout-flow-v1/windowed.json",
-        "docs/design/qa/layout-flow-v1/windowed-51.json"
+        "docs/design/qa/layout-flow-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "context_pointer_set": {
@@ -131,10 +145,14 @@
     },
     "emboss": {
       "kind": "property",
-      "status": "unimplemented",
-      "notes": "Accepted/stored by the authoring object but not consumed by custom behavior or rendering. This inert setting does not establish parity. Audited 2026-10-30; implementation and execution/reference acceptance remain open.",
+      "status": "partial",
+      "notes": "Compound pies consume NONE and NONE_OR_STATUS, including method emboss=False, prepared animation/alert colors and unembossed field editing/context actions. Boolean switches retain the mandated BVT layout. NORMAL/PULLDOWN_MENU/PIE_MENU share current custom menu chrome; distinct native emboss geometry, visual acceptance remain open. Ordinary Canvas fields now consume alert/NONE/NONE_OR_STATUS and method emboss=False; status is prepared outside paint. Scalar BVT geometry remains mandatory. See docs/ACTION_PARITY.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v5/launches.json",
+        "docs/design/qa/action-parity-v1/launches.json"
+      ]
     },
     "enabled": {
       "kind": "property",
@@ -185,14 +203,15 @@
     "grid_flow": {
       "kind": "method",
       "status": "partial",
-      "notes": "Retained row/column-major packing, automatic/explicit/negative-multiple counts, weighted/even columns and equal row cells. Full alignment, all compound-child sizing and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
+      "notes": "Retained row/column-major packing, automatic/explicit/negative-multiple counts, weighted/even columns and equal row cells. Full alignment, all compound-child sizing and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-flow-v1/runtime.json",
         "docs/design/qa/layout-flow-v1/runtime-51.json",
         "docs/design/qa/layout-flow-v1/windowed.json",
-        "docs/design/qa/layout-flow-v1/windowed-51.json"
+        "docs/design/qa/layout-flow-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "icon": {
@@ -251,17 +270,33 @@
     },
     "menu_pie": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Standalone Layout.menu_pie now authors unregistered pies through the same Canvas engine as registered menus, with explicit host open coordinates/trigger, argument finalization and owner/scope revalidation. Nested pie/list Back, exact child actions, compound layout and theme/glass/motion remain shared. V5 restores resting shape immediately inside logical petals while retaining approach stretch, proximity and guide. Adds compound alert, emboss/status, property split/decorators and initial field/default selection. 5.1.2/5.2.2 execution and GPU capture evidence is recorded in marking-menu-v5. Full native edge/emboss/mixed-array/dialog semantics, specialized compound controls and generated-reference acceptance remain open; focus failures are documented.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
+      "authoring_surfaces": [
+        "layout.Layout",
+        "registered_menu.MenuLayout"
+      ],
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v1/runtime.json",
+        "docs/design/qa/marking-menu-v1/runtime-51.json",
+        "docs/design/qa/marking-menu-v2/runtime.json",
+        "docs/design/qa/marking-menu-v2/runtime-51.json",
+        "docs/design/qa/marking-menu-v3/launches.json",
+        "docs/design/qa/marking-menu-v4/launches.json",
+        "docs/design/qa/marking-menu-v5/launches.json"
+      ]
     },
     "operator": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. Operator context menus now append consuming-host contributions through the shared operator authoring path; exact-target stale-owner rejection is tested. No new visual acceptance claimed.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/operator-host-context-v1/runtime.json"
+      ]
     },
     "operator_context": {
       "kind": "property",
@@ -298,10 +333,14 @@
     },
     "operator_menu_hold": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom primary action on quick release; 200ms held registered menu with opening-release suppression, cancellation, live guards and finite scheduling independent of motion settings. Operator context actions plus keyboard-accessible held submenu retained. Exact visuals, broader native gestures/icons and platform acceptance remain open. See docs/ACTION_PARITY.md. Operator context menus now append consuming-host contributions through the shared operator authoring path; exact-target stale-owner rejection is tested. No new visual acceptance claimed.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/action-parity-v1/launches.json",
+        "docs/design/qa/operator-host-context-v1/runtime.json"
+      ]
     },
     "panel": {
       "kind": "method",
@@ -353,7 +392,7 @@
     "prop": {
       "kind": "method",
       "status": "partial",
-      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, remaining pointer/decorator and event variants, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md. Custom ID pointer popovers support camera/parent/registered polls or explicit PointerItems policies, stale candidate validation, clear and host commit rollback. See docs/POINTERS_AND_DECORATORS.md. Named non-ID pointer fields and searches now use explicit PointerItems policies with mandatory host revision tokens and rollback context managers; collection-owned active Bone/Node properties, transactional edits, stale structural snapshots, copy paths and candidate menus are execution-tested on 5.1.2/5.2.2. Pointer typing starts immediately; rejected commits preserve the editor. Native button-pointer callback overrides for collection owners, unqualified setter side effects, unnamed/nonassignable targets, broader collection coverage and exact reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md. Enum v2 supersedes the preceding modifier/grouping notes: source-specific expanded flag exclusive/Shift-toggle behavior, retained menu headings/separators, nonselectable header navigation and props_enum group columns are implemented and executed. Public-RNA fallback cannot expose structural rows; full icon drawing, context-dependent persistent menus, tabs and all keywords remain incomplete. See docs/design/qa/enum-properties-v2/index.html. Search follow-up: long dropdown pages automatically expose label/group search, stable owner actions, keyboard/clipboard editing, empty results, nested-page query retention and query-first cancellation. Search is input-only and reuses menu glass/motion/theme. Fuzzy ranking and IME composition remain unqualified. See docs/MENU_SEARCH.md. BVT scalar layout update: sliders have separate label/rail/bubble/number fields; booleans use switches including contributed menu rows; color hue/alpha use the same scalar treatment. Execution-tested on 5.1.2 and 5.2.2; exact visual acceptance remains open. See docs/SCALAR_CONTROLS.md and docs/design/qa/scalar-layout-v1/index.html.",
+      "notes": "Basic bool/scalar/string/enum/color/vector paths implemented. Numeric properties now have rotation/length/area/volume scene-unit conversion, preferred length units, factor percentages, unchanged-value preservation, click-to-type, BVT-style drag steps, Shift precision, Ctrl snapping, soft/hard limits and slider flag behavior. Menu fields share the codec and raw RNA context target. Wide numeric motion uses 15% amplitude. Custom event-only scalar INT/ENUM and full-event KeyMapItem.type capture now share glass menus, cancellation, stale-owner checks and atomic host commits; keyboard/mouse/chord cases are execution-tested. See docs/EVENT_PROPERTIES.md. Tested on macOS Blender 5.1.2/5.2.2; exact reference acceptance, remaining pointer/decorator and event variants, full math/driver syntax, other unit categories and complete prop keyword/subtype semantics remain open. See docs/NUMERIC_PROPERTIES.md. Custom ID pointer popovers support camera/parent/registered polls or explicit PointerItems policies, stale candidate validation, clear and host commit rollback. See docs/POINTERS_AND_DECORATORS.md. Named non-ID pointer fields and searches now use explicit PointerItems policies with mandatory host revision tokens and rollback context managers; collection-owned active Bone/Node properties, transactional edits, stale structural snapshots, copy paths and candidate menus are execution-tested on 5.1.2/5.2.2. Pointer typing starts immediately; rejected commits preserve the editor. Native button-pointer callback overrides for collection owners, unqualified setter side effects, unnamed/nonassignable targets, broader collection coverage and exact reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Enum pass 2026-10-29: scalar and explicit flag menus use shared strong glass/motion for clicks and shortcuts, bounded 4096-choice admission with visible-row scrolling, current-choice reveal and dynamic choice revalidation. Expanded choices share setter verification, no-op suppression and failed-commit rollback. Real 200-choice window input and runtime behavior pass on 5.1.2/5.2.2; 600 batch-equal motion frames cover three scales. Modifier-specific flag persistence, separators/icons, specialized tabs, unqualified dynamic callbacks and exact reference acceptance remain open. See docs/ENUM_PROPERTIES.md. Enum v2 supersedes the preceding modifier/grouping notes: source-specific expanded flag exclusive/Shift-toggle behavior, retained menu headings/separators, nonselectable header navigation and props_enum group columns are implemented and executed. Public-RNA fallback cannot expose structural rows; full icon drawing, context-dependent persistent menus, tabs and all keywords remain incomplete. See docs/design/qa/enum-properties-v2/index.html. Search follow-up: long dropdown pages automatically expose label/group search, stable owner actions, keyboard/clipboard editing, empty results, nested-page query retention and query-first cancellation. Search is input-only and reuses menu glass/motion/theme. Fuzzy ranking and IME composition remain unqualified. See docs/MENU_SEARCH.md. BVT scalar layout update: sliders have separate label/rail/bubble/number fields; booleans use switches including contributed menu rows; color hue/alpha use the same scalar treatment. Execution-tested on 5.1.2 and 5.2.2; exact visual acceptance remains open. See docs/SCALAR_CONTROLS.md and docs/design/qa/scalar-layout-v1/index.html. Context Reset/Copy to Selected suppress unchanged-component writes and commits; rejected component transactions preserve unrelated sibling changes. Background 5.1.2/5.2.2 regression evidence recorded.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/non-id-pointers-v1/capture.json",
       "enum_execution_evidence": [
@@ -369,14 +408,20 @@
         "docs/design/qa/menu-search-v1/runtime-51.json",
         "docs/design/qa/menu-search-v1/windowed-52.json",
         "docs/design/qa/menu-search-v1/windowed-51.json"
+      ],
+      "execution_evidence": [
+        "docs/design/qa/context-transactions-v1/runtime.json"
       ]
     },
     "prop_decorator": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom empty/keyed/changed/animated/driven states, active theme animation roles, exact component key insertion/deletion and owner-aware right-click menus. Active Action slots/channelbags and legacy fcurves fallback; requires host undo callback. NLA/layer blending, remaining specialized array layouts, index=-2, full animation semantics and generated-reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Standalone arrays now expand by exact component; color/direction remain aggregate, with both forms execution-tested.",
+      "notes": "Custom empty/keyed/changed/animated/driven states, active theme animation roles, exact component key insertion/deletion and owner-aware right-click menus. Active Action slots/channelbags and legacy fcurves fallback; requires host undo callback. NLA/layer blending, remaining specialized array layouts, index=-2, full animation semantics and generated-reference acceptance remain open. See docs/POINTERS_AND_DECORATORS.md. Standalone arrays now expand by exact component; color/direction remain aggregate, with both forms execution-tested. V5 adds explicit and split-enabled compound menu decorators with real exact-component key insertion/deletion and owner-aware right-click actions. Input prepares status colors; paint does not scan channels. Narrow inline fallback/reference acceptance remains open.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/capture.json"
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v5/launches.json"
+      ]
     },
     "prop_enum": {
       "kind": "method",
@@ -499,67 +544,77 @@
     "row": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v4/launches.json"
+      ]
     },
     "scale_x": {
       "kind": "property",
       "status": "partial",
-      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-sizing-v1/runtime.json",
         "docs/design/qa/layout-sizing-v1/runtime-51.json",
         "docs/design/qa/layout-sizing-v1/windowed.json",
-        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+        "docs/design/qa/layout-sizing-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "scale_y": {
       "kind": "property",
       "status": "partial",
-      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-sizing-v1/runtime.json",
         "docs/design/qa/layout-sizing-v1/runtime-51.json",
         "docs/design/qa/layout-sizing-v1/windowed.json",
-        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+        "docs/design/qa/layout-sizing-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "separator": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified.",
+      "notes": "Custom implementation exists; complete Blender semantics and exact visual-reference acceptance remain unverified. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v4/launches.json"
+      ]
     },
     "separator_spacer": {
       "kind": "method",
       "status": "partial",
-      "notes": "Invisible flexible horizontal spacing with no paint/input/binding target. Native header/popup-specific semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
+      "notes": "Invisible flexible horizontal spacing with no paint/input/binding target. Native header/popup-specific semantics and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-flow-v1/runtime.json",
         "docs/design/qa/layout-flow-v1/runtime-51.json",
         "docs/design/qa/layout-flow-v1/windowed.json",
-        "docs/design/qa/layout-flow-v1/windowed-51.json"
+        "docs/design/qa/layout-flow-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "split": {
       "kind": "method",
       "status": "partial",
-      "notes": "Retained factor/automatic split with shared controls, validation and remainder allocation. Native joined-corner appearance and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md.",
+      "notes": "Retained factor/automatic split with shared controls, validation and remainder allocation. Native joined-corner appearance and exact reference acceptance remain open. See docs/LAYOUT_FLOW.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-flow-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-flow-v1/runtime.json",
         "docs/design/qa/layout-flow-v1/runtime-51.json",
         "docs/design/qa/layout-flow-v1/windowed.json",
-        "docs/design/qa/layout-flow-v1/windowed-51.json"
+        "docs/design/qa/layout-flow-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "template_ID": {
@@ -711,17 +766,23 @@
     },
     "template_colorspace_settings": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Custom input color-space selector using shared searchable RNA enum, glass/theme/motion and exact-owner property contexts. Settings identity and deleted Image are guarded. Headless 5.1.2/5.2.2 assignment/commit/context/stale-owner checks pass. Visual/reference, broader owners and 4.2 execution remain open.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": null,
+      "execution_evidence": [
+        "docs/design/qa/colorspace-template-v1/runtime.json"
+      ]
     },
     "template_component_menu": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Persistent custom property popup for indexed arrays and expanded enums, using shared field interactions, transactions, units, glass/motion, owner menus and scope guards. Long enum lists have retained token search. Vector edit, enum selection, right-cancel rollback, filtering and deleted-owner rejection tested. Broader property subtype/layout and exact-reference acceptance remain open. See docs/ACTION_PARITY.md.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/action-parity-v1/launches.json"
+      ]
     },
     "template_constraint_header": {
       "kind": "method",
@@ -740,7 +801,7 @@
     "template_curve_mapping": {
       "kind": "method",
       "status": "partial",
-      "notes": "Curve sampling, point drag/add/remove and channel selector implemented. Handles, exact-coordinate fields, bounds, presets/levels/brush modes and exact reference matching remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial.",
+      "notes": "Curve sampling, point drag/add/remove and channel selector implemented. Handles, exact-coordinate fields, bounds, presets/levels/brush modes and exact reference matching remain open. Tyler approved the presented v2 visual state on 2026-10-27; remaining API semantics are still partial. CamKeys consumer batch: automatic persistent row identities and brush=True point/handle controls are execution-tested on 5.1.2/5.2.2. Consumer brush lifecycle/undo is separate. No added reference-match claim; see docs/BRUSH_CURVES.md and docs/CAMKEYS_MIGRATION.md.",
       "reference": "docs/design/references/specialized-controls-v1.png",
       "comparison_evidence": "docs/design/qa/v2/all-controls-comparison.png",
       "visual_approval": "docs/design/qa/v2/approval.json"
@@ -761,10 +822,14 @@
     },
     "template_event_from_keymap_item": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Read-only localized KeyMapItem shortcut text with exact-owner Copy Shortcut context menu and deletion invalidation. Native keycap/icon geometry, theme/platform matrix and exact-reference acceptance remain open. See docs/ACTION_PARITY.md. Host context contributions are now preserved; keyboard APP invocation, isolated clipboard copy, exact clicked host action and deleted-keymap rejection pass on both installed runtimes.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/action-parity-v1/launches.json",
+        "docs/design/qa/shortcut-context-v1/runtime.json"
+      ]
     },
     "template_file_select_path": {
       "kind": "method",
@@ -895,7 +960,7 @@
     "template_list": {
       "kind": "method",
       "status": "partial",
-      "notes": "Custom default/compact/grid collection lists plus registered Python draw_item/draw_filter/filter_items on retained visible child canvases. Original-index filter mapping, custom scalar list settings, exact-owner editing/menus, modal routing and spring transfer; no callbacks in paint. Pre-4.5 inversion preserved by version gate. Stable host identity required for PropertyGroup moves. Native-only callbacks, callback-backed/array/flag settings, icons, dynamic tooltips, multiline/nested callbacks, drag/drop, full native semantics and exact-reference acceptance remain open. See docs/COLLECTION_LISTS.md and docs/REGISTERED_LISTS.md.",
+      "notes": "Custom default/compact/grid collection lists plus registered Python draw_item/draw_filter/filter_items on retained visible child canvases. Original-index filter mapping, custom scalar list settings, exact-owner editing/menus, modal routing and spring transfer; no callbacks in paint. Pre-4.5 inversion preserved by version gate. Stable host identity required for PropertyGroup moves. Native-only callbacks, callback-backed/array/flag settings, icons, dynamic tooltips, multiline/nested callbacks, drag/drop, full native semantics and exact-reference acceptance remain open. See docs/COLLECTION_LISTS.md and docs/REGISTERED_LISTS.md. CamKeys consumer batch: automatic persistent row identities and brush=True point/handle controls are execution-tested on 5.1.2/5.2.2. Consumer brush lifecycle/undo is separate. No added reference-match claim; see docs/BRUSH_CURVES.md and docs/CAMKEYS_MIGRATION.md.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/registered-lists-v1/comparison.json",
       "execution_evidence": [
@@ -1044,10 +1109,14 @@
     },
     "template_popup_confirm": {
       "kind": "method",
-      "status": "unimplemented",
-      "notes": "No custom implementation; native forwarding does not count.",
+      "status": "partial",
+      "notes": "Owned custom popup footer with matching-release Cancel/Confirm, cancel_default Return routing, mutable operator arguments and FINISHED/RUNNING_MODAL-only dismissal. Replaced popup safety and CANCELLED retention execution-tested. Full native dialog semantics, icons and exact-reference acceptance remain open. See docs/ACTION_PARITY.md. Operator context menus now append consuming-host contributions through the shared operator authoring path; exact-target stale-owner rejection is tested. No new visual acceptance claimed.",
       "reference": null,
-      "comparison_evidence": null
+      "comparison_evidence": "docs/design/qa/action-parity-v1/report.json",
+      "execution_evidence": [
+        "docs/design/qa/action-parity-v1/launches.json",
+        "docs/design/qa/operator-host-context-v1/runtime.json"
+      ]
     },
     "template_preview": {
       "kind": "method",
@@ -1165,49 +1234,57 @@
     "ui_units_x": {
       "kind": "property",
       "status": "partial",
-      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-sizing-v1/runtime.json",
         "docs/design/qa/layout-sizing-v1/runtime-51.json",
         "docs/design/qa/layout-sizing-v1/windowed.json",
-        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+        "docs/design/qa/layout-sizing-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "ui_units_y": {
       "kind": "property",
       "status": "partial",
-      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md.",
+      "notes": "Retained custom geometry with local zero/identity settings, single ancestor scale composition, constrained fixed logical-unit slots, stable owner hit targets and resize cancellation. Fonts remain host-sized and compound content preserves aspect. Ordinary layouts retain an unsized fast path; no sizing work in paint. Custom height fitting, bounded ranges and source spacing do not claim identical native layout negotiation; exact reference acceptance remains open. See docs/LAYOUT_SIZING.md. V4 adds this behavior inside registered compound pie slots through the shared retained planner; nested owner/context/motion routes are execution-tested. See docs/MARKING_MENUS.md; exact native/reference acceptance remains open.",
       "reference": null,
       "comparison_evidence": "docs/design/qa/layout-sizing-v1/comparison.json",
       "execution_evidence": [
         "docs/design/qa/layout-sizing-v1/runtime.json",
         "docs/design/qa/layout-sizing-v1/runtime-51.json",
         "docs/design/qa/layout-sizing-v1/windowed.json",
-        "docs/design/qa/layout-sizing-v1/windowed-51.json"
+        "docs/design/qa/layout-sizing-v1/windowed-51.json",
+        "docs/design/qa/marking-menu-v4/launches.json"
       ]
     },
     "use_property_decorate": {
       "kind": "property",
       "status": "partial",
-      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open.",
+      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open. V5 compound pies support exact-component key decorators with insertion/deletion, prepared status colors, explicit prop_decorator, placeholders, and decorate=False suppression. Shared owner-aware right-click and theme/motion policies apply. Narrow fallback placement and exact-reference acceptance remain open.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/runtime-52.json"
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v5/launches.json"
+      ]
     },
     "use_property_split": {
       "kind": "property",
       "status": "partial",
-      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open.",
+      "notes": "When both flags are enabled, scalar/indexed props and expanded vector components reserve compact decorator slots; decorate=False opts out. Full native split-label/array layout semantics and visual acceptance remain open. V5 compound pies right-align scalar/indexed field labels in the shared logical lane and reserve exact-owner decorator slots when requested. Full native mixed-array/split semantics and narrow fallback inline placement remain open.",
       "reference": null,
-      "comparison_evidence": "docs/design/qa/pointer-decorators-v1/runtime-52.json"
+      "comparison_evidence": "docs/design/qa/marking-menu-v5/report.json",
+      "execution_evidence": [
+        "docs/design/qa/marking-menu-v5/launches.json"
+      ]
     }
   },
   "cross_cutting_gates": {
     "right_click_context_menus": {
       "status": "partial",
       "source_contract": "docs/SOURCE_UI_CONTRACT.md",
-      "notes": "Shared owner-aware BVT glass/motion menus now include scalar/string/array fields, transactional inline edits, host-owned custom-popup shortcuts, dynamic enum callbacks, scoped string contexts and host-extensible conflict maps. QA v5 tests actual keyboard dispatch, stale owners and native release on admitted macOS arm64 5.1.2/5.2.2. Generic UILayout templates and full prop subtype semantics remain in the main UI ledger. Broader platform/theme/DPI/window qualification and exact generated-reference/motion acceptance remain open. See docs/CONTEXT_MENUS.md.",
+      "notes": "Shared owner-aware BVT glass/motion menus support exact RNA actions, animation/keying sets, selected value/driver copies, conditional file/asset actions, visible-object/active-rig Jump and existing-editor routing. Simple library property overrides (single/all, linked-value restore, transactional rollback) and scalar custom ID-property defaults/bindings now pass 5.1.2/5.2.2. Exact-build native clipboard/Favorites admission restored and regression protected. Hierarchy-wide ID overrides, complex/mandatory rules, new-window/Edit Driver and hidden/cross-mode Jump remain explicit gaps. Broader platform/theme/DPI qualification and exact-reference/motion acceptance remain open. See docs/CORE_CONTEXT_AUDIT.md and docs/CONTEXT_MENUS.md. Scalar custom driver clipboard and Favorites now share the admitted ID/path interfaces, with UTF-8 buffer bounds. Host-owned numeric shortcut registration supports typed values, dependency tags, stale/type guards and real undo/redo. Eight final 5.1.2/5.2.2 runtime runs pass; see custom-adapters-v1. Scalar custom Python menu contributions now receive genuine property metadata on exact admitted builds, including nested contexts, inline fields and own-field right-click menus; Assign Default is mapped. Eight runtime runs and 253 unit tests pass; see custom-contributions-v1. Other custom types/unmapped native operators remain explicit limits.",
       "execution_evidence": [
         "docs/design/qa/context-menu-v1/rna-51.json",
         "docs/design/qa/context-menu-v1/rna-52.json",
@@ -1242,7 +1319,13 @@
         "docs/design/qa/context-menu-v5/parity-51.json",
         "docs/design/qa/context-menu-v5/parity-52.json",
         "docs/design/qa/context-menu-v5/regression-51.json",
-        "docs/design/qa/context-menu-v5/regression-52.json"
+        "docs/design/qa/context-menu-v5/regression-52.json",
+        "docs/design/qa/context-selection-v1/runtime.json",
+        "docs/design/qa/driver-copy-v1/runtime.json",
+        "docs/design/qa/context-data-v1/runtime.json",
+        "docs/design/qa/context-overrides-v1/runtime.json",
+        "docs/design/qa/custom-adapters-v1/runtime.json",
+        "docs/design/qa/custom-contributions-v1/runtime.json"
       ],
       "comparison_evidence": "docs/design/qa/context-menu-v5/comparison.json"
     },
@@ -1278,6 +1361,17 @@
         "docs/design/qa/ui-scale-v1/checks-scaling-52.json",
         "docs/design/qa/ui-scale-v1/checks-scaling-51.json"
       ]
+    },
+    "single_line_invocation": {
+      "status": "partial",
+      "execution_evidence": [
+        "docs/design/qa/single-line-v1/runtime.json",
+        "docs/design/qa/direct-popups-v1/runtime.json",
+        "docs/design/qa/popup-variants-v1/runtime.json",
+        "docs/design/qa/camkeys-consumer-v1/runtime.json",
+        "docs/design/qa/camkeys-custom-v1/runtime.json"
+      ],
+      "notes": "Loader-independent panel adoption and owned dialogs, property-only popups, confirmations, enum search, callback menus/pies and direct wm.call_menu* routes are execution-tested on macOS arm64 5.1.2/5.2.2. Existing owned-menu keymap routing, RNA matching, test-modal invocation, chord-preserving restoration and menu-only consumers are tested. Original operator state, cancellation, undo, exact-property context menus and retained glass verified. Ordinary foreground hotkey dispatch still needs consumer QA. Native redo popups, flag-enum search, auto-keymap hints, indirect helper calls, strict RNA proxies and unqualified hosts remain explicit limits. No new visual acceptance. Real CamKeys dialogs, menu, exact Add to CamProps contribution/undo and lifecycle pass on both runtimes. Mixed compatibility is explicitly opt-in; PropertyGroup lists without stable consumer keys remain native. Advanced brush curves remain unsupported. See docs/CAMKEYS_MIGRATION.md. Follow-up closes CamKeys local stable-list identity and brush-falloff consumer gaps with strict one-line setup. Foreign/read-only identities and other curve modes remain explicit boundaries."
     }
   }
 }

@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Registered menu_pie keeps eight Blender-order slots including empty separators; operator runs only on release",
+    "Pie toggle and numeric field retain exact RNA ownership and editing",
+    "Nested menus keep all rows and searchable capacity beyond eight radial slots",
+    "Marking release over visible petals resolves the displayed operator even when wide labels or clamping differ from angular sectors",
+    "Exact-row property context actions survive radial navigation; removed registration rejects pending release"
+  ]
+}

@@ -1,0 +1,283 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "batch": "custom",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 73139,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_custom_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "real FloatProperty/IntProperty and nested context restoration verified; owner/identifier/description reaches callbacks and operators; mapped reset/default commands and rollback work",
+          "nested menus, custom inline edit/rollback and right-click subfield Reset target exact contributed property",
+          "public appended callbacks integrate; failing callbacks isolate; unsupported adapters keep base menus with explicit unavailable row",
+          "deleted custom property and unregistered operator revoke pending actions without retaining native scopes"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/custom/blender-0.log"
+    },
+    {
+      "batch": "custom",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 73151,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_custom_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "real FloatProperty/IntProperty and nested context restoration verified; owner/identifier/description reaches callbacks and operators; mapped reset/default commands and rollback work",
+          "nested menus, custom inline edit/rollback and right-click subfield Reset target exact contributed property",
+          "public appended callbacks integrate; failing callbacks isolate; unsupported adapters keep base menus with explicit unavailable row",
+          "deleted custom property and unregistered operator revoke pending actions without retaining native scopes"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/custom/blender-1.log"
+    },
+    {
+      "batch": "existing",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 73140,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Contributed Reset/Copy Selected respect component and all-array arguments",
+          "Contributed driver copying honors single/all channels and requires host undo",
+          "Data/full paths use exact clicked owner and isolated clipboard",
+          "Python operators ending in _button execute and revoke after unregister",
+          "Unknown arguments, native-only actions and inherited disabled states fail closed",
+          "Locked controls retain readable paths; rejected reset rolls back",
+          "Deleted property owners revoke pending contributed actions"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/existing/blender-0.log"
+    },
+    {
+      "batch": "existing",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 73143,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Contributed Reset/Copy Selected respect component and all-array arguments",
+          "Contributed driver copying honors single/all channels and requires host undo",
+          "Data/full paths use exact clicked owner and isolated clipboard",
+          "Python operators ending in _button execute and revoke after unregister",
+          "Unknown arguments, native-only actions and inherited disabled states fail closed",
+          "Locked controls retain readable paths; rejected reset rolls back",
+          "Deleted property owners revoke pending contributed actions"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/existing/blender-1.log"
+    },
+    {
+      "batch": "overrides",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 73138,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/overrides/blender-0.log"
+    },
+    {
+      "batch": "overrides",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 73150,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/overrides/blender-1.log"
+    },
+    {
+      "batch": "native-context",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 73228,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_native_context.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 71381,
+        "initial_frontmost_pid": 71381,
+        "new_instance": true,
+        "pid": 73228,
+        "restore_requests": 0,
+        "seconds": 2.7194610834121704,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "native string scope preserves Unicode and inherited keys; nested/exception exit restores context and releases stores",
+          "contributed and authored operators retain native string scope; dynamic operator enums see snapshotted properties; scratch config cleanup preserves preferences",
+          "dynamic Python enum callbacks receive exact context and updated items; repeated native temporary arrays released",
+          "dynamic field menus reject vanished choices; custom Layout.prop uses current callback items"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/native-context/blender-0.log"
+    },
+    {
+      "batch": "native-context",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 73248,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_native_context.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 71381,
+        "initial_frontmost_pid": 71381,
+        "new_instance": true,
+        "pid": 73248,
+        "restore_requests": 0,
+        "seconds": 2.93094801902771,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "native string scope preserves Unicode and inherited keys; nested/exception exit restores context and releases stores",
+          "contributed and authored operators retain native string scope; dynamic operator enums see snapshotted properties; scratch config cleanup preserves preferences",
+          "dynamic Python enum callbacks receive exact context and updated items; repeated native temporary arrays released",
+          "dynamic field menus reject vanished choices; custom Layout.prop uses current callback items"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-contributions-v1/native-context/blender-1.log"
+    }
+  ]
+}

@@ -86,6 +86,7 @@ class RegisteredPanel(RegisteredMenu):
             raise ValueError("Popover nesting exceeds three levels")
         child = Canvas(
             parent.theme,
+            icon_renderer=parent.icon_renderer,
             context_provider=parent.context_provider,
             menu_commit=parent.menu_commit,
             shortcut_registry=parent.shortcut_registry,
@@ -101,11 +102,19 @@ class RegisteredPanel(RegisteredMenu):
         )
         child.bind_context_tooltips(parent._tooltip_wake)
         child.set_text_measure(parent.text_measure, parent._text_measure_key)
+
+        def commit(before, after):
+            hook = getattr(self.cls, "beyond_ui_changed", None)
+            if hook:
+                with override(context, self.pointers.values()):
+                    child._panel_rebuild = bool(hook(context, before, after))
+            self.layout.commit(before, after)
+
         ui = Layout(
             child,
             context,
             resolve=self.layout.resolve,
-            commit=self.layout.commit,
+            commit=commit,
             state=self.layout.state,
             source=self.layout.source,
             pointer_sources=self.layout.pointer_sources,
@@ -117,12 +126,23 @@ class RegisteredPanel(RegisteredMenu):
         ui._context_pointers = dict(self.pointers.values())
         try:
             with override(context, self.pointers.values()):
-                if "HIDE_HEADER" not in getattr(self.cls, "bl_options", set()):
+                prepare = getattr(self.cls, "beyond_ui_prepare", None)
+                if prepare:
+                    prepare(context)
+                if self.label.strip() and "HIDE_HEADER" not in getattr(
+                    self.cls, "bl_options", set()
+                ):
                     ui.title(
                         text=self.label,
                         text_ctxt=getattr(self.cls, "bl_translation_context", "*"),
                     )
-                self.cls.draw(PanelProxy(self.cls, ui), context)
+                from .layout_recording import Tape
+
+                tape = Tape(self.layout.state)
+                tape.root._values["is_popover"] = True
+                self.cls.draw(PanelProxy(self.cls, tape.root), context)
+                tape.initialize_lists(ui.list_identity)
+                tape.play(ui)
             self.check(context, scope)
             if len(child.controls) > LIMIT:
                 raise ValueError("Popover exceeds 4096 controls")
@@ -157,13 +177,24 @@ class PanelPopover(Widget):
         self.preferred_width = min(960.0, max(160.0, float(units) * 20.0))
         from .popup_focus import PopupFocus
 
+        self.canvas._popup_close = self.close_owned
         self.focus = PopupFocus(self)
+
+    def close_owned(self):
+        if (self.parent.overlay or {}).get("widget") is self:
+            self.parent.cancel()
 
     def opened(self, context):
         self.focus.open(context)
 
     def dimensions(self, font_size, available_width, available_height=None):
-        self.canvas.theme = self.parent.theme
+        theme = getattr(self.model, "menu_theme", lambda value: value)(
+            self.parent.theme
+        )
+        if self.canvas.theme != theme:
+            self.canvas.theme = theme
+            self.canvas.invalidate()
+        self.canvas.icon_renderer = self.parent.icon_renderer
         self.canvas.wide_numeric_motion_scale = self.parent.wide_numeric_motion_scale
         self.width = max(1.0, min(self.preferred_width, available_width))
         height = self.canvas.arrange(self.width)
@@ -347,6 +378,9 @@ class PanelPopover(Widget):
         )
         if child.menu_error:
             self.parent.menu_error = child.menu_error
+        if getattr(child, "_panel_rebuild", False) and not child.widget_capture:
+            child._panel_rebuild = False
+            self.parent.open_panel(self.owner, self.parent._event_clip, context)
         # Hover redraws must reach the owning host even when no spring is active.
         return used or contained and event.type == "MOUSEMOVE"
 
@@ -499,7 +533,7 @@ def author(layout, panel, **options):
         control = group.group.button(
             layout._key("popover"),
             layout._text(
-                options["text"] or model.label,
+                model.label if options["text"] is None else options["text"],
                 options["text_ctxt"],
                 options["translate"],
             ),

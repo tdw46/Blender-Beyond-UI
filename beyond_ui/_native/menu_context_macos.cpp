@@ -69,3 +69,37 @@ extern "C" void beyond_context_exit(void *opaque, int restore) {
   --active;
 }
 extern "C" int beyond_context_active() { return active; }
+
+// Metadata-only custom property scope. The native button is never attached,
+// painted, activated or used to execute an operator. Blender owns its layouts.
+#include <optional>
+extern "C" void *beyond_context_property_enter(void *context, void *owner, const char *name) {
+  using Define = void *(*)(void *, int8_t, std::optional<StringRef>, int, int,
+                          short, short, void *, StringRef, int, float, float,
+                          std::optional<StringRef>);
+  using Set = void (*)(void *, const void *);
+  auto define = reinterpret_cast<Define>(dlsym(RTLD_DEFAULT,
+    "_ZN7blender2ui9uiDefButREPNS0_5BlockENS0_10ButtonTypeENSt3__18optionalINS_9StringRefEEEiissPNS_10PointerRNAENS_13StringRefNullEiffS7_"));
+  auto set = reinterpret_cast<Set>(dlsym(RTLD_DEFAULT,
+    "_ZN7blender2ui6Layout20context_set_from_butEPKNS0_6ButtonE"));
+  if (!begin_block || !define || !set || !context || !owner || !name || active >= 8) return nullptr;
+  auto *scope = new Scope{context, nullptr, get_context(context), nullptr};
+  try {
+    scope->block = begin_block(context, nullptr, "Beyond UI property metadata", 1);
+    auto *layout = create_layout(scope->block, 1, 0, 0, 0, 1, 1, 0, style());
+    if (scope->previous) copy_context(layout, scope->previous);
+    // ButtonType::Num is 7 in both admitted UI_interface_c.hh revisions.
+    auto *button = define(scope->block, 7, std::nullopt, 0, 0, 1, 1, owner,
+                          {name, int64_t(std::strlen(name))}, -1, 0, 1, std::nullopt);
+    if (!button) { free_layout(scope->block); free_block(context, scope->block); delete scope; return nullptr; }
+    set(layout, button);
+    scope->current = layout_context(layout);
+    set_context(context, scope->current);
+    ++active;
+    return scope;
+  } catch (...) {
+    if (scope->block) { free_layout(scope->block); free_block(context, scope->block); }
+    delete scope;
+    return nullptr;
+  }
+}

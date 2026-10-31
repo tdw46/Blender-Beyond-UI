@@ -81,10 +81,16 @@ class ContextArguments(Arguments):
             return False
 
 
-def retarget(rows, target):
+def retarget(rows, target, *, _depth=0, _budget=None):
     """Nested row actions keep their exact property/operator target."""
+    if _depth > 16:
+        raise ValueError("Compound owner tree exceeds depth 16")
+    _budget = [0] if _budget is None else _budget
     result = []
-    for row in rows:
+    for row in islice(rows, LIMIT + 1):
+        _budget[0] += 1
+        if _budget[0] > LIMIT:
+            raise ValueError("Compound owner tree exceeds 4096 nodes")
 
         def wrap(callback):
             def call(t, c, *args):
@@ -134,9 +140,19 @@ def retarget(rows, target):
                 else None,
                 context=nested(row.context) if row.context else None,
                 field=field,
+                compound=replace(
+                    row.compound,
+                    rows=retarget(
+                        row.compound.rows, target, _depth=_depth + 1, _budget=_budget
+                    ),
+                )
+                if row.compound is not None
+                else None,
             )
         )
-    return tuple(result)
+    from .pie_layout import PieRows
+
+    return PieRows(result) if isinstance(rows, PieRows) else tuple(result)
 
 
 class RegisteredMenu:
@@ -146,13 +162,18 @@ class RegisteredMenu:
         self.layout, self.context, self.name = layout, layout.context, name
         self.cls, self.depth, self.source = self.lookup(name), depth, source
         self.draw_identity = draw_key(self.cls)
+        self.pie = False
         self.parent_check = None
         self.label = self.cls.bl_label
         self.pointers = ContextArguments()
         from .context_extensions import overrides
 
         self.pointers.capture(
-            {**layout._context_pointers, **layout._context_strings, **overrides(source)}
+            {
+                **layout._context_pointers,
+                **layout._context_strings,
+                **overrides(source, self.context),
+            }
         )
         self.pointers.values()
         self.invocation = layout.operator_context
@@ -196,6 +217,7 @@ class RegisteredMenu:
         with override(context, self.pointers.values()):
             self.cls.draw(Proxy(self.cls, collector), context)
         collector.finish()
+        self.pie = collector.pie
         self.check(context, scope)
         if not collector.rows:
             raise ValueError("Menu has no supported rows in this context")
@@ -208,7 +230,9 @@ class RegisteredMenu:
                 rows,
                 Target(self.name, valid=valid, commit=self.layout.canvas.menu_commit),
             )
-        return rows, valid
+        from .pie_layout import PieRows
+
+        return (PieRows(rows) if collector.pie else rows), valid
 
     def context_rows(self, target, context):
         rows = [
@@ -244,9 +268,43 @@ class MenuLayout:
         "divider",
         "selections",
         "parent",
+        "pie",
+        "compound_mode",
+        "compound_options",
+        "compound_kind",
+        "alert",
+        "emboss",
+        "active_default",
+        "activate_init",
+        "use_property_split",
+        "use_property_decorate",
     }
 
     def __setattr__(self, name, value):
+        if name == "emboss" and value not in {
+            "NORMAL",
+            "NONE",
+            "PULLDOWN_MENU",
+            "PIE_MENU",
+            "NONE_OR_STATUS",
+        }:
+            raise ValueError("Unknown emboss style")
+        if name in {"scale_x", "scale_y", "ui_units_x", "ui_units_y", "alignment"}:
+            if not self.compound_mode:
+                raise ValueError("Menu sizing/alignment requires a compound group")
+            if name == "alignment":
+                if value not in {"EXPAND", "LEFT", "CENTER", "RIGHT"}:
+                    raise ValueError("Unknown alignment")
+            else:
+                from math import isfinite
+
+                value = float(value)
+                if not isfinite(value) or not 0 <= value <= 4096:
+                    raise ValueError(
+                        "Menu size must be finite and between zero and 4096"
+                    )
+            self.compound_options[name] = value
+            return
         if name not in self._attributes:
             from .layout import UnsupportedControl
 
@@ -270,8 +328,26 @@ class MenuLayout:
         self.divider = False
         self.selections = {}
         self.parent = None
+        self.pie = False
+        self.compound_mode = False
+        self.compound_options = {}
+        self.compound_kind = None
+        self.alert = self.active_default = self.activate_init = False
+        self.emboss = "NORMAL"
+        self.use_property_split = False
+        self.use_property_decorate = True
+
+    def menu_pie(self):
+        if self.rows or self.parent is not None:
+            raise ValueError("menu_pie must be the root of a fresh menu definition")
+        self.pie = True
+        return self
 
     def __getattr__(self, name):
+        if name in {"scale_x", "scale_y", "ui_units_x", "ui_units_y", "alignment"}:
+            return self.compound_options.get(
+                name, "EXPAND" if name == "alignment" else 0.0
+            )
         from .layout import UnsupportedControl
 
         raise UnsupportedControl("registered menu " + name)
@@ -279,7 +355,9 @@ class MenuLayout:
     def _text(self, text, text_ctxt="", translate=True):
         return self.model.layout._text(text, text_ctxt, translate)
 
-    def _add(self, row):
+    def _add(self, row, *, emboss=None):
+        if self.pie and len(self.rows) >= 8:
+            raise ValueError("A pie supports at most eight slots; use nested menus")
         if len(self.rows) >= LIMIT - bool(self.depth):
             raise ValueError("Registered menu exceeds 4096 rows")
         if row.children is not None and row.context is None:
@@ -295,7 +373,18 @@ class MenuLayout:
                 ),
             )
         self.rows.append(
-            replace(row, key=f"{len(self.rows)}:{row.key}", divider=self.divider)
+            replace(
+                row,
+                key=f"{len(self.rows)}:{row.key}",
+                divider=self.divider,
+                alert=bool(self.alert),
+                emboss=self.emboss if emboss is None else emboss,
+                label_split=bool(self.use_property_split),
+                active_default=bool(
+                    self.active_default and row.action and not row.toggle
+                ),
+                activate_init=bool(self.activate_init and row.field),
+            )
         )
         self.divider = False
 
@@ -304,23 +393,125 @@ class MenuLayout:
             callback()
 
     def row(self, *, align=False, heading="", heading_ctxt="", translate=True):
-        if heading:
-            self.label(text=heading, text_ctxt=heading_ctxt, translate=translate)
-        child = MenuLayout(
-            self.model, self.context, self.scope, self.depth, self.rows, self.finalizers
+        return self._group("row", align, heading, heading_ctxt, translate)
+
+    def column(self, *, align=False, heading="", heading_ctxt="", translate=True):
+        return self._group("column", align, heading, heading_ctxt, translate)
+
+    def box(self):
+        if not (self.pie or self.compound_mode):
+            from .layout import UnsupportedControl
+
+            raise UnsupportedControl("box in vertical registered menu")
+        return self._group("box", False, "", "", True)
+
+    def split(self, *, factor=0.0, align=False):
+        from math import isfinite
+
+        factor = float(factor)
+        if not isfinite(factor) or not 0 <= factor <= 1:
+            raise ValueError("Invalid split factor")
+        return self._compound("split", align, factor=factor)
+
+    def column_flow(self, *, columns=0, align=False):
+        return self._compound("flow", align, columns=self._columns(columns, False))
+
+    def grid_flow(
+        self,
+        *,
+        row_major=False,
+        columns=0,
+        even_columns=False,
+        even_rows=False,
+        align=False,
+    ):
+        return self._compound(
+            "grid",
+            align,
+            columns=self._columns(columns, True),
+            row_major=bool(row_major),
+            even_columns=bool(even_columns),
+            even_rows=bool(even_rows),
         )
-        child.parent = self
-        child.operator_context = self.operator_context
-        child.extra = dict(self.extra)
-        child.selections = self.selections
+
+    @staticmethod
+    def _columns(value, negative):
+        from operator import index
+
+        value = index(value)
+        if not (-4096 if negative else 0) <= value <= 4096:
+            raise ValueError("Column count exceeds bounded menu layout")
+        return value
+
+    def _compound(self, kind, align, **options):
+        if not (self.pie or self.compound_mode):
+            raise ValueError("This layout requires a compound pie slot")
+        child = self._group(kind, align, "", "", True)
+        child.compound_options.update(options)
         return child
 
-    column = row
+    def separator_spacer(self):
+        if not self.compound_mode or self.compound_kind != "row":
+            raise ValueError("separator_spacer requires a compound row")
+        self._compound("spacer", True)
+
+    def _group(self, kind, align, heading, heading_ctxt, translate):
+        compound = self.pie or self.compound_mode
+        rows = [] if compound else self.rows
+        child = MenuLayout(
+            self.model, self.context, self.scope, self.depth, rows, self.finalizers
+        )
+        child.parent = self
+        child.compound_mode = compound
+        child.compound_kind = kind
+        child.operator_context = self.operator_context
+        for flag in (
+            "alert",
+            "emboss",
+            "active_default",
+            "activate_init",
+            "use_property_split",
+            "use_property_decorate",
+        ):
+            setattr(child, flag, getattr(self, flag))
+        child.extra = dict(self.extra)
+        child.selections = self.selections
+        if compound:
+            from .pie_layout import Compound
+
+            self._add(
+                Entry(
+                    "__compound__",
+                    "",
+                    compound=Compound(kind, rows, bool(align), child.compound_options),
+                )
+            )
+        if heading:
+            child.label(text=heading, text_ctxt=heading_ctxt, translate=translate)
+        return child
 
     def separator(self, *, factor=1.0, type="AUTO"):
         if type not in {"AUTO", "LINE", "SPACE"}:
             raise ValueError("Unknown menu separator")
-        self.divider = True
+        from math import isfinite
+
+        factor = float(factor)
+        if not isfinite(factor) or not 0 <= factor <= 4096:
+            raise ValueError("Invalid separator factor")
+        if self.pie:
+            self._add(Entry("__pie_space__", "", enabled=False, heading=True))
+        elif self.compound_mode:
+            self._add(
+                Entry(
+                    "__spacing__",
+                    "",
+                    enabled=False,
+                    heading=True,
+                    spacing=(factor, type, self.compound_kind in {"row", "split"}),
+                )
+            )
+        else:
+            self.divider = True
 
     def label(
         self, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
@@ -430,7 +621,7 @@ class MenuLayout:
 
         def execute(t, c):
             with override(c, check(c, executing=True)):
-                return operator(idname)(invocation, **args.values())
+                return operator(idname)(invocation, True, **args.values())
 
         def context(t, c):
             def owned():
@@ -475,7 +666,8 @@ class MenuLayout:
                 tip=info.description,
                 checked=depress,
                 context=context,
-            )
+            ),
+            emboss=None if emboss else "NONE_OR_STATUS",
         )
         return props
 
@@ -522,7 +714,80 @@ class MenuLayout:
             context_factory=self._property_context,
         )
 
-        self._add(replace(row, icon=icon, context=self._property_context(source)))
+        row = replace(row, icon=icon, context=self._property_context(source))
+        if (
+            self.use_property_split
+            and self.use_property_decorate
+            and (self.pie or self.compound_mode)
+            and not (getattr(meta, "is_array", False) and index < 0)
+        ):
+            group = self.row(align=True)
+            group.use_property_decorate = False
+            group._add(row, emboss=None if emboss else "NONE_OR_STATUS")
+            group.prop_decorator(data, property, index=index)
+        else:
+            self._add(row, emboss=None if emboss else "NONE_OR_STATUS")
+
+    def prop_decorator(self, data, property, *, index=-1):
+        from .bindings import rna_binding
+        from .decorator import Decorator
+        from .context_rna import Property
+
+        if not (self.pie or self.compound_mode):
+            raise ValueError("Inline decorators require a compound pie slot")
+        if data is None or not property:
+            self._add(
+                Entry(
+                    "__decorator_space__",
+                    "",
+                    heading=True,
+                    spacing=(2.875, "SPACE", True),
+                )
+            )
+            return
+        source = Property(owner_guard(data), property, None if index < 0 else index)
+        meta = source.owner().bl_rna.properties[property]
+        if index < -1 or (
+            index >= 0 and (not meta.is_array or index >= meta.array_length)
+        ):
+            raise ValueError("Decorator component index is outside the property")
+        if index == -1 and meta.is_array and meta.is_animatable:
+            group = self.column()
+            for component in range(meta.array_length):
+                group.prop_decorator(data, property, index=component)
+            return
+        if not meta.is_animatable or getattr(data, "id_data", None) is None:
+            self.prop_decorator(None, "")
+            return
+        binding = rna_binding(
+            source.resolve,
+            property,
+            index=source.index,
+            commit=self.model.layout.commit,
+        )
+        model = Decorator(binding, self.context)
+        canvas = self.model.layout.canvas
+
+        def enabled(t, c):
+            return self.eligible() and t.valid() and model.editable(canvas)
+
+        def execute(t, c):
+            self.model.check(c, self.scope)
+            if not enabled(t, c):
+                raise ReferenceError("Decorator owner is unavailable")
+            model.click(canvas, SimpleNamespace(key=property), c)
+
+        self._add(
+            Entry(
+                "decorator:" + property,
+                "",
+                execute,
+                enabled,
+                tip="Insert/delete keyframe; right-click for property actions",
+                decorator=model,
+                context=self._property_context(source),
+            )
+        )
 
     def _property_context(self, source):
         def context(t, c):

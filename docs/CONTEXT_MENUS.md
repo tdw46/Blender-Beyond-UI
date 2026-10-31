@@ -29,6 +29,15 @@ API links. Reset/copy roll back assignments if the host commit raises. Animation
 callbacks run after a successful RNA operation; the host must own any larger
 transaction/rollback policy. Read-only owners retain readable actions.
 
+Delete Keyframe and Remove Driver additionally require an existing channel on
+the exact clicked component (or any component for whole-array targets). Keyframe
+removal requires a key at the current frame including its subframe; insertion
+uses the same frame. Availability is resolved on input and rechecked before
+execution, so externally removed channels cannot trigger a stale action or host
+commit. These checks reuse the decorator's layered/legacy Action capability
+paths and do not add RNA reads to painting. Background execution evidence on
+5.1.2/5.2.2: `design/qa/context-availability-v1/runtime.json`.
+
 ## Supply product actions
 
 ```python
@@ -89,7 +98,11 @@ capability. Key-modifier chords track held/released keys and honor wildcard modi
 focus loss clears the held-key state. Disabled actions cannot execute. Public Python
 `UI_MT_button_context_menu` contributions are collected on demand with explicit
 `button_pointer` / `button_prop`; nested pointer contexts and operator properties
-are snapshotted and revalidated. Native-button-dependent operators are disabled.
+are snapshotted and revalidated. Contributed Reset, Copy to Selected and Copy Data
+Path commands are translated into exact-owner custom actions, with their RNA
+argument defaults and component/all-array flags. Unsupported native-button
+operators remain disabled. Registered Python operators are not rejected merely
+because their names end in `_button`.
 Unsupported callback surfaces are logged and isolated. String contexts cannot be
 passed through Blender's public `temp_override` and require a host adapter.
 
@@ -105,6 +118,9 @@ Glass does not depend on animation being enabled. See [animation](ANIMATION.md)
 and [GPU backdrop integration](INTEGRATION.md).
 
 ## Evidence and remaining parity
+
+See the [core action audit](CORE_CONTEXT_AUDIT.md) for the exact remaining native
+action families. Disabled or omitted actions do not establish full parity.
 
 [QA gallery](design/qa/context-menu-v5/index.html) includes real Blender root,
 nested, tooltip, all eight compound targets, glass-versus-tint comparison and
@@ -274,3 +290,132 @@ is covered by the [v6 pixel regression](design/qa/context-menu-v6/index.html);
 153 animation frames match unbatched drawing on each tested Blender version.
 The correction is scoped to finite motion and preserves resting batching,
 logical hit targets, theme roles and the cached liquid-glass backdrop.
+
+## Animation applicability and selected-owner domains
+
+Context actions recheck exact channels on execution: key insertion/deletion is
+unavailable for driven channels, and driver add/paste is unavailable for action
+channels. Add Driver also rejects an existing driver. Whole-array actions check
+all their affected channels. Menus opened at an existing key use Replace Keyframe
+wording, with the scene subframe included.
+
+Copy to Selected supports matching Object, PoseBone, Bone from pose selection,
+Node and selected-object data owners. Matching RNA types and array shape are
+required; read-only/incompatible owners are skipped and shared IDs are copied
+once. The current selection is resolved on execution. Unsupported nested-owner
+domains return no candidates instead of guessing a similarly named property.
+Driver-copy-to-selected is implemented as described below; graph/driver editor routing remains an explicit gap.
+See `design/qa/context-selection-v1/runtime.json` for background evidence.
+
+## Copy drivers to selected owners
+
+Single/all channel actions reuse the selected-owner resolver. Full FCurves are
+copied with original variable targets intact, exact destination paths, existing
+driver replacement and keyed-channel skipping. The host `menu_commit` is required;
+rejected commits restore previous drivers and preserve unrelated channel edits.
+The public RNA `from_existing`, `new` and `remove` capabilities are required.
+There is no silent partial serializer or private-ABI fallback on missing APIs.
+The contributed `ui.copy_driver_to_selected_button(all=...)` route and configured
+shortcuts use the same implementation. These actions preserve shared macOS menu
+geometry, theme roles, glass and motion. Evidence: `design/qa/driver-copy-v1/`.
+
+## Conditional file, asset and navigation actions
+
+- Existing file/directory properties offer Open File/Location; Blender-relative
+  paths use the property's owning library. Missing files and unsaved `//` paths
+  stay unavailable, and changed owners/values revoke the open menu action.
+- ID pointer and search field/candidate menus offer exact-ID Mark/Clear Asset.
+  Host undo is mandatory; rejected changes restore complete asset metadata.
+  Clear requires the public metadata-copy setter.
+- Jump to Target handles visible objects in Object Mode and active-rig pose/data
+  bones. Rejected host commits restore selection. Hidden/excluded/cross-mode
+  targets need further routing and remain disabled.
+- Single/all graph and driver viewing uses an existing same-window editor of the
+  appropriate mode with the exact channels visible. It preserves filters and
+  frames the selected curves. New windows and native Edit Driver popups remain
+  unsupported; this route does not pretend to implement those actions.
+
+These actions reuse shared Entry rendering, glass, theme roles and bounded motion.
+No filesystem checks, RNA mutation, selection scans or editor operators were added
+to painting. See `design/qa/context-data-v1/provenance.json` for tested boundaries.
+
+## Property overrides and custom defaults
+
+Simple scalar/array library properties offer `OVERRIDE_ADD`, `OVERRIDE_REMOVE`
+and component `_ALL` alternatives when their owner is an editable user override.
+Removing restores the actual linked reference value. Component removal splits
+whole-array rules without resetting siblings. Host `Target.commit` is required;
+rejected commits restore rules and affected values. Complex/mandatory operations
+and hierarchy create/reset/delete are not emulated. Native contributed override
+operators route through this same exact-owner implementation.
+
+Use `layout.prop(owner, '["gain"]', text="Gain", slider=True)` or
+`rna_binding(lambda: owner, '["gain"]', commit=...)` for scalar int/float custom
+ID properties. Existing BVT numeric fields/sliders, icons, glass, theme roles,
+source springs and owner menus are reused. These bindings support Reset, Assign
+Value as Default, escaped/nested paths, selected value/driver copies, keyframes,
+drivers, keying sets, existing-editor routes and animation decorators. Assign
+default requires `Canvas.menu_commit` / `Target.commit`; it changes ID-property
+UI metadata and preserves the live value. Field/reset transactions use the
+binding's commit callback, as other RNA controls do.
+
+Custom keys/types are revalidated before writes; registered RNA property storage
+must use its regular RNA binding. Custom arrays and nonnumeric ID properties,
+native clipboard/Favorites/shortcuts and native button-menu contributions for
+custom properties are not qualified by this pass. Those gaps remain explicit;
+these bindings are not a claim of full native ID-property parity. Runtime and
+rollback evidence: `design/qa/context-overrides-v1/runtime.json`.
+
+## Custom scalar property clipboard, Favorites and numeric shortcuts
+
+Scalar numeric custom bindings share Copy/Paste Driver and Copy as New Driver
+with ordinary RNA properties. Exact escaped and nested owner paths are retained.
+Favorites add/remove the actual property entry on admitted builds. Native path
+buffers are checked in UTF-8 bytes; overlong names remain visibly unavailable.
+Other platforms/builds keep their explicit native-adapter limitation.
+
+The existing host-owned registry now registers two owned operators: popup command
+dispatch and an undoable custom-number setter. Existing integration is sufficient:
+
+```python
+shortcuts = ShortcutRegistry("my_extension.ui")
+shortcuts.register()  # in the extension's register(), never paint
+canvas = Canvas(shortcut_registry=shortcuts)
+# Layout(canvas, ...).prop(owner, '["gain"]', text="Gain")
+# Right-click: Shortcut to Value -> Set to 0.75 -> keyboard/mouse/chord capture.
+# extension unregister():
+shortcuts.close()
+```
+
+The second operator uses typed, finite numeric literals and a restricted owner
+path resolver. It rejects removed/retyped/read-only properties, tags dependencies,
+and participates in native undo/redo. No arbitrary user expression is evaluated.
+Assignments follow the future context owner; callback-based popup shortcuts retain
+their existing visible-control lifetime rules. Both operators unregister on close;
+user keymap preferences remain reusable when the same owner registers again.
+Without a registered consumer registry, the numeric shortcut row explains why it
+is unavailable. Existing assigned values stay available to change/remove after
+the live value changes. Rendering and motion use the same menu/capture code.
+
+This supersedes the preceding pass's scalar clipboard/Favorites/shortcut gap.
+Native button-menu contributions, other custom-property types and broad native
+platform qualification remain explicit limits. Evidence: `design/qa/custom-adapters-v1/`.
+
+
+## Custom-property contributions
+
+Scalar numeric ID-property menus now collect public Python button-menu callbacks
+on admitted macOS arm64 5.1.2/5.2.2 builds. Existing callbacks receive a genuine
+`context.button_prop` (`FloatProperty` or `IntProperty`) and exact
+`context.button_pointer`. Custom identifiers with quotes/Unicode are supported.
+Use ordinary `layout.operator`, `layout.menu`, and `layout.prop(owner, '["key"]')`;
+inline fields retain their exact-owner context actions and consumer undo callback.
+`ui.assign_default_button` is mapped alongside Reset and existing property commands.
+
+Metadata is acquired synchronously through an undrawn, unattached native scope,
+then restored and released. The menu still uses the shared custom renderer and
+motion. Nested scopes, exception cleanup, stale keys and operator unregistration
+are execution-tested. Unqualified native builds show a disabled explanatory entry;
+base property actions still work. Other custom types and unmapped native button
+operators remain outside this adapter. This supersedes the preceding scalar
+custom-contribution limitation. Evidence: `design/qa/custom-contributions-v1/`.

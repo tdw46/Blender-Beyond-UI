@@ -137,7 +137,9 @@ ui.canvas.cancel()
 w = open_field(nodes)
 key = tree.nodes[1].as_pointer()
 index = next(i for i, item in enumerate(w.items) if item[0] == key)
-hit = target(w, nodes.key, 40, 147 + index * 70 + 10)
+from beyond_ui.widgets.metrics import PICKER
+
+hit = target(w, nodes.key, 40, PICKER["list"][1] + index * PICKER["row_height"] + 10)
 rows = hit.payload(hit, ctx)
 clipboard = NS(window_manager=NS(clipboard="Original"))
 assert rows[1].action(hit, clipboard) is True

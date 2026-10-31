@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 import unittest
 from beyond_ui.bindings import Binding
+from beyond_ui.widgets.metrics import PICKER
 from beyond_ui.widgets import ColorPicker, ColorRamp, CurveMapping, DataPicker
 from beyond_ui import Layout, UnsupportedControl
 
@@ -83,11 +84,15 @@ class Widgets(unittest.TestCase):
         self.assertEqual(selected, [2])
         selected.clear()
         valid.remove(2)
-        widget.event(event("LEFTMOUSE"), 100, 175)
+        widget.event(
+            event("LEFTMOUSE"), 100, PICKER["list"][1] + PICKER["row_height"] / 2
+        )
         self.assertEqual(selected, [])
         widget.query = ""
         widget._filter()
-        widget.event(event("LEFTMOUSE"), 100, 175)
+        widget.event(
+            event("LEFTMOUSE"), 100, PICKER["list"][1] + PICKER["row_height"] / 2
+        )
         self.assertEqual(selected, [1])
 
     def test_reference_hit_regions_and_title_roles(self):

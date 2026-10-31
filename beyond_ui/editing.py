@@ -7,7 +7,9 @@ import colorsys
 
 
 def display_number(value):
-    """Two significant digits for display only, including trailing zeroes."""
+    """Compact display; keep ordinary integral values out of exponent notation."""
+    if 100 <= abs(value) < 1e6 and float(value).is_integer():
+        return str(int(value))
     return format(value, "#.2g").removesuffix(".")
 
 

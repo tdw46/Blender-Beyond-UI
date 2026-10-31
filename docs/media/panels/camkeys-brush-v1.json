@@ -1,0 +1,17 @@
+{
+  "path": "docs/media/panels/camkeys-brush-v1.gif",
+  "captured_frames": 105,
+  "encoded_frames": 85,
+  "duration_ms": 3500,
+  "crop": [
+    0,
+    0,
+    1280,
+    1520
+  ],
+  "playback_dimensions": [
+    640,
+    760
+  ],
+  "sha256": "a9dadb248d47e1c1efdb2473bc44aabef3080eb1290d54a57886c99d927f230e"
+}

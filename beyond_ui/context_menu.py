@@ -6,7 +6,9 @@ capabilities are rechecked on input; painting only consumes prepared rows.
 
 from dataclasses import dataclass, replace
 from itertools import islice
+from contextlib import nullcontext
 from .animation import Motion
+from .menu_metrics import Metrics as menu_metrics
 
 
 @dataclass(frozen=True)
@@ -70,6 +72,15 @@ class Entry:
     heading: bool = False
     toggle: bool = False  # Boolean property; enum selections retain their checks.
     context: object = None  # Optional exact-row context actions (target, context).
+    compound: object = None  # Pie-only bounded row/column tree, prepared on open.
+    spacing: object = None  # Compound separator: factor, type, horizontal layout.
+    alert: bool = False
+    emboss: str = "NORMAL"
+    label_split: bool = False
+    active_default: bool = False
+    activate_init: bool = False
+    decorator: object = None  # Prepared on input; never query RNA during paint.
+    status: object = None  # Animation-state provider, also prepared on input.
 
 
 @dataclass
@@ -83,6 +94,7 @@ class Page:
     checked: tuple = ()
     values: tuple = ()
     search: object = None
+    statuses: tuple = ()
 
 
 def inside(rect, x, y):
@@ -93,8 +105,8 @@ def inside(rect, x, y):
 class Menu:
     limit = 64
     depth_limit = 3
-    row_height = 23.0
-    padding = 4.0
+    row_height = menu_metrics.ROW_HEIGHT
+    padding = menu_metrics.PADDING
 
     def __init__(
         self,
@@ -119,16 +131,21 @@ class Menu:
             raise ValueError("Search threshold must be a positive integer")
         self.search_threshold = search_threshold
         self.visible_refresh = visible_refresh
+        self.event_context = context
         self.target, self.anchor, self.clip = target, anchor, clip
         self.scope, self.scope_id = scope, scope(context)
         self.measure = measure or (lambda text, size: len(text) * size * 0.6)
         self.on_error = on_error or (lambda error: None)
         self.motion = Motion()
         self.parents = []
+        self.navigation_parent = None
+        self.on_navigate = None
+        self.pointer = tuple(anchor)
         self.editor = None
         self.capture_row = None
         self.capture_picker = self.capture_return = None
         self.held_keys = set()
+        self.pending_click = None
         self.closed = False
         self.glass_ready = False
         self.error = None
@@ -137,10 +154,20 @@ class Menu:
         self.tip_pending = None
         self.page = self._page(rows, context)
 
+    def initialize(self, context):
+        """Initial popup focus is logical only; never activate the OS window."""
+        for i, row in enumerate(self.page.rows):
+            if row.active_default and row.action and self.page.available[i]:
+                self.page.highlight = i
+                break
+        for i, row in enumerate(self.page.rows):
+            if row.activate_init and row.field and self.page.available[i]:
+                self.choose(i, context)
+                self.reveal()
+                break
+
     def _page(self, rows, context, title="", max_width=None):
         rows = tuple(islice(rows, self.limit))
-        if title and rows:
-            rows = (replace(rows[0], divider=True),) + rows[1:]
         if title:
             rows = (Entry("__back__", title, icon="‹"),) + rows[: self.limit - 1]
         if not rows:
@@ -158,7 +185,7 @@ class Menu:
         width = min(
             cw,
             max(
-                260.0,
+                menu_metrics.WIDTH,
                 max(
                     self.measure(r.label, 11) + self.measure(r.shortcut, 10) + 64
                     for r in rows
@@ -174,7 +201,11 @@ class Menu:
             # The search stays pinned above the scrolling result rows.
         )
         if search is not None:
-            height = min(ch, height + 28)
+            height = min(
+                ch, height + menu_metrics.SEARCH_HEIGHT + menu_metrics.HEADER_GAP
+            )
+        if title:
+            height = min(ch, height + menu_metrics.HEADER_GAP)
         x, y = self.anchor
         rect = (
             max(cx, min(x, cx + cw - width)),
@@ -192,6 +223,7 @@ class Menu:
             checked=tuple(self._checked(row, context) for row in rows),
             values=tuple(self._value(row, context) for row in rows),
             search=search,
+            statuses=tuple(self._status(row) for row in rows),
         )
 
     def search_rect(self, page=None):
@@ -200,10 +232,17 @@ class Menu:
             return None
         x, y, w, h = p.rect
         return (
-            x + self.padding,
-            y + self.padding,
-            w - 2 * self.padding,
-            min(28, max(0, h - 2 * self.padding - self.row_height)),
+            x + self.padding + menu_metrics.SEARCH_INSET,
+            y
+            + self.padding
+            + (self.row_height + menu_metrics.HEADER_GAP if p.title else 0),
+            max(0, w - 2 * (self.padding + menu_metrics.SEARCH_INSET)),
+            min(
+                menu_metrics.SEARCH_HEIGHT,
+                max(
+                    0, h - 2 * self.padding - self.row_height - menu_metrics.HEADER_GAP
+                ),
+            ),
         )
 
     def filter_search(self, context=None):
@@ -222,7 +261,9 @@ class Menu:
             w,
             min(
                 h,
-                28
+                menu_metrics.SEARCH_HEIGHT
+                + menu_metrics.HEADER_GAP
+                + (menu_metrics.HEADER_GAP if p.title else 0)
                 + 2 * self.padding
                 + sum(self.row_height + (8 if r.divider else 0) for r in rows[:18]),
             ),
@@ -349,7 +390,13 @@ class Menu:
         except (AttributeError, ReferenceError, RuntimeError, TypeError):
             return False
 
+    @staticmethod
+    def _status(row):
+        return row.status.state() if row.status is not None else "EMPTY"
+
     def _value(self, row, context):
+        if row.decorator is not None:
+            return row.decorator.state()
         if row.field is None:
             return ""
         try:
@@ -387,8 +434,8 @@ class Menu:
             indices.add(page.highlight)
             if index is not None:
                 indices.add(index)
-            available, checked, values = map(
-                list, (page.available, page.checked, page.values)
+            available, checked, values, statuses = map(
+                list, (page.available, page.checked, page.values, page.statuses)
             )
             for i in indices:
                 if 0 <= i < len(page.rows):
@@ -396,10 +443,12 @@ class Menu:
                     available[i] = self._enabled(row, context)
                     checked[i] = self._checked(row, context)
                     values[i] = self._value(row, context)
-            page.available, page.checked, page.values = (
+                    statuses[i] = self._status(row)
+            page.available, page.checked, page.values, page.statuses = (
                 tuple(available),
                 tuple(checked),
                 tuple(values),
+                tuple(statuses),
             )
             return True
         self.page.available = tuple(
@@ -407,6 +456,7 @@ class Menu:
         )
         self.page.checked = tuple(self._checked(row, context) for row in self.page.rows)
         self.page.values = tuple(self._value(row, context) for row in self.page.rows)
+        self.page.statuses = tuple(self._status(row) for row in self.page.rows)
         return True
 
     @property
@@ -417,7 +467,14 @@ class Menu:
             int(
                 max(
                     0,
-                    self.page.rect[3] - 2 * self.padding - (search[3] if search else 0),
+                    self.page.rect[3]
+                    - 2 * self.padding
+                    - (search[3] + menu_metrics.HEADER_GAP if search else 0)
+                    - (
+                        self.row_height + menu_metrics.HEADER_GAP
+                        if self.page.title
+                        else 0
+                    ),
                 )
                 // self.row_height
             ),
@@ -428,10 +485,16 @@ class Menu:
         a, b, w, h = p.rect
         top = b + self.padding
         search = self.search_rect(p)
+        start = p.offset
+        if p.title:
+            height = min(self.row_height, max(0, h - 2 * self.padding))
+            yield 0, (a + self.padding, top, w - 2 * self.padding, height), p.rows[0]
+            top += height + menu_metrics.HEADER_GAP
+            start = max(1, start)
         if search:
-            top += search[3]
+            top += search[3] + menu_metrics.HEADER_GAP
         bottom = b + h - self.padding
-        for i in range(p.offset, min(len(p.rows), p.offset + 18)):
+        for i in range(start, min(len(p.rows), start + 18)):
             divider = 8 if p.rows[i].divider else 0
             if top + divider + self.row_height > bottom and i > p.offset:
                 break
@@ -441,6 +504,28 @@ class Menu:
                 break
             yield i, (a + self.padding, top, w - 2 * self.padding, height), p.rows[i]
             top += height
+
+    def surfaces(self, page):
+        """Logical glass surfaces; a pie reuses the painter with separate petals."""
+        return (page.rect,)
+
+    def presentation(self, mapped):
+        return nullcontext()
+
+    def surface_transform(self, rect, mapped, scale):
+        return nullcontext()
+
+    def surface_tint(self, page, rect, palette):
+        return palette.get("menu_glass", (0.0, 0.0, 0.0, 0.0))
+
+    def row_motion_enabled(self, page, index):
+        return True
+
+    def row_transform(self, page, index, mapped, scale):
+        return nullcontext()
+
+    def highlight_alpha(self, page, index):
+        return 1.0
 
     def reveal(self):
         p = self.page
@@ -519,9 +604,59 @@ class Menu:
         self.motion.pulse("tooltip", 0.12)
         return None
 
+    def navigation_depth(self):
+        depth, menu = len(self.parents), self.navigation_parent
+        while menu is not None:
+            depth += 1 + len(menu.parents)
+            menu = menu.navigation_parent
+        return depth
+
+    def open_radial_child(self, rows, context, row):
+        from .pie_menu import PieMenu
+
+        if self.on_navigate is None:
+            raise RuntimeError("Nested pies require a host on_navigate callback")
+        page, source_target = self.page, self.target
+        target = replace(
+            source_target,
+            # Closing presentation before dispatch must not invalidate a live owner.
+            valid=lambda: self.target is source_target
+            and source_target.valid()
+            and self.scope(context) == self.scope_id
+            and any(r is row for r in page.rows)
+            and self._enabled(row, context),
+        )
+        child = PieMenu(
+            target,
+            rows,
+            self.pointer,
+            self.clip,
+            context=context,
+            measure=self.measure,
+            scope=self.scope,
+            on_error=self.on_error,
+            on_tip=self.on_tip,
+            search_threshold=self.search_threshold,
+            visible_refresh=self.visible_refresh,
+            clock=self.motion.clock,
+            navigation_back=True,
+        )
+        child.navigation_parent = self
+        child.on_navigate = self.on_navigate
+        child.motion.bind(self.motion.parents[1:], self.motion.wake)
+        self.pending_click = None
+        self.hide_tip()
+        self.motion.clear()
+        self.on_navigate(self, child)
+        child.motion.pulse("reveal", 0.12)
+
     def close(self):
+        parent, self.navigation_parent = self.navigation_parent, None
+        if parent is not None:
+            parent.close()
         self.hide_tip()
         self.closed = True
+        self.pending_click = None
         self.motion.clear()
         self.parents.clear()
         self.held_keys.clear()
@@ -530,7 +665,8 @@ class Menu:
         self.capture_picker = self.capture_return = None
         self.page.search = None
 
-    def back(self):
+    def back(self, context=None):
+        self.pending_click = None
         if self.capture_return is not None:
             self.hide_tip()
             self.page, self.capture_return = self.capture_return, None
@@ -540,7 +676,19 @@ class Menu:
             self.motion.pulse("reveal", 0.12)
             return True
         if not self.parents:
-            return False
+            if self.navigation_parent is None or self.on_navigate is None:
+                return False
+            parent, self.navigation_parent = self.navigation_parent, None
+            self.close()
+            parent.refresh(context)
+            self.on_navigate(self, parent)
+            parent.motion.clear()
+            if hasattr(parent, "started"):
+                parent.started = parent.motion.clock()
+                parent.pulls.clear()
+                parent.proximity.clear()
+            parent.motion.pulse("reveal", 0.12)
+            return True
         self.hide_tip()
         self.capture_row = None
         self.held_keys.clear()
@@ -558,7 +706,7 @@ class Menu:
             if self.page is self.capture_picker:
                 self.capture_return = self.page
         else:
-            if len(self.parents) >= self.depth_limit:
+            if self.navigation_depth() >= self.depth_limit:
                 return
             self.parents.append(self.page)
         if row.capture_options is not None:
@@ -600,7 +748,7 @@ class Menu:
         if not self.page.available[index]:
             return
         if row.key == "__back__":
-            self.back()
+            self.back(context)
             self.refresh(context)
             return
         try:
@@ -609,16 +757,23 @@ class Menu:
 
                 self.editor = Editor(row, index, self.target, context)
                 self.page.highlight = index
-                self.motion.pulse(("row", index), 0.12)
+                if self.row_motion_enabled(self.page, index):
+                    self.motion.pulse(("row", index), 0.12)
             elif row.capture is not None:
                 self.start_capture(row, context)
             elif row.children is not None:
-                if len(self.parents) >= self.depth_limit:
+                if self.navigation_depth() >= self.depth_limit:
+                    return
+                from .pie_layout import PieRows
+
+                rows = row.children(self.target, context)
+                if isinstance(rows, PieRows):
+                    self.open_radial_child(rows, context, row)
                     return
                 old_anchor = self.anchor
                 self.anchor = (self.page.rect[0] + 12, self.page.rect[1] + 34)
                 child = self._page(
-                    row.children(self.target, context),
+                    rows,
                     context,
                     row.label,
                     max(164, self.page.rect[2] - 12),
@@ -644,7 +799,7 @@ class Menu:
         if not self.refresh(context, index) or not 0 <= index < len(self.page.rows):
             return False
         row = self.page.rows[index]
-        if row.context is None or len(self.parents) >= self.depth_limit:
+        if row.context is None or self.navigation_depth() >= self.depth_limit:
             return False
         try:
             rows = tuple(row.context(self.target, context))
@@ -663,6 +818,9 @@ class Menu:
             return True
 
     def event(self, event, x, y, context=None):
+        self.event_context = context
+        if event.type in {"MOUSEMOVE", "LEFTMOUSE", "RIGHTMOUSE"}:
+            self.pointer = (x, y)
         if event.type.startswith("TIMER"):
             return False
         if not self.refresh(context):
@@ -675,6 +833,31 @@ class Menu:
             self.close()
             return False
         self.motion.input(event, x, y)
+        if self.pending_click is not None:
+            page, index, row = self.pending_click
+            if press and kind in {"ESC", "RIGHTMOUSE"}:
+                self.pending_click = None
+                self.close()
+                return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
+            if kind == "LEFTMOUSE" and event.value == "RELEASE":
+                self.pending_click = None
+                self.held_keys.discard(kind)
+                hit = next(
+                    (i for i, r, _ in self.visible_rows() if inside(r, x, y)), None
+                )
+                if (
+                    self.page is page
+                    and hit == index
+                    and index < len(page.rows)
+                    and page.rows[index] is row
+                ):
+                    self.choose(index, context)
+                elif not over:
+                    self.close()
+                return True
+            # Own the complete click, including motion and unrelated keys. Never
+            # deliver its release to a popup created by the selected action.
+            return True
         if event.value == "RELEASE":
             self.held_keys.discard(kind)
         elif press and len(self.held_keys) < 64:
@@ -799,7 +982,7 @@ class Menu:
             )
             if self.open_row_context(index, context):
                 return True
-        if press and kind in {"ESC", "LEFT_ARROW"} and self.back():
+        if press and kind in {"ESC", "LEFT_ARROW"} and self.back(context):
             self.refresh(context)
             return True
         if press and kind in {"ESC", "RIGHTMOUSE"}:
@@ -824,7 +1007,9 @@ class Menu:
         hit = next((i for i, r, _ in self.visible_rows() if inside(r, x, y)), None)
         if kind == "LEFTMOUSE" and press:
             if hit is not None:
-                self.choose(hit, context)
+                if self.page.available[hit] and not self.page.rows[hit].heading:
+                    self.page.highlight = hit
+                    self.pending_click = (self.page, hit, self.page.rows[hit])
             elif not over:
                 self.close()
             return inside(self.clip, x, y)

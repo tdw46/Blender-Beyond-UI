@@ -43,6 +43,28 @@ class PopoverContracts(unittest.TestCase):
         self.assertEqual(widget.canvas.theme.font_size, parent.theme.font_size)
         self.assertEqual(state, [False])
 
+    def test_menu_metrics_survive_resize_and_parent_theme_changes(self):
+        from dataclasses import replace
+        from beyond_ui.menu_metrics import Metrics
+
+        parent, widget, _ = self.fixture(2)
+        widget.model.menu_theme = Metrics.theme
+        widget.dimensions(11, 224, 500)
+        self.assertEqual(widget.canvas.theme.row_height, 22.5)
+        self.assertEqual(widget.canvas.theme.gap, 0)
+        before = widget.canvas.layout_count
+        widget.dimensions(11, 224, 500)
+        self.assertEqual(widget.canvas.layout_count, before)
+        parent.theme = replace(
+            parent.theme, padding=30, row_height=64, gap=20, palette="REFERENCE"
+        )
+        widget.dimensions(11, 224, 500)
+        self.assertEqual(widget.canvas.theme.padding, 8)
+        self.assertEqual(widget.canvas.theme.row_height, 22.5)
+        self.assertEqual(widget.canvas.theme.palette, "REFERENCE")
+        rows = list(widget.canvas.controls.values())
+        self.assertEqual(rows[1].rect[1] - rows[0].rect[1], 22.5)
+
     def test_scrollbar_drag_context_and_outside_passthrough(self):
         parent, widget, state = self.fixture()
         widget.dispatch(event("LEFTMOUSE"), widget.width - 6, 60)

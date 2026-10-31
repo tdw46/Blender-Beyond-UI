@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-30",
+  "files": {
+    "beyond_ui/context_overrides.py": "ca3379da71eef2b623cc176cd60a247c8ea4ad351814e1de659d0355c30039e7",
+    "beyond_ui/context_custom.py": "8dc8649a2bc3c20741624eaa9a3d77d3471d03a4e2bc064c596ea03b370a159c",
+    "beyond_ui/context_rna.py": "eb981b9d9193183980bc234e0c9e94acf0a0920c9fdd40cbe08a8a5e0d9cc337",
+    "beyond_ui/bindings.py": "ca696b09089b0aa2d87de27bf44ba71aa1c48bafb37fd5d73e2d3d40cd6314d6",
+    "beyond_ui/layout.py": "99fe2427640526689b357875cc4bde9fdd188a4d20f691225a53425786070e32",
+    "beyond_ui/decorator.py": "8f80ac2bd091c3f7efd7e9fb005450a456ecfee127c6a71f7672553833d9b292",
+    "beyond_ui/context_editor.py": "2edf3e8c02d014f9b2c32cddd1bb3561e5bb1f12ce5f4e8573f11ea1ba822c02",
+    "beyond_ui/context_keying.py": "92c3bbff12ea6556924e87c463d8a3e25001d80ef2444054052db767aec77bd3",
+    "beyond_ui/context_selected.py": "82f510457a22bb3be9059926d02d101ea2e3ff8348fac1f65e64cdf52b0f2563",
+    "beyond_ui/context_drivers.py": "bab47f32bb183a24e856d667f1490131f01568f6e899259606d4acdaa5509da4",
+    "beyond_ui/context_builtin.py": "75a6d2c4e97962fe5d64428fac8cd290e053fbd905b16b7b098b3ff76201ea90",
+    "beyond_ui/hosts/menu_native.py": "eec2cc3ba0c50eb76808889d6c5447024b35d75338db53d1f36954f4aafa8ac6",
+    "tests/blender_context_overrides.py": "cc6b2b8c5807e1d7fcdaf49152f2ff22cb0be60605d3ead713c79c9d3321c9bd",
+    "tests/blender_menu_adapters.py": "8b5ac1b940e0e964956b0d62224d1dbb0abb9f8748c91cd393cb4b6b3ffe393a",
+    "tests/test_native_admission.py": "abfea4070dc6b9301e4ae16f17b9bb3a772679ffcb5d4ed834ebf10f310ce664",
+    "tools/launch_blender_macos.swift": "77eff0d4af74b45d9844f275d8fff479958649e9aff2792789454c2e5427f487",
+    "tools/run_blender_tests.py": "11186644c90a9bb136d437e843983c96b2b930c74ae633beb6f2e16aafabfa42"
+  },
+  "native_semantics": "build/driver-copy-audit/interface_ops.cc, d13f752e3b9c; native poll and remove-component algorithm; installed public RNA introspection on 5.1.2/5.2.2",
+  "documentation": "Exact 4.2/5.1/5.2 API and Manual pages were requested; web fetching returned unavailable/402/403. No fetched-docs or 4.2 execution claim.",
+  "limits": [
+    "No renderer changes or new generated-reference acceptance.",
+    "Hierarchy create/reset/delete, complex flagged/collection override rules remain unsupported.",
+    "Scalar custom integer/float properties only; native clipboard, Favorites, shortcuts and Python button-menu contributions for ID properties remain unqualified.",
+    "No other-platform native adapter admission."
+  ],
+  "focus": "Two final LaunchServices windowed adapter tests; observer-only helper, no activation/restoration; all other final runs headless. Earlier probe/failure records retained under build/context-overrides-v1."
+}

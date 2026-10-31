@@ -1,0 +1,56 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 82594,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_label_layout.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Omitted RNA labels preserved; explicit empty prop/operator labels respected",
+        "Compact label-free switch and fixed horizontal separator preserve value space at three widths",
+        "Bindings remain valid; invalid separator rejected"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-visual-v2/labels/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 82601,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_label_layout.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Omitted RNA labels preserved; explicit empty prop/operator labels respected",
+        "Compact label-free switch and fixed horizontal separator preserve value space at three widths",
+        "Bindings remain valid; invalid separator rejected"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-visual-v2/labels/blender-1.log"
+  }
+]

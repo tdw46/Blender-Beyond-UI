@@ -1,6 +1,7 @@
 """Mixed-control sizing must stay consistent as the host grows or narrows."""
 
 import unittest
+from beyond_ui.widgets.metrics import PICKER, PICKER_SIZE
 from beyond_ui import Canvas, Theme
 from beyond_ui.bindings import Binding
 from beyond_ui.widgets import (
@@ -56,7 +57,7 @@ class UIScale(unittest.TestCase):
         for clip in ((0, 0, 560, 520), (100, 80, 960, 800)):
             canvas.open_widget(DataPicker([], lambda k: None), owner, clip)
             a, b, w, h = canvas.overlay["rect"]
-            self.assertEqual((w, h), (315, 236))
+            self.assertEqual((w, h), (224, 189))
             self.assertGreaterEqual(a, clip[0])
             self.assertGreaterEqual(b, clip[1])
             self.assertLessEqual(a + w, clip[0] + clip[2])
@@ -72,7 +73,7 @@ class UIScale(unittest.TestCase):
         canvas.event(NS(type="MOUSEMOVE", value="NOTHING"), 0, 0, (20, 10, 320, 250))
         a, b, w, h = canvas.overlay["rect"]
         self.assertIs(canvas.overlay["widget"], widget)
-        self.assertEqual((w, h), (315, 236))
+        self.assertEqual((w, h), (224, 189))
         self.assertGreaterEqual(a, 20)
         self.assertGreaterEqual(b, 10)
         self.assertLessEqual(a + w, 340)
@@ -85,13 +86,15 @@ class UIScale(unittest.TestCase):
         )
         canvas.arrange(560)
         self.assertEqual(control.rect[3], 100)
-        self.assertAlmostEqual(control.rect[2] / control.rect[3], 630 / 472)
+        self.assertAlmostEqual(
+            control.rect[2] / control.rect[3], PICKER_SIZE[0] / PICKER_SIZE[1]
+        )
         self.assertEqual(canvas.height, 116)
         canvas.open_widget(control.options["widget"], control, (30, 40, 100, 80))
         a, b, w, h = canvas.overlay["rect"]
         self.assertLessEqual(a + w, 130)
         self.assertLessEqual(b + h, 120)
-        self.assertAlmostEqual(w / h, 630 / 472)
+        self.assertAlmostEqual(w / h, PICKER_SIZE[0] / PICKER_SIZE[1])
 
     def test_socket_stays_small_and_does_not_leave_a_panel_height_gap(self):
         canvas = Canvas()
@@ -123,13 +126,19 @@ class UIScale(unittest.TestCase):
                     y + 10,
                     (0, 0, width, 520),
                 )
-                self.assertEqual(canvas.overlay["rect"][2:], (315, 236))
+                self.assertEqual(
+                    canvas.overlay["rect"][2:],
+                    (315, 236) if control is color else (224, 189),
+                )
                 if control is not color:
                     a, b, w, h = canvas.overlay["rect"]
                     canvas.event(
                         NS(type="LEFTMOUSE", value="PRESS"),
-                        a + 100 * w / 630,
-                        b + 175 * h / 472,
+                        a + 100 * w / picker.width,
+                        b
+                        + (PICKER["list"][1] + PICKER["row_height"] / 2)
+                        * h
+                        / picker.height,
                         (0, 0, width, 520),
                     )
                     self.assertEqual(selected[-1], 1)

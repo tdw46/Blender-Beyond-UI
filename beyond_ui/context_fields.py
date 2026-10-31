@@ -1,7 +1,6 @@
 """RNA field contributions rendered by the shared context-menu painter."""
 
 from .context_menu import Entry
-from .context_rna import Property
 from .context_enums import items, contains
 
 
@@ -18,8 +17,13 @@ def property_row(
     limit=63,
     context_factory=None,
 ):
-    source = source or Property(lambda: data, name, None if index < 0 else index)
-    meta = source.owner().bl_rna.properties[name]
+    from .bindings import rna_binding
+
+    source = (
+        source
+        or rna_binding(lambda: data, name, index=None if index < 0 else index).context
+    )
+    meta = source.metadata()
     label = text or meta.name
 
     def entry(*args, **kwargs):

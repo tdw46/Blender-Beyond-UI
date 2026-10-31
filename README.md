@@ -1,355 +1,134 @@
 # Beyond UI for Blender
 
-A modular, vendorable custom UI library extracted from Beyond VTuber Tools'
-Effect Layers interface: retained layout, custom controls, glass/refraction,
-vector icons, inline editing, searchable lists and bounded previews.
+**BVT liquid glass, bouncy controls, and Blender-style panel code.**
+Vendor one package into your add-on. Keep your operators and properties; author
+custom panels with familiar `self.layout.prop()`, `row()`, `menu()` and `popover()`
+calls. No pip install or separate UI add-on required.
 
-**Development status:** the extraction and initial custom backend work. Full
-custom parity with Blender's UI API is **not complete**, and exact matching to
-the complete generated visual specifications is **not established**. Tyler approved
-the prior four controls' presented resting state; new controls and motion await QA. The release gate
-tracks these honestly; a native wrapper does not count as custom parity.
+[Quick integration guide](docs/INTEGRATION.md) · [Copy-ready add-on](examples/single_line.py) ·
+[Current visual review](docs/design/qa/core-review-v2/index.html) ·
+[Feature overview](docs/design/qa/overview/index.html)
 
-[Next batch QA](docs/design/qa/next-v1/index.html) ·
-[Visual specification](docs/design/references/specialized-controls-v1.png) ·
-[Custom parity ledger](docs/CUSTOM_PARITY.json) ·
-[Validation](docs/VALIDATION.md) · [Integration](docs/INTEGRATION.md)
+## Drop it in
 
-## Panel overview
-
-Actual Blender-rendered panels with the shared squash-and-stretch animations.
-These previews show the current implementation; full API and visual parity are
-still in progress. [Animation settings](docs/ANIMATION.md) control strength and
-whether motion is enabled.
-
-| Curve Mapping | Color Ramp |
-| --- | --- |
-| ![Animated Curve Mapping panel](docs/media/panels/curve-mapping.gif) | ![Animated Color Ramp panel](docs/media/panels/color-ramp.gif) |
-| **Data Picker** | **Color Picker** |
-| ![Animated Data Picker panel](docs/media/panels/data-picker.gif) | ![Animated Color Picker panel](docs/media/panels/color-picker.gif) |
-| **Palette** | **Matrix decomposition** |
-| ![Animated Palette panel](docs/media/panels/palette.gif) | ![Animated Matrix decomposition panel](docs/media/panels/matrix.gif) |
-| **Progress Bar** | **Progress Ring** |
-| ![Animated Progress Bar panel](docs/media/panels/progress-bar.gif) | ![Animated Progress Ring panel](docs/media/panels/progress-ring.gif) |
-
-[Full motion overview](docs/design/qa/next-v1/motion.gif) ·
-[Generated references versus implementations](docs/design/qa/next-v1/all-controls-comparison.png)
-
-Previews explicitly use the fixed artwork palette and translucent tint fallback
-over a neutral backdrop. Production defaults to Blender’s active theme across
-all eight panels; see [theme configuration and QA](docs/THEMING.md). A consuming
-host can provide the shared blurred viewport backdrop. [Capture provenance](docs/media/panels/provenance.json).
-
-## Popup keyboard actions
-
-Popovers can open with a selected text/numeric field and a default Return action.
-Edits commit before execution; nested menus and stale owners retain their guards.
-[Keyboard QA](docs/design/qa/popup-focus-v1/index.html) ·
-[Behavior and remaining gaps](docs/POPUP_KEYBOARD.md)
-
-![Actual popup editing and source menu motion](docs/media/panels/popup-focus-v1.gif)
-
-## Layout sizing
-
-![Actual Blender layout sizing animation](docs/media/panels/layout-sizing-v1.gif)
-
-[Layout sizing QA](docs/design/qa/layout-sizing-v1/index.html) ·
-[Scale and fixed-unit behavior](docs/LAYOUT_SIZING.md). Explicit sizing retains
-source typography, proportional compound controls and exact-owner menus.
-
-## Collection lists
-
-Default collection lists now support original-index selection, rename, filtering,
-sorting, virtual scrolling, compact/grid layouts and exact row context menus.
-PropertyGroup collections require host-owned stable identity keys.
-
-![Actual Blender registered UIList animation](docs/media/panels/registered-lists-v1.gif)
-
-[Registered list QA](docs/design/qa/registered-lists-v1/index.html) ·
-[Callback support and remaining gaps](docs/REGISTERED_LISTS.md). Python row/filter
-callbacks use retained custom fields, owner menus and source motion. Full parity
-and reference acceptance remain open.
-
-![Actual Blender collection list animation](docs/media/panels/collection-lists-v1.gif)
-
-[Collection list QA](docs/design/qa/collection-lists-v1/index.html) ·
-[Supported cases and remaining list gaps](docs/COLLECTION_LISTS.md)
-
-## Panel popovers
-
-Registered panels open as custom canvases with nested controls, scrolling,
-property-attached panels and exact-owner context menus.
-
-![Actual Blender panel popover animation](docs/media/panels/panel-popovers-v1.gif)
-
-[Panel popover QA](docs/design/qa/panel-popovers-v1/index.html) ·
-[Authoring and remaining gaps](docs/POPOVERS.md)
-
-## Registered menus
-
-Registered Python menus render through custom searchable dropdowns, inline
-contents and property-attached menus, with exact-row right-click actions.
-
-![Actual Blender registered menu animation](docs/media/panels/registered-menus-v1.gif)
-
-[Registered menu QA](docs/design/qa/registered-menus-v1/index.html) ·
-[Authoring and remaining gaps](docs/REGISTERED_MENUS.md)
-
-## Data-block selectors and tabs
-
-Searchable ID selectors, editable names, user counts, Fake User switches and
-New/Open/Unlink actions reuse the shared BVT controls. Pending edits and menus
-stay tied to their original selection.
-
-![Actual Blender data-block control animation](docs/media/panels/id-templates-v1.gif)
-
-[ID template QA](docs/design/qa/id-templates-v1/index.html) ·
-[Integration and remaining gaps](docs/ID_TEMPLATES.md)
-
-## Split layouts and responsive grids
-
-Split columns, automatic grids and height-balanced flows retain the shared BVT
-controls. Parent enable/active state and horizontal flexible spacing work across
-the layout tree.
-
-![Actual Blender split and grid control animation](docs/media/panels/layout-flow-v1.gif)
-
-[Layout QA](docs/design/qa/layout-flow-v1/index.html) ·
-[Layout behavior and remaining gaps](docs/LAYOUT_FLOW.md)
-
-## Operator choices
-
-Expanded operator actions and searchable operator dropdowns now use the shared
-BVT controls, with exact argument snapshots and checks before execution.
-
-![Actual Blender operator choice animation](docs/media/panels/operator-enums-v1.gif)
-
-[Operator choice QA](docs/design/qa/operator-enums-v1/index.html) ·
-[Integration and remaining gaps](docs/OPERATOR_CHOICES.md)
-
-## Sliders and switches
-
-Sliders use BVT’s label, thin rail, animated bubble handle and separate number
-entry. Boolean properties use glass toggle switches, including menu rows.
-Hue and alpha use the same slider layout; narrow rows stack their labels.
-
-![Actual Blender BVT slider and switch animation](docs/media/panels/scalar-layout-v1.gif)
-
-[Your screenshots versus implementation](docs/design/qa/scalar-layout-v1/index.html) ·
-[Behavior and integration](docs/SCALAR_CONTROLS.md)
-
-## Context menus
-
-Shared right-click menus now support owner-aware property actions, nested Back
-navigation, keyboard shortcuts, cancellation and delayed descriptions. Menus
-and tooltips use BVT’s liquid-glass blur/refraction by default in the embedded
-host, with one retained backdrop shared across controls and animation frames.
-
-![Actual Blender liquid-glass context menu motion](docs/media/panels/context-menu.gif)
-
-[Glass versus tint and all eight control targets](docs/design/qa/context-menu-v1/index.html) ·
-[Context menu integration](docs/CONTEXT_MENUS.md) ·
-[Menu capture provenance](docs/media/panels/context-menu-provenance.json)
-
-![Actual Blender inline menu field with shared liquid glass and bounce](docs/media/panels/context-menu-fields-v5.gif)
-
-[Current menu adapters and glass captures](docs/design/qa/context-menu-v5/index.html)
-cover real driver clipboard copy/paste, Quick Favorites add/remove, enum-value
-and flag shortcuts, custom-popup dispatch, keyboard/mouse/key-modifier capture, contributed scalar/array/boolean/enum
-choices, Edit Source and Python tooltips. Capture modes support keyboard selection;
-inline menu contributions preserve disabled state and invocation, and operator
-arguments use bounded snapshots with stale-owner checks. These adapters are
-execution-tested on macOS arm64 Blender 5.1.2 and 5.2.2; private APIs require exact
-source/executable admission. See the [supported cases and gaps](docs/CONTEXT_MENUS.md).
-Exact generated-reference/motion acceptance is still open. The earlier panel GIFs above are tint-fallback fixtures; this menu
-preview exercises the real liquid-glass path.
-
-Every right-click option now follows the opening bounce, including labels,
-shortcut hints and disabled rows. Native deferred-text batching is covered by
-pixel comparisons on both tested Blender versions.
-
-![Actual Blender menu motion with every option animated](docs/media/panels/context-menu-motion-v6.gif)
-
-[Before/after menu motion QA](docs/design/qa/context-menu-v6/index.html)
-
-Numeric properties now support scene units, angles, percentage factors and source-style
-dragging through the same glass/theme/motion path.
-
-![Actual Blender numeric property motion](docs/media/panels/numeric-props-v2.gif)
-
-[Numeric property QA](docs/design/qa/numeric-props-v2/index.html) ·
-[Supported semantics and remaining gaps](docs/NUMERIC_PROPERTIES.md)
-
-
-Wide numeric fields now use **15% bounce amplitude**, with the same spring timing.
-The QA page includes an original/current motion comparison.
-
-Event properties now use the shared custom glass capture menu for keyboard, mouse
-and held-key chords, with owner validation and host-owned commit/rollback.
-
-![Actual Blender event property capture](docs/media/panels/event-props-v1.gif)
-
-[Event property QA](docs/design/qa/event-props-v1/index.html) ·
-[Supported semantics and open gaps](docs/EVENT_PROPERTIES.md)
-
-Pointer properties now open a custom searchable ID picker, with owner-checked
-selection and candidate right-click menus. Compact animation decorators show
-keyed, changed, animated and driven states beside supported properties.
-
-![Actual Blender pointer picker and decorator motion](docs/media/panels/pointer-decorators-v1.gif)
-
-[Pointer/decorator QA](docs/design/qa/pointer-decorators-v1/index.html) ·
-[Policies, host undo and remaining gaps](docs/POINTERS_AND_DECORATORS.md)
-
-Collection searches now validate stale rows and host commits, support custom
-result labels and optional free-text suggestions, and animate row contents together.
-Standalone vector decorators expand into exact component controls.
-
-![Actual Blender collection search motion](docs/media/panels/collection-search-v1.gif)
-
-[Search QA and before/after row motion](docs/design/qa/collection-search-v1/index.html) ·
-[Search integration and remaining gaps](docs/SEARCH_PROPERTIES.md)
-
-Search properties now default to compact fields with on-demand glass popovers.
-Type immediately after opening; full-card mode remains an explicit backend option.
-
-![Actual Blender compact search popover](docs/media/panels/search-popover-v1.gif)
-
-[Compact search QA](docs/design/qa/search-popover-v1/index.html) ·
-[Search integration](docs/SEARCH_PROPERTIES.md)
-
-Named non-ID pointers now support active bones/nodes and collection-owned search
-properties, with host revision checks and shared glass/motion/context menus.
-
-![Non-ID pointer selection and context menus](docs/media/panels/non-id-pointers-v1.gif)
-
-[Non-ID pointer QA](docs/design/qa/non-id-pointers-v1/index.html) ·
-[Host policy and revision setup](docs/POINTERS_AND_DECORATORS.md#non-id-pointers-and-collection-owned-properties)
-
-The current scale audit supersedes the oversized presentation in earlier galleries:
-all compound controls now use the surrounding panel's logical UI scale.
-
-![Corrected compact popover scale](docs/media/panels/ui-scale-v1.gif)
-
-[All-control scale audit and before/after](docs/design/qa/ui-scale-v1/index.html) ·
-[Logical sizing contract](docs/UI_SCALING.md)
-
-The enum-property pass unifies mouse/shortcut menus, long lists, flag choices and
-transactional expanded buttons while retaining the shared styling and scale:
-
-![Enum property menus](docs/media/panels/enum-properties-v1.gif)
-
-[Enum QA gallery](docs/design/qa/enum-properties-v1/index.html) ·
-[Enum integration and remaining gaps](docs/ENUM_PROPERTIES.md)
-
-The next enum pass adds grouped menus, headings/separators, Shift-aware flag strips
-and enum metadata helpers:
-
-![Grouped enums and flag modifiers](docs/media/panels/enum-properties-v2.gif)
-
-[Enum groups QA gallery](docs/design/qa/enum-properties-v2/index.html)
-
-Long enum and action dropdowns now search as you type, retaining their original
-owners, glass and motion. Small menus keep their existing layout.
-
-![Searchable dropdowns](docs/media/panels/menu-search-v1.gif)
-
-[Searchable dropdown QA](docs/design/qa/menu-search-v1/index.html) · [Configuration](docs/MENU_SEARCH.md)
-
-## Requirements
-
-Every control must have custom appearance **and** custom interactions. Generated
-references are exact visual specifications, not loose inspiration. Geometry,
-spacing, typography, icons, colors, glass treatment and depicted states must
-match. An actual Blender capture and direct reference comparison are required
-before visual acceptance. These are hard rules in [AGENTS.md](AGENTS.md).
-
-## Vendor into an extension
-
-Copy the `beyond_ui/` package, including `LICENSE`, `NOTICE` and optional native
-artifacts, into your extension's `vendor/` folder. Import it relatively; no pip
-install or global Python path modification is required.
-
-```python
-from .vendor.beyond_ui import Layout
-
-# Custom authoring: use the returned canvas with your host adapter.
-ui = Layout(context=context, commit=on_committed_edit)
-ui.label(text="Settings")
-ui.prop(settings, "enabled")
-ui.prop(settings, "strength", slider=True)
-ui.template_color_picker(settings, "color")
-canvas = ui.canvas
-```
-
-Your extension owns settings, operators, registration, undo and translations.
-Unsupported custom methods raise `UnsupportedControl`; there is no silent
-native-widget fallback. The [ledger](docs/CUSTOM_PARITY.json) includes limitations
-of partially implemented methods; `supports()` is not a visual acceptance claim.
-
-For an owned N-panel or Properties panel, use
-`beyond_ui.hosts.panel.PanelHost`. It anchors custom GPU controls inside the native
-layout. The experimental bundled adapter is restricted to exact macOS arm64
-Blender builds. Other platforms can use pure components or an explicitly chosen
-native compatibility UI while a custom host adapter is qualified.
-
-See [examples/demo.py](examples/demo.py) for registration, stable input activation,
-per-region canvases, event routing, invalidation and teardown.
-
-## Components
-
-* `Canvas`, `Layout`, `Binding`, `Edit`: retained controls and host-owned edits.
-* `widgets`: custom color picker, curve/ramp editor, searchable data picker,
-  virtualized palette, read-only matrix decomposition and progress bar/ring.
-* `AnimationSettings`: shared source springs with live enable/strength policy;
-  see [animation integration and remaining gaps](docs/ANIMATION.md).
-* `components`, `virtual`, `editing`: Blender-independent layout/search/clipping,
-  indexed virtualization, text selection, safe number parsing and color math.
-* `gpu`: extracted rounded primitives, semantic vector icons, finite springs,
-  theme roles, shared glass and bounded texture/material previews.
-* `hosts`: exact-build native N-panel anchor and independent owner lifecycle.
-
-Imports do not register RNA, install timers, mutate scenes/preferences, download
-code or invoke compilers. Relative imports isolate vendored copies. Optional
-native callbacks are multiplexed so extensions cannot replace each other's
-callback ownership.
-
-## Optional native compatibility
-
-`NativeLayout(self.layout)` forwards the full installed Blender UI API unchanged,
-including specialized templates. It retains native behavior and is useful as a
-compatibility path or test reference. It **does not satisfy custom parity**.
-Native Panel/Menu/Header/UIList classes remain host-owned.
-
-The exact-version [API inventory](docs/api_inventory.json) covers Blender
-4.2–5.2 and includes all documented members, not just selected examples.
-[The routing table](docs/COVERAGE.md) documents the native reference surface;
-[the custom ledger](docs/CUSTOM_PARITY.json) is the custom implementation authority.
-
-## Development
+From this repository's checkout:
 
 ```sh
-uv sync
-uv run python -m unittest discover -s tests
-uv run ruff check beyond_ui tests tools examples
-uv run python tools/check_custom_parity.py
-python3 tools/run_blender_tests.py --blender /path/to/blender
-python3 tools/run_blender_tests.py --blender /path/to/blender --windowed
+python tools/vendor.py /path/to/my_addon/_vendor
 ```
 
-Tests preserve your foreground app: headless by default; windowed GPU captures
-and panel input use Blender's `--no-window-focus`, with no foreground fallback.
-See [background testing and the focus audit](docs/BACKGROUND_TESTING.md).
+Add **one line** at the bottom of your add-on's `__init__.py`, after its existing
+`register()` / `unregister()` definitions and before any script-run guard:
 
-`tools/check_custom_parity.py --require-complete` is the strict release gate.
-It currently fails because full custom parity and exact reference matches are
-unfinished. Ordinary CI verifies the ledger's completeness and current code;
-passing CI must not be described as full UI parity.
+```python
+from ._vendor.beyond_ui import integrate; integrate(globals())
+```
 
-Runtime runners use disposable profiles, timeouts and mandatory result records.
-They never save the user's current Blender file or preferences. The optional
-macOS bridge is built explicitly with `python3 tools/build_bridge.py`.
+Keep your existing `bpy.types.Panel` classes, `self.layout` calls and registration
+code. Manual registration, aliased registration functions, Blender's
+`register_classes_factory`, and delegating module loaders all use the same hook.
+No class-base search-and-replace is needed. Exclude `_vendor` from recursive
+module discovery if your loader scans dependencies.
 
-[Architecture](docs/ARCHITECTURE.md) · [Provenance](docs/PROVENANCE.md)
+Supported N-panel and Properties-panel bodies use the custom renderer. Conditional
+rows update on normal Blender layout draws; unchanged commands retain their
+canvases and motion state. The helper owns input startup, undo boundaries,
+shortcuts and teardown, scoped to your package.
 
-GPL-3.0-or-later. Preserve the license and notice when vendoring.
+Owned operator callbacks route property dialogs/popups, confirmations, enum
+search, callback menus/pies and `wm.call_menu*` through the custom UI. Existing
+shortcuts targeting your registered menus are adapted too—even in menu-only
+add-ons. Operator state, cancellation, `check()` and undo are preserved.
+
+**This is not an automatic replacement of every native surface.** Panel headers,
+auto-executing redo popups, indirect helper calls and unsupported layout modes
+remain explicit limits. `__beyond_ui_integration__.status` reports detected routes,
+rendering fallbacks and errors. Exact-build host requirements still apply below.
+
+**Consumer-tested:** CamKeys' tested panels, lists and three brush-falloff popovers
+now run through the custom controls on Blender 5.1.2/5.2.2. The integration assigns
+persistent collection row IDs outside drawing. CamKeys keeps brush preparation
+and undo in its own lifecycle hooks. [Consumer results and limits](docs/CAMKEYS_MIGRATION.md).
+
+[Single-line example](examples/single_line.py) ·
+[Integration and limits](docs/INTEGRATION.md) ·
+[Explicit lifecycle alternative](examples/panels.py)
+
+## Current controls in motion
+
+Actual Blender GPU captures with current core styling. Synthetic light/purple
+fixtures demonstrate theme roles; they are not installed presets.
+
+| Sliders, switches and numeric entry | Menus, search and component fields |
+| --- | --- |
+| ![Current core sliders, switches and numeric entry](docs/media/panels/core-review-scalars-v2.gif) | ![Current host context actions and searchable component popups](docs/media/panels/core-review-components-v2.gif) |
+| **Actions and confirmation popovers** | **Theme support** |
+| ![Current held menus and confirmation popovers](docs/media/panels/core-review-actions-v2.gif) | ![Theme support: native dark and synthetic light/purple captures](docs/media/panels/theme-support-v2.gif) |
+
+| Searchable menus | Color picker |
+| --- | --- |
+| ![Current searchable format menu](docs/design/qa/core-review-v2/reference-menu.png) | ![Current color picker with external labels](docs/design/qa/core-review-v2/external-color-fields.png) |
+| **Curve fields** | **Color ramp fields** |
+| ![Current curve fields](docs/design/qa/core-review-v2/external-curve-fields.png) | ![Current ramp fields](docs/design/qa/core-review-v2/external-ramp-fields.png) |
+
+### CamKeys consumer review
+
+Actual list and brush captures from the isolated consumer branch. These retain the
+shared renderer, glass, motion and owner menus. Real embedded N-panel captures now cover the text batching defect that offscreen tests missed. Original source icons, compact action rails and narrow status rows are included; exact-reference acceptance remains pending.
+[Review the responsive Forced Perspective panel, generated reference and width comparisons](docs/design/qa/forced-perspective-v2/index.html).
+
+![Forced Perspective native panel and right-click states](docs/media/panels/forced-perspective-v2.gif)
+
+![CamKeys compact list tools and centered icons](docs/media/panels/camkeys-panel-v5.gif)
+
+[Review generated list target, actual embedded captures and before/after comparisons](docs/design/qa/camkeys-visual-v4/index.html).
+
+| Tracked-object list | Brush falloff |
+| --- | --- |
+| ![CamKeys list selection, scrolling and context menu](docs/media/panels/camkeys-lists-v4.gif) | ![CamKeys brush opening, point drag and context menu](docs/media/panels/camkeys-brush-v4.gif) |
+
+[Full review and capture provenance](docs/design/qa/core-review-v2/index.html) ·
+[Historical feature recordings](docs/FEATURE_GALLERY.md)
+
+## What you get
+
+- Layouts, labels/icons, buttons, switches, sliders and editable text/numbers.
+- Searchable enums, data selectors, lists, menus, popovers and pie menus.
+- Color pickers, ramps, curves and other specialized controls with explicit limits.
+- Owner-aware right-click actions, keyboard interaction, shortcuts and nested menus.
+- Shared liquid glass, active Blender theme colors and configurable source motion.
+- Independent extension-local imports, bundled assets and a recorded vendor manifest.
+
+## Compatibility and scope
+
+**Embedded panels are currently execution-tested on macOS arm64 Blender 5.1.2
+and 5.2.2 and require admitted exact-build native adapters.** Unsupported hosts
+show an explicit availability reason. Copying the package does not qualify every
+Blender build, Windows or Linux. [Runtime details](docs/VALIDATION.md).
+
+The toolkit targets third-party N-panels, Properties panels and their reusable
+controls—not Blender's built-in modifier stacks or editor interfaces. Full
+right-click and visual parity still have [documented gaps](docs/CORE_CONTEXT_AUDIT.md).
+Current styling is ready for use/review; exact generated-reference matching and
+all platform/state combinations are not certified.
+
+## Advanced integration and development
+
+`AddonUI` is optional. Use `Layout`, `Canvas`, `PanelHost`, bindings and
+`ShortcutRegistry` independently when integrating an existing renderer/modal.
+Importing the library performs no registration, compilation, timers or scene edits.
+
+[Integration](docs/INTEGRATION.md) · [Animation](docs/ANIMATION.md) ·
+[Theming](docs/THEMING.md) · [Context menus](docs/CONTEXT_MENUS.md) ·
+[API inventory](docs/api_inventory.json) · [Parity ledger](docs/CUSTOM_PARITY.json)
+
+```sh
+uv run python -m unittest discover -s tests -p 'test_*.py'
+uv run ruff check beyond_ui tests tools
+```
+
+## License
+
+GPL-3.0-or-later. Preserve the bundled [license](LICENSE),
+[notice](beyond_ui/NOTICE) and font licenses when vendoring.
+Derived from Beyond VTuber Tools' Effect Layers UI; see [provenance](docs/PROVENANCE.md).

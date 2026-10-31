@@ -1,0 +1,354 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "batch": "final",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 68000,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_custom_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68000,
+        "restore_requests": 0,
+        "seconds": 2.9502480030059814,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "real clipboard copy/paste/new-driver handles escaped Unicode custom paths, evaluation, keyed guards and rollback",
+          "native Favorites store exact custom path, deduplicate, remove, stay read-only on query and reject truncation/context drift",
+          "custom shortcut capture/change/remove and registered execution preserve double precision; prior values remain discoverable",
+          "actual Canvas owner menu installs registered numeric shortcut path without changing renderer",
+          "nested PropertyGroup clipboard, Favorites and shortcut dispatch retain full owner path",
+          "large integer shortcut values, cancellation, deleted keys and changed owner invalidate without writes",
+          "registered setter validates dispatch, refreshes driven values, and supports actual Blender undo/redo"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/final/blender-0.log"
+    },
+    {
+      "batch": "final",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68023,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_custom_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68023,
+        "restore_requests": 0,
+        "seconds": 2.976217031478882,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "real clipboard copy/paste/new-driver handles escaped Unicode custom paths, evaluation, keyed guards and rollback",
+          "native Favorites store exact custom path, deduplicate, remove, stay read-only on query and reject truncation/context drift",
+          "custom shortcut capture/change/remove and registered execution preserve double precision; prior values remain discoverable",
+          "actual Canvas owner menu installs registered numeric shortcut path without changing renderer",
+          "nested PropertyGroup clipboard, Favorites and shortcut dispatch retain full owner path",
+          "large integer shortcut values, cancellation, deleted keys and changed owner invalidate without writes",
+          "registered setter validates dispatch, refreshes driven values, and supports actual Blender undo/redo"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/final/blender-1.log"
+    },
+    {
+      "batch": "native",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 68044,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68044,
+        "restore_requests": 0,
+        "seconds": 2.6860240697860718,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9",
+        "checks": [
+          "real native driver clipboard preserves expression and replaces exact component",
+          "host undo failure restores complete previous driver and removes staging ID",
+          "public paste guard rejects keyed channels without changing admitted adapter",
+          "new-driver clipboard uses exact ID/path; readonly input and unsupported whole-array guards",
+          "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected",
+          "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released",
+          "custom glass capture: assign/change/remove real keymap, cancel, modifier-only input, conflicts, stale-item rejection and exact properties",
+          "explicit authoring source opens correct file/line; Python tooltip preference honored"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/native/blender-0.log"
+    },
+    {
+      "batch": "native",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68061,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68061,
+        "restore_requests": 0,
+        "seconds": 2.8673200607299805,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c",
+        "checks": [
+          "real native driver clipboard preserves expression and replaces exact component",
+          "host undo failure restores complete previous driver and removes staging ID",
+          "public paste guard rejects keyed channels without changing admitted adapter",
+          "new-driver clipboard uses exact ID/path; readonly input and unsupported whole-array guards",
+          "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected",
+          "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released",
+          "custom glass capture: assign/change/remove real keymap, cancel, modifier-only input, conflicts, stale-item rejection and exact properties",
+          "explicit authoring source opens correct file/line; Python tooltip preference honored"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/native/blender-1.log"
+    },
+    {
+      "batch": "registry-final",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 68218,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_completion.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68218,
+        "restore_requests": 0,
+        "seconds": 2.7116400003433228,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "inline numeric arithmetic, deferred commit, cancellation, invalid text and concurrent-value rejection",
+          "string fields, numeric array components and rollback through the host commit boundary",
+          "real keymap and registered host dispatcher reopen custom enum, commit selection, revoke hidden/replaced controls",
+          "host editor/modal conflict maps reject colliding shortcuts without changing existing assignments",
+          "host callbacks support custom invocation routing without dropping their context",
+          "dispatcher teardown clears callbacks and unregisters its owned operator"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/registry-final/blender-0.log"
+    },
+    {
+      "batch": "registry-final",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68245,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_completion.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 68245,
+        "restore_requests": 0,
+        "seconds": 2.952579975128174,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "inline numeric arithmetic, deferred commit, cancellation, invalid text and concurrent-value rejection",
+          "string fields, numeric array components and rollback through the host commit boundary",
+          "real keymap and registered host dispatcher reopen custom enum, commit selection, revoke hidden/replaced controls",
+          "host editor/modal conflict maps reject colliding shortcuts without changing existing assignments",
+          "host callbacks support custom invocation routing without dropping their context",
+          "dispatcher teardown clears callbacks and unregisters its owned operator"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/registry-final/blender-1.log"
+    },
+    {
+      "batch": "overrides-final",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 68296,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/overrides-final/blender-0.log"
+    },
+    {
+      "batch": "overrides-final",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68307,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/custom-adapters-v1/overrides-final/blender-1.log"
+    }
+  ],
+  "visual_acceptance": false
+}

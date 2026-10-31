@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-30",
+  "files": {
+    "beyond_ui/hosts/menu_native.py": "e77391bc29a546cea7f867cdb0554977d620b4c1cb6ccf0d9c6102606f0933c4",
+    "beyond_ui/hosts/menu-native-audit.json": "2b5388788038833af012b07414499f90cca0499f2b376578c1411cbc28432049",
+    "beyond_ui/context_native_entries.py": "c970c4d4531b233729da88965be7de93b971b5f6eed4ed069ce0d1f7335242ee",
+    "beyond_ui/context_paths.py": "41067e619f78469630b8bb3b5a418c9fb2c9ee1dc097bd6eff76d6ba88d63589",
+    "beyond_ui/context_custom.py": "d193146bc9263b380f176cf1ffc45869ade0e4eed50784cc43f11576c8a21797",
+    "beyond_ui/context_shortcuts.py": "a9a8959fea90231a1bb14a68de809720e6cfb58baddacab155f5a076125e5de1",
+    "beyond_ui/context_custom_shortcuts.py": "c6f75937add2a380ad1cfa043dd2abe3a0635b126629337a63c318d146ae874f",
+    "beyond_ui/context_dispatch.py": "15af323595a58d879aa8bd204ebe38a8306dfe95b804687bba1df594979ecbad",
+    "beyond_ui/context_rna.py": "5b43056542598301bb2001e99fa392a05709edcbcb520d3bc680697c5eb285ef",
+    "beyond_ui/context_drivers.py": "9a175ab49da513fac764b076dd61477d4373b580808e575b54bfe02213809602",
+    "beyond_ui/context_overrides.py": "321902c6b146e4758c24751c57b68e5fe21a1648004987612b8193aca42422e3",
+    "beyond_ui/canvas.py": "c16ce2212e15abcd3f2d975eac8436aa047b47d48bf35210d6b9fc8fcad59d6b",
+    "tests/blender_custom_adapters.py": "bc5d9f2d480a4f29154969840f524c89f7d60a5b163e15e1ae1200f44c77c09e",
+    "tests/test_custom_shortcuts.py": "6beaa798f40ad56d417a57b068d693600b5fe4be1b0a401581a88d1651651bee",
+    "tests/blender_context_overrides.py": "a3098dd709cc3c090b09fb0daa15389f42175669930a5e6b0472d74a6356fff8"
+  },
+  "reference": "Existing BVT/macOS menu rendering unchanged; no new visual or motion acceptance.",
+  "source_evidence": "Audited exact-build interface_context_menu.cc uses RNA_path_property_py for custom Favorites; screen_user_menu.cc resolves it; DNA_userdef_types.h has 256/64-byte path fields. Existing ID/path clipboard entry points unchanged.",
+  "api_docs": "Exact 4.2/5.1/5.2 API and Manual requested, unavailable through web tool. Installed 5.1.2/5.2.2 and audited source used; no 4.2 execution claim.",
+  "tests": {
+    "runtime_runs": 8,
+    "pure_tests": 252,
+    "windowed_runs": 6,
+    "focus_activations": 0
+  },
+  "limits": [
+    "Custom numeric scalar properties only; arrays/other custom types unchanged.",
+    "Clipboard and Favorites remain limited to exact admitted macOS arm64 executables; long Favorites paths fail closed.",
+    "Numeric shortcuts require consumer-owned ShortcutRegistry.register() and Canvas(shortcut_registry=registry); no registration on import.",
+    "Python native-button contributions and hierarchy/editor-navigation gaps remain in CORE_CONTEXT_AUDIT.md.",
+    "Failures/probes retained under build/custom-adapters-v1; generic wm.context_set_value route rejected for missing undo/dependency updates."
+  ]
+}

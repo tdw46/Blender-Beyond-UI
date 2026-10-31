@@ -10,6 +10,32 @@ def event(kind, **kw):
 
 
 class RowContext(unittest.TestCase):
+    def test_registered_menu_constructs_with_empty_button_context(self):
+        from beyond_ui.registered_menu import RegisteredMenu
+
+        definition = NS(bl_label="Commands", draw=lambda self, context: None)
+
+        class MenuFixture(RegisteredMenu):
+            lookup = staticmethod(lambda name: definition)
+
+        context = NS()
+        layout = NS(
+            context=context,
+            _context_pointers={},
+            _context_strings={},
+            operator_context="INVOKE_DEFAULT",
+        )
+        menu = MenuFixture(layout, "FIXTURE_MT_commands")
+        self.assertIs(menu.context, context)
+        self.assertEqual(
+            menu.pointers.values(),
+            {
+                "button_pointer": None,
+                "button_prop": None,
+                "button_operator": None,
+            },
+        )
+
     def test_invalid_inline_context_cancels_without_swallowing_outside_right_click(
         self,
     ):

@@ -1,0 +1,123 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Standalone compound fields, initial edit, split labels, optional exact-component key decorators and owner-aware right-click",
+    "Initial default operator selected, then exactly one explicit Return dispatch",
+    "Standalone-to-registered nesting, live child poll invalidation and quiescent teardown",
+    "Active semantic error and animation theme roles; theme change invalidates color cache"
+  ],
+  "theme_status_source": {
+    "EMPTY": [
+      0.6443137660622598,
+      0.6443137660622598,
+      0.6443137660622598,
+      1.0
+    ],
+    "KEYED": [
+      0.7019608020782471,
+      0.6823529601097107,
+      0.21176472306251526,
+      1.0
+    ],
+    "ANIMATED": [
+      0.32549020648002625,
+      0.6000000238418579,
+      0.18039216101169586,
+      1.0
+    ],
+    "DRIVEN": [
+      0.5647059082984924,
+      0.0,
+      0.8000000715255737,
+      1.0
+    ],
+    "CHANGED": [
+      0.8000000715255737,
+      0.458823561668396,
+      0.16078431904315948,
+      1.0
+    ],
+    "fallback_roles": [],
+    "source": "blender",
+    "ALERT": [
+      0.6000000238418579,
+      0.08627451211214066,
+      0.08627451211214066,
+      1.0
+    ]
+  },
+  "theme_ui_roles": [
+    "rna_type",
+    "wcol_regular",
+    "wcol_tool",
+    "wcol_toolbar_item",
+    "wcol_radio",
+    "wcol_text",
+    "wcol_option",
+    "wcol_toggle",
+    "wcol_num",
+    "wcol_numslider",
+    "wcol_box",
+    "wcol_curve",
+    "wcol_menu",
+    "wcol_pulldown",
+    "wcol_menu_back",
+    "wcol_pie_menu",
+    "wcol_tooltip",
+    "wcol_menu_item",
+    "wcol_scroll",
+    "wcol_progress",
+    "wcol_list_item",
+    "wcol_state",
+    "wcol_tab",
+    "menu_shadow_fac",
+    "menu_shadow_width",
+    "icon_alpha",
+    "icon_saturation",
+    "widget_emboss",
+    "link",
+    "editor_border",
+    "editor_outline",
+    "editor_outline_active",
+    "widget_text_cursor",
+    "panel_roundness",
+    "panel_header",
+    "panel_title",
+    "panel_text",
+    "panel_back",
+    "panel_sub_back",
+    "panel_outline",
+    "panel_active",
+    "transparent_checker_primary",
+    "transparent_checker_secondary",
+    "transparent_checker_size",
+    "axis_x",
+    "axis_y",
+    "axis_z",
+    "axis_w",
+    "gizmo_hi",
+    "gizmo_primary",
+    "gizmo_secondary",
+    "gizmo_view_align",
+    "gizmo_a",
+    "gizmo_b",
+    "icon_scene",
+    "icon_collection",
+    "icon_object",
+    "icon_object_data",
+    "icon_modifier",
+    "icon_shading",
+    "icon_folder",
+    "icon_autokey",
+    "icon_border_intensity"
+  ],
+  "native_flag_descriptions": {
+    "alert": "",
+    "emboss": "",
+    "use_property_split": "",
+    "use_property_decorate": "",
+    "active_default": "When true, an operator button defined after this will be activated when pressing return(use with popup dialogs)",
+    "activate_init": "When true, buttons defined in popups will be activated on first display (use so you can type into a field without having to click on it first)"
+  }
+}

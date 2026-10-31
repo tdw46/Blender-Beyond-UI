@@ -10,6 +10,8 @@
 #include "GPU_matrix.hh"
 #include "GPU_platform.hh"
 #include "BLI_threads.h"
+#include "BLF_api.hh"
+#include "GPU_state.hh"
 #include "ED_keyframing.hh"
 #include "DEG_depsgraph_build.hh"
 #include "BKE_global.hh"
@@ -52,7 +54,16 @@ EXPORT int bvt_probe_reserve(ui::Layout *layout, int width, int height, uint64_t
   ui::block_layout_set_current(block, layout);
   ui::uiDefBut(block, ui::ButtonType::Extra, "", 0, 0, short(width), short(height), nullptr, 0, 0, std::nullopt);
   ui::button_func_drawextra_set(block, [token](const bContext *, rcti *rect) {
-    if (callback && rect) callback(token, rect->xmin, rect->ymin, rect->xmax, rect->ymax);
+    if (callback && rect) {
+      int clip[4], viewport[4];
+      GPU_scissor_get(clip);
+      GPU_viewport_size_get_i(viewport);
+      GPU_scissor(viewport[0], viewport[1], viewport[2], viewport[3]);
+      BLF_batch_draw_end();
+      GPU_scissor(clip[0], clip[1], clip[2], clip[3]);
+      BLF_batch_draw_begin();
+      callback(token, rect->xmin, rect->ymin, rect->xmax, rect->ymax);
+    }
   });
   return 1;
 }

@@ -10,7 +10,13 @@ from .bridge import load, BridgeUnavailable
 
 class PanelHost:
     def __init__(
-        self, owner, *, backdrop_revision=None, animation=None, glass_enabled=True
+        self,
+        owner,
+        *,
+        backdrop_revision=None,
+        animation=None,
+        glass_enabled=True,
+        panel_layout=True,
     ):
         if not owner:
             raise ValueError("Use a unique extension-qualified owner")
@@ -20,6 +26,7 @@ class PanelHost:
         self._tooltip_keys = set()
         self._tooltip_callback = self._reveal_tooltips
         self._in_tooltip_callback = False
+        self.panel_layout = bool(panel_layout)
         self.owner = owner
         self.backdrop_revision = backdrop_revision
         self.glass_enabled = bool(glass_enabled)
@@ -119,6 +126,9 @@ class PanelHost:
                 )[0],
                 measure_key,
             )
+        if getattr(canvas, "panel_layout", False) != self.panel_layout:
+            canvas.panel_layout = self.panel_layout
+            canvas.invalidate()
         height = canvas.arrange(width)
         record = self.records.get(key)
         if record is None:
@@ -185,6 +195,10 @@ class PanelHost:
         record["valid"] = True
         record["rect"] = (x0, y0, x1 - x0, y1 - y0)
         record["clip"] = (left, bottom, right - left, top - bottom)
+        # Native header text may still be queued before our framebuffer/clip changes.
+        from ..gpu.typography import flush_text
+
+        flush_text(self.font)
         backdrop = None
         if self.glass_enabled:
             from ..gpu import glass
@@ -266,6 +280,8 @@ class PanelHost:
             hidden = (
                 area is not None
                 and area.type == "VIEW_3D"
+                and region is not None
+                and region.type == "UI"
                 and not area.spaces.active.show_region_ui
             )
             if region is None or hidden or not record["valid"] or not record["rect"]:
@@ -317,7 +333,9 @@ class PanelHost:
             from ..gpu.paint import measure
             from ..gpu.typography import face
 
-            with context.temp_override(window=window, area=area, region=region):
+            with context.temp_override(
+                window=window, area=area, region=record.get("context_region", region)
+            ):
                 consumed = canvas.event(
                     event,
                     (px - x) / sx,
@@ -451,6 +469,8 @@ class PanelHost:
             if (
                 area
                 and area.type == "VIEW_3D"
+                and region is not None
+                and region.type == "UI"
                 and not area.spaces.active.show_region_ui
             ):
                 visible = False
@@ -466,7 +486,11 @@ class PanelHost:
             cx, cy, cw, ch = record["clip"]
             sx, sy = w / max(1.0, canvas._width), h / max(1.0, canvas.height)
             clip = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
-            if not canvas.advance_animations(clip):
+            with bpy.context.temp_override(
+                window=window, area=area, region=record.get("context_region", region)
+            ):
+                moving = canvas.advance_animations(clip, context=bpy.context)
+            if not moving:
                 self._animation_keys.discard(key)
         return 1 / 60 if self._animation_keys else None
 

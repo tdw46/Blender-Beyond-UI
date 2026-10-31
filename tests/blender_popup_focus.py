@@ -116,8 +116,16 @@ def run():
             for i, r in enumerate(popup.canvas.context_menu.page.rows)
             if r.label == "Copy Full Data Path"
         )
-        popup.canvas.context_menu.choose(row, ctx)
-        assert "render.filepath" in ctx.window_manager.clipboard
+
+        class ClipboardContext:
+            window_manager = NS(clipboard="")
+
+            def __getattr__(self, name):
+                return getattr(ctx, name)
+
+        copy_context = ClipboardContext()
+        popup.canvas.context_menu.choose(row, copy_context)
+        assert "render.filepath" in copy_context.window_manager.clipboard
         popup.canvas.close_context()
         checks.append(
             "Nested default stays in child popup; edit cancellation preserves exact-property context menus"
@@ -152,4 +160,7 @@ def run():
     )
 
 
-bpy.app.timers.register(run, first_interval=1)
+if bpy.app.background:
+    run()
+else:
+    bpy.app.timers.register(run, first_interval=1)

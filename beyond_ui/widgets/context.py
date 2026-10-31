@@ -62,10 +62,13 @@ def target(widget, key, x, y):
                 else color_hsv(binding.read(), widget.linear, widget.hue_value)[index]
             )
     elif isinstance(widget, CurveMapping):
-        for i, r in enumerate(CURVE["tabs"]):
+        for i, r in enumerate(CURVE["tabs"][:3] if widget.brush else CURVE["tabs"]):
             if contains(r, x, y):
-                part = ("channel", i)
-                selected_binding = widget.channel
+                if widget.brush:
+                    part = ("point_field", 0, widget.selected, 2)
+                else:
+                    part = ("channel", i)
+                    selected_binding = widget.channel
         points = deepcopy(binding.read())
         channel = widget.channel.read() if widget.channel else 0
         a, b, w, h = widget.graph
@@ -114,8 +117,17 @@ def target(widget, key, x, y):
     elif isinstance(widget, DataPicker):
         selected_binding = getattr(widget, "binding", None)
         if contains(PICKER["list"], x, y):
-            for i, top, h in widget.rows.visible(206):
-                if contains((25, 147 + top, 560, 65), x, y):
+            for i, top, h in widget.rows.visible(PICKER["list"][3]):
+                if contains(
+                    (
+                        PICKER["list"][0],
+                        PICKER["list"][1] + top,
+                        PICKER["list"][2],
+                        PICKER["row_height"],
+                    ),
+                    x,
+                    y,
+                ):
                     identity, label, icon = widget.filtered[i]
                     part = ("row", identity)
                     selected_binding = (

@@ -39,7 +39,11 @@ def grid_shape(count, width, average, columns=0, row_major=False):
 class Plan:
     """One invalidation's measurement cache, discarded after geometry is retained."""
 
-    def __init__(self, theme, measure=None, root=None):
+    def __init__(self, theme, measure=None, root=None, *, panel_layout=False):
+        self.panel_layout = panel_layout
+        self.minimum_cache = {}
+        self.stacked_peers = set()
+        self.panel_label_column = 0
         self.theme = theme
         self.measure = measure
         self.natural_cache = {}
@@ -86,7 +90,70 @@ class Plan:
         return None
 
     def gap(self, node):
+        if self.panel_layout and (
+            node.kind in {"row", "split", "column"} or node.options.get("_list_tools")
+        ):
+            return 4.0
         return 0.0 if node.options.get("align") else self.theme.gap
+
+    def label_width(self, node):
+        return (
+            self.measure(node.label, node.options.get("text_role", "body"))
+            if self.measure
+            else len(node.label) * self.theme.font_size * 0.58
+        )
+
+    def minimum(self, node):
+        key = id(node)
+        if key in self.minimum_cache:
+            return self.minimum_cache[key]
+        compact = self.compact_width(node)
+        if compact is not None:
+            result = compact
+        elif hasattr(node, "children"):
+            widths = [self.minimum(c) for c in node.children]
+            result = (
+                sum(widths) + max(0, len(widths) - 1) * self.gap(node)
+                if node.kind in {"row", "split"}
+                else max(widths, default=0)
+            )
+            if node.kind == "box":
+                result += 2 * self.theme.padding
+        elif node.kind == "number" and node.options.get("_slider_stacked"):
+            # Caption spans its accessory row; reserve track + value, not text width.
+            result = 80.0
+        elif node.kind == "label":
+            result = self.label_width(node) + 12
+        elif node.kind in {"number", "text", "event", "enum", "pointer", "search"}:
+            text = self.label_width(node) + 12
+            result = max(64, text + 56 if text < 75 else text)
+        else:
+            result = min(self.natural(node), 80)
+        self.minimum_cache[key] = result
+        return result
+
+    def entry_extra(self, node, available):
+        node.options.pop("_entry_label_width", None)
+        node.options.pop("_entry_stacked", None)
+        if not self.panel_layout or not node.label or node.options.get("search_bar"):
+            return 0
+        if node.kind not in {"text", "event", "enum", "pointer", "search", "number"}:
+            return 0
+        if node.kind == "number" and node.options.get("slider", True):
+            return 0
+        needed = self.label_width(node) + 12
+        if node.options.get("icon") not in {None, "", "NONE", 0} or node.options.get(
+            "icon_value"
+        ):
+            needed += 18
+        label = max(available * 0.36, needed)
+        if available > self.panel_label_column * 1.8:
+            label = max(label, self.panel_label_column)
+        stacked = id(node) in self.stacked_peers or available - label - 8 < 48
+        node.options["_entry_stacked"] = stacked
+        node.options["_entry_label_width"] = label
+        node.options["_label_band"] = 26 if self.panel_layout else 20
+        return node.options["_label_band"] if stacked else 0
 
     def natural(self, node):
         key = id(node)
@@ -108,6 +175,13 @@ class Plan:
                     * (12 / 11 if node.options.get("text_role") == "title" else 1)
                     * 0.58
                 )
+                if node.options.get("icon") not in {
+                    None,
+                    "",
+                    "NONE",
+                    0,
+                } or node.options.get("icon_value"):
+                    text += 18
                 minimum = {
                     "number": 280 if node.options.get("slider", True) else 130,
                     "toggle": 130,
@@ -119,7 +193,11 @@ class Plan:
                     "event": 160,
                     "image": 160,
                 }.get(node.kind, 24)
-                width = max(minimum, text + (70 if node.kind == "toggle" else 24))
+                width = (
+                    text + 24
+                    if node.options.get("bool_button")
+                    else max(minimum, text + (70 if node.kind == "toggle" else 24))
+                )
         else:
             sizes = [self.natural(c) for c in node.children]
             width = (
@@ -138,6 +216,21 @@ class Plan:
         self.natural_cache[key] = max(0.0, width)
         return self.natural_cache[key]
 
+    def base_height(self, node):
+        if not self.panel_layout:
+            return self.theme.row_height
+        from . import panel_metrics as m
+
+        if node.options.get("_list_tool") and node.kind == "button":
+            return m.LIST_TOOL_SIZE
+        if node.kind == "button":
+            return m.ICON_BUTTON_SIZE if not node.label else m.BUTTON_HEIGHT
+        if node.kind == "label":
+            return 24 if node.options.get("text_role") == "title" else 20
+        if node.kind == "number" and node.options.get("slider"):
+            return 24.0
+        return m.FIELD_HEIGHT
+
     def control_size_plain(self, node, available):
         available = max(0.0, min(available, node.options.get("width", available)))
         if node.kind == "widget":
@@ -145,15 +238,41 @@ class Plan:
                 self.theme.font_size, available, node.options.get("height")
             )
         extra = (
-            20
+            (26 if self.panel_layout else 20)
             if node.kind == "number"
             and node.label
             and node.options.get("slider", True)
-            and available < 260
+            and (self.panel_layout or available < 260)
             else 0
         )
+        extra = max(extra, self.entry_extra(node, available))
+        node.options.pop("_heading_lines", None)
+        if (
+            self.panel_layout
+            and node.options.get("text_role") == "title"
+            and node.label
+        ):
+            lines, line = [], ""
+            for word in node.label.split():
+                trial = (line + " " + word).strip()
+                measured = (
+                    self.measure(trial, "title")
+                    if self.measure
+                    else len(trial) * self.theme.font_size * 0.64
+                )
+                if line and measured > max(1, available - 12):
+                    lines.append(line)
+                    line = word
+                else:
+                    line = trial
+            lines.append(line)
+            node.options["_heading_lines"] = lines
+            extra = max(extra, len(lines) * 18 - self.base_height(node))
         height = node.options.get(
-            "height", 8 if node.kind == "separator" else self.theme.row_height + extra
+            "height",
+            8
+            if node.kind == "separator"
+            else node.options.get("_paragraph_height", self.base_height(node)) + extra,
         )
         return available, max(0.0, height)
 
@@ -169,26 +288,99 @@ class Plan:
             )
             return min(available, w * sx), h * sy
         extra = (
-            20
+            (26 if self.panel_layout else 20)
             if node.kind == "number"
             and node.label
             and node.options.get("slider", True)
-            and available < 260
+            and (self.panel_layout or available < 260)
             else 0
         )
+        extra = max(extra, self.entry_extra(node, available))
+        node.options.pop("_heading_lines", None)
+        if (
+            self.panel_layout
+            and node.options.get("text_role") == "title"
+            and node.label
+        ):
+            lines, line = [], ""
+            for word in node.label.split():
+                trial = (line + " " + word).strip()
+                measured = (
+                    self.measure(trial, "title")
+                    if self.measure
+                    else len(trial) * self.theme.font_size * 0.64
+                )
+                if line and measured > max(1, available - 12):
+                    lines.append(line)
+                    line = word
+                else:
+                    line = trial
+            lines.append(line)
+            node.options["_heading_lines"] = lines
+            extra = max(extra, len(lines) * 18 - self.base_height(node))
         height = node.options.get(
-            "height", 8 if node.kind == "separator" else self.theme.row_height + extra
+            "height",
+            8
+            if node.kind == "separator"
+            else node.options.get("_paragraph_height", self.base_height(node)) + extra,
         )
         return available, max(0.0, height * sy)
+
+    def compact_width(self, node):
+        """Intrinsic icon rail width, without shrinking authored value controls."""
+        if "width" in node.options:
+            return self.fixed(node, 0) if self.sized else node.options["width"]
+        if hasattr(node, "children"):
+            if node.kind not in {"column", "row"} or not node.children:
+                return None
+            sizes = [
+                self.compact_width(c) for c in node.children if c.kind != "separator"
+            ]
+            if not sizes or any(w is None for w in sizes):
+                return None
+            return (
+                max(sizes)
+                if node.kind == "column"
+                else sum(sizes) + max(0, len(sizes) - 1) * self.gap(node)
+            )
+        if self.panel_layout:
+            if node.kind == "toggle" and not node.label:
+                return 46.0 * self.scale(node)[0]
+            if node.kind == "label" and node.label:
+                return self.label_width(node) + 12
+        if (
+            node.kind in {"button", "label"}
+            and not node.label
+            and node.options.get("icon") not in {None, "", "NONE", 0}
+        ):
+            return (
+                22
+                if node.options.get("_list_tool")
+                else 24
+                if self.panel_layout
+                else self.theme.row_height
+            ) * self.scale(node)[0]
+        return None
 
     def row_widths(self, node, width):
         children, gap = node.children, self.gap(node)
         usable = max(0.0, width - max(0, len(children) - 1) * gap)
         if node.kind == "split":
             factor = node.options.get("factor", 0) or 1 / max(1, len(children))
-            return [usable * factor] + [
+            widths = [usable * factor] + [
                 usable * (1 - factor) / max(1, len(children) - 1)
             ] * (len(children) - 1)
+            if self.panel_layout and 0 < factor < 1:
+                minimum = [self.minimum(c) for c in children]
+                if sum(minimum) <= usable:
+                    extra = usable - sum(minimum)
+                    weights = [max(0, w - m) for w, m in zip(widths, minimum)]
+                    total = sum(weights)
+                    widths = [
+                        m + extra * (v / total if total else 1 / len(children))
+                        for m, v in zip(minimum, weights)
+                    ]
+            return widths
         spacers = [bool(c.options.get("spacer")) for c in children]
         if any(spacers):
             widths = [
@@ -213,6 +405,10 @@ class Plan:
                 for c in children
             ]
         )
+        # Native-style tool rails must not take half of their sibling list.
+        fixed = [
+            self.compact_width(c) if w is None else w for c, w in zip(children, fixed)
+        ]
         total = sum(w for w in fixed if w is not None)
         shrink = min(1, usable / total) if total else 1
         if not self.sized:
@@ -242,7 +438,20 @@ class Plan:
         cells = []
         alignment = node.options.get("alignment", "EXPAND")
         shift = {"CENTER": 0.5, "RIGHT": 1.0}.get(alignment, 0.0)
-        if node.kind in {"row", "split"}:
+        if (
+            self.panel_layout
+            and node.kind == "split"
+            and len(children) > 1
+            and 0 < node.options.get("factor", 0.5) < 1
+            and sum(self.minimum(c) for c in children) + (len(children) - 1) * gap
+            > available
+        ):
+            y = 0
+            for child in children:
+                h = self.layout(child, available)[0]
+                cells.append((child, 0, y, available, h))
+                y += h + gap
+        elif node.kind in {"row", "split"}:
             widths = self.row_widths(node, available)
             x = (
                 max(0, available - sum(widths) - max(0, len(children) - 1) * gap)
@@ -252,6 +461,55 @@ class Plan:
                 h = self.layout(child, w)[0]
                 cells.append((child, x, 0, w, h))
                 x += w + gap
+
+            # A responsive grid changes label placement for the whole row, not
+            # one field at a time. This prevents mixed inline/stacked peers.
+            if self.panel_layout:
+
+                def entry_leaves(child):
+                    if hasattr(child, "children"):
+                        return [
+                            c for item in child.children for c in entry_leaves(item)
+                        ]
+                    return [child] if "_entry_stacked" in child.options else []
+
+                entries = [c for child in children for c in entry_leaves(child)]
+                if any(c.options["_entry_stacked"] for c in entries):
+                    newly_stacked = [
+                        c for c in entries if id(c) not in self.stacked_peers
+                    ]
+                    if newly_stacked:
+                        self.stacked_peers.update(id(c) for c in entries)
+
+                        def descendants(child):
+                            yield id(child)
+                            for item in getattr(child, "children", ()):
+                                yield from descendants(item)
+
+                        changed = {
+                            identity
+                            for child in children
+                            for identity in descendants(child)
+                        }
+                        self.plans = {
+                            key: value
+                            for key, value in self.plans.items()
+                            if key[0] not in changed
+                        }
+                        cells = [
+                            (c, x, y, w, self.layout(c, w)[0])
+                            for c, x, y, w, h in cells
+                        ]
+
+            def stacked(child):
+                return (
+                    child.options.get("_entry_stacked", False)
+                    or child.options.get("_slider_stacked", False)
+                ) or any(stacked(c) for c in getattr(child, "children", ()))
+
+            if self.panel_layout and cells and any(stacked(c) for c in children):
+                row_height = max(cell[4] for cell in cells)
+                cells = [(c, x, row_height - h, w, h) for c, x, y, w, h in cells]
         elif node.kind == "grid" and children:
             natural = [self.natural(c) for c in children]
             cols, rows = grid_shape(
@@ -376,3 +634,38 @@ class Plan:
                 self.layout(child, w)[0] * child_scale if child_scale != 1.0 else None
             )
             self.place(child, x + padding + a, y + (padding + b) * ratio, w, allocated)
+
+
+def compact_paragraphs(group, font_size):
+    """Consecutive text-only rows inside a box form body copy, not button slots."""
+    for child in getattr(group, "children", ()):
+        if hasattr(child, "children"):
+            compact_paragraphs(child, font_size)
+        else:
+            child.options.pop("_paragraph_height", None)
+    if group.kind != "box":
+        return
+    run = []
+
+    def finish():
+        if len(run) > 1:
+            for label in run:
+                if "height" not in label.options:
+                    label.options["_paragraph_height"] = font_size * 1.65
+        run.clear()
+
+    for row in group.children:
+        children = getattr(row, "children", ())
+        if (
+            row.kind == "row"
+            and len(children) == 1
+            and children[0].kind == "label"
+            and children[0].label
+            and children[0].options.get("icon") in {None, "", "NONE", 0}
+            and not children[0].options.get("icon_value")
+            and children[0].options.get("text_role", "body") == "body"
+        ):
+            run.append(children[0])
+        else:
+            finish()
+    finish()

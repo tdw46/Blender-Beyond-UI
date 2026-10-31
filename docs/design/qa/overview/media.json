@@ -1,0 +1,202 @@
+[
+  {
+    "title": "Current core sliders, switches and numeric entry",
+    "path": "docs/media/panels/core-review-scalars-v2.gif"
+  },
+  {
+    "title": "Current host context actions and searchable component popups",
+    "path": "docs/media/panels/core-review-components-v2.gif"
+  },
+  {
+    "title": "Current held menus and confirmation popovers",
+    "path": "docs/media/panels/core-review-actions-v2.gif"
+  },
+  {
+    "title": "Theme support: native dark and synthetic light/purple captures",
+    "path": "docs/media/panels/theme-support-v2.gif"
+  },
+  {
+    "title": "Forced Perspective native panel and right-click states",
+    "path": "docs/media/panels/forced-perspective-v2.gif"
+  },
+  {
+    "title": "CamKeys compact list tools and centered icons",
+    "path": "docs/media/panels/camkeys-panel-v5.gif"
+  },
+  {
+    "title": "CamKeys list selection, scrolling and context menu",
+    "path": "docs/media/panels/camkeys-lists-v4.gif"
+  },
+  {
+    "title": "CamKeys brush opening, point drag and context menu",
+    "path": "docs/media/panels/camkeys-brush-v4.gif"
+  },
+  {
+    "title": "Animated Curve Mapping panel",
+    "path": "docs/media/panels/curve-mapping.gif"
+  },
+  {
+    "title": "Animated Color Ramp panel",
+    "path": "docs/media/panels/color-ramp.gif"
+  },
+  {
+    "title": "Animated Data Picker panel",
+    "path": "docs/media/panels/data-picker.gif"
+  },
+  {
+    "title": "Animated Color Picker panel",
+    "path": "docs/media/panels/color-picker.gif"
+  },
+  {
+    "title": "Animated Palette panel",
+    "path": "docs/media/panels/palette.gif"
+  },
+  {
+    "title": "Animated Matrix decomposition panel",
+    "path": "docs/media/panels/matrix.gif"
+  },
+  {
+    "title": "Animated Progress Bar panel",
+    "path": "docs/media/panels/progress-bar.gif"
+  },
+  {
+    "title": "Animated Progress Ring panel",
+    "path": "docs/media/panels/progress-ring.gif"
+  },
+  {
+    "title": "Actual held-menu and confirmation motion",
+    "path": "docs/media/panels/action-parity-v1.gif"
+  },
+  {
+    "title": "Actual popup editing and source menu motion",
+    "path": "docs/media/panels/popup-focus-v1.gif"
+  },
+  {
+    "title": "Actual liquid pie motion",
+    "path": "docs/media/panels/marking-menu-v3-simple.gif"
+  },
+  {
+    "title": "Actual compound pie motion",
+    "path": "docs/media/panels/marking-menu-v3-compound.gif"
+  },
+  {
+    "title": "Actual nested pie, compound layout and context-menu motion",
+    "path": "docs/media/panels/marking-menu-v4.gif"
+  },
+  {
+    "title": "Actual standalone pie and stable-hover motion",
+    "path": "docs/media/panels/marking-menu-v5.gif"
+  },
+  {
+    "title": "Actual Blender layout sizing animation",
+    "path": "docs/media/panels/layout-sizing-v1.gif"
+  },
+  {
+    "title": "Actual Blender registered UIList animation",
+    "path": "docs/media/panels/registered-lists-v1.gif"
+  },
+  {
+    "title": "Actual Blender collection list animation",
+    "path": "docs/media/panels/collection-lists-v1.gif"
+  },
+  {
+    "title": "Actual Blender panel popover animation",
+    "path": "docs/media/panels/panel-popovers-v1.gif"
+  },
+  {
+    "title": "Actual Blender registered menu animation",
+    "path": "docs/media/panels/registered-menus-v1.gif"
+  },
+  {
+    "title": "Actual Blender data-block control animation",
+    "path": "docs/media/panels/id-templates-v1.gif"
+  },
+  {
+    "title": "Actual Blender split and grid control animation",
+    "path": "docs/media/panels/layout-flow-v1.gif"
+  },
+  {
+    "title": "Actual Blender operator choice animation",
+    "path": "docs/media/panels/operator-enums-v1.gif"
+  },
+  {
+    "title": "Actual Blender BVT slider and switch animation",
+    "path": "docs/media/panels/scalar-layout-v1.gif"
+  },
+  {
+    "title": "Actual Blender liquid-glass context menu motion",
+    "path": "docs/media/panels/context-menu.gif"
+  },
+  {
+    "title": "Actual Blender inline menu field with shared liquid glass and bounce",
+    "path": "docs/media/panels/context-menu-fields-v5.gif"
+  },
+  {
+    "title": "Actual Blender menu motion with every option animated",
+    "path": "docs/media/panels/context-menu-motion-v6.gif"
+  },
+  {
+    "title": "Actual Blender numeric property motion",
+    "path": "docs/media/panels/numeric-props-v2.gif"
+  },
+  {
+    "title": "Actual Blender event property capture",
+    "path": "docs/media/panels/event-props-v1.gif"
+  },
+  {
+    "title": "Actual Blender pointer picker and decorator motion",
+    "path": "docs/media/panels/pointer-decorators-v1.gif"
+  },
+  {
+    "title": "Actual Blender collection search motion",
+    "path": "docs/media/panels/collection-search-v1.gif"
+  },
+  {
+    "title": "Actual Blender compact search popover",
+    "path": "docs/media/panels/search-popover-v1.gif"
+  },
+  {
+    "title": "Non-ID pointer selection and context menus",
+    "path": "docs/media/panels/non-id-pointers-v1.gif"
+  },
+  {
+    "title": "Corrected compact popover scale",
+    "path": "docs/media/panels/ui-scale-v1.gif"
+  },
+  {
+    "title": "Enum property menus",
+    "path": "docs/media/panels/enum-properties-v1.gif"
+  },
+  {
+    "title": "Grouped enums and flag modifiers",
+    "path": "docs/media/panels/enum-properties-v2.gif"
+  },
+  {
+    "title": "Searchable dropdowns",
+    "path": "docs/media/panels/menu-search-v1.gif"
+  },
+  {
+    "title": "Current menu spacing, search and component context motion",
+    "path": "docs/media/panels/menu-spacing-components-v1.gif"
+  },
+  {
+    "title": "Current menu actions and inset fields",
+    "path": "docs/media/panels/menu-spacing-actions-v1.gif"
+  },
+  {
+    "title": "Current BVT scalar layout and larger switches",
+    "path": "docs/media/panels/menu-spacing-scalars-v1.gif"
+  },
+  {
+    "title": "External labels, label icons and compact menu motion",
+    "path": "docs/media/panels/menu-spacing-components-v2.gif"
+  },
+  {
+    "title": "Centered confirmation actions and external field labels",
+    "path": "docs/media/panels/menu-spacing-actions-v2.gif"
+  },
+  {
+    "title": "Outlined scalar value fields and BVT switches",
+    "path": "docs/media/panels/menu-spacing-scalars-v2.gif"
+  }
+]

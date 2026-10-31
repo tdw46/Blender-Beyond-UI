@@ -1,0 +1,215 @@
+{
+  "reviewed": "2026-10-31 \u2014 user-approved checkpoint; launch-crash investigation next",
+  "remaining_turns": [
+    1,
+    1
+  ],
+  "implementation_turns": [
+    0,
+    1
+  ],
+  "integration_qa_turns": [
+    0,
+    1
+  ],
+  "active_hours": null,
+  "confidence": "Requested shared geometry and icon corrections are execution- and raster-tested; generated reference acceptance is still open.",
+  "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
+  "excludes": [
+    "user review waits",
+    "new multiline/preview/advanced-curve features",
+    "built-in feature panels",
+    "new cross-platform native adapters"
+  ],
+  "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
+  "media_gaps": [
+    "input color-space template dedicated GIF",
+    "Dedicated direct-popup integration GIF (execution/resource checks only so far)",
+    "Popup-variant/keymap integration GIF (execution/resource checks only)",
+    "Core/brush historical GIFs predate the latest shared icon-centering pass; current panel/list evidence is in forced-perspective-v2. Earlier recordings are archived rather than labeled current."
+  ],
+  "latest_progress": "Closed compact button/list sizing, row-spanning focal slider, synchronized paired-field labels, switch-label alignment and glyph centering. 292 unit tests; 177 real icon/button scale checks; 5.1/5.2 consumer captures; refreshed native panels/list GIFs and installed vendor.",
+  "estimate_review": "User approved committing the current appearance as a checkpoint, while noting it is not perfect. The remaining reference reconciliation pass is unchanged. A newly reported scene launch crash is being investigated separately; its repair estimate requires reproduction.",
+  "time_summary": "One bounded reference reconciliation/review pass remains. No reliable wall-clock estimate: generated concepts still differ from authored source controls and active theme/backdrop.",
+  "observed_pace": {
+    "source": "Tyler reported the last two implementation turns each took around one minute",
+    "sample_turns": 2,
+    "approx_minutes_per_turn": 1,
+    "independently_measured": false
+  },
+  "completed_since_previous_budget": [
+    {
+      "work": "Shortcut host actions, keyboard context and stale-owner tests",
+      "evidence": "docs/design/qa/shortcut-context-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Property context no-op suppression and component rollback",
+      "evidence": "docs/design/qa/context-transactions-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Mixed core Canvas integration walkthrough on 5.1.2/5.2.2",
+      "evidence": "docs/design/qa/core-workflow-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Actual N-panel and Properties host integration on 5.1.2/5.2.2",
+      "evidence": "docs/design/qa/core-hosts-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Exact-channel animation context availability, stale actions and subframe correctness",
+      "evidence": "docs/design/qa/context-availability-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Contributed command fixes, exact native action audit and current core visual review package",
+      "evidence": "docs/design/qa/core-review-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Keying-set/clear-channel context actions, shared menu geometry correction, search icons, light contrast and current reference comparison",
+      "evidence": "docs/design/qa/menu-spacing-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "External field labels and optional icons; centered confirmation text; inset outlines, smaller search text, taller highlights; current reference sheets and captures",
+      "evidence": "docs/design/qa/menu-spacing-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Color Picker Alpha label alignment and generated macOS comparison",
+      "evidence": "docs/design/qa/color-alpha-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Animation applicability, Replace Keyframe wording and common selected-owner routing",
+      "evidence": "docs/design/qa/context-selection-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Single/all driver copying to selected owners, full FCurve fidelity and transactional contribution routing",
+      "evidence": "docs/design/qa/driver-copy-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Owner-relative file actions, exact-ID asset transactions, visible-object/active-rig Jump and existing-editor single/all routing",
+      "evidence": "docs/design/qa/context-data-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Property override define/remove and rollback; custom scalar defaults/bindings and common menus; restored native adapter admission",
+      "evidence": "docs/design/qa/context-overrides-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Custom scalar clipboard and Favorites; typed host-owned numeric shortcuts, nested paths, dependency updates and real undo/redo",
+      "evidence": "docs/design/qa/custom-adapters-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Scalar custom-property Python menu contributions, real metadata, nested restoration, inline field owner menus and mapped defaults",
+      "evidence": "docs/design/qa/custom-contributions-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Current-styling core review and theme demos; archive separation; registered-menu constructor regression fix",
+      "evidence": "docs/design/qa/core-review-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "AddonUI panel lifecycle, vendor copier/update guards, current README media and concise integration guide",
+      "evidence": "docs/design/qa/addon-setup-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "One-line package-scoped lifecycle adoption; dynamic layout recorder; manual/factory/module-loader runtime tests and explicit native-route reporting",
+      "evidence": "docs/design/qa/single-line-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Owned dialog/menu invocation routing with original operator lifecycle, custom floating glass host, operator-property right-click applicability and native undo/check/teardown tests",
+      "evidence": "docs/design/qa/direct-popups-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Property-only/confirmation/search/callback-pie routing, exact search-owner menus and reversible keymap/menu-only adoption",
+      "evidence": "docs/design/qa/popup-variants-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Real CamKeys consumer qualification, explicit unsupported-panel/dialog fallback, operator UI undo fix and two-runtime popup/list regressions",
+      "evidence": "docs/design/qa/camkeys-consumer-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "Persistent list IDs, custom CamKeys brush popovers, safe point storage, consumer undo/redo and lifecycle",
+      "evidence": "docs/design/qa/camkeys-custom-v1/runtime.json",
+      "turns": 1
+    },
+    {
+      "work": "CamKeys visual capture: 195 frames, two GIFs, three brush popovers, themes, owner menus and final no-focus audit",
+      "evidence": "docs/design/qa/camkeys-visual-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Empty labels, compact row separators, retained curve preset icons, omitted blank titles; two-runtime regression checks, refreshed media and local next-launch setup",
+      "evidence": "docs/design/qa/camkeys-visual-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "283 unit tests; 5.1.2/5.2.2 consumer checks; real 5.2.2 idle/hover/settled/scroll captures; original Blender icons; installed test vendor refreshed.",
+      "evidence": "docs/design/qa/camkeys-visual-v3/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Compact list/status presentation, authored Boolean-action alignment, centered icon-only caret, native font queue boundary and actual redraw/OCR regressions; current screenshots and GIFs.",
+      "evidence": "docs/design/qa/camkeys-visual-v4/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Generalized responsive panel layout; original CamKeys source unchanged; current generated reference, width/scale comparisons, native focal menu and installed vendor refresh.",
+      "evidence": "docs/design/qa/forced-perspective-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Shared compact metrics, source slider auto-presentation, grid caption spanning/peer stacking, aligned switch labels, atlas/vector ink centering, native captures and installed test refresh.",
+      "evidence": "docs/design/qa/forced-perspective-v2/report.json",
+      "turns": 1
+    }
+  ],
+  "remaining_work": "Resolve the recorded generated-reference conflicts (original glyph artwork, author-supplied Lens/curve controls/separators, active theme/backdrop) and obtain visual acceptance. Runtime geometry and centering defects requested in this pass are closed.",
+  "newly_identified_work": [
+    {
+      "batch": "Requested reference fidelity",
+      "details": "MacOS styling and shared spacing implemented; backdrop/glyph and minor generated-spacing differences remain visible for review."
+    },
+    {
+      "batch": "Custom ID-property boundary audit",
+      "details": "Scalar clipboard/Favorites/shortcuts and numeric custom menu contributions are verified. Nonnumeric/array custom properties and unqualified native builds remain explicit limits."
+    },
+    {
+      "batch": "Generalized one-line migration beyond panel bodies",
+      "details": "Custom popup variants and owned-menu keymaps are implemented. Native redo, flag-enum search and auto-keymap hints are explicit fallbacks. Inactive-window top-level key dispatch failed even for native Select All, so RNA matching/test-modal invocation is verified while ordinary foreground hotkeys remain consumer QA."
+    },
+    {
+      "batch": "Real consumer blockers",
+      "details": "CamKeys PropertyGroup lists have no stable row IDs; storage pointers change logical ownership after reorder. Advanced brush curves and draw-time synchronization also prevent full custom conversion."
+    },
+    {
+      "batch": "Brush undo behavior",
+      "details": "Runtime tests exposed Brush memfile-undo exclusion from 4.3 onward. Closed for the custom CamKeys workflows with a version-gated consumer scene journal; the 4.2 native path remains."
+    },
+    {
+      "batch": "CamKeys visual presentation",
+      "details": "Closed: explicit empty labels, compact list spacing, centered preset icon glyphs and untitled popover header spacing. v2 runtime/capture evidence published locally."
+    },
+    {
+      "batch": "Scene launch crash",
+      "details": "Investigate reported launch crash in the Camera Effect Locks test scene; cause and scope not yet established."
+    }
+  ],
+  "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
+  "checkpoint": "reference reconciliation and user acceptance of the compact panel candidate"
+}

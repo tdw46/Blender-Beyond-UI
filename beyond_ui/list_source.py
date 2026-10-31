@@ -4,6 +4,11 @@ from dataclasses import dataclass, field, replace
 from fnmatch import fnmatchcase
 from .bindings import Edit, rna_binding
 from .rna_owner import guarded, identity
+from .layout import UnsupportedControl
+
+
+class UnsafeListIdentity(UnsupportedControl, ValueError):
+    """A declared compatibility boundary, never a guessed pointer identity."""
 
 
 @dataclass(frozen=True)
@@ -22,6 +27,9 @@ class CollectionSource:
         self.layout, self.prop = layout, prop
         self.resolve = guarded(layout.resolve(data) if layout.resolve else lambda: data)
         self.owner = identity(data)
+        self.owner_token = (
+            data.get("_beyond_ui_row_id", "") if hasattr(data, "get") else ""
+        )
         meta = data.bl_rna.properties.get(prop)
         active_meta = active_data.bl_rna.properties.get(active_prop)
         if meta is None or meta.type != "COLLECTION":
@@ -34,7 +42,7 @@ class CollectionSource:
             bases.add(current.identifier)
             current = current.base
         if self.key is None and "PropertyGroup" in bases:
-            raise ValueError(
+            raise UnsafeListIdentity(
                 "PropertyGroup lists require Layout(list_identity=...) with unique stable host keys"
             )
         if active_meta is None or active_meta.type != "INT" or active_meta.is_array:
@@ -54,7 +62,9 @@ class CollectionSource:
 
     def collection(self):
         owner = self.resolve()
-        if identity(owner) != self.owner:
+        if identity(owner) != self.owner or (
+            self.owner_token and owner.get("_beyond_ui_row_id", "") != self.owner_token
+        ):
             raise ReferenceError("List collection owner changed")
         return getattr(owner, self.prop)
 
@@ -73,7 +83,13 @@ class CollectionSource:
                 and bool(item.owner.as_pointer())
                 and self.item_identity(values[item.index]) == item.identity
             )
-        except (ReferenceError, RuntimeError, AttributeError, IndexError):
+        except (
+            ReferenceError,
+            RuntimeError,
+            AttributeError,
+            IndexError,
+            UnsafeListIdentity,
+        ):
             return False
 
     def item_identity(self, value):
@@ -87,6 +103,8 @@ class CollectionSource:
             raise ValueError(
                 "Collection list exceeds 100000 items; provide a bounded collection"
             )
+        if self.key is not None and hasattr(self.key, "prepare"):
+            self.key.prepare(self.resolve(), self.prop)
         items, keys = [], set()
         for index, value in enumerate(values):
             key = self.item_identity(value)

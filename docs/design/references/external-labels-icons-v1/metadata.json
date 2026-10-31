@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "tool": "image_gen.imagegen",
+  "prompt": "prompt.txt",
+  "dimensions": [
+    2111,
+    745
+  ],
+  "theme": "Reference dark blue/brown BVT glass",
+  "exact_match": false,
+  "approval": "Generated at user request; implementation comparison and human acceptance pending",
+  "supersedes": "macos-confirm-v1 label-inside arrangement",
+  "notes": [
+    "Icons are optional per label. Icon sheet adds axes/folder/eye examples.",
+    "Production uses Blender theme roles and retained glass; generated backdrop is not production artwork."
+  ],
+  "sha256": {
+    "reference.png": "c3be7c5b022292b5f62abbf76e765310a5ec4701ad7c0bf35730f4cd73a828df",
+    "prompt.txt": "b6e0f950b58a7747c4424dcc2030d7bc6bce7176153819f71d49a143c050d1e3",
+    "source-1.png": "d062bb0eced6d6a4a406f0e2e2de5e8ae11c661fed07482c3d62d124f0cf9bcc",
+    "source-2.png": "c95f6c0eb3c67fb5ccd2cfc9e13db7538a3c7a0b4df61f0cd2607ac59e237008"
+  }
+}

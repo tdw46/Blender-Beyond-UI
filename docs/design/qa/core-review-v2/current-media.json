@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Updated sliders, switches and numeric entry",
+    "path": "docs/media/panels/core-review-scalars-v2.gif",
+    "report": "docs/design/qa/core-review-v2/report.json"
+  },
+  {
+    "title": "Updated context menus, component fields and searchable enums",
+    "path": "docs/media/panels/core-review-components-v2.gif",
+    "report": "docs/design/qa/core-review-v2/report.json"
+  },
+  {
+    "title": "Updated held menus and confirmation popovers",
+    "path": "docs/media/panels/core-review-actions-v2.gif",
+    "report": "docs/design/qa/core-review-v2/report.json"
+  },
+  {
+    "title": "Updated theme support: dark and synthetic light/purple",
+    "path": "docs/media/panels/theme-support-v2.gif",
+    "report": "docs/design/qa/core-review-v2/report.json"
+  }
+]

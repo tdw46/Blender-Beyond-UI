@@ -1,0 +1,21 @@
+{
+  "admitted": true,
+  "reason": "Standing user authorization on 2026-10-30 permits no-focus launched windows whenever needed; supersedes one-time permission and prior blanket suspension. Mandatory no-focus capability checks remain. This is authorization, not focus-safety requalification.",
+  "authorization": {
+    "date": "2026-10-30",
+    "scope": "Standing permission for no-focus launched windows; no deliberate foreground activation",
+    "user_instruction": "actually, in general moving forward you may use no-focus launched windows any time you need them! update the global agents md with this insruction."
+  },
+  "prior_focus_failure": {
+    "runtime": "Blender 5.2.2 LTS / macOS",
+    "owned_test_pid": 35515,
+    "evidence": "docs/design/qa/marking-menu-v1/focus-windowed.json",
+    "user_confirmed": true
+  },
+  "restoration_authorization": {
+    "date": "2026-10-30",
+    "instruction": "you can still capture them!!! just search the web first for a way to not steal focus on mac, or to restore the old focus after a launch",
+    "scope": "Bounded restoration of prior non-owned app after owned launch; never deliberate Blender activation"
+  },
+  "preferred_macos_launcher": "NSWorkspace OpenConfiguration.activates=false plus --no-window-focus"
+}

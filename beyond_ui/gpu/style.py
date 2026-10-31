@@ -54,6 +54,8 @@ def reference_palette():
         {key: result[name] for key, name in zip(native["tokens"], names)}
     )
     result.update(skin.reference_inks())
+    result["input"] = (0.065, 0.075, 0.09, 0.74)
+    result["menu_glass"] = (0.0, 0.0, 0.0, 0.0)
     result["surfaces"] = MappingProxyType(skin.ROLES)
     result["source"] = "reference"
     result["fallback_roles"] = ()
@@ -145,6 +147,14 @@ def _theme_palette(signature, missing=()):
     ) + (0.55,)
     p["hover"] = shade(button, 0.07, 0.72)
     p["overlay"] = alpha(regular, 0.62)
+    # Inset fields have a uniform darker tint; dropdowns retain raised glass.
+    p["input"] = tuple(v * 0.46 for v in field[:3]) + (0.74,)
+    # Dark text needs a pale frosted body even over a dark scene backdrop.
+    # Derive this from theme roles, never from scene-linear colors or readback.
+    light = sum(text[:3]) < sum(regular[:3])
+    p["menu_glass"] = alpha(regular, 0.78) if light else (0.0, 0.0, 0.0, 0.0)
+    if light:
+        p["selected"] = alpha(accent, 0.78)
     p["api"] = shade(accent, 0.25, 1.0)
     # Retained layout items carry stable semantic tokens. Resolve at paint:
     # theme edits must not invalidate layout, thumbnails, geometry or blur.
@@ -213,6 +223,10 @@ def _animation_palette(colors, missing=(), reference=False):
 def icon(glyph, x, y, size, color):
     """Centered vector icons, independent of a font's bearings and baseline."""
     global _icon_shader
+    from . import icons
+
+    if icons.draw(glyph, x, y, size, color):
+        return True
     supported = {
         "⚙",
         "+",
@@ -261,8 +275,28 @@ def icon(glyph, x, y, size, color):
         "material",
         "vertices",
         "outline",
+        "✓",
+        "axes",
+        "SMOOTHCURVE",
+        "SPHERECURVE",
+        "ROOTCURVE",
+        "SHARPCURVE",
+        "LINCURVE",
+        "NOCURVE",
     }
     glyph = {
+        "FILE_FOLDER": "folder",
+        "FOLDER_REDIRECT": "folder",
+        "EMPTY_ARROWS": "axes",
+        "ORIENTATION_LOCAL": "axes",
+        "OBJECT_DATA": "object",
+        "OUTLINER_OB_MESH": "object",
+        "HIDE_OFF": "👁",
+        "VIEWZOOM": "search",
+        "CAMERA_DATA": "camera",
+        "IMAGE_DATA": "image",
+        "MATERIAL": "material",
+        "INFO": "◉",
         "LOOP_BACK": "reset",
         "MENU_PANEL": "menu",
         "KEYINGSET": "shortcut",
@@ -330,7 +364,33 @@ def icon(glyph, x, y, size, color):
                 tri(p, q, s)
                 tri(q, t, s)
 
-        if glyph == "palette":
+        if glyph in {
+            "SMOOTHCURVE",
+            "SPHERECURVE",
+            "ROOTCURVE",
+            "SHARPCURVE",
+            "LINCURVE",
+            "NOCURVE",
+        }:
+            # Built once per glyph into the same retained/theme-tinted vector batch.
+            points = []
+            for i in range(25):
+                t = i / 24
+                value = {
+                    "SMOOTHCURVE": 1 - 3 * t * t + 2 * t * t * t,
+                    "SPHERECURVE": math.sqrt(max(0, 1 - t * t)),
+                    "ROOTCURVE": math.sqrt(1 - t),
+                    "SHARPCURVE": (1 - t) ** 2,
+                    "LINCURVE": 1 - t,
+                    "NOCURVE": 1,
+                }[glyph]
+                points.append((-0.70 + 1.40 * t, -0.70 + 1.40 * value))
+            for a, b in zip(points, points[1:]):
+                line(a, b, 0.075)
+        elif glyph == "✓":
+            line((-0.65, -0.02), (-0.20, -0.43), 0.10)
+            line((-0.20, -0.43), (0.70, 0.60), 0.10)
+        elif glyph == "palette":
             points = [
                 (0.82 * math.cos(i * math.tau / 36), 0.72 * math.sin(i * math.tau / 36))
                 for i in range(32)
@@ -516,6 +576,13 @@ def icon(glyph, x, y, size, color):
                 ((0.14, 0.14), (0.14, -0.43)),
             ):
                 line(a, b, 0.055)
+        elif glyph == "axes":
+            line((-0.75, 0), (0.75, 0), 0.06)
+            line((0, -0.75), (0, 0.75), 0.06)
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                tip = (dx * 0.75, dy * 0.75)
+                line(tip, (dx * 0.45 - dy * 0.25, dy * 0.45 + dx * 0.25), 0.06)
+                line(tip, (dx * 0.45 + dy * 0.25, dy * 0.45 - dx * 0.25), 0.06)
         elif glyph == "search":
             ring(0.56, 0.44, 32)
             line((0.4, -0.4), (0.85, -0.85), 0.075)
@@ -653,11 +720,11 @@ def icon(glyph, x, y, size, color):
         else:
             line((-0.55, -0.50), (0.55, 0.60), 0.18)
             tri((-0.70, -0.70), (-0.66, -0.32), (-0.32, -0.66))
-        if glyph == "search":
-            # Center the complete silhouette, including its offset handle.
-            cx = (min(v[0] for v in verts) + max(v[0] for v in verts)) / 2
-            cy = (min(v[1] for v in verts) + max(v[1] for v in verts)) / 2
-            verts = [(vx - cx, vy - cy) for vx, vy in verts]
+        # Center the actual silhouette for every fallback glyph, independent
+        # of asymmetric hand-authored coordinates or font-style bearings.
+        cx = (min(v[0] for v in verts) + max(v[0] for v in verts)) / 2
+        cy = (min(v[1] for v in verts) + max(v[1] for v in verts)) / 2
+        verts = [(vx - cx, vy - cy) for vx, vy in verts]
         _icons[glyph] = batch_for_shader(_icon_shader, "TRIS", {"pos": verts})
     gpu.state.blend_set("ALPHA")
     with gpu.matrix.push_pop():
@@ -820,7 +887,13 @@ def hover_impulse(
 
 def switch_bounds(x, y, width, height, scale=1.0):
     """Shrink only the visible switch; keep layout and hit bounds unchanged."""
-    return x + width * 0.2, y + height * 0.2, width * 0.6, height * 0.6, scale * 0.6
+    return (
+        x + width * 0.125,
+        y + height * 0.125,
+        width * 0.75,
+        height * 0.75,
+        scale * 0.75,
+    )
 
 
 def picker_marker(
@@ -1050,3 +1123,32 @@ void main(){
     _preview_shader.uniform_float("rect", (x, y, w, h))
     _preview_shader.uniform_float("radius", radius)
     _preview_batch.draw(_preview_shader)
+
+
+def menu_status_palette(preferences, *, reference=False):
+    """Central theme roles for compound menu status; explicit capability fallback."""
+    colors = animation_palette(preferences, reference=reference)
+    missing = list(colors["fallback_roles"])
+    try:
+        if reference:
+            raise AttributeError("Reference fixture")
+        theme = preferences.themes[0]
+        state = theme.user_interface.wcol_state
+        # Newer builds expose the semantic widget error role; 4.2 uses Info's
+        # error background. Never substitute the (usually white) icon text role.
+        alert = tuple(state.error if hasattr(state, "error") else theme.info.info_error)
+        if len(alert) < 3 or not all(math.isfinite(c) for c in alert):
+            raise ValueError("Invalid theme error color")
+    except (AttributeError, IndexError, TypeError, ReferenceError, ValueError):
+        alert = (0.8, 0.15, 0.15)
+        missing.append("wcol_state.error/info.info_error")
+    return _menu_status_palette(tuple(colors.items()), tuple(alert[:3]), tuple(missing))
+
+
+@lru_cache(maxsize=8)
+def _menu_status_palette(colors, alert, missing):
+    from types import MappingProxyType
+
+    return MappingProxyType(
+        {**dict(colors), "ALERT": (*alert, 1.0), "fallback_roles": missing}
+    )

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-30",
+  "scope": "single-line popup variants and owned-menu keymaps",
+  "unit_tests": 272,
+  "visual_acceptance": false,
+  "source_hashes": {
+    "beyond_ui/invoke_routing.py": "5f56fa8539040b19a0a8fdabcf37db77c75c8baadd9923e0a556acffccb39f09",
+    "beyond_ui/invoke_keymaps.py": "36baacb3d61ac0e6016bdaf2f1dd2903a364b6afd817f957bb4e1128a743c2c9",
+    "beyond_ui/dialog.py": "4fa8ef02f2adef2cc9b22d448575c8519ce89e92631ed2e71e506478c71f1a16",
+    "beyond_ui/integration.py": "e15c9d73d7d1a2f0b81901e6cd6fc1cd36bfbf6b9e5b017f1a8a61855d863a57",
+    "beyond_ui/canvas.py": "743c48a93a92c655ecf558d0572b61663d886ce63db25811c7c7338bec93c1ab",
+    "beyond_ui/pie_menu.py": "ffeeea24615eb664fd0a0fcb13bf47b12a5de38590e791d0843a306b0d0fac9f",
+    "tests/dialog_consumer.py": "2c44ee40c511062397463a1b259ef3f7d0f16f61fe7cde7f8bb0d9b5e8725c5f",
+    "tests/blender_popup_variants.py": "0971aa3af40efcd4f1a3ed99e89d5d2b0890f98f60cf00465a91cbbe0d0297da",
+    "tests/blender_direct_popups.py": "b450f5be94b7c333e31695a56c787f0560d9666a207772d0963cf901888eb229",
+    "tests/test_invoke_routing.py": "fb70472b908931544c531ef483214fec3211560763f33fe325fec88c53e0e0f5"
+  },
+  "focus": {
+    "owned_activations": 0,
+    "restore_requests": 0
+  },
+  "limits": [
+    "Ordinary top-level key dispatch untested: inactive native Select All also did not dispatch. RNA keymap matching plus test-modal invocation verified.",
+    "Native redo, flag-enum search and automatic keymap hints are explicit fallbacks.",
+    "Exact versioned API/Manual web retrieval returned HTTP 402; local RNA and execution used.",
+    "No new visual acceptance or warm GPU performance benchmark.",
+    "CamKeys remains untouched."
+  ],
+  "api_attempts": [
+    "https://docs.blender.org/api/4.2/bpy.types.WindowManager.html",
+    "https://docs.blender.org/api/5.1/bpy.types.WindowManager.html",
+    "https://docs.blender.org/api/5.2/bpy.types.WindowManager.html"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "child_exit" : 0,
+  "events" : [
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "initial",
+      "pid" : 13701,
+      "seconds" : 0.0014020204544067383
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "final",
+      "pid" : 13701,
+      "seconds" : 16.31017804145813
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    13701
+  ],
+  "seconds" : 16.310822010040283
+}

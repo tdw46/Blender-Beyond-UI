@@ -1,0 +1,67 @@
+{
+  "child_exit" : 0,
+  "events" : [
+    {
+      "bundle" : "com.microsoft.edgemac.app.eppojlglocelodeimnohnlnionkobfln",
+      "kind" : "initial",
+      "pid" : 15124,
+      "seconds" : 0.0015031099319458008
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 23.622287034988403
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 52534,
+      "seconds" : 25.204261064529419
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 28.915442109107971
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 52598,
+      "seconds" : 31.107973098754883
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 38.606504082679749
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 52938,
+      "seconds" : 42.965580105781555
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 53.02775502204895
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "final",
+      "pid" : 13701,
+      "seconds" : 53.198918104171753
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    13701,
+    15124,
+    52534,
+    52598,
+    52938
+  ],
+  "seconds" : 53.199014067649841
+}

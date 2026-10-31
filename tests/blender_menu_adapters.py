@@ -80,6 +80,20 @@ def run():
     assert (
         variable.targets[0].id == obj and variable.targets[0].data_path == "location[1]"
     )
+    # The public guard lives outside the fingerprinted native adapter.
+    keyed = rna_binding(lambda: receiver_obj, "location", index=0).context
+    receiver_obj.keyframe_insert(data_path="location", index=0)
+    paste = next(r for r in keyed.entries(target, ctx) if r.key == "PASTE_DRIVER")
+    assert not paste.enabled(target, ctx)
+    try:
+        keyed.execute("PASTE_DRIVER", target, ctx)
+        raise AssertionError("Must reject driver paste over keyed channels")
+    except RuntimeError as error:
+        assert "keyed channels" in str(error)
+    assert receiver_obj.animation_data.drivers.find("location", index=0) is None
+    checks.append(
+        "public paste guard rejects keyed channels without changing admitted adapter"
+    )
     readonly = rna_binding(lambda: obj, "users").context
     assert native.driver_enabled("NATIVE_DRIVER", readonly, target)
     assert not native.driver_enabled("PASTE_DRIVER", readonly, target)

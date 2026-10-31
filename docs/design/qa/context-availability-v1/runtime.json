@@ -1,0 +1,114 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 8585,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "build/context-availability-v1/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 8596,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "build/context-availability-v1/blender-1.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 8674,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_transactions.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Unchanged component Reset/Copy to Selected skip host commits",
+        "Failed transactions restore only the owned component",
+        "Changed copy commits once and repeated copy is a no-op"
+      ]
+    },
+    "log": "build/context-availability-v1/transactions/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 8678,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_transactions.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Unchanged component Reset/Copy to Selected skip host commits",
+        "Failed transactions restore only the owned component",
+        "Changed copy commits once and repeated copy is a no-op"
+      ]
+    },
+    "log": "build/context-availability-v1/transactions/blender-1.log"
+  }
+]

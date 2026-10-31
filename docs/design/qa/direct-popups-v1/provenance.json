@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-30",
+  "platform": "macOS arm64",
+  "unit_tests": 269,
+  "visual_acceptance": false,
+  "gpu_resource_check": "One retained backdrop production and no glass errors per audited popup interval; not a full GPU performance benchmark",
+  "source_hashes": {
+    "beyond_ui/integration.py": "330005759673af070c14e48d26d5d2a28e57c54bdb9da0945896641125aaadd3",
+    "beyond_ui/invoke_routing.py": "7cef1e10e400aafc67b4afa581900e36d71306d6d9d42180dd5654e8c0af4790",
+    "beyond_ui/dialog.py": "c9c991b01a2b9d9ac8ea6bcf1cc8933540f0653b81edd7b50b2474951ff466e2",
+    "beyond_ui/hosts/floating.py": "c387948ddd3d6f010025347db766cd00dee8fbece1bdf50a431cdf50260743d4",
+    "beyond_ui/hosts/panel.py": "0b7bbfebd5d98ef33ff2a95708350a915aca5e88dc76aecccaa3fa1d08789ab8",
+    "beyond_ui/gpu/glass.py": "b68fc3bb363106e98e718927c3fac4742751585029b73a31c5ccf5563b3b520c",
+    "beyond_ui/layout.py": "10276525af986f5f6a0f91a20ea9a44a622fa63943c4cb8cb02b9ef48b7cfc86",
+    "beyond_ui/context_rna.py": "0e46e0b0fd72556fac370f4843261634d44eb4b89c6e1d224b3cd9a177ecabe7",
+    "beyond_ui/context_native_entries.py": "04fa7fec99c856f52f1a4f3547ba3a056957d483bf9f10a4d858d98c9a17d4ab",
+    "tests/blender_direct_popups.py": "08da9c4200ef4387b0223dd363ddf379151890e86802c122025ab40648d46bec",
+    "tests/dialog_consumer.py": "ccf7fa3a456ed45ee22ceb789e19ae2fed938fa43f4237728d1cbc00eefe28f5",
+    "tests/test_invoke_routing.py": "ce405a5494cccebdabd6a5364db775650bce9112f913858e19be6562d0767123",
+    "tools/prepare_popup_fixture.py": "e5f2ed8247e211242d57937ea76c2db2bcdc3b8acb2bc170ee00dd0f974937cf"
+  },
+  "focus": "No owned test process activation or focus-restoration requests; unrelated application events retained verbatim",
+  "limitations": [
+    "Remaining popup variants, native keymap-only and indirect helper routes",
+    "Strict RNA callback/type assumptions",
+    "Unqualified native builds and editor hosts",
+    "No new visual reference acceptance; dedicated GIF pending",
+    "CamKeys live checkout untouched; new-branch consumer test authorized for later"
+  ]
+}

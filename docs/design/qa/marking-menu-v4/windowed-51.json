@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "error": "",
+  "version": "5.1.2",
+  "checks": [
+    "Native N-panel events navigate into a nested definition and restore its parent",
+    "Exact child property right-click actions retain glass and keyboard Back",
+    "Matching release dispatches the compound child operator once and closes the chain",
+    "Global animation disable and teardown leave no host animation/tooltip callbacks",
+    "Narrow N-panel uses the explicit custom list fallback; radial pixels are covered by GPU fixtures"
+  ]
+}

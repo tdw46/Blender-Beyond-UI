@@ -21,6 +21,13 @@ def main():
         n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "Layout"
     )
     implemented = {n.name for n in cls.body if isinstance(n, ast.FunctionDef)}
+    menu_tree = ast.parse((ROOT / "beyond_ui/registered_menu.py").read_text())
+    menu_cls = next(
+        n
+        for n in menu_tree.body
+        if isinstance(n, ast.ClassDef) and n.name == "MenuLayout"
+    )
+    menu_methods = {n.name for n in menu_cls.body if isinstance(n, ast.FunctionDef)}
     allowed = {
         "unimplemented",
         "partial",
@@ -31,7 +38,12 @@ def main():
     for name, row in ledger["members"].items():
         assert row["status"] in allowed, (name, row["status"])
         if row["status"] != "unimplemented" and row["kind"] == "method":
-            assert name in implemented, name
+            # A registered draw callback has its own restricted authoring surface.
+            # Admit it explicitly rather than adding an inert Layout method stub.
+            if row.get("authoring_surfaces") == ["registered_menu.MenuLayout"]:
+                assert name in menu_methods and row["status"] == "partial", name
+            else:
+                assert name in implemented, name
         if row["status"] == "reference-matched":
             assert row.get("reference") and row.get("comparison_evidence"), name
             assert (ROOT / row["reference"]).is_file(), name

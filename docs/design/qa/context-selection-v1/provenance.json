@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-30",
+  "source_sha256": {
+    "beyond_ui/context_selected.py": "87ffdf79a54265f315a4e3440141f235de4030149366cc872a51ab731e7b7a63",
+    "beyond_ui/context_rna.py": "749431f527bdde9e11ea87136714ec851fc98052022b133f07d1666afc619269",
+    "beyond_ui/hosts/menu_native.py": "e27c5a62f0af451851b782d3cd6412c8c4499520fd52c2b20a35dcd821701165",
+    "tests/blender_context_selection.py": "fdea4754972c8e57ee1e5729972ef4aa6109b333a5571e76a1f3a8fc81510928",
+    "tests/blender_context_availability.py": "2210fda276955d554ceac99eaef65d2bfb9773ba33e8dd7dc04a62c889ae9167",
+    "tests/blender_context_menu.py": "0561168804427e7a118112b20693d14ab32b85090fd8cf57813241c9e4423f37",
+    "tests/blender_context_transactions.py": "397c79646faf1b20ab99b1cb2f1d94a79d7bc788da8f110191cf63f864ce58ea",
+    "tests/blender_keying_actions.py": "a2cace11f264de26d19c44ad8fd6b17d61a8d7f0662289abefeb9b0a7782fc64"
+  },
+  "runtime_versions": [
+    "5.1.2",
+    "5.2.2"
+  ],
+  "validation": "10 passing disposable background processes; no Blender windows launched.",
+  "visual_acceptance": false,
+  "exact_match": false,
+  "documentation": "Exact API and Manual URLs for 4.2/5.1/5.2 were requested; web tool returned 402 and direct official requests returned 403. Runtime behavior and retained exact-build native source are the evidence; no new 4.2 qualification.",
+  "resolved_fixture_failures": [
+    "Old broad fixture assumed OS clipboard works in background. It now uses a local clipboard context for headless checks.",
+    "A test-only unconditional Clear Keyframes step was removed because keyframe deletion had already removed that channel. Final context runs pass."
+  ]
+}

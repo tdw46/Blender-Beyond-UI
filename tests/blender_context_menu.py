@@ -21,7 +21,18 @@ from beyond_ui.widgets import ColorRamp, CurveMapping, Palette
 def run():
     checks = []
     commits = []
-    ctx = bpy.context
+
+    class Context:
+        # Headless Blender has no OS clipboard. Keep clipboard assertions local,
+        # while public context overrides/pointers still delegate to real Blender.
+        window_manager = SimpleNamespace(
+            clipboard="", keyconfigs=bpy.context.window_manager.keyconfigs
+        )
+
+        def __getattr__(self, name):
+            return getattr(bpy.context, name)
+
+    ctx = Context() if bpy.app.background else bpy.context
     obj = ctx.active_object
     other = bpy.data.objects.new("Menu receiver", None)
     ctx.collection.objects.link(other)
@@ -131,7 +142,7 @@ def run():
         assert context.button_pointer == obj
         self.layout.context_pointer_set("menu_fixture_marker", other)
         self.layout.menu("BEYONDUI_MT_menu_fixture")
-        self.layout.operator("ui.reset_default_button", text="Native forbidden")
+        self.layout.operator("anim.keyframe_insert_button", text="Native forbidden")
 
     bpy.types.UI_MT_button_context_menu.append(contribution)
     try:

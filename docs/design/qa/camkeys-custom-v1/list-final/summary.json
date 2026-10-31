@@ -1,0 +1,94 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 29019,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 12179,
+      "initial_frontmost_pid": 12179,
+      "new_instance": true,
+      "pid": 29019,
+      "restore_requests": 0,
+      "seconds": 2.712104082107544,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "checks": [
+        "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+        "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+        "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+        "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+        "Disabling the parent invalidates row bindings and releases retained child canvases",
+        "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+        "Deferred child menu actions recheck callback registration even without another mouse event"
+      ],
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9"
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/list-final/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 29046,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 12179,
+      "initial_frontmost_pid": 12179,
+      "new_instance": true,
+      "pid": 29046,
+      "restore_requests": 0,
+      "seconds": 2.9895089864730835,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "checks": [
+        "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+        "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+        "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+        "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+        "Disabling the parent invalidates row bindings and releases retained child canvases",
+        "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+        "Deferred child menu actions recheck callback registration even without another mouse event"
+      ],
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c"
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-custom/list-final/blender-1.log"
+  }
+]

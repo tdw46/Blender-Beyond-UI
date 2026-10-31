@@ -1,0 +1,15 @@
+{
+  "version": "color-alpha-v1",
+  "tool": "image_gen built-in",
+  "date": "2026-10-30",
+  "source": "source.png",
+  "reference": "reference.png",
+  "request": "Align Alpha left edge with RGB channel labels, preserving macOS-style glass picker.",
+  "state": "RGB, R .58 G .74 B .85 Alpha 1.00, resting",
+  "implementation": "Painter.text left alignment with 16 design-unit inset, same as Painter.field labels.",
+  "exact_match": false,
+  "limitations": [
+    "Generated raster alters resolution, backdrop and small glyph details; complete raster equivalence is not claimed.",
+    "Requested label alignment is implemented with a shared 390 design-unit text origin."
+  ]
+}

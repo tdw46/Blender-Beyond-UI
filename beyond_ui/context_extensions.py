@@ -1,7 +1,7 @@
 """On-demand adapter for public Python button-menu contributions (source BVT).
 
 A deliberately bounded collector, not a general replacement UILayout. Unsupported
-callbacks are isolated and reported; native-button-dependent actions stay absent.
+callbacks are isolated and reported; unsupported native-button actions stay disabled.
 """
 
 from types import SimpleNamespace
@@ -12,11 +12,21 @@ from .context_enums import items as enum_items, operator_items
 from .hosts.menu_context import override
 
 
-def overrides(source):
+def overrides(source, context):
     owner = source.owner() if source is not None else None
+    from .context_custom import CustomProperty
+    from .hosts.menu_context import custom_property
+
+    prop = (
+        custom_property(context, source)
+        if isinstance(source, CustomProperty)
+        else owner.bl_rna.properties[source.name]
+        if owner is not None
+        else None
+    )
     return dict(
         button_pointer=owner,
-        button_prop=owner.bl_rna.properties[source.name] if owner is not None else None,
+        button_prop=prop,
         button_operator=None,
     )
 
@@ -76,7 +86,7 @@ class Collector:
         def values():
             if any(extra[k].as_pointer() != ptr for k, ptr in identities.items()):
                 raise ReferenceError("Extension context changed")
-            return {**extra, **overrides(self.source)}
+            return {**extra, **overrides(self.source, self.context)}
 
         return values
 
@@ -86,7 +96,30 @@ class Collector:
         props = SimpleNamespace()
         snapshot = Arguments()
         self.snapshots.append((props, snapshot))
-        if idname.startswith("ui.") or idname.endswith("_button"):
+        op = operator(idname)
+        info = op.get_rna_type()
+        from .context_builtin import COMMANDS, entry
+
+        if idname in COMMANDS:
+            self._add(
+                entry(
+                    idname,
+                    info,
+                    self.source,
+                    snapshot,
+                    self._scope(),
+                    self.enabled and self.active,
+                    text,
+                    icon,
+                )
+            )
+            return props
+        import bpy
+
+        python_operator = bpy.types.Operator.bl_rna_get_subclass_py(info.identifier)
+        if python_operator is None and (
+            idname.startswith("ui.") or idname.endswith("_button")
+        ):
             self._add(
                 Entry(
                     idname,
@@ -97,8 +130,6 @@ class Collector:
                 )
             )
             return props
-        op = operator(idname)
-        info = op.get_rna_type()
         identity = info.as_pointer()
         invocation = self.operator_context
         values = self._scope()
@@ -112,6 +143,8 @@ class Collector:
                 current = operator(idname)
                 return (
                     permitted
+                    and target.valid()
+                    and target.editable()
                     and snapshot.valid()
                     and current.get_rna_type().as_pointer() == identity
                     and current.poll()
@@ -120,7 +153,7 @@ class Collector:
         def execute(target, context):
             with scope(context):
                 if poll(target, context):
-                    return operator(idname)(invocation, **snapshot.values())
+                    return operator(idname)(invocation, True, **snapshot.values())
                 raise ReferenceError("Contributed operator changed or is unavailable")
 
         self._add(
@@ -135,10 +168,40 @@ class Collector:
         )
         return props
 
+    def _property_context(self, source):
+        permitted = self.enabled and self.active
+
+        def context(target, current):
+            from .bindings import rna_binding
+            from .registered_menu import retarget
+
+            def commit(before, after):
+                if target.commit is None:
+                    raise RuntimeError("Host undo callback is required")
+                target.commit("PROPERTY")
+
+            binding = rna_binding(
+                source.resolve, source.name, index=source.index, commit=commit
+            )
+            owned = replace(
+                target,
+                binding=binding,
+                valid=lambda: target.valid() and source.valid(),
+                editable=lambda: permitted
+                and target.editable()
+                and target.commit is not None
+                and source.editable(),
+            )
+            return retarget(binding.context.entries(owned, current), owned)
+
+        return context
+
     def prop(self, data, property, *, text="", index=-1, expand=False, **kwargs):
         from .context_fields import property_row
 
-        if expand and data.bl_rna.properties[property].type == "ENUM":
+        from .context_custom import metadata
+
+        if expand and metadata(data, property).type == "ENUM":
             return self.props_enum(data, property)
         self._add(
             property_row(
@@ -147,6 +210,7 @@ class Collector:
                 text=text,
                 index=index,
                 permitted=self.enabled and self.active,
+                context_factory=self._property_context,
             )
         )
 
@@ -172,6 +236,7 @@ class Collector:
                 text=text or (item.name if item else value),
                 value=value,
                 permitted=self.enabled and self.active,
+                context_factory=self._property_context,
             )
         )
 
@@ -217,6 +282,8 @@ class Collector:
             with override(context, values()):
                 return (
                     permitted
+                    and target.valid()
+                    and target.editable()
                     and snapshot.valid()
                     and current.get_rna_type().as_pointer() == identity
                     and current.poll()
@@ -306,7 +373,7 @@ def collect(context, source, callbacks, depth=0, extra=None):
     from .context_rna import decorate
 
     rows = []
-    with override(context, {**(extra or {}), **overrides(source)}):
+    with override(context, {**(extra or {}), **overrides(source, context)}):
         for callback in callbacks:
             pending = []
             try:
@@ -337,11 +404,19 @@ def entries(context, source):
 
     cls = getattr(bpy.types, "UI_MT_button_context_menu", None)
     callbacks = getattr(getattr(cls, "draw", None), "_draw_funcs", ())
-    return (
-        collect(context, source, callbacks)
-        if callbacks and hasattr(context, "temp_override")
-        else ()
-    )
+    if not callbacks or not hasattr(context, "temp_override"):
+        return ()
+    try:
+        return collect(context, source, callbacks)
+    except (AttributeError, OSError, RuntimeError, ValueError) as error:
+        return [
+            Entry(
+                "EXTENSIONS_UNAVAILABLE",
+                "Extension menu unavailable",
+                enabled=False,
+                tip=str(error),
+            ),
+        ]
 
 
 def operator_entries(

@@ -1,0 +1,362 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "batch": "complete-final",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63593,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/complete-final/blender-0.log"
+    },
+    {
+      "batch": "complete-final",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63596,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_overrides.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "single removal splits generic override and restores only linked component",
+          "rejected removal restores rule and clicked value, preserving sibling edit",
+          "no undo, system overrides, changed and non-reproducible rules fail closed",
+          "contributed native override commands use captured component without active native button",
+          "custom scalar override restores actual linked ID property",
+          "integer/float defaults, reset, cancel, escaped paths, keys, drivers and keying sets",
+          "custom values/drivers copy to matching selected keys and skip mismatched types",
+          "nested node ID-property path and keying use owning node tree",
+          "default rollback preserves value and unrelated metadata; RNA defaults never mutated",
+          "Layout.prop custom numeric controls/decorators share renderer; stale key/type invalidates"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/complete-final/blender-1.log"
+    },
+    {
+      "batch": "selection",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63065,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_selection.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Replace wording follows current subframe, insertion remains available elsewhere",
+          "Animated channels reject Add/Paste Driver; driven channels reject key insertion",
+          "Open menus and direct actions revalidate conflicts; sibling component stays independent",
+          "Selected object data is type checked and shared datablocks deduplicated",
+          "Selected nodes, pose bones and data bones resolve exact owners",
+          "Selection changes, no-op suppression and rejected component commits are respected"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/selection/blender-0.log"
+    },
+    {
+      "batch": "selection",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63073,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_selection.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Replace wording follows current subframe, insertion remains available elsewhere",
+          "Animated channels reject Add/Paste Driver; driven channels reject key insertion",
+          "Open menus and direct actions revalidate conflicts; sibling component stays independent",
+          "Selected object data is type checked and shared datablocks deduplicated",
+          "Selected nodes, pose bones and data bones resolve exact owners",
+          "Selection changes, no-op suppression and rejected component commits are respected"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/selection/blender-1.log"
+    },
+    {
+      "batch": "drivers",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63094,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_driver_copy_selected.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Single/all copies retain complete drivers and original variable target IDs",
+          "New driver dependencies evaluate and react to input changes",
+          "Existing drivers are replaced; keyed destinations and sibling channels survive",
+          "Rejected host commit restores drivers/modifiers and removes new empty AnimData",
+          "Unrelated host edits survive rollback; temporary staging is always removed",
+          "Missing undo, empty selection and stale source channels fail closed",
+          "Same-ID nested node paths copy without replacing the source channel"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/drivers/blender-0.log"
+    },
+    {
+      "batch": "drivers",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63109,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_driver_copy_selected.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Single/all copies retain complete drivers and original variable target IDs",
+          "New driver dependencies evaluate and react to input changes",
+          "Existing drivers are replaced; keyed destinations and sibling channels survive",
+          "Rejected host commit restores drivers/modifiers and removes new empty AnimData",
+          "Unrelated host edits survive rollback; temporary staging is always removed",
+          "Missing undo, empty selection and stale source channels fail closed",
+          "Same-ID nested node paths copy without replacing the source channel"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/drivers/blender-1.log"
+    },
+    {
+      "batch": "contributions",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63608,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Contributed Reset/Copy Selected respect component and all-array arguments",
+          "Contributed driver copying honors single/all channels and requires host undo",
+          "Data/full paths use exact clicked owner and isolated clipboard",
+          "Python operators ending in _button execute and revoke after unregister",
+          "Unknown arguments, native-only actions and inherited disabled states fail closed",
+          "Locked controls retain readable paths; rejected reset rolls back",
+          "Deleted property owners revoke pending contributed actions"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/contributions/blender-0.log"
+    },
+    {
+      "batch": "contributions",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63609,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_contributions.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Contributed Reset/Copy Selected respect component and all-array arguments",
+          "Contributed driver copying honors single/all channels and requires host undo",
+          "Data/full paths use exact clicked owner and isolated clipboard",
+          "Python operators ending in _button execute and revoke after unregister",
+          "Unknown arguments, native-only actions and inherited disabled states fail closed",
+          "Locked controls retain readable paths; rejected reset rolls back",
+          "Deleted property owners revoke pending contributed actions"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/contributions/blender-1.log"
+    },
+    {
+      "batch": "native-verified",
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63278,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 63278,
+        "restore_requests": 0,
+        "seconds": 2.8006370067596436,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9",
+        "checks": [
+          "real native driver clipboard preserves expression and replaces exact component",
+          "host undo failure restores complete previous driver and removes staging ID",
+          "public paste guard rejects keyed channels without changing admitted adapter",
+          "new-driver clipboard uses exact ID/path; readonly input and unsupported whole-array guards",
+          "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected",
+          "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released",
+          "custom glass capture: assign/change/remove real keymap, cancel, modifier-only input, conflicts, stale-item rejection and exact properties",
+          "explicit authoring source opens correct file/line; Python tooltip preference honored"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/native-verified/blender-0.log"
+    },
+    {
+      "batch": "native-verified",
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63298,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_menu_adapters.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 63298,
+        "restore_requests": 0,
+        "seconds": 3.066920042037964,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c",
+        "checks": [
+          "real native driver clipboard preserves expression and replaces exact component",
+          "host undo failure restores complete previous driver and removes staging ID",
+          "public paste guard rejects keyed channels without changing admitted adapter",
+          "new-driver clipboard uses exact ID/path; readonly input and unsupported whole-array guards",
+          "real property favorites add/remove exact component; query leaves preferences clean; unrelated owner rejected",
+          "real operator favorites add/query/remove typed arguments; repeated removal safe; temporary configuration released",
+          "custom glass capture: assign/change/remove real keymap, cancel, modifier-only input, conflicts, stale-item rejection and exact properties",
+          "explicit authoring source opens correct file/line; Python tooltip preference honored"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/context-overrides-v1/native-verified/blender-1.log"
+    }
+  ],
+  "visual_acceptance": false
+}

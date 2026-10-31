@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30",
+  "source_sha256": {
+    "beyond_ui/context_drivers.py": "d4dbed8ba77ae0b90f45af56ca06aba875dc9ac0922b314a5b33199eb846239f",
+    "beyond_ui/context_rna.py": "8ebb535c270a6b9f9ee00bd94c5e94fc17a2479c3cb5727c8acea935e81418d6",
+    "beyond_ui/context_builtin.py": "140f04345f21caa41a62f77eb5a41ff81fb72b39b2ffe3baed8cbc683d465b17",
+    "beyond_ui/context_selected.py": "87ffdf79a54265f315a4e3440141f235de4030149366cc872a51ab731e7b7a63",
+    "tests/blender_driver_copy_selected.py": "d15ce93954a6b5b32054926e1562796a456f2d458da62e38d225fcf3792533a2",
+    "tests/blender_context_contributions.py": "0d82267d8d02fd8da2f5afcdaee2c81c8193e3b2f4c460fa9c255f73b7b9fde6",
+    "tests/blender_context_selection.py": "fdea4754972c8e57ee1e5729972ef4aa6109b333a5571e76a1f3a8fc81510928"
+  },
+  "source_audit": {
+    "interface_ops.cc": "be4b180952ece759dd01dbff34d9cc50ca4c931ff4756f8fca65e072050943db",
+    "rna_animation_api.cc": "7a2c65afc9df176245a8d775d5cb1c8c5885a7da1683bbc8b790435e91040445",
+    "rna_animation.cc": "67c90be2e1ba5ce67d1ed805d5506df3dcdfd6a515364eadf9422deded448fb1",
+    "drivers.cc": "ef3e2c8f06f6d72483f5dd4f99ffa6720de9e9d710cfdf54cd406516f3c0146f"
+  },
+  "native_source": "https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/editors/interface/interface_ops.cc#L1720",
+  "public_copy_source": "https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/makesrna/intern/rna_animation.cc#L938",
+  "compatibility": "Public from_existing/new/remove capability gate; missing capability disables only this action. Blender 4.2 remains declared but is not runtime-qualified in this pass. Exact-version API/Manual requests returned web-tool 402; native source and installed 5.1.2/5.2.2 are the verified evidence.",
+  "visual_acceptance": false,
+  "initial_fixture_failure": "The first fixture attempted to mutate frozen Target.commit; changed to dataclasses.replace. Final runs pass.",
+  "headless": true
+}

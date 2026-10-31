@@ -1,0 +1,5 @@
+Auto_load: registering 130 classes. PropertyGroups order: ['CamKeysDollyBinding', 'CamKeysDollyOwnedValue', 'CamKeysDollyVrmBinding', 'CamKeysDollyExpression', 'CamKeysLensStop', 'CamKeysLensCompensation', 'DistanceStop', 'CamKeysAddonProperties', 'AngleItem', 'CamKeysAutoAddEntry', 'CamPropVectorStop', 'CamPropTargetValue', 'CamPropItem', 'CamKeysOtherObject', 'CamKeysLatticeTargetState', 'CamKeysEffectLock', 'CamKeysBillboardGroup', 'CamKeysSteppedTurnaround', 'MeshObjectItem']
+Info: Captured angle for Focal Length
+Info: Added Focal Length to CamProps
+Auto_load: registering 130 classes. PropertyGroups order: ['CamKeysDollyBinding', 'CamKeysDollyOwnedValue', 'CamKeysDollyVrmBinding', 'CamKeysDollyExpression', 'CamKeysLensStop', 'CamKeysLensCompensation', 'DistanceStop', 'CamKeysAddonProperties', 'AngleItem', 'CamKeysAutoAddEntry', 'CamPropVectorStop', 'CamPropTargetValue', 'CamPropItem', 'CamKeysOtherObject', 'CamKeysLatticeTargetState', 'CamKeysEffectLock', 'CamKeysBillboardGroup', 'CamKeysSteppedTurnaround', 'MeshObjectItem']
+Info: Saved copy as "identity-roundtrip.blend"

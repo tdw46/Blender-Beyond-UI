@@ -1,0 +1,355 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 3313,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 3313,
+      "restore_requests": 0,
+      "seconds": 12.35050904750824,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+        "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+        "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+        "Original callbacks restored and lifecycle unregister completes"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "execute",
+          7,
+          true
+        ],
+        [
+          "cancel",
+          7
+        ],
+        [
+          "menu"
+        ],
+        [
+          "cancel",
+          7
+        ]
+      ],
+      "error": null
+    },
+    "log": "direct-popups-0.log",
+    "suite": "direct-popups"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 3407,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 3407,
+      "restore_requests": 0,
+      "seconds": 12.135488033294678,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+        "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+        "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+        "Original callbacks restored and lifecycle unregister completes"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "execute",
+          7,
+          true
+        ],
+        [
+          "cancel",
+          7
+        ],
+        [
+          "menu"
+        ],
+        [
+          "cancel",
+          7
+        ]
+      ],
+      "error": null
+    },
+    "log": "direct-popups-1.log",
+    "suite": "direct-popups"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 424,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_single_line.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [
+        {
+          "bundle": "org.blenderfoundation.blender",
+          "kind": "activation",
+          "pid": 97825,
+          "seconds": 7.158453941345215
+        },
+        {
+          "bundle": "com.apple.finder",
+          "kind": "activation",
+          "pid": 52875,
+          "seconds": 10.514462947845459
+        }
+      ],
+      "final_frontmost_pid": 52875,
+      "initial_frontmost_pid": 52875,
+      "new_instance": true,
+      "pid": 424,
+      "restore_requests": 0,
+      "seconds": 10.875890016555786,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Manual aliases and factory registration retain original classes; unchanged draw retains canvas; conditional rows rebuild automatically",
+        "Exact-owner right click, restoration of original draw, isolated teardown and re-registration pass",
+        "Delegating module loader receives custom content; unsupported mode revokes stale input and recovers; direct native dialog routes are reported"
+      ],
+      "performance": {
+        "record_and_signature_ms": {
+          "median": 0.012999458704143763,
+          "p95": 0.017291982658207417
+        },
+        "rebuild_layout_ms": {
+          "median": 0.046645523980259895,
+          "p95": 0.20091701298952103
+        },
+        "samples": 90,
+        "warmup": 10,
+        "controls": 3,
+        "ui_scale": 2.0,
+        "scope": "CPU authoring only; not GPU frame timing or BVT equivalence"
+      },
+      "error": null
+    },
+    "log": "panel-regression-0.log",
+    "suite": "panel-regression"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 504,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_single_line.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 52875,
+      "initial_frontmost_pid": 52875,
+      "new_instance": true,
+      "pid": 504,
+      "restore_requests": 0,
+      "seconds": 10.197919964790344,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Manual aliases and factory registration retain original classes; unchanged draw retains canvas; conditional rows rebuild automatically",
+        "Exact-owner right click, restoration of original draw, isolated teardown and re-registration pass",
+        "Delegating module loader receives custom content; unsupported mode revokes stale input and recovers; direct native dialog routes are reported"
+      ],
+      "performance": {
+        "record_and_signature_ms": {
+          "median": 0.013124546967446804,
+          "p95": 0.02575002145022154
+        },
+        "rebuild_layout_ms": {
+          "median": 0.04781247116625309,
+          "p95": 0.21729199215769768
+        },
+        "samples": 90,
+        "warmup": 10,
+        "controls": 3,
+        "ui_scale": 2.0,
+        "scope": "CPU authoring only; not GPU frame timing or BVT equivalence"
+      },
+      "error": null
+    },
+    "log": "panel-regression-1.log",
+    "suite": "panel-regression"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 928,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "context-regression-0.log",
+    "suite": "context-regression"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 937,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_context_availability.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "checks": [
+        "Empty/sibling channels disable destructive animation actions",
+        "Whole-array menus include applicable sibling channels",
+        "Insert/delete use exact subframe; other frames stay disabled",
+        "Open menus revalidate removed channels and skip host commits",
+        "Direct stale removal is a no-op; sibling animation survives",
+        "Missing host undo and locked controls disable animation actions"
+      ]
+    },
+    "log": "context-regression-1.log",
+    "suite": "context-regression"
+  }
+]

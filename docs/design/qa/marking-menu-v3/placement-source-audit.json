@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30",
+  "official_api_manual_fetch": "Exact 4.2/5.1/5.2 pages requested; unavailable, not counted as documentation validation.",
+  "sources": [
+    {
+      "revision": "v4.2.0",
+      "sha256": "4da24523602f9a7c0d999d4c580acda5faecc64686867db63da40755655f91cf",
+      "url": "https://github.com/blender/blender/blob/v4.2.0/source/blender/editors/interface/interface_layout.cc",
+      "finding": "Native uses unit-circle directions and size-dependent edge offsets; custom collision-aware centered circles do not claim exact native placement."
+    },
+    {
+      "revision": "ec6e62d40fa9",
+      "sha256": "fcfbafcc58c90c407e3e2b93c414a6e02f470dea39b41c03fe99879b5fa082b7",
+      "url": "https://github.com/blender/blender/blob/ec6e62d40fa9/source/blender/editors/interface/interface_layout.cc",
+      "finding": "Native uses unit-circle directions and size-dependent edge offsets; custom collision-aware centered circles do not claim exact native placement."
+    },
+    {
+      "revision": "d13f752e3b9c",
+      "sha256": "da71c05f91c604220d9f96d6283be93ea96bfa2abad683fca288c0d68dafed7b",
+      "url": "https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/editors/interface/interface_layout.cc",
+      "finding": "Native uses unit-circle directions and size-dependent edge offsets; custom collision-aware centered circles do not claim exact native placement."
+    }
+  ]
+}

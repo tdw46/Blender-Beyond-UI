@@ -1,0 +1,17 @@
+{
+  "path": "docs/media/panels/camkeys-lists-v1.gif",
+  "captured_frames": 90,
+  "encoded_frames": 36,
+  "duration_ms": 3000,
+  "crop": [
+    0,
+    0,
+    1280,
+    600
+  ],
+  "playback_dimensions": [
+    640,
+    300
+  ],
+  "sha256": "f588af5ed0287a23f769c98029e10e1685fc788ede6858dbd12138990e0b0dfa"
+}

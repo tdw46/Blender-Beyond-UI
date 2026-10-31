@@ -18,6 +18,7 @@ class UnsupportedControl(NotImplementedError):
 
 
 class Layout:
+    is_custom = True
     """Build a custom Canvas with Blender-like layout/prop/operator calls.
 
     Pass context explicitly. resolve(data) can provide a stable-ID re-resolution
@@ -171,8 +172,29 @@ class Layout:
                 pass  # Pure-Python hosts retain the oldest supported convention.
         return "VERTICAL"
 
+    @property
+    def emboss(self):
+        return self._emboss
+
+    @emboss.setter
+    def emboss(self, value):
+        if value not in {
+            "NORMAL",
+            "NONE",
+            "NONE_OR_STATUS",
+            "PULLDOWN_MENU",
+            "PIE_MENU",
+        }:
+            raise ValueError("Unknown emboss style")
+        self._emboss = value
+
     def _options(self):
-        return {"activate_init": bool(self.activate_init)} if self.activate_init else {}
+        return dict(
+            alert=bool(self.alert),
+            emboss=self.emboss,
+            activate_init=bool(self.activate_init),
+            text_alignment=self.alignment,
+        )
 
     def _child(self, group):
         child = Layout(
@@ -278,6 +300,8 @@ class Layout:
     def label(
         self, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
     ):
+        if icon_value and self.canvas.icon_renderer is None:
+            raise UnsupportedControl("Custom icon_value requires Canvas.icon_renderer")
         return self.group.label(
             self._key("label"),
             self._text(text, text_ctxt, translate),
@@ -287,15 +311,38 @@ class Layout:
             **self._options(),
         )
 
-    def title(self, *, text="", text_ctxt="", translate=True):
+    def title(
+        self, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
+    ):
+        if icon_value and self.canvas.icon_renderer is None:
+            raise UnsupportedControl("Custom icon_value requires Canvas.icon_renderer")
         return self.group.title(
             self._key("title"),
             self._text(text, text_ctxt, translate),
+            icon=icon,
+            icon_value=icon_value,
             **self._options(),
         )
 
     def separator(self, *, factor=1.0, type="AUTO"):
-        return self.group.separator(self._key("separator"), height=8 * factor)
+        from math import isfinite
+
+        factor = float(factor)
+        if (
+            type not in {"AUTO", "SPACE", "LINE"}
+            or not isfinite(factor)
+            or not 0 <= factor <= 4096
+        ):
+            raise ValueError("Invalid separator type or factor")
+        horizontal = self.group.kind in {"row", "split"}
+        options = dict(
+            height=self.canvas.theme.row_height if horizontal else 8 * factor,
+            space=type == "SPACE" or (type == "AUTO" and horizontal),
+            vertical=horizontal,
+        )
+        if horizontal:
+            options["width"] = 8 * factor
+        return self.group.separator(self._key("separator"), **options)
 
     def _binding(self, data, property, index=None):
         resolver = self.resolve(data) if self.resolve else lambda: data
@@ -308,13 +355,13 @@ class Layout:
         data,
         property,
         *,
-        text="",
+        text=None,
         text_ctxt="",
         translate=True,
         icon="NONE",
         placeholder="",
         expand=False,
-        slider=False,
+        slider=None,
         toggle=-1,
         icon_only=False,
         event=False,
@@ -331,7 +378,9 @@ class Layout:
 
         if isinstance(data, ListProxy):
             return data.property(self, property, arguments)
-        meta = data.bl_rna.properties[property]
+        from .context_custom import metadata
+
+        meta = metadata(data, property)
         if (
             self.use_property_split
             and self.use_property_decorate
@@ -348,7 +397,13 @@ class Layout:
             if getattr(meta, "unit", "NONE") in {"AREA", "VOLUME"}
             else meta.subtype
         )
-        label = self._text(text or meta.name, text_ctxt, translate)
+        label = self._text(meta.name if text is None else text, text_ctxt, translate)
+        options = self._options()
+        options.update(icon=icon, icon_value=icon_value)
+        if icon_value and self.canvas.icon_renderer is None:
+            raise UnsupportedControl("Custom icon_value requires Canvas.icon_renderer")
+        if not emboss:
+            options["emboss"] = "NONE_OR_STATUS"
         if event or full_event:
             from .event_field import EventField
 
@@ -363,7 +418,7 @@ class Layout:
                 label,
                 binding=binding,
                 event_field=field,
-                **self._options(),
+                **options,
             )
         if (
             getattr(meta, "is_array", False)
@@ -374,13 +429,30 @@ class Layout:
             row.activate_init = self.activate_init
             for i in range(meta.array_length):
                 row.prop(
-                    data, property, text=f"{label} {i + 1}", index=i, slider=slider
+                    data,
+                    property,
+                    text=f"{label} {i + 1}",
+                    index=i,
+                    slider=slider,
+                    emboss=emboss,
+                    icon=icon,
+                    icon_value=icon_value,
                 )
             return None
         binding = self._binding(data, property, index if index >= 0 else None)
         key = self._key(property)
-        options = self._options()
+        if meta.is_animatable and hasattr(
+            getattr(data, "id_data", None), "animation_data"
+        ):
+            from .decorator import Decorator
+
+            model = Decorator(binding, self.context)
+            options.update(status_model=model, status=model.state())
         if meta.type == "BOOLEAN":
+            # Unembossed labeled disclosures are Boolean-backed actions.
+            # Ordinary/explicit toggles retain the shared full-size switch.
+            if not emboss:
+                options["bool_button"] = True
             if invert_checkbox:
                 original = binding
                 binding = Binding(
@@ -390,6 +462,13 @@ class Layout:
                     lambda a, b: original.commit(not a, not b),
                     original.context,
                 )
+            if (
+                not label
+                and icon in {"", "NONE"}
+                and not icon_value
+                and self.group.kind == "row"
+            ):
+                options["width"] = 52
             return self.group.toggle(key, label, binding, **options)
         if meta.type in {"INT", "FLOAT"}:
             if subtype in {"COLOR", "COLOR_GAMMA"} and index < 0:
@@ -408,7 +487,8 @@ class Layout:
                 hard_max=meta.hard_max,
                 integer=meta.type == "INT",
                 numeric=Numeric(meta, self.context),
-                slider=slider,
+                slider=bool(slider),
+                slider_auto=slider is None,
                 **options,
             )
         if meta.type == "STRING":
@@ -417,9 +497,9 @@ class Layout:
             )
         if meta.type == "ENUM":
             if getattr(meta, "is_enum_flag", False):
-                return self._expanded_enum(data, property)
+                return self._expanded_enum(data, property, options=options)
             if expand:
-                return self._expanded_enum(data, property)
+                return self._expanded_enum(data, property, options=options)
             return self._enum_control(data, property, label, binding, key, options)
         if meta.type == "POINTER":
             from .pointer import PointerField
@@ -590,7 +670,9 @@ class Layout:
         binding = None
         model = None
         if data is not None and property:
-            meta = data.bl_rna.properties[property]
+            from .context_custom import metadata
+
+            meta = metadata(data, property)
             if index < -1 or (
                 index >= 0 and (not meta.is_array or index >= meta.array_length)
             ):
@@ -715,6 +797,7 @@ class Layout:
         text_ctxt="",
         translate=True,
         modifier_select=False,
+        options=None,
     ):
         source = self._binding(data, property)
         source.context.enum_value = item.identifier
@@ -742,9 +825,10 @@ class Layout:
             self._text(text or item.name, text_ctxt, translate),
             action,
             selected=selected,
+            menu_option=True,
             action_event=action,
             binding=source,
-            **self._options(),
+            **(self._options() if options is None else options),
         )
 
     def prop_enum(
@@ -766,13 +850,18 @@ class Layout:
             data, property, item, text=text, text_ctxt=text_ctxt, translate=translate
         )
 
-    def _expanded_enum(self, data, property):
+    def _expanded_enum(self, data, property, *, options=None):
         field = self._enum_field(self._binding(data, property))
         row = self.row()
         for item in field.snapshot():
             if item.identifier != "":
                 row._enum_button(
-                    data, property, item, translate=False, modifier_select=True
+                    data,
+                    property,
+                    item,
+                    translate=False,
+                    modifier_select=True,
+                    options=options,
                 )
             elif item.name:
                 row.title(text=item.name, translate=False)
@@ -825,7 +914,7 @@ class Layout:
         self,
         operator,
         *,
-        text="",
+        text=None,
         text_ctxt="",
         translate=True,
         icon="NONE",
@@ -839,7 +928,9 @@ class Layout:
         category, name = operator.split(".", 1)
         function = getattr(getattr(bpy.ops, category), name)
         properties = SimpleNamespace()
-        label = self._text(text or function.get_rna_type().name, text_ctxt, translate)
+        label = self._text(
+            function.get_rna_type().name if text is None else text, text_ctxt, translate
+        )
         context = self.context
         invocation = self.operator_context
         pointers = {**self._context_pointers, **self._context_strings}
@@ -854,11 +945,30 @@ class Layout:
             # are synthesized against a native widget the user did not click.
             with override(context, pointers):
                 if function.poll():
-                    return function(invocation, **vars(properties))
+                    return function(invocation, True, **vars(properties))
             return {"CANCELLED"}
 
         from .context_extensions import operator_entries
 
+        def context_rows(target, ctx):
+            from itertools import chain
+
+            current = ctx or context
+            provider = self.canvas.context_provider
+            return chain(
+                operator_entries(
+                    operator,
+                    vars(properties),
+                    current,
+                    invocation=invocation,
+                    pointers=pointers,
+                ),
+                provider(target, current) if provider else (),
+            )
+
+        options = self._options()
+        if not emboss:
+            options["emboss"] = "NONE_OR_STATUS"
         self.group.button(
             self._key(operator),
             label,
@@ -867,16 +977,122 @@ class Layout:
             active_default=bool(self.active_default),
             operator_button=True,
             icon=icon,
-            context_menu=lambda target, ctx: operator_entries(
-                operator,
-                vars(properties),
-                ctx or context,
-                invocation=invocation,
-                pointers=pointers,
-            ),
-            **self._options(),
+            context_menu=lambda target, ctx: context_rows(target, ctx),
+            **options,
         )
         return properties
+
+    def operator_menu_hold(
+        self,
+        operator,
+        *,
+        text=None,
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        emboss=True,
+        depress=False,
+        icon_value=0,
+        menu,
+    ):
+        from .registered_menu import RegisteredMenu
+        from .context_menu import Entry
+
+        model = RegisteredMenu(self, menu)
+        props = self.operator(
+            operator,
+            text=text,
+            text_ctxt=text_ctxt,
+            translate=translate,
+            icon=icon,
+            emboss=emboss,
+            depress=depress,
+            icon_value=icon_value,
+        )
+        control = self.group.children[-1]
+        original_context = control.options["context_menu"]
+        control.options.update(
+            hold_menu=model,
+            context_menu=lambda target, ctx: (
+                Entry(
+                    "HOLD_MENU",
+                    "Open " + model.label,
+                    children=lambda t, c: model.rows(c)[0],
+                    enabled=lambda t, c: model.available(c),
+                ),
+                *original_context(target, ctx),
+            ),
+        )
+        return props
+
+    def template_popup_confirm(
+        self,
+        operator,
+        *,
+        text=None,
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        cancel_text="",
+        cancel_default=False,
+    ):
+        if not self.is_popover:
+            raise ValueError("template_popup_confirm requires an owned custom popup")
+        row = self.row()
+        row.alignment = "RIGHT"
+
+        def close():
+            callback = getattr(self.canvas, "_popup_close", None)
+            if callback is None:
+                raise RuntimeError("Popup host did not install its close callback")
+            callback()
+            return {"FINISHED"}
+
+        if cancel_text:
+            from .context_menu import Entry
+
+            row.group.button(
+                self._key("cancel"),
+                self._text(cancel_text, text_ctxt, translate),
+                close,
+                release_action=True,
+                context_menu=lambda target, ctx: (
+                    Entry(
+                        "CANCEL_POPUP",
+                        self._text(cancel_text, text_ctxt, translate),
+                        lambda t, c: close(),
+                        enabled=lambda t, c: t.valid(),
+                    ),
+                    *(
+                        self.canvas.context_provider(target, ctx)
+                        if self.canvas.context_provider
+                        else ()
+                    ),
+                ),
+                active_default=bool(cancel_default),
+                operator_button=True,
+                **self._options(),
+            )
+        if not operator:
+            return None
+        row.active_default = not cancel_default
+        props = row.operator(
+            operator, text=text, text_ctxt=text_ctxt, translate=translate, icon=icon
+        )
+        control = row.group.children[-1]
+        action = control.action
+
+        def confirm():
+            result = action()
+            if isinstance(result, set) and result.intersection(
+                {"FINISHED", "RUNNING_MODAL"}
+            ):
+                close()
+            return result
+
+        control.action = confirm
+        control.options["release_action"] = True
+        return props
 
     def _operator_enum(self, operator, property):
         from .operator_enum import OperatorEnum
@@ -972,7 +1188,7 @@ class Layout:
         self,
         panel,
         *,
-        text="",
+        text=None,
         text_ctxt="",
         translate=True,
         icon="NONE",
@@ -1034,8 +1250,25 @@ class Layout:
             )
         model.attach(control)
 
+    def menu_pie(self):
+        """Author an unregistered custom pie; call its open(anchor=..., clip=...).
+
+        The consuming host owns invocation coordinates and event routing. No RNA
+        class, keymap, timer or drawing handler is installed by this method.
+        """
+        from .standalone_pie import StandalonePie
+
+        return StandalonePie(self)
+
     def menu(
-        self, menu, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
+        self,
+        menu,
+        *,
+        text=None,
+        text_ctxt="",
+        translate=True,
+        icon="NONE",
+        icon_value=0,
     ):
         if icon_value:
             raise UnsupportedControl("menu preview icon")
@@ -1044,7 +1277,7 @@ class Layout:
         model = RegisteredMenu(self, menu)
         self.group.button(
             self._key("menu"),
-            self._text(text or model.label, text_ctxt, translate),
+            self._text(model.label if text is None else text, text_ctxt, translate),
             None,
             menu_model=model,
             context_menu=model.context_rows,
@@ -1133,12 +1366,6 @@ class Layout:
         return header, self.column() if getattr(data, property) else None
 
     def supports(self, name):
-        # Accepted legacy attributes without custom behavior are not capabilities.
-        if name in {
-            "alert",
-            "emboss",
-        }:
-            return False
         return (
             isinstance(getattr(type(self), name, None), property)
             or callable(getattr(type(self), name, None))
@@ -1197,7 +1424,7 @@ class Layout:
         from .widgets import CurveMapping
         from .widgets.rna import curve_mapping
 
-        if any((levels, brush, use_negative_slope, show_tone, show_presets)):
+        if any((levels, use_negative_slope, show_tone, show_presets)):
             raise UnsupportedControl("template_curve_mapping advanced modes")
         channel = [0]
         binding, mapping, curve = curve_mapping(data, property, self.commit, channel)
@@ -1205,15 +1432,29 @@ class Layout:
             lambda: channel[0],
             lambda value: channel.__setitem__(0, min(value, len(mapping.curves) - 1)),
         )
-        return self.group.widget(
+        control = self.group.widget(
             self._key("curve_mapping"),
             CurveMapping(
                 binding,
                 evaluate=lambda x: mapping.evaluate(curve(), x),
-                channel=channel_binding,
+                channel=None if brush else channel_binding,
+                brush=brush,
             ),
             **self._options(),
         )
+
+        if brush:
+            tools = self.row()
+
+            def commit_mapping(before, after):
+                mapping.update()
+                self.commit(before, after)
+
+            tools.commit = commit_mapping
+            for name in ("use_clip", "extend"):
+                if name in mapping.bl_rna.properties:
+                    tools.prop(mapping, name)
+        return control
 
     def prop_search(
         self,
@@ -1222,7 +1463,7 @@ class Layout:
         search_data,
         search_property,
         *,
-        text="",
+        text=None,
         text_ctxt="",
         translate=True,
         icon="NONE",
@@ -1250,7 +1491,9 @@ class Layout:
                 search_property,
                 policy=policy,
                 label=self._text(
-                    text or data.bl_rna.properties[property].name, text_ctxt, translate
+                    data.bl_rna.properties[property].name if text is None else text,
+                    text_ctxt,
+                    translate,
                 ),
                 item_name=item_search_property,
                 suggestions=results_are_suggestions,
@@ -1299,6 +1542,101 @@ class Layout:
         if unlink:
             row.operator(unlink, text="Unlink")
         return result
+
+    def template_colorspace_settings(self, data, property):
+        """Input color-space selector, using the shared searchable RNA enum."""
+        from .registered_menu import owner_guard
+
+        resolve = owner_guard(data)
+        settings = getattr(resolve(), property)
+        if (
+            settings is None
+            or settings.bl_rna.identifier != "ColorManagedInputColorspaceSettings"
+        ):
+            raise ValueError("Expected input color-space settings")
+        identity = settings.as_pointer()
+        control = self.prop(settings, "name", text="Color Space")
+
+        def valid():
+            try:
+                return getattr(resolve(), property).as_pointer() == identity
+            except (ReferenceError, RuntimeError, AttributeError):
+                return False
+
+        control.options["valid_context"] = valid
+        return None
+
+    def template_component_menu(self, data, property, *, name="", icon="NONE"):
+        from .property_popover import PropertyPopover
+
+        label = self._text(name or data.bl_rna.properties[property].name)
+        model = PropertyPopover(self, data, property, label)
+        control = self.group.button(
+            self._key("components"),
+            label,
+            None,
+            binding=model.binding,
+            panel_model=model,
+            icon=icon,
+            enabled=lambda: model.available(self.context),
+            context_menu=model.context_rows,
+            **self._options(),
+        )
+        model.control = control
+        self.canvas._panel_buttons = True
+        return None
+
+    def template_event_from_keymap_item(
+        self,
+        item,
+        *,
+        text="",
+        text_ctxt="",
+        translate=True,
+    ):
+        """Read-only shortcut display, with exact-owner copy context action."""
+        from .registered_menu import owner_guard
+        from .context_menu import Entry
+
+        if item.bl_rna.identifier != "KeyMapItem":
+            raise ValueError("Expected an existing KeyMapItem")
+        resolve = owner_guard(item)
+        binding = self._binding(item, "type")
+        caption = self._text(text, text_ctxt, translate)
+
+        def label():
+            try:
+                return "  ".join(v for v in (caption, resolve().to_string()) if v)
+            except (ReferenceError, RuntimeError):
+                return self._text("Unavailable")
+
+        def copy(target, context):
+            if not target.valid() or not binding.valid():
+                raise ReferenceError("Shortcut owner changed")
+            context.window_manager.clipboard = resolve().to_string()
+
+        return self.group.label(
+            self._key("shortcut-display"),
+            caption,
+            binding=binding,
+            label_get=label,
+            context_menu=lambda target, context: (
+                Entry(
+                    "COPY_SHORTCUT",
+                    self._text("Copy Shortcut"),
+                    copy,
+                    enabled=lambda t, c: t.valid()
+                    and binding.valid()
+                    and getattr(c, "window_manager", None) is not None,
+                ),
+                *(
+                    self.canvas.context_provider(target, context)
+                    if self.canvas.context_provider
+                    else ()
+                ),
+            ),
+            **self._options(),
+        )
 
     def template_matrix(self, data, property):
         from .widgets import MatrixView
@@ -1414,6 +1752,17 @@ class Layout:
         rows, maxrows, columns = index(rows), index(maxrows), index(columns)
         if not 0 <= rows <= 128 or not 0 <= maxrows <= 128 or not 1 <= columns <= 128:
             raise ValueError("List rows/maxrows must be 0..128 and columns 1..128")
+        # A label immediately introducing a list group is its section heading.
+        branch = self.group
+        while branch.parent is not None:
+            siblings = branch.parent.children
+            prior = siblings[: siblings.index(branch)]
+            previous = next((c for c in reversed(prior) if c.kind != "separator"), None)
+            if previous is not None:
+                if previous.kind == "label" and previous.label:
+                    previous.options["text_role"] = "title"
+                break
+            branch = branch.parent
         source = CollectionSource(
             self, dataptr, propname, active_dataptr, active_propname
         )

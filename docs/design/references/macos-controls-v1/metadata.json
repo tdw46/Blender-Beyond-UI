@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "tool": "OpenAI built-in image_gen.imagegen",
+  "prompt": "prompt.txt",
+  "approval": "Tyler approved generated style and supplied Format crop as explicit spacing target",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "reference_inner_menu_bounds": [
+    8,
+    5,
+    752,
+    626
+  ],
+  "host_menu_width": 224,
+  "reference_scale": 3.357142857142857,
+  "state": "Format, PNG selected, empty unfocused search; blue/brown backdrop",
+  "exact_match": false,
+  "limitations": [
+    "Generated backdrop and typography are not identical to the Blender fixture; no pixel-exact acceptance claimed.",
+    "Generated row pitches vary slightly; implementation uses consistent shared host spacing.",
+    "Only depicted reference states are approved; other states remain reviewable runtime evidence."
+  ],
+  "sha256": {
+    "reference.png": "75c9edbe2c15c7b16db1c99597891829fae9abc1d7907729a3de8ec61455d63b",
+    "prompt.txt": "6b849802b66f7d7132260ee927a67d55c9a2fbd0fe4d9073f4930ebd2bb0b7de",
+    "approved-format-crop.png": "8caf2bf526c9c65781f424701a169e88df5c85a73e5eee23a35992bdcfaa942b",
+    "source-1.png": "dd09848da2478e0dbda5d08342b4f478ce6c9ef4c05bb9b47951cdb80e623bbe",
+    "source-3.png": "51b1f8c1ff56c41398d113a2dd1f0169c676839cd630d384255c4a4e7a23fb08",
+    "source-2.png": "634f2790d301796dffbbeff6202ff779c00280fcc35cf2c751c327f0cc093ecf"
+  }
+}

@@ -1,0 +1,354 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 8969,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 1282,
+      "initial_frontmost_pid": 1282,
+      "new_instance": true,
+      "pid": 8969,
+      "restore_requests": 0,
+      "seconds": 14.328685998916626,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Property-only popup edits/check refresh without executing; Escape cancels once",
+        "Confirmation message and action execute the original instance exactly once",
+        "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+        "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+        "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+        "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "cancel",
+          3
+        ],
+        [
+          "execute",
+          3,
+          false
+        ],
+        [
+          "search",
+          "JPEG"
+        ],
+        [
+          "search-cancel"
+        ],
+        [
+          "menu"
+        ],
+        [
+          "search-cancel"
+        ]
+      ],
+      "error": null
+    },
+    "log": "docs/design/qa/popup-variants-v1/variants-0.log",
+    "batch": "variants"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 9048,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 1282,
+      "initial_frontmost_pid": 1282,
+      "new_instance": true,
+      "pid": 9048,
+      "restore_requests": 0,
+      "seconds": 14.265317916870117,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Property-only popup edits/check refresh without executing; Escape cancels once",
+        "Confirmation message and action execute the original instance exactly once",
+        "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+        "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+        "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+        "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "cancel",
+          3
+        ],
+        [
+          "execute",
+          3,
+          false
+        ],
+        [
+          "search",
+          "JPEG"
+        ],
+        [
+          "search-cancel"
+        ],
+        [
+          "menu"
+        ],
+        [
+          "search-cancel"
+        ]
+      ],
+      "error": null
+    },
+    "log": "docs/design/qa/popup-variants-v1/variants-1.log",
+    "batch": "variants"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 8446,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 1282,
+      "initial_frontmost_pid": 1282,
+      "new_instance": true,
+      "pid": 8446,
+      "restore_requests": 0,
+      "seconds": 12.467347979545593,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+        "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+        "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+        "Original callbacks restored and lifecycle unregister completes"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "execute",
+          7,
+          true
+        ],
+        [
+          "cancel",
+          7
+        ],
+        [
+          "menu"
+        ],
+        [
+          "cancel",
+          7
+        ]
+      ],
+      "error": null
+    },
+    "log": "docs/design/qa/popup-variants-v1/direct-regression-0.log",
+    "batch": "direct-regression"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 8524,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 1282,
+      "initial_frontmost_pid": 1282,
+      "new_instance": true,
+      "pid": 8524,
+      "restore_requests": 0,
+      "seconds": 12.234438061714172,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+        "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+        "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+        "Original callbacks restored and lifecycle unregister completes"
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "calls": [
+        [
+          "execute",
+          7,
+          true
+        ],
+        [
+          "cancel",
+          7
+        ],
+        [
+          "menu"
+        ],
+        [
+          "cancel",
+          7
+        ]
+      ],
+      "error": null
+    },
+    "log": "docs/design/qa/popup-variants-v1/direct-regression-1.log",
+    "batch": "direct-regression"
+  }
+]

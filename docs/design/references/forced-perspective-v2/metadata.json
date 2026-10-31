@@ -1,0 +1,13 @@
+{
+  "tool": "image_gen.imagegen",
+  "version": 2,
+  "dimensions": [
+    957,
+    1644
+  ],
+  "prompt": "prompt.txt",
+  "date": "2026-10-31",
+  "source_reference": "../forced-perspective-v1/reference.png",
+  "state": "Dark macOS concept with focal slider and separate numeric field",
+  "exact_match": false
+}

@@ -1,5 +1,5 @@
 {
-  "adapter_sha256": "eec2cc3ba0c50eb76808889d6c5447024b35d75338db53d1f36954f4aafa8ac6",
+  "adapter_sha256": "e77391bc29a546cea7f867cdb0554977d620b4c1cb6ccf0d9c6102606f0933c4",
   "builds": {
     "ec6e62d40fa9": {
       "version": "5.1.2",
@@ -61,5 +61,11 @@
   "favorites_items_offset": 88,
   "platform": "Darwin",
   "machine": "arm64",
-  "qualification": "experimental; only exact tested executables; no 4.2 or Windows admission"
+  "qualification": "experimental; only exact tested executables; no 4.2 or Windows admission",
+  "custom_property_qualification": {
+    "date": "2026-10-30",
+    "evidence": "docs/design/qa/custom-adapters-v1/runtime.json",
+    "previous_adapter_sha256": "eec2cc3ba0c50eb76808889d6c5447024b35d75338db53d1f36954f4aafa8ac6",
+    "change": "Existing ID/path clipboard ABI and escaped-property Favorites ABI reused; no new symbols or layouts. Metadata/path helpers accept scalar custom bindings; byte lengths reject native truncation. Requalified on both existing exact macOS arm64 builds. Unknown builds remain disabled."
+  }
 }

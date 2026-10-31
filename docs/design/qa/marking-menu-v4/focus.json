@@ -1,0 +1,112 @@
+{
+  "child_exit" : 0,
+  "events" : [
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "initial",
+      "pid" : 13701,
+      "seconds" : 0.001437067985534668
+    },
+    {
+      "bundle" : "com.microsoft.edgemac.app.eppojlglocelodeimnohnlnionkobfln",
+      "kind" : "activation",
+      "pid" : 15124,
+      "seconds" : 2.9477500915527344
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 7.0106450319290161
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 61939,
+      "seconds" : 9.537790060043335
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 16.076115012168884
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 62025,
+      "seconds" : 17.256385087966919
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 21.960571050643921
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 62075,
+      "seconds" : 23.156667113304138
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 29.237689018249512
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 62112,
+      "seconds" : 30.632288098335266
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 34.09781801700592
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 62141,
+      "seconds" : 36.357941031455994
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 45.136169075965881
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 62190,
+      "seconds" : 47.067590117454529
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 55.82359504699707
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "final",
+      "pid" : 13701,
+      "seconds" : 55.967831015586853
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    13701,
+    15124,
+    61939,
+    62025,
+    62075,
+    62112,
+    62141,
+    62190
+  ],
+  "seconds" : 55.967953085899353
+}

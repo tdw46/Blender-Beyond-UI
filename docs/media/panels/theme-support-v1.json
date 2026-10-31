@@ -1,0 +1,14 @@
+{
+  "kind": "Slideshow of historical Blender captures; not live theme switching",
+  "states": [
+    "native-dark.png",
+    "synthetic-light.png",
+    "synthetic-purple.png"
+  ],
+  "source": "docs/design/qa/theme-v1",
+  "source_sha256": {
+    "native-dark.png": "4fe608635bab83a5d610ec9f591d6425fe4282c59d414c26df4107b3a9126f2c",
+    "synthetic-light.png": "86a72fd714eb02fe0a3e019aa810e78006f6ae06297a7de7f9679fc8e19f5e7e",
+    "synthetic-purple.png": "6c1eb37f48c6b6cb8dc07d0fcb4e4227e9eb7aa5e4303a2dfbce111d8860357d"
+  }
+}

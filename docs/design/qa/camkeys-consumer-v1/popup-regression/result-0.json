@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "version": "5.1.2",
+  "checks": [
+    "Property-only popup edits/check refresh without executing; Escape cancels once",
+    "Confirmation message and action execute the original instance exactly once",
+    "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+    "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+    "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+    "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+  ],
+  "glass": [
+    {
+      "productions": 1,
+      "error": ""
+    },
+    {
+      "productions": 1,
+      "error": ""
+    },
+    {
+      "productions": 1,
+      "error": ""
+    },
+    {
+      "productions": 1,
+      "error": ""
+    },
+    {
+      "productions": 1,
+      "error": ""
+    },
+    {
+      "productions": 1,
+      "error": ""
+    }
+  ],
+  "calls": [
+    [
+      "cancel",
+      3
+    ],
+    [
+      "execute",
+      3,
+      false
+    ],
+    [
+      "search",
+      "JPEG"
+    ],
+    [
+      "search-cancel"
+    ],
+    [
+      "menu"
+    ],
+    [
+      "search-cancel"
+    ]
+  ],
+  "error": null
+}

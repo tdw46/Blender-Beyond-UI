@@ -1,0 +1,65 @@
+{
+  "final": {
+    "child_exit": 0,
+    "events": [
+      {
+        "bundle": "com.openai.codex",
+        "kind": "initial",
+        "pid": 13701,
+        "seconds": 0.0014029741287231445
+      },
+      {
+        "bundle": "com.openai.codex",
+        "kind": "final",
+        "pid": 13701,
+        "seconds": 7.003818988800049
+      }
+    ],
+    "sampled_frontmost_pids": [
+      13701
+    ],
+    "seconds": 7.0039509534835815
+  },
+  "native": {
+    "child_exit": 0,
+    "events": [
+      {
+        "bundle": "com.openai.codex",
+        "kind": "initial",
+        "pid": 13701,
+        "seconds": 0.0014189481735229492
+      },
+      {
+        "bundle": "com.openai.codex",
+        "kind": "final",
+        "pid": 13701,
+        "seconds": 6.206987023353577
+      }
+    ],
+    "sampled_frontmost_pids": [
+      13701
+    ],
+    "seconds": 6.207157015800476
+  },
+  "registry-final": {
+    "child_exit": 0,
+    "events": [
+      {
+        "bundle": "com.openai.codex",
+        "kind": "initial",
+        "pid": 13701,
+        "seconds": 0.001291036605834961
+      },
+      {
+        "bundle": "com.openai.codex",
+        "kind": "final",
+        "pid": 13701,
+        "seconds": 6.507452011108398
+      }
+    ],
+    "sampled_frontmost_pids": [
+      13701
+    ],
+    "seconds": 6.507626056671143
+  }
+}

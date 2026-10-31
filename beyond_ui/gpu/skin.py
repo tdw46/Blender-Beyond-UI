@@ -66,7 +66,10 @@ void main(){
  if(params.z==2.)c=vec4(hue(uv.x),1.);
  // Soft diagonal illumination on translucent glass, no extra capture/pass.
  if(params.z==4.)c.rgb+=.008*exp(-dot((uv-vec2(.35,.65))*vec2(1.5,2.),(uv-vec2(.35,.65))*vec2(1.5,2.)));
- if(params.y>0.){
+ if(params.z==5.){
+  c.a*=smoothstep(-params.y-aa*.5,-params.y+aa*.5,d);
+ }
+ else if(params.y>0.){
   float edge=smoothstep(-params.y-aa*.5,-params.y+aa*.5,d);
   float chroma=max(c.r,max(c.g,c.b))-min(c.r,min(c.g,c.b));
   vec3 rim=mix(vec3(.48,.50,.52),min(c.rgb+vec3(.18),vec3(1.)),step(.15,chroma));
@@ -99,6 +102,11 @@ def draw(rect, lower, upper=None, *, radius=8.0, border=0.7, mode=0.0, hue=0.0):
     _shader.uniform_float("upper", upper if upper is not None else lower)
     _shader.uniform_float("params", (radius, border, mode, hue))
     _batch.draw(_shader)
+
+
+def inset_outline(rect, palette, scale=1.0, radius=6.0):
+    """Theme-derived hairline; transparent center preserves the shared glass."""
+    draw(rect, palette["edge"], radius=radius * scale, border=0.65 * scale, mode=5.0)
 
 
 def clear():

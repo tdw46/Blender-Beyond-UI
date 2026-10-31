@@ -509,9 +509,8 @@ class CollectionList(Widget):
                 active = item.index == selected
                 key = ("row", item.identity)
                 with p.deform(key, r):
-                    p.surface(
-                        r, "selected" if active else "field", 5, 0.5, motion_key=False
-                    )
+                    if active:
+                        p.surface(r, "selected", 5, 0.5, motion_key=False)
                     editing = (
                         self.text_edit is not None
                         and self.field == "name"
@@ -540,6 +539,11 @@ class CollectionList(Widget):
             with p.deform("scroll", thumb):
                 p.surface(thumb, "thumb", 2, 0.6, motion_key=False)
             self.motion.region("scroll", (self.width - 12, 0, 12, self.viewport))
+        p.line(
+            ((4, self.viewport), (self.width - 4, self.viewport)),
+            (*palette["muted"][:3], 0.25),
+            width=0.6,
+        )
         footer = (2, self.viewport + 1, self.width - 4, 24)
         with p.deform("filter-reveal", footer):
             p.icon(
@@ -584,17 +588,21 @@ class CollectionList(Widget):
             for key, label, r in self.filters():
                 with p.deform(("filter", key), r):
                     if key == "query":
-                        p.surface(r, "input", 5, motion_key=False)
-                        if self.text_edit is not None and self.field == "query":
-                            self.paint_editor(p, r)
-                        else:
-                            p.text(
-                                r,
-                                self.state.get("query") or label,
-                                "text" if self.state.get("query") else "muted",
-                                11,
-                                inset=8,
-                            )
+                        from ..gpu.menus import search_field
+                        from ..gpu.typography import face
+
+                        edit = self.text_edit if self.field == "query" else None
+                        search_field(
+                            face(p.font, "body"),
+                            p.map(r),
+                            p.scale,
+                            p.palette,
+                            backdrop,
+                            edit.text if edit else self.state.get("query", ""),
+                            edit,
+                            lambda bounds: (bounds,),
+                            placeholder="Search…",
+                        )
                     else:
                         p.text(
                             (r[0], r[1], max(0, r[2] - 38), r[3]),

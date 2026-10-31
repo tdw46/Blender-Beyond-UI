@@ -1,0 +1,17 @@
+{
+  "tool": "image_gen.imagegen",
+  "version": 1,
+  "prompt": "prompt.txt",
+  "dimensions": [
+    1852,
+    849
+  ],
+  "state": "Apply Output Changes; default output path; Transparent off; centered secondary and primary action labels",
+  "exact_match": false,
+  "acceptance": "Generated per user request; human review pending. Dialog aspect/backdrop differences must remain visible in comparison.",
+  "sha256": {
+    "reference.png": "26456ab2aa3b6d3463cd9ecd82968227c78973dcf6cc9b41705bd613692b0595",
+    "prompt.txt": "11052b83149e4724d66f8f13d6be338e4d5ab5fd1fc965991351faad02e2643a",
+    "source.png": "3b2c86207d3bf051286d9181be035c8807baf6927d2cf4a341491c02fdbea4a3"
+  }
+}

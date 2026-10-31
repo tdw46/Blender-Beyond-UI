@@ -1,0 +1,1090 @@
+{
+  "final": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 14484,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14484,
+        "restore_requests": 0,
+        "seconds": 13.273324966430664,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "mixed custom/native compatibility; not full custom migration",
+        "version": "5.1.2",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; unsafe lists explicitly use native compatibility",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {
+              "CAMKEYS_PT_camkeys_main": {
+                "reason": "PropertyGroup lists require Layout(list_identity=...) with unique stable host keys",
+                "custom": false
+              }
+            },
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 14592,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14592,
+        "restore_requests": 0,
+        "seconds": 12.99886691570282,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "mixed custom/native compatibility; not full custom migration",
+        "version": "5.2.2 LTS",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; unsafe lists explicitly use native compatibility",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "passed": false,
+            "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_consumer.py\", line 34, in audit\n    tape.play(layout)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout_recording.py\", line 44, in play\n    result = getattr(values[target], name)(*args, **kwargs)\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/layout.py\", line 1699, in template_list\n    source = CollectionSource(\n        self, dataptr, propname, active_dataptr, active_propname\n    )\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/_vendor/beyond_ui/list_source.py\", line 42, in __init__\n    raise UnsafeListIdentity(\n        \"PropertyGroup lists require Layout(list_identity=...) with unique stable host keys\"\n    )\ncamkeys_qa._vendor.beyond_ui.list_source.UnsafeListIdentity: Custom control 'PropertyGroup lists require Layout(list_identity=...) with unique stable host keys' is not implemented. See docs/CUSTOM_PARITY.json; no native fallback was used.\n",
+            "compatibility": "native: stable row identity required"
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 10,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {
+              "CAMKEYS_PT_camkeys_main": {
+                "reason": "PropertyGroup lists require Layout(list_identity=...) with unique stable host keys",
+                "custom": false
+              }
+            },
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/final/blender-1.log"
+    }
+  ],
+  "popup-regression": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 14500,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14500,
+        "restore_requests": 0,
+        "seconds": 14.409618020057678,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Property-only popup edits/check refresh without executing; Escape cancels once",
+          "Confirmation message and action execute the original instance exactly once",
+          "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+          "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+          "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+          "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "calls": [
+          [
+            "cancel",
+            3
+          ],
+          [
+            "execute",
+            3,
+            false
+          ],
+          [
+            "search",
+            "JPEG"
+          ],
+          [
+            "search-cancel"
+          ],
+          [
+            "menu"
+          ],
+          [
+            "search-cancel"
+          ]
+        ],
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/popup-regression/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 14603,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popup_variants.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14603,
+        "restore_requests": 0,
+        "seconds": 14.275400996208191,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Property-only popup edits/check refresh without executing; Escape cancels once",
+          "Confirmation message and action execute the original instance exactly once",
+          "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+          "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+          "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+          "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "calls": [
+          [
+            "cancel",
+            3
+          ],
+          [
+            "execute",
+            3,
+            false
+          ],
+          [
+            "search",
+            "JPEG"
+          ],
+          [
+            "search-cancel"
+          ],
+          [
+            "menu"
+          ],
+          [
+            "search-cancel"
+          ]
+        ],
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/popup-regression/blender-1.log"
+    }
+  ],
+  "list-windowed": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 14681,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14681,
+        "restore_requests": 0,
+        "seconds": 2.408271074295044,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ],
+        "version": "5.1.2",
+        "build": "ec6e62d40fa9"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/list-windowed/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 14700,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 99230,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 14700,
+        "restore_requests": 0,
+        "seconds": 2.575532078742981,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ],
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-consumer/list-windowed/blender-1.log"
+    }
+  ]
+}

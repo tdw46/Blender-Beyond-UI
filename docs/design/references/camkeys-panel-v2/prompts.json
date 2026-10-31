@@ -1,0 +1,34 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-31",
+  "version": 2,
+  "list": "Use case: ui-mockup. Create an exact production UI reference, front-on, macOS-inspired restrained BVT liquid glass Blender extension panel section. Single card only, no explanatory annotations. Artboard 960x720, display at 2x logical scale; charcoal softly refractive frosted glass over abstract blurred dark viewport with subtle warm/cool areas, thin luminous rim, not opaque. Title 'Mesh/Lattice/Curve Objects' bold 24px at x48 y40. List from x40 y100 to x824 y444; action rail x840..904. Four compact rows each 80px high with 4px gaps. Row1 selected muted purple-blue rounded highlight, rows2-4 unboxed. Each row: small pill switch at x56..108 vertically centered; original Blender OBJECT_DATA outlined four-corner square icon at x128..152; object name at x168, y123/207/291/375 respectively: 'Hero mesh', 'Hair strands', 'Jacket folds', 'Accessories'. Secondary muted smaller 'No Armature' directly beneath each name at SAME left edge x168. All switches ON except Accessories OFF. No oversized controls, no blank tall list. Rail has five 56x56px rounded subtle outline square buttons: plus, minus, a single DOWN CHEVRON EXACTLY CENTERED horizontally and vertically, up triangle, down triangle. No extra caret near edge of the chevron button. List footer below rows at y470: small disclosure and 'Filter' left, grip center, '4 / 4' right. Bottom at y570, a 64px tall full-width subtle unembossed HELP BUTTON with exactly centered 'HOW TO', small info glyph at equal margins left and right. Absolutely NO switch or checkbox in HOW TO. Font Inter regular22px, secondary18px, titlebold24px. Comfortable consistent outer padding. Keep all UI within card. Clean vector-like geometry, no huge text. This reference must retain real-looking liquid glass, understated source theme and fully readable content.",
+  "help": "Use case: ui-mockup. Exact macOS-inspired BVT liquid glass UI reference for Blender extension help disclosures. Two identical-width compact glass cards stacked vertically over a very softly blurred dark charcoal background. Front-on, no perspective. The upper card is collapsed: a single modest-height row with small white INFO icon at left, the words 'HOW TO' EXACTLY centered across the full width, identical INFO icon at right. There is NO toggle, NO checkbox, NO pill, NO caret on this help row. The row is an unembossed text button: no raised button chrome, no individual rectangular box around text. Outer glass card has restrained refractive rim. Lower card is expanded: same centered HOW TO row with slightly stronger theme tint, beneath a thin separator and an inset paragraph in small regular Inter font: 'Choose a camera or use the viewport to drive CamKeys. Baking requires Camera mode.' Text wraps neatly inside card with 16 logical pixels inset. Both cards have symmetric icon columns of 28 logical pixels, center fills remaining width. Typography body11 logical px, rowheight28, padding8. Use real-looking frosted BVT glass with diffusion, soft rims, no opaque flat panel. Subtle blue-purple active tint only in lower help header. Font regular not bold for HOW TO. No extra headings, labels, explanatory annotations. Render crisp at 3x logical scale on an approximately 1000x750 artboard. This is a reference for centered unembossed Boolean action controls, not a native switch.",
+  "exact_match": false,
+  "source": "BVT liquid glass and CamKeys authored controls; macOS visual direction",
+  "images": {
+    "list": {
+      "path": "list.png",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "state": "Four item list; selected first row",
+      "theme": "Generated dark reference; production colors remain Blender theme-derived"
+    },
+    "help": {
+      "path": "help.png",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "state": "Collapsed and expanded authored help action",
+      "theme": "Generated dark reference; production colors remain Blender theme-derived"
+    }
+  },
+  "source_style_references": [
+    "User screenshot codex-clipboard-d7444f3b-e5b1-4286-ac24-e5136971e7ca.png",
+    "BVT Effect Layers shared liquid glass, switches and source motion",
+    "Previously approved macOS-inspired menu/field reference direction"
+  ]
+}

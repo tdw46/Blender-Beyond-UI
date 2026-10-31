@@ -1,0 +1,188 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 84997,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_launch.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 52875,
+      "initial_frontmost_pid": 52875,
+      "new_instance": true,
+      "pid": 84997,
+      "restore_requests": 0,
+      "seconds": 3.144913911819458,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "saved_preference_enabled": true,
+      "loaded_file": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys/__init__.py",
+      "single_line_integration": true,
+      "status": {
+        "state": "registered",
+        "panels": [
+          "CAMKEYS_PT_auto_fov",
+          "CAMKEYS_PT_baking",
+          "CAMKEYS_PT_camkeys_linking",
+          "CAMKEYS_PT_camkeys_main",
+          "CAMKEYS_PT_camprops",
+          "CAMKEYS_PT_lattice_auto_fov_modifier"
+        ],
+        "other_panels": [
+          "CAMKEYS_PT_billboard_settings",
+          "CAMKEYS_PT_dolly_expressions",
+          "CAMKEYS_PT_lens_compensation",
+          "CAMKEYS_PT_distance_falloff_popover",
+          "CAMKEYS_PT_falloff_popover",
+          "CAMKEYS_PT_flatten_falloff_popover"
+        ],
+        "limits": [
+          "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+          "Only supported Layout calls/modes are converted; draw errors appear in status.",
+          "Exact-build embedded adapters are required for custom rendering."
+        ],
+        "native_routes": [
+          {
+            "class": "CAMKEYS_OT_billboard_groups",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_distance_stop_vector",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_configure_camprop_values",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_export_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_vector_stop",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          }
+        ],
+        "routed_routes": [
+          "invoke_props_dialog",
+          "invoke_popup",
+          "invoke_confirm",
+          "invoke_search_popup",
+          "popup_menu",
+          "popup_menu_pie",
+          "call_menu",
+          "call_menu_pie"
+        ],
+        "host": {
+          "registered": true,
+          "draw_errors": {},
+          "native_fallbacks": {},
+          "panels": {
+            "CAMKEYS_PT_auto_fov": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            },
+            "CAMKEYS_PT_baking": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            },
+            "CAMKEYS_PT_camkeys_linking": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            },
+            "CAMKEYS_PT_camkeys_main": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            },
+            "CAMKEYS_PT_camprops": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            },
+            "CAMKEYS_PT_lattice_auto_fov_modifier": {
+              "available": false,
+              "reason": "Not started",
+              "menus": "Not started",
+              "property_contributions": "Not started"
+            }
+          }
+        },
+        "list_identity": {
+          "pending": 0,
+          "errors": []
+        },
+        "popups": {
+          "dialogs": 0,
+          "menus": 0,
+          "error": null,
+          "native_fallbacks": [],
+          "keymap_routes": 0
+        }
+      },
+      "profile": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-visual-v2/next-launch-windowed/profile-0/config"
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-visual-v2/next-launch-windowed/blender-0.log"
+  }
+]

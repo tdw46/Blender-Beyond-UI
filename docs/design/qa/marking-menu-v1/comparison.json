@@ -1,0 +1,45 @@
+{
+  "exact_match": false,
+  "full_custom_parity": false,
+  "native_text_batching_equal_frames": 60,
+  "ordinary_list_before_after_equal": true,
+  "timings": {
+    "pie": {
+      "median_ms": 0.17660402227193117,
+      "p95_ms": 0.22608309518545866,
+      "max_ms": 0.6423330632969737
+    },
+    "nested-search": {
+      "median_ms": 0.3015835536643863,
+      "p95_ms": 0.330416951328516,
+      "max_ms": 0.37716596852988005
+    },
+    "list-before": {
+      "median_ms": 0.14206243213266134,
+      "p95_ms": 0.1635829685255885,
+      "max_ms": 0.2245830837637186
+    },
+    "list-after": {
+      "median_ms": 0.14139595441520214,
+      "p95_ms": 0.16066699754446745,
+      "max_ms": 0.2193329855799675
+    }
+  },
+  "focus_acceptance": false,
+  "post_capture_changes": [
+    {
+      "path": "beyond_ui/pie_menu.py",
+      "current_sha256": "9807a04671121f3dd9e537752935baff5e36fcb8afa953dd73e336d12f1b416a",
+      "note": "Event-only visible-petal priority correction after capture; background/unit tested. No new GPU capture."
+    }
+  ],
+  "focus_note": "Tyler confirmed the owned test Blender process stole focus. Shared runner blocks all windowed tests pending safe requalification. Subsequent headless audit passed.",
+  "unverified": [
+    "Generated-reference and visual acceptance",
+    "Compound pie slots",
+    "Nested radial definitions",
+    "Native preference/timing/edge equivalence",
+    "Additional scales, themes and runtime GPU coverage",
+    "Blender 4.2 runtime"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 6676,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/build/popup-variants/native-keymap-probe.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 1282,
+      "initial_frontmost_pid": 1282,
+      "new_instance": true,
+      "pid": 6676,
+      "restore_requests": 0,
+      "seconds": 2.9047939777374268,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "selected": 0
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/popup-variants/native-probe/blender-0.log"
+  }
+]

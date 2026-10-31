@@ -15,6 +15,11 @@
     "OFL.txt": {
       "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
       "source": "https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt"
+    },
+    "Inter-Bold.woff2": {
+      "sha256": "fa888127b6da015b65569f0351f3b5c391ad928904951f1c20e9f8462a8d95ea",
+      "source": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Bold.woff2",
+      "downloaded": "2026-10-30"
     }
   }
 }

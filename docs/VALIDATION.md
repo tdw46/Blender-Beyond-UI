@@ -1,5 +1,34 @@
 # Validation record — 2026-10-28
 
+## Hold actions, confirmation and component popups — 2026-10-30
+
+Four previously missing API methods now have custom implementations:
+`operator_menu_hold`, `template_popup_confirm`, `template_event_from_keymap_item`
+and `template_component_menu`. Ordinary Canvas fields also consume alert,
+NONE/NONE_OR_STATUS and animation status through shared theme roles. Searchable
+component lists retain original bindings, exclude filtered controls from hit
+testing and shrink their owned popup to the filtered content.
+
+- 245 pure tests, Ruff, package build and ledger checks pass.
+- Eight background runtime processes pass on 5.1.2/5.2.2, covering new actions,
+  popup keyboard behavior, standalone pies and general runtime regressions.
+- Four GPU captures pass at 1×/1.5×/2× and both installed versions. All 240 native
+  font-batching frame pairs are byte-identical; one backdrop/strong-blur production
+  and all retained GPU/font resources remain stable.
+- The separate 144-button/48-action-menu paired paint benchmark passes with
+  200 alternating samples per state. Median differences against baseline
+  `54dd612` are -0.6% to +3.4%; this is limited CPU-submission evidence, not full
+  source-performance parity or GPU completion latency.
+- All five final windowed processes activated despite `--no-window-focus`.
+  No deliberate activation, raising, desktop input or focus restoration was used.
+  UI execution passes do not establish focus safety.
+
+[Behavior and limits](ACTION_PARITY.md) ·
+[Production gallery and evidence](design/qa/action-parity-v1/index.html).
+The ledger now has **73 unimplemented / 64 partial / 0 reference-matched** members.
+Full API parity, exact generated-reference acceptance, all themes/platforms and
+Blender 4.2 execution remain open. No release completion is claimed.
+
 ## Popup initial editing and default actions — 2026-10-30
 
 Custom registered-panel popovers now consume `activate_init` and `active_default`.
@@ -1376,3 +1405,149 @@ Native-only/instanced/subpanel semantics, additional themes/platforms, complete
 keyboard/accessibility behavior and exact visual/motion acceptance remain open.
 No unrelated live scene or preferences were saved. The strict completion gate
 still correctly fails; see [POPOVERS.md](POPOVERS.md) for supported behavior.
+
+
+## Vendored panel integration helper — 2026-10-30
+
+`AddonUI` now owns the optional consumer panel/input/shortcut lifecycle. Two
+independently copied packages were exercised together in disposable Blender
+5.1.2 and 5.2.2 profiles: N-panel and Properties anchors, real simulated toggle
+and right-click events, retained redraw, default undo, refresh, teardown/re-register
+and factory-file load recovery. Both final runs passed with no observed Blender
+activation or restoration. 257 unit tests and Ruff pass. Exact-copy file hashes
+were checked. [Runtime and focus evidence](design/qa/addon-setup-v1/runtime.json),
+[source provenance](design/qa/addon-setup-v1/provenance.json).
+
+The existing native-host build/platform restrictions remain. No new visual,
+Windows/Linux or 4.2 execution acceptance is implied. The renderer was unchanged.
+
+## One-line integration — 2026-10-30
+
+`integrate(globals())` now adopts registered panel bodies without depending on a
+particular loader. [Runtime evidence](design/qa/single-line-v1/runtime.json) covers
+manual aliased registration, Blender's class factory and a delegating module
+loader in three independently vendored packages. Actual N-panel and Properties
+bodies render; unchanged command streams retain canvas identity, conditionals
+rebuild, exact-owner right-click works, unsupported modes revoke stale input and
+recover, and unregister restores original methods while preserving other consumers.
+The explicit AddonUI path also re-passed undo/load/re-registration tests.
+
+Both installed macOS arm64 5.1.2 and 5.2.2 runtimes pass; all four retained launches
+recorded zero activation events and zero focus restoration requests. 264 unit
+tests and Ruff pass. The CPU recording microbenchmark reports medians around
+0.012–0.013 ms for the three-control fixture at UI scale 2.0; it is not GPU timing
+or a claim of BVT-equivalent throughput. No new visual acceptance is claimed.
+
+The one-line hook is **not universal native-UI replacement**: WindowManager
+dialogs/direct native menu calls, native panel headers, unsupported control modes,
+and callbacks requiring real RNA Panel instances remain explicit limits. Native
+routes are reported where statically detectable. See [integration](INTEGRATION.md).
+The exact versioned official API/Manual retrieval attempt failed with HTTP 402;
+new qualification claims are restricted to the installed runtimes above.
+
+## Direct dialogs and menus — 2026-10-30
+
+The one-line integration now adapts owned `invoke()`/`execute()` paths for
+`WindowManager.invoke_props_dialog`, `WindowManager.popup_menu` and owned
+`bpy.ops.wm.call_menu`/`call_menu_pie` targets. A custom floating host reuses
+PanelPopover/Menu/PieMenu, source glass, source motion, theme roles and input
+routing. It retains the original operator instance rather than reconstructing
+its properties later. Native modules and WindowManager classes remain unchanged.
+
+[Execution evidence](design/qa/direct-popups-v1/runtime.json) covers both installed
+macOS arm64 Blender 5.1.2/5.2.2 builds: actual field input, `check()` conditional
+rebuilds, confirm/cancel exactly once, transient invoke state, native undo,
+operator-property context menus, direct/callback/pie menus, invoking-sidebar
+context, and teardown while a dialog is open. Transient operator properties no
+longer attempt nonexistent persistent data paths or animation channels. Existing
+panel-adoption and exact-channel context regressions pass too. 269 unit tests pass.
+
+Each audited popup reports one retained glass backdrop production and no glass
+error across its opening/input interval. Test-owned process IDs never became
+frontmost; raw audit records may include other applications or an unrelated
+Blender process. There were no restoration requests. These are execution and
+resource-reuse checks, not new visual reference acceptance or a full GPU benchmark.
+
+Exact versioned 4.2/5.1/5.2 API and 5.1 Manual retrieval was attempted but failed
+with HTTP 402. Runtime RNA confirmed `invoke_props_dialog` arguments on 5.2.2;
+capability fallbacks filter arguments through the installed RNA function schema.
+Unqualified/editor-unavailable hosts preserve native invocation and record
+`custom=False` in integration status. Other popup variants, keymap-only native
+menu calls, indirect imports, strict RNA callback proxies and untested platforms
+remain documented limits. CamKeys itself has not been modified or runtime-qualified.
+
+## Single-line popup variants and keymap menus — 2026-10-30
+
+The next batch adds `invoke_popup` property-only forms, `invoke_confirm`,
+single-choice `invoke_search_popup`, and `popup_menu_pie`. Search retains the
+original operator and exposes exact enum-property context actions; pie titles
+use the shared center surface without consuming directional slots. Existing
+add-on/user keymap items targeting owned registered menus are routed reversibly,
+including packages containing only Menu classes. Explicit refresh adopts later
+keymaps; teardown also restores regenerated effective user-keymap copies.
+
+[Runtime evidence](design/qa/popup-variants-v1/runtime.json) covers macOS arm64
+5.1.2/5.2.2: property-only edits without execute, confirmation exactly once,
+search keyboard filtering/selection/undo/cancel, exact search-property menus,
+callback pie slot/title layout, keymap matching/route invocation, edited-chord
+preservation, refresh, menu-only registration and pending-search teardown.
+The original direct-popup workflow also passes on both versions. **272 unit
+tests**, Ruff and diff checks pass. Every audited popup uses one retained glass
+production without a glass error. No test-owned PID activated; no focus restore
+was requested. These are execution/resource checks, not visual acceptance or
+a new performance benchmark.
+
+Top-level keymap dispatch did not run in the inactive fixture: a separate native
+Select All probe also left selection unchanged. The fixture therefore uses
+Blender's `KeyMapItems.match_event` and a test-only modal dispatcher to invoke the
+matched operator. Ordinary foreground shortcut dispatch remains consumer/manual
+QA; this distinction is preserved in the result records.
+
+Registered-parent operator inheritance in an early fixture failed even without
+integration. The fixture now uses ordinary unregistered mixins. Routing snapshots
+inherited callbacks before mutation and unregisters descendants before bases,
+then registers/restores in the opposite order.
+
+Auto-executing redo popups, flag-enum search and automatic keymap hints retain
+explicit native fallbacks. Exact API/Manual retrieval for 4.2/5.1/5.2 returned
+HTTP 402; installed 5.2.2 RNA and both runtime workflows provide the local checks.
+Native compatibility is not counted as custom parity. No CamKeys files changed.
+
+## CamKeys consumer qualification (2026-10-30)
+
+Isolated `codex/camkeys-beyond-ui` consumer workflows, generic popup/keymap
+regressions and registered-list regressions pass on 5.1.2/5.2.2 macOS arm64.
+276 unit tests and Ruff pass. Fixed custom operator dispatch to request Blender's
+UI undo behavior; strict-by-default native compatibility handles explicitly
+unsupported adopted panels/direct dialogs and remains observable. Dialog drawing
+records commands before replay so consumer catch blocks cannot silently suppress
+unsupported layout adaptation. No shared painter replacement or visual acceptance.
+
+Live CamKeys HEAD, dirty status and copied source hashes are unchanged.
+Stable row identity, advanced brush curves and foreground hotkeys remain limits.
+[Evidence](design/qa/camkeys-consumer-v1/runtime.json) and
+[qualification scope](CAMKEYS_MIGRATION.md).
+
+## CamKeys stable-list / brush follow-up (2026-10-30)
+
+281 unit tests and Ruff pass. Two-runtime consumer qualification covers persistent
+list IDs, stale row rejection, duplicate repair/save-load, three custom brush
+popovers, point allocation/deletion safety, handle context, cancel and undo/redo.
+Generic popup/keymap, registered-list and property-context regressions pass.
+Zero owned focus activations/restorations; no visual/reference acceptance claimed.
+See [evidence](design/qa/camkeys-custom-v1/runtime.json) and
+[scope](CAMKEYS_MIGRATION.md).
+
+
+### CamKeys compact panel correction (2026-10-31)
+
+See `docs/design/qa/camkeys-visual-v4/report.json`: 284 unit tests, Boolean
+presentation/owner checks and consumer runtime on macOS arm64 5.1.2/5.2.2,
+actual native-panel redraw states, absolute OCR, 195 frames and focus audits.
+Required BLF batch symbols retain the 4.2 global-symbol fallback and 5.x namespace
+path. 4.2 runtime and Windows execution were not available; Windows source changes
+are not a validated binary. Exact-version API/Manual fetches were attempted but
+returned 402/unavailable, so installed RNA and exact-version source declarations
+were used; no current behavior is inferred from older documentation.
+Exact generated-reference acceptance is still open for recorded icon/card/glass
+mismatches. The current QA page distinguishes generation from actual captures.

@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-30",
+  "qualification": "Mixed custom/native consumer compatibility; not full custom CamKeys migration",
+  "unit_tests": 276,
+  "visual_acceptance": false,
+  "warm_gpu_performance_measured": false,
+  "source_hashes": {
+    "beyond_ui/addon.py": "15d9b98207120a7cfd90626ab2e66966d0c75f679af5ff545f8dc2e875e334b6",
+    "beyond_ui/hosts/addon.py": "2e6ee568b79b0f6a5672f9741adcb1c831a8fa05c5f6d61e0ac87c0773542b7c",
+    "beyond_ui/list_source.py": "97ac69e03cd5b3338ec2080075fc7379405d1f09c36d9d86e1fcdbe11c46241c",
+    "beyond_ui/dialog.py": "209b122444fac7afb9622f144e241a3367e94ea239891e2a69de918d0100c8f5",
+    "beyond_ui/invoke_routing.py": "df333ca0ed82c623582c871208c5e620c8ca01220618859ff484d30344d5ffcb",
+    "beyond_ui/context_extensions.py": "ba4abb5562f266f880038836e647201c7ff6e8acbbccf78f4be0a108187a3573",
+    "beyond_ui/registered_menu.py": "a41412b4b299d304779fc29a50d746cdedb64ebfe3982a2f4a9840a7b4ba79b0",
+    "beyond_ui/layout.py": "deaf43f110bd76980c3c5813973cec4bf3ab71a7d274bf71e70d9fafaffafb64",
+    "beyond_ui/operator_enum.py": "4aec5ffea510d851773a323dc4b8c171af27a39b7e84aefd22448b9929dd1b32",
+    "tests/blender_camkeys_consumer.py": "9b14064f905488f9c7926f976ca45c524dd29d0c2805e1af94e6fad0e461ca46",
+    "tests/test_integration_fallback.py": "16c69540ee8beac1b368a40ec3e5acf71d83b7bd7604c91ffe2dc7e1aea11079",
+    "tests/test_operator_enum.py": "5438ef4a094dc9236e299948d269f70e3a8dd08bd8814f710ad150d6820da1ed"
+  },
+  "focus": {
+    "owned_activations": 0,
+    "restore_requests": 0
+  },
+  "limitations": [
+    "PropertyGroup collection identity must be supplied by the consumer. RNA slot pointers are unsafe after reorder.",
+    "Advanced brush curves and their draw-time synchronization are not adapted.",
+    "Ordinary foreground hotkey dispatch remains unqualified; no deliberate focus activation authorized.",
+    "4.2 fallback paths retained but no 4.2 runtime installed. Official exact-version web retrieval returned HTTP 402.",
+    "Panel authoring audit includes hidden/empty contexts and does not establish visual acceptance.",
+    "The initial background list run never executed its timer fixture; only the successful windowed rerun counts."
+  ]
+}

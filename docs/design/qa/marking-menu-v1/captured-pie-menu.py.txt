@@ -1,0 +1,174 @@
+"""Bounded marking menus using the existing owner, glass, theme and motion path.
+
+Geometry is prepared once in host logical units. No Blender import, timer,
+pointer polling, GPU resources or binding reads in the layout/hit-test engine.
+"""
+
+from math import atan2, pi, hypot, isfinite
+from .context_menu import Menu, inside
+
+# Blender construction order: W, E, S, N, NW, NE, SW, SE. Canvas Y grows down.
+DIRECTIONS = ((-1, 0), (1, 0), (0, 1), (0, -1), (-1, -1), (1, -1), (-1, 1), (1, 1))
+SECTORS = (1, 7, 2, 6, 0, 4, 3, 5)
+KEYS = dict(
+    zip(
+        (
+            "NUMPAD_4",
+            "NUMPAD_6",
+            "NUMPAD_2",
+            "NUMPAD_8",
+            "NUMPAD_7",
+            "NUMPAD_9",
+            "NUMPAD_1",
+            "NUMPAD_3",
+        ),
+        range(8),
+    )
+)
+
+
+def sector(origin, x, y, dead_zone=16.0):
+    dx, dy = x - origin[0], y - origin[1]
+    if hypot(dx, dy) <= dead_zone:
+        return None
+    return SECTORS[int((atan2(dy, dx) + pi / 8) // (pi / 4)) % 8]
+
+
+class PieMenu(Menu):
+    """Up to eight slots. Small clips explicitly use the ordinary custom list.
+
+    ``trigger`` is the already-held invoking key/button, or None for click mode.
+    Releasing in the dead zone leaves click mode open; releasing over a direction
+    executes once. Submenus and exact-row context actions use normal menu pages.
+    """
+
+    def __init__(self, *args, trigger=None, dead_zone=16.0, **kwargs):
+        dead_zone = float(dead_zone)
+        if not isfinite(dead_zone) or not 0 <= dead_zone <= 128:
+            raise ValueError("Pie dead zone must be finite and between 0 and 128")
+        self.root = None
+        self.rectangles = ()
+        self.layout_mode = "PIE"
+        self.trigger = trigger
+        self.dead_zone = dead_zone
+        # Read at most nine, so oversized/infinite host iterables fail boundedly.
+        kwargs["row_limit"] = 9
+        super().__init__(*args, **kwargs)
+        self.root = self.page
+        if len(self.root.rows) > 8:
+            raise ValueError("A pie supports at most eight slots; use nested menus")
+        # Child pages retain ordinary searchable menu capacity, not the radial cap.
+        self.limit = 4096
+        self.origin = tuple(self.anchor)
+        self.root.highlight = -1
+        cx, cy, cw, ch = self.clip
+        width = min(
+            240.0,
+            max(
+                120.0,
+                max(
+                    self.measure(r.label, 11) + self.measure(r.shortcut, 10) + 64
+                    for r in self.root.rows
+                ),
+            ),
+        )
+        gap = max(18.0, dead_zone * 2)
+        height = self.row_height + 2 * self.padding
+        # Never magnify or shrink text to make a pie fit; retain a visible fallback.
+        width = min(width, (cw - 2 * gap) / 3)
+        total_w, total_h = 3 * width + 2 * gap, 3 * height + 2 * gap
+        if width < 120 or total_h > ch:
+            self.layout_mode = "LIST_FALLBACK"
+            self.root.highlight = 0
+            return
+        x = max(cx + total_w / 2, min(self.anchor[0], cx + cw - total_w / 2))
+        y = max(cy + total_h / 2, min(self.anchor[1], cy + ch - total_h / 2))
+        self.center = (x, y)
+        self.root.rect = (x - total_w / 2, y - total_h / 2, total_w, total_h)
+        self.rectangles = tuple(
+            (
+                x + dx * (width + gap) - width / 2,
+                y + dy * (height + gap) - height / 2,
+                width,
+                height,
+            )
+            for dx, dy in DIRECTIONS[: len(self.root.rows)]
+        )
+
+    def radial(self, page=None):
+        return (page or self.page) is self.root and self.layout_mode == "PIE"
+
+    def visible_rows(self, page=None):
+        page = page or self.page
+        if not self.radial(page):
+            yield from super().visible_rows(page)
+            return
+        for index, rect in enumerate(self.rectangles):
+            row = page.rows[index]
+            if row.key.endswith(":__pie_space__") or row.key == "__pie_space__":
+                continue
+            x, y, w, h = rect
+            p = self.padding
+            yield index, (x + p, y + p, w - 2 * p, h - 2 * p), row
+
+    def surfaces(self, page):
+        if not self.radial(page):
+            return super().surfaces(page)
+        return tuple(self.rectangles[i] for i, _, _ in self.visible_rows(page))
+
+    def reveal(self):
+        if not self.radial():
+            super().reveal()
+
+    def close(self):
+        self.trigger = None
+        super().close()
+
+    def event(self, event, x, y, context=None):
+        if (
+            not self.radial()
+            or self.editor is not None
+            or self.pending_click is not None
+        ):
+            return super().event(event, x, y, context)
+        if event.type.startswith("TIMER"):
+            return False
+        if not self.refresh(context):
+            return False
+        press = event.value in {"PRESS", "DOUBLE_CLICK"}
+        if press and event.type in {"ESC", "RIGHTMOUSE", "APP", "F10"}:
+            self.trigger = None
+        if self.trigger:
+            if event.type == "WINDOW_DEACTIVATE":
+                self.close()
+                return False
+            if event.type == "MOUSEMOVE" or (
+                event.type == self.trigger and event.value == "RELEASE"
+            ):
+                self.motion.input(event, x, y)
+                hit = (
+                    sector(self.origin, x, y, self.dead_zone)
+                    if inside(self.clip, x, y)
+                    else None
+                )
+                self.page.highlight = (
+                    hit if hit is not None and hit < len(self.page.rows) else -1
+                )
+                if event.type == self.trigger:
+                    self.trigger = None
+                    if not inside(self.clip, x, y):
+                        self.close()
+                    elif self.page.highlight >= 0:
+                        self.choose(self.page.highlight, context)
+                return True
+        if (
+            press
+            and event.type in KEYS
+            and not any(
+                getattr(event, k, False) for k in ("ctrl", "alt", "shift", "oskey")
+            )
+        ):
+            if not getattr(event, "is_repeat", False):
+                self.choose(KEYS[event.type], context)
+            return True
+        return super().event(event, x, y, context)

@@ -17,6 +17,11 @@ static void (*set_current)(void *, void *) = nullptr;
 static void (*set_draw)(void *, Draw) = nullptr;
 static void *create_button = nullptr;
 static int family = 0;
+static void (*text_batch_begin)() = nullptr;
+static void (*text_batch_end)() = nullptr;
+static void (*scissor_get)(int *) = nullptr;
+static void (*viewport_get)(int *) = nullptr;
+static void (*scissor_set)(int, int, int, int) = nullptr;
 static void *(*active_framebuffer)() = nullptr;
 static void (*blit_framebuffer)(void *, int, void *, int, int) = nullptr;
 static void *(*region_viewport)(void *) = nullptr;
@@ -50,7 +55,14 @@ extern "C" int bvt_probe_initialize(int requested_family)
   create_button = dlsym(RTLD_DEFAULT, legacy ?
       "_Z8uiDefButP7uiBlockiiN7blender9StringRefEiissPvffPKc" :
       "_ZN7blender2ui8uiDefButEPNS0_5BlockENS0_25ButtonTypeWithPointerTypeENS_9StringRefEiissPvffNSt3__18optionalIS4_EE");
-  family = get_block && set_current && set_draw && create_button ? requested_family : 0;
+  text_batch_begin = reinterpret_cast<decltype(text_batch_begin)>(dlsym(RTLD_DEFAULT, legacy ?
+      "_Z20BLF_batch_draw_beginv" : "_ZN7blender20BLF_batch_draw_beginEv"));
+  text_batch_end = reinterpret_cast<decltype(text_batch_end)>(dlsym(RTLD_DEFAULT, legacy ?
+      "_Z18BLF_batch_draw_endv" : "_ZN7blender18BLF_batch_draw_endEv"));
+  scissor_get = reinterpret_cast<decltype(scissor_get)>(dlsym(RTLD_DEFAULT, legacy ? "_Z15GPU_scissor_getPi" : "_ZN7blender15GPU_scissor_getEPi"));
+  viewport_get = reinterpret_cast<decltype(viewport_get)>(dlsym(RTLD_DEFAULT, legacy ? "_Z23GPU_viewport_size_get_iPi" : "_ZN7blender23GPU_viewport_size_get_iEPi"));
+  scissor_set = reinterpret_cast<decltype(scissor_set)>(dlsym(RTLD_DEFAULT, legacy ? "_Z11GPU_scissoriiii" : "_ZN7blender11GPU_scissorEiiii"));
+  family = get_block && set_current && set_draw && create_button && text_batch_begin && text_batch_end && scissor_get && viewport_get && scissor_set ? requested_family : 0;
   // Optional GPU-only UI backdrop copy. Opaque pointers only, no struct reads.
   active_framebuffer = reinterpret_cast<decltype(active_framebuffer)>(dlsym(RTLD_DEFAULT, legacy ?
       "_Z26GPU_framebuffer_active_getv" : "_ZN7blender26GPU_framebuffer_active_getEv"));
@@ -177,7 +189,19 @@ extern "C" int bvt_probe_reserve(void *layout, int width, int height, uint64_t t
   // Captures only a value, never a Python callable or a retained Layout pointer.
   // Disable the global callback BEFORE removing the Python callback reference.
   set_draw(block, [token](const void *, Rect *rect) {
-    if (callback && rect) callback(token, rect->xmin, rect->ymin, rect->xmax, rect->ymax);
+    if (callback && rect) {
+      // Finish the enclosing UI queue BEFORE Python changes clips/FBOs for glass.
+      // Custom glyph runs remain batched internally; resume native UI batching.
+      int clip[4], viewport[4];
+      scissor_get(clip);
+      viewport_get(viewport);
+      // The queue also owns preceding native headers outside this extra button.
+      scissor_set(viewport[0], viewport[1], viewport[2], viewport[3]);
+      text_batch_end();
+      scissor_set(clip[0], clip[1], clip[2], clip[3]);
+      text_batch_begin();
+      callback(token, rect->xmin, rect->ymin, rect->xmax, rect->ymax);
+    }
   });
   return 1;
 }

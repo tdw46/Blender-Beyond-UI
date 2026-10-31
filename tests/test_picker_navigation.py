@@ -27,16 +27,18 @@ class PickerNavigation(unittest.TestCase):
         widget.focus()
         widget.event(event("END"), 0, 0)
         self.assertEqual(widget.cursor, 9999)
-        self.assertAlmostEqual(widget.rows.offset, widget.rows.height - 206)
+        self.assertAlmostEqual(
+            widget.rows.offset, widget.rows.height - PICKER["list"][3]
+        )
         self.assertEqual(selected, [])
         widget.event(event("PAGE_UP"), 0, 0)
-        self.assertEqual(widget.cursor, 9997)
-        valid.remove(9997)
+        self.assertEqual(widget.cursor, 9995)
+        valid.remove(9995)
         widget.event(event("RET"), 0, 0)
         self.assertEqual(selected, [])
         widget.event(event("UP_ARROW"), 0, 0)
         widget.event(event("RET"), 0, 0)
-        self.assertEqual(selected, [9996])
+        self.assertEqual(selected, [9994])
         widget.event(event("HOME"), 0, 0)
         self.assertEqual(widget.rows.offset, 0)
         widget.event(event("ESC"), 0, 0)
@@ -55,7 +57,7 @@ class PickerNavigation(unittest.TestCase):
         self.assertEqual(widget.rows.offset, 0)
         self.assertFalse(widget.capturing)
         widget.event(event("LEFTMOUSE"), x, y + h + 20)
-        self.assertEqual(widget.rows.offset, 206)
+        self.assertEqual(widget.rows.offset, PICKER["list"][3])
         thumb, travel, limit = widget.scrollbar()
         widget.event(event("LEFTMOUSE"), x, thumb[1] + thumb[3] / 2)
         widget.event(event("MOUSEMOVE"), x, 10000)
@@ -72,7 +74,10 @@ class PickerNavigation(unittest.TestCase):
         canvas.event(
             event("LEFTMOUSE"),
             control.rect[0] + 100 * control.rect[2] / widget.width,
-            control.rect[1] + 175 * control.rect[3] / widget.height,
+            control.rect[1]
+            + (PICKER["list"][1] + PICKER["row_height"] / 2)
+            * control.rect[3]
+            / widget.height,
             clip,
         )
         self.assertIs(canvas.keyboard_focus, control)
@@ -85,7 +90,10 @@ class PickerNavigation(unittest.TestCase):
         canvas.event(
             event("LEFTMOUSE"),
             control.rect[0] + 100 * control.rect[2] / widget.width,
-            control.rect[1] + 175 * control.rect[3] / widget.height,
+            control.rect[1]
+            + (PICKER["list"][1] + PICKER["row_height"] / 2)
+            * control.rect[3]
+            / widget.height,
             clip,
         )
         canvas.park()

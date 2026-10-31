@@ -4,12 +4,12 @@ from .base import Widget, Painter, contains
 from ..components import matches
 from ..virtual import VirtualList
 from ..editing import Text
-from .metrics import PICKER, SIZE
+from .metrics import PICKER, PICKER_SIZE
 
 
 class DataPicker(Widget):
     design_font_size = 22.0
-    width, height = SIZE
+    width, height = PICKER_SIZE
     focusable = True
     navigation_keys = {"UP_ARROW", "DOWN_ARROW", "HOME", "END", "PAGE_UP", "PAGE_DOWN"}
 
@@ -32,7 +32,7 @@ class DataPicker(Widget):
         self.valid = valid
         self.query = ""
         self.filtered = self.items
-        self.rows = VirtualList([70] * len(self.filtered))
+        self.rows = VirtualList([PICKER["row_height"]] * len(self.filtered))
         self.scroll_drag = None
         self.focused = False
         self.cursor = None
@@ -44,7 +44,7 @@ class DataPicker(Widget):
             if matches(self.query, item[1])
             and (not hasattr(self, "filter_item") or self.filter_item(item, self.query))
         )
-        self.rows.replace([70] * len(self.filtered))
+        self.rows.replace([PICKER["row_height"]] * len(self.filtered))
         self.rows.offset = 0
         self.cursor = None
 
@@ -64,7 +64,7 @@ class DataPicker(Widget):
     def scrollbar(self):
         x, y, w, _ = PICKER["scroll"]
         viewport = PICKER["list"][3]
-        total = max(280, self.rows.height)  # Preserve approved resting geometry.
+        total = max(viewport, self.rows.height)
         height = max(12.0, viewport * viewport / total)
         travel = viewport - height
         limit = max(0.0, self.rows.height - viewport)
@@ -80,7 +80,7 @@ class DataPicker(Widget):
             self.rows.scroll(top - self.rows.offset, viewport)
         elif bottom > self.rows.offset + viewport:
             self.rows.scroll(bottom - self.rows.offset - viewport, viewport)
-        r = (25, 147 + top - self.rows.offset, 560, 65)
+        r = (16, 128 + top - self.rows.offset, 416, PICKER["row_height"])
         self.motion.region(("row", self.filtered[self.cursor][0]), r)
         self.motion.pulse(("row", self.filtered[self.cursor][0]), 0.10)
 
@@ -217,7 +217,7 @@ class DataPicker(Widget):
                 if kind == "WHEELDOWNMOUSE"
                 else getattr(event, "mouse_prev_y", 0) - getattr(event, "mouse_y", 0)
             )
-            self.rows.scroll(delta, 206)
+            self.rows.scroll(delta, PICKER["list"][3])
             return True
         if kind != "LEFTMOUSE" or not press:
             return False
@@ -236,7 +236,10 @@ class DataPicker(Widget):
                 self.scroll_drag = (y, self.rows.offset)
                 self.capturing = True
             elif limit:
-                self.rows.scroll(-206 if y < thumb[1] else 206, 206)
+                self.rows.scroll(
+                    -PICKER["list"][3] if y < thumb[1] else PICKER["list"][3],
+                    PICKER["list"][3],
+                )
             return True
         for r, action in zip(PICKER["actions"], self.actions):
             if contains(r, x, y):
@@ -244,8 +247,8 @@ class DataPicker(Widget):
                     action()
                 return bool(action)
         if contains(PICKER["list"], x, y):
-            for i, top, height in self.rows.visible(206):
-                if top <= y - 147 < top + height:
+            for i, top, height in self.rows.visible(PICKER["list"][3]):
+                if top <= y - PICKER["list"][1] < top + height:
                     self.focus()
                     self.cursor = i
                     self._accept()
@@ -256,49 +259,80 @@ class DataPicker(Widget):
         p = Painter(
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
         )
-        p.card(
-            getattr(self, "title", "Data Picker"), blur=getattr(self, "glass_blur", 0.4)
-        )
-        p.surface(PICKER["search"], "input", border=1)
+        from ..gpu import glass
+        from ..gpu.menus import search_field
+        from ..gpu.typography import face
+        from ..menu_metrics import Metrics
+
+        if not glass.lens(
+            backdrop,
+            rect,
+            16 * p.scale,
+            palette.get("menu_glass", (0, 0, 0, 0)),
+            blur=0.7,
+        ):
+            p.surface((0, 0, self.width, self.height), "card", 16, motion_key=False)
         p.text(
-            (76, 74, 510, 57),
-            self.text_edit.text if self.text_edit else self.query or "Search",
-            role="text" if self.query else "muted",
-            inset=16,
+            PICKER["title"],
+            getattr(self, "title", "Data Picker"),
+            size=2 * Metrics.TITLE_SIZE,
+            inset=0,
+            weight="title",
         )
-        p.icon("search", (38, 84, 40, 37), 29)
+        with p.deform("search", PICKER["search"]):
+            search_field(
+                face(font, "body"),
+                p.map(PICKER["search"]),
+                2 * p.scale,
+                palette,
+                backdrop,
+                self.text_edit.text if self.text_edit else self.query,
+                self.text_edit,
+                lambda bounds: (bounds,),
+                placeholder="Search…",
+            )
+        self.motion.region("search", PICKER["search"])
         active = self.selected()
         with p.clip(PICKER["list"]):
-            for i, top, height in self.rows.visible(206):
+            for i, top, height in self.rows.visible(PICKER["list"][3]):
                 key, label, icon = self.filtered[i]
-                r = (25, 147 + top, 560, 65)
+                r = (16, 128 + top, 416, PICKER["row_height"])
                 highlighted = (
                     i == self.cursor
                     if self.focused and self.cursor is not None
                     else key == active
                 )
                 with p.deform(("row", key), r):
-                    p.surface(
-                        r,
-                        "selected" if highlighted else "field",
-                        7,
-                        motion_key=False,
-                    )
+                    if highlighted:
+                        p.surface(
+                            Metrics.highlight(r, 2), "selected", 14, motion_key=False
+                        )
                     self.motion.region(
                         ("row", key),
                         (
-                            25,
-                            max(147, 147 + top),
-                            560,
-                            max(0, min(353, 147 + top + 65) - max(147, 147 + top)),
+                            16,
+                            max(128, 128 + top),
+                            416,
+                            max(
+                                0,
+                                min(308, 128 + top + PICKER["row_height"])
+                                - max(128, 128 + top),
+                            ),
                         ),
                     )
                     p.text(
-                        (117, 147 + top, 460, 65),
+                        (
+                            66 if icon else 20,
+                            128 + top,
+                            350 if icon else 396,
+                            PICKER["row_height"],
+                        ),
                         label,
                         role="selected_text" if highlighted else "text",
                         inset=16,
                     )
+                    if not icon:
+                        continue
                     # Four retained icon slots cover the clipped viewport. At rest,
                     # use the approved coordinates exactly (no extra matrix rounding).
                     import gpu
@@ -307,8 +341,8 @@ class DataPicker(Widget):
                     if top == anchor:
                         p.icon(
                             "○" if icon == "material" else icon,
-                            (49, 156 + anchor, 52, 45),
-                            37,
+                            (32, 128 + anchor, 30, PICKER["row_height"]),
+                            28,
                             role="selected_text" if highlighted else "text",
                         )
                     else:
@@ -316,8 +350,8 @@ class DataPicker(Widget):
                             gpu.matrix.translate((0, -(top - anchor) * p.sy, 0))
                             p.icon(
                                 "○" if icon == "material" else icon,
-                                (49, 156 + anchor, 52, 45),
-                                37,
+                                (32, 128 + anchor, 30, PICKER["row_height"]),
+                                28,
                                 role="selected_text" if highlighted else "text",
                             )
         p.surface(PICKER["scroll"], "track", 5, 0)
@@ -325,8 +359,8 @@ class DataPicker(Widget):
         p.surface(thumb, "thumb", 5, 0.6, motion_key="scroll")
         self.motion.region("scroll", PICKER["scroll"])
         p.surface(PICKER["toolbar"], "field", 8)
-        for x in (211, 417):
-            p.line(((x, 394), (x, 430)), palette["toolbar_divider"], p.scale)
+        for x in (154, 294):
+            p.line(((x, 330), (x, 356)), palette["toolbar_divider"], p.scale)
         for r, icon, action in zip(
             PICKER["actions"], ("+", "duplicate", "unlink"), self.actions
         ):
@@ -334,7 +368,7 @@ class DataPicker(Widget):
                 p.icon(
                     icon,
                     r,
-                    31,
+                    26,
                     role="muted"
                     if getattr(self, "disabled_actions", False) and action is None
                     else "text",

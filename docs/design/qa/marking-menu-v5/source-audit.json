@@ -1,0 +1,17 @@
+{
+  "prior": "prior-source-audit.json",
+  "documentation": "Exact 4.2/5.1/5.2 API and Manual pages requested; retrieval unavailable. Installed 5.1.2/5.2.2 RNA and archived versioned source checked.",
+  "theme_roles": [
+    {
+      "path": "rna_userdef.cc",
+      "url": "https://github.com/blender/blender/blob/ec6e62d40fa9/source/blender/makesrna/intern/rna_userdef.cc",
+      "sha256": "72932aa479ecec702ade583cedafcfb4ba342eeb39aac37dbee639311868a3f2"
+    },
+    {
+      "path": "rna_userdef-42.cc",
+      "url": "https://github.com/blender/blender/blob/v4.2.0/source/blender/makesrna/intern/rna_userdef.cc",
+      "sha256": "57a4d07db173e03a416e8e04e37e60f78693f2a98f82dded2a8cda8e8e2894b7"
+    }
+  ],
+  "compatibility": "wcol_state.error capability first; legacy Info error background fallback. No icon-text substitution or linear conversion. Existing action-layer/legacy fcurve gates reused."
+}

@@ -1,0 +1,19 @@
+{
+  "activates" : false,
+  "error" : "",
+  "events" : [
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 9.696153998374939
+    }
+  ],
+  "final_frontmost_pid" : 13701,
+  "initial_frontmost_pid" : 12179,
+  "new_instance" : true,
+  "pid" : 29072,
+  "restore_requests" : 0,
+  "seconds" : 14.503016948699951,
+  "timeout" : false
+}

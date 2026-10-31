@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "revision": "v4.2.0",
+      "path": "build/prop-pointer/source/v4.2.0/rna_ui_api.cc",
+      "sha256": "2ca0ada7be7641ccd485cfdf919f350c5d6a1f825c4c388a8d1f6be7be364b50"
+    },
+    {
+      "revision": "v4.2.0",
+      "path": "build/prop-search/source/v4.2.0/interface_handlers.cc",
+      "sha256": "1ec00e4c8f50a1b32d510a4204a0e0c6d82710961d422432c5951f4660f33f7c"
+    },
+    {
+      "revision": "ec6e62d40fa9",
+      "path": "build/prop-pointer/source/ec6e62d40fa9/rna_ui_api.cc",
+      "sha256": "53ff057c9948263c1a7338653f6052d14e53999084f21952741f784e1d00a20e"
+    },
+    {
+      "revision": "ec6e62d40fa9",
+      "path": "build/prop-search/source/ec6e62d40fa9/interface_handlers.cc",
+      "sha256": "e2c623c528786d3f8b6a025bdd7aa73461205a710cec58e9dfbfcfeabced76cc"
+    },
+    {
+      "revision": "d13f752e3b9c",
+      "path": "build/prop-pointer/source/d13f752e3b9c/rna_ui_api.cc",
+      "sha256": "238b66bbb5063d1a18452471470eabb726ce96d3083664952c6054d2356e3b62"
+    },
+    {
+      "revision": "d13f752e3b9c",
+      "path": "build/prop-search/source/d13f752e3b9c/interface_handlers.cc",
+      "sha256": "9bcd285f9c24b7c4a6ebf061bc0e8ee0f45a311b9133e51828ae51b08ac60521"
+    },
+    {
+      "revision": "ec6e62d40fa9",
+      "url": "https://raw.githubusercontent.com/blender/blender/ec6e62d40fa9/source/blender/editors/interface/templates/interface_template_component_menu.cc",
+      "path": "build/action-parity-v1/source/ec6e62d40fa9/interface_template_component_menu.cc",
+      "sha256": "1fcd64accd98a2bb48b7a5d0f935c78eab453e1165edb85e2c8f229ae690953b"
+    },
+    {
+      "revision": "d13f752e3b9c",
+      "url": "https://raw.githubusercontent.com/blender/blender/d13f752e3b9c/source/blender/editors/interface/templates/interface_template_component_menu.cc",
+      "path": "build/action-parity-v1/source/d13f752e3b9c/interface_template_component_menu.cc",
+      "sha256": "1fcd64accd98a2bb48b7a5d0f935c78eab453e1165edb85e2c8f229ae690953b"
+    }
+  ],
+  "api_fetch": "Exact 4.2, 5.1, 5.2 pages requested; unavailable, not used as fetched evidence.",
+  "findings": [
+    "BUTTON_AUTO_OPEN_THRESH = 0.2",
+    "component_menu expands RNA with BLOCK_KEEP_OPEN",
+    "popup confirm and shortcut display signatures retained"
+  ]
+}

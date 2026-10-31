@@ -47,7 +47,7 @@ def property_path(source, context):
     path = owner_path(source, context)
     if path is None:
         return None
-    path += "." + source.name
+    path += ("" if source.name.startswith("[") else ".") + source.name
     if source.index is not None:
         path += f"[{source.index}]"
     return path

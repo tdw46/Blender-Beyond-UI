@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-30",
+  "unit_tests": 281,
+  "visual_acceptance": false,
+  "warm_gpu_benchmark": false,
+  "qualification": "Strict one-line integration; tested local list and brush consumer workflows",
+  "focus": {
+    "owned_activations": [],
+    "restore_requests": 0
+  },
+  "source_hashes": {
+    "beyond_ui/list_identity.py": "98ce962d9c9022ed256976a617e2ee47950d610396cd6d03533c46ed7e3fe975",
+    "beyond_ui/list_source.py": "ff89888133d9c0933a2c3adfe2bb13ee45a99f8b29deb9b619e47bccaeda18ab",
+    "beyond_ui/layout_recording.py": "ee80761bf600a6a4ac8ab13af5e94df253c1b3555ebfb6c1eccea479076baef3",
+    "beyond_ui/integration.py": "dc22797a8a2ce1d3b0000a96439f5f90a410da7a282eedebb73c382092e59932",
+    "beyond_ui/hosts/addon.py": "707f85fd4261af1b90254f2aac7a16e61a8085fd03eee18e4022adf8d2e37efc",
+    "beyond_ui/invoke_routing.py": "bb024fcf6fdd735b98dd556931f10a285b2eee5bfa303bbb93592cbf37710540",
+    "beyond_ui/dialog.py": "3a7204d6d4b1466249fa645bf4804aceb708ed9184450500e4dd91260d5ce444",
+    "beyond_ui/popover.py": "e7e4471c2ba40d614b5cee7bfc715175a37a8302df64f86e2c6f8c1ad1141b57",
+    "beyond_ui/layout.py": "30d1ed5b34aee46ac51338dc270f4215744cac8de38a6cb9c0f6a0681318a5ea",
+    "beyond_ui/widgets/curve.py": "a2de141e6bd73bf7bcd5e508cefe8ad48f6d3df25d0f59366eb2d72d8d5ec3b3",
+    "beyond_ui/widgets/rna.py": "78ea4920e9d4d9001a83499d87bb74e40df9adcabc90ef01ec3cec618fcc0d43",
+    "beyond_ui/widgets/context.py": "1ea913c1ff234363985269b6531da92fcf21956d36e1055c58d51aad197908af",
+    "tests/blender_camkeys_custom.py": "58cb8946c948404f0761f71f972ae12febba96f0d19c11f29fbed82717583ce4",
+    "tests/test_list_identity.py": "8f6621f698c08549279589c1576103e3257dea6fe3aaa82890d8e27aad95f409"
+  },
+  "consumer_hashes": {
+    "__init__.py": "069e9f0c6d12ff203e920dc3df5b879f839db71d1585dbf73c1905b47507446e",
+    "ui_lists.py": "3cf41f5adf8eb270124ed874ce4dad061ab193ef6474e82cd4180b85b766be5b",
+    "utils.py": "187e9e237a492b671696cc4e62d75441ae10470ce0e43b20e4a4e69f6fc60f0c",
+    "ops_general.py": "fe3bdd321009b688e47e629930ad952cab65dc466a57426bb6bbf97272af7c6e",
+    "custom_curve_lifecycle.py": "ef4e4284af5a1de41f8fde0972741e0a842b715e871d12e3415d02db40962c8c"
+  },
+  "consumer_branch": "codex/camkeys-beyond-ui",
+  "limits": [
+    "No new brush reference match or animation capture",
+    "No 4.2 runtime, other platform or foreground-hotkey qualification",
+    "Foreign/read-only collection identities require a host resolver",
+    "Not all native curve editor tools or all consumer feature combinations are implemented/tested"
+  ],
+  "api_sources": [
+    "https://raw.githubusercontent.com/blender/blender/v4.3.0/source/blender/blenkernel/intern/brush.cc",
+    "https://raw.githubusercontent.com/blender/blender/v4.2.0/source/blender/blenkernel/intern/brush.cc"
+  ],
+  "api_retrieval": "Exact versioned API/Manual 4.2/5.1/5.2 requests failed; installed RNA/runtime plus versioned source used. Brush 4.3 memfile-undo exclusion confirmed against 4.2 fallback."
+}

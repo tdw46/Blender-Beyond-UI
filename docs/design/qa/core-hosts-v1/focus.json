@@ -1,0 +1,41 @@
+{
+  "child_exit" : 0,
+  "events" : [
+    {
+      "bundle" : "com.microsoft.edgemac",
+      "kind" : "initial",
+      "pid" : 1282,
+      "seconds" : 0.0014450550079345703
+    },
+    {
+      "bundle" : "com.microsoft.edgemac.app.eppojlglocelodeimnohnlnionkobfln",
+      "kind" : "activation",
+      "pid" : 15124,
+      "seconds" : 14.224157094955444
+    },
+    {
+      "bundle" : "com.microsoft.edgemac",
+      "kind" : "activation",
+      "pid" : 1282,
+      "seconds" : 16.819615006446838
+    },
+    {
+      "bundle" : "com.hnc.Discord",
+      "kind" : "activation",
+      "pid" : 1708,
+      "seconds" : 23.625490069389343
+    },
+    {
+      "bundle" : "com.hnc.Discord",
+      "kind" : "final",
+      "pid" : 1708,
+      "seconds" : 26.677141070365906
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    1282,
+    1708,
+    15124
+  ],
+  "seconds" : 26.677226066589355
+}

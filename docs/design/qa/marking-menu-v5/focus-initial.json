@@ -1,0 +1,34 @@
+{
+  "child_exit" : 0,
+  "events" : [
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "initial",
+      "pid" : 13701,
+      "seconds" : 0.0012869834899902344
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 68368,
+      "seconds" : 1.0834529399871826
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 4.7060339450836182
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "final",
+      "pid" : 13701,
+      "seconds" : 4.8587549924850464
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    13701,
+    68368
+  ],
+  "seconds" : 4.8588409423828125
+}

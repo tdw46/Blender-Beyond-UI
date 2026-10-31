@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "documented_members": {
+    "Header": 11,
+    "Menu": 18,
+    "Panel": 30,
+    "UILayout": 134,
+    "UIList": 21
+  },
+  "checks": [
+    "documented RNA availability",
+    "RNA edit rollback",
+    "two vendor namespaces",
+    "register/unregister twice",
+    "custom RNA authoring without native delegation",
+    "custom ramp/curve transaction rollback",
+    "unsupported template fails explicitly",
+    "custom palette selection/add/remove and canceled color edit",
+    "palette stale-element and owner rejection",
+    "legacy palette color flag and 5.2 default",
+    "read-only matrix decomposition cache and type validation",
+    "custom BAR/RING authoring"
+  ],
+  "platform": "darwin"
+}

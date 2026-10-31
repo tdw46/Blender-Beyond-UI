@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30",
+  "platform": "macOS arm64",
+  "visual_acceptance": false,
+  "source_hashes": {
+    "beyond_ui/integration.py": "b4cbe276f1fe2dfd9105df6584bb0cc456e3a8b7dfa2f4bf739c4f43b832f974",
+    "beyond_ui/layout_recording.py": "25ecc02ef665d0a63c1ff5257e9df6472fcc7f4140f9a4fb11dba8ae4959cc09",
+    "beyond_ui/hosts/addon.py": "cc9bf67e13661c46954d4aa010d01ef97eea03079a53835e941c6b71cd92fa87",
+    "beyond_ui/addon.py": "fff50c93957df93978f7dafba206a558f75378486d0f8eb3ad1e85aa977e2fbf",
+    "beyond_ui/__init__.py": "ec2d0f771ff68093abe92b3f5ea5ee0a71e604be0c29576ccde318f2b8e47c86",
+    "tests/blender_single_line.py": "5deaff4eb273963305579d1348ba6d58461f8a4fa4d53ab581071d01889dee91",
+    "tests/test_integration.py": "fce48e25e4e8ac82274f9c288a3d206ddd071da7082a897d0797f5caadcf8802",
+    "tools/prepare_integration_fixture.py": "92c8fbb232d774a409cf88dce446efc138719587146572f3378b6dfd66905cd8"
+  },
+  "unit_tests": 264,
+  "focus": "No activation events or focus restoration requests in the four retained runs",
+  "limitations": [
+    "Only qualified exact-build macOS hosts tested",
+    "Direct native WindowManager dialogs remain native",
+    "Advanced curve modes and strict RNA Panel-instance callbacks remain unsupported",
+    "CPU authoring microbenchmark only, not source-level GPU performance proof"
+  ],
+  "docs_lookup": "Exact Blender 4.2/5.1/5.2 API pages and 5.1 Manual requested; web retrieval failed HTTP 402. Claims use installed-runtime evidence."
+}

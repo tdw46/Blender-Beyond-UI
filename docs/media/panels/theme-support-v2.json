@@ -1,0 +1,14 @@
+{
+  "source": "Slideshow of fresh Blender GPU captures; synthetic light/purple inputs",
+  "frames": 6,
+  "frame_sha256": {
+    "1x-rest.png": "9d6a52f12c703765e27e142bab815b3161698a51034d84e2b12f684dd2a3c43b",
+    "theme-light.png": "afcd84a2ac441ec999074ca2f24edb079b4610425aa4d8d8e5754069b8832132",
+    "theme-purple.png": "abb0a1a75efbe5e54c30f6fd8989100f79c86e6502184be259dfce1fdc0a0d70",
+    "1x-hold-context.png": "cfcba905da5cb7133ba4aa290e4efd8b3992c6f6e573e176c8600837f8c349b1",
+    "theme-light-menu.png": "375d459abed4875afb7965b45f70373bc0888dda268481357658e944aaf07c62",
+    "theme-purple-menu.png": "a4c17389ca80114a074ec1f785b11cabe2317fc33e547a0897b6220a5675e294"
+  },
+  "sha256": "e8ba8993b6dd80e455924ed22306046cbeeb5a01fbc8f26649de202254c579cf",
+  "exact_match": false
+}

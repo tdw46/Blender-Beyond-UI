@@ -1,0 +1,62 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 99704,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_workflow.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Mixed properties/list canvas remains within narrow and wide logical host bounds",
+        "Boolean action, text right-cancel before context, and numeric expression editing coexist",
+        "Popup input does not click through to parent property",
+        "List selection and exact-row property context work alongside ordinary fields",
+        "Disabled motion leaves popup interaction available; teardown settles without polling"
+      ],
+      "visual_acceptance": false,
+      "scope": "Shared Canvas consumer workflow; not actual N-panel/Properties host embedding or GPU visual qualification"
+    },
+    "log": "build/core-workflow-v1/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 99714,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_core_workflow.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Mixed properties/list canvas remains within narrow and wide logical host bounds",
+        "Boolean action, text right-cancel before context, and numeric expression editing coexist",
+        "Popup input does not click through to parent property",
+        "List selection and exact-row property context work alongside ordinary fields",
+        "Disabled motion leaves popup interaction available; teardown settles without polling"
+      ],
+      "visual_acceptance": false,
+      "scope": "Shared Canvas consumer workflow; not actual N-panel/Properties host embedding or GPU visual qualification"
+    },
+    "log": "build/core-workflow-v1/blender-1.log"
+  }
+]

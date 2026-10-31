@@ -1,4 +1,4 @@
-"""Explicit regular/semibold faces shared by all custom panel titles.
+"""Explicit regular/bold faces shared by all custom panel titles.
 
 Load at host setup, never in paint. Font handles are privately owned and released
 with the host. A plain integer remains supported for host-supplied legacy fonts.
@@ -18,11 +18,19 @@ class Fonts(int):
         import blf
 
         regular = blf.load(str(ASSETS / "Inter-Regular.woff2"))
-        title = blf.load(str(ASSETS / "Inter-SemiBold.woff2"))
+        title = blf.load(str(ASSETS / "Inter-Bold.woff2"))
         if min(regular, title) < 0:
-            for name in ("Inter-Regular.woff2", "Inter-SemiBold.woff2"):
+            for name in ("Inter-Regular.woff2", "Inter-Bold.woff2"):
                 blf.unload(str(ASSETS / name))
             raise RuntimeError("Beyond UI bundled font could not be loaded")
+        from . import icons
+
+        try:
+            icons.prepare()
+        except Exception:
+            for name in ("Inter-Regular.woff2", "Inter-Bold.woff2"):
+                blf.unload(str(ASSETS / name))
+            raise
         obj = super().__new__(cls, regular)
         obj.title = title
         obj.closed = False
@@ -35,7 +43,7 @@ class Fonts(int):
             return
         import blf
 
-        for name in ("Inter-Regular.woff2", "Inter-SemiBold.woff2"):
+        for name in ("Inter-Regular.woff2", "Inter-Bold.woff2"):
             blf.unload(str(ASSETS / name))
         self.closed = True
         _owners -= 1
@@ -44,6 +52,9 @@ class Fonts(int):
             from .paint import measure
             from ..widgets import base
 
+            from . import icons
+
+            icons.clear()
             progress.clear()
             skin.clear()
             style.clear()
@@ -56,11 +67,11 @@ def face(font, role="body"):
 
 
 @contextmanager
-def motion_text(font, motion):
+def motion_text(font, motion, *, force=False):
     """Submit owned fonts inside finite transforms; retain batching at rest."""
     import blf
 
-    moving = bool(motion.tracks) and bool(motion.strength)
+    moving = (bool(motion.tracks) or force) and bool(motion.strength)
     fonts = {face(font), face(font, "title")} if moving else ()
     for handle in fonts:
         blf.rotation(handle, 0.0)
@@ -78,11 +89,28 @@ def flush_text(font):
     """Finish underlying owned text before painting an overlay above it."""
     import blf
 
-    for handle in {face(font), face(font, "title")}:
-        blf.rotation(handle, 0.0)
-        blf.enable(handle, blf.ROTATION)
-        try:
-            blf.position(handle, 0, 0, 0)
-            blf.draw(handle, " ")
-        finally:
-            blf.disable(handle, blf.ROTATION)
+    import gpu
+
+    blend = gpu.state.blend_get()
+    try:
+        for handle in (
+            face(font),
+        ):  # BLF owns one global queue, including title/native text.
+            blf.rotation(handle, 0.0)
+            blf.enable(handle, blf.ROTATION)
+            try:
+                blf.position(handle, 0, 0, 0)
+                blf.draw(handle, " ")
+            finally:
+                blf.disable(handle, blf.ROTATION)
+    finally:
+        gpu.state.blend_set(blend)
+
+
+@contextmanager
+def submitted_text(font):
+    """Drain owned BLF queues before the enclosing GPU clip/state is restored."""
+    try:
+        yield
+    finally:
+        flush_text(font)

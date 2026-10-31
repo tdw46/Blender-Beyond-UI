@@ -184,6 +184,8 @@ class Action:
         return km, item
 
     def enabled(self, target, context):
+        if target is not None and (not target.valid() or not target.editable()):
+            return False
         try:
             self.current(context)
             return True
@@ -192,6 +194,9 @@ class Action:
 
     def capture(self, target, context, event, *, mouse=False, key_modifier="NONE"):
         import bpy
+
+        if not self.enabled(target, context):
+            raise ReferenceError("Shortcut target changed or is disabled")
 
         if event.value != "PRESS" or event.type in MODIFIERS:
             return False
@@ -288,6 +293,8 @@ class Action:
         return True
 
     def remove(self, target, context):
+        if not self.enabled(target, context):
+            raise ReferenceError("Shortcut target changed or is disabled")
         km, item = self.current(context)
         if item is None:
             raise ReferenceError("Shortcut no longer exists")
@@ -468,4 +475,106 @@ def capture_entry(capture, enabled, label="Assign Shortcut", *, allow_chord=True
         capture_options=modes,
         icon="shortcut",
         tip="Assign a key; alternate capture modes are available inside.",
+    )
+
+
+def numeric_property_entry(source, context, registry=None):
+    """Value shortcuts through the host-owned undoable ID-property operator.
+
+    Existing assignments stay discoverable after the property's value changes.
+    No arbitrary expression input, implicit registration or native data pointer.
+    """
+    import ast
+    import math
+    from dataclasses import replace
+    from .context_paths import owner_path
+
+    path = owner_path(source, context)
+
+    def valid(c):
+        return source.valid() and source.editable() and owner_path(source, c) == path
+
+    def literal(value):
+        return type(value) in (int, float) and (
+            type(value) is int or math.isfinite(value)
+        )
+
+    if (
+        registry is None
+        or registry.property_operator_class is None
+        or path is None
+        or not literal(source.read())
+    ):
+        return Entry(
+            "SHORTCUT",
+            "Shortcut to Value",
+            enabled=False,
+            icon="shortcut",
+            tip="Requires the consuming extension's registered ShortcutRegistry.",
+        )
+    captured = source.read()
+
+    def action(value, c):
+        return Action(
+            registry.property_idname,
+            {
+                "owner_path": path,
+                "key": source.key,
+                "kind": source.metadata().type,
+                "value": repr(value),
+            },
+            c,
+            keymap=registry.keymap,
+            conflict_keymaps=registry.conflict_keymaps,
+            valid=valid,
+        )
+
+    def choices(t, c):
+        values = [captured]
+        current = action(captured, c)
+        km = current.keymap(c)
+        if km:
+            # Scan only the selected map on menu input; never during drawing.
+            for item in km.keymap_items:
+                if (
+                    not item.active
+                    or item.idname != registry.property_idname
+                    or (
+                        item.properties.owner_path != path
+                        or item.properties.key != source.key
+                    )
+                ):
+                    continue
+                try:
+                    value = ast.literal_eval(item.properties.value)
+                except (ValueError, SyntaxError, TypeError):
+                    continue
+                if (
+                    type(value) is type(captured)
+                    and literal(value)
+                    and value not in values
+                ):
+                    values.append(value)
+                    if len(values) >= 64:
+                        break
+        return tuple(
+            replace(
+                action(v, c).entry(c),
+                key=f"VALUE_{i}",
+                label=f"Set to {v!r}",
+                tip="Assign, change or remove a shortcut for this value. It follows Blender's future context owner.",
+            )
+            for i, v in enumerate(values)
+        )
+
+    return Entry(
+        "SHORTCUT",
+        "Shortcut to Value",
+        children=choices,
+        enabled=lambda t, c: t.valid()
+        and t.editable()
+        and valid(c)
+        and action(captured, c).keymap(c) is not None,
+        icon="shortcut",
+        divider=True,
     )

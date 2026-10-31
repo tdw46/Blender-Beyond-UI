@@ -1,0 +1,54 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 84889,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_colorspace_template.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Custom searchable enum changes exact input color-space RNA with host commit",
+        "Exact settings owner context menu",
+        "Image deletion invalidates selector and existing target"
+      ]
+    },
+    "log": "build/colorspace-template-v1/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 84905,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_colorspace_template.py"
+    ],
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Custom searchable enum changes exact input color-space RNA with host commit",
+        "Exact settings owner context menu",
+        "Image deletion invalidates selector and existing target"
+      ]
+    },
+    "log": "build/colorspace-template-v1/blender-1.log"
+  }
+]

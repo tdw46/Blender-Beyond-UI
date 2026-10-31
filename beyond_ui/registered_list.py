@@ -227,7 +227,9 @@ class ListProxy(Proxy):
             lambda before, after: setattr(w, "pending", True),
         )
         label = layout._text(
-            args["text"] or meta.name, args["text_ctxt"], args["translate"]
+            meta.name if args["text"] is None else args["text"],
+            args["text_ctxt"],
+            args["translate"],
         )
         key = layout._key("list-setting")
         group = layout.group
@@ -280,6 +282,46 @@ class ListProxy(Proxy):
         if w.sort_lock and name in {"use_filter_sort_alpha", "use_filter_sort_reverse"}:
             control.options["enabled"] = False
         return control
+
+
+def reflow_list_status(canvas, group=None):
+    """Keep authored value and secondary status in one compact column."""
+    from .canvas import Group
+
+    group = canvas if group is None else group
+    for child in tuple(group.children):
+        if hasattr(child, "children"):
+            reflow_list_status(canvas, child)
+    if not (
+        group.kind == "row"
+        and len(group.children) >= 2
+        and group.children[-1].kind == "label"
+        and group.children[-1].label
+    ):
+        return
+    values = [c for c in group.children if c.kind in {"pointer", "search", "text"}]
+    if len(values) != 1:
+        return
+    value = values[0]
+    status = group.children[-1]
+    column = Group(canvas, "column", group, gap=0, align=True)
+    column.children = [value, status]
+    value.options["height"] = 20
+    has_icon = value.options.get("icon") not in {None, "", "NONE", 0} or bool(
+        value.options.get("icon_value")
+    )
+    status.options.update(
+        height=14, text_role="secondary", text_inset=24 if has_icon else 6
+    )
+    value.parent = status.parent = column
+    group.children = [
+        column if c is value else c
+        for c in group.children
+        if c is not status and c.kind != "separator"
+    ]
+    for child in group.children:
+        if child is not column:
+            child.options["height"] = 34
 
 
 class RegisteredList(CollectionList):
@@ -391,7 +433,7 @@ class RegisteredList(CollectionList):
         from .popover import guard_controls
 
         canvas = Canvas(
-            replace(self.parent.theme, row_height=32, gap=2, padding=0, font_size=11),
+            replace(self.parent.theme, row_height=28, gap=2, padding=0, font_size=11),
             context_provider=self.parent.context_provider,
             menu_commit=self.parent.menu_commit,
             shortcut_registry=self.parent.shortcut_registry,
@@ -472,6 +514,14 @@ class RegisteredList(CollectionList):
                 self.invoke(self.draw_item, *args[:n])
             if len(canvas.controls) > 128:
                 raise ValueError("UIList callback exceeds 128 controls")
+            if item is not None:
+                for control in canvas.controls.values():
+                    control.options["list_row"] = True
+                    if control.kind == "toggle" and not control.label:
+                        control.options["width"] = 38
+                # Preserve authored secondary status instead of crushing the value
+                # field. Compact hosts use a second line; no bindings are removed.
+                reflow_list_status(canvas)
             canvas.arrange(width)
             if item is not None and canvas.height > self.row_height - 4 + 0.01:
                 raise UnsupportedControl("multiline/oversized UIList row")
@@ -520,6 +570,7 @@ class RegisteredList(CollectionList):
         return self.type != "COMPACT" and self.state.get("show_filter", False)
 
     def dimensions(self, font_size, available_width, available_height=None):
+        self.row_height = 40.0
         result = super().dimensions(font_size, available_width, available_height)
         self.prepare()
         if self.filter_canvas is not None and self.filter_visible:

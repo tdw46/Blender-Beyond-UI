@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "visual_verified": false,
+  "exact_match": false,
+  "windowed_tests": "blocked",
+  "background_focus_passed": true,
+  "checks": [
+    "One compound direction holds a box, column, heading, horizontal operator row and exact scalar property owners; release actions and right-click navigation work",
+    "Ancestor disable remains live per child; nested menu retains all searchable rows",
+    "Installed pie preference values match the snapshot; quick tap, long neutral hold and optional stationary 20ms distance confirmation match the source timing branches",
+    "Pointer-origin grow, proximity highlight, guide origin and finite source-spring pull preserve logical hit geometry; disabling motion restores rest"
+  ],
+  "runtimes": [
+    {
+      "version": "5.2.2 LTS",
+      "event_timings": {
+        "False": {
+          "median_ms": 0.01225003506988287,
+          "p95_ms": 0.012958073057234287
+        },
+        "True": {
+          "median_ms": 0.01795799471437931,
+          "p95_ms": 0.018916907720267773
+        }
+      },
+      "preferences": {
+        "pie_animation_timeout": 6,
+        "pie_initial_timeout": 0,
+        "pie_menu_confirm": 0,
+        "pie_menu_radius": 100,
+        "pie_menu_threshold": 12,
+        "pie_tap_timeout": 20,
+        "use_reduce_motion": false
+      }
+    },
+    {
+      "version": "5.1.2",
+      "event_timings": {
+        "False": {
+          "median_ms": 0.012625008821487427,
+          "p95_ms": 0.013833981938660145
+        },
+        "True": {
+          "median_ms": 0.022916996385902166,
+          "p95_ms": 0.07045792881399393
+        }
+      },
+      "preferences": {
+        "pie_animation_timeout": 6,
+        "pie_initial_timeout": 0,
+        "pie_menu_confirm": 0,
+        "pie_menu_radius": 100,
+        "pie_menu_threshold": 12,
+        "pie_tap_timeout": 20,
+        "use_reduce_motion": false
+      }
+    }
+  ],
+  "remaining": [
+    "Full compound layout API/sizing semantics",
+    "Nested radial definitions",
+    "Native circular placement and edge equivalence",
+    "Full native button-type apply behavior",
+    "Additional runtime/platform/scale/theme coverage",
+    "GPU resource and warm-render comparison for new effects",
+    "Generated-reference and visual/motion acceptance"
+  ]
+}

@@ -28,7 +28,8 @@ class OperatorChoices(unittest.TestCase):
             get_rna_type = lambda _: info
             poll = lambda _: self.poll[0]
 
-            def __call__(_, invocation, **properties):
+            def __call__(_, invocation, undo=False, **properties):
+                self.assertTrue(undo, "Custom UI must request Blender UI undo")
                 self.calls.append((invocation, properties))
                 return {"FINISHED"}
 

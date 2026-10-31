@@ -1,0 +1,18 @@
+{
+  "tool": "image_gen.imagegen",
+  "version": 1,
+  "dimensions": [
+    957,
+    1644
+  ],
+  "prompt": "prompt.txt",
+  "date": "2026-10-31",
+  "source": "User Forced Perspective screenshot; BVT liquid glass/scalar controls; approved macOS styling",
+  "state": "Dark reference panel, Focus Object Face, focal length 250; generated toggle states differ from actual fixture",
+  "exact_match": false,
+  "conflicts": [
+    "Generated extra numeric dropdown arrows are not implemented: those fields do not open menus.",
+    "Generated icon artwork, panel backdrop and rim are not pixel-identical to the actual consumer capture.",
+    "At 260 logical units, utility groups wrap to preserve readable labels, full switches and units; the concept depicts a wider panel."
+  ]
+}

@@ -1,128 +1,324 @@
-# Integration
+# Add Beyond UI to an add-on
 
-Copy the entire `beyond_ui` package into an extension-local `vendor` directory.
-Use relative imports. Do not put the library on global sys.path or install a
-second top-level copy. Exclude the vendor directory from class auto-discovery.
-Preserve `LICENSE` and `NOTICE`; pin the repository commit alongside the copy.
+## Copy once, add one line
 
-The library does not register an extension of its own. Your extension owns its
-panels, operators, preferences, handlers and translations. A supported extension
-can use the pure helpers without importing the GPU/native integration.
+From a checkout or source archive of this repository:
 
-## Custom authoring
-
-```python
-from .vendor.beyond_ui import Layout
-
-ui = Layout(context=context, commit=on_committed_edit)
-ui.label(text="Settings")
-ui.prop(settings, "enabled")
-ui.prop(settings, "strength", slider=True)
-ui.template_color_picker(settings, "color")
-canvas = ui.canvas
+```sh
+python tools/vendor.py /path/to/my_addon/_vendor
 ```
 
-Build a schema once, retaining a Canvas for each window/area/region. Rebuild on
-structural changes; values stay in the host's authoritative model. For long-lived
-RNA bindings provide `resolve(data)` returning a stable-ID reacquisition callable.
-Do not search mutable names or collection indices to reinterpret stale controls.
-Invalidate canvases before undo/load and rebuild them afterwards. The `commit`
-callback owns one undo boundary and relevant redraw; the library never invents
-undo state, silently saves a file, or changes unrelated scene data.
-
-Custom API support is intentionally explicit. `ui.supports(name)` reports an
-implemented authoring method, not that every mode or visual state is accepted.
-Unimplemented methods raise `UnsupportedControl`. Legacy inert settings such as
-`scale_x/y`, `ui_units_x/y`, `alert`, `emboss`, `activate_init` and `active_default`
-remain accepted attributes for compatibility, but `supports()` returns false for
-them until behavior is implemented. Consult the parity ledger before
-integrating specialized controls. The present editors have known incomplete
-features, listed in the ledger.
-
-## Embedded N-panel host
+At the bottom of the add-on's `__init__.py`, **after** its existing registration
+functions and **before** any `if __name__ == "__main__": register()` guard:
 
 ```python
-from .vendor.beyond_ui.hosts.panel import PanelHost
-
-host = PanelHost(__package__)
-host.start()  # during an explicit host lifecycle, not module import
-# In your owned Panel.draw(context):
-host.draw(self.layout, context, canvas)
-# In your window modal:
-consumed = host.event(context, event)
-# Before undo/load and when unregistering:
-host.invalidate()
-host.close()
+from ._vendor.beyond_ui import integrate; integrate(globals())
 ```
 
-Start the input modal explicitly or from a guarded lifecycle callback. Do not
-start timers/operators from draw. The example exposes an Enable Custom UI Input
-button and preserves its row height after activation.
+That's the integration line. Keep your normal `bpy.types.Panel`, `Menu`, `UIList`,
+`Operator`, properties, `poll()`, `bl_parent_id` and `self.layout` code. Keep
+registering them with your existing functions. No panel-base replacement and no
+`auto_load.py` dependency. See the complete [example](../examples/single_line.py).
 
-`draw()` returns False when the embedded host is unavailable. The host may
-explicitly offer a separately labeled native compatibility UI, or display the
-unavailability reason. It must never call native widgets a custom implementation.
-Only one canvas is supported in an exclusively owned panel block; Blender's
-private extra-draw callback is block-owned, not independent for arbitrary widgets.
+The hook works after manual registration, imported/aliased `register_class`,
+`bpy.utils.register_classes_factory`, or a loader called by your registration
+function. It discovers registered panels whose Python modules belong to your
+package, then adapts their draw content in place. Class identities and panel IDs
+stay unchanged. Other add-ons' classes and global `bpy.utils` are not patched.
 
-The bundled macOS adapter admits only recorded exact hashes. Windows adapter
-source is preserved, but there is no validated Windows or Linux binary in this
-repository. `tools/build_bridge.py` is an explicit developer build step, never a
-startup action. Binaries are checked against their package source and manifest.
+An add-on distributed as one `.py` file must first become a package directory to
+carry its vendored dependency. A loader that recursively imports dependencies
+must exclude `_vendor`; the integration does not rewrite an unknown loader.
+Classes registered later, outside the wrapped `register()`, are not auto-discovered.
 
-PanelHost enables BVT liquid glass by default, sharing one retained backdrop
-across controls, menus and tooltips. Viewport draws and `Canvas.invalidate()`
-invalidate that source; springs do not. Pass
-`backdrop_revision=lambda context: meaningful_revision` when your host owns
-additional underlay changes. `glass_enabled=False` explicitly requests the tint
-fallback. Capability failures are exposed in the host record as `glass_error`;
-the fallback does not satisfy glass acceptance.
+## Explicit migration compatibility
 
-For a host that already owns a completed GPU texture, call
-`gpu.glass.prepare_texture(key, revision, texture, region_rect)` then pass `key`
-as `backdrop` to `Canvas.paint()`. It uses the same retained Gaussian levels and
-refractive lens without CPU readback or native ABI. Call `glass.release(key)` on
-teardown. Keep the texture alive, and advance its revision when its content changes.
-`gpu.glass.draw(..., viewport_present=callback)` lets an extension supply its
-completed viewport presentation without coupling the library to its renderer.
-
-## Explicit native compatibility
+For a consumer with unsupported panel bodies or direct operator dialogs:
 
 ```python
-from .vendor.beyond_ui import NativeLayout
-ui = NativeLayout(self.layout)
-ui.template_curve_mapping(node, "mapping")
+from ._vendor.beyond_ui import integrate; integrate(globals(), native_fallback=True)
 ```
 
-This preserves native behavior and full installed API access. It is not part of
-the custom parity acceptance count. Retain a `NativeLayout` only during the
-current Blender draw callback.
+This opt-in keeps those surfaces native when the adapter raises `UnsupportedControl`.
+It labels native panel bodies and reports the reason in
+`__beyond_ui_integration__.status` (`host.native_fallbacks` / `popups.native_fallbacks`).
+Default is strict; unexpected consumer errors are never converted into fallback.
+This does not implement unsupported controls or cover every nested popover route.
 
-## Shared typography and reference skin
+The one-line integration initializes local, package-owned PropertyGroup lists
+with persistent `_beyond_ui_row_id` metadata. Initialization is deferred outside
+native panel drawing; dialog/popover preparation runs after authoring and before
+opening. IDs survive reorder and save/load. Duplicate tokens are regenerated for
+all ambiguous rows, revoking old actions. No repeating timer or per-draw full-list
+scan is added. The IDs remain when the integration is disabled.
 
-`PanelHost` owns bundled Inter Regular/SemiBold handles. Use `canvas.title(key,
-text)` or `Layout.title(text=...)` for headings. Labels returned inside
-`Layout.panel()` and `panel_prop()` headers, plus row/column `heading` labels,
-receive the title role automatically. A custom host should create
-`beyond_ui.gpu.typography.Fonts()` once, pass it as `font`, and call `close()` at
-teardown. Plain integer font handles remain supported but cannot supply a
-separate semibold face.
+For foreign/read-only data or an existing identity schema, pass
+`layout_options={"list_identity": resolver}`. The callback receives
+`(collection_owner, property_name, item)` and returns a unique stable key.
+Supplying `None` explicitly opts out of automatic IDs and leaves PropertyGroup
+lists unsupported. Low-level `Layout` users still supply their own resolver.
+Do not use indices or RNA storage pointers as identities.
 
-The default shared palette is the explicit reference skin, including transparent
-fields and consistent blue highlights. `style.native_theme_palette(preferences)`
-is an explicit opt-in utility; native Blender theme colors do not override the
-reference skin. Compound widgets include their card/header; do not wrap them in
-a second painted header. Canvas derives their height from the authored aspect
-ratio unless an explicit height is supplied. Hosts provide a backdrop revision
-to `PanelHost` to reuse the source glass pipeline; otherwise translucent tinting
-is used. `ColorRamp(linear=True)` converts scene-linear stop colors to display
-space consistently for the gradient, handles and swatch. Set `linear=False` only
-for display-space bindings.
+## Optional consumer data hooks
 
-## Animation configuration
+For popovers whose original draw code creates data or starts timers, move those
+operations into a static `Panel.beyond_ui_prepare(context)` method. It runs on
+open, outside draw. An optional static
+`Panel.beyond_ui_changed(context, before, after)` runs before the host's undo
+commit; return `True` only when the body needs rebuilding (for example, an enum
+reveals another curve). Point edits can return `False` to retain motion and layout.
+Context pointers are preserved for both hooks. Ordinary `draw()` stays read-only;
+use `layout.is_custom` to distinguish the custom path from a native fallback.
+These product-specific data hooks do not add another library setup line.
 
-Use `AnimationSettings` on the host, canvas or individual control for live
-`enabled` and `strength` settings. [The animation guide](ANIMATION.md) documents
-inheritance, read-only change notifications, finite redraw ownership and current
-coverage gaps. The library does not register settings in the consuming extension;
-bind these Python properties to your own backend/preferences.
+`template_curve_mapping(..., brush=True)` uses the shared custom curve engine,
+point handles, Clip toggle and Extend enum. The consumer's preset operators keep
+their brush context. Blender 4.3+ excludes Brush IDs from global undo snapshots:
+consumers requiring brush undo must store/replay their curve state through their
+own undo policy. The library does not install a scene journal or product handler.
+See [brush behavior and limits](BRUSH_CURVES.md) and the
+[CamKeys qualification](CAMKEYS_MIGRATION.md).
+
+## Dynamic panels and lifecycle
+
+For the one-line integration, existing `draw()` callbacks run at Blender's normal
+layout-draw cadence. A bounded command recorder rebuilds the custom canvas only
+when the authored layout changes. Conditional rows, labels, enabled states and
+operator arguments therefore update without adding `refresh()` calls. Bound
+property values remain live. GPU painting does not run authoring callbacks.
+Unchanged command streams retain controls, geometry and animation state.
+
+The integration owns automatic input startup, per-panel/window/region canvases,
+shortcuts, undo/load invalidation, finite animations and teardown. There is no
+idle discovery/polling loop. Newly opened windows show **Enable Panel Input** until
+input is enabled there. Ordinary property edits get an undo boundary; operators
+retain their own `UNDO` policy.
+
+On unregister, custom hosts stop and original draw methods are restored before
+your original unregister function runs. Repeated helper registration/teardown is
+idempotent. Disable the add-on before reloading its modules. Importing/installing
+the hook itself creates no Blender classes, timers, native loads or scene edits.
+
+## Controls and styling
+
+Use ordinary layout calls, for example:
+
+```python
+layout.label(text="Settings", icon="SETTINGS")
+layout.prop(settings, "enabled")
+layout.prop(settings, "strength", slider=True)
+layout.prop(settings, "name")
+layout.prop(settings, "mode")
+layout.prop(settings, "target")
+row = layout.row(align=True)
+row.operator("my_addon.apply", text="Apply")
+row.operator("my_addon.reset", text="Reset")
+layout.menu("MYADDON_MT_actions")
+layout.popover(panel="MYADDON_PT_options")
+```
+
+Supported content uses the existing BVT liquid glass, shared squash/stretch,
+Blender theme roles, macOS field/menu styling and owner-aware right-click paths.
+The integration does not introduce a different skin or animation implementation.
+Registered menus, UILists and popover panels reached through supported custom
+Layout calls use their existing drawing adapters.
+
+## Direct dialogs and menus
+
+The same integration line now routes these calls made by your owned operators'
+`invoke()` / `execute()` callbacks:
+
+```python
+return context.window_manager.invoke_props_dialog(self, width=340)
+context.window_manager.popup_menu(draw_callback, title="Actions", icon="INFO")
+bpy.ops.wm.call_menu(name="MYADDON_MT_actions")
+bpy.ops.wm.call_menu_pie(name="MYADDON_MT_pie")
+```
+
+The hook also adapts `invoke_popup(self, width=...)` (properties only, never
+executes), `invoke_confirm(self, event, ...)` (message/action, no properties),
+`invoke_search_popup(self)` (searches the enum named by `bl_property`) and
+`popup_menu_pie(event, draw_callback, title=..., icon=...)`. Search retains its
+native `None` return value; your `invoke()` still returns `{'RUNNING_MODAL'}`.
+Selecting a result executes the original instance once, including when choosing
+the current enum value. Search rows expose the exact property's context menu.
+Callback pie titles occupy the center, not a directional option slot.
+
+On qualified 3D View and Properties hosts, these open custom floating surfaces.
+The dialog keeps the **actual operator instance** from `invoke()` through
+`execute()`: edited RNA properties and transient Python attributes survive.
+Confirmation executes once; Escape/outside dismissal cancels; native operator
+undo remains in charge. Committed property changes call `Operator.check()` and
+rebuild conditional controls when it returns true. Right-click targets the exact
+operator property; unavailable persistent-path/animation actions stay disabled.
+
+Direct menus reuse the registered menu/pie engine. Callback menus retain their
+title/icon and custom rows. Popups use the existing glass producer, retained
+backdrop, typography, theming, bounded motion and context routing. They preserve
+the invoking region's context even when drawn over the editor's main region.
+
+This is package-scoped: the hook re-registers the same owned Operator classes to
+install modal callbacks, then restores original methods during teardown. It
+passes a context facade and temporarily rebinds `bpy`/`ops`/`context` aliases in
+the current owned callback's globals, restoring them in `finally`. It does **not**
+modify the shared Blender modules or WindowManager type. Foreign menus continue
+to use their native route. Code that strictly checks facade/RNA object types,
+imports `bpy` inside the callback, or opens menus indirectly through another
+module may need an explicit adapter.
+
+Host capability failures preserve the native route and are recorded in
+`status["popups"]["native_fallbacks"]` with `custom=False`. This degraded behavior
+is not custom parity. Unsupported custom layout content raises a specific error;
+it is not silently omitted.
+
+## Existing menu shortcuts
+
+Keep your existing keymap setup, including direct `wm.call_menu` and
+`wm.call_menu_pie` items. During registration, the hook routes items in the add-on
+and user keyconfigs only when the named registered menu belongs to your package.
+It keeps the same keymap item, event chord, order and enabled state. Removal
+restores the native menu route and preserves shortcut edits made while integrated.
+Saved owner-local routes are recognized on registration. Menu-only packages work
+without declaring a Panel or Operator.
+
+For shortcuts installed after registration, call
+`__beyond_ui_integration__.refresh()` once after creating them. There is no keymap
+polling loop. `status['popups']['keymap_routes']` reports tracked route records.
+
+Blender 5.1.2/5.2.2 tests verify RNA event matching and invoke the matched route
+through a test modal operator. Ordinary top-level shortcuts did not dispatch in
+the inactive no-focus fixture (an unmodified native Select All probe also failed
+to dispatch). Foreground hotkey dispatch still needs consumer/manual QA; no
+activation workaround was used.
+
+## Check conversion status
+
+From the add-on module:
+
+```python
+print(__beyond_ui_integration__.status)
+```
+
+Status lists adopted panels, panels outside the embedded-host scope, detected
+menu/dialog routes, supported `routed_routes`, host availability, native fallbacks
+and per-panel draw errors. The historical `native_routes` field is the static
+call-site inventory; it does not mean every listed route remains native. Native
+route discovery is a bounded hint from registered class callbacks; indirect
+helper calls and arbitrary dynamic Python cannot be exhaustively analyzed.
+Unsupported drawing revokes the previous interactive content and displays a
+specific error. Correcting that layout branch lets the panel recover on redraw.
+
+**Current limits:**
+
+- Embedded bodies support `VIEW_3D/UI` and `PROPERTIES/WINDOW`. Native panel
+  headers (`draw_header`) and Blender's outer panel shell remain native.
+- Auto-executing `invoke_props_popup` keeps its native redo-stack behavior and
+  records an explicit fallback; rerunning execute without undo replacement would
+  be incorrect. `invoke_popup(auto_keymap=True)` likewise reports a native fallback
+  for automatic keymap hints. These are not custom parity.
+- Search popups currently qualify single-choice enums. Flag-enum search uses a
+  recorded native fallback until its selection semantics are qualified.
+- Calls outside owned invoke/execute callbacks, arbitrary modal callback chains
+  and helper-module imports are not automatically intercepted. Keymap routing
+  covers existing items plus explicit refresh, not unregistered menu names or
+  modal keymaps.
+- Floating hosts currently support 3D View and Properties editors. Other editor
+  hosts preserve native behavior with a recorded availability reason.
+- Only implemented `Layout` methods and modes convert. Advanced curve modes
+  including `brush=True`, and other ledger gaps, still need dedicated work.
+- Draw callbacks receive a layout proxy, not an RNA Panel instance. Ordinary
+  Python helper methods and metadata work; `super()`/strict instance checks or
+  helpers requiring an actual RNA panel need an explicit adapter.
+- Draw code must obey Blender's read-only drawing contract. No timer-driven
+  heartbeat is added to preserve an add-on's draw-time business logic.
+- Embedded custom rendering requires admitted exact-build native adapters.
+  Integration execution is verified on macOS arm64 Blender **5.1.2/5.2.2**.
+  This is not qualification for every 4.2+ build, Windows or Linux. On unavailable
+  hosts, adoption shows the availability reason and preserves the original native
+  draw as an explicit degraded fallback; it is not custom parity.
+
+See [validation](VALIDATION.md), [context-action limits](CORE_CONTEXT_AUDIT.md),
+and the [custom parity ledger](CUSTOM_PARITY.json). A successful one-line install
+is not a claim that every control, native popup or generated reference is complete.
+
+## Optional configuration
+
+The hook accepts the same options as `AddonUI` in that single call:
+
+```python
+from ._vendor.beyond_ui import integrate; ui = integrate(globals(), commit=my_commit)
+```
+
+`commit(before, after)` supplies your transaction policy. `context_menu=provider`
+uses `Canvas.context_provider`; include `default_entries(target, context)` when
+adding custom actions. `animation=AnimationSettings(...)` controls source motion.
+`layout_options` accepts `resolve`, `source`, `pointer_sources`, `id_actions` and
+`list_identity`. Configuration belongs to this add-on's integration only.
+
+After registration, `ui.ui.animation.enabled` and `.strength` update motion live;
+`ui.refresh()` explicitly invalidates unusual external layout dependencies.
+Disabling motion does not disable glass. Colors come from Blender's active theme.
+
+## Explicit lifecycle alternative
+
+For a new add-on or an existing custom host, the lower-level APIs remain available:
+
+```python
+from ._vendor.beyond_ui import AddonUI
+ui = AddonUI(__package__)
+
+def register():
+    ui.register(FirstPanel, SecondPanel)
+
+def unregister():
+    ui.unregister()
+```
+
+With **this alternative**, register panels only through `ui`, after your data and
+operators; exclude them from other registration. Its draw schemas are retained:
+call `ui.refresh()` after conditional structure changes, or supply a cheap static
+`cache_key(context)` on each definition. This differs from automatic recording in
+`integrate(globals())`. See [the explicit example](../examples/panels.py).
+`Layout`, `Canvas`, `PanelHost` and `ShortcutRegistry` also remain independently
+usable. Do not combine both registration approaches for the same panels.
+
+## Updating the vendored copy
+
+The vendor tool copies fonts, shaders, adapters and licenses and writes exact file
+hashes in `vendor-record.json`. Git provenance is included when available; source
+archives leave it unset. Re-run the command with `--replace` to update an unchanged
+recorded copy. Locally modified copies are refused. Keep the complete package,
+license and notice; stripping assets/ABI manifests disables capabilities.
+
+## Reproduce the integration tests
+
+```sh
+uv run python tools/prepare_integration_fixture.py build/single-line/consumers
+BEYOND_UI_CONSUMER_ROOT="$PWD/build/single-line/consumers" \
+  uv run python tools/run_blender_tests.py --windowed --macos-noactivate \
+  --blender '/Applications/Blender 5.1.2.app/Contents/MacOS/Blender' \
+  --blender '/Applications/Blender 5.2.2.app/Contents/MacOS/Blender' \
+  --fixture tests/blender_single_line.py --output build/single-line/check
+```
+
+The fixture uses three independently vendored consumers, actual simulated Blender
+events, conditional rebuilds, unchanged-canvas retention, owner menus, explicit
+unsupported-mode recovery, original-method restoration and isolated teardown.
+
+
+Direct-dialog/menu reproduction (same runner flags/builds as above):
+
+```sh
+uv run python tools/prepare_popup_fixture.py build/direct-popups/consumers
+BEYOND_UI_CONSUMER_ROOT="$PWD/build/direct-popups/consumers" \
+  uv run python tools/run_blender_tests.py --windowed --macos-noactivate \
+  --blender '/Applications/Blender 5.2.2.app/Contents/MacOS/Blender' \
+  --fixture tests/blender_direct_popups.py --output build/direct-popups/check
+```
+
+[Direct popup runtime evidence](design/qa/direct-popups-v1/runtime.json).
+
+Use `tests/blender_popup_variants.py` with the same prepared consumer/runner to
+check property-only, confirmation, search, callback pie and keymap routes.
+[Popup-variant evidence and qualification limits](design/qa/popup-variants-v1/runtime.json).
+These are execution/GPU-resource checks, not new visual-reference acceptance.

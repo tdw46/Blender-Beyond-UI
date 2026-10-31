@@ -1,0 +1,54 @@
+{
+  "child_exit" : 1,
+  "events" : [
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "initial",
+      "pid" : 13701,
+      "seconds" : 0.001278996467590332
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 4261,
+      "seconds" : 2.2844159603118896
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 6.7525739669799805
+    },
+    {
+      "bundle" : "org.blenderfoundation.blender",
+      "kind" : "activation",
+      "pid" : 4437,
+      "seconds" : 9.148501992225647
+    },
+    {
+      "bundle" : "com.openai.codex",
+      "kind" : "activation",
+      "pid" : 13701,
+      "seconds" : 13.630169987678528
+    },
+    {
+      "bundle" : "com.microsoft.edgemac",
+      "kind" : "activation",
+      "pid" : 1282,
+      "seconds" : 14.358569979667664
+    },
+    {
+      "bundle" : "com.microsoft.edgemac",
+      "kind" : "final",
+      "pid" : 1282,
+      "seconds" : 22.588603973388672
+    }
+  ],
+  "sampled_frontmost_pids" : [
+    1282,
+    4261,
+    4437,
+    13701
+  ],
+  "seconds" : 22.588696002960205
+}

@@ -1,0 +1,6 @@
+{
+  "source": "Actual Blender GPU frames, no generated pixels",
+  "source_frames": 60,
+  "sha256": "46210f90523cc7f2718947f1a1bf74cb91cda8c862a0da9cd19147f20eb6207a",
+  "capture": "../../design/qa/marking-menu-v1/capture.json"
+}

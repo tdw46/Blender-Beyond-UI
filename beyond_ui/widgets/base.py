@@ -41,6 +41,9 @@ class Painter:
         import gpu
         from math import ceil, floor
 
+        from ..gpu.typography import flush_text
+
+        flush_text(self.font)
         previous = gpu.state.scissor_get()
         prior_clip = self._clip
         x, y, w, h = self.map(r)
@@ -57,6 +60,7 @@ class Painter:
         try:
             yield
         finally:
+            flush_text(self.font)
             gpu.state.scissor_set(*previous)
             self._clip = prior_clip
 
@@ -170,17 +174,30 @@ class Painter:
         finally:
             blf.disable(font, blf.CLIPPING)
 
-    def field(self, r, label, value, split=64, size=22):
-        self.surface(r)
+    def field(self, r, label, value, split=64, size=22, *, icon=None):
+        from ..gpu import glass, skin
+
         x, y, w, h = r
-        self.surface(
-            (x + split, y + 1, w - split - 1, h - 2),
-            self.palette["field_inset"],
-            radius=7,
-            border=0,
-        )
-        self.text((x, y, split, h), label, size=size)
-        self.text((x + split, y, w - split, h), value, size=size, inset=22)
+        split = min(split, max(0, w - 48))
+        field = (x + split + 8, y, max(0, w - split - 8), h)
+        key = tuple(r)
+        if self.motion is not None and self.interactive:
+            self.motion.region(key, r)
+        with self.deform(key, r):
+            target = self.map(field)
+            if not glass.lens(
+                self.backdrop, target, 7 * self.scale, self.palette["input"], blur=0.7
+            ):
+                skin.draw(
+                    target, self.palette["input"], radius=7 * self.scale, border=0
+                )
+            skin.inset_outline(target, self.palette, 2 * self.scale, 3.5)
+            inset = 16
+            if icon:
+                self.icon(icon, (x + 12, y + (h - 24) / 2, 24, 24), 24)
+                inset += 36
+            self.text((x, y, split, h), label, size=size, inset=inset)
+            self.text(field, value, size=size, inset=16)
 
     def chevron(self, x, y, size=15):
         self.line(

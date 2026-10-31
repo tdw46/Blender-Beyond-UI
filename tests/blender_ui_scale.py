@@ -33,7 +33,9 @@ try:
                 NS(type="LEFTMOUSE", value="PRESS"), x + 10, y + 10, clip, context=ctx
             )
             assert canvas.overlay is not None, canvas.menu_error
-            assert canvas.overlay["rect"][2:] == (315, 236)
+            assert canvas.overlay["rect"][2:] == (
+                (315, 236) if control is color else (224, 189)
+            )
             assert canvas.overlay["widget"].glass_blur == 0.7
             if control is color:
                 before = tuple(ctx.object.color)
@@ -67,7 +69,7 @@ try:
         passed=True,
         version=bpy.app.version_string,
         checks=[
-            "Pointer, search and color popovers retain 315x236 logical size at 360/560/960 panel widths",
+            "Pointer/search popovers retain 224x189 and color popovers 315x236 logical size at 360/560/960 panel widths",
             "Rescaled color hit mapping edits and right-click cancellation restores the bound color",
             "Palette editing uses the shared scale, current viewport clip, exact owner and strong glass",
         ],

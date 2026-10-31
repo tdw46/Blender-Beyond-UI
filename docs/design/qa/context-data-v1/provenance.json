@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-30",
+  "source_sha256": {
+    "beyond_ui/context_files.py": "29076bfe34e8d05d0c0530d9cfe2b4742f98cda2ba5085d2b17fc2481501d0fe",
+    "beyond_ui/context_assets.py": "cd8c4a5fb7298d3cddcabee15c4f226056cdc54184859bcaada1541976f5c56d",
+    "beyond_ui/context_jump.py": "86eff3c7a3551bc139b6b0e4f50f482bb860e1dc525819da3a9b23f3dd93d51c",
+    "beyond_ui/context_editor.py": "108f893d2a5b0cbe2524dda6d9e716dc7b74116336cd15b1aa95f087286ca603",
+    "beyond_ui/context_rna.py": "e8016551e0b5f253b16270b3b21d9629a8ef82537eeea2458f74c94f6c4dddac",
+    "beyond_ui/pointer.py": "bbaee708ff30c00fd147fd20be7df14f6ece100975f64a01e9576d8faa29fc95",
+    "beyond_ui/search.py": "0b46cb3c86bb793198ebe4d321caede60bcdd2735977285519c46b92bcd0cf94",
+    "tests/blender_context_data_routes.py": "4c5283aecbb79e67a89cf75bd2a3b5f406a7ae230e85f2fed900d61dd73d4d7d"
+  },
+  "native_source_sha256": {
+    "rna_ID.cc": "4c53c551002d84193d14c390a5da578ed43759874b24153e373eccc2f5685caa",
+    "anim_channels_edit.cc": "8179bdcc7bddfe5eaf549681c6efb805b272c873bd11d8cb2b96cb78977c443a",
+    "screen_ops.cc": "1524bb835b01b1080d323b2a8177f4447cfdae2fca4f06835c58fceb64ddba12",
+    "asset_ops.cc": "94ae9ce907d1060b3f4dc7536ddd66590efb8e1680bf7d3dc72ce1ce53523732"
+  },
+  "native_revision": "d13f752e3b9c",
+  "evidence": "8 passing headless processes over Blender 5.1.2/5.2.2. No window launch, OS file opener or asset-preview job was executed by these tests.",
+  "limits": [
+    "Existing-editor routing requires the same window, correct editor mode, and visible exact channels. No new editor window or native Edit Driver popup.",
+    "Jump supports visible objects in Object Mode and bones on the active pose rig. Hidden/excluded owners and cross-mode routing remain disabled.",
+    "Native asset preview scheduling after successful mark is implemented but not executed in background fixtures.",
+    "Asset clear is disabled if the public asset_data copy setter is read-only; no incomplete metadata fallback.",
+    "Missing/unsaved relative file paths are unavailable.",
+    "Library/property overrides, custom-property defaults and unsupported native-button contributions remain open.",
+    "Exact-version API/Manual requests were attempted for 4.2/5.1/5.2 but unavailable from the web tool. Installed runtime and exact-build native source are the evidence; no new 4.2 or cross-platform qualification."
+  ],
+  "visual_acceptance": false
+}

@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "version": "5.1.2",
+  "checks": [
+    "Quick release dispatch, 200ms hold menu, release suppression and changed-poll rejection",
+    "Owned popup confirm/cancel on matching release, Return default, Cancel-default and CANCELLED retention",
+    "Normal/none/status/alert flags reach ordinary Canvas controls; keyed status refreshes outside paint",
+    "Read-only shortcut label retains exact owner identity and invalidates on keymap deletion",
+    "Component popups edit vector and enum values without dismissing; indexed context, right-cancel rollback and deleted owner rejection"
+  ]
+}

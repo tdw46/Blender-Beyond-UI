@@ -28,6 +28,8 @@ class BlenderTestRunner(unittest.TestCase):
             runner.require_no_focus.cache_clear()
             with (
                 patch("sys.argv", args),
+                # These are mocked-process tests; no Blender windows are launched.
+                patch.object(runner, "require_windowed_admission"),
                 patch.object(
                     runner.subprocess, "run", return_value=MagicMock(stdout=help_text)
                 ),
@@ -72,3 +74,33 @@ class BlenderTestRunner(unittest.TestCase):
 
     def test_timeout_kills_owned_process_and_rejects_stale_result(self):
         self.run_fixture(True, timeout=True)
+
+    def test_revoked_admission_blocks_before_any_process_launch(self):
+        with (
+            tempfile.TemporaryDirectory() as folder,
+            patch.object(runner, "ROOT", Path(folder)),
+            patch("sys.argv", ["runner", "--windowed", "--blender", "/test/blender"]),
+            patch.object(runner.subprocess, "Popen") as launch,
+            patch.object(runner.subprocess, "run") as probe,
+        ):
+            status = Path(folder) / "docs/WINDOWED_TEST_STATUS.json"
+            status.parent.mkdir()
+            status.write_text('{"admitted": false, "reason": "Revoked"}')
+            with self.assertRaisesRegex(RuntimeError, "Windowed tests suspended"):
+                runner.main()
+            launch.assert_not_called()
+            probe.assert_not_called()
+
+    def test_missing_focus_admission_fails_closed(self):
+        with (
+            tempfile.TemporaryDirectory() as folder,
+            patch.object(runner, "ROOT", Path(folder)),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "explicit focus admission"):
+                runner.require_windowed_admission()
+
+    def test_standing_authorization_admits_current_no_focus_route(self):
+        runner.require_windowed_admission()
+        status = json.loads((runner.ROOT / "docs/WINDOWED_TEST_STATUS.json").read_text())
+        self.assertIn("authorization", status)
+        self.assertTrue(status["prior_focus_failure"]["user_confirmed"])

@@ -1,0 +1,210 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 92008,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_single_line.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 92008,
+      "restore_requests": 0,
+      "seconds": 10.088582992553711,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Manual aliases and factory registration retain original classes; unchanged draw retains canvas; conditional rows rebuild automatically",
+        "Exact-owner right click, restoration of original draw, isolated teardown and re-registration pass",
+        "Delegating module loader receives custom content; unsupported mode revokes stale input and recovers; direct native dialog routes are reported"
+      ],
+      "performance": {
+        "record_and_signature_ms": {
+          "median": 0.012833974324166775,
+          "p95": 0.017208978533744812
+        },
+        "rebuild_layout_ms": {
+          "median": 0.04577054642140865,
+          "p95": 0.19029201939702034
+        },
+        "samples": 90,
+        "warmup": 10,
+        "controls": 3,
+        "ui_scale": 2.0,
+        "scope": "CPU authoring only; not GPU frame timing or BVT equivalence"
+      },
+      "error": null
+    },
+    "log": "one-line-0.log",
+    "suite": "one-line"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 92098,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_single_line.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 92098,
+      "restore_requests": 0,
+      "seconds": 10.149492025375366,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Manual aliases and factory registration retain original classes; unchanged draw retains canvas; conditional rows rebuild automatically",
+        "Exact-owner right click, restoration of original draw, isolated teardown and re-registration pass",
+        "Delegating module loader receives custom content; unsupported mode revokes stale input and recovers; direct native dialog routes are reported"
+      ],
+      "performance": {
+        "record_and_signature_ms": {
+          "median": 0.012062489986419678,
+          "p95": 0.015125027857720852
+        },
+        "rebuild_layout_ms": {
+          "median": 0.04274997627362609,
+          "p95": 0.18966698553413153
+        },
+        "samples": 90,
+        "warmup": 10,
+        "controls": 3,
+        "ui_scale": 2.0,
+        "scope": "CPU authoring only; not GPU frame timing or BVT equivalence"
+      },
+      "error": null
+    },
+    "log": "one-line-1.log",
+    "suite": "one-line"
+  },
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 91744,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_addon_setup.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 91744,
+      "restore_requests": 0,
+      "seconds": 10.224815011024475,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "checks": [
+        "Two vendored packages and N-panel/Properties hosts register independently and auto-start input without draw-time timers",
+        "Actual custom toggle input and exact-property right-click menu; retained canvas across redraw",
+        "Default commit creates working undo; undo invalidates old canvases",
+        "Refresh coalesces; idempotent teardown preserves the other consumer",
+        "Unregister/register restores custom panel lifecycle",
+        "Factory file load rebuilds input ownership and invalidates old generations"
+      ],
+      "error": null,
+      "version": "5.1.2"
+    },
+    "log": "explicit-regression-0.log",
+    "suite": "explicit-regression"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 91809,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_addon_setup.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 91809,
+      "restore_requests": 0,
+      "seconds": 10.099302887916565,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "checks": [
+        "Two vendored packages and N-panel/Properties hosts register independently and auto-start input without draw-time timers",
+        "Actual custom toggle input and exact-property right-click menu; retained canvas across redraw",
+        "Default commit creates working undo; undo invalidates old canvases",
+        "Refresh coalesces; idempotent teardown preserves the other consumer",
+        "Unregister/register restores custom panel lifecycle",
+        "Factory file load rebuilds input ownership and invalidates old generations"
+      ],
+      "error": null,
+      "version": "5.2.2 LTS"
+    },
+    "log": "explicit-regression-1.log",
+    "suite": "explicit-regression"
+  }
+]

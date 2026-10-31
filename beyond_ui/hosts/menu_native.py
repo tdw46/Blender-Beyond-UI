@@ -147,7 +147,7 @@ def curve(source):
     owner = source.owner()
     animation = owner.id_data.animation_data
     return (
-        animation.drivers.find(owner.path_from_id(source.name), index=source.index or 0)
+        animation.drivers.find(source.property_path(owner), index=source.index or 0)
         if animation
         else None
     )
@@ -156,8 +156,10 @@ def curve(source):
 def driver_enabled(kind, source, target):
     import bpy
 
+    if not target.valid() or not source.valid():
+        return False
     owner = source.owner()
-    meta = owner.bl_rna.properties[source.name]
+    meta = source.metadata(owner)
     if meta.type not in {"BOOLEAN", "INT", "FLOAT", "ENUM"}:
         return False
     if getattr(meta, "is_array", False) and source.index is None:
@@ -191,7 +193,7 @@ def driver_apply(kind, source, target):
         raise RuntimeError("Driver clipboard action is unavailable")
     owner = source.owner()
     identity = owner.id_data
-    path = owner.path_from_id(source.name)
+    path = source.property_path(owner)
     identity.path_resolve(path)
     index = source.index or 0
     functions = api()
@@ -231,7 +233,11 @@ def driver_apply(kind, source, target):
             restored = identity.animation_data.drivers.from_existing(src_driver=backup)
             restored.data_path, restored.array_index = path, index
         if not had_animation:
-            identity.animation_data_clear()
+            animation = identity.animation_data
+            if animation is not None and not (
+                animation.action or animation.drivers or animation.nla_tracks
+            ):
+                identity.animation_data_clear()
         raise
     finally:
         bpy.data.objects.remove(staging)
@@ -256,11 +262,26 @@ def _favorite_menus(context):
         functions["free_array"](pointer)
 
 
+def favorite_supported(source, context):
+    from ..context_paths import owner_path
+
+    path = owner_path(source, context)
+    # DNA stores UTF-8 byte arrays, not arbitrary strings. Never silently truncate
+    # an escaped ID-property key or owner path into a different Favorite.
+    return (
+        path is not None
+        and context.area is not None
+        and len(path.encode()) < 256
+        and len(source.name.encode()) < 64
+        and api() is not None
+    )
+
+
 def property_favorite(source, context, *, remove=False):
     from ..context_paths import owner_path
 
     path = owner_path(source, context)
-    if path is None or api() is None:
+    if not favorite_supported(source, context):
         return False
     args = (
         path.encode(),
@@ -284,8 +305,10 @@ def add_property_favorite(source, context):
 
     path = owner_path(source, context)
     functions = api()
-    if functions is None or path is None or context.area is None:
-        raise RuntimeError("Quick Favorites is unavailable for this owner/context")
+    if not favorite_supported(source, context):
+        raise RuntimeError(
+            "Quick Favorites is unavailable for this owner/context or path length"
+        )
     owner = source.owner()
     # Exact DNA_userdef_types.h in both admitted builds: two pointers, char,
     # seven pad bytes, context[64], then ListBase items at byte 88. No other
@@ -298,7 +321,7 @@ def add_property_favorite(source, context):
     args = (items, path.encode(), source.name.encode(), index)
     if not functions["find_property"](*args):
         functions["add_property"](
-            items, owner.bl_rna.properties[source.name].name.encode(), *args[1:]
+            items, source.metadata(owner).name.encode(), *args[1:]
         )
         context.preferences.is_dirty = True
     if not functions["find_property"](*args):

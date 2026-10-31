@@ -83,8 +83,10 @@ def tick():
             assert any(r["valid"] for r in demo._host.records.values())
             with bpy.context.temp_override(window=window, area=area, region=region):
                 bpy.ops.beyonduidemo.input("INVOKE_DEFAULT")
-            emit("MOUSEMOVE", "NOTHING", (100, 175))
-            emit("LEFTMOUSE", logical=(100, 175))
+            from beyond_ui.widgets.metrics import PICKER
+
+            emit("MOUSEMOVE", "NOTHING", (100, PICKER["list"][1] + 15))
+            emit("LEFTMOUSE", logical=(100, PICKER["list"][1] + 15))
             emit("LEFTMOUSE", "RELEASE")
         elif stage == 2:
             assert selected == [0], selected
@@ -97,9 +99,9 @@ def tick():
                 "keyboard selection survives pointer leaving owned region"
             )
             thumb, _, _ = widget.scrollbar()
-            emit("MOUSEMOVE", "NOTHING", (603, thumb[1] + thumb[3] / 2))
-            emit("LEFTMOUSE", logical=(603, thumb[1] + thumb[3] / 2))
-            emit("MOUSEMOVE", "NOTHING", (603, 340))
+            emit("MOUSEMOVE", "NOTHING", (widget.width - 10, thumb[1] + thumb[3] / 2))
+            emit("LEFTMOUSE", logical=(widget.width - 10, thumb[1] + thumb[3] / 2))
+            emit("MOUSEMOVE", "NOTHING", (widget.width - 10, 300))
             emit("LEFTMOUSE", "RELEASE")
         elif stage == 4:
             assert widget.rows.offset > 100000, widget.rows.offset

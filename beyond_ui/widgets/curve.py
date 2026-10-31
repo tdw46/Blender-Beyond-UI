@@ -11,9 +11,10 @@ class CurveMapping(Widget):
     width, height = SIZE
     graph = CURVE["graph"]
 
-    def __init__(self, binding, *, evaluate=None, channel=None):
+    def __init__(self, binding, *, evaluate=None, channel=None, brush=False):
         super().__init__()
         self.binding = binding
+        self.brush = brush
         self.evaluate = evaluate
         self.channel = channel
         self.selected = 0
@@ -34,6 +35,12 @@ class CurveMapping(Widget):
         self.capturing = False
 
     def event(self, event, x, y, *, clipboard=None):
+        if (
+            not self.capturing
+            and hasattr(self.binding, "refresh")
+            and not self.binding.valid()
+        ):
+            self.binding.refresh()
         if not self.binding.valid():
             self.cancel()
             return False
@@ -43,6 +50,7 @@ class CurveMapping(Widget):
             self.cancel()
             return True
         points = tuple(self.binding.read())
+        self.selected = max(0, min(self.selected, len(points) - 1))
         if self.text_edit:
             result = self.edit_text(event, clipboard=clipboard)
             if result is False:
@@ -67,19 +75,37 @@ class CurveMapping(Widget):
                     max(0.0, min(1.0, (x - a) / w)),
                     max(0.0, min(1.0, 1 - (y - b) / h)),
                 )
+                moved = values[self.selected]
                 self.transaction.update(tuple(values))
+                self.selected = min(
+                    range(len(values)),
+                    key=lambda i: sum(
+                        (a - b) ** 2 for a, b in zip(self.binding.read()[i], moved)
+                    ),
+                )
             elif kind == "LEFTMOUSE" and event.value == "RELEASE":
                 self._finish()
             return True
         if kind == "DEL" and press and len(points) > 2:
             values = tuple(p for i, p in enumerate(points) if i != self.selected)
-            self.binding.write(values)
-            self.binding.commit(points, values)
+            if hasattr(self.binding, "remove"):
+                self.binding.remove(self.selected)
+            else:
+                edit = Edit(self.binding)
+                edit.update(values)
+                edit.finish()
             self.selected = min(self.selected, len(values) - 1)
             return True
         if kind != "LEFTMOUSE" or not press:
             return False
-        for i, r in enumerate(CURVE["tabs"]):
+        if self.brush:
+            for i, r in enumerate(CURVE["tabs"][:3]):
+                if contains(r, x, y) and points:
+                    edit = Edit(self.binding.handle(self.selected))
+                    edit.update(("AUTO", "VECTOR", "AUTO_CLAMPED")[i])
+                    edit.finish()
+                    return True
+        for i, r in enumerate(CURVE["tabs"] if not self.brush else ()):
             if contains(r, x, y) and self.channel:
                 old = self.channel.read()
                 self.channel.write(i)
@@ -95,9 +121,15 @@ class CurveMapping(Widget):
         if contains(self.graph, x, y):
             if event.value == "DOUBLE_CLICK":
                 values = (*points, ((x - a) / w, 1 - (y - b) / h))
-                self.binding.write(values)
-                self.binding.commit(points, values)
-                self.selected = len(points)
+                edit = Edit(self.binding)
+                edit.update(values)
+                edit.finish()
+                added = values[-1]
+                current = self.binding.read()
+                self.selected = min(
+                    range(len(current)),
+                    key=lambda i: sum((a - b) ** 2 for a, b in zip(current[i], added)),
+                )
                 return True
             if not points:
                 return False
@@ -127,16 +159,27 @@ class CurveMapping(Widget):
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
         )
         p.card("Curve Mapping")
+        if not self.binding.valid():
+            p.text(self.graph, "Curve changed — move here to refresh", size=19)
+            return
         points = tuple(self.binding.read())
         if not points:
             return
         channel = self.channel.read() if self.channel else 0
-        for i, (label, r) in enumerate(zip("CRGB", CURVE["tabs"])):
-            p.surface(r, "tab" if i == channel else "button")
+        modes = ("AUTO", "VECTOR", "AUTO_CLAMPED")
+        labels = ("Auto", "Vector", "Clamped") if self.brush else "CRGB"
+        handle = (
+            self.binding.handle_value(min(self.selected, len(points) - 1))
+            if self.brush
+            else None
+        )
+        for i, (label, r) in enumerate(zip(labels, CURVE["tabs"])):
+            active = handle == modes[i] if self.brush else i == channel
+            p.surface(r, "tab" if active else "button")
             p.text(
                 r,
                 label,
-                role="selected_text" if i == channel else "text",
+                role="selected_text" if active else "text",
                 size=19,
                 align="center",
             )
@@ -155,7 +198,11 @@ class CurveMapping(Widget):
                     )
                 )
             p.lines(lines, palette["grid_major" if major else "grid_minor"], p.scale)
-        signature = (points, channel)
+        signature = (
+            points,
+            channel,
+            self.binding.revision() if hasattr(self.binding, "revision") else None,
+        )
         if signature != self._signature:
             min_x = min(pt[0] for pt in points)
             span = max(pt[0] for pt in points) - min_x
@@ -193,6 +240,9 @@ class CurveMapping(Widget):
                 else f"{points[index][i]:.2f}"
             )
             p.field(CURVE["fields"][i], label, value, split=54)
-        p.surface(CURVE["fields"][2])
-        p.text(CURVE["fields"][2], "Auto", inset=18)
-        p.chevron(583, 432, 14)
+        if not self.brush:
+            p.surface(CURVE["fields"][2])
+        label = handle.replace("AUTO_CLAMPED", "Clamped").title() if handle else "Auto"
+        p.text(CURVE["fields"][2], label, inset=18)
+        if not self.brush:
+            p.chevron(583, 432, 14)

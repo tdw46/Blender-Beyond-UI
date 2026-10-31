@@ -22,7 +22,19 @@ class Search:
     event = Editor.event
 
     def pointer(self, event, x, rect, measure):
-        Editor.pointer(self, event, x, rect, measure, full_width=True)
+        from .menu_metrics import Metrics
+
+        # Editor adds 5 units internally; match the shared magnifier text origin.
+        left, top, width, height = rect
+        shift = Metrics.SEARCH_TEXT - 5
+        Editor.pointer(
+            self,
+            event,
+            x,
+            (left + shift, top, max(0, width - shift), height),
+            lambda text, size: measure(text, Metrics.SEARCH_FONT_SIZE),
+            full_width=True,
+        )
 
     def filtered(self):
         words = self.text.text.casefold().split()

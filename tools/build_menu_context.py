@@ -16,6 +16,9 @@ subprocess.run(
 subprocess.run(["codesign", "--force", "--sign", "-", str(binary)], check=True)
 record = dict(
     source_sha256=digest,
+    python_adapter_sha256=hashlib.sha256(
+        (ROOT / "beyond_ui/hosts/menu_context.py").read_bytes()
+    ).hexdigest(),
     binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest(),
     library=binary.name,
     qualification="Exact menu_native admission required; Darwin arm64 5.1.2/5.2.2 only",

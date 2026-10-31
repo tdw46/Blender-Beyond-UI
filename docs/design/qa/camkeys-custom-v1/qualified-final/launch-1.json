@@ -1,0 +1,14 @@
+{
+  "activates" : false,
+  "error" : "",
+  "events" : [
+
+  ],
+  "final_frontmost_pid" : 12179,
+  "initial_frontmost_pid" : 12179,
+  "new_instance" : true,
+  "pid" : 29362,
+  "restore_requests" : 0,
+  "seconds" : 12.814590930938721,
+  "timeout" : false
+}

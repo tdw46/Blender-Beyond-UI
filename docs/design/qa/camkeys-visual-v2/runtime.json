@@ -1,0 +1,62 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 83137,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_camkeys.py"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 71460,
+      "initial_frontmost_pid": 71460,
+      "new_instance": true,
+      "pid": 83137,
+      "restore_requests": 0,
+      "seconds": 10.569382071495056,
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "dimensions": [
+        1280,
+        1520
+      ],
+      "dpi": 2.0,
+      "frames": 195,
+      "native_text_batching": {
+        "native_text_batch": true,
+        "baseline_sha256": null,
+        "helper_sha256": "a8aef9cb6cbf9b39d3ade908885d2b0203491b67e002c092bb97ded1623ade43"
+      },
+      "glass_productions": 1,
+      "icon_cpu_comparison": {
+        "mapped": 2.508104022126645,
+        "unmapped": 2.431145985610783
+      },
+      "retained_icon_batches": 16,
+      "paint_cpu_median_ms": 2.4694374878890812,
+      "paint_cpu_p95_ms": 2.7739579090848565,
+      "fixture": "Actual consumer UIList and registered falloff popover in controlled GPU offscreen; synthetic contrasting backdrop. Dark = active factory theme; light/purple = synthetic theme fixtures.",
+      "exact_match": false,
+      "visual_acceptance": "Pending Tyler review",
+      "consumer": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+      "fixture_sha256": "442c5eeace6634a24e22516fa835d83ab3f65a291cd33c3c04dbc4c412e008fa"
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-visual-v2/verified-run/blender-0.log"
+  }
+]

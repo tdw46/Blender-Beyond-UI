@@ -255,6 +255,9 @@ class CollectionSearch:
         key = hit.part[1]
 
         def rows(t, c):
+            from .context_assets import entries as asset_entries
+            from .context_jump import entries as jump_entries
+
             return (
                 Entry(
                     "SELECT_SEARCH",
@@ -268,6 +271,8 @@ class CollectionSearch:
                     lambda t, c: self.copy_name(key, c),
                     lambda t, c: self.valid(key),
                 ),
+                *asset_entries(lambda: self.candidate(key), c),
+                *jump_entries(lambda: self.candidate(key)),
             )
 
         return replace(hit, payload=rows)
@@ -279,4 +284,13 @@ class CollectionSearch:
                 *target.payload(target, context),
                 *(provider(target, context) if provider else ()),
             )
-        return (provider or default_entries)(target, context)
+        rows = tuple((provider or default_entries)(target, context))
+        if not self.pointer:
+            key = self.selected()
+            if key is not None and self.valid(key):
+                from .context_assets import entries as asset_entries
+                from .context_jump import entries as jump_entries
+
+                rows += asset_entries(lambda: self.candidate(key), context)
+                rows += jump_entries(lambda: self.candidate(key))
+        return rows

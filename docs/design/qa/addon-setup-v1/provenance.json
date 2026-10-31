@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-30",
+  "source_sha256": {
+    "beyond_ui/__init__.py": "5b8da11d4a3bc9a38aba50b74aeb3ec28bc8b718a9a29865164b81f260d18523",
+    "beyond_ui/addon.py": "fff50c93957df93978f7dafba206a558f75378486d0f8eb3ad1e85aa977e2fbf",
+    "beyond_ui/hosts/addon.py": "00bf0445ffc6dbc07b4f6bb415b13ef67ac5f23c752246e0437b6cb49c480378",
+    "tools/vendor.py": "80bbbb7e2bb861ce34516a47f3eb9367c78468c526db7946a535ab479a9d6eec",
+    "examples/panels.py": "b8f68c700b9d865d7c713ebe6d20d977ee083a52d5a2f16b7f5224d7b7f9a523",
+    "tests/blender_addon_setup.py": "ca287013e056a0d0f31848a35548ff7902a57f4fa25af8cc6f5a571ba1ad43a0",
+    "tests/test_addon_setup.py": "0ca3d8e97e8c8dd870e9e49a66c3c84a916c6420b55480b8e5c40793d78e1107"
+  },
+  "vendored_copies_verified_against_source": true,
+  "tests": "Two independent vendored namespaces; N-panel and Properties anchors; retained input, exact-owner menu, undo, refresh, idempotent lifecycle and factory-file load.",
+  "scope": "Optional integration helper; renderer, glass, theme and animation implementation unchanged. Existing exact-build/platform admission retained.",
+  "api_evidence": "Exact 4.2/5.1/5.2 Panel API and Manual pages requested; web retrieval failed. Installed 5.1.2/5.2.2 runtimes exercised. No new 4.2/platform qualification.",
+  "initial_attempts": "Earlier fixture/registration iterations retained under build/addon-setup; final source and final pass are recorded here."
+}

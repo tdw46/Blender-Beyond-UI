@@ -8,7 +8,9 @@ class ShortcutRegistry:
     """A consuming extension registers/closes one registry under its unique ID.
 
     Commands are stable logical names; callbacks are scoped to current windows.
-    Hidden/replaced controls fail closed. Rebind after rebuilding a host canvas.
+    Hidden/replaced callback controls fail closed. Rebind after canvas rebuilds.
+    Numeric property shortcuts use a separate undoable operator and follow the
+    future context owner, like native property shortcuts; no callback is retained.
     """
 
     def __init__(self, owner, *, limit=256, keymap="Window", conflict_keymaps=None):
@@ -21,6 +23,8 @@ class ShortcutRegistry:
         self.classname = namespace.upper() + "_OT_dispatch"
         self.commands = OrderedDict()
         self.operator_class = None
+        self.property_idname = namespace + ".set_property"
+        self.property_operator_class = None
         self.error = None
 
     def register(self):
@@ -50,8 +54,17 @@ class ShortcutRegistry:
                 "execute": execute,
             },
         )
+        from .context_custom_shortcuts import operator_class
+
+        prop_cls = operator_class(self.property_idname)
         bpy.utils.register_class(cls)
+        try:
+            bpy.utils.register_class(prop_cls)
+        except Exception:
+            bpy.utils.unregister_class(cls)
+            raise
         self.operator_class = cls
+        self.property_operator_class = prop_cls
 
     def bind(self, command, context, callback, *, valid=lambda context: True):
         if self.operator_class is None:
@@ -138,6 +151,9 @@ class ShortcutRegistry:
         import bpy
 
         self.commands.clear()
+        prop_cls, self.property_operator_class = self.property_operator_class, None
+        if prop_cls is not None and prop_cls.is_registered:
+            bpy.utils.unregister_class(prop_cls)
         cls, self.operator_class = self.operator_class, None
         if cls is not None and cls.is_registered:
             bpy.utils.unregister_class(cls)

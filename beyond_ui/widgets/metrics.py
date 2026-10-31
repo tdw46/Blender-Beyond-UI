@@ -25,14 +25,21 @@ RAMP = {
     "color": (365, 373, 239, 57),
     "swatch": (372, 379, 187, 45),
 }
+# Picker artwork uses 2 design units per host unit (22 px body -> 11).
+# Normalize its menu rhythm through the same policy as enum/context popovers.
+from ..menu_metrics import Metrics as _Menu
+
+PICKER_SIZE = (2 * _Menu.WIDTH, 378.0)
 PICKER = {
-    "search": (24, 74, 582, 57),
-    "list": (25, 147, 560, 206),
-    "row_height": 70.0,
-    "scroll": (598, 148, 11, 208),
-    "toolbar": (25, 381, 582, 62),
-    "actions": ((25, 381, 186, 62), (212, 381, 206, 62), (419, 381, 188, 62)),
+    "title": (30, 16, 388, 36),
+    "search": (25, 63, 398, 49),
+    "list": (16, 128, 416, 180),
+    "row_height": 2 * _Menu.ROW_HEIGHT,
+    "scroll": (434, 128, 6, 180),
+    "toolbar": (16, 324, 416, 38),
+    "actions": ((16, 324, 138, 38), (154, 324, 140, 38), (294, 324, 138, 38)),
 }
+
 COLOR = {
     "tabs": ((30, 71, 282, 41), (320, 71, 282, 41)),
     "sv": (30, 123, 325, 263),

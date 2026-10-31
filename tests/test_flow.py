@@ -114,13 +114,13 @@ class Flow(unittest.TestCase):
         with patch.dict("sys.modules", {"bpy": None}):
             self.assertEqual(Layout().grid_flow().direction, "VERTICAL")
 
-    def test_inert_attributes_do_not_claim_capability(self):
+    def test_presentation_attributes_are_supported(self):
         ui = Layout()
         for name in (
             "alert",
             "emboss",
         ):
-            self.assertFalse(ui.supports(name), name)
+            self.assertTrue(ui.supports(name), name)
         for name in (
             "enabled",
             "active",

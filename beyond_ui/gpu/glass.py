@@ -221,6 +221,7 @@ def draw(
     blur=0.3,
     capture_rect=None,
     viewport_present=None,
+    prepare_only=False,
 ):
     """Sample a retained blurred crop; only changed underlays run its producer."""
     global error
@@ -231,7 +232,7 @@ def draw(
 
     viewport = gpu.state.viewport_get()
     vx, vy, vw, vh = viewport
-    if (
+    if not prepare_only and (
         source_key(key, shared_key, rect, (vw, vh)) == shared_key
         and shared_key is not None
     ):
@@ -419,6 +420,8 @@ def draw(
             owner["signature"] = signature
             owner["productions"] += 1
             owner["sample_rect"] = (left, bottom, cw, ch)
+        if prepare_only:
+            return True
         gpu.state.viewport_set(*viewport)
         gpu.state.scissor_set(*scissor)
         gpu.state.blend_set("ALPHA")

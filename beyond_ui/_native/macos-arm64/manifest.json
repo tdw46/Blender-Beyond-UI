@@ -6,9 +6,9 @@
     "ec6e62d40fa9": 51,
     "d13f752e3b9c": 52
   },
-  "library": "bridge-2eace69413d1f04d.dylib",
-  "source_sha256": "2eace69413d1f04de77b511e2fa71afddc8a7d8de349918975d56a9a0b8c088b",
-  "binary_sha256": "0ef27368eac6fe650f99c005515fb1a66a32eb2b5994694c3a619ce2d840673f",
+  "library": "bridge-1053693ab97c16fc.dylib",
+  "source_sha256": "1053693ab97c16fc56ff8b1036208a4f4beda35b146672f690f51f7eb4974d10",
+  "binary_sha256": "6b72faa94ace18414f81130cbe0591940cbae885eb1bac342ee097beeef24a15",
   "abi": "beyond-ui-extra-v1",
   "qualification": "experimental; see docs/VALIDATION.md"
 }

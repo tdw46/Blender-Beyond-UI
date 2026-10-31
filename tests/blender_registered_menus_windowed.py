@@ -56,6 +56,8 @@ def click_row(label, kind="LEFTMOUSE"):
     menu = current()[1].context_menu
     rect = next(r for i, r, row in menu.visible_rows() if row.label == label)
     emit(kind, logical=(rect[0] + rect[2] / 2, rect[1] + rect[3] / 2))
+    if kind == "LEFTMOUSE":
+        emit(kind, "RELEASE", logical=(rect[0] + rect[2] / 2, rect[1] + rect[3] / 2))
 
 
 def finish(passed, error=""):

@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "pure_tests": 257,
+  "runs": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 82334,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_addon_setup.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.openai.codex",
+            "kind": "activation",
+            "pid": 13701,
+            "seconds": 10.088086009025574
+          }
+        ],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 99230,
+        "new_instance": true,
+        "pid": 82334,
+        "restore_requests": 0,
+        "seconds": 10.282600998878479,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "Two vendored packages and N-panel/Properties hosts register independently and auto-start input without draw-time timers",
+          "Actual custom toggle input and exact-property right-click menu; retained canvas across redraw",
+          "Default commit creates working undo; undo invalidates old canvases",
+          "Refresh coalesces; idempotent teardown preserves the other consumer",
+          "Unregister/register restores custom panel lifecycle",
+          "Factory file load rebuilds input ownership and invalidates old generations"
+        ],
+        "error": null,
+        "version": "5.1.2"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/addon-setup/release-check/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 82411,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_addon_setup.py"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.hnc.Discord",
+            "kind": "activation",
+            "pid": 1708,
+            "seconds": 6.914095044136047
+          }
+        ],
+        "final_frontmost_pid": 1708,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 82411,
+        "restore_requests": 0,
+        "seconds": 10.078508019447327,
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "Two vendored packages and N-panel/Properties hosts register independently and auto-start input without draw-time timers",
+          "Actual custom toggle input and exact-property right-click menu; retained canvas across redraw",
+          "Default commit creates working undo; undo invalidates old canvases",
+          "Refresh coalesces; idempotent teardown preserves the other consumer",
+          "Unregister/register restores custom panel lifecycle",
+          "Factory file load rebuilds input ownership and invalidates old generations"
+        ],
+        "error": null,
+        "version": "5.2.2 LTS"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/addon-setup/release-check/blender-1.log"
+    }
+  ],
+  "focus": "No owned Blender PID became active. Changes between unrelated foreground apps are preserved in the audit."
+}

@@ -52,7 +52,7 @@ class Decorator:
     def refresh(self):
         owner = self.source.owner()
         self.collections, drivers = channel_collections(owner.id_data)
-        path = owner.path_from_id(self.source.name)
+        path = self.source.property_path(owner)
         match = lambda f: f.data_path == path and (
             self.source.index is None or f.array_index == self.source.index
         )
@@ -92,7 +92,7 @@ class Decorator:
 
     def editable(self, canvas):
         try:
-            meta = self.source.owner().bl_rna.properties[self.source.name]
+            meta = self.source.metadata()
             return (
                 canvas.menu_commit is not None
                 and self.binding.valid()
