@@ -27,6 +27,9 @@ class Theme:
     label_band: float = 26.0
     list_row_height: float = 40.0
     stylesheet: object = None
+    heading_height: float = 24.0
+    box_padding: float | None = None
+    separator_height: float = 8.0
 
     def __post_init__(self):
         if self.palette not in {"BLENDER", "REFERENCE"}:

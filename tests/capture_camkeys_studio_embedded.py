@@ -15,7 +15,12 @@ spec = importlib.util.spec_from_file_location(
 addon = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = addon
 spec.loader.exec_module(addon)
-OUT = ROOT / "docs/design/qa/camkeys-studio-v1/embedded"
+OUT = Path(
+    os.environ.get(
+        "BEYOND_UI_STUDIO_EMBEDDED",
+        str(ROOT / "docs/design/qa/camkeys-studio-v1/embedded"),
+    )
+)
 OUT.mkdir(parents=True, exist_ok=True)
 slugs = [
     "camkeys_main",

@@ -32,13 +32,14 @@ def run():
         from beyond_ui.context_menu import Entry
 
         canvas = Canvas()
+        cards = bool(os.environ.get("BEYOND_UI_BENCHMARK_CARDS"))
         ui = Layout(canvas, context=ctx)
         ui.title(text="Operator Menu Painter")
         rows = tuple(
             Entry(f"action:{i}", f"Action {i:03}", lambda t, c: None) for i in range(48)
         )
         for row_index in range(24):
-            row = canvas.row()
+            row = canvas.box().row() if cards else canvas.row()
             for col in range(6):
                 control = row.button(
                     f"{row_index}:{col}",
@@ -182,7 +183,12 @@ def run():
             from beyond_ui import StyleSheet
 
             base_theme = canvas.theme
+            if cards:
+                StyleSheet(cards=True).apply(canvas)
+                canvas.arrange(560)
+                base_theme = canvas.theme
             sheet = StyleSheet(
+                cards=cards,
                 colors={
                     "accent": "#F17C67",
                     "toggle_on": "#39BFA5C2",
@@ -244,6 +250,7 @@ def run():
             paired_method="200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; identical painter, theme tokens overlaid only for after. No geometry or visible-count changes. 20 warmups each; readback excluded.",
             workload="144 action buttons in 24 rows, clipped and scrolled through a 520px viewport, with an identical 48-action searchable context menu on both revisions. Paint: 20 warmups each, 200 alternating CPU submission samples per revision. Framebuffer readback excluded",
             stable_resources=True,
+            glass_card_count=len(getattr(canvas, "_style_cards", ())),
             batch_admission=batch_info,
             retained_resources=before,
             source_sha256={

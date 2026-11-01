@@ -23,6 +23,9 @@ class BlenderTestRunner(unittest.TestCase):
                 args.append("--windowed")
             if macos:
                 args.append("--macos-noactivate")
+                source = output / "tools/launch_blender_macos.swift"
+                source.parent.mkdir()
+                source.touch()
                 launcher = output / "build/focus-audit/launch-blender"
                 launcher.parent.mkdir(parents=True)
                 launcher.touch()

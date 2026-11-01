@@ -59,6 +59,21 @@ def prepare(canvas):
                 if child.kind == "number" and child.options.get("slider"):
                     child.options["_slider_stacked"] = bool(child.label)
                     child.options["_label_band"] = canvas.theme.label_band
+        # A leading disclosure row with a trailing section icon is an authored
+        # section header. Single centered help actions retain ordinary text.
+        if group.kind == "box" and children and children[0].kind == "row":
+            header = children[0].children
+            if (
+                len(header) == 2
+                and header[0].kind == "toggle"
+                and header[0].options.get("bool_button")
+                and header[0].options.get("icon") in {"TRIA_DOWN", "TRIA_RIGHT"}
+                and header[1].kind == "label"
+                and not header[1].label
+            ):
+                header[0].options["text_role"] = "title"
+                header[0].options["text_alignment"] = "LEFT"
+                header[0].options["section_disclosure"] = True
         if group.kind not in {"box", "column"}:
             return
         for i, child in enumerate(children[:-1]):

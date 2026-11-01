@@ -126,7 +126,7 @@ def run():
                         addon.__beyond_ui_integration__.ui, "stylesheet", None
                     )
                     if sheet is not None:
-                        sheet.apply(ui.canvas)
+                        sheet.apply(ui.canvas, variant=getattr(cls, "beyond_ui_style", ""))
                     ui.title(text=labels[slug])
                     try:
                         runtime.draw_functions.get(cls, cls.draw)(
@@ -321,7 +321,11 @@ def run():
         Path(os.environ["BEYOND_UI_TEST_RESULT"]).write_text(
             json.dumps(result, indent=2, default=str)
         )
-        bpy.ops.wm.quit_blender()
+        addon.unregister()
+        # Let the callback's GPU/Python locals unwind before context teardown.
+        bpy.app.timers.register(
+            lambda: (bpy.ops.wm.quit_blender(), None)[1], first_interval=0.2
+        )
     return None
 
 

@@ -1,11 +1,11 @@
 [
   {
     "title": "CamKeys Studio live appearance snapshots",
-    "path": "docs/media/panels/camkeys-studio-appearance.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-appearance.gif"
   },
   {
     "title": "CamKeys Studio panel change motion",
-    "path": "docs/media/panels/camkeys-studio-camkeys_main.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-camkeys_main.gif"
   },
   {
     "title": "Current core sliders, switches and numeric entry",
@@ -209,46 +209,46 @@
   },
   {
     "title": "CamKeys Studio \u00b7 Forced Perspective",
-    "path": "docs/media/panels/camkeys-studio-auto_fov.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-auto_fov.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Baking",
-    "path": "docs/media/panels/camkeys-studio-baking.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-baking.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 CamKeys Linking",
-    "path": "docs/media/panels/camkeys-studio-camkeys_linking.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-camkeys_linking.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 CamProps",
-    "path": "docs/media/panels/camkeys-studio-camprops.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-camprops.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Lattice Perspective",
-    "path": "docs/media/panels/camkeys-studio-lattice_auto_fov_modifier.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-lattice_auto_fov_modifier.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Billboard Emulation",
-    "path": "docs/media/panels/camkeys-studio-billboard_settings.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-billboard_settings.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Dolly Expressions",
-    "path": "docs/media/panels/camkeys-studio-dolly_expressions.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-dolly_expressions.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Lens Compensation",
-    "path": "docs/media/panels/camkeys-studio-lens_compensation.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-lens_compensation.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Object Falloff",
-    "path": "docs/media/panels/camkeys-studio-falloff_popover.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-falloff_popover.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Distance Falloff",
-    "path": "docs/media/panels/camkeys-studio-distance_falloff_popover.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-distance_falloff_popover.gif"
   },
   {
     "title": "CamKeys Studio \u00b7 Lens Falloff",
-    "path": "docs/media/panels/camkeys-studio-flatten_falloff_popover.gif"
+    "path": "docs/media/panels/camkeys-studio-v2-flatten_falloff_popover.gif"
   }
 ]

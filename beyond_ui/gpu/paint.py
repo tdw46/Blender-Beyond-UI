@@ -233,6 +233,7 @@ def paint(
             for card in getattr(canvas, "_style_cards", ()):
                 if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
                     surface(mapped(card), palette["card"])
+                    skin.inset_outline(mapped(card), palette, scale, t.radius)
         for control in canvas.visible_controls(logical) if controls else ():
             r = mapped(control.rect)
             if control.options.get("search_bar"):
@@ -402,13 +403,21 @@ def paint(
                                 a, b + d / 2, c, scale, palette["muted"], radius=0
                             )
                 elif kind == "toggle" and control.options.get("bool_button"):
-                    if value or canvas.hover == control.key:
+                    if control.options.get("section_disclosure"):
+                        surface(
+                            r,
+                            palette["hover"]
+                            if canvas.hover == control.key
+                            else palette["bar"],
+                        )
+                    elif value or canvas.hover == control.key:
                         surface(r, palette["selected"] if value else palette["hover"])
                     alignment = control.options.get("text_alignment", "EXPAND")
                     text(
                         control.label,
                         r,
                         ink,
+                        role=control.options.get("text_role", "body"),
                         center=alignment in {"EXPAND", "CENTER"},
                         right_align=alignment == "RIGHT",
                         icon=control.options.get("icon"),
@@ -731,15 +740,29 @@ def paint(
                         )
                 elif control.options.get("_heading_lines"):
                     lines = control.options["_heading_lines"]
-                    line_height = 18 * scale
+                    line_height = max(18, t.font_size * 18 / 11) * scale
                     top = b + d / 2 + len(lines) * line_height / 2
                     for i, line in enumerate(lines):
+                        gutter = (
+                            control.options.get("_heading_icon_gutter", 0) * scale
+                            if i
+                            else 0
+                        )
                         text(
                             line,
-                            (a, top - (i + 1) * line_height, c, line_height),
+                            (
+                                a + gutter,
+                                top - (i + 1) * line_height,
+                                c - gutter,
+                                line_height,
+                            ),
                             ink,
                             "title",
                             inset=0,
+                            icon=control.options.get("icon") if i == 0 else None,
+                            icon_value=control.options.get("icon_value", 0)
+                            if i == 0
+                            else 0,
                         )
                 else:
                     label_get = control.options.get("label_get")

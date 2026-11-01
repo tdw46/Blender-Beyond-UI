@@ -417,28 +417,28 @@ GPL-3.0-or-later. Preserve the license and notice when vendoring.
 
 Real Blender GPU captures of the shared change pulse. Appearance uses state snapshots. Generated references and conditional-state limits are on the Studio review page.
 
-![CamKeys Studio · Forced Perspective](media/panels/camkeys-studio-auto_fov.gif)
+![CamKeys Studio · Forced Perspective](media/panels/camkeys-studio-v2-auto_fov.gif)
 
-![CamKeys Studio · Baking](media/panels/camkeys-studio-baking.gif)
+![CamKeys Studio · Baking](media/panels/camkeys-studio-v2-baking.gif)
 
-![CamKeys Studio · CamKeys Linking](media/panels/camkeys-studio-camkeys_linking.gif)
+![CamKeys Studio · CamKeys Linking](media/panels/camkeys-studio-v2-camkeys_linking.gif)
 
-![CamKeys Studio · CamKeys](media/panels/camkeys-studio-camkeys_main.gif)
+![CamKeys Studio · CamKeys](media/panels/camkeys-studio-v2-camkeys_main.gif)
 
-![CamKeys Studio · CamProps](media/panels/camkeys-studio-camprops.gif)
+![CamKeys Studio · CamProps](media/panels/camkeys-studio-v2-camprops.gif)
 
-![CamKeys Studio · Lattice Perspective](media/panels/camkeys-studio-lattice_auto_fov_modifier.gif)
+![CamKeys Studio · Lattice Perspective](media/panels/camkeys-studio-v2-lattice_auto_fov_modifier.gif)
 
-![CamKeys Studio · Billboard Emulation](media/panels/camkeys-studio-billboard_settings.gif)
+![CamKeys Studio · Billboard Emulation](media/panels/camkeys-studio-v2-billboard_settings.gif)
 
-![CamKeys Studio · Dolly Expressions](media/panels/camkeys-studio-dolly_expressions.gif)
+![CamKeys Studio · Dolly Expressions](media/panels/camkeys-studio-v2-dolly_expressions.gif)
 
-![CamKeys Studio · Lens Compensation](media/panels/camkeys-studio-lens_compensation.gif)
+![CamKeys Studio · Lens Compensation](media/panels/camkeys-studio-v2-lens_compensation.gif)
 
-![CamKeys Studio · Object Falloff](media/panels/camkeys-studio-falloff_popover.gif)
+![CamKeys Studio · Object Falloff](media/panels/camkeys-studio-v2-falloff_popover.gif)
 
-![CamKeys Studio · Distance Falloff](media/panels/camkeys-studio-distance_falloff_popover.gif)
+![CamKeys Studio · Distance Falloff](media/panels/camkeys-studio-v2-distance_falloff_popover.gif)
 
-![CamKeys Studio · Lens Falloff](media/panels/camkeys-studio-flatten_falloff_popover.gif)
+![CamKeys Studio · Lens Falloff](media/panels/camkeys-studio-v2-flatten_falloff_popover.gif)
 
-![CamKeys Studio · live preset edits and owner menu snapshots](media/panels/camkeys-studio-appearance.gif)
+![CamKeys Studio · live preset edits and owner menu snapshots](media/panels/camkeys-studio-v2-appearance.gif)

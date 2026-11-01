@@ -20,6 +20,9 @@ _GEOMETRY = {
     "list_tool_size": (18, 48),
     "label_band": (16, 48),
     "list_row_height": (28, 88),
+    "heading_height": (16, 48),
+    "box_padding": (0, 40),
+    "separator_height": (1, 24),
 }
 _COLORS = {
     "accent",
@@ -87,6 +90,7 @@ class StyleSheet:
         name="Custom",
         colors=None,
         geometry=None,
+        geometry_variants=None,
         surfaces=None,
         opacity=1.0,
         cards=False,
@@ -99,6 +103,7 @@ class StyleSheet:
         self._canvases = WeakSet()
         self._original_geometry = WeakKeyDictionary()
         self._applied_revision = WeakKeyDictionary()
+        self._canvas_variants = WeakKeyDictionary()
         self._cache = None
         self._variant_cache = {}
         self.revision = 0
@@ -108,6 +113,7 @@ class StyleSheet:
                 name=name,
                 colors=colors or {},
                 geometry=geometry or {},
+                geometry_variants=geometry_variants or {},
                 surfaces=surfaces or {},
                 opacity=opacity,
                 cards=bool(cards),
@@ -124,20 +130,26 @@ class StyleSheet:
     def _validate(data):
         if not isinstance(data["name"], str):
             raise ValueError("Style name must be text")
+        if "" in data["geometry_variants"]:
+            raise ValueError("Geometry variants require a nonempty name")
         if set(data["colors"]) - _COLORS:
             raise ValueError("Unknown semantic color role")
         for value in data["colors"].values():
             color(value)
-        if set(data["geometry"]) - set(_GEOMETRY):
-            raise ValueError("Unknown geometry token")
-        for key, value in data["geometry"].items():
-            low, high = _GEOMETRY[key]
-            if (
-                isinstance(value, bool)
-                or not isfinite(value)
-                or not low <= value <= high
-            ):
-                raise ValueError(f"{key} must be finite in [{low}, {high}]")
+        for name, geometry in {
+            "": data["geometry"],
+            **data["geometry_variants"],
+        }.items():
+            if not isinstance(name, str) or set(geometry) - set(_GEOMETRY):
+                raise ValueError("Unknown geometry token or variant name")
+            for key, value in geometry.items():
+                low, high = _GEOMETRY[key]
+                if (
+                    isinstance(value, bool)
+                    or not isfinite(value)
+                    or not low <= value <= high
+                ):
+                    raise ValueError(f"{key} must be finite in [{low}, {high}]")
         for role, values in data["variants"].items():
             if not isinstance(role, str) or set(values) - _COLORS:
                 raise ValueError("Variants map class names to semantic colors")
@@ -202,14 +214,20 @@ class StyleSheet:
         for owner in tuple(self._owners):
             owner.refresh()
 
-    def apply(self, canvas):
+    def apply(self, canvas, *, variant=None):
+        if variant is not None:
+            if variant and variant not in self._data["geometry_variants"]:
+                raise ValueError("Unknown geometry variant: " + str(variant))
+            self._canvas_variants[canvas] = variant
         self._canvases.add(canvas)
         original = self._original_geometry.setdefault(
             canvas, {key: getattr(canvas.theme, key) for key in _GEOMETRY}
         )
-        next_theme = replace(
-            canvas.theme, **dict(original, **self._data["geometry"]), stylesheet=self
+        geometry = dict(original, **self._data["geometry"])
+        geometry.update(
+            self._data["geometry_variants"].get(self._canvas_variants.get(canvas), {})
         )
+        next_theme = replace(canvas.theme, **geometry, stylesheet=self)
         changed = (
             next_theme != canvas.theme
             or self._applied_revision.get(canvas) != self.revision

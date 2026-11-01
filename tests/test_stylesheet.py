@@ -4,6 +4,74 @@ from beyond_ui.gpu.style import theme_palette
 
 
 class StylesheetTests(unittest.TestCase):
+    def test_large_heading_reserves_icon_and_wrapped_line_height(self):
+        from beyond_ui import Layout
+
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        StyleSheet(geometry={"font_size": 16, "heading_height": 18}).apply(ui.canvas)
+        ui.title(text="Camera animation settings", icon="CAMERA_DATA")
+        ui.canvas.arrange(150)
+        heading = next(iter(ui.canvas.controls.values()))
+        lines = heading.options["_heading_lines"]
+        self.assertGreater(len(lines), 1)
+        self.assertGreater(heading.options["_heading_icon_gutter"], 0)
+        self.assertGreaterEqual(heading.rect[3], len(lines) * 16 * 18 / 11)
+
+    def test_geometry_variants_stay_local_and_follow_live_base_updates(self):
+        sheet = StyleSheet(
+            geometry={"gap": 6},
+            geometry_variants={
+                "compact": {"gap": 3, "heading_height": 18, "box_padding": 5}
+            },
+        )
+        compact, ordinary = Canvas(), Canvas()
+        sheet.apply(compact, variant="compact")
+        sheet.apply(ordinary)
+        self.assertEqual((compact.theme.gap, ordinary.theme.gap), (3, 6))
+        sheet.update(geometry={"padding": 12})
+        self.assertEqual((compact.theme.padding, ordinary.theme.padding), (12, 12))
+        self.assertEqual(compact.theme.box_padding, 5)
+        sheet.replace(geometry_variants={})
+        self.assertEqual(compact.theme.gap, 6)
+        self.assertIsNone(compact.theme.box_padding)
+        with self.assertRaises(ValueError):
+            sheet.apply(ordinary, variant="missing")
+        with self.assertRaises(ValueError):
+            sheet.update(geometry_variants={"bad": {"gap": -1}})
+        with self.assertRaises(ValueError):
+            sheet.update(geometry_variants={"": {"gap": 100}})
+
+    def test_structural_disclosure_heading_excludes_help_actions(self):
+        from beyond_ui.bindings import Binding
+
+        canvas = Canvas()
+        canvas.panel_layout = True
+        row = canvas.box().row()
+        header = row.toggle(
+            "header",
+            "Section",
+            Binding(lambda: True, lambda v: None),
+            bool_button=True,
+            icon="TRIA_DOWN",
+        )
+        row.label("icon", "", icon="CAMERA_DATA")
+        help_action = (
+            canvas.box()
+            .row()
+            .toggle(
+                "help",
+                "Help",
+                Binding(lambda: False, lambda v: None),
+                bool_button=True,
+                icon="TRIA_RIGHT",
+            )
+        )
+        canvas.arrange(300)
+        self.assertEqual(header.options["text_role"], "title")
+        self.assertEqual(header.options["text_alignment"], "LEFT")
+        self.assertNotEqual(help_action.options.get("text_role"), "title")
+
     def test_constructor_owns_its_tokens_and_export_is_detached(self):
         colors = {"accent": "#FFAA00"}
         sheet = StyleSheet(colors=colors)

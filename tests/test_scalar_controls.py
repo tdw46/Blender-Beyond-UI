@@ -13,6 +13,16 @@ def ev(kind, value="PRESS", **kw):
 
 
 class ScalarControls(unittest.TestCase):
+    def test_compact_slider_retains_readable_number_field(self):
+        from beyond_ui.editing import display_number
+
+        self.assertEqual(display_number(210.35), "210")
+        self.assertEqual(display_number(-210.35), "-210")
+        _, track, field = slider_parts((0, 0, 85, 24), label=False)
+        self.assertEqual(field[2], 53)
+        self.assertGreater(track[2], 0)
+        self.assertLess(track[0] + track[2], field[0])
+
     def fixture(self, width=560, integer=False):
         state = [0.25]
         commits = []

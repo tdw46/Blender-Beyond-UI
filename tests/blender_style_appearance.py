@@ -136,6 +136,7 @@ def tick():
             d.operator.opacity = 0.65
             d.operator.size = 12
             d.operator.motion = False
+            d.operator.accent = (0.2, 0.65, 0.9)
             d.changed(None, None)
             event()
         elif n == 2:
@@ -143,6 +144,9 @@ def tick():
             assert d.host.canvas.overlay is not None
             assert abs(sheet.to_dict()["opacity"] - 0.65) < 1e-6
             assert not sheet.animation.enabled and d.canvas.theme.font_size == 12
+            primary = sheet.to_dict()["variants"]["primary"]["field"]
+            assert all(abs(a-b) < 1e-6 for a, b in zip(primary[:3], (0.2, 0.65, 0.9)))
+            checks.append("Live accent also updates primary action buttons")
             checks.append(
                 "Live opacity, type size and disable retain dialog and shared glass"
             )

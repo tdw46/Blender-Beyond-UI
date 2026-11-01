@@ -738,7 +738,7 @@ def icon(glyph, x, y, size, color):
 
 def slider_parts(x, y, width, height, scale=1.0):
     """One geometry contract for the visible track, numeric field and input."""
-    number_width = min(width * 0.48, 53.0 * scale)
+    number_width = min(max(0.0, width - 32.0 * scale), 53.0 * scale)
     track_width = max(1.0, width - number_width - 16.0 * scale)
     return (x + 7.0 * scale, y + height / 2.0, track_width), (
         x + width - number_width,

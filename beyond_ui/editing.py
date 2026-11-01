@@ -10,7 +10,12 @@ def display_number(value):
     """Compact display; keep ordinary integral values out of exponent notation."""
     if 100 <= abs(value) < 1e6 and float(value).is_integer():
         return str(int(value))
-    return format(value, "#.2g").removesuffix(".")
+    compact = format(value, "#.2g").removesuffix(".")
+    if 100 <= abs(value) < 1e6:
+        # Preserve the same compact precision without spending the value field
+        # on an exponent for ordinary focal lengths and other panel quantities.
+        return format(float(compact), ".0f")
+    return compact
 
 
 def drag_step(kind, step, minimum, maximum, *, precision=False):

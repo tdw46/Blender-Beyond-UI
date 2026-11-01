@@ -30,7 +30,8 @@ Use the same `stylesheet=` with `AddonUI`. For a standalone canvas, call `STUDIO
 | Section | Supported values |
 | --- | --- |
 | `colors` | `accent`, `bg`, `card`, `bar`, `field`, `input`, `text`, `title`, `muted`, `selected_text`, `selected`, `hover`, `overlay`, `tab`, `slider_track`, `slider_fill`, `toggle_off`, `toggle_on`, `menu_glass`, `api`, `edge`, `curve`, `point`, `point_selected` |
-| `geometry` | `row_height`, `gap`, `padding`, `radius`, `font_size`, `icon_size`, `field_height`, `button_height`, `icon_button_size`, `list_tool_size`, `label_band`, `list_row_height` |
+| `geometry` | `row_height`, `gap`, `padding`, `radius`, `font_size`, `icon_size`, `field_height`, `button_height`, `icon_button_size`, `list_tool_size`, `label_band`, `list_row_height`, `heading_height`, `box_padding`, `separator_height` |
+| `geometry_variants` | Named panel-level geometry overrides, layered over the preset's base geometry |
 | `motion` | `enabled`, `strength`, `speed` |
 | `opacity` | 0–1 multiplier for chrome alpha; text and user-authored color values stay unchanged |
 | `cards` | Draw top-level `layout.box()` groups as glass cards |
@@ -86,6 +87,25 @@ layout.paragraph(text="Help copy wraps at the actual panel width.", icon="INFO")
 
 Use `row`, `column`, `split`, `grid_flow`, aligned groups and shared tokens like a web grid. Keep labels outside editable values. Avoid fixed spaces in labels, draw-time RNA mutation, per-control blur passes or custom timers for appearance.
 
+## Panel templates
+
+Give a dense N-panel or Properties panel a compact template without shrinking unrelated panels:
+
+```python
+STUDIO.update(geometry_variants={"compact": {
+    "gap": 4, "box_padding": 6, "heading_height": 18,
+    "button_height": 20, "field_height": 22, "separator_height": 4,
+}})
+
+class MYADDON_PT_tools(bpy.types.Panel):
+    beyond_ui_style = "compact"
+    # Existing bl_* metadata and draw() stay unchanged.
+```
+
+Embedded adopted panels resolve `beyond_ui_style` on their original class. Standalone canvases use `STUDIO.apply(canvas, variant="compact")`. Floating menus keep the shared menu metrics; the class attribute is not a general popup override. Omit the attribute (or use an empty string) for the base template. Base updates flow into every variant; removing a variant restores base values on existing canvases. Unknown explicitly selected names fail visibly instead of silently choosing a template.
+
+`padding` controls the outer inset; `box_padding` independently controls card content (omitted means follow `padding`). `heading_height` is the minimum single-line heading height, while wrapping reserves the actual font and optional icon. `separator_height` controls the space allocated to a separator. These tokens affect retained layout, not per-frame GPU allocation.
+
 ## Validation boundary
 
-CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v1/index.html); visual differences are not counted as exact matches.
+CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v2/index.html); visual differences are not counted as exact matches.

@@ -1,19 +1,19 @@
 {
-  "reviewed": "2026-10-31 — Studio presets, 12 panel states, installed preview and final validation",
+  "reviewed": "2026-11-01 \u2014 compact panel templates, final Studio media and consumer validation",
   "remaining_turns": [
     1,
-    2
+    1
   ],
   "implementation_turns": [
     0,
-    1
+    0
   ],
   "integration_qa_turns": [
     1,
     1
   ],
   "active_hours": null,
-  "confidence": "Preset API and consumer behavior tested on 5.1.2/5.2.2; exact generated-reference acceptance remains open.",
+  "confidence": "Requested preset and consumer implementation complete; visual-reference acceptance remains explicitly open.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
@@ -23,12 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Exact generated-reference acceptance for CamKeys Studio; comparison overlays supplied.",
-    "Older core/default-theme GIFs retain their recorded styling; branded Studio captures do not replace default-theme evidence."
+    "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
+    "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
   ],
-  "latest_progress": "Pushed checkpoint 3cc6eaa. Added layered/JSON presets, live Appearance editing with Cancel, responsive paragraphs, compact two-line lists, coral/mint CamKeys redesign, generated logo/panel targets, current GPU captures/GIFs, and no-focus tests. 305 unit tests; paired preset draw overhead within 1.5% median with stable retained resources. Completed the lattice and Dolly Shape Keys fixtures, 12 panel comparisons, 13 GIFs, narrow 1×/1.5×/2× captures and installed original-scene regression.",
-  "estimate_review": "Closed the conditional-state capture work and reduced the remaining range from 1–3 to 1–2 passes. Preset implementation and native consumer checks are complete. The remaining work is the explicitly documented visual-reference mismatch and user acceptance, not another full parity implementation.",
-  "time_summary": "Allow 1–2 focused visual correction/review passes. No reliable hour forecast for generation and capture latency; historical one-minute turns do not describe this larger redesign.",
+  "latest_progress": "309 unit tests; compact per-panel geometry templates, card rims, heading icons/bold disclosures, CamProps slider and readable narrow numeric values. Refreshed all 12 panel states, 13 GIFs, 260/480px captures at 1\u00d7/1.5\u00d7/2\u00d7 and real embedded N-panel screenshots. Both Blender versions pass consumer and live preset checks. Fixed false capture timeouts caused by stale LaunchServices records; final captures exit without focus activation.",
+  "estimate_review": "Closed the planned layout correction and capture pass: reduce 1\u20132 remaining passes to one user review. No additional implementation batch is budgeted for the current preset feature set. Exact-reference conflicts are listed explicitly and still need review, not silently counted as exact matches.",
+  "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -185,9 +185,14 @@
       "work": "Reusable StyleSheet, reload-safe preset factory, live dialog/cancel, responsive copy, consumer layout and branded media, paired rendering benchmark.",
       "evidence": "docs/design/qa/camkeys-studio-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Closed compact layout, heading/icon, list-order, numeric readability and live-accent corrections; renewed multi-scale/embedded/GIF evidence and no-focus launcher termination audit.",
+      "evidence": "docs/design/qa/camkeys-studio-v2/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Resolve documented generated-reference differences in glyphs, optical rims and some spacing, then obtain visual acceptance of the new preset.",
+  "remaining_work": "User review of Studio v2 and explicit resolution of generated glyph/glass/content conflicts. Additional corrections, if requested, are new measured work; no claim of pixel-exact acceptance.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -223,5 +228,5 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "CamKeys Studio preview and reusable stylesheets; exact visual acceptance pending"
+  "checkpoint": "Studio v2 implementation and captures complete; visual acceptance pending"
 }

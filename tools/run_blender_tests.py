@@ -98,6 +98,11 @@ def main():
                 raise RuntimeError(
                     "Compile tools/launch_blender_macos.swift before using this mode"
                 )
+            source = ROOT / "tools/launch_blender_macos.swift"
+            if launcher.stat().st_mtime < source.stat().st_mtime:
+                raise RuntimeError(
+                    "Recompile the changed macOS test launcher before using this mode"
+                )
             env["BEYOND_UI_TEST_LOG"] = str(log.resolve())
             command[-2:-2] = [
                 "--python-expr",

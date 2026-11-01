@@ -89,6 +89,11 @@ class Plan:
             )
         return None
 
+    @property
+    def box_padding(self):
+        value = getattr(self.theme, "box_padding", None)
+        return self.theme.padding if value is None else value
+
     def gap(self, node):
         if self.panel_layout and (
             node.kind in {"row", "split", "column"} or node.options.get("_list_tools")
@@ -118,7 +123,7 @@ class Plan:
                 else max(widths, default=0)
             )
             if node.kind == "box":
-                result += 2 * self.theme.padding
+                result += 2 * self.box_padding
         elif node.kind == "number" and node.options.get("_slider_stacked"):
             # Caption spans its accessory row; reserve track + value, not text width.
             result = 80.0
@@ -208,7 +213,7 @@ class Plan:
                 else max(sizes, default=0.0)
             )
             if node.kind == "box":
-                width += 2 * self.theme.padding
+                width += 2 * self.box_padding
         if self.sized:
             if not hasattr(node, "children"):
                 width *= self.scale(node)[0]
@@ -232,7 +237,11 @@ class Plan:
                 else self.theme.button_height
             )
         if node.kind == "label":
-            return 24 if node.options.get("text_role") == "title" else 20
+            return (
+                self.theme.heading_height
+                if node.options.get("text_role") == "title"
+                else 20
+            )
         if node.kind == "number" and node.options.get("slider"):
             return 24.0
         return self.theme.field_height
@@ -292,6 +301,13 @@ class Plan:
             and node.options.get("text_role") == "title"
             and node.label
         ):
+            gutter = (
+                (self.theme.icon_size + 6)
+                if node.options.get("icon") not in {None, "", "NONE", 0}
+                or node.options.get("icon_value")
+                else 0
+            )
+            node.options["_heading_icon_gutter"] = gutter
             lines, line = [], ""
             for word in node.label.split():
                 trial = (line + " " + word).strip()
@@ -300,17 +316,21 @@ class Plan:
                     if self.measure
                     else len(trial) * self.theme.font_size * 0.64
                 )
-                if line and measured > max(1, available - 12):
+                if line and measured > max(1, available - 12 - gutter):
                     lines.append(line)
                     line = word
                 else:
                     line = trial
             lines.append(line)
             node.options["_heading_lines"] = lines
-            extra = max(extra, len(lines) * 18 - self.base_height(node))
+            extra = max(
+                extra,
+                len(lines) * max(18, self.theme.font_size * 18 / 11)
+                - self.base_height(node),
+            )
         height = node.options.get(
             "height",
-            8
+            getattr(self.theme, "separator_height", 8)
             if node.kind == "separator"
             else node.options.get("_paragraph_height", self.base_height(node)) + extra,
         )
@@ -346,6 +366,13 @@ class Plan:
             and node.options.get("text_role") == "title"
             and node.label
         ):
+            gutter = (
+                (self.theme.icon_size + 6)
+                if node.options.get("icon") not in {None, "", "NONE", 0}
+                or node.options.get("icon_value")
+                else 0
+            )
+            node.options["_heading_icon_gutter"] = gutter
             lines, line = [], ""
             for word in node.label.split():
                 trial = (line + " " + word).strip()
@@ -354,17 +381,21 @@ class Plan:
                     if self.measure
                     else len(trial) * self.theme.font_size * 0.64
                 )
-                if line and measured > max(1, available - 12):
+                if line and measured > max(1, available - 12 - gutter):
                     lines.append(line)
                     line = word
                 else:
                     line = trial
             lines.append(line)
             node.options["_heading_lines"] = lines
-            extra = max(extra, len(lines) * 18 - self.base_height(node))
+            extra = max(
+                extra,
+                len(lines) * max(18, self.theme.font_size * 18 / 11)
+                - self.base_height(node),
+            )
         height = node.options.get(
             "height",
-            8
+            getattr(self.theme, "separator_height", 8)
             if node.kind == "separator"
             else node.options.get("_paragraph_height", self.base_height(node)) + extra,
         )
@@ -476,7 +507,7 @@ class Plan:
             return self.plans[key]
         if not hasattr(node, "children"):
             return self.control_size(node, width)[1], ()
-        padding = self.theme.padding if node.kind == "box" else 0
+        padding = self.box_padding if node.kind == "box" else 0
         available = max(0.0, width - 2 * padding)
         gap, children = self.gap(node), node.children
         cells = []
@@ -642,7 +673,7 @@ class Plan:
             return
         height, cells = self.layout(node, width)
         node.rect = (x, y, width, height)
-        padding = self.theme.padding if node.kind == "box" else 0
+        padding = self.box_padding if node.kind == "box" else 0
         for child, a, b, w, h in cells:
             self.place(child, x + padding + a, y + padding + b, w)
 
@@ -671,7 +702,7 @@ class Plan:
             else 1.0
         )
         node.rect = (x, y, width, height * ratio)
-        padding = min(self.theme.padding, height / 2) if node.kind == "box" else 0
+        padding = min(self.box_padding, height / 2) if node.kind == "box" else 0
         child_scale = ratio * self.slot_ratios.get((id(node), width), 1.0)
         for child, a, b, w, h in cells:
             allocated = (

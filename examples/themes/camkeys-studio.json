@@ -32,6 +32,17 @@
     "label_band": 24,
     "list_row_height": 28
   },
+  "geometry_variants": {
+    "compact": {
+      "gap": 4,
+      "box_padding": 6,
+      "heading_height": 18,
+      "field_height": 22,
+      "button_height": 20,
+      "separator_height": 4,
+      "label_band": 22
+    }
+  },
   "surfaces": {
     "card": [
       "#20272DB8",
@@ -54,7 +65,7 @@
   "cards": true,
   "variants": {
     "primary": {
-      "field": "#D46252B8",
+      "field": "#F06B57D9",
       "hover": "#F17C67CC",
       "text": "#FFF8F2"
     }
