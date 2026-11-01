@@ -19,6 +19,14 @@ class Theme:
     radius: float = 8.0
     font_size: float = 11.0
     palette: str = "BLENDER"
+    icon_size: float = 14.0
+    field_height: float = 26.0
+    button_height: float = 20.0
+    icon_button_size: float = 24.0
+    list_tool_size: float = 22.0
+    label_band: float = 26.0
+    list_row_height: float = 40.0
+    stylesheet: object = None
 
     def __post_init__(self):
         if self.palette not in {"BLENDER", "REFERENCE"}:
@@ -496,6 +504,17 @@ class Canvas(Group):
         self._width = width
         self._scale_numeric_motion()
         self._dirty = False
+        self._style_cards = []
+        if self.theme.stylesheet is not None and self.theme.stylesheet.cards:
+
+            def cards(group, depth=0):
+                for child in group.children:
+                    if isinstance(child, Group):
+                        if child.kind == "box" and depth == 0:
+                            self._style_cards.append(child.rect)
+                        cards(child, depth + (child.kind == "box"))
+
+            cards(self)
         self.layout_count += 1
         return self.height
 

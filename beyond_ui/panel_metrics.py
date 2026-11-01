@@ -58,7 +58,7 @@ def prepare(canvas):
                     )
                 if child.kind == "number" and child.options.get("slider"):
                     child.options["_slider_stacked"] = bool(child.label)
-                    child.options["_label_band"] = LABEL_BAND
+                    child.options["_label_band"] = canvas.theme.label_band
         if group.kind not in {"box", "column"}:
             return
         for i, child in enumerate(children[:-1]):
@@ -75,7 +75,14 @@ def prepare(canvas):
                 0,
             } or child.options.get("icon_value"):
                 continue
-            first = group.kind == "box" and i == 0
+            first = i == 0 and (
+                group.kind == "box"
+                or (
+                    group.kind == "column"
+                    and group.parent is not None
+                    and group.parent.kind == "box"
+                )
+            )
             divided = i > 0 and children[i - 1].kind == "separator"
             following = children[i + 1]
             if (first or divided) and following.kind not in {"label", "separator"}:

@@ -455,6 +455,7 @@ class Router:
             context,
             animation=self.config.animation,
             registry=self.registry,
+            stylesheet=self.config.stylesheet,
         )
 
     def owns_menu(self, name):

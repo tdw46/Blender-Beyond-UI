@@ -46,6 +46,9 @@ def audit(label):
                 )
                 for attempt in range(8):
                     try:
+                        sheet = getattr(addon.__beyond_ui_integration__.ui, "stylesheet", None)
+                        if sheet is not None:
+                            sheet.apply(layout.canvas)
                         tape.play(layout)
                         break
                     except Exception:

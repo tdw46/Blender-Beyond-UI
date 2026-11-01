@@ -9,6 +9,29 @@ calls. No pip install or separate UI add-on required.
 [Current visual review](docs/design/qa/core-review-v2/index.html) ·
 [Feature overview](docs/design/qa/overview/index.html)
 
+## Make it your own
+
+Opt into reusable presets for colors, opacity, sizes, glass cards and motion.
+Unspecified colors still follow Blender. Keep ordinary panel code and owner menus.
+
+```python
+from ._vendor.beyond_ui import integrate, StyleSheet
+studio = StyleSheet(colors={"accent": "#F17C67"},
+                    motion={"enabled": True, "strength": 0.7, "speed": 1.0})
+integrate(globals(), stylesheet=studio)
+```
+
+[Styling guide](docs/STYLING.md) · [Copy-ready presets](examples/theme_presets.py) ·
+[CamKeys Studio JSON](examples/themes/camkeys-studio.json) ·
+[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v1/index.html)
+
+The CamKeys consumer preview includes a live Appearance dialog. These recordings
+show actual Blender renders; generated-reference acceptance remains open.
+
+| Live customization | Branded panel |
+| --- | --- |
+| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-camkeys_main.gif) |
+
 ## Drop it in
 
 From this repository's checkout:

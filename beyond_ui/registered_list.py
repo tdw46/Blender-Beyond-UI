@@ -433,7 +433,13 @@ class RegisteredList(CollectionList):
         from .popover import guard_controls
 
         canvas = Canvas(
-            replace(self.parent.theme, row_height=28, gap=2, padding=0, font_size=11),
+            replace(
+                self.parent.theme,
+                row_height=20 if self.parent.theme.stylesheet else 28,
+                gap=2,
+                padding=0,
+                font_size=self.parent.theme.font_size,
+            ),
             context_provider=self.parent.context_provider,
             menu_commit=self.parent.menu_commit,
             shortcut_registry=self.parent.shortcut_registry,
@@ -570,7 +576,19 @@ class RegisteredList(CollectionList):
         return self.type != "COMPACT" and self.state.get("show_filter", False)
 
     def dimensions(self, font_size, available_width, available_height=None):
-        self.row_height = 40.0
+        self.row_height = max(
+            28,
+            min(
+                88,
+                float(
+                    getattr(
+                        self.cls,
+                        "beyond_ui_row_height",
+                        self.parent.theme.list_row_height,
+                    )
+                ),
+            ),
+        )
         result = super().dimensions(font_size, available_width, available_height)
         self.prepare()
         if self.filter_canvas is not None and self.filter_visible:

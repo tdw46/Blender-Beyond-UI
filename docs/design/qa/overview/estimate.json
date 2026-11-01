@@ -1,19 +1,19 @@
 {
-  "reviewed": "2026-10-31 \u2014 checkpoint pushed; scene startup crash repaired and verified",
+  "reviewed": "2026-10-31 — Studio presets, 12 panel states, installed preview and final validation",
   "remaining_turns": [
     1,
-    1
+    2
   ],
   "implementation_turns": [
     0,
     1
   ],
   "integration_qa_turns": [
-    0,
+    1,
     1
   ],
   "active_hours": null,
-  "confidence": "Requested shared geometry and icon corrections are execution- and raster-tested; generated reference acceptance is still open.",
+  "confidence": "Preset API and consumer behavior tested on 5.1.2/5.2.2; exact generated-reference acceptance remains open.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
@@ -23,14 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "input color-space template dedicated GIF",
-    "Dedicated direct-popup integration GIF (execution/resource checks only so far)",
-    "Popup-variant/keymap integration GIF (execution/resource checks only)",
-    "Core/brush historical GIFs predate the latest shared icon-centering pass; current panel/list evidence is in forced-perspective-v2. Earlier recordings are archived rather than labeled current."
+    "Exact generated-reference acceptance for CamKeys Studio; comparison overlays supplied.",
+    "Older core/default-theme GIFs retain their recorded styling; branded Studio captures do not replace default-theme evidence."
   ],
-  "latest_progress": "Pushed UI checkpoint 6f0a4ea. Isolated deferred macro-RNA startup crash; preserved registered macro children. 296 unit tests; macro lifecycle and full CamKeys regressions passed on 5.1.2/5.2.2; original scene opened with five refreshes and 15 nested macro-property writes. Installed repair; source blend unchanged.",
-  "estimate_review": "New crash scope was reproduced, repaired and execution-verified in this turn. It adds no remaining implementation budget. The separate generated-reference reconciliation pass remains because checkpoint approval explicitly acknowledged remaining visual differences.",
-  "time_summary": "One bounded reference reconciliation/review pass remains. No reliable wall-clock estimate: generated concepts still differ from authored source controls and active theme/backdrop.",
+  "latest_progress": "Pushed checkpoint 3cc6eaa. Added layered/JSON presets, live Appearance editing with Cancel, responsive paragraphs, compact two-line lists, coral/mint CamKeys redesign, generated logo/panel targets, current GPU captures/GIFs, and no-focus tests. 305 unit tests; paired preset draw overhead within 1.5% median with stable retained resources. Completed the lattice and Dolly Shape Keys fixtures, 12 panel comparisons, 13 GIFs, narrow 1×/1.5×/2× captures and installed original-scene regression.",
+  "estimate_review": "Closed the conditional-state capture work and reduced the remaining range from 1–3 to 1–2 passes. Preset implementation and native consumer checks are complete. The remaining work is the explicitly documented visual-reference mismatch and user acceptance, not another full parity implementation.",
+  "time_summary": "Allow 1–2 focused visual correction/review passes. No reliable hour forecast for generation and capture latency; historical one-minute turns do not describe this larger redesign.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -182,9 +180,14 @@
       "work": "Deferred macro RNA lifecycle crash, original scene launch and consumer regression checks; installed repaired vendor.",
       "evidence": "docs/design/qa/macro-lifecycle-v1/runtime.json",
       "turns": 1
+    },
+    {
+      "work": "Reusable StyleSheet, reload-safe preset factory, live dialog/cancel, responsive copy, consumer layout and branded media, paired rendering benchmark.",
+      "evidence": "docs/design/qa/camkeys-studio-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Resolve the recorded generated-reference conflicts (original glyph artwork, author-supplied Lens/curve controls/separators, active theme/backdrop) and obtain visual acceptance. Runtime geometry and centering defects requested in this pass are closed.",
+  "remaining_work": "Resolve documented generated-reference differences in glyphs, optical rims and some spacing, then obtain visual acceptance of the new preset.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -213,8 +216,12 @@
     {
       "batch": "Scene launch crash",
       "details": "Closed locally: Beyond UI re-registration invalidated CamKeys macro child RNA. Guard and teardown regression verified; repaired vendor installed. Fresh Blender process required."
+    },
+    {
+      "batch": "Explicit CamKeys Studio request",
+      "details": "New scope: logo, per-panel art, consumer redesign, reusable presets, live customization and native validation. Implementation and principal tests delivered; reference fidelity remains separate."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "reference reconciliation and user acceptance of the compact panel candidate"
+  "checkpoint": "CamKeys Studio preview and reusable stylesheets; exact visual acceptance pending"
 }

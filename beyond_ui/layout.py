@@ -51,6 +51,7 @@ class Layout:
         self.state = state if state is not None else {}
         self._sequence = 0
         self._text_role = "body"
+        self.style_class = ""
         self.alert = False
         self.operator_context = "INVOKE_DEFAULT"
         self.search_popovers = True
@@ -190,6 +191,7 @@ class Layout:
 
     def _options(self):
         return dict(
+            style_class=self.style_class,
             alert=bool(self.alert),
             emboss=self.emboss,
             activate_init=bool(self.activate_init),
@@ -211,6 +213,7 @@ class Layout:
         )
         for name in (
             "_text_role",
+            "style_class",
             "alert",
             "operator_context",
             "search_popovers",
@@ -310,6 +313,13 @@ class Layout:
             text_role=self._text_role,
             **self._options(),
         )
+
+    def paragraph(self, *, text="", icon="NONE", translate=True):
+        """Responsive body copy, wrapped by the retained layout at its actual width."""
+        control = self.label(text=text, icon=icon, translate=translate)
+        control.options["wrap_text"] = True
+        control.options["section_heading"] = False
+        return control
 
     def title(
         self, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
@@ -976,6 +986,7 @@ class Layout:
             selected=depress or bool(self.active_default and self.is_popover),
             active_default=bool(self.active_default),
             operator_button=True,
+            operator_id=operator,
             icon=icon,
             context_menu=lambda target, ctx: context_rows(target, ctx),
             **options,
@@ -1504,10 +1515,13 @@ class Layout:
         control = self.group.add(
             "search" if self.search_popovers else "widget",
             self._key("search"),
-            model.widget.title,
+            model.widget.title
+            if text is None
+            else self._text(text, text_ctxt, translate),
             widget=model.widget,
             binding=model.binding,
             search_field=model,
+            icon=icon,
             context_menu=model.entries,
             **self._options(),
         )

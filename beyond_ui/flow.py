@@ -93,7 +93,7 @@ class Plan:
         if self.panel_layout and (
             node.kind in {"row", "split", "column"} or node.options.get("_list_tools")
         ):
-            return 4.0
+            return self.theme.gap if self.theme.stylesheet else 4.0
         return 0.0 if node.options.get("align") else self.theme.gap
 
     def label_width(self, node):
@@ -123,7 +123,9 @@ class Plan:
             # Caption spans its accessory row; reserve track + value, not text width.
             result = 80.0
         elif node.kind == "label":
-            result = self.label_width(node) + 12
+            result = (
+                64 if node.options.get("wrap_text") else self.label_width(node) + 12
+            )
         elif node.kind in {"number", "text", "event", "enum", "pointer", "search"}:
             text = self.label_width(node) + 12
             result = max(64, text + 56 if text < 75 else text)
@@ -222,14 +224,48 @@ class Plan:
         from . import panel_metrics as m
 
         if node.options.get("_list_tool") and node.kind == "button":
-            return m.LIST_TOOL_SIZE
+            return self.theme.list_tool_size
         if node.kind == "button":
-            return m.ICON_BUTTON_SIZE if not node.label else m.BUTTON_HEIGHT
+            return (
+                self.theme.icon_button_size
+                if not node.label
+                else self.theme.button_height
+            )
         if node.kind == "label":
             return 24 if node.options.get("text_role") == "title" else 20
         if node.kind == "number" and node.options.get("slider"):
             return 24.0
-        return m.FIELD_HEIGHT
+        return self.theme.field_height
+
+    def paragraph_extra(self, node, available):
+        node.options.pop("_wrapped_lines", None)
+        if node.kind != "label" or not node.options.get("wrap_text"):
+            return 0
+        icon = node.options.get("icon") not in {None, "", "NONE", 0}
+        limit = max(1, available - (20 if icon else 0) - 12)
+        measure = (
+            lambda text: self.measure(text, "body")
+            if self.measure
+            else len(text) * self.theme.font_size * 0.58
+        )
+        lines = []
+        for paragraph in node.label.split("\n"):
+            line = ""
+            for word in paragraph.split():
+                trial = (line + word).strip()
+                if line and measure(trial) > limit:
+                    lines.append(line.rstrip())
+                    line = ""
+                for char in word:
+                    trial = line + char
+                    if line and measure(trial) > limit:
+                        lines.append(line.rstrip())
+                        line = ""
+                    line += char
+                line += " "
+            lines.append(line.rstrip())
+        node.options["_wrapped_lines"] = tuple(lines)
+        return max(0, len(lines) * self.theme.font_size * 1.55 - self.base_height(node))
 
     def control_size_plain(self, node, available):
         available = max(0.0, min(available, node.options.get("width", available)))
@@ -238,14 +274,18 @@ class Plan:
                 self.theme.font_size, available, node.options.get("height")
             )
         extra = (
-            (26 if self.panel_layout else 20)
+            (self.theme.label_band if self.panel_layout else 20)
             if node.kind == "number"
             and node.label
             and node.options.get("slider", True)
             and (self.panel_layout or available < 260)
             else 0
         )
-        extra = max(extra, self.entry_extra(node, available))
+        extra = max(
+            extra,
+            self.entry_extra(node, available),
+            self.paragraph_extra(node, available),
+        )
         node.options.pop("_heading_lines", None)
         if (
             self.panel_layout
@@ -288,14 +328,18 @@ class Plan:
             )
             return min(available, w * sx), h * sy
         extra = (
-            (26 if self.panel_layout else 20)
+            (self.theme.label_band if self.panel_layout else 20)
             if node.kind == "number"
             and node.label
             and node.options.get("slider", True)
             and (self.panel_layout or available < 260)
             else 0
         )
-        extra = max(extra, self.entry_extra(node, available))
+        extra = max(
+            extra,
+            self.entry_extra(node, available),
+            self.paragraph_extra(node, available),
+        )
         node.options.pop("_heading_lines", None)
         if (
             self.panel_layout

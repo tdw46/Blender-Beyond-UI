@@ -8,7 +8,9 @@ from ..gpu.paint import measure, paint
 
 
 class FloatingHost(PanelHost):
-    def __init__(self, owner, context, *, animation=None, registry=None):
+    def __init__(
+        self, owner, context, *, animation=None, registry=None, stylesheet=None
+    ):
         super().__init__(owner, animation=animation)
         self.window, self.area = context.window, context.area
         self.origin_region = context.region
@@ -31,6 +33,8 @@ class FloatingHost(PanelHost):
             self.menu_context_reason = str(error)
         self.font = Fonts()
         self.canvas = Canvas(shortcut_registry=registry)
+        if stylesheet is not None:
+            stylesheet.apply(self.canvas)
         self.key = (
             self.window.as_pointer(),
             self.area.as_pointer(),

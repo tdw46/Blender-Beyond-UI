@@ -73,6 +73,8 @@ def paint(
             preferences, reference=canvas.theme.palette == "REFERENCE"
         )
     t = canvas.theme
+    if t.stylesheet is not None:
+        palette = t.stylesheet.palette(palette)
 
     def mapped(r):
         a, b, c, d = r
@@ -109,7 +111,11 @@ def paint(
         if right <= left or top <= bottom:
             return
         has_icon = icon not in {None, "", "NONE", 0} or bool(icon_value)
-        icon_size = 14 if getattr(canvas, "panel_layout", False) else 12
+        icon_size = (
+            t.icon_size
+            if t.stylesheet
+            else (14 if getattr(canvas, "panel_layout", False) else 12)
+        )
         has_icon = has_icon and right - left >= (icon_size + 4) * scale
         gutter = (icon_size + 6 if value else icon_size) * scale if has_icon else 0
         group_left = (
@@ -223,6 +229,10 @@ def paint(
         gpu.state.scissor_set(int(cx), int(cy), max(0, int(cw)), max(0, int(ch)))
         if background:
             style.draw(*rect, palette["bg"], radius=t.radius * scale)
+        if controls:
+            for card in getattr(canvas, "_style_cards", ()):
+                if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
+                    surface(mapped(card), palette["card"])
         for control in canvas.visible_controls(logical) if controls else ():
             r = mapped(control.rect)
             if control.options.get("search_bar"):
@@ -230,7 +240,11 @@ def paint(
                 inset = menu_metrics.SEARCH_INSET * scale
                 r = (a + inset, b, max(0, c - 2 * inset), d)
             a, b, c, d = r
-            palette = base_palette
+            palette = (
+                t.stylesheet.control_palette(base_palette, control)
+                if t.stylesheet is not None
+                else base_palette
+            )
             kind = control.kind
             slider = kind == "number" and control.options.get("slider", True)
             external_label = (
@@ -697,6 +711,24 @@ def paint(
                     texture = texture() if callable(texture) else texture
                     if texture is not None:
                         style.preview(texture, *r, radius=t.radius * scale)
+                elif control.options.get("_wrapped_lines"):
+                    lines = control.options["_wrapped_lines"]
+                    line_height = t.font_size * 1.55 * scale
+                    has_icon = control.options.get("icon") not in {None, "", "NONE", 0}
+                    for i, line in enumerate(lines):
+                        gutter = 20 * scale if has_icon and i else 0
+                        text(
+                            line,
+                            (
+                                a + gutter,
+                                b + d - (i + 1) * line_height,
+                                c - gutter,
+                                line_height,
+                            ),
+                            ink,
+                            "body",
+                            icon=control.options.get("icon") if i == 0 else None,
+                        )
                 elif control.options.get("_heading_lines"):
                     lines = control.options["_heading_lines"]
                     line_height = 18 * scale

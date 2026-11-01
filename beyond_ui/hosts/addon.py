@@ -258,6 +258,8 @@ class Runtime:
             if cached is not None:
                 cached[1].park()
             canvas = Canvas(shortcut_registry=self.registry)
+            if self.config.stylesheet is not None:
+                self.config.stylesheet.apply(canvas)
             if self.config.context_menu is not None:
                 canvas.context_provider = self.config.context_menu
 

@@ -1,0 +1,298 @@
+{
+  "checkpoint_pushed": "3cc6eaa",
+  "library_branch": "codex/camkeys-theme-system",
+  "consumer_branch": "codex/camkeys-studio-theme",
+  "installed_branch": "codex/camkeys-studio-preview",
+  "tests": 305,
+  "source_scene": {
+    "filename": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+    "sha256": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158",
+    "unchanged": true
+  },
+  "runs": {
+    "studio-final-consumer": [
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": true
+        }
+      },
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.1.2",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-appearance-final": [
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Live opacity, type size and disable retain dialog and shared glass",
+          "Exact-owner Appearance property right-click",
+          "Blender color inheritance restored live",
+          "Cancel restores colors, metrics, opacity and motion atomically"
+        ],
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": true
+        }
+      }
+    ],
+    "studio-appearance-final-51": [
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.1.2",
+        "checks": [
+          "Live opacity, type size and disable retain dialog and shared glass",
+          "Exact-owner Appearance property right-click",
+          "Blender color inheritance restored live",
+          "Cancel restores colors, metrics, opacity and motion atomically"
+        ],
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-bench-style": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "timings": {
+          "closed_fields": {
+            "before": {
+              "median_ms": 1.2252710293978453,
+              "p95_ms": 1.4934169594198465,
+              "max_ms": 2.2561249788850546
+            },
+            "after": {
+              "median_ms": 1.2167500099167228,
+              "p95_ms": 1.5472089871764183,
+              "max_ms": 1.806542044505477
+            }
+          },
+          "open_scalar": {
+            "before": {
+              "median_ms": 1.6054578591138124,
+              "p95_ms": 1.809166045859456,
+              "max_ms": 2.6419591158628464
+            },
+            "after": {
+              "median_ms": 1.6294795786961913,
+              "p95_ms": 1.8131250981241465,
+              "max_ms": 2.4443750735372305
+            }
+          },
+          "open_scalar_retained": {
+            "before": {
+              "median_ms": 1.7016454366967082,
+              "p95_ms": 2.0029169972985983,
+              "max_ms": 2.6012498419731855
+            },
+            "after": {
+              "median_ms": 1.7153954831883311,
+              "p95_ms": 1.9865829963237047,
+              "max_ms": 2.4352078326046467
+            }
+          },
+          "scrolled_controls": {
+            "before": {
+              "median_ms": 1.5836454695090652,
+              "p95_ms": 1.7947908490896225,
+              "max_ms": 2.300041960552335
+            },
+            "after": {
+              "median_ms": 1.5825419686734676,
+              "p95_ms": 1.7566659953445196,
+              "max_ms": 1.9528751727193594
+            }
+          }
+        },
+        "stable_resources": true,
+        "retained_resources": {
+          "productions": 1,
+          "blur": 1,
+          "offscreens": 5,
+          "layout": 1,
+          "font_handles": [
+            25,
+            26
+          ],
+          "skin_shader": 481675057520,
+          "skin_batch": 481675121408,
+          "glass_batches": {
+            "0.3": 481675121504,
+            "0.4": 481675121744,
+            "0.7": 481675121792
+          }
+        },
+        "workload": "144 action buttons in 24 rows, clipped and scrolled through a 520px viewport, with an identical 48-action searchable context menu on both revisions. Paint: 20 warmups each, 200 alternating CPU submission samples per revision. Framebuffer readback excluded",
+        "paired_method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; identical painter, theme tokens overlaid only for after. No geometry or visible-count changes. 20 warmups each; readback excluded.",
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-final-captures": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "scene_loaded": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+        "paint_cpu_median_ms": 0.46318734530359507,
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-embedded-4": [
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.2.2 LTS",
+        "focus_audit": {
+          "events": [],
+          "restore_requests": 0,
+          "activates": false,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-installed-scene": [
+      {
+        "passed": true,
+        "error": null,
+        "version": "5.2.2 LTS",
+        "refreshes": 5,
+        "scene_loaded": true,
+        "objects": 63
+      }
+    ],
+    "studio-lattice-final-run": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "scene_loaded": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+        "paint_cpu_median_ms": 0.11904153507202864,
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 5919,
+          "restore_requests": 0,
+          "seconds": 13.986869931221008,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-dolly-final-run": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "scene_loaded": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+        "paint_cpu_median_ms": 0.22089609410613775,
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 5927,
+          "restore_requests": 0,
+          "seconds": 5.911457061767578,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-narrow-final": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "scene_loaded": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+        "paint_cpu_median_ms": 0.46845851466059685,
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 6005,
+          "restore_requests": 0,
+          "seconds": 85.00035095214844,
+          "timeout": true
+        }
+      }
+    ]
+  },
+  "exact_reference_match": false,
+  "remaining_visual_differences": [
+    "AI-generated glyph silhouettes and rim/lighting differ from the retained BVT renderer.",
+    "Some generated art has different vertical rhythm; overlays expose the remaining mismatch.",
+    "Real viewport backdrop differs from diagnostic capture background; real glass intentionally refracts actual scene pixels."
+  ],
+  "conditional_boundaries": [
+    "Lattice controller captured using a disposable temporary lattice linked to the existing scene mesh. The original selected object has no lattice controller.",
+    "Dolly Expressions Shape Keys mode is captured; the VRM dependency notice is archived separately. Full VRM extension behavior is not qualified by this fixture."
+  ],
+  "reference_corrections": [
+    "v1 main invents empty row switches: superseded by v2.",
+    "v1 linking invents truncated S/C controls: superseded by v2 two-line rows.",
+    "v2 distance picker mistakenly removed valid choices: rejected; all seven real choices remain.",
+    "v2 Lens Falloff restores the full wrapped explanation."
+  ],
+  "capture_notes": "Offscreen images use real consumer callbacks and production GPU glass over a diagnostic backdrop. Embedded screenshots are actual UI-region GPU pixels. Panel GIFs exercise the shared source change pulse; Appearance GIF contains recorded state snapshots.",
+  "compatibility": "Declared older library paths retained; new consumer styling tested on macOS 5.1.2/5.2.2. Exact 4.2/5.1/5.2 official documentation URLs returned HTTP 402 through the browsing service; runtime checks are the compatibility evidence for this turn.",
+  "scope": "All 12 registered CamKeys Panel classes have generated targets and real GPU captures. Shared presets also apply to routed menus/dialogs; this gallery does not enumerate every dynamic menu combination.",
+  "scale_checks": "260 logical-pixel captures at 1x, 1.5x and 2x; ordinary captures 360 logical pixels at 2x. Narrow Forced Perspective inspected for surviving labels, units, controls and responsive stacking.",
+  "installed_preview": "codex/camkeys-studio-preview; same seven consumer UI files as codex/camkeys-studio-theme; SHA-recorded preinstallation backup retained in local build/studio-install-backup."
+}

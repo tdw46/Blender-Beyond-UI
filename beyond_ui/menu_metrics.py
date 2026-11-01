@@ -38,5 +38,5 @@ class Metrics:
             padding=Metrics.PADDING,
             row_height=Metrics.ROW_HEIGHT,
             gap=0,
-            radius=8,
+            radius=parent.radius if parent.stylesheet else 8,
         )

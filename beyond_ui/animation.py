@@ -12,10 +12,11 @@ _REST = nullcontext()
 class AnimationSettings:
     """Mutable backend policy. None strength inherits the nearest parent value."""
 
-    def __init__(self, *, enabled=True, strength=None):
+    def __init__(self, *, enabled=True, strength=None, speed=1.0):
         self._listeners = WeakSet()
         self._enabled = bool(enabled)
         self._strength = self._validate(strength)
+        self.speed = speed
 
     @staticmethod
     def _validate(value):
@@ -29,6 +30,19 @@ class AnimationSettings:
     def _changed(self):
         for motion in tuple(self._listeners):
             motion.clear()
+
+    @property
+    def speed(self):
+        return self._speed
+
+    @speed.setter
+    def speed(self, value):
+        value = float(value)
+        if not isfinite(value) or not 0.25 <= value <= 4:
+            raise ValueError("Animation speed must be finite in [0.25, 4]")
+        if value != getattr(self, "_speed", None):
+            self._speed = value
+            self._changed()
 
     @property
     def enabled(self):
@@ -111,6 +125,10 @@ class Motion:
                 value = policy.strength
         return value * self.amplitude_scale
 
+    @property
+    def speed(self):
+        return next((p.speed for p in reversed(self.parents) if p.speed != 1.0), 1.0)
+
     def clear(self):
         changed = bool(self.tracks or self.positions)
         self.tracks.clear()
@@ -135,7 +153,7 @@ class Motion:
         now = self.clock() if now is None else now
         from .gpu.style import release_shape
 
-        return release_shape(amount, now - start, initial, toggle), angle
+        return release_shape(amount, (now - start) * self.speed, initial, toggle), angle
 
     def pulse(self, key, amount=0.14, angle=0.0, *, toggle=False):
         toggle = toggle or self.toggle
@@ -160,10 +178,10 @@ class Motion:
         now = self.clock()
         for key, track in tuple(self.tracks.items()):
             duration = SWITCH_DURATION if track[4] else HANDLE_DURATION
-            if not self.strength or now - track[0] >= duration:
+            if not self.strength or (now - track[0]) * self.speed >= duration:
                 del self.tracks[key]
         for key, (start, _, _) in tuple(self.positions.items()):
-            if not self.strength or now - start >= 0.36:
+            if not self.strength or (now - start) * self.speed >= 0.36:
                 del self.positions[key]
         return bool(self.tracks or self.positions)
 
@@ -175,7 +193,7 @@ class Motion:
         from .gpu.style import switch_position
 
         return switch_position(
-            track[1], track[2], self.clock() - track[0], duration=0.36
+            track[1], track[2], (self.clock() - track[0]) * self.speed, duration=0.36
         )
 
     def retarget(self, key, before, after):
