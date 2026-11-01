@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-31",
+  "checkpoint": "6f0a4ea",
+  "cause": "Re-registering a child operator invalidated RNA types retained by registered CamKeys macros. Deferred keymap writes then crashed in WM_operator_properties_create_ptr.",
+  "fix": "Preserve registered macro child operators and their registered bases during UI adoption and teardown; expose dependencies and native callback-routing limits.",
+  "minimal": [
+    {
+      "version": "5.2.2 LTS",
+      "passed": true,
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 91704,
+        "restore_requests": 0,
+        "seconds": 2.3600770235061646,
+        "timeout": false
+      }
+    },
+    {
+      "version": "5.1.2",
+      "passed": true,
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 91719,
+        "restore_requests": 0,
+        "seconds": 2.423200011253357,
+        "timeout": false
+      }
+    }
+  ],
+  "consumer": [
+    {
+      "version": "5.2.2 LTS",
+      "passed": true,
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 91968,
+        "restore_requests": 0,
+        "seconds": 12.800343990325928,
+        "timeout": false
+      }
+    },
+    {
+      "version": "5.1.2",
+      "passed": true,
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 92163,
+        "restore_requests": 0,
+        "seconds": 12.763498067855835,
+        "timeout": false
+      }
+    }
+  ],
+  "scene": {
+    "passed": true,
+    "error": null,
+    "version": "5.2.2 LTS",
+    "refreshes": 5,
+    "scene_loaded": true,
+    "objects": 63,
+    "dependencies": [
+      {
+        "macro": "camkeys.pan_navigation",
+        "operator": "camkeys.begin_dolly_navigation"
+      },
+      {
+        "macro": "camkeys.pan_navigation",
+        "operator": "camkeys.finish_dolly_navigation"
+      },
+      {
+        "macro": "camkeys.orbit_navigation",
+        "operator": "camkeys.begin_dolly_navigation"
+      },
+      {
+        "macro": "camkeys.orbit_navigation",
+        "operator": "camkeys.finish_dolly_navigation"
+      },
+      {
+        "macro": "camkeys.dolly_navigation",
+        "operator": "camkeys.begin_dolly_navigation"
+      },
+      {
+        "macro": "camkeys.dolly_navigation",
+        "operator": "camkeys.finish_dolly_navigation"
+      }
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 91817,
+      "restore_requests": 0,
+      "seconds": 13.948480010032654,
+      "timeout": false
+    },
+    "source_sha256_unchanged": true
+  },
+  "focus_incidents": [
+    {
+      "run": "initial scene probe",
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "org.blenderfoundation.blender",
+            "kind": "activation",
+            "pid": 91253,
+            "seconds": 13.191972017288208
+          },
+          {
+            "bundle": "com.apple.MobileSMS",
+            "kind": "activation",
+            "pid": 1313,
+            "seconds": 14.168246984481812
+          }
+        ],
+        "final_frontmost_pid": 1313,
+        "initial_frontmost_pid": 1313,
+        "new_instance": true,
+        "pid": 91253,
+        "restore_requests": 0,
+        "seconds": 14.200793027877808,
+        "timeout": false
+      },
+      "note": "Owned Blender activated briefly despite no-focus launch. No deliberate activation or focus restoration. The later successful run and both consumer regressions recorded no activation."
+    }
+  ],
+  "unit_tests": 296,
+  "visual_acceptance": "Unchanged: user approved checkpoint, not exact-reference parity.",
+  "limits": [
+    "Scene tested with CamKeys and isolated preferences; unrelated installed add-ons were not enabled.",
+    "Macro-step popup callbacks retain native routing; CamKeys begin/finish steps do not open UI.",
+    "4.2 compatibility path retained but no 4.2 executable tested.",
+    "Repair is local and installed; preceding UI checkpoint is the pushed commit."
+  ]
+}

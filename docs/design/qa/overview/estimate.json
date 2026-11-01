@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-10-31 \u2014 user-approved checkpoint; launch-crash investigation next",
+  "reviewed": "2026-10-31 \u2014 checkpoint pushed; scene startup crash repaired and verified",
   "remaining_turns": [
     1,
     1
@@ -28,8 +28,8 @@
     "Popup-variant/keymap integration GIF (execution/resource checks only)",
     "Core/brush historical GIFs predate the latest shared icon-centering pass; current panel/list evidence is in forced-perspective-v2. Earlier recordings are archived rather than labeled current."
   ],
-  "latest_progress": "Closed compact button/list sizing, row-spanning focal slider, synchronized paired-field labels, switch-label alignment and glyph centering. 292 unit tests; 177 real icon/button scale checks; 5.1/5.2 consumer captures; refreshed native panels/list GIFs and installed vendor.",
-  "estimate_review": "User approved committing the current appearance as a checkpoint, while noting it is not perfect. The remaining reference reconciliation pass is unchanged. A newly reported scene launch crash is being investigated separately; its repair estimate requires reproduction.",
+  "latest_progress": "Pushed UI checkpoint 6f0a4ea. Isolated deferred macro-RNA startup crash; preserved registered macro children. 296 unit tests; macro lifecycle and full CamKeys regressions passed on 5.1.2/5.2.2; original scene opened with five refreshes and 15 nested macro-property writes. Installed repair; source blend unchanged.",
+  "estimate_review": "New crash scope was reproduced, repaired and execution-verified in this turn. It adds no remaining implementation budget. The separate generated-reference reconciliation pass remains because checkpoint approval explicitly acknowledged remaining visual differences.",
   "time_summary": "One bounded reference reconciliation/review pass remains. No reliable wall-clock estimate: generated concepts still differ from authored source controls and active theme/backdrop.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -177,6 +177,11 @@
       "work": "Shared compact metrics, source slider auto-presentation, grid caption spanning/peer stacking, aligned switch labels, atlas/vector ink centering, native captures and installed test refresh.",
       "evidence": "docs/design/qa/forced-perspective-v2/report.json",
       "turns": 1
+    },
+    {
+      "work": "Deferred macro RNA lifecycle crash, original scene launch and consumer regression checks; installed repaired vendor.",
+      "evidence": "docs/design/qa/macro-lifecycle-v1/runtime.json",
+      "turns": 1
     }
   ],
   "remaining_work": "Resolve the recorded generated-reference conflicts (original glyph artwork, author-supplied Lens/curve controls/separators, active theme/backdrop) and obtain visual acceptance. Runtime geometry and centering defects requested in this pass are closed.",
@@ -207,7 +212,7 @@
     },
     {
       "batch": "Scene launch crash",
-      "details": "Investigate reported launch crash in the Camera Effect Locks test scene; cause and scope not yet established."
+      "details": "Closed locally: Beyond UI re-registration invalidated CamKeys macro child RNA. Guard and teardown regression verified; repaired vendor installed. Fresh Blender process required."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",

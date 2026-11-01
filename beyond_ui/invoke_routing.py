@@ -254,6 +254,17 @@ class Router:
     def register(self):
         import bpy
 
+        from .macro_safety import protected_operators
+
+        protected, references = protected_operators(self.operators)
+        self.macro_dependencies = references
+        self.operators = tuple(cls for cls in self.operators if cls not in protected)
+        for cls in protected:
+            self.note_fallback(
+                "macro-step:" + cls.bl_idname,
+                "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+            )
+
         router = self
         self.registry.register()
         self.active = True

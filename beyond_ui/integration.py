@@ -199,6 +199,9 @@ class Integration:
                 "menus": len(self.router.menus),
                 "error": self.router.error,
                 "native_fallbacks": list(self.router.fallbacks),
+                "preserved_macro_dependencies": getattr(
+                    self.router, "macro_dependencies", []
+                ),
                 "keymap_routes": len(self.router.keymaps.items)
                 if self.router.keymaps
                 else 0,

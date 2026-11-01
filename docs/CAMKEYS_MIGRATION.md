@@ -17,7 +17,10 @@ from ._vendor.beyond_ui import integrate; integrate(globals())
 
 No native-fallback opt-in is now used for the tested consumer states. The six
 panel definitions pass the populated-state authoring audit, and final runtime
-status reports no draw errors or native fallbacks. This is not exhaustive visual
+status reports no draw errors or panel fallbacks. The 2026-10-31 macro lifecycle
+repair preserves the two navigation-step operators' native callback registration;
+they have no popup UI. See [startup crash diagnosis](MACRO_LIFECYCLE.md).
+This is not exhaustive visual
 approval of every hidden panel or feature combination.
 
 The integration initializes package-owned list rows with persistent IDs outside

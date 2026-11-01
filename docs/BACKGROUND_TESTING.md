@@ -1,5 +1,25 @@
 # Automated testing without taking focus
 
+## Crash-recovery isolation — 2026-10-31
+
+An intentionally reproduced macro-RNA crash left macOS showing its restoration
+prompt on the next test launch. The LaunchServices runner now appends
+`-- -ApplePersistenceIgnoreState YES`: Blender ignores the trailing arguments,
+while Cocoa reads this process-local argument-domain default. No persistent
+preferences or saved-state files are edited. Apple's
+[AppKit testing guidance](https://developer.apple.com/library/archive/releasenotes/AppKit/RN-AppKitOlderNotes/)
+documents this override; its
+[defaults-domain documentation](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UserDefaults/AboutPreferenceDomains/AboutPreferenceDomains.html)
+explains command-line precedence and volatile argument defaults. The existing
+no-focus flag, disposable profile and activation audit remain mandatory.
+
+The repaired macro regression passed on 5.1.2/5.2.2. An initial actual-scene probe
+briefly activated Blender despite the launch flags; no activation or restoration
+command was used. The subsequent successful scene run and both full consumer
+regressions recorded no activation. See the retained
+[runtime/focus record](design/qa/macro-lifecycle-v1/runtime.json). This does not
+establish universal focus safety.
+
 ## Standing authorization and known focus limitation — 2026-10-30
 
 Tyler gives standing authorization to use no-focus launched Blender windows

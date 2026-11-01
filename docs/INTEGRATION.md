@@ -210,6 +210,11 @@ specific error. Correcting that layout branch lets the panel recover on redraw.
 
 **Current limits:**
 
+- Registered macro child operators retain their original RNA and callbacks to
+  avoid dangling native pointers. Their popup calls keep native routing; these
+  dependencies and limits are explicit in integration status. See
+  [macro lifecycle safety](MACRO_LIFECYCLE.md). Other owned operators still route
+  through custom dialogs and menus.
 - Embedded bodies support `VIEW_3D/UI` and `PROPERTIES/WINDOW`. Native panel
   headers (`draw_header`) and Blender's outer panel shell remain native.
 - Auto-executing `invoke_props_popup` keeps its native redo-stack behavior and

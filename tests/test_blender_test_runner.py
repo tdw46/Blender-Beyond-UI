@@ -11,7 +11,9 @@ from tools import run_blender_tests as runner
 
 
 class BlenderTestRunner(unittest.TestCase):
-    def run_fixture(self, windowed, help_text="--no-window-focus", timeout=False):
+    def run_fixture(
+        self, windowed, help_text="--no-window-focus", timeout=False, macos=False
+    ):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder)
             result = output / "result-0.json"
@@ -19,6 +21,11 @@ class BlenderTestRunner(unittest.TestCase):
             args = ["runner", "--blender", "/test/blender", "--output", folder]
             if windowed:
                 args.append("--windowed")
+            if macos:
+                args.append("--macos-noactivate")
+                launcher = output / "build/focus-audit/launch-blender"
+                launcher.parent.mkdir(parents=True)
+                launcher.touch()
             process = MagicMock()
             process.pid = 123
             process.__enter__.return_value = process
@@ -28,6 +35,8 @@ class BlenderTestRunner(unittest.TestCase):
             runner.require_no_focus.cache_clear()
             with (
                 patch("sys.argv", args),
+                patch("sys.platform", "darwin"),
+                patch.object(runner, "ROOT", output if macos else runner.ROOT),
                 # These are mocked-process tests; no Blender windows are launched.
                 patch.object(runner, "require_windowed_admission"),
                 patch.object(
@@ -50,7 +59,12 @@ class BlenderTestRunner(unittest.TestCase):
                 summary = json.loads((output / "summary.json").read_text())[0]
                 self.assertFalse(summary["passed"])
                 self.assertEqual(summary["pid"], 123)
-                command = launch.call_args.args[0]
+                command = summary["command"]
+                if macos:
+                    self.assertEqual(
+                        command[-3:], ["--", "-ApplePersistenceIgnoreState", "YES"]
+                    )
+                    self.assertLess(command.index("--python"), command.index("--"))
                 if windowed:
                     self.assertIn("--no-window-focus", command)
                     self.assertLess(
@@ -68,6 +82,9 @@ class BlenderTestRunner(unittest.TestCase):
 
     def test_windowed_launch_never_omits_no_focus(self):
         self.run_fixture(True)
+
+    def test_macos_restoration_override_is_process_local_and_after_blender_args(self):
+        self.run_fixture(True, macos=True)
 
     def test_missing_capability_never_launches_window(self):
         self.run_fixture(True, help_text="")
@@ -101,6 +118,8 @@ class BlenderTestRunner(unittest.TestCase):
 
     def test_standing_authorization_admits_current_no_focus_route(self):
         runner.require_windowed_admission()
-        status = json.loads((runner.ROOT / "docs/WINDOWED_TEST_STATUS.json").read_text())
+        status = json.loads(
+            (runner.ROOT / "docs/WINDOWED_TEST_STATUS.json").read_text()
+        )
         self.assertIn("authorization", status)
         self.assertTrue(status["prior_focus_failure"]["user_confirmed"])

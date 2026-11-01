@@ -103,6 +103,9 @@ def main():
                 "--python-expr",
                 "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
             ]
+            # Cocoa argument-domain defaults are process-local. Ignore crash
+            # restoration for this disposable instance without changing user defaults.
+            command += ["--", "-ApplePersistenceIgnoreState", "YES"]
             config = output / f"launch-config-{i}.json"
             config.write_text(
                 json.dumps({"command": command, "report": str(launch_report.resolve())})
