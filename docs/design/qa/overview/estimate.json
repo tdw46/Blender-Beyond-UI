@@ -26,7 +26,7 @@
     "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
     "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
   ],
-  "latest_progress": "Added bui.style() and bui.prop(..., style={}) with reusable dictionaries, group defaults, CSS-inspired spacing/constraints, colors/type/motion and units. Migrated CamKeys presentation overrides; selected icon 2 from four generated candidates. 325 unit tests, native/custom 5.1.2/5.2.2 checks, refreshed panel media and paired retained-render benchmark.",
+  "latest_progress": "Added bui.style() and bui.prop(..., style={}) with reusable dictionaries, group defaults, CSS-inspired spacing/constraints, colors/type/motion and units. Migrated CamKeys presentation overrides; selected icon 2 from four generated candidates. 325 unit tests, native/custom 5.1.2/5.2.2 checks, refreshed panel media and paired retained-render benchmark. Installed preview pinned to 88fcc88; source-file launch passed with zero focus activations and unchanged scene hash.",
   "estimate_review": "New scope added and closed this turn: four icon candidates, generalized inline styling API, CamKeys migration, compatibility checks and current captures. Previous completed work remains credited; one user visual review remains. No additional implementation batch budgeted unless new feedback adds work.",
   "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
   "observed_pace": {
