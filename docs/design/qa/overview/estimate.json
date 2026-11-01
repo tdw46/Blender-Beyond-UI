@@ -1,19 +1,19 @@
 {
-  "reviewed": "2026-11-01 \u2014 Studio v5 reference geometry audit and refreshed comparisons",
+  "reviewed": "2026-11-01 \u2014 modular style options audit; close visual match accepted as the target",
   "remaining_turns": [
-    1,
-    2
+    0,
+    1
   ],
   "implementation_turns": [
     0,
     0
   ],
   "integration_qa_turns": [
-    1,
-    2
+    0,
+    1
   ],
   "active_hours": null,
-  "confidence": "This requested geometry pass is implemented and execution-tested. User visual acceptance and explicitly documented generated-artwork conflicts remain open.",
+  "confidence": "Requested style-option composition repairs are implemented. Optional user review remains; pixel-exact generated-artwork matching is no longer the target for this refinement.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
@@ -23,12 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "All 12 panel/popover states have current captures and change-motion GIFs. Appearance state GIF is explicitly retained from v2.",
-    "Generated glyph/rim/background differences and inconsistent reference hierarchy remain documented; no pixel-exact acceptance claimed."
+    "Current styling comparisons cover all 12 panel/popover states. Appearance GIF retains its explicitly labeled v2 source.",
+    "Minor reference glyph/rim/background differences remain documented; close visual consistency is the current acceptance target."
   ],
-  "latest_progress": "Audited and recaptured all 12 CamKeys panel/popover states. Fixed styled-list tool sizing, CamProps list density and inline slider reflow, enum-cell spacing, field columns and gutters, Baking header surface span, Lens Compensation units, and option rhythm. Added registered overlays, prior-v4 comparisons and per-panel difference notes. 330 tests passed; 5.1.2/5.2.2 consumer checks and focus-audited captures passed. Installed preview is pinned to 9685397; original-scene launch passed without focus activation.",
-  "estimate_review": "Closed the planned visual comparison pass and its identified layout repairs. One review pass remains; reserve one possible feedback turn for remaining source-glyph/reference-artwork differences. No implementation time is hidden as QA.",
-  "time_summary": "Capture and layout fixes complete. Remaining review/feedback duration is not reliably forecast; no new measured-hour claim.",
+  "latest_progress": "Audited all 19 CamKeys presets. Fixed color-only box padding, completed compound-row spacing, and atomic validation of composed sizing constraints. 333 unit tests and style/consumer checks in Blender 5.1.2 and 5.2.2 passed, with no observed focus activation. Existing v5 reference comparisons remain available. All 12 current capture geometries match the existing Studio v5 comparison states, including the conditional lattice panel.",
+  "estimate_review": "Closed the requested options audit and composition fixes. Reduced remaining work to an optional user feedback pass; the user explicitly relaxed pixel-exact matching to a close, consistent result.",
+  "time_summary": "Implementation and automated verification completed. No remaining implementation-hour forecast; user review time is excluded.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -210,13 +210,18 @@
       "work": "Studio v5: all-panel reference registration and modular spacing/sizing/alignment corrections",
       "evidence": "docs/design/qa/camkeys-studio-v5/report.json",
       "turns": 1
+    },
+    {
+      "work": "Modular styling coverage audit and composable geometry repairs; 19 consumer presets validated",
+      "evidence": "docs/design/qa/style-options-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Review the inline-style migration and current CamKeys renders. Exact generated-reference acceptance remains open; new requested changes are estimated separately.",
+  "remaining_work": "Optional user review of the existing Studio comparison page. No known implementation blocker for the currently requested styling options.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
-      "details": "MacOS styling and shared spacing implemented; backdrop/glyph and minor generated-spacing differences remain visible for review."
+      "details": "Current target explicitly relaxed by Tyler to close, consistent visual matching. Minor generated glyph/rim/background differences remain documented, not pixel-exact release blockers."
     },
     {
       "batch": "Custom ID-property boundary audit",
@@ -228,7 +233,7 @@
     },
     {
       "batch": "Real consumer blockers",
-      "details": "CamKeys PropertyGroup lists have no stable row IDs; storage pointers change logical ownership after reorder. Advanced brush curves and draw-time synchronization also prevent full custom conversion."
+      "details": "Closed in the earlier custom-consumer pass: stable list IDs and consumer-owned brush undo/read-only drawing are implemented. Fresh 5.1.2/5.2.2 consumer checks passed in the style-options audit."
     },
     {
       "batch": "Brush undo behavior",
@@ -256,5 +261,5 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Inline styling and CamKeys migration complete; visual acceptance pending"
+  "checkpoint": "Requested modular styling options audited and validated; optional user review"
 }
