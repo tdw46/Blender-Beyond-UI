@@ -26,7 +26,7 @@
     "All 12 panel/popover states have current captures and change-motion GIFs. Appearance state GIF is explicitly retained from v2.",
     "Generated glyph/rim/background differences and inconsistent reference hierarchy remain documented; no pixel-exact acceptance claimed."
   ],
-  "latest_progress": "Audited and recaptured all 12 CamKeys panel/popover states. Fixed styled-list tool sizing, CamProps list density and inline slider reflow, enum-cell spacing, field columns and gutters, Baking header surface span, Lens Compensation units, and option rhythm. Added registered overlays, prior-v4 comparisons and per-panel difference notes. 330 tests passed; 5.1.2/5.2.2 consumer checks and focus-audited captures passed.",
+  "latest_progress": "Audited and recaptured all 12 CamKeys panel/popover states. Fixed styled-list tool sizing, CamProps list density and inline slider reflow, enum-cell spacing, field columns and gutters, Baking header surface span, Lens Compensation units, and option rhythm. Added registered overlays, prior-v4 comparisons and per-panel difference notes. 330 tests passed; 5.1.2/5.2.2 consumer checks and focus-audited captures passed. Installed preview is pinned to 9685397; original-scene launch passed without focus activation.",
   "estimate_review": "Closed the planned visual comparison pass and its identified layout repairs. One review pass remains; reserve one possible feedback turn for remaining source-glyph/reference-artwork differences. No implementation time is hidden as QA.",
   "time_summary": "Capture and layout fixes complete. Remaining review/feedback duration is not reliably forecast; no new measured-hour claim.",
   "observed_pace": {
