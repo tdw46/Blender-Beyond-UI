@@ -8,6 +8,54 @@ from test_numeric import codec
 
 
 class InlineStyleTests(unittest.TestCase):
+    def test_visual_presets_preserve_box_padding_and_follow_theme_changes(self):
+        from beyond_ui.flow import Plan
+
+        ui = Layout()
+        box = ui.box()
+        child = box.label(text="Existing content")
+        ui.canvas.arrange(360)
+        original = child.rect
+        style(box, scope="group", color="#FFFFFF")
+        ui.canvas.arrange(360)
+        self.assertEqual(child.rect, original)
+        style(box, scope="group", margin=3)
+        plan = Plan(ui.canvas.theme)
+        self.assertEqual(plan.insets(box.group), (plan.box_padding + 3,) * 4)
+        from dataclasses import replace
+
+        plan.theme = replace(plan.theme, box_padding=12)
+        self.assertEqual(plan.insets(box.group), (15,) * 4)
+        style(box, scope="group", padding=0)
+        self.assertEqual(plan.insets(box.group), (3,) * 4)
+
+    def test_style_previous_compound_targets_its_spacing_and_future_children(self):
+        ui = Layout()
+        row = ui.row()
+        a = row.label(text="One")
+        b = row.label(text="Two")
+        style(ui, gap=13, padding=4, color="#FFFFFF")
+        self.assertIs(ui.group.children[-1], row.group)
+        c = row.label(text="Three")
+        self.assertIn("color", c.options["_inline_style"])
+        ui.canvas.arrange(360)
+        self.assertAlmostEqual(b.rect[0] - a.rect[0] - a.rect[2], 13)
+        self.assertAlmostEqual(c.rect[0] - b.rect[0] - b.rect[2], 13)
+
+    def test_repeated_constraint_updates_fail_atomically(self):
+        ui = Layout()
+        c = ui.label(text="Stable")
+        style(ui, min_width=100, color="#FFFFFF")
+        group = ui.group.children[-1]
+        before = dict(group.options)
+        with self.assertRaises(ValueError):
+            style(ui, max_width=80, color="#FF0000")
+        self.assertEqual(group.options, before)
+        self.assertEqual(c.options["_inline_style"]["color"], (1, 1, 1, 1))
+        style(ui, max_width=120)
+        ui.canvas.arrange(360)
+        self.assertLessEqual(c.rect[2], 120)
+
     def number(self, ui, key="n", unit="NONE"):
         return ui.group.number(
             key,

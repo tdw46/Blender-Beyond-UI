@@ -132,6 +132,24 @@ def run():
         data.number = 200
         assert tuple(tape.signature) == before
         checks.append("Value edits do not change style recording signatures")
+        composition = Tape()
+        box = composition.root.box()
+        bui.style(box, scope="group", color="#FFFFFF")
+        row = box.row()
+        row.prop(data, "count")
+        row.prop(data, "number")
+        bui.style(box, gap=13, padding=4)
+        composed = bui.Layout(context=bpy.context)
+        composition.play(composed)
+        composed.canvas.arrange(420)
+        group = composed.canvas.children[0]
+        from beyond_ui.flow import Plan
+        plan = Plan(composed.canvas.theme)
+        assert plan.insets(group) == (plan.box_padding,) * 4
+        a, b = tuple(composed.canvas.controls.values())
+        assert abs(b.rect[0] - a.rect[0] - a.rect[2] - 13) < 1e-6
+        assert a.binding.valid() and b.binding.valid()
+        checks.append("Composed row presets retain internal gaps, box padding and RNA owners")
         bpy.ops.wm.bui_native_style_test("INVOKE_DEFAULT")
         bpy.app.timers.register(verify, first_interval=2)
     except Exception:

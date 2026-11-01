@@ -87,6 +87,13 @@ class Plan:
 
     def insets(self, node):
         value = self.box_padding if node.kind == "box" else 0
+        if "padding" in node.options or "margin" in node.options:
+            return tuple(
+                a + b for a, b in zip(
+                    node.options.get("padding", (value,) * 4),
+                    node.options.get("margin", (0,) * 4),
+                )
+            )
         return node.options.get("_insets", (value,) * 4)
 
     def bound_width(self, node, width):

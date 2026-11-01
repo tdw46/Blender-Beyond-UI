@@ -60,7 +60,7 @@ keys fail explicitly instead of being silently ignored.
 | Properties | Meaning |
 | --- | --- |
 | `padding`, `margin` | Container spacing in logical units. Number or 1–4 values, CSS top/right/bottom/left order, 0–128. Padding is inside the item's **layout container**, around its existing native-size control; margin is outside that content. Neither enlarges fonts or changes owner hit targets. |
-| `gap` | Row/column spacing, 0–64. Use `scope="group"` for a row. |
+| `gap` | Row/column spacing, 0–64. Use `scope="group"` on the row, or style its parent immediately after authoring that row. Both target the row's internal gaps. |
 | `width`, `height` | Explicit layout allocation, 1–4096 logical units. |
 | `min_width`, `max_width`, `min_height`, `max_height` | Container constraints; available host bounds still win over minimum width. Content fits an explicit height without changing its binding. |
 | `align` | Container content alignment: `left`, `center`, `right`, `expand`. |
@@ -153,3 +153,31 @@ row.prop(camera, "clip_end")
 A style wrapper preserves list toolbar semantics and intrinsic spacing.
 `flex_grow` is applied to flexible row children; explicit fixed widths retain
 priority. These rules run during retained layout, not every paint.
+
+## Choosing the right customization layer
+
+The current CamKeys design needs are covered without product-specific library
+rules. Use these same options in other add-ons:
+
+| Design need | Public configuration |
+| --- | --- |
+| Shared palette, glass opacity, density and motion | Host `StyleSheet`, its color/geometry variants, and live `update()` |
+| Panel sections and aligned rows | `padding`, `margin`, `gap`, `align`, `flex_grow`, size constraints |
+| Matching field columns and narrow-panel reflow | `label_width`, `label_position`, `value_width`; shared responsive layout |
+| Bold headings, centered actions and help icons | `font_weight`, `font_size`, `text_align`, `icon`, `trailing_icon`, `wrap` |
+| Numeric formatting and slider presentation | `units`, `precision`, `slider`, `disabled_accent` |
+| List viewport and row density | `list_rows`, `list_row_height`, plus ordinary row styles inside `draw_item()` |
+| Individual accents, inset fields and reduced motion | `colors`, `background`, `accent`, `opacity`, `radius`, `motion` |
+
+Color-only presets preserve a box's existing theme padding. `margin` adds to
+that padding; explicit `padding=0` removes it. Styling a completed compound row
+styles that actual row, so its internal gaps and later-added children behave the
+same as `scope="group"`. Repeated size presets are validated together: an invalid
+`min_width`/`max_width` combination fails before modifying geometry or colors.
+
+This covers the requested design, not every CSS property. Arbitrary selectors,
+media-query syntax, absolute positioning, per-widget shader/blur overrides and
+independent resizing of every internal icon are not provided. Shared source
+icons, glass and motion stay consistent; specialized controls expose their own
+documented APIs. No style option silently changes bindings, right-click owners,
+enabled state or operator behavior.

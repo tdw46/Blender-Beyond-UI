@@ -38,6 +38,17 @@ versioned official API/Manual evidence for compatibility claims.
 
 ## Hard rule: exact generated-reference fidelity
 
+### Current acceptance correction — 2026-11-01
+
+Tyler subsequently clarified: "Doesn't have to be perfect, just close." For the
+current CamKeys styling/refinement work, prioritize a close, consistent match
+and practical readability over pixel-exact reproduction. Use the references and
+side-by-side evidence, report remaining differences honestly, and preserve all
+glass, motion, theme, ownership and performance requirements. Do not spend further
+turns chasing generated-artwork minutiae or treat them as release blockers.
+This explicit correction supersedes the exact-match acceptance wording below
+for this work; retain immutable references and evidence.
+
 Tyler requires implemented custom controls to match generated references
 EXACTLY. A generated reference is a visual specification, not loose inspiration.
 

@@ -77,7 +77,7 @@ class Group:
 
     def _sync_size_policy(self):
         registry = self.canvas._sized_groups
-        if "_insets" in self.options or any(
+        if "_insets" in self.options or self.options.get("_inline_geometry") or any(
             self.options.get(name, 0)
             for name in ("scale_x", "scale_y", "ui_units_x", "ui_units_y")
         ):

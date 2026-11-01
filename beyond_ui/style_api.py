@@ -262,6 +262,12 @@ def apply(layout, values, scope):
     if scope == "last" and not layout.group.children:
         raise ValueError("style() needs a preceding item on this layout")
     target = layout.group if scope == "group" else layout.group.children[-1]
+    # Validate the composed geometry before changing the tree or its controls.
+    # Separate calls must obey the same constraints as one merged preset.
+    geometry = normalize(
+        {k: v for k, v in target.options.items() if k in _LAYOUT and k != "align"},
+        {k: v for k, v in values.items() if k in _LAYOUT},
+    )
     if values.keys() & {"list_row_height", "list_rows"}:
         from .registered_list import RegisteredList
 
@@ -284,27 +290,18 @@ def apply(layout, values, scope):
             raise ValueError("template requires a named StyleSheet geometry variant")
     visual = {k: v for k, v in values.items() if k not in _LAYOUT}
     staged = [(c, prepare_control(c, visual)) for c in _leaves(target)]
-    if scope == "last" and not target.options.get("_style_wrapper"):
+    if scope == "last" and not isinstance(target, Group):
         wrapper = Group(layout.canvas, "column", layout.group, _style_wrapper=True)
         layout.group.children[-1] = wrapper
         wrapper.children.append(target)
-        if isinstance(target, Group):
-            target.parent = wrapper
         target = wrapper
-    geometry = {k: v for k, v in values.items() if k in _LAYOUT}
     target.options.update(geometry)
+    target.options["_inline_geometry"] = True
     target.options["_style_defaults"] = normalize(
         target.options.get("_style_defaults", {}), visual
     )
     if "align" in geometry:
         target.options["alignment"] = geometry["align"]
-    target.options["_insets"] = tuple(
-        a + b
-        for a, b in zip(
-            target.options.get("padding", (0,) * 4),
-            target.options.get("margin", (0,) * 4),
-        )
-    )
     layout.canvas._sized_groups.add(target)
     if values.get("display") == "none":
         hidden_controls = list(_leaves(target))
