@@ -109,6 +109,16 @@ def inset_outline(rect, palette, scale=1.0, radius=6.0):
     draw(rect, palette["edge"], radius=radius * scale, border=0.65 * scale, mode=5.0)
 
 
+def selection_outline(rect, palette, scale=1.0, radius=5.0, opacity=1.0):
+    """One retained hairline draw; transparent center keeps the glass intact."""
+    ink = palette.get("selection_rim")
+    if ink is None:
+        ink = tuple(a * 0.7 + b * 0.3 for a, b in zip(
+            palette["selected"][:3], palette["text"][:3])) + (0.68,)
+    ink = ink[:3] + (ink[3] * max(0, min(1, opacity)),)
+    draw(rect, ink, radius=radius * scale, border=0.9 * scale, mode=5.0)
+
+
 def clear():
     global _shader, _batch
     _shader = _batch = None

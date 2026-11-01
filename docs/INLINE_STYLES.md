@@ -82,6 +82,10 @@ keys fail explicitly instead of being silently ignored.
 | `list_row_height` | Registered list row height, 28–88. Apply after `template_list()`; no custom UIList class attribute needed. |
 | `list_rows` | Default visible row count, 1–128. Changes the list viewport without scaling its text or controls. User resizing still works; an existing resized state takes precedence. |
 | `label_position`, `label_width` | `auto`, `left`, or `top`; optional 0–320 logical-unit label column. A left slider label stacks when there is insufficient room for its text, track and number box. Paired entry captions stack together. |
+| `surface`, `surface_region` | Optional decorative parent surface: `none` (default), `card`, `field`, or `input`. `surface_region="group"` covers the container; `"value"` excludes the external label on a single entry/slider. Other compound groups use their full bounds. No new hit target or owner is created. |
+| `surface_radius`, `surface_color` | Parent surface radius (0–64) and optional explicit tint. Unspecified tint comes from the host theme role. Uses the existing shared glass backdrop. |
+| `button_padding` | Minimum text-button padding in CSS edge order, such as `(6, 14)`. Centered content uses the larger of each opposing pair. Icon-only controls and menu-option rows retain their compact geometry. Explicit fixed size allocations may still constrain content. Host defaults are `button_padding_x=14`, `button_padding_y=6` in `StyleSheet.geometry`. |
+| `list_dividers` | Boolean; registered lists show subtle separators between populated rows by default. Does not add lines through empty space, or across grid/compact presentations. |
 
 The common container/color/motion vocabulary works with rendered Boolean,
 integer, float, string, enum, pointer, vector, color and compound controls, plus
@@ -181,3 +185,26 @@ independent resizing of every internal icon are not provided. Shared source
 icons, glass and motion stay consistent; specialized controls expose their own
 documented APIs. No style option silently changes bindings, right-click owners,
 enabled state or operator behavior.
+
+## Glass groups and value capsules
+
+```python
+row = layout.row()
+bui.style(row, scope="group", surface="card", padding=6, gap=8)
+row.prop(settings, "enabled")
+row.operator("my_addon.apply")
+
+layout.prop(settings, "sensitivity", slider=True)
+bui.style(layout, surface="field", surface_region="value",
+          surface_radius=6, padding=(3, 0), label_position="left")
+```
+
+The first form groups any controls. The second adds a capsule behind just the
+slider track and number field, leaving its caption outside; it follows responsive
+label stacking. Surfaces are retained layout decoration, not independent animated
+buttons. Child controls retain their own source motion, editing and owner menus.
+
+Selected menu/list rims derive from the active selection and text theme colors.
+Override the shared `selection_rim` color role for an explicit branded rim.
+Inactive menu rows remain unboxed. Rims and dividers use retained analytic drawing;
+they add no framebuffer capture, blur target or idle refresh timer.

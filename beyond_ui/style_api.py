@@ -18,6 +18,10 @@ _LAYOUT = {
     "flex_grow",
     "display",
     "template",
+    "surface",
+    "surface_region",
+    "surface_radius",
+    "surface_color",
 }
 _NUMERIC = {"units", "precision", "value_width", "slider", "disabled_accent"}
 _VISUAL = {
@@ -39,6 +43,8 @@ _VISUAL = {
     "list_rows",
     "label_position",
     "label_width",
+    "button_padding",
+    "list_dividers",
 }
 
 
@@ -84,8 +90,14 @@ def normalize(*presets, **options):
     if unknown:
         raise ValueError("Unsupported style properties: " + ", ".join(sorted(unknown)))
     for key, value in tuple(result.items()):
-        if key in {"padding", "margin"}:
+        if key in {"padding", "margin", "button_padding"}:
             result[key] = _edges(key, value)
+        elif key == "surface" and value not in {"none", "card", "field", "input"}:
+            raise ValueError("surface must be none, card, field or input")
+        elif key == "surface_region" and value not in {"group", "value"}:
+            raise ValueError("surface_region must be group or value")
+        elif key == "list_dividers" and type(value) is not bool:
+            raise ValueError("list_dividers must be Boolean")
         elif key in {
             "width",
             "height",
@@ -108,7 +120,7 @@ def normalize(*presets, **options):
             raise ValueError("display must be flex or none")
         elif key == "wrap" and type(value) is not bool:
             raise ValueError("wrap must be Boolean")
-        elif key in {"gap", "radius"}:
+        elif key in {"gap", "radius", "surface_radius"}:
             _number(key, value, 0, 64)
         elif key == "flex_grow":
             _number(key, value, 0.01, 100)
@@ -137,7 +149,7 @@ def normalize(*presets, **options):
                 or any(ord(c) < 32 for c in value)
             ):
                 raise ValueError(key + " must be short display text")
-        elif key in {"color", "background", "accent"}:
+        elif key in {"color", "background", "accent", "surface_color"}:
             result[key] = color(value)
         elif key == "colors":
             if not isinstance(value, Mapping) or value.keys() - _COLORS:
@@ -232,11 +244,13 @@ def apply_control(control, values, prepared=None):
             widget.style_row_height = values["list_row_height"]
     if "list_rows" in values and control.kind == "widget":
         control.options["widget"].style_visible_rows = values["list_rows"]
+    if "list_dividers" in values and control.kind == "widget":
+        control.options["widget"].style_dividers = values["list_dividers"]
     if "variant" in values:
         control.options["style_class"] = values["variant"]
     if "text_align" in values:
         control.options["text_alignment"] = values["text_align"]
-    for key in ("font_size", "font_weight", "radius", "label_width", "label_position"):
+    for key in ("font_size", "font_weight", "radius", "label_width", "label_position", "button_padding"):
         if key in values:
             control.options[key] = values[key]
     colors = dict(merged.get("colors", {}))
@@ -268,7 +282,7 @@ def apply(layout, values, scope):
         {k: v for k, v in target.options.items() if k in _LAYOUT and k != "align"},
         {k: v for k, v in values.items() if k in _LAYOUT},
     )
-    if values.keys() & {"list_row_height", "list_rows"}:
+    if values.keys() & {"list_row_height", "list_rows", "list_dividers"}:
         from .registered_list import RegisteredList
 
         if not any(
@@ -324,3 +338,31 @@ def apply(layout, values, scope):
     if "template" in values:
         sheet.apply(layout.canvas, variant=values["template"])
     layout.canvas.invalidate()
+
+
+def surface_rect(group):
+    """Resolve decorative geometry during layout; never create a new hit owner."""
+    if group.options.get("surface_region") != "value":
+        return group.rect
+    controls = list(_leaves(group))
+    if len(controls) != 1:
+        return group.rect
+    control = controls[0]
+    from .scalar_geometry import slider_parts, entry_parts
+
+    if control.kind == "number" and control.options.get("slider", True):
+        _, track, field = slider_parts(
+            control.rect, bool(control.label),
+            stacked=control.options.get("_slider_stacked"),
+            label_width=control.options.get("_slider_label_width"),
+            label_band=control.options.get("_label_band", 24),
+            value_width=control.options.get("value_width", 53),
+        )
+        x = max(control.rect[0], track[0] - 8)
+        return (x, field[1] - 3, field[0] + field[2] - x + 3, field[3] + 6)
+    if control.kind in {"number", "text", "event", "enum", "pointer", "search"}:
+        return entry_parts(control.rect, bool(control.label),
+                           label_width=control.options.get("_entry_label_width"),
+                           stacked=control.options.get("_entry_stacked", False),
+                           label_band=control.options.get("_label_band", 20))[1]
+    return group.rect

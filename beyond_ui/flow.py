@@ -279,6 +279,9 @@ class Plan:
                     if node.options.get("bool_button")
                     else max(minimum, text + (70 if node.kind == "toggle" else 24))
                 )
+                if node.kind == "button" and node.label and not node.options.get("menu_option"):
+                    top, right, bottom, left = self.button_padding(node)
+                    width = max(width, text + 2 * max(left, right))
         else:
             sizes = [self.natural(c) for c in self.children(node)]
             width = (
@@ -302,6 +305,12 @@ class Plan:
         return self.natural_cache[key]
 
     def base_height(self, node):
+        if node.kind == "button" and node.label and not node.options.get("menu_option"):
+            top, right, bottom, left = self.button_padding(node)
+            return max(
+                getattr(self.theme, "button_height", self.theme.row_height) if self.panel_layout else self.theme.row_height,
+                node.options.get("font_size", self.theme.font_size) + 2 * max(top, bottom),
+            )
         if "font_size" in node.options:
             return max(self.theme.row_height, node.options["font_size"] * 1.6)
         if not self.panel_layout:
@@ -325,6 +334,12 @@ class Plan:
         if node.kind == "number" and node.options.get("slider"):
             return 24.0
         return self.theme.field_height
+
+    def button_padding(self, node):
+        return node.options.get("button_padding", (
+            getattr(self.theme, "button_padding_y", 6), getattr(self.theme, "button_padding_x", 14),
+            getattr(self.theme, "button_padding_y", 6), getattr(self.theme, "button_padding_x", 14),
+        ))
 
     def paragraph_extra(self, node, available):
         node.options.pop("_wrapped_lines", None)

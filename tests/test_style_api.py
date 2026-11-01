@@ -8,6 +8,53 @@ from test_numeric import codec
 
 
 class InlineStyleTests(unittest.TestCase):
+    def test_value_surface_excludes_caption_and_preserves_owner(self):
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        c = self.number(ui)
+        binding = c.binding
+        style(ui, slider=True, label_width=120, label_position="left",
+              surface="field", surface_region="value", padding=(3, 0))
+        ui.canvas.arrange(360)
+        rect, _ = ui.canvas._style_surfaces[0]
+        self.assertGreater(rect[0], c.rect[0] + 120)
+        self.assertIs(c.binding, binding)
+        self.assertEqual(len(ui.canvas.controls), 1)
+        ui.canvas.arrange(180)
+        rect, _ = ui.canvas._style_surfaces[0]
+        self.assertTrue(c.options["_slider_stacked"])
+        self.assertGreater(rect[1], c.rect[1])
+        style(ui, display="none")
+        ui.canvas.arrange(180)
+        self.assertEqual(ui.canvas._style_surfaces, [])
+
+    def test_group_surface_does_not_restyle_children(self):
+        ui = Layout()
+        row = ui.row()
+        style(row, scope="group", surface="card", surface_color="#12345680", padding=4)
+        c = row.label(text="Child")
+        ui.canvas.arrange(360)
+        self.assertEqual(ui.canvas._style_surfaces[0][0], row.group.rect)
+        self.assertNotIn("surface_color", c.options.get("_inline_style", {}))
+
+    def test_text_button_padding_keeps_icon_tools_compact(self):
+        from beyond_ui.flow import Plan
+
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        row = ui.row()
+        text = row.group.button("text", "ON", lambda: None)
+        icon = row.group.button("icon", "", lambda: None, icon="ADD")
+        ui.canvas.arrange(360)
+        self.assertGreaterEqual(text.rect[3], ui.canvas.theme.font_size + 12)
+        self.assertEqual(icon.rect[3], ui.canvas.theme.icon_button_size)
+        plan = Plan(ui.canvas.theme, panel_layout=True)
+        before = plan.natural(text)
+        style(row, scope="group", button_padding=(8, 20))
+        ui.canvas.arrange(360)
+        self.assertGreaterEqual(text.rect[3], ui.canvas.theme.font_size + 16)
+        self.assertGreater(Plan(ui.canvas.theme).natural(text), before)
+
     def test_visual_presets_preserve_box_padding_and_follow_theme_changes(self):
         from beyond_ui.flow import Plan
 

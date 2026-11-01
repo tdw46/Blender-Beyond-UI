@@ -153,6 +153,15 @@ class CollectionList(Widget):
             (item for item, rect in self.visible() if contains(rect, x, y)), None
         )
 
+    def divider_rect(self, rect):
+        if not getattr(self, "style_dividers", True) or self.type != "DEFAULT":
+            return None
+        x, y, w, h = rect
+        boundary = y + h + 2
+        if boundary + self.offset >= len(self.filtered) * self.row_height or boundary >= self.viewport:
+            return None
+        return (x + 6, boundary - 0.25, max(0, w - 12), 0.5)
+
     def scrollbar(self):
         track = (self.width - 6, 2, 3, max(0, self.viewport - 4))
         total = self.viewport + self.limit
@@ -496,7 +505,7 @@ class CollectionList(Widget):
         return tuple(rows)
 
     def paint(self, rect, font, palette, *, backdrop=None):
-        from ..gpu import glass, style
+        from ..gpu import glass, style, skin
 
         p = Painter(
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
@@ -518,13 +527,20 @@ class CollectionList(Widget):
                 key = ("row", item.identity)
                 with p.deform(key, r):
                     if active:
-                        p.surface(r, "selected", 5, 0.5, motion_key=False)
+                        if not glass.lens(backdrop, p.map(r), 5 * p.scale, palette["selected"]):
+                            p.surface(r, "selected", 5, 0.5, motion_key=False)
+                        skin.selection_outline(p.map(r), palette, p.scale, 5)
                     editing = (
                         self.text_edit is not None
                         and self.field == "name"
                         and self.edit_item == item
                     )
                     self.paint_row(p, item, r, active, editing)
+                divider = self.divider_rect(r)
+                if divider is not None:
+                    skin.draw(p.map(divider),
+                              (*palette["edge"][:3], min(0.18, palette["edge"][3])),
+                              radius=0, border=0)
                 self.motion.region(
                     key,
                     (

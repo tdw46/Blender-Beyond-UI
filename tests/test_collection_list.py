@@ -32,6 +32,17 @@ class Lists(unittest.TestCase):
         self.assertEqual(tuple(widget.visible(28, 56))[0][0].index, 1)
         self.assertEqual(tuple(widget.visible(0, 0)), ())
 
+    def test_dividers_only_separate_populated_rows_and_follow_scroll(self):
+        widget, _ = self.fixture(2)
+        rows = list(widget.visible())
+        self.assertIsNotNone(widget.divider_rect(rows[0][1]))
+        self.assertIsNone(widget.divider_rect(rows[-1][1]))
+        widget.style_dividers = False
+        self.assertIsNone(widget.divider_rect(rows[0][1]))
+        widget, _ = self.fixture(100)
+        widget.scroll_to(widget.limit)
+        self.assertIsNone(widget.divider_rect(list(widget.visible())[-1][1]))
+
     def test_wildcards_reverse_original_indices(self):
         items = [
             Item(i, i, name, "name")

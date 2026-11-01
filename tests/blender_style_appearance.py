@@ -146,7 +146,13 @@ def tick():
             assert not sheet.animation.enabled and d.canvas.theme.font_size == 12
             primary = sheet.to_dict()["variants"]["primary"]["field"]
             assert all(abs(a-b) < 1e-6 for a, b in zip(primary[:3], (0.2, 0.65, 0.9)))
+            variants = sheet.to_dict()["variants"]
+            assert all(abs(a-b) < 1e-6 for a, b in zip(
+                variants["coral_action"]["field"][:3], d.operator.accent))
+            assert all(abs(a-b) < 1e-6 for a, b in zip(
+                variants["mint_action"]["selected"][:3], d.operator.mint))
             checks.append("Live accent also updates primary action buttons")
+            checks.append("Reset and selected ON/OFF presets follow live coral/mint edits")
             checks.append(
                 "Live opacity, type size and disable retain dialog and shared glass"
             )

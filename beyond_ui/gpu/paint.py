@@ -292,6 +292,14 @@ def paint(
                 if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
                     surface(mapped(card), palette["card"])
                     skin.inset_outline(mapped(card), palette, scale, t.radius)
+            for bounds, options in getattr(canvas, "_style_surfaces", ()):
+                if bounds[1] + bounds[3] <= logical[1] or bounds[1] >= logical[1] + logical[3]:
+                    continue
+                radius = options.get("surface_radius", t.radius)
+                tint = options.get("surface_color", palette[options["surface"]])
+                opacity = options.get("_style_defaults", {}).get("opacity", 1)
+                surface(mapped(bounds), tint[:3] + (tint[3] * opacity,), radius)
+                skin.inset_outline(mapped(bounds), palette, scale, radius)
         for control in canvas.visible_controls(logical) if controls else ():
             current_style = control.options.get("_inline_style", {})
             r = mapped(control.rect)
@@ -463,6 +471,9 @@ def paint(
                     )
                     if kind == "button" and not menu_option:
                         skin.inset_outline(r, palette, scale, t.radius)
+                    if selected or menu_option and canvas.hover == control.key:
+                        skin.selection_outline(menu_metrics.highlight(r, scale) if menu_option else r,
+                                               palette, scale, current_style.get("radius", t.radius))
                 if kind == "widget":
                     typography.flush_text(font)
                     control.options["widget"].paint(r, font, palette, backdrop=backdrop)

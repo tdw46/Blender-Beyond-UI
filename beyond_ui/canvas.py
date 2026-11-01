@@ -22,6 +22,8 @@ class Theme:
     icon_size: float = 14.0
     field_height: float = 26.0
     button_height: float = 20.0
+    button_padding_x: float = 14.0
+    button_padding_y: float = 6.0
     icon_button_size: float = 24.0
     list_tool_size: float = 22.0
     label_band: float = 26.0
@@ -522,6 +524,19 @@ class Canvas(Group):
         self._scale_numeric_motion()
         self._dirty = False
         self._style_cards = []
+        self._style_surfaces = []
+        from .style_api import surface_rect
+
+        def surfaces(group):
+            if group.options.get("display") == "none":
+                return
+            if group.options.get("surface", "none") != "none":
+                self._style_surfaces.append((surface_rect(group), group.options))
+            for child in group.children:
+                if isinstance(child, Group):
+                    surfaces(child)
+
+        surfaces(self)
         if self.theme.stylesheet is not None and self.theme.stylesheet.cards:
 
             def cards(group, depth=0):

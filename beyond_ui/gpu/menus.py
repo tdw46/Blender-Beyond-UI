@@ -73,9 +73,13 @@ def enum_option(
             radius=0,
         )
     if color[3] > 0:
+        from . import skin
+
         highlight = menu_metrics.highlight(rect, scale)
         if not glass.lens(backdrop, highlight, 4 * scale, color, blur=0.4):
             style.draw(*highlight, color, radius=4 * scale)
+        skin.selection_outline(highlight, palette, scale, 4,
+                               color[3] / max(0.001, palette["selected"][3]))
     ink = (
         (palette["selected_text"] if color[3] > 0 and not item.get("heading") else TEXT)
         if item["enabled"] or item.get("heading")
