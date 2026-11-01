@@ -34,10 +34,16 @@ def auto_slider(control):
 def prepare(canvas):
     from .widgets.collection_list import CollectionList
 
+    def content(node):
+        while node.options.get("_style_wrapper") and len(node.children) == 1:
+            node = node.children[0]
+        return node
+
     def visit(group):
         children = getattr(group, "children", ())
         if group.kind == "row" and any(
-            c.kind == "widget" and isinstance(c.options.get("widget"), CollectionList)
+            content(c).kind == "widget"
+            and isinstance(content(c).options.get("widget"), CollectionList)
             for c in children
         ):
             for c in children:
@@ -113,6 +119,11 @@ def span_labels(group):
     for child in children:
         leaves.extend(span_labels(child) if hasattr(child, "children") else (child,))
     if group.kind in {"row", "split"}:
+        for child in children:
+            if child.options.get("section_disclosure"):
+                # Include the decorative trailing icon in the header surface,
+                # without changing the authored control's owner or hit target.
+                child.options["_section_rect"] = group.rect
         labels = [c for c in leaves if c.options.get("_slider_stacked")]
         if len(labels) == 1:
             label = labels[0]

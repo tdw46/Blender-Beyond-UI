@@ -1,0 +1,26 @@
+{
+  "method": "Manual reference bounds normalized to 360 logical panel width; reference measurements are approximate, not pixel-exact certificates. Actual values are retained layout geometry.",
+  "measurements": [
+    {
+      "item": "CamProps list total height",
+      "reference_approx": 178.00738007380073,
+      "v4": 110,
+      "v5": 176,
+      "unit": "logical px"
+    },
+    {
+      "item": "CamProps outer panel height",
+      "reference_approx": 713.8007380073801,
+      "v4": 642,
+      "v5": 700,
+      "unit": "logical px"
+    },
+    {
+      "item": "Object/Distance Falloff option pitch",
+      "reference_approx": 25.227750525578134,
+      "v4": 28,
+      "v5": 25,
+      "unit": "logical px"
+    }
+  ]
+}

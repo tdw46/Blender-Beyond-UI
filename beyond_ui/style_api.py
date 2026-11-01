@@ -36,6 +36,9 @@ _VISUAL = {
     "variant",
     "wrap",
     "list_row_height",
+    "list_rows",
+    "label_position",
+    "label_width",
 }
 
 
@@ -94,6 +97,13 @@ def normalize(*presets, **options):
             _number(key, value, 1, 4096)
         elif key == "list_row_height":
             _number(key, value, 28, 88)
+        elif key == "list_rows":
+            if type(value) is not int or not 1 <= value <= 128:
+                raise ValueError("list_rows must be an integer in [1, 128]")
+        elif key == "label_width":
+            _number(key, value, 0, 320)
+        elif key == "label_position" and value not in {"auto", "left", "top"}:
+            raise ValueError("label_position must be auto, left or top")
         elif key == "display" and value not in {"flex", "none"}:
             raise ValueError("display must be flex or none")
         elif key == "wrap" and type(value) is not bool:
@@ -220,11 +230,13 @@ def apply_control(control, values, prepared=None):
         widget = control.options["widget"]
         if hasattr(widget, "row_height"):
             widget.style_row_height = values["list_row_height"]
+    if "list_rows" in values and control.kind == "widget":
+        control.options["widget"].style_visible_rows = values["list_rows"]
     if "variant" in values:
         control.options["style_class"] = values["variant"]
     if "text_align" in values:
         control.options["text_alignment"] = values["text_align"]
-    for key in ("font_size", "font_weight", "radius"):
+    for key in ("font_size", "font_weight", "radius", "label_width", "label_position"):
         if key in values:
             control.options[key] = values[key]
     colors = dict(merged.get("colors", {}))
@@ -250,13 +262,13 @@ def apply(layout, values, scope):
     if scope == "last" and not layout.group.children:
         raise ValueError("style() needs a preceding item on this layout")
     target = layout.group if scope == "group" else layout.group.children[-1]
-    if "list_row_height" in values:
+    if values.keys() & {"list_row_height", "list_rows"}:
         from .registered_list import RegisteredList
 
         if not any(
             isinstance(c.options.get("widget"), RegisteredList) for c in _leaves(target)
         ):
-            raise ValueError("list_row_height requires a registered UIList")
+            raise ValueError("List styling requires a registered UIList")
     if values.keys() & _NUMERIC and not any(
         c.kind == "number" for c in _leaves(target)
     ):

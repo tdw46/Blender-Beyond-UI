@@ -23,14 +23,14 @@ integrate(globals(), stylesheet=studio)
 
 [Styling guide](docs/STYLING.md) · [Copy-ready presets](examples/theme_presets.py) ·
 [CamKeys Studio JSON](examples/themes/camkeys-studio.json) ·
-[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v4/index.html)
+[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v5/index.html)
 
 The CamKeys consumer preview includes a live Appearance dialog. These recordings
 show actual Blender renders; generated-reference acceptance remains open.
 
 | Live customization | Branded panel |
 | --- | --- |
-| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v4-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v4-camkeys_main.gif) |
+| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v5-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v5-camkeys_main.gif) |
 
 ## One extra line of styling
 

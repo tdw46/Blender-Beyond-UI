@@ -80,6 +80,8 @@ keys fail explicitly instead of being silently ignored.
 | `units`, `precision` | Numeric display unit/annotation and fixed decimals (0–6). See below. |
 | `value_width`, `slider`, `disabled_accent` | Slider number-box width (24–240), slider presentation, or accent fill while read-only. None enables a disabled property. |
 | `list_row_height` | Registered list row height, 28–88. Apply after `template_list()`; no custom UIList class attribute needed. |
+| `list_rows` | Default visible row count, 1–128. Changes the list viewport without scaling its text or controls. User resizing still works; an existing resized state takes precedence. |
+| `label_position`, `label_width` | `auto`, `left`, or `top`; optional 0–320 logical-unit label column. A left slider label stacks when there is insufficient room for its text, track and number box. Paired entry captions stack together. |
 
 The common container/color/motion vocabulary works with rendered Boolean,
 integer, float, string, enum, pointer, vector, color and compound controls, plus
@@ -128,3 +130,26 @@ The existing Blender 4.2 paths are retained but not runtime-qualified by this pa
 
 References: [5.2 UILayout API](https://docs.blender.org/api/5.2/bpy.types.UILayout.html),
 [5.2 signature changes](https://docs.blender.org/api/5.2/change_log.html).
+
+## Responsive list and field presets
+
+```python
+PROPERTY_LIST = dict(list_rows=5, list_row_height=30)
+INLINE_VALUE = dict(label_position="left", label_width=150, value_width=42)
+PAIR = dict(gap=10, label_width=60)
+
+row.template_list("MY_UL_items", "", owner, "items", owner, "active_index")
+bui.style(row, PROPERTY_LIST)
+
+layout.prop(camera, "lens", slider=True)
+bui.style(layout, INLINE_VALUE)
+
+row = layout.row()
+bui.style(row, PAIR, scope="group")
+row.prop(camera, "clip_start")
+row.prop(camera, "clip_end")
+```
+
+A style wrapper preserves list toolbar semantics and intrinsic spacing.
+`flex_grow` is applied to flexible row children; explicit fixed widths retain
+priority. These rules run during retained layout, not every paint.

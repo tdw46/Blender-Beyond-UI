@@ -91,3 +91,18 @@ class Lists(unittest.TestCase):
         self.assertEqual(len(tuple(widget.visible())), 1)
         widget.toggle("reverse")
         self.assertNotIn("reverse", widget.state)
+
+    def test_styled_viewport_preserves_density_resize_and_cancellation(self):
+        widget, state = self.fixture(rows=3, maxrows=8)
+        widget.style_visible_rows = 5
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.viewport, 5 * 28)
+        self.assertEqual(state, [0])
+        widget.event(event("LEFTMOUSE"), widget.width / 2, widget.viewport + 12)
+        widget.event(event("MOUSEMOVE", "NOTHING"), 160, 600)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.visible_rows, 8)
+        widget.event(event("RIGHTMOUSE"), 160, 600)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.visible_rows, 5)
+        self.assertEqual(widget.row_height, 28)

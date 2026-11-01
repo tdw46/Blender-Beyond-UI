@@ -3,13 +3,20 @@
 from math import isfinite
 
 
-def slider_parts(rect, label=True, *, stacked=None, label_band=24, value_width=53):
+def slider_parts(
+    rect, label=True, *, stacked=None, label_band=24, value_width=53, label_width=None
+):
     from .gpu.style import slider_parts as source_parts
 
     x, y, w, h = rect
     narrow = label and (w < 260 if stacked is None else stacked)
-    label_rect = (x, y, w if narrow else w * 0.43, 20 if narrow else h)
-    offset = 0 if narrow or not label else w * 0.46
+    label_size = w * 0.43 if label_width is None else label_width
+    label_rect = (x, y, w if narrow else label_size, 20 if narrow else h)
+    offset = (
+        0
+        if narrow or not label
+        else (w * 0.46 if label_width is None else label_size + 8)
+    )
     top = y + (label_band if narrow else max(0, (h - 24) / 2))
     controls = (x + offset, top, max(0, w - offset), min(24, h))
     track, field = source_parts(*controls, value_width=value_width)

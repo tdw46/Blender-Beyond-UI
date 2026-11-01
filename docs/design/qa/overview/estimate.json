@@ -1,8 +1,8 @@
 {
-  "reviewed": "2026-11-01 \u2014 native-safe inline styling and complete CamKeys presentation migration",
+  "reviewed": "2026-11-01 \u2014 Studio v5 reference geometry audit and refreshed comparisons",
   "remaining_turns": [
     1,
-    1
+    2
   ],
   "implementation_turns": [
     0,
@@ -10,10 +10,10 @@
   ],
   "integration_qa_turns": [
     1,
-    1
+    2
   ],
   "active_hours": null,
-  "confidence": "Requested preset and consumer implementation complete; visual-reference acceptance remains explicitly open.",
+  "confidence": "This requested geometry pass is implemented and execution-tested. User visual acceptance and explicitly documented generated-artwork conflicts remain open.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
@@ -23,12 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
-    "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
+    "All 12 panel/popover states have current captures and change-motion GIFs. Appearance state GIF is explicitly retained from v2.",
+    "Generated glyph/rim/background differences and inconsistent reference hierarchy remain documented; no pixel-exact acceptance claimed."
   ],
-  "latest_progress": "Added bui.style() and bui.prop(..., style={}) with reusable dictionaries, group defaults, CSS-inspired spacing/constraints, colors/type/motion and units. Migrated CamKeys presentation overrides; selected icon 2 from four generated candidates. 325 unit tests, native/custom 5.1.2/5.2.2 checks, refreshed panel media and paired retained-render benchmark. Installed preview pinned to 88fcc88; source-file launch passed with zero focus activations and unchanged scene hash.",
-  "estimate_review": "New scope added and closed this turn: four icon candidates, generalized inline styling API, CamKeys migration, compatibility checks and current captures. Previous completed work remains credited; one user visual review remains. No additional implementation batch budgeted unless new feedback adds work.",
-  "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
+  "latest_progress": "Audited and recaptured all 12 CamKeys panel/popover states. Fixed styled-list tool sizing, CamProps list density and inline slider reflow, enum-cell spacing, field columns and gutters, Baking header surface span, Lens Compensation units, and option rhythm. Added registered overlays, prior-v4 comparisons and per-panel difference notes. 330 tests passed; 5.1.2/5.2.2 consumer checks and focus-audited captures passed.",
+  "estimate_review": "Closed the planned visual comparison pass and its identified layout repairs. One review pass remains; reserve one possible feedback turn for remaining source-glyph/reference-artwork differences. No implementation time is hidden as QA.",
+  "time_summary": "Capture and layout fixes complete. Remaining review/feedback duration is not reliably forecast; no new measured-hour claim.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -204,6 +204,11 @@
     {
       "work": "Generalized native-safe inline style helpers, reusable presets, units and container geometry; removed CamKeys presentation class overrides/custom list branches; four icon candidates with selection 2; runtime/performance/media validation.",
       "evidence": "docs/design/qa/camkeys-studio-v4/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Studio v5: all-panel reference registration and modular spacing/sizing/alignment corrections",
+      "evidence": "docs/design/qa/camkeys-studio-v5/report.json",
       "turns": 1
     }
   ],

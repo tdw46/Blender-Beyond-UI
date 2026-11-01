@@ -1649,6 +1649,7 @@ class Canvas(Group):
                         control.rect,
                         bool(control.label),
                         stacked=control.options.get("_slider_stacked"),
+                        label_width=control.options.get("_slider_label_width"),
                         label_band=control.options.get("_label_band", 24),
                         value_width=control.options.get("value_width", 53),
                     )

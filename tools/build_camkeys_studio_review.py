@@ -5,7 +5,7 @@ import html, json, shutil
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs/design/qa/camkeys-studio-v4"
+OUT = ROOT / "docs/design/qa/camkeys-studio-v5"
 MEDIA = ROOT / "docs/media/panels"
 MEDIA.mkdir(parents=True, exist_ok=True)
 report = json.loads((OUT / "implementation/report.json").read_text())
@@ -16,6 +16,12 @@ revised = {
     "lattice_auto_fov_modifier",
     "dolly_expressions",
 }
+audit = json.loads((OUT / "layout-audit.json").read_text())
+
+def registered_image(url, size, bounds, extra=""):
+    x, y, w, h = bounds
+    return f'<div class="registered {extra}" style="aspect-ratio:{w}/{h}"><img loading="lazy" src="{url}" style="width:{size[0]/w*100:.8f}%;left:{-x/w*100:.8f}%;top:{-y/h*100:.8f}%"></div>'
+
 current = []
 cards = []
 manifest = []
@@ -23,8 +29,8 @@ for row in report["records"]:
     slug = row["slug"]
     title = row["controls"][0]["label"]
     active = len(row["controls"]) > 1
-    frames = sorted((ROOT / "build/studio-v4-motion" / slug).glob("*.png"))
-    gif = MEDIA / f"camkeys-studio-v4-{slug}.gif"
+    frames = sorted((ROOT / "build/studio-v5-motion" / slug).glob("*.png"))
+    gif = MEDIA / f"camkeys-studio-v5-{slug}.gif"
     if frames and active:
         ims = [Image.open(p).convert("RGB") for p in frames]
         ims[0].save(
@@ -52,7 +58,18 @@ for row in report["records"]:
         notes = "Seven real options retained. The incorrect shortened v2 generated variant is rejected; v1 is the comparison target."
     ref_size = Image.open(OUT / ref).size
     impl_size = Image.open(OUT / impl).size
-    ratio = max(ref_size[1] / ref_size[0], impl_size[1] / impl_size[0])
+    review = audit[slug]
+    ref_bounds = review["reference_bounds_px"]
+    impl_bounds = (32, 32, impl_size[0]-64, impl_size[1]-64)
+    ref_view = registered_image(ref, ref_size, ref_bounds)
+    impl_view = registered_image(impl, impl_size, impl_bounds)
+    ratio = max(ref_bounds[3] / ref_bounds[2], impl_bounds[3] / impl_bounds[2])
+    before = f"../camkeys-studio-v4/implementation/{slug}.png"
+    before_size = Image.open(OUT / before).size
+    before_view = registered_image(before, before_size, (32,32,before_size[0]-64,before_size[1]-64))
+    changes = '<ul>' + ''.join('<li>'+html.escape(x)+'</li>' for x in review['fixes']) + '</ul>'
+    limitations = '<ul>' + ''.join('<li>'+html.escape(x)+'</li>' for x in review['remaining']) + '</ul>'
+    notes = "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels."
     embedded = "".join(
         f'<a href="embedded/{slug}-{part}.png">Embedded {part}</a> '
         for part in ("top", "lower")
@@ -71,9 +88,10 @@ for row in report["records"]:
     )
     # Correct QA-relative media path below, without changing image contents.
     motion = motion.replace("../../../../media/", "../../../media/")
-    cards.append(f'''<section id="{slug}"><h2>{html.escape(title)}</h2><p>{notes}</p>{embedded}<p>{scales}</p>
-<div class="pair"><figure><figcaption>Generated target · {version}</figcaption><img loading="lazy" src="{ref}"></figure><figure><figcaption>Actual Blender implementation · 360 logical px / 2×</figcaption><img loading="lazy" src="{impl}"></figure></div>
-<details><summary>Overlay comparison</summary><p>Normalized to equal width, original aspect ratios retained. This exposes differences; it is not an exact-match certification.</p><input aria-label="Reference opacity" type="range" min="0" max="1" step=".01" value=".5" oninput="this.nextElementSibling.querySelector('.over').style.opacity=this.value"><div class="overlay" style="aspect-ratio:1/{ratio}"><img src="{impl}" loading="lazy"><img class="over" src="{ref}" loading="lazy"></div></details>{motion}</section>''')
+    cards.append(f'''<section id="{slug}"><h2>{html.escape(title)}</h2><p>{notes}</p>{changes}{embedded}<p>{scales}</p>
+<div class="pair"><figure><figcaption>Generated reference · {version}</figcaption>{ref_view}</figure><figure><figcaption>Updated Blender implementation · 360 logical px / 2×</figcaption>{impl_view}</figure></div>
+<details><summary>Registered overlay · reference opacity</summary><p>Outer panel bounds aligned; aspect ratios preserved. Registration uncertainty is about two source pixels. Different backdrops and artwork prevent a meaningful full-image pixel score.</p><input aria-label="Reference opacity" type="range" min="0" max="1" step=".01" value=".5" oninput="this.nextElementSibling.querySelector('.reference-layer').style.opacity=this.value"><div class="overlay" style="aspect-ratio:1/{ratio}"><div class="base-layer">{impl_view}</div><div class="reference-layer">{ref_view}</div></div></details>
+<details><summary>Before this pass · v4</summary>{before_view}</details><details><summary>Remaining reference differences / later user corrections</summary>{limitations}</details>{motion}</section>''')
     manifest.append(
         dict(
             panel=row["panel"],
@@ -83,6 +101,7 @@ for row in report["records"]:
             reference=ref,
             exact_match=False,
             notes=notes,
+            audit=review,
         )
     )
 frames_path = ROOT / "build/studio-polish-appearance-frames"
@@ -93,7 +112,7 @@ if (frames_path / "frames.json").exists():
         ims = [Image.open(p).convert("RGB") for p in frames]
         # These are explicit state snapshots, not a claim about measured animation timing.
         ims[0].save(
-            MEDIA / "camkeys-studio-v4-appearance.gif",
+            MEDIA / "camkeys-studio-v5-appearance.gif",
             save_all=True,
             append_images=ims[1:],
             duration=850,
@@ -105,7 +124,7 @@ if (frames_path / "frames.json").exists():
         current.append(
             dict(
                 title="CamKeys Studio · live preset edits and owner menu snapshots",
-                path="docs/media/panels/camkeys-studio-v4-appearance.gif",
+                path="docs/media/panels/camkeys-studio-v5-appearance.gif",
             )
         )
 nav = " · ".join(
@@ -113,8 +132,8 @@ nav = " · ".join(
     for r in report["records"]
 )
 page = """<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CamKeys Studio · Design review</title><style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#151c22;color:#f5f2ec;font:16px/1.55 system-ui}main{max-width:1450px;margin:auto;padding:36px 28px}a{color:#76d7c3}h1{font-size:36px;line-height:1.1}h2{font-size:23px}p{max-width:1000px;color:#bdc8ce}.logo{width:168px;height:168px;object-fit:contain}.logo-previews{display:flex;gap:24px;align-items:center}.logo-previews img{width:144px;height:144px;background:#28323b;border-radius:24px}.logo-previews .circle{border-radius:50%}.hero,section{padding:25px;margin:24px 0;background:#202930;border:1px solid #45545d;border-radius:18px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}figure{margin:0}figcaption{font-size:14px;margin:12px 0;color:#aebfc7}img{width:100%;height:auto;display:block;border-radius:10px}details{margin-top:18px}summary{cursor:pointer;color:#f4a28c}details>img,.overlay{max-width:700px}.overlay{position:relative;overflow:hidden}.over{position:absolute;top:0;left:0;opacity:.5;pointer-events:none}input[type=range]{width:min(700px,100%)}nav{line-height:2.2}.tag{display:inline-block;background:#34554e;padding:5px 12px;border-radius:20px;margin-right:8px;font-size:13px}@media(max-width:750px){.pair{grid-template-columns:1fr}main{padding:12px}section{padding:14px}}
-</style><main><img class="logo" src="../../references/camkeys-logo-v4/02-morph-body.png" alt="CamKeys logo"><h1>CamKeys Studio</h1><details><summary>Compact logo · square and circle previews</summary><div class="logo-previews"><img src="../../references/camkeys-logo-v4/02-morph-body.png" alt="Square icon footprint"><img class="circle" src="../../references/camkeys-logo-v4/02-morph-body.png" alt="Circular icon footprint"></div><p>Selected: candidate 2, Morphing camera. Camera silhouettes and artist-recognizable deformation motifs replace the earlier abstract lens mark.</p></details><p>A consumer-owned coral and mint preset over Beyond UI's shared glass, motion, binding and menu systems.</p><div class="hero"><span class="tag">325 unit tests</span><span class="tag">Blender 5.1.2 + 5.2.2</span><span class="tag">Reference acceptance open</span><p>Studio v4 migrates CamKeys styling to native-safe bui.style() calls and reusable dictionaries. No product-specific styling is present in the shared library. The styling system and live Appearance dialog remain available. These are real Blender renders, not HTML imitations. Generated targets remain separate: font/glyph details, optical rims, some spacing and backdrop differences are still visible. No panel is marked pixel-exact.</p><p><a href="../../../../STYLING.md">Preset integration guide</a> · <a href="report.json">Validation and boundaries</a> · <a href="../overview/index.html">Updated work estimate</a></p></div><p><a href="../../../INLINE_STYLES.md">Copy-ready bui.style() guide</a> · <a href="icon-candidates.html">All four icon candidates</a></p><nav>NAV</nav><section><h2>Live customization</h2><p>Colors, chrome opacity, text size, motion strength/speed and disable controls; Follow Blender Colors and Cancel restoration. GIF shows recorded state snapshots retained from Studio v2; this unchanged Appearance dialog was not recaptured in v3.</p><img style="max-width:700px" src="../../../media/panels/camkeys-studio-v4-appearance.gif"></section>CARDS</main></html>"""
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#151c22;color:#f5f2ec;font:16px/1.55 system-ui}main{max-width:1450px;margin:auto;padding:36px 28px}a{color:#76d7c3}h1{font-size:36px;line-height:1.1}h2{font-size:23px}p{max-width:1000px;color:#bdc8ce}.logo{width:168px;height:168px;object-fit:contain}.logo-previews{display:flex;gap:24px;align-items:center}.logo-previews img{width:144px;height:144px;background:#28323b;border-radius:24px}.logo-previews .circle{border-radius:50%}.hero,section{padding:25px;margin:24px 0;background:#202930;border:1px solid #45545d;border-radius:18px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}figure{margin:0}figcaption{font-size:14px;margin:12px 0;color:#aebfc7}img{width:100%;height:auto;display:block;border-radius:10px}details{margin-top:18px}summary{cursor:pointer;color:#f4a28c}details>img,.overlay{max-width:700px}.overlay{position:relative;overflow:hidden}.registered{position:relative;overflow:hidden;width:100%;border-radius:8px}.registered img{position:absolute;max-width:none;height:auto;border-radius:0}.base-layer,.reference-layer{position:absolute;top:0;left:0;width:100%}.reference-layer{opacity:.5;pointer-events:none}details>.registered{max-width:700px}input[type=range]{width:min(700px,100%)}nav{line-height:2.2}.tag{display:inline-block;background:#34554e;padding:5px 12px;border-radius:20px;margin-right:8px;font-size:13px}@media(max-width:750px){.pair{grid-template-columns:1fr}main{padding:12px}section{padding:14px}}
+</style><main><img class="logo" src="../../references/camkeys-logo-v4/02-morph-body.png" alt="CamKeys logo"><h1>CamKeys Studio</h1><details><summary>Compact logo · square and circle previews</summary><div class="logo-previews"><img src="../../references/camkeys-logo-v4/02-morph-body.png" alt="Square icon footprint"><img class="circle" src="../../references/camkeys-logo-v4/02-morph-body.png" alt="Circular icon footprint"></div><p>Selected: candidate 2, Morphing camera. Camera silhouettes and artist-recognizable deformation motifs replace the earlier abstract lens mark.</p></details><p>A consumer-owned coral and mint preset over Beyond UI's shared glass, motion, binding and menu systems.</p><div class="hero"><span class="tag">330 unit tests</span><span class="tag">Blender 5.1.2 + 5.2.2</span><span class="tag">Reference acceptance open</span><p>Studio v5 audits all 12 panel/popover states against their immutable generated references. Corrected list density, inline slider labels, value columns, paired gutters and option spacing use reusable bui.style() presets. No product-specific styling is present in the shared library. The styling system and live Appearance dialog remain available. These are real Blender renders, not HTML imitations. Generated targets remain separate: font/glyph details, optical rims, some spacing and backdrop differences are still visible. No panel is marked pixel-exact.</p><p><a href="../../../../STYLING.md">Preset integration guide</a> · <a href="report.json">Validation and boundaries</a> · <a href="../overview/index.html">Updated work estimate</a></p></div><p><a href="../../../INLINE_STYLES.md">Copy-ready bui.style() guide</a> · <a href="../camkeys-studio-v4/icon-candidates.html">All four icon candidates</a></p><nav>NAV</nav><section><h2>Live customization</h2><p>Colors, chrome opacity, text size, motion strength/speed and disable controls; Follow Blender Colors and Cancel restoration. GIF shows recorded state snapshots retained from Studio v2; this unchanged Appearance dialog was not recaptured in v5.</p><img style="max-width:700px" src="../../../media/panels/camkeys-studio-v5-appearance.gif"></section>CARDS</main></html>"""
 page = (
     page.replace("NAV", nav)
     .replace("CARDS", "".join(cards))

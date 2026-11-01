@@ -182,14 +182,46 @@ class Plan:
             "icon_value"
         ):
             needed += 18
-        label = max(available * 0.36, needed)
-        if available > self.panel_label_column * 1.8:
+        label = max(node.options.get("label_width", available * 0.36), needed)
+        if (
+            "label_width" not in node.options
+            and available > self.panel_label_column * 1.8
+        ):
             label = max(label, self.panel_label_column)
-        stacked = id(node) in self.stacked_peers or available - label - 8 < 48
+        stacked = (
+            node.options.get("label_position") == "top"
+            or id(node) in self.stacked_peers
+            or available - label - 8 < 48
+        )
         node.options["_entry_stacked"] = stacked
         node.options["_entry_label_width"] = label
         node.options["_label_band"] = 26 if self.panel_layout else 20
         return node.options["_label_band"] if stacked else 0
+
+    def slider_extra(self, node, available):
+        if (
+            node.kind != "number"
+            or not node.label
+            or not node.options.get("slider", True)
+        ):
+            return 0
+        position = node.options.get("label_position", "auto")
+        if position == "left":
+            label_width = max(
+                node.options.get("label_width", available * 0.43),
+                self.label_width(node) + 6,
+            )
+            stacked = (
+                available < label_width + 8 + node.options.get("value_width", 53) + 40
+            )
+        else:
+            label_width = None
+            stacked = position == "top" or self.panel_layout or available < 260
+        node.options["_slider_stacked"] = stacked
+        node.options["_slider_label_width"] = (
+            label_width if position == "left" else None
+        )
+        return (self.theme.label_band if self.panel_layout else 20) if stacked else 0
 
     def natural(self, node):
         key = id(node)
@@ -329,14 +361,7 @@ class Plan:
             return node.options["widget"].dimensions(
                 self.theme.font_size, available, node.options.get("height")
             )
-        extra = (
-            (self.theme.label_band if self.panel_layout else 20)
-            if node.kind == "number"
-            and node.label
-            and node.options.get("slider", True)
-            and (self.panel_layout or available < 260)
-            else 0
-        )
+        extra = self.slider_extra(node, available)
         extra = max(
             extra,
             self.entry_extra(node, available),
@@ -397,14 +422,7 @@ class Plan:
                 self.theme.font_size, available, node.options.get("height")
             )
             return min(available, w * sx), h * sy
-        extra = (
-            (self.theme.label_band if self.panel_layout else 20)
-            if node.kind == "number"
-            and node.label
-            and node.options.get("slider", True)
-            and (self.panel_layout or available < 260)
-            else 0
-        )
+        extra = self.slider_extra(node, available)
         extra = max(
             extra,
             self.entry_extra(node, available),
@@ -468,11 +486,13 @@ class Plan:
             ]
             if not sizes or any(w is None for w in sizes):
                 return None
-            return (
+            content = (
                 max(sizes)
                 if node.kind == "column"
                 else sum(sizes) + max(0, len(sizes) - 1) * self.gap(node)
             )
+            top, right, bottom, left = self.insets(node)
+            return content + left + right
         if self.panel_layout:
             if node.kind == "toggle" and not node.label:
                 return 46.0 * self.scale(node)[0]
@@ -543,7 +563,8 @@ class Plan:
             flex = max(0, usable - total) / max(1, fixed.count(None))
             return [w * shrink if w is not None else flex for w in fixed]
         weights = [
-            self.scale(c)[0] if w is None else 0 for c, w in zip(children, fixed)
+            self.scale(c)[0] * c.options.get("flex_grow", 1) if w is None else 0
+            for c, w in zip(children, fixed)
         ]
         flex = max(0, usable - total) / max(1e-30, sum(weights))
         return [

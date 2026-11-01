@@ -50,12 +50,12 @@ class CollectionList(Widget):
     def dimensions(self, font_size, available_width, available_height=None):
         scale = max(0.01, font_size / self.design_font_size)
         self.width = max(1, min(560, available_width / scale))
+        default_rows = getattr(self, "style_visible_rows", self.minimum)
+        minimum, maximum = self.row_limits
         self.visible_rows = (
             1
             if self.type == "COMPACT"
-            else max(
-                self.minimum, min(self.maximum, self.state.get("rows", self.minimum))
-            )
+            else max(minimum, min(maximum, self.state.get("rows", default_rows)))
         )
         self.grid_columns = (
             max(1, min(self.columns, int(self.width / 76)))
@@ -70,6 +70,11 @@ class CollectionList(Widget):
         )
         self.scroll_to(self.state.get("scroll", 0))
         return self.width * scale, self.height * scale
+
+    @property
+    def row_limits(self):
+        default = getattr(self, "style_visible_rows", self.minimum)
+        return min(self.minimum, default), max(self.maximum, default)
 
     def reorder(self):
         self.filtered = ordered(
@@ -283,9 +288,10 @@ class CollectionList(Widget):
                     )
                 else:
                     self.state["rows"] = max(
-                        self.minimum,
+                        self.row_limits[0],
                         min(
-                            self.maximum, round(before + (y - start) / self.row_height)
+                            self.row_limits[1],
+                            round(before + (y - start) / self.row_height),
                         ),
                     )
                     self.changed()
@@ -348,10 +354,12 @@ class CollectionList(Widget):
                 delta = (
                     -self.row_height
                     if kind == "WHEELUPMOUSE"
-                    else self.row_height
-                    if kind == "WHEELDOWNMOUSE"
-                    else getattr(event, "mouse_prev_y", 0)
-                    - getattr(event, "mouse_y", 0)
+                    else (
+                        self.row_height
+                        if kind == "WHEELDOWNMOUSE"
+                        else getattr(event, "mouse_prev_y", 0)
+                        - getattr(event, "mouse_y", 0)
+                    )
                 )
                 self.scroll_to(self.offset + delta)
             return True

@@ -396,6 +396,7 @@ def paint(
                             control.rect,
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
+                            label_width=control.options.get("_slider_label_width"),
                             label_band=control.options.get("_label_band", 24),
                             value_width=control.options.get("value_width", 53),
                         )
@@ -478,7 +479,7 @@ def paint(
                 elif kind == "toggle" and control.options.get("bool_button"):
                     if control.options.get("section_disclosure"):
                         surface(
-                            r,
+                            mapped(control.options.get("_section_rect", control.rect)),
                             (
                                 palette["hover"]
                                 if canvas.hover == control.key
@@ -624,6 +625,7 @@ def paint(
                             control.rect,
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
+                            label_width=control.options.get("_slider_label_width"),
                             label_band=control.options.get("_label_band", 24),
                             value_width=control.options.get("value_width", 53),
                         )

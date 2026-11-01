@@ -189,8 +189,89 @@ class InlineStyleTests(unittest.TestCase):
         ui.canvas.arrange(300)
         from beyond_ui import MenuEntry
 
-        ui.canvas.context_provider = lambda target, context: (MenuEntry("copy", "Copy"),)
+        ui.canvas.context_provider = lambda target, context: (
+            MenuEntry("copy", "Copy"),
+        )
         self.assertTrue(ui.canvas.open_context(c, 20, 20, (0, 0, 300, 500)))
         style(col, display="none")
         self.assertIsNone(ui.canvas.context_menu)
         self.assertIsNone(ui.canvas.context_focus)
+
+    def test_inline_slider_reflows_without_changing_value_hit_geometry(self):
+        from beyond_ui.scalar_geometry import slider_parts
+
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        c = self.number(ui)
+        style(ui, slider=True, label_position="left", label_width=100, value_width=42)
+        ui.canvas.arrange(360)
+        self.assertFalse(c.options["_slider_stacked"])
+        label, track, field = slider_parts(
+            c.rect,
+            stacked=False,
+            label_width=c.options["_slider_label_width"],
+            value_width=42,
+        )
+        self.assertEqual(label[2], 100)
+        self.assertEqual(field[2], 42)
+        self.assertGreater(track[0], label[0] + label[2])
+        ui.canvas.arrange(170)
+        self.assertTrue(c.options["_slider_stacked"])
+        self.assertGreater(c.rect[3], 24)
+
+    def test_explicit_label_column_and_paired_field_alignment(self):
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        row = ui.row()
+        style(row, scope="group", label_width=60, gap=10)
+        a, b = self.number(row, "a"), self.number(row, "b")
+        ui.canvas.arrange(360)
+        self.assertEqual(a.options["_entry_label_width"], 60)
+        self.assertEqual(b.options["_entry_label_width"], 60)
+        self.assertEqual(b.rect[0] - a.rect[0] - a.rect[2], 10)
+        ui.canvas.arrange(180)
+        self.assertTrue(a.options["_entry_stacked"])
+        self.assertTrue(b.options["_entry_stacked"])
+
+    def test_styled_list_keeps_compact_toolbar_and_intrinsic_padding(self):
+        from test_collection_list import Lists
+
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        widget, _ = Lists().fixture(10)
+        row = ui.row()
+        row.group.widget("list", widget)
+        style(row, margin=2)
+        rail = row.column()
+        tool = rail.group.button("tool", "", lambda: None, icon="ADD")
+        ui.canvas.arrange(360)
+        self.assertTrue(tool.options["_list_tool"])
+        self.assertEqual(tool.rect[2:], (22, 22))
+        ui2 = Layout()
+        row2 = ui2.row()
+        a = row2.label(text="One")
+        style(row2, flex_grow=1)
+        b = row2.label(text="Two")
+        style(row2, flex_grow=2)
+        ui2.canvas.arrange(360)
+        self.assertAlmostEqual(b.rect[2], a.rect[2] * 2)
+
+    def test_section_surface_includes_decorative_trailing_icon(self):
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        row = ui.box().row()
+        header = row.group.add(
+            "toggle",
+            "section",
+            "Section",
+            binding=Binding(lambda: True, lambda value: None),
+            bool_button=True,
+            icon="TRIA_DOWN",
+        )
+        icon = row.label(text="", icon="INFO")
+        ui.canvas.arrange(360)
+        self.assertTrue(header.options["section_disclosure"])
+        surface = header.options["_section_rect"]
+        self.assertEqual(surface, row.group.rect)
+        self.assertGreater(surface[2], header.rect[2])
+        self.assertGreaterEqual(surface[0] + surface[2], icon.rect[0] + icon.rect[2])
