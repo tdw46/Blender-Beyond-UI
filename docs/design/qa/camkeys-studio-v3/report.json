@@ -9519,7 +9519,7 @@
   ],
   "source_scene_saved": false,
   "consumer_patch": "consumer-changes.patch",
-  "logo": "../../references/camkeys-logo-v2/logo.png",
+  "logo": "../../references/camkeys-logo-v3/logo.png",
   "installed_vendor": {
     "commit": "ece7cf9a1cfb80418218a9826877ac53a39ab2a6",
     "working_tree_changes": false
@@ -9531,5 +9531,6 @@
     "lens_compensation.py"
   ],
   "scene_sha256": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158",
-  "scene_hash_unchanged": true
+  "scene_hash_unchanged": true,
+  "logo_revision": "Square lens + nested Blender shape-key silhouette; circle-fit check recorded in reference provenance."
 }

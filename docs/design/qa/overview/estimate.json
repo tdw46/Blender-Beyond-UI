@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-01 \u2014 Studio v3 requested visual corrections and class presentation hints",
+  "reviewed": "2026-11-01 \u2014 compact square/circle CamKeys logo revision",
   "remaining_turns": [
     1,
     1
@@ -26,8 +26,8 @@
     "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
     "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
   ],
-  "latest_progress": "Closed the newly requested coral slider, Enum Bins alignment/inset fields, HOW TO icons, fixed-decimal inline units and simpler logo pass. Refreshed 12 panel captures/GIFs, narrow/wide scales and embedded N-panels; 313 unit tests and two-version consumer qualification. Installed clean pinned vendor ece7cf9 and verified original-scene launch without saving; no focus activation recorded.",
-  "estimate_review": "This turn added and closed the six requested styling/presentation corrections. The previous implementation budget was zero; no existing planned work is erased. One user visual acceptance pass remains, with further requested corrections estimated separately.",
+  "latest_progress": "Replaced the horizontal wordmark with a compact lens and nested shape-key icon. Square and circular previews added to Studio v3; accent geometry fits within the circular crop. Previous UI implementation and runtime evidence unchanged.",
+  "estimate_review": "Added and completed this logo-only revision. One user visual review remains; no additional UI implementation or runtime test work introduced.",
   "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -194,6 +194,11 @@
     {
       "work": "Requested slider accent, enum row grid/inset values, help icon, fixed numeric unit labels, generalized class hints and simplified logo; renewed runtime media.",
       "evidence": "docs/design/qa/camkeys-studio-v3/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Square and circle-safe lens/shape-key logo revision; updated review previews.",
+      "evidence": "docs/design/references/camkeys-logo-v3/provenance.json",
       "turns": 1
     }
   ],
