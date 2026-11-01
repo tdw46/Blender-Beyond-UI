@@ -1,0 +1,64 @@
+--- a/ui_theme.py
++++ b/ui_theme.py
+@@ -26,7 +26,11 @@
+         'selected':('#34786D66','#34786D66'),
+         'field':('#303A42C4','#38434BC4'),
+     },
+-    variants={'primary':{'field':'#F06B57D9','hover':'#F17C67CC','text':'#FFF8F2'}},
++    variants={
++        'primary':{'field':'#F06B57D9','hover':'#F17C67CC','text':'#FFF8F2'},
++        'coral_action':{'field':'#B1584D88','hover':'#F17C67B8','text':'#FFF8F2'},
++        'mint_action':{'selected':'#39BFA5B8','hover':'#39BFA566','selected_text':'#F5F2EC'},
++    },
+ 
+     motion=dict(enabled=True,strength=0.7,speed=1.0),
+ )
+@@ -52,6 +56,9 @@
+ INLINE_SLIDER = dict(label_position="left", label_width=150, value_width=42)
+ FIELD_COLUMN = dict(label_width=136)
+ MENU_OPTIONS = dict(gap=3)
++VALUE_SURFACE = dict(surface="field", surface_region="value", surface_radius=6, padding=(3, 0))
++CORAL_ACTION = dict(variant="coral_action")
++MINT_ACTION = dict(variant="mint_action")
+ 
+ 
+ DEFAULT_STYLE = STUDIO.to_dict()
+@@ -101,6 +108,10 @@
+         variants=deepcopy(self._previous["variants"] or DEFAULT_STYLE["variants"])
+         if "primary" in variants:
+             variants["primary"].update(field=tuple(self.accent)+(.85,),hover=tuple(self.accent)+(.9,))
++        if "coral_action" in variants:
++            variants["coral_action"].update(field=tuple(self.accent)+(.53,),hover=tuple(self.accent)+(.72,))
++        if "mint_action" in variants:
++            variants["mint_action"].update(selected=tuple(self.mint)+(.72,),hover=tuple(self.mint)+(.4,))
+         # Replace sections intentionally, then use the public validated transaction.
+         STUDIO.replace(colors=data['colors'],surfaces=data['surfaces'],
+                       variants={} if self.blender_colors else variants,
+--- a/ui_panel.py
++++ b/ui_panel.py
+@@ -779,6 +779,7 @@
+                      text=i18n.pgettext_tip("Apparent Focal Length"))
+         bui.style(fl_left, ui_theme.FOCAL)
+         fl_left.operator("camkeys.reset_apparent_focal_length", text="", icon='LOOP_BACK')
++        bui.style(fl_left, ui_theme.CORAL_ACTION)
+ 
+         fl_right = fl_split.row(align=True)
+         # Unlock short lens checkbox (allows apparent FL below current lens)
+@@ -1102,7 +1103,7 @@
+ 
+                                 left = angle_falloff_row.row()
+                                 left.prop(active_camprop, "angle_sensitivity", slider=True, text=f"{i18n.pgettext_tip('Angle Sensitivity for')} {active_camprop.name}")
+-                                bui.style(left, ui_theme.INLINE_SLIDER)
++                                bui.style(left, ui_theme.INLINE_SLIDER, ui_theme.VALUE_SURFACE)
+ 
+                                 right = angle_falloff_row.row(align=True)
+                                 icon_id = 'RNDCURVE'
+--- a/lens_compensation.py
++++ b/lens_compensation.py
+@@ -262,5 +262,6 @@
+                     "camkeys.set_lens_stop_option", text=text,
+                     depress=value == enabled,
+                 )
++                bui.style(buttons, ui_theme.MINT_ACTION)
+                 button.option = option
+                 button.enabled = enabled

@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-01 \u2014 modular style options audit; close visual match accepted as the target",
+  "reviewed": "2026-11-01 \u2014 reusable surfaces, selection details and button padding",
   "remaining_turns": [
     0,
     1
@@ -23,11 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Current styling comparisons cover all 12 panel/popover states. Appearance GIF retains its explicitly labeled v2 source.",
-    "Minor reference glyph/rim/background differences remain documented; close visual consistency is the current acceptance target."
+    "All 12 panel/popover states have current v6 images, mobile comparisons and motion GIFs; narrow/wide captures at 1x/1.5x/2x and embedded N-panel images are updated.",
+    "Appearance GIF still uses labeled v2 snapshots; current color updates and Cancel behavior were execution-tested.",
+    "Minor generated-reference glyph/rim/background differences remain; close consistency is the user-approved target."
   ],
-  "latest_progress": "Audited all 19 CamKeys presets. Fixed color-only box padding, completed compound-row spacing, and atomic validation of composed sizing constraints. 333 unit tests and style/consumer checks in Blender 5.1.2 and 5.2.2 passed, with no observed focus activation. Existing v5 reference comparisons remain available. All 12 current capture geometries match the existing Studio v5 comparison states, including the conditional lattice panel.",
-  "estimate_review": "Closed the requested options audit and composition fixes. Reduced remaining work to an optional user feedback pass; the user explicitly relaxed pixel-exact matching to a close, consistent result.",
+  "latest_progress": "Added reusable group/value glass surfaces and the Angle Sensitivity capsule; restored coral reset and mint selected ON/OFF buttons through consumer presets; added theme-derived menu/list rims, subtle list separators and minimum text-button padding. 337 unit tests, Blender 5.1.2/5.2.2 consumer checks, live Appearance behavior, 12-state captures, narrow/wide scale matrices and embedded screenshots passed. Installed preview updated.",
+  "estimate_review": "Added and closed this turn: parent surfaces, missing action colors, selection rims, list dividers and shared button padding. The previous optional 0\u20131 feedback turn remains; no uncompleted implementation batch added.",
   "time_summary": "Implementation and automated verification completed. No remaining implementation-hour forecast; user review time is excluded.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -215,9 +216,19 @@
       "work": "Modular styling coverage audit and composable geometry repairs; 19 consumer presets validated",
       "evidence": "docs/design/qa/style-options-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Twelve mobile-readable reference/Blender image comparisons",
+      "evidence": "docs/design/qa/camkeys-studio-v5/mobile/manifest.json",
+      "turns": 1
+    },
+    {
+      "work": "Reusable value/group surfaces, missing action colors, selection rims, subtle list dividers and comfortable text-button padding",
+      "evidence": "docs/design/qa/camkeys-studio-v6/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optional user review of the existing Studio comparison page. No known implementation blocker for the currently requested styling options.",
+  "remaining_work": "Optional user review of current Studio v6 renders and mobile comparisons.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -261,5 +272,5 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Requested modular styling options audited and validated; optional user review"
+  "checkpoint": "Requested surface/color/selection/button refinements implemented; review ready"
 }

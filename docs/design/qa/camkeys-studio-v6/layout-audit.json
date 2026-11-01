@@ -1,0 +1,193 @@
+{
+  "auto_fov": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing.",
+      "Coral preset on the focal-length reset action.",
+      "Selection rims and subtle list separators."
+    ],
+    "remaining": [
+      "Reference shows an older exponent/unit placement and paired help icons; later user corrections take precedence.",
+      "Reference header caret and some rendered glyph/rim details differ."
+    ],
+    "reference_bounds_px": [
+      76,
+      32,
+      774,
+      1628
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "baking": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Reference truncates the topology warning; all authored warning text is retained and wraps.",
+      "Generated optical rims and source icon geometry remain different."
+    ],
+    "reference_bounds_px": [
+      84,
+      27,
+      759,
+      1643
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camkeys_linking": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Source glyphs, list dividers and glass lighting differ from generated artwork.",
+      "HOW TO retains the later approved single info icon."
+    ],
+    "reference_bounds_px": [
+      42,
+      42,
+      941,
+      1448
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camkeys_main": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Source glyphs and glass lighting differ; HOW TO retains the later approved single info icon."
+    ],
+    "reference_bounds_px": [
+      42,
+      40,
+      923,
+      1483
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camprops": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing.",
+      "Reusable value-only glass parent surface around Angle Sensitivity.",
+      "Theme-derived selection rim and subtle separators between populated list rows."
+    ],
+    "remaining": [
+      "Reference omits the real BASIS suffix; preserved for correct item identity. Narrow names truncate within their allotted column instead of disappearing.",
+      "Reference enlarges its top title relative to other panels; consistent host title scale is preserved. Native section nesting/separators remain visible."
+    ],
+    "reference_bounds_px": [
+      41,
+      53,
+      813,
+      1612
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "lattice_auto_fov_modifier": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Generated icon shapes and optical rim remain different."
+    ],
+    "reference_bounds_px": [
+      74,
+      72,
+      1595,
+      752
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "billboard_settings": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Generated Override Armature includes an extra switch absent from the authored action; no fake control added."
+    ],
+    "reference_bounds_px": [
+      65,
+      65,
+      1536,
+      804
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "dolly_expressions": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Real informational icon retained although omitted from the generated heading."
+    ],
+    "reference_bounds_px": [
+      52,
+      53,
+      1203,
+      1092
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "lens_compensation": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing.",
+      "Mint preset for active ON/OFF actions, updated by the live Appearance editor."
+    ],
+    "remaining": [
+      "Reference exponent notation is superseded by the user correction; generated surface lighting remains different."
+    ],
+    "reference_bounds_px": [
+      51,
+      52,
+      1133,
+      1170
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "falloff_popover": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing.",
+      "Theme-derived highlighted-option rim."
+    ],
+    "remaining": [
+      "Generated border bloom, glyphs and backdrop differ."
+    ],
+    "reference_bounds_px": [
+      66,
+      58,
+      1427,
+      868
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "distance_falloff_popover": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing.",
+      "Theme-derived highlighted-option rim."
+    ],
+    "remaining": [
+      "Generated border bloom, glyphs and backdrop differ."
+    ],
+    "reference_bounds_px": [
+      66,
+      58,
+      1427,
+      881
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "flatten_falloff_popover": {
+    "fixes": [
+      "Shared text-button padding now reserves at least 6 logical units above/below and 14 on either side; icon-only tools retain compact sizing."
+    ],
+    "remaining": [
+      "Generated glass and native glyph details differ; curve values are actual scene data."
+    ],
+    "reference_bounds_px": [
+      38,
+      36,
+      802,
+      1720
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  }
+}

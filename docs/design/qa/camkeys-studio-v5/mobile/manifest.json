@@ -1,0 +1,122 @@
+[
+  {
+    "panel": "auto_fov",
+    "image": "auto_fov.jpg",
+    "reference": "../../references/camkeys-studio-v1/auto_fov.png",
+    "implementation": "implementation/auto_fov.png",
+    "size": [
+      1340,
+      1595
+    ]
+  },
+  {
+    "panel": "baking",
+    "image": "baking.jpg",
+    "reference": "../../references/camkeys-studio-v1/baking.png",
+    "implementation": "implementation/baking.png",
+    "size": [
+      1340,
+      1629
+    ]
+  },
+  {
+    "panel": "camkeys_linking",
+    "image": "camkeys_linking.jpg",
+    "reference": "../../references/camkeys-studio-v2/camkeys_linking.png",
+    "implementation": "implementation/camkeys_linking.png",
+    "size": [
+      1340,
+      1135
+    ]
+  },
+  {
+    "panel": "camkeys_main",
+    "image": "camkeys_main.jpg",
+    "reference": "../../references/camkeys-studio-v2/camkeys_main.png",
+    "implementation": "implementation/camkeys_main.png",
+    "size": [
+      1340,
+      1178
+    ]
+  },
+  {
+    "panel": "camprops",
+    "image": "camprops.jpg",
+    "reference": "../../references/camkeys-studio-v1/camprops.png",
+    "implementation": "implementation/camprops.png",
+    "size": [
+      1340,
+      1419
+    ]
+  },
+  {
+    "panel": "lattice_auto_fov_modifier",
+    "image": "lattice_auto_fov_modifier.jpg",
+    "reference": "../../references/camkeys-studio-v2/lattice_auto_fov_modifier.png",
+    "implementation": "implementation/lattice_auto_fov_modifier.png",
+    "size": [
+      1340,
+      456
+    ]
+  },
+  {
+    "panel": "billboard_settings",
+    "image": "billboard_settings.jpg",
+    "reference": "../../references/camkeys-studio-v1/billboard_settings.png",
+    "implementation": "implementation/billboard_settings.png",
+    "size": [
+      1340,
+      509
+    ]
+  },
+  {
+    "panel": "dolly_expressions",
+    "image": "dolly_expressions.jpg",
+    "reference": "../../references/camkeys-studio-v2/dolly_expressions.png",
+    "implementation": "implementation/dolly_expressions.png",
+    "size": [
+      1340,
+      733
+    ]
+  },
+  {
+    "panel": "lens_compensation",
+    "image": "lens_compensation.jpg",
+    "reference": "../../references/camkeys-studio-v1/lens_compensation.png",
+    "implementation": "implementation/lens_compensation.png",
+    "size": [
+      1340,
+      840
+    ]
+  },
+  {
+    "panel": "falloff_popover",
+    "image": "falloff_popover.jpg",
+    "reference": "../../references/camkeys-studio-v1/falloff_popover.png",
+    "implementation": "implementation/falloff_popover.png",
+    "size": [
+      1340,
+      539
+    ]
+  },
+  {
+    "panel": "distance_falloff_popover",
+    "image": "distance_falloff_popover.jpg",
+    "reference": "../../references/camkeys-studio-v1/distance_falloff_popover.png",
+    "implementation": "implementation/distance_falloff_popover.png",
+    "size": [
+      1340,
+      545
+    ]
+  },
+  {
+    "panel": "flatten_falloff_popover",
+    "image": "flatten_falloff_popover.jpg",
+    "reference": "../../references/camkeys-studio-v2/flatten_falloff_popover.png",
+    "implementation": "implementation/flatten_falloff_popover.png",
+    "size": [
+      1340,
+      1523
+    ]
+  }
+]

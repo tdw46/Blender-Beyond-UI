@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-01",
+  "library_commit": "82ec0ee",
+  "unit_tests": 337,
+  "runs": {
+    "consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      }
+    ],
+    "appearance": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Live accent also updates primary action buttons",
+          "Reset and selected ON/OFF presets follow live coral/mint edits",
+          "Live opacity, type size and disable retain dialog and shared glass",
+          "Exact-owner Appearance property right-click",
+          "Blender color inheritance restored live",
+          "Cancel restores colors, metrics, opacity and motion atomically"
+        ]
+      }
+    ],
+    "captures": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "lattice": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "narrow": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "wide": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "embedded": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "benchmark-before": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "benchmark-after": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "installed": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "scene_loaded": true,
+        "refreshes": 5
+      }
+    ]
+  },
+  "changes": [
+    "Reusable group/value glass surfaces",
+    "Coral reset and mint selected action presets with live appearance updates",
+    "Theme-derived menu/list selection rims",
+    "Subtle dividers only between populated list rows",
+    "Minimum text-button padding; compact icon tools preserved"
+  ],
+  "acceptance": "Close visual match; generated artwork and real Blender captures remain separate.",
+  "performance": "Two sequential runs of the same 144-control/48-action benchmark. CPU submission medians show no regression in this sample; not GPU frame time or a speedup claim. Both retained one backdrop production and one blur, five offscreens and one layout revision.",
+  "scope_limits": [
+    "Native Blender 4.2 paths retained, not runtime-qualified by this pass.",
+    "Existing macro native-routing exclusions retained.",
+    "Appearance GIF retains labeled v2 snapshots; current dialog behavior execution-tested."
+  ],
+  "scene_sha256_unchanged": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158"
+}
