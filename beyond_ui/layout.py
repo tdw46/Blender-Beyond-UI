@@ -38,6 +38,7 @@ class Layout:
         pointer_sources=None,
         id_actions=None,
         list_identity=None,
+        property_options=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
@@ -47,6 +48,7 @@ class Layout:
         self.pointer_sources = pointer_sources
         self.id_actions = id_actions
         self.list_identity = list_identity
+        self.property_options = property_options or {}
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
@@ -210,6 +212,7 @@ class Layout:
             pointer_sources=self.pointer_sources,
             id_actions=self.id_actions,
             list_identity=self.list_identity,
+            property_options=self.property_options,
         )
         for name in (
             "_text_role",
@@ -410,6 +413,12 @@ class Layout:
         label = self._text(meta.name if text is None else text, text_ctxt, translate)
         options = self._options()
         options.update(icon=icon, icon_value=icon_value)
+        from .presentation import property_options
+
+        hints = property_options(data, property, self.property_options)
+        options.update({k: v for k, v in hints.items() if k not in {"precision", "suffix", "slider"}})
+        if slider is None and "slider" in hints:
+            slider = hints["slider"]
         if icon_value and self.canvas.icon_renderer is None:
             raise UnsupportedControl("Custom icon_value requires Canvas.icon_renderer")
         if not emboss:
@@ -496,7 +505,7 @@ class Layout:
                 hard_min=meta.hard_min,
                 hard_max=meta.hard_max,
                 integer=meta.type == "INT",
-                numeric=Numeric(meta, self.context),
+                numeric=Numeric(meta, self.context, presentation=hints),
                 slider=bool(slider),
                 slider_auto=slider is None,
                 **options,

@@ -63,7 +63,7 @@ def _unit_text(system, category, value, precision, separate):
 class Numeric:
     """A lightweight codec per RNA property; snapshots are immutable scene settings."""
 
-    def __init__(self, meta, context=None):
+    def __init__(self, meta, context=None, *, presentation=None):
         self.context = context
         self.integer = meta.type == "INT"
         self.unit = getattr(meta, "unit", "NONE")
@@ -78,6 +78,11 @@ class Numeric:
         self.precision = min(6, max(0, getattr(meta, "precision", 3)))
         self.step = getattr(meta, "step", 1 if self.integer else 3)
         self.minimum, self.maximum = meta.soft_min, meta.soft_max
+        self.presentation = presentation or {}
+        if self.presentation.get("suffix") and (
+            self.unit != "NONE" or self.subtype in {"PERCENTAGE", "FACTOR"}
+        ):
+            raise ValueError("Custom suffixes require plain unitless values; native codecs own conversion")
 
     def snapshot(self):
         settings = getattr(getattr(self.context, "scene", None), "unit_settings", None)
@@ -102,6 +107,15 @@ class Numeric:
 
     def format(self, value, state=None):
         state = state or self.snapshot()
+        if self.unit == "NONE" and ("precision" in self.presentation or self.presentation.get("suffix")):
+            precision = self.presentation.get("precision", self.precision)
+            text = f"{value * self.scale(state):.{precision}f}"
+            if self.subtype == "PERCENTAGE" or (
+                self.subtype == "FACTOR" and state[5] == "PERCENTAGE"
+            ):
+                return text + "%"
+            suffix = self.presentation.get("suffix")
+            return text + (f" ({suffix})" if suffix else "")
         if self.integer:
             return str(int(value)) + ("%" if self.subtype == "PERCENTAGE" else "")
         if self.unit == "ROTATION":
@@ -129,6 +143,8 @@ class Numeric:
         state = state or self.snapshot()
         if text == self.format(original, state):
             return original  # Merely focusing a rounded field must be lossless.
+        if self.presentation.get("suffix"):
+            text = text.strip().removesuffix("(" + self.presentation["suffix"] + ")").strip()
         if self.unit == "ROTATION":
             raw = text.strip()
             if not re.search(r"[A-Za-z°'\"]", re.sub(r"\d[eE][+-]?\d+", "0", raw)):

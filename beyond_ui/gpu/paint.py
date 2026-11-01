@@ -92,6 +92,7 @@ def paint(
         inset=6,
         icon=None,
         icon_value=0,
+        trailing_icon=None,
     ):
         active_font = typography.face(font, role)
         a, b, c, d = r
@@ -118,10 +119,12 @@ def paint(
         )
         has_icon = has_icon and right - left >= (icon_size + 4) * scale
         gutter = (icon_size + 6 if value else icon_size) * scale if has_icon else 0
+        tail = trailing_icon not in {None, "", "NONE", 0}
+        tail_gutter = (icon_size + 6) * scale if tail else 0
         group_left = (
-            max(left, a + (c - measure(active_font, size, str(value))[0] - gutter) / 2)
+            max(left, a + (c - measure(active_font, size, str(value))[0] - gutter - tail_gutter) / 2)
             if center
-            else max(left, right - measure(active_font, size, str(value))[0] - gutter)
+            else max(left, right - measure(active_font, size, str(value))[0] - gutter - tail_gutter)
             if right_align
             else left
         )
@@ -147,6 +150,17 @@ def paint(
                 )
             left = group_left + gutter
         origin = group_left + gutter
+        if tail:
+            tail_x = min(right - icon_size * scale, origin + measure(active_font, size, str(value))[0] + 6 * scale)
+            if tail_x >= origin:
+                icon_rect = (tail_x, b + (d - icon_size * scale) / 2, icon_size * scale, icon_size * scale)
+                handled = canvas.icon_renderer(trailing_icon, 0, icon_rect, ink) if canvas.icon_renderer else False
+                if not handled:
+                    style.icon(trailing_icon, tail_x + icon_size * scale / 2, b + d / 2, icon_size * scale, ink)
+                # Leave room for hinted glyph ink beyond its advance width.
+                # Clipping exactly at the measured advance can drop the final
+                # glyph at small host scales even with ample button space.
+                right = min(right, tail_x - 2 * scale)
         if editor is not None:
             cursor = measure(active_font, size, value[: editor.cursor])[0]
             origin = left - max(0, cursor - max(0, right - left - 2 * scale))
@@ -303,6 +317,7 @@ def paint(
                 chrome = False
             if (
                 control.options.get("list_row")
+                and kind not in {"number", "text", "event"}
                 and canvas.hover != control.key
                 and canvas.active is not control
             ):
@@ -334,6 +349,7 @@ def paint(
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
                             label_band=control.options.get("_label_band", 24),
+                            value_width=control.options.get("value_width", 53),
                         )
                         control.motion.region(
                             "handle", (tx - 7, ty - 12, tw + 14, 24), circular=True
@@ -357,6 +373,7 @@ def paint(
                         inset=0 if getattr(canvas, "panel_layout", False) else 6,
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
+                        trailing_icon=control.options.get("trailing_icon"),
                     )
                 if (
                     kind
@@ -422,6 +439,7 @@ def paint(
                         right_align=alignment == "RIGHT",
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
+                        trailing_icon=control.options.get("trailing_icon"),
                     )
                 elif kind == "toggle":
                     from ..scalar_geometry import switch_rect
@@ -545,6 +563,7 @@ def paint(
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
                             label_band=control.options.get("_label_band", 24),
+                            value_width=control.options.get("value_width", 53),
                         )
                         if control.label:
                             lx, ly, lw, lh = label_rect
@@ -579,7 +598,7 @@ def paint(
                             shape=control.motion.sample("handle")[0],
                             scale=scale,
                             palette=palette,
-                            enabled=enabled,
+                            enabled=enabled or control.options.get("disabled_accent", False),
                         )
                         field = mapped(field)
                         with control.motion.deform("field", field):

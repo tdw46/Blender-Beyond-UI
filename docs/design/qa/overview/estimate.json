@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-01 \u2014 compact panel templates, final Studio media and consumer validation",
+  "reviewed": "2026-11-01 \u2014 Studio v3 requested visual corrections and class presentation hints",
   "remaining_turns": [
     1,
     1
@@ -26,8 +26,8 @@
     "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
     "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
   ],
-  "latest_progress": "309 unit tests; compact per-panel geometry templates, card rims, heading icons/bold disclosures, CamProps slider and readable narrow numeric values. Refreshed all 12 panel states, 13 GIFs, 260/480px captures at 1\u00d7/1.5\u00d7/2\u00d7 and real embedded N-panel screenshots. Both Blender versions pass consumer and live preset checks. Fixed false capture timeouts caused by stale LaunchServices records; final captures exit without focus activation. Installed clean pinned vendor 5f002bd and the four updated consumer files; original Uraraka scene opens with 63 objects, five keymap refreshes and zero panel draw errors.",
-  "estimate_review": "Closed the planned layout correction and capture pass: reduce 1\u20132 remaining passes to one user review. No additional implementation batch is budgeted for the current preset feature set. Exact-reference conflicts are listed explicitly and still need review, not silently counted as exact matches.",
+  "latest_progress": "Closed the newly requested coral slider, Enum Bins alignment/inset fields, HOW TO icons, fixed-decimal inline units and simpler logo pass. Refreshed 12 panel captures/GIFs, narrow/wide scales and embedded N-panels; 313 unit tests and two-version consumer qualification.",
+  "estimate_review": "This turn added and closed the six requested styling/presentation corrections. The previous implementation budget was zero; no existing planned work is erased. One user visual acceptance pass remains, with further requested corrections estimated separately.",
   "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -190,9 +190,14 @@
       "work": "Closed compact layout, heading/icon, list-order, numeric readability and live-accent corrections; renewed multi-scale/embedded/GIF evidence and no-focus launcher termination audit.",
       "evidence": "docs/design/qa/camkeys-studio-v2/report.json",
       "turns": 1
+    },
+    {
+      "work": "Requested slider accent, enum row grid/inset values, help icon, fixed numeric unit labels, generalized class hints and simplified logo; renewed runtime media.",
+      "evidence": "docs/design/qa/camkeys-studio-v3/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "User review of Studio v2 and explicit resolution of generated glyph/glass/content conflicts. Additional corrections, if requested, are new measured work; no claim of pixel-exact acceptance.",
+  "remaining_work": "Review Studio v3 corrections and the simplified logo. Generated glyph/glass differences remain explicit; no pixel-exact acceptance claimed.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -225,8 +230,12 @@
     {
       "batch": "Explicit CamKeys Studio request",
       "details": "New scope: logo, per-panel art, consumer redesign, reusable presets, live customization and native validation. Implementation and principal tests delivered; reference fidelity remains separate."
+    },
+    {
+      "batch": "Studio v3 user QA corrections",
+      "details": "Added and closed this turn: six visual/presentation requests, including reusable class hints. User review remains one pass; no extra implementation batch assumed."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Studio v2 implementation and captures complete; visual acceptance pending"
+  "checkpoint": "Studio v3 corrections implemented; user visual acceptance pending"
 }

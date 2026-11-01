@@ -23,7 +23,7 @@ forecast = json.loads((OUT / "estimate.json").read_text())
 current = json.loads(
     (ROOT / "docs/design/qa/forced-perspective-v2/current-media.json").read_text()
 )
-studio_media = ROOT / "docs/design/qa/camkeys-studio-v2/current-media.json"
+studio_media = ROOT / "docs/design/qa/camkeys-studio-v3/current-media.json"
 if studio_media.exists():
     current += json.loads(studio_media.read_text())
 current_paths = {r["path"] for r in current}
@@ -38,7 +38,7 @@ def cards(items, historical=False):
 
 
 features = (
-    '<h2>Current controls · freshly captured</h2><p><a href="../camkeys-studio-v2/index.html">CamKeys Studio: logo, presets, every panel, actual Blender captures and reference overlays</a></p><p><a href="../forced-perspective-v2/index.html">Current panels: compact browser-style grid, aligned labels, centered icons and focal slider</a></p><p><a href="../camkeys-visual-v4/index.html">Earlier CamKeys list/brush behavior evidence (before the latest icon-centering pass)</a></p><p><a href="../core-review-v2/index.html">Earlier core review and QA notes (before the latest icon-centering pass)</a></p><div class="grid">'
+    '<h2>Current controls · freshly captured</h2><p><a href="../camkeys-studio-v3/index.html">CamKeys Studio: logo, presets, every panel, actual Blender captures and reference overlays</a></p><p><a href="../forced-perspective-v2/index.html">Current panels: compact browser-style grid, aligned labels, centered icons and focal slider</a></p><p><a href="../camkeys-visual-v4/index.html">Earlier CamKeys list/brush behavior evidence (before the latest icon-centering pass)</a></p><p><a href="../core-review-v2/index.html">Earlier core review and QA notes (before the latest icon-centering pass)</a></p><div class="grid">'
     + cards(current)
     + '</div><details id="archive"><summary>Historical feature archive ('
     + str(len(archive))

@@ -108,4 +108,52 @@ Embedded adopted panels resolve `beyond_ui_style` on their original class. Stand
 
 ## Validation boundary
 
-CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v2/index.html); visual differences are not counted as exact matches.
+CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v3/index.html); visual differences are not counted as exact matches.
+
+## Property presentation hints
+
+Normal Python class attributes can supply Beyond UI hints without adding RNA
+properties or changing stored data. Native Blender ignores these attributes.
+For example, put this on your own PropertyGroup:
+
+```python
+class LensSettings(bpy.types.PropertyGroup):
+    beyond_ui_props = {
+        "apparent": {"precision": 1, "suffix": "mm", "value_width": 78},
+    }
+    apparent: bpy.props.FloatProperty(default=155.0, min=1, max=500)
+```
+
+The field displays `155.0 (mm)`; editing accepts `155.0 (mm)`, `155.0`, or an
+arithmetic expression. Focusing a rounded value without changing it preserves
+its full original precision. Suffixes are display annotations for unitless RNA;
+properties with native unit conversion keep Blender's unit codec. Factor/percentage properties reject custom suffixes and retain their percentage scaling when precision is specified. No conversion
+is implied by writing `mm`.
+
+Adopted Panel classes, popover Panel classes, dialog Operator classes and UIList
+classes may also declare `beyond_ui_props`. A plain property name applies locally;
+`"ShapeKey.value"` additionally matches the RNA owner type. Class-local hints
+layer over the PropertyGroup hints. For example:
+
+```python
+beyond_ui_props = {
+    "ShapeKey.value": {"disabled_accent": True},
+    "show_help": {"trailing_icon": "INFO"},
+    "bin_size": {"precision": 1, "suffix": "°", "slider": False, "width": 72},
+}
+```
+
+Supported hints: `precision` (0–6), `suffix`, `value_width` (slider number box),
+`width` (whole numeric/text control; compact unlabeled switches use their shared width), `slider`, `trailing_icon` (Boolean action), and
+`disabled_accent` (read-only slider fill). Widths are logical units, 24–240.
+Unknown or invalid hints fail during authoring. Disabled accent changes only the
+fill color; it never enables input. Trailing icons share their button's motion,
+theme, clipping and centered text group. Ordinary menu labels are unaffected.
+
+A UIList may declare `beyond_ui_row_gap = 6` (0–16 logical units) and author
+unaligned rows to use that spacing. Numeric/text cells keep inset surfaces at
+rest; inactive menu options still have no individual surface. Native fallback
+layouts ignore Beyond UI hints. Registered `MenuLayout` contribution rows do not
+yet consume this class-hint API; use the existing menu presentation contract.
+Class-hint changes take effect on the next retained-layout rebuild or add-on
+reload; live theme changes remain `StyleSheet.update()` transactions.

@@ -1,0 +1,13 @@
+{
+  "tool": "image_gen.imagegen",
+  "version": "camkeys-logo-v2",
+  "purpose": "Minimal camera linked to nested shape-key motif",
+  "source": "/Users/tylerwalker/.codex/generated_images/01a17f65-81cf-7512-b777-297bb8ea4825/exec-d8d89610-3929-44b9-8814-2996c62996b7.png",
+  "background": "graphite",
+  "status": "selected concept for user review",
+  "rejected_first_attempt": "Transparent first attempt had ragged alpha edges and diamond keyframes instead of the requested shape-key motif.",
+  "dimensions": [
+    1774,
+    887
+  ]
+}

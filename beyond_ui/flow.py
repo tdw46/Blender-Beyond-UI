@@ -126,7 +126,7 @@ class Plan:
                 result += 2 * self.box_padding
         elif node.kind == "number" and node.options.get("_slider_stacked"):
             # Caption spans its accessory row; reserve track + value, not text width.
-            result = 80.0
+            result = max(80.0, node.options.get("value_width", 48) + 32)
         elif node.kind == "label":
             result = (
                 64 if node.options.get("wrap_text") else self.label_width(node) + 12
@@ -189,6 +189,8 @@ class Plan:
                     0,
                 } or node.options.get("icon_value"):
                     text += 18
+                if node.options.get("trailing_icon") not in {None, "", "NONE", 0}:
+                    text += self.theme.icon_size + 6
                 minimum = {
                     "number": 280 if node.options.get("slider", True) else 130,
                     "toggle": 130,

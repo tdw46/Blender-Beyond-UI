@@ -120,6 +120,7 @@ class RegisteredPanel(RegisteredMenu):
             pointer_sources=self.layout.pointer_sources,
             id_actions=self.layout.id_actions,
             list_identity=self.layout.list_identity,
+            property_options={**self.layout.property_options, **getattr(self.cls, "beyond_ui_props", {})},
         )
         ui._is_popover = True
         ui.operator_context = self.invocation

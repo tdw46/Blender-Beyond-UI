@@ -104,6 +104,10 @@ class Dialog:
 
         options = dict(self.layout_options)
         options.update(resolve=resolve, commit=self.changed)
+        options["property_options"] = {
+            **options.get("property_options", {}),
+            **getattr(type(operator), "beyond_ui_props", {}),
+        }
         ui = Layout(self.canvas, context, **options)
         ui._is_popover = True
         ui.title(text=title or operator.bl_label, icon=self.icon, translate=False)

@@ -329,6 +329,11 @@ class RegisteredList(CollectionList):
 
     def __init__(self, source, state, *, name, list_id, **options):
         self.cls, self.name, self.list_id = list_class(name), name, list_id
+        from math import isfinite
+
+        self.row_gap = getattr(self.cls, "beyond_ui_row_gap", 2)
+        if not isinstance(self.row_gap, (int, float)) or not isfinite(self.row_gap) or not 0 <= self.row_gap <= 16:
+            raise ValueError("beyond_ui_row_gap must be finite logical units from 0 through 16")
         self.callback_key = callbacks(self.cls)
         self.context = source.layout.context
         self.scope = context_key(self.context)
@@ -436,7 +441,7 @@ class RegisteredList(CollectionList):
             replace(
                 self.parent.theme,
                 row_height=20 if self.parent.theme.stylesheet else 28,
-                gap=2,
+                gap=self.row_gap,
                 padding=0,
                 font_size=self.parent.theme.font_size,
             ),
@@ -488,6 +493,7 @@ class RegisteredList(CollectionList):
             pointer_sources=base.pointer_sources,
             id_actions=base.id_actions,
             list_identity=base.list_identity,
+            property_options={**base.property_options, **getattr(self.cls, "beyond_ui_props", {})},
         )
         ui.operator_context = base.operator_context
         ui._context_pointers = dict(base._context_pointers)

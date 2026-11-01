@@ -3,7 +3,7 @@
 from math import isfinite
 
 
-def slider_parts(rect, label=True, *, stacked=None, label_band=24):
+def slider_parts(rect, label=True, *, stacked=None, label_band=24, value_width=53):
     from .gpu.style import slider_parts as source_parts
 
     x, y, w, h = rect
@@ -12,7 +12,7 @@ def slider_parts(rect, label=True, *, stacked=None, label_band=24):
     offset = 0 if narrow or not label else w * 0.46
     top = y + (label_band if narrow else max(0, (h - 24) / 2))
     controls = (x + offset, top, max(0, w - offset), min(24, h))
-    track, field = source_parts(*controls)
+    track, field = source_parts(*controls, value_width=value_width)
     return label_rect, track, field
 
 

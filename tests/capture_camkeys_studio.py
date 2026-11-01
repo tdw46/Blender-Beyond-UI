@@ -120,7 +120,8 @@ def run():
 
                 for attempt in range(8):
                     ui = Layout(
-                        context=ctx, **addon.__beyond_ui_integration__.ui.layout_options
+                        context=ctx, property_options=getattr(cls, "beyond_ui_props", {}),
+                        **addon.__beyond_ui_integration__.ui.layout_options
                     )
                     sheet = getattr(
                         addon.__beyond_ui_integration__.ui, "stylesheet", None

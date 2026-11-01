@@ -281,12 +281,17 @@ class Runtime:
                         )
                 self.redraw()
 
+            layout_options = dict(self.config.layout_options)
+            layout_options["property_options"] = {
+                **layout_options.get("property_options", {}),
+                **getattr(definition, "beyond_ui_props", {}),
+            }
             layout = Layout(
                 canvas=canvas,
                 context=context,
                 commit=commit,
                 state=state,
-                **self.config.layout_options,
+                **layout_options,
             )
             try:
                 if tape is not None:

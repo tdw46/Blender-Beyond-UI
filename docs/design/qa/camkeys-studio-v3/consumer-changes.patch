@@ -1,0 +1,113 @@
+--- a/ui_panel.py
++++ b/ui_panel.py
+@@ -5,6 +5,8 @@
+ from . import stepped_turnaround
+ 
+ class CamKeysPanel:
++    beyond_ui_props = {"ShapeKey.value": {"disabled_accent": True}}
++
+     bl_space_type = "VIEW_3D"
+     bl_region_type = "UI"
+     bl_category = "CamKeys"
+@@ -772,7 +774,8 @@
+         # Unlock short lens checkbox (allows apparent FL below current lens)
+         unlock_icon = 'UNLOCKED' if active_mesh_obj_item.auto_fov_unlock_short_lens else 'LOCKED'
+         fl_right.prop(active_mesh_obj_item, "auto_fov_unlock_short_lens", text="", icon=unlock_icon, toggle=True)
+-        fl_right.label(text=i18n.pgettext_tip("mm"))
++        if not getattr(layout, "is_custom", False):
++            fl_right.label(text=i18n.pgettext_tip("mm"))
+         
+         flatten_icon_id = 'NOCURVE'
+         # Determine if currently in short lens mode (apparent < current)
+--- a/properties.py
++++ b/properties.py
+@@ -292,6 +292,11 @@
+     )
+ 
+ class CamKeysAddonProperties(bpy.types.PropertyGroup):
++    beyond_ui_props = {name: {"trailing_icon": "INFO"} for name in (
++        "show_help_select_camera", "show_help_mesh_objects", "show_help_cam_angles",
++        "show_help_auto_fov", "show_help_cam_props",
++    )}
++
+     tempObjFlag: bpy.props.IntProperty(default=0)
+     globObj: bpy.props.PointerProperty(type=bpy.types.Object)
+     is_operator_running: bpy.props.BoolProperty(
+@@ -486,6 +491,11 @@
+     )
+ 
+ class CamPropTargetValue(bpy.types.PropertyGroup):
++    beyond_ui_props = {
++        "bin_size": {"precision": 1, "suffix": "°", "slider": False, "width": 72},
++        "string_value": {"width": 64},
++    }
++
+     """Stores a possible value for a cam prop"""
+     value_type: bpy.props.StringProperty(name="Value Type", default="FLOAT")
+     float_value: bpy.props.FloatProperty(name="Float Value", default=0.0)
+@@ -635,6 +645,8 @@
+     parsed_prop_path: bpy.props.StringProperty(name="Parsed Prop Path", default="")
+ 
+ class CamKeysOtherObject(bpy.types.PropertyGroup):
++    beyond_ui_props = {"auto_fov_max_strength": {"precision": 1, "suffix": "mm", "value_width": 78}}
++
+     """Reference to another object affected by Forced Perspective"""
+     object: bpy.props.PointerProperty(
+         name="Object",
+--- a/ui_lists.py
++++ b/ui_lists.py
+@@ -376,6 +376,8 @@
+             row.prop(item, "object", text="", icon="OBJECT_DATA")
+ 
+ class CamPropValueItems_UL(bpy.types.UIList):
++    beyond_ui_row_gap = 6
++
+     bl_idname = "CAMKEYS_UL_camprop_value_items"
+     
+     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index):
+@@ -385,11 +387,12 @@
+         if camprop.prop_type == 'ENUM' and item.value_type == 'ENUM':
+             is_basis = (item.enum_value == camprop.captured_value_enum)
+         
+-        row = layout.row(align=True)
++        row = layout.row(align=False)
+         
+         row.prop(item, "enabled", text="")
+         num_label = row.row(align=True)
+-        num_label.alignment = 'RIGHT'
++        num_label.alignment = 'CENTER'
++        num_label.ui_units_x = 1.2
+         num_label.label(text=str(index))
+         
+         if is_basis:
+@@ -398,13 +401,13 @@
+             row.label(text=item.name)
+         
+         if item.value_type == "ENUM":
+-            bin_row = row.row(align=True)
+-            bin_row.prop(item, "bin_size", text="", emboss=True)
+-            deg_row = bin_row.row(align=True)
+-            deg_row.scale_x = 0.1
+-            deg_row.label(text=i18n.pgettext_tip("°"))
++            row.prop(item, "bin_size", text="", emboss=True)
++            if not getattr(layout, "is_custom", False):
++                row.label(text=i18n.pgettext_tip("°"))
+         elif item.value_type == "STRING":
+-            row.label(text=f'"{item.string_value}"')
++            value = row.row()
++            value.enabled = False
++            value.prop(item, "string_value", text="", emboss=True)
+         elif item.value_type == "BOOL":
+             row.label(text=str(item.bool_value))
+ 
+--- a/lens_compensation.py
++++ b/lens_compensation.py
+@@ -122,6 +122,8 @@
+ 
+ 
+ class CamKeysLensCompensation(bpy.types.PropertyGroup):
++    beyond_ui_props = {"apparent": {"precision": 1, "suffix": "mm", "value_width": 78}}
++
+     auto_add_stops: bpy.props.BoolProperty(
+         name="Auto Add Stops", default=False, options=set(),
+         description="Record apparent focal length edits as lens stops",
