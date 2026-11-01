@@ -230,6 +230,64 @@
           "timeout": false
         }
       }
+    ],
+    "studio-polish-consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7965,
+          "restore_requests": 0,
+          "seconds": 12.648813009262085,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 8012,
+          "restore_requests": 0,
+          "seconds": 12.782765984535217,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
     ]
   },
   "source_scene": {
@@ -443,7 +501,7 @@
   "media": {
     "panel_states": 12,
     "gifs": 13,
-    "embedded_images": 12,
+    "embedded_images": 10,
     "narrow_scales": [
       1,
       1.5,
@@ -462,5 +520,36 @@
     "Generated CamProps target depicts editable numeric cells where the source may expose display strings. No invented editable data binding.",
     "Full safety/help copy and all seven distance options retained even where generated art omits them."
   ],
-  "installed_validation": "Pending final pinned vendor deployment"
+  "installed_validation": {
+    "passed": true,
+    "source_scene_loaded": true,
+    "objects": 63,
+    "draw_errors": {},
+    "keymap_refreshes": 5,
+    "focus_audit": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 7695,
+      "restore_requests": 0,
+      "seconds": 13.649981021881104,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "vendor_working_tree_changes": false,
+    "consumer_files": [
+      "ui_theme.py",
+      "ui_panel.py",
+      "ui_lists.py",
+      "camkeys_translations.json"
+    ],
+    "next_launch_ready": true,
+    "original_scene_saved": false,
+    "consumer_changes": "Local preview branches; unrelated pre-existing changes preserved, not mass-committed."
+  },
+  "library_commit": "5f002bd355423dd0c0f94ebf3c0ecde2115a240d",
+  "historical_fixture_note": "The older blender_camkeys_consumer.py asserts that native fallbacks exist and fails against the completed custom migration. Current qualification uses blender_camkeys_custom.py; both 5.1.2 and 5.2.2 pass. The old failed run is retained in build/studio-polish-legacy-consumer."
 }
