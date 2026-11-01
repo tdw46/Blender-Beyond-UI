@@ -23,14 +23,29 @@ integrate(globals(), stylesheet=studio)
 
 [Styling guide](docs/STYLING.md) · [Copy-ready presets](examples/theme_presets.py) ·
 [CamKeys Studio JSON](examples/themes/camkeys-studio.json) ·
-[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v3/index.html)
+[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v4/index.html)
 
 The CamKeys consumer preview includes a live Appearance dialog. These recordings
 show actual Blender renders; generated-reference acceptance remains open.
 
 | Live customization | Branded panel |
 | --- | --- |
-| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v3-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v3-camkeys_main.gif) |
+| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v4-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v4-camkeys_main.gif) |
+
+## One extra line of styling
+
+Keep native Blender calls and add reusable styles after them:
+
+```python
+from ._vendor import beyond_ui as bui
+
+row.prop(camera, "lens")
+bui.style(row, units="mm", precision=1, value_width=78, padding=(3, 8))
+```
+
+The helper is a no-op on native Blender layouts. Compose dictionaries for spacing,
+alignment, dimensions, colors, typography, motion and numeric presentation.
+[Inline styling guide and supported options](docs/INLINE_STYLES.md).
 
 ## Drop it in
 

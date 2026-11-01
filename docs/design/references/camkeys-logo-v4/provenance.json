@@ -1,0 +1,39 @@
+{
+  "version": 4,
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-01",
+  "selected": "02-morph-body.png",
+  "selection": "Explicit user preference: 2 \u2014 Morphing camera",
+  "style": "Minimal macOS creative-tool icon, coral camera and mint morph geometry, graphite background",
+  "state": "Concept icon candidates; original generated pixels retained. No reference-match acceptance implied for panel controls.",
+  "images": [
+    {
+      "file": "01-vertex-lens.png",
+      "prompt": "01-vertex-lens.txt",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "45db747036ee1c871b618c1d1172e165468224ed9b93bccdb5c7ac8cbe1ccc14"
+    },
+    {
+      "file": "02-morph-body.png",
+      "prompt": "02-morph-body.txt",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "0487b713e7e4a98b1a8f9fa6fc6ab09747b65e70d1b8e706ce818f6ed61cb27d"
+    },
+    {
+      "file": "03-bezier-lens.png",
+      "prompt": "03-bezier-lens.txt",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "74132a983f9f463df27c6fbcb4f4e7dcd1416d70663ee5f395ca015cf02f8e4a"
+    },
+    {
+      "file": "04-morph-trail.png",
+      "prompt": "04-morph-trail.txt",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "8ef8d8efb9af6f6fdbc3312f26e72493c36e7986ee1a1b09af54e66629433cef"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ No bpy import, registration, native loading, threads or timers at import time.
 from .integration import integrate
 from .addon import AddonUI
 from .stylesheet import StyleSheet
+from .style_api import style, prop
 from .pointer import PointerItems
 from .id_template import IDAction
 from .animation import AnimationSettings, animation_defaults
@@ -20,6 +21,8 @@ __version__ = "0.1.0"
 __all__ = [
     "AddonUI",
     "StyleSheet",
+    "style",
+    "prop",
     "integrate",
     "AnimationSettings",
     "animation_defaults",

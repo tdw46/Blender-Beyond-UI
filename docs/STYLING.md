@@ -1,3 +1,5 @@
+> Prefer the [native-safe inline `bui.style()` API](INLINE_STYLES.md) for per-control and container overrides. Class hints below remain compatible.
+
 # Stylesheets and reusable templates
 
 Keep Blender's theme by default. Opt into a named preset when an add-on needs its own identity. Presets change presentation; your RNA bindings, operators, undo, owner menus and shared BVT glass remain the same.
@@ -108,7 +110,7 @@ Embedded adopted panels resolve `beyond_ui_style` on their original class. Stand
 
 ## Validation boundary
 
-CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v3/index.html); visual differences are not counted as exact matches.
+CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v4/index.html); visual differences are not counted as exact matches.
 
 ## Property presentation hints
 

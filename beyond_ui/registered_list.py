@@ -332,8 +332,14 @@ class RegisteredList(CollectionList):
         from math import isfinite
 
         self.row_gap = getattr(self.cls, "beyond_ui_row_gap", 2)
-        if not isinstance(self.row_gap, (int, float)) or not isfinite(self.row_gap) or not 0 <= self.row_gap <= 16:
-            raise ValueError("beyond_ui_row_gap must be finite logical units from 0 through 16")
+        if (
+            not isinstance(self.row_gap, (int, float))
+            or not isfinite(self.row_gap)
+            or not 0 <= self.row_gap <= 16
+        ):
+            raise ValueError(
+                "beyond_ui_row_gap must be finite logical units from 0 through 16"
+            )
         self.callback_key = callbacks(self.cls)
         self.context = source.layout.context
         self.scope = context_key(self.context)
@@ -458,9 +464,9 @@ class RegisteredList(CollectionList):
                 self.parent.animation,
                 self.motion.settings,
             ),
-            lambda: self.parent._animation_wake()
-            if self.parent._animation_wake
-            else None,
+            lambda: (
+                self.parent._animation_wake() if self.parent._animation_wake else None
+            ),
         )
         canvas.bind_context_tooltips(self.parent._tooltip_wake)
         canvas.set_text_measure(self.parent.text_measure, self.parent._text_measure_key)
@@ -493,7 +499,10 @@ class RegisteredList(CollectionList):
             pointer_sources=base.pointer_sources,
             id_actions=base.id_actions,
             list_identity=base.list_identity,
-            property_options={**base.property_options, **getattr(self.cls, "beyond_ui_props", {})},
+            property_options={
+                **base.property_options,
+                **getattr(self.cls, "beyond_ui_props", {}),
+            },
         )
         ui.operator_context = base.operator_context
         ui._context_pointers = dict(base._context_pointers)
@@ -588,9 +597,13 @@ class RegisteredList(CollectionList):
                 88,
                 float(
                     getattr(
-                        self.cls,
-                        "beyond_ui_row_height",
-                        self.parent.theme.list_row_height,
+                        self,
+                        "style_row_height",
+                        getattr(
+                            self.cls,
+                            "beyond_ui_row_height",
+                            self.parent.theme.list_row_height,
+                        ),
                     )
                 ),
             ),
@@ -656,6 +669,7 @@ class RegisteredList(CollectionList):
                     item.index,
                     selected,
                     round(rect[2], 6),
+                    self.row_height,
                     self.epoch,
                 )
                 entry = self.cache.get(key)

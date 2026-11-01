@@ -77,7 +77,7 @@ class Group:
 
     def _sync_size_policy(self):
         registry = self.canvas._sized_groups
-        if any(
+        if "_insets" in self.options or any(
             self.options.get(name, 0)
             for name in ("scale_x", "scale_y", "ui_units_x", "ui_units_y")
         ):
@@ -155,6 +155,20 @@ class Group:
         control.motion.toggle = kind == "toggle" and not options.get("bool_button")
         self.canvas._bind_motion(control.motion)
         self.canvas._motion_owners[control.motion] = control
+        ancestors, current = [], self
+        while current is not None:
+            ancestors.append(current)
+            current = current.parent
+        defaults = {}
+        for ancestor in reversed(ancestors):
+            if ancestor.options.get("_style_defaults"):
+                from .style_api import normalize
+
+                defaults = normalize(defaults, ancestor.options["_style_defaults"])
+        if defaults:
+            from .style_api import apply_control
+
+            apply_control(control, defaults)
         self.canvas.controls[key] = control
         self.children.append(control)
         self.canvas.invalidate()
@@ -528,7 +542,7 @@ class Canvas(Group):
         controls = self._composites if composites else self.controls
         for control in controls.values():
             a, b, c, d = control.rect
-            if a < x + w and a + c > x and b < y + h and b + d > y:
+            if c > 0 and d > 0 and a < x + w and a + c > x and b < y + h and b + d > y:
                 yield control
 
     def hit(self, x, y, clip, *, include_disabled=False):
@@ -759,19 +773,24 @@ class Canvas(Group):
                 ),
                 rows,
                 (
-                    anchor
-                    or (
-                        control.rect[0] + control.rect[2] / 2,
-                        control.rect[1] + control.rect[3],
+                    (
+                        anchor
+                        or (
+                            control.rect[0] + control.rect[2] / 2,
+                            control.rect[1] + control.rect[3],
+                        )
                     )
-                )
-                if menu_type is PieMenu
-                else (control.rect[0], control.rect[1] + control.rect[3]),
+                    if menu_type is PieMenu
+                    else (control.rect[0], control.rect[1] + control.rect[3])
+                ),
                 clip,
                 context=context,
-                row_limit=4096
-                if control.options.get("menu_model") or control.options.get("hold_menu")
-                else len(rows),
+                row_limit=(
+                    4096
+                    if control.options.get("menu_model")
+                    or control.options.get("hold_menu")
+                    else len(rows)
+                ),
                 search_threshold=self.menu_search_threshold,
                 visible_refresh=bool(
                     control.options.get("menu_model")
@@ -958,11 +977,11 @@ class Canvas(Group):
                     control.key,
                     (control.kind,),
                     binding,
-                    source.valid
-                    if isinstance(source, Property)
-                    else binding.valid
-                    if binding
-                    else lambda: True,
+                    (
+                        source.valid
+                        if isinstance(source, Property)
+                        else binding.valid if binding else lambda: True
+                    ),
                     payload=control,
                 )
             valid = target.valid
@@ -1035,10 +1054,12 @@ class Canvas(Group):
                 context=context,
                 measure=measure,
                 scope=scope,
-                row_limit=4096
-                if control.options.get("operator_enum")
-                or control.options.get("menu_model")
-                else Menu.limit,
+                row_limit=(
+                    4096
+                    if control.options.get("operator_enum")
+                    or control.options.get("menu_model")
+                    else Menu.limit
+                ),
                 search_threshold=self.menu_search_threshold,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
                 on_tip=self._tooltip_wake,
@@ -1629,7 +1650,7 @@ class Canvas(Group):
                         bool(control.label),
                         stacked=control.options.get("_slider_stacked"),
                         label_band=control.options.get("_label_band", 24),
-                            value_width=control.options.get("value_width", 53),
+                        value_width=control.options.get("value_width", 53),
                     )
                     lo, hi = (
                         control.options.get("min", 0.0),

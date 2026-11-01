@@ -67,6 +67,11 @@ class Layout:
         self._is_popover = False
         self._panel_stack = ()
 
+    def style_item(self, values, *, scope="last"):
+        from .style_api import apply
+
+        apply(self, values, scope)
+
     def _key(self, kind):
         self._sequence += 1
         return f"{id(self.group)}:{kind}:{self._sequence}"
@@ -416,7 +421,13 @@ class Layout:
         from .presentation import property_options
 
         hints = property_options(data, property, self.property_options)
-        options.update({k: v for k, v in hints.items() if k not in {"precision", "suffix", "slider"}})
+        options.update(
+            {
+                k: v
+                for k, v in hints.items()
+                if k not in {"precision", "suffix", "slider"}
+            }
+        )
         if slider is None and "slider" in hints:
             slider = hints["slider"]
         if icon_value and self.canvas.icon_renderer is None:
@@ -1524,9 +1535,11 @@ class Layout:
         control = self.group.add(
             "search" if self.search_popovers else "widget",
             self._key("search"),
-            model.widget.title
-            if text is None
-            else self._text(text, text_ctxt, translate),
+            (
+                model.widget.title
+                if text is None
+                else self._text(text, text_ctxt, translate)
+            ),
             widget=model.widget,
             binding=model.binding,
             search_field=model,
@@ -1814,8 +1827,7 @@ class Layout:
             changed=relayout,
             **extra,
         )
-        if listtype_name != "UI_UL_list":
-            widget.dimensions(self.canvas.theme.font_size, 560)
+        # Measure during retained layout, after adjacent style() hints are applied.
         control = self.group.widget(
             self._key("list"), widget, context_menu=widget.entries, **self._options()
         )

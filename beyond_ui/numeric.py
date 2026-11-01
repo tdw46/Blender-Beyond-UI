@@ -79,10 +79,32 @@ class Numeric:
         self.step = getattr(meta, "step", 1 if self.integer else 3)
         self.minimum, self.maximum = meta.soft_min, meta.soft_max
         self.presentation = presentation or {}
+        self.validate_presentation()
+
+    def validate_presentation(self):
+        units = self.presentation.get("units")
+        if units and self.unit not in {"NONE", "LENGTH", "ROTATION"}:
+            raise ValueError(
+                "Explicit units support plain values, lengths and rotations"
+            )
+        if units and self.subtype in {"FACTOR", "PERCENTAGE"}:
+            raise ValueError(
+                "Factor/percentage fields keep their native unit semantics"
+            )
+        if (
+            units
+            and self.unit == "LENGTH"
+            and units not in {"mm", "cm", "m", "km", "in", "ft"}
+        ):
+            raise ValueError("Length units: mm, cm, m, km, in, ft")
+        if units and self.unit == "ROTATION" and units not in {"deg", "°", "rad"}:
+            raise ValueError("Rotation units: deg, °, rad")
         if self.presentation.get("suffix") and (
             self.unit != "NONE" or self.subtype in {"PERCENTAGE", "FACTOR"}
         ):
-            raise ValueError("Custom suffixes require plain unitless values; native codecs own conversion")
+            raise ValueError(
+                "Custom suffixes require plain unitless values; native codecs own conversion"
+            )
 
     def snapshot(self):
         settings = getattr(getattr(self.context, "scene", None), "unit_settings", None)
@@ -105,9 +127,30 @@ class Numeric:
             return state[1] ** {"LENGTH": 1, "AREA": 2, "VOLUME": 3}[self.unit]
         return 1
 
+    def presentation_scale(self, state):
+        units = self.presentation.get("units")
+        if self.unit == "LENGTH":
+            factor = {
+                "mm": 0.001,
+                "cm": 0.01,
+                "m": 1,
+                "km": 1000,
+                "in": 0.0254,
+                "ft": 0.3048,
+            }[units]
+            return state[1] / factor
+        if self.unit == "ROTATION":
+            return 1 if units == "rad" else 180 / math.pi
+        return 1
+
     def format(self, value, state=None):
         state = state or self.snapshot()
-        if self.unit == "NONE" and ("precision" in self.presentation or self.presentation.get("suffix")):
+        if self.presentation.get("units"):
+            precision = self.presentation.get("precision", self.precision)
+            return f"{value * self.presentation_scale(state):.{precision}f} ({self.presentation['units']})"
+        if self.unit == "NONE" and (
+            "precision" in self.presentation or self.presentation.get("suffix")
+        ):
             precision = self.presentation.get("precision", self.precision)
             text = f"{value * self.scale(state):.{precision}f}"
             if self.subtype == "PERCENTAGE" or (
@@ -143,8 +186,36 @@ class Numeric:
         state = state or self.snapshot()
         if text == self.format(original, state):
             return original  # Merely focusing a rounded field must be lossless.
+        units = self.presentation.get("units")
+        if units:
+            raw = text.strip().removesuffix("(" + units + ")").strip()
+            # Bare numbers/expressions use the explicitly displayed unit. Native
+            # unit-bearing input still follows Blender's existing unit codec.
+            if self.unit == "NONE" or not re.search(
+                r"[A-Za-z°]", re.sub(r"\d[eE][+-]?\d+", "0", raw)
+            ):
+                result = number(raw) / self.presentation_scale(state)
+                if not math.isfinite(result):
+                    raise ValueError("Value must be finite")
+                return result
+            if self.unit == "LENGTH":
+                from bpy.utils import units as blender_units
+
+                return (
+                    blender_units.to_value(
+                        "METRIC" if state[0] == "NONE" else state[0],
+                        "LENGTH",
+                        checked_units(raw),
+                    )
+                    / state[1]
+                )
+            text = raw
         if self.presentation.get("suffix"):
-            text = text.strip().removesuffix("(" + self.presentation["suffix"] + ")").strip()
+            text = (
+                text.strip()
+                .removesuffix("(" + self.presentation["suffix"] + ")")
+                .strip()
+            )
         if self.unit == "ROTATION":
             raw = text.strip()
             if not re.search(r"[A-Za-z°'\"]", re.sub(r"\d[eE][+-]?\d+", "0", raw)):
@@ -178,6 +249,8 @@ class Numeric:
         return result
 
     def display_scale(self, state):
+        if self.presentation.get("units"):
+            return self.presentation_scale(state)
         scale = self.scale(state)
         if self.unit == "LENGTH" and state[0] != "NONE" and state[3] in _LENGTH:
             scale /= _unit_factor(state[0], _LENGTH[state[3]])

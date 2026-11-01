@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-01 \u2014 compact square/circle CamKeys logo revision",
+  "reviewed": "2026-11-01 \u2014 native-safe inline styling and complete CamKeys presentation migration",
   "remaining_turns": [
     1,
     1
@@ -26,8 +26,8 @@
     "Exact generated-reference acceptance remains open; all 12 panel comparisons and 13 current GIFs are supplied.",
     "Older core/default-theme GIFs keep their archived styling and do not represent the branded Studio preset."
   ],
-  "latest_progress": "Replaced the horizontal wordmark with a compact lens and nested shape-key icon. Square and circular previews added to Studio v3; accent geometry fits within the circular crop. Previous UI implementation and runtime evidence unchanged.",
-  "estimate_review": "Added and completed this logo-only revision. One user visual review remains; no additional UI implementation or runtime test work introduced.",
+  "latest_progress": "Added bui.style() and bui.prop(..., style={}) with reusable dictionaries, group defaults, CSS-inspired spacing/constraints, colors/type/motion and units. Migrated CamKeys presentation overrides; selected icon 2 from four generated candidates. 325 unit tests, native/custom 5.1.2/5.2.2 checks, refreshed panel media and paired retained-render benchmark.",
+  "estimate_review": "New scope added and closed this turn: four icon candidates, generalized inline styling API, CamKeys migration, compatibility checks and current captures. Previous completed work remains credited; one user visual review remains. No additional implementation batch budgeted unless new feedback adds work.",
   "time_summary": "Implementation and capture pass complete. One visual acceptance pass remains; duration depends on feedback. No measured-hour forecast for that review.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -200,9 +200,14 @@
       "work": "Square and circle-safe lens/shape-key logo revision; updated review previews.",
       "evidence": "docs/design/references/camkeys-logo-v3/provenance.json",
       "turns": 1
+    },
+    {
+      "work": "Generalized native-safe inline style helpers, reusable presets, units and container geometry; removed CamKeys presentation class overrides/custom list branches; four icon candidates with selection 2; runtime/performance/media validation.",
+      "evidence": "docs/design/qa/camkeys-studio-v4/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Review Studio v3 corrections and the simplified logo. Generated glyph/glass differences remain explicit; no pixel-exact acceptance claimed.",
+  "remaining_work": "Review the inline-style migration and current CamKeys renders. Exact generated-reference acceptance remains open; new requested changes are estimated separately.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -239,8 +244,12 @@
     {
       "batch": "Studio v3 user QA corrections",
       "details": "Added and closed this turn: six visual/presentation requests, including reusable class hints. User review remains one pass; no extra implementation batch assumed."
+    },
+    {
+      "batch": "Inline style system and CamKeys migration",
+      "details": "Added and completed this turn; bounded CSS-inspired vocabulary with explicit applicability. Native fallback and functional lifecycle preserved."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Studio v3 corrections implemented; user visual acceptance pending"
+  "checkpoint": "Inline styling and CamKeys migration complete; visual acceptance pending"
 }
