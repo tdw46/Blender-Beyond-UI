@@ -1,0 +1,434 @@
+{
+  "date": "2026-11-01",
+  "library_commit": "64c641f",
+  "unit_tests": 338,
+  "runs": {
+    "registered": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "focus_events": [],
+        "checks": [
+          "Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners",
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners",
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ]
+      }
+    ],
+    "consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      }
+    ],
+    "captures": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [
+          {
+            "bundle": "com.apple.loginwindow",
+            "kind": "activation",
+            "pid": 615,
+            "seconds": 9.334925055503845
+          }
+        ],
+        "checks": []
+      }
+    ],
+    "lattice": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "narrow": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "wide": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "embedded": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ]
+  },
+  "row_geometry": [
+    {
+      "width": 360,
+      "panel": "auto_fov",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "auto_fov",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "auto_fov",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camkeys_linking",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camkeys_linking",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camkeys_linking",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camkeys_linking",
+      "row": 3,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camkeys_main",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camprops",
+      "row": 0,
+      "top": 3.0,
+      "bottom": 3.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camprops",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 360,
+      "panel": "camprops",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "auto_fov",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "auto_fov",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "auto_fov",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camkeys_linking",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camkeys_linking",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camkeys_linking",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camkeys_linking",
+      "row": 3,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camkeys_main",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camprops",
+      "row": 0,
+      "top": 3.0,
+      "bottom": 3.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camprops",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 260,
+      "panel": "camprops",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "auto_fov",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "auto_fov",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "auto_fov",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camkeys_linking",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camkeys_linking",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camkeys_linking",
+      "row": 2,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camkeys_linking",
+      "row": 3,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camkeys_main",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camprops",
+      "row": 0,
+      "top": 3.0,
+      "bottom": 3.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camprops",
+      "row": 0,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    },
+    {
+      "width": 480,
+      "panel": "camprops",
+      "row": 1,
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 8,
+      "right": 8
+    }
+  ],
+  "acceptance": "Actual CamKeys captures inspected; default rim/content centering and padding verified geometrically at 260/360/480 logical widths. Pixel-exact artwork matching is not claimed.",
+  "performance": "Same painter and retained GPU resources; visible-row content bounds resolved during retained layout. Warm layout tests verify unchanged callback/build counts; no new GPU frame-time claim.",
+  "focus": "No owned Blender activation. One capture recorded macOS loginwindow activation; no focus restoration attempted.",
+  "limits": [
+    "Rows exceeding the existing 88-unit bound remain explicitly unsupported.",
+    "Explicit draw_item padding adds to shared list padding.",
+    "Blender 4.2 paths preserved, not runtime-qualified in this pass.",
+    "Separate installed original-scene startup check timed out without a result; focused consumer/capture fixtures passed."
+  ],
+  "installed_preview": {
+    "vendor_commit": "64c641f",
+    "startup_check": "Timed out after 275 seconds with no result marker; not counted as passing. No owned Blender activation.",
+    "source_scene_sha256": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158",
+    "source_scene_unchanged": true
+  }
+}

@@ -1,0 +1,294 @@
+[
+  {
+    "panel": "CAMKEYS_PT_auto_fov",
+    "slug": "auto_fov",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/auto_fov.png",
+    "reference": "../../references/camkeys-studio-v1/auto_fov.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Reference shows an older exponent/unit placement and paired help icons; later user corrections take precedence.",
+        "Reference header caret and some rendered glyph/rim details differ."
+      ],
+      "reference_bounds_px": [
+        76,
+        32,
+        774,
+        1628
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_baking",
+    "slug": "baking",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/baking.png",
+    "reference": "../../references/camkeys-studio-v1/baking.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Reference truncates the topology warning; all authored warning text is retained and wraps.",
+        "Generated optical rims and source icon geometry remain different."
+      ],
+      "reference_bounds_px": [
+        84,
+        27,
+        759,
+        1643
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_camkeys_linking",
+    "slug": "camkeys_linking",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/camkeys_linking.png",
+    "reference": "../../references/camkeys-studio-v2/camkeys_linking.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Source glyphs, list dividers and glass lighting differ from generated artwork.",
+        "HOW TO retains the later approved single info icon."
+      ],
+      "reference_bounds_px": [
+        42,
+        42,
+        941,
+        1448
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_camkeys_main",
+    "slug": "camkeys_main",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/camkeys_main.png",
+    "reference": "../../references/camkeys-studio-v2/camkeys_main.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Source glyphs and glass lighting differ; HOW TO retains the later approved single info icon."
+      ],
+      "reference_bounds_px": [
+        42,
+        40,
+        923,
+        1483
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_camprops",
+    "slug": "camprops",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/camprops.png",
+    "reference": "../../references/camkeys-studio-v1/camprops.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Reference omits the real BASIS suffix; preserved for correct item identity. Narrow names truncate within their allotted column instead of disappearing.",
+        "Reference enlarges its top title relative to other panels; consistent host title scale is preserved. Native section nesting/separators remain visible."
+      ],
+      "reference_bounds_px": [
+        41,
+        53,
+        813,
+        1612
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_billboard_settings",
+    "slug": "billboard_settings",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/billboard_settings.png",
+    "reference": "../../references/camkeys-studio-v1/billboard_settings.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Generated Override Armature includes an extra switch absent from the authored action; no fake control added."
+      ],
+      "reference_bounds_px": [
+        65,
+        65,
+        1536,
+        804
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_dolly_expressions",
+    "slug": "dolly_expressions",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/dolly_expressions.png",
+    "reference": "../../references/camkeys-studio-v2/dolly_expressions.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Real informational icon retained although omitted from the generated heading."
+      ],
+      "reference_bounds_px": [
+        52,
+        53,
+        1203,
+        1092
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_lens_compensation",
+    "slug": "lens_compensation",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/lens_compensation.png",
+    "reference": "../../references/camkeys-studio-v1/lens_compensation.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Reference exponent notation is superseded by the user correction; generated surface lighting remains different."
+      ],
+      "reference_bounds_px": [
+        51,
+        52,
+        1133,
+        1170
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_falloff_popover",
+    "slug": "falloff_popover",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v1/falloff_popover.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Generated border bloom, glyphs and backdrop differ."
+      ],
+      "reference_bounds_px": [
+        66,
+        58,
+        1427,
+        868
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_distance_falloff_popover",
+    "slug": "distance_falloff_popover",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/distance_falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v1/distance_falloff_popover.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Generated border bloom, glyphs and backdrop differ."
+      ],
+      "reference_bounds_px": [
+        66,
+        58,
+        1427,
+        881
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_flatten_falloff_popover",
+    "slug": "flatten_falloff_popover",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/flatten_falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v2/flatten_falloff_popover.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Generated glass and native glyph details differ; curve values are actual scene data."
+      ],
+      "reference_bounds_px": [
+        38,
+        36,
+        802,
+        1720
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  },
+  {
+    "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+    "slug": "lattice_auto_fov_modifier",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/lattice_auto_fov_modifier.png",
+    "reference": "../../references/camkeys-studio-v2/lattice_auto_fov_modifier.png",
+    "exact_match": false,
+    "notes": "Fresh Blender capture using bui.style presets. Outer panel rims aligned at equal logical width; no image stretching or replacement pixels.",
+    "audit": {
+      "fixes": [
+        "List content uses shared padded, vertically centered frames for painting and interaction. Padding and top/center/bottom alignment are configurable; no consumer-specific layout rules."
+      ],
+      "remaining": [
+        "Generated icon shapes and optical rim remain different."
+      ],
+      "reference_bounds_px": [
+        74,
+        72,
+        1595,
+        752
+      ],
+      "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+    }
+  }
+]

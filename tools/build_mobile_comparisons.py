@@ -6,7 +6,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEW = ROOT / "docs/design/qa/camkeys-studio-v6"
+REVIEW = ROOT / "docs/design/qa/camkeys-studio-v7"
 OUT = REVIEW / "mobile"
 OUT.mkdir(exist_ok=True)
 font_path = "/System/Library/Fonts/Supplemental/Arial.ttf"
@@ -30,7 +30,7 @@ for panel in json.loads((REVIEW / "panels.json").read_text()):
     for left, label, im in zip((20, 680), ("Generated reference", "Actual Blender UI"), images):
         draw.text((left, 62), label, font=label_font, fill="#BCC8D1")
         sheet.paste(im, (left, 102))
-    draw.text((20, sheet.height - 34), "Saved Studio v6 comparison · equal width · original proportions",
+    draw.text((20, sheet.height - 34), "Saved Studio v7 comparison · equal width · original proportions",
               font=ImageFont.truetype(font_path, 18), fill="#A9B6C0")
     path = OUT / (panel["slug"] + ".jpg")
     sheet.save(path, quality=93, subsampling=0)

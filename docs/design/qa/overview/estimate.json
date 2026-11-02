@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-01 \u2014 reusable surfaces, selection details and button padding",
+  "reviewed": "2026-11-01 \u2014 centered and padded UIList rows",
   "remaining_turns": [
     0,
     1
@@ -23,12 +23,12 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "All 12 panel/popover states have current v6 images, mobile comparisons and motion GIFs; narrow/wide captures at 1x/1.5x/2x and embedded N-panel images are updated.",
-    "Appearance GIF still uses labeled v2 snapshots; current color updates and Cancel behavior were execution-tested.",
-    "Minor generated-reference glyph/rim/background differences remain; close consistency is the user-approved target."
+    "Current v7 images/GIFs, embedded screenshots, mobile comparisons and narrow/wide scale captures are available.",
+    "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
+    "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Added reusable group/value glass surfaces and the Angle Sensitivity capsule; restored coral reset and mint selected ON/OFF buttons through consumer presets; added theme-derived menu/list rims, subtle list separators and minimum text-button padding. 337 unit tests, Blender 5.1.2/5.2.2 consumer checks, live Appearance behavior, 12-state captures, narrow/wide scale matrices and embedded screenshots passed. Installed preview updated.",
-  "estimate_review": "Added and closed this turn: parent surfaces, missing action colors, selection rims, list dividers and shared button padding. The previous optional 0\u20131 feedback turn remains; no uncompleted implementation batch added.",
+  "latest_progress": "Fixed registered-list top anchoring: text, fields, switches and icons share a padded content rectangle centered inside the selection rim. Added list_row_padding and list_row_align options, intrinsic row-height growth and matching paint/hit/menu transforms. 338 unit tests; Blender 5.1.2/5.2.2 list and CamKeys checks passed. Verified 33 visible row frames across narrow/standard/wide captures; refreshed screenshots and GIFs.",
+  "estimate_review": "Added and completed this turn: shared default row centering and configurable insets/alignment. Remaining budget stays at 0\u20131 optional feedback turns; no extra implementation batch outstanding. Separate installed original-scene startup check timed out without a result; keep this as an explicit QA limit within the remaining review pass.",
   "time_summary": "Implementation and automated verification completed. No remaining implementation-hour forecast; user review time is excluded.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -226,9 +226,14 @@
       "work": "Reusable value/group surfaces, missing action colors, selection rims, subtle list dividers and comfortable text-button padding",
       "evidence": "docs/design/qa/camkeys-studio-v6/report.json",
       "turns": 1
+    },
+    {
+      "work": "Default centered list content with configurable padding/alignment and shared input geometry",
+      "evidence": "docs/design/qa/camkeys-studio-v7/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optional user review of current Studio v6 renders and mobile comparisons.",
+  "remaining_work": "Optional user review of Studio v7 list centering; separate installed original-scene startup retest remains unverified after timeout.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -272,5 +277,5 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Requested surface/color/selection/button refinements implemented; review ready"
+  "checkpoint": "Shared UIList centering and padding fixed; review ready"
 }

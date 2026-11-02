@@ -110,7 +110,7 @@ Embedded adopted panels resolve `beyond_ui_style` on their original class. Stand
 
 ## Validation boundary
 
-CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v6/index.html); visual differences are not counted as exact matches.
+CamKeys' preset and routed Appearance dialog are exercised on macOS Blender 5.1.2 and 5.2.2. Older library compatibility paths remain intact, but this consumer redesign has not been runtime-qualified on Blender 4.2. Generated artwork and real renders are separate in the [Studio review](design/qa/camkeys-studio-v7/index.html); visual differences are not counted as exact matches.
 
 ## Property presentation hints
 
