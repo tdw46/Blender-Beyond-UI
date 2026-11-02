@@ -30,6 +30,9 @@
 #include "DNA_screen_types.h"
 #include "DNA_windowmanager_types.h"
 #include "BKE_report.hh"
+#if BUI_DRIVER_OPERATOR
+# include "BKE_screen.hh"
+#endif
 #include "bui_screen_declarations.hh"
 #include "bui_layout_methods.hh"
 
@@ -185,12 +188,16 @@ static bool driver_operator(bContext *context, ID *id, const char *path, int ind
   auto *type = WM_operatortype_find(paste ? "ANIM_OT_paste_driver_button" : "ANIM_OT_copy_driver_button", true);
   if (!type || !type->exec) return false;
   auto *copy = CTX_copy(context);
-  ARegion region{};
-  CTX_wm_region_popup_set(copy, nullptr); CTX_wm_region_set(copy, &region);
-# if BUI_ENUM_EMBOSS
-  auto *block = UI_block_begin(copy, &region, "Beyond UI driver action", blender::ui::EmbossType::None);
+# if BUI_FAMILY >= 44
+  auto *region = BKE_area_region_new();
 # else
-  auto *block = UI_block_begin(copy, &region, "Beyond UI driver action", UI_EMBOSS_NONE);
+  ARegion storage{}; auto *region = &storage;
+# endif
+  CTX_wm_region_popup_set(copy, nullptr); CTX_wm_region_set(copy, region);
+# if BUI_ENUM_EMBOSS
+  auto *block = UI_block_begin(copy, region, "Beyond UI driver action", blender::ui::EmbossType::None);
+# else
+  auto *block = UI_block_begin(copy, region, "Beyond UI driver action", UI_EMBOSS_NONE);
 # endif
   auto *button = uiDefButR_prop(block, BUI_NUM, 0, BUI_LABEL, 0, 0, 1, 1, &owner, prop, index, 0, 1, BUI_TIP);
   ReportList reports{}; BKE_reports_init(&reports, 0); wmOperator op{}; op.type = type; op.reports = &reports;
@@ -199,7 +206,11 @@ static bool driver_operator(bContext *context, ID *id, const char *path, int ind
     UI_but_flag_enable(button, BUI_ACTIVE_OVERRIDE);
     success = (type->exec(copy, &op) & OPERATOR_FINISHED) != 0;
   }
-  BKE_reports_free(&reports); UI_block_free(copy, block); CTX_free(copy);
+  BKE_reports_free(&reports); UI_block_free(copy, block);
+# if BUI_FAMILY >= 44
+  BKE_area_region_free(nullptr, region); bui_free(region, 0);
+# endif
+  CTX_free(copy);
   return success;
 }
 #endif
