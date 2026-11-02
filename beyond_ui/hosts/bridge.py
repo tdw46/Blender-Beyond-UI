@@ -21,10 +21,17 @@ class BridgeUnavailable(RuntimeError):
 def load():
     import bpy
 
-    if (platform.system(), platform.machine()) != ("Darwin", "arm64"):
-        raise BridgeUnavailable(
-            "Custom embedded canvas is not qualified on this platform; use Layout"
-        )
+    # Portable packages are exact-build artifacts, never runtime compilation.
+    # Keep existing admitted Darwin binaries as the compatibility fallback.
+    from . import portable
+    try:
+        library, manifest = portable.load()
+    except BridgeUnavailable:
+        if ((platform.system(), platform.machine()) != ("Darwin", "arm64")
+                or bpy.app.build_hash.decode() not in {"d0cbe84903e8", "ec6e62d40fa9", "d13f752e3b9c"}):
+            raise
+    else:
+        return broker(library, manifest["binary_sha256"], manifest["family"], portable=True)
     root = Path(__file__).resolve().parents[1] / "_native"
     directory = root / "macos-arm64"
     try:
@@ -46,13 +53,18 @@ def load():
         raise BridgeUnavailable(
             "Build the optional bridge with tools/build_bridge.py"
         ) from error
+    return broker(ctypes.CDLL(str(binary)), manifest["binary_sha256"], builds[build])
+
+
+def broker(library, binary_sha256, family, *, portable=False):
     # Share the same ABI/source across vendors, keeping callbacks and CDLL alive.
-    name = "_beyond_ui_bridge_v1_" + manifest["binary_sha256"]
+    name = "_beyond_ui_bridge_v1_" + binary_sha256
     state = sys.modules.get(name)
     if state is not None:
         return state
     state = types.ModuleType(name)
-    state.library = ctypes.CDLL(str(binary))
+    state.library = library
+    state.portable = portable
     lib = state.library
     lib.bvt_probe_initialize.argtypes = [ctypes.c_int]
     lib.bvt_probe_initialize.restype = ctypes.c_int
@@ -65,7 +77,7 @@ def load():
     lib.bvt_probe_reserve.restype = ctypes.c_int
     lib.bvt_probe_callback.argtypes = [ctypes.c_void_p]
     lib.bvt_probe_callback.restype = None
-    if lib.bvt_probe_initialize(builds[build]) != builds[build]:
+    if lib.bvt_probe_initialize(family) != family:
         raise BridgeUnavailable("Required Blender symbols are unavailable")
     state.records = {}
     state.next_token = 1
