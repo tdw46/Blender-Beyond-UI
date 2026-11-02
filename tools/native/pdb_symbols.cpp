@@ -59,6 +59,37 @@ int wmain(int argc,wchar_t **argv) {
   }
   functions->Release();
  }
+ IDiaEnumSymbols *compilands=nullptr;
+ if(SUCCEEDED(global->findChildren(SymTagCompiland,nullptr,nsNone,&compilands))) {
+  IDiaSymbol *unit=nullptr;ULONG units=0;
+  while(SUCCEEDED(compilands->Next(1,&unit,&units))&&units) {
+   BSTR unit_name=nullptr;
+   if(SUCCEEDED(unit->get_name(&unit_name))&&unit_name) {
+    std::string file=utf8(unit_name);
+    if(file.find("drivers.")!=std::string::npos || file.find("interface_layout.")!=std::string::npos || file.find("gpu_framebuffer.")!=std::string::npos) {
+     IDiaEnumSymbols *children=nullptr;
+     if(SUCCEEDED(unit->findChildren(SymTagNull,nullptr,nsNone,&children))) {
+      while(SUCCEEDED(children->Next(1,&symbol,&count))&&count) {
+       BSTR name=nullptr;DWORD rva=0,tag=0;
+       if(SUCCEEDED(symbol->get_name(&name))&&name) {
+        std::string key=utf8(name);
+        if(key.find("GPU_framebuffer_blit")!=std::string::npos || key.find("ANIM_copy_driver")!=std::string::npos || key.find("ANIM_paste_driver")!=std::string::npos || key.find("channeldriver_copypaste_buf")!=std::string::npos) {
+         symbol->get_relativeVirtualAddress(&rva);symbol->get_symTag(&tag);
+         std::cerr << "UNIT " << file << " | " << key << " TAG=" << tag << " RVA=" << rva << std::endl;
+        }
+        SysFreeString(name);
+       }
+       symbol->Release();
+      }
+      children->Release();
+     }
+    }
+    SysFreeString(unit_name);
+   }
+   unit->Release();
+  }
+  compilands->Release();
+ }
  std::ofstream output(argv[6]);auto *old=std::cout.rdbuf(output.rdbuf());std::cout<<'{';bool first=true;
  for(auto &pair:found) { if(!first)std::cout<<',';first=false;quote(pair.first);std::cout<<':'<<pair.second; }
  std::cout<<'}';std::cout.rdbuf(old);
