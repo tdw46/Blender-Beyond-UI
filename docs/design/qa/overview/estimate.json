@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-02 \u2014 publication checkpoint",
+  "reviewed": "2026-11-02 \u2014 head/body setup publication checkpoint",
   "remaining_turns": [
     0,
     1
@@ -26,6 +26,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Head/body setup correction is behavioral; current custom dialog styling retained, no new capture required.",
     "Response and list changes now have a fresh actual Blender GIF, active/settled PNGs and multi-scale captures. Other older panel demos remain labeled by their existing capture batches.",
     "Header refinement has 15 updated Blender PNGs and normalized reference crops; no new animation behavior or GIF.",
     "Artwork pass: fresh generated references and 15 Blender PNGs for five panels at three scale/width combinations. No new GIF; shared motion unchanged.",
@@ -43,8 +44,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Checkpoint includes branded artwork/headers, response card, capture angles, finite value feedback, performance refinements and Separate Billboards default correction. 389 unit tests and lint pass; existing Blender 5.1/5.2 execution and GPU evidence retained.",
-  "estimate_review": "Reviewed for the requested repository checkpoint. Completed implementation stays closed; 0\u20131 optional user QA turns remain. No new feature scope or implementation time was added by committing.",
+  "latest_progress": "Fixed body-only Create Head / Body no-op and automatic setup on Separate Billboards enable. Custom dialog confirmation/cancellation and real assignments passed in Uraraka copies on Blender 5.1.2/5.2.2. Repaired the live partial setup without saving.",
+  "estimate_review": "Reviewed for the requested commit/push checkpoint. Head/body setup work is closed; existing optional user QA remains 0\u20131 turns. Publication adds no implementation backlog.",
   "time_summary": "Optional confirmation/follow-up: 0\u20131 turn, roughly 0\u201315 active minutes. Forecast uncertain, not measured.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -316,6 +317,11 @@
     {
       "work": "Preserve Separate Billboards false default through automatic initialization; installed/live patch and regression execution.",
       "evidence": "docs/design/qa/billboard-default-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Repair body-only setup and initialize mapped head/body on separate-mode enable; tested real custom dialog input and live scene repair.",
+      "evidence": "docs/design/qa/billboard-setup-v1/report.json",
       "turns": 1
     }
   ],
