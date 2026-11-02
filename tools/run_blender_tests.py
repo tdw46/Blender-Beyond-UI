@@ -37,6 +37,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--blender", action="append", required=True)
     parser.add_argument("--windowed", action="store_true")
+    parser.add_argument("--gpu-backend", choices=("metal", "opengl", "vulkan"))
     parser.add_argument(
         "--macos-noactivate",
         action="store_true",
@@ -74,6 +75,9 @@ def main():
         else:
             require_no_focus(executable)
             command += ["--no-window-focus", "--enable-event-simulate"]
+        if args.gpu_backend:
+            command += ["--gpu-backend", args.gpu_backend]
+            env["BEYOND_UI_EXPECT_BACKEND"] = args.gpu_backend.upper()
         command += [
             "--python",
             str(

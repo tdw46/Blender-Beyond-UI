@@ -78,6 +78,7 @@ def main():
     ap.add_argument("--version", required=True)
     ap.add_argument("--workspace", type=Path, required=True)
     ap.add_argument("--blender", type=Path)
+    ap.add_argument("--runtime-only", action="store_true")
     ap.add_argument(
         "--destination", type=Path, default=ROOT / "beyond_ui/_native/packages"
     )
@@ -164,6 +165,9 @@ def main():
     host = json.loads(identity.read_text())
     assert host["version"] == [major, minor, patch], host
     build = host["build"]
+    if args.runtime_only:
+        (work/"build-result.json").write_text(json.dumps(dict(blender=str(blender),version=version,build_hash=build)))
+        return
     out = args.destination.resolve() / key / build
     out.mkdir(parents=True, exist_ok=True)
     source = ROOT / "beyond_ui/_native/bridge_portable.cpp"

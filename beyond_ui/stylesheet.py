@@ -28,6 +28,12 @@ _GEOMETRY = {
 }
 _COLORS = {
     "accent",
+    "accent_text",
+    "value_change",
+    "header_divider",
+    "toolbar_divider",
+    "matrix_divider",
+    "list_divider",
     "bg",
     "card",
     "bar",
@@ -272,28 +278,23 @@ class StyleSheet:
         if key not in self._variant_cache:
             if len(self._variant_cache) >= 64:
                 self._variant_cache.clear()
-            self._variant_cache[key] = MappingProxyType(
-                dict(
-                    base,
-                    **{
-                        k: (
-                            color(v)[:3] + (color(v)[3] * self._data["opacity"],)
-                            if k
-                            in {
-                                "field",
-                                "input",
-                                "hover",
-                                "selected",
-                                "card",
-                                "bg",
-                                "bar",
-                            }
-                            else color(v)
-                        )
-                        for k, v in values.items()
-                    },
-                )
-            )
+            explicit = dict(base.get("_color_overrides", {}))
+            explicit.update({k: color(v) for k, v in values.items()})
+            for role in ("accent_text", "value_change"):
+                if "accent" in values and role not in values:
+                    explicit[role] = color(values["accent"])
+            resolved = dict(base)
+            resolved.update({
+                k: (color(v)[:3] + (color(v)[3] * self._data["opacity"],)
+                    if k in {"field", "input", "hover", "selected", "card", "bg", "bar"}
+                    else color(v))
+                for k, v in values.items()
+            })
+            for role in ("accent_text", "value_change"):
+                if "accent" in values and role not in values:
+                    resolved[role] = explicit[role]
+            resolved["_color_overrides"] = MappingProxyType(explicit)
+            self._variant_cache[key] = MappingProxyType(resolved)
         return self._variant_cache[key]
 
     def palette(self, base):
@@ -305,7 +306,14 @@ class StyleSheet:
 
         p = dict(base)
         p["text_effects"] = MappingProxyType({**base.get("text_effects", {}), **self._data["text_effects"]})
-        overrides = {key: color(value) for key, value in self._data["colors"].items()}
+        # A child style must not replace explicit parent ink with newly derived
+        # Blender defaults. Keep provenance on the cached palette, not controls.
+        overrides = {key: base[key] for key in base.get("_color_overrides", {})}
+        local = {key: color(value) for key, value in self._data["colors"].items()}
+        overrides.update(local)
+        for role in ("accent_text", "value_change"):
+            if "accent" in local and role not in local:
+                overrides[role] = local["accent"]
         p.update(overrides)
         if "accent" in overrides:
             for key in ("slider_fill", "toggle_on", "tab", "api"):
@@ -357,6 +365,7 @@ class StyleSheet:
             tokens[token] = p[role]
         p["tokens"] = MappingProxyType(tokens)
         p["source"] = base["source"] + "+preset:" + self._data["name"]
+        p["_color_overrides"] = MappingProxyType(overrides)
         result = MappingProxyType(p)
         self._cache = (base, result)
         return result

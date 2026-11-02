@@ -550,7 +550,7 @@ class CollectionList(Widget):
                 divider = self.divider_rect(r)
                 if divider is not None:
                     skin.draw(p.map(divider),
-                              (*palette["edge"][:3], min(0.18, palette["edge"][3])),
+                              palette.get("list_divider", (*palette["edge"][:3], min(0.18, palette["edge"][3]))),
                               radius=0, border=0)
                 self.motion.region(
                     key,

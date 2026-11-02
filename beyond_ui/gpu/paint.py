@@ -370,7 +370,8 @@ def paint(
                 )
                 palette = dict(base_palette, field=(*tint[:3], 0.3))
             role = "text" if "color" in current_style else current_style.get("color_role", "text")
-            ink = palette[role] if enabled else palette["muted"]
+            ink_role = "accent_text" if role == "accent" and "color" not in current_style else role
+            ink = palette.get(ink_role, palette[role]) if enabled else palette["muted"]
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
             menu_option = control.options.get("menu_option", False)
@@ -389,7 +390,8 @@ def paint(
             stable_ink = ink
             feedback = canvas.value_feedback.amount(control, feedback_now)
             if feedback:
-                tint = palette[canvas.value_feedback.options(control)["role"]]
+                feedback_role = canvas.value_feedback.options(control)["role"]
+                tint = palette.get("value_change", palette.get("accent_text", palette["accent"])) if feedback_role == "accent" else palette[feedback_role]
                 ink = tuple(a + (b-a)*feedback for a,b in zip(ink,tint))
             if kind != "widget":
                 control.motion.begin_paint()

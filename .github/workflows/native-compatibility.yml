@@ -45,3 +45,32 @@ jobs:
             build/native/*.log
             build/native/*.json
             build/native/smoke/
+  renderer:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '4.2.0'
+            backend: opengl
+          - version: '5.2.2'
+            backend: vulkan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y xvfb libxkbcommon0 libsm6 libxxf86vm1 libxi6 libxfixes3 libxrender1 libgl1 libegl1 mesa-vulkan-drivers
+      - run: python tools/build_portable_bridge.py --version ${{ matrix.version }} --workspace build/native --runtime-only
+      - name: Real software GPU execution
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a python tools/native/run_renderer.py build/native/build-result.json ${{ matrix.backend }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: renderer-${{ matrix.version }}-${{ matrix.backend }}
+          path: |
+            build/native/renderer-*/
+            build/native/*.log
+            build/native/*.json
