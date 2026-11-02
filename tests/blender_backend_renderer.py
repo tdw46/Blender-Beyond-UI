@@ -32,6 +32,24 @@ def run():
     try:
         with source.bind():
             gpu.state.active_framebuffer_get().clear(color=(0.08, 0.25, 0.5, 1))
+        import ctypes as C
+        import platform
+        native_copy = None
+        if platform.system() in {"Darwin", "Windows"}:
+            from beyond_ui.hosts import bridge
+            native = bridge.load().library
+            native.bvt_probe_framebuffer.argtypes = []
+            native.bvt_probe_framebuffer.restype = C.c_void_p
+            native.bvt_probe_copy_framebuffer.argtypes = [C.c_void_p]
+            native.bvt_probe_copy_framebuffer.restype = C.c_int
+            with source.bind():
+                pointer = native.bvt_probe_framebuffer()
+            with target.bind():
+                assert native.bvt_probe_copy_framebuffer(pointer) == 1
+                pixel = gpu.state.active_framebuffer_get().read_color(0, 0, 1, 1, 4, 0, "UBYTE")
+                pixel.dimensions = 4
+                assert all(abs(a-b)<=2 for a,b in zip(bytes(pixel), (20,64,128,255))), bytes(pixel)
+            native_copy = True
         assert glass.prepare_texture(key, 1, texture, (0, 0, width, height)), (
             glass.error
         )
@@ -109,6 +127,7 @@ def run():
             glass=True,
             retained_resources=True,
             hashes=hashes,
+            native_framebuffer_copy=native_copy,
             host_integration=False,
             visual_acceptance=False,
         )
