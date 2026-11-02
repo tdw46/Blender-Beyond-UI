@@ -1,0 +1,111 @@
+{
+  "unit_tests": 341,
+  "runtime": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 58083,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_text_effects.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 58083,
+        "restore_requests": 0,
+        "seconds": 3.153688907623291,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Native outline and drop-shadow pixels present",
+          "Native text batch exactly matches standalone output",
+          "Disabling restores original pixels"
+        ],
+        "native_text_batch": {
+          "native_text_batch": true,
+          "baseline_sha256": null,
+          "helper_sha256": "a8aef9cb6cbf9b39d3ade908885d2b0203491b67e002c092bb97ded1623ade43"
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/text-effects-runtime/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 58118,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_text_effects.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 13701,
+        "initial_frontmost_pid": 13701,
+        "new_instance": true,
+        "pid": 58118,
+        "restore_requests": 0,
+        "seconds": 3.118738055229187,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Native outline and drop-shadow pixels present",
+          "Native text batch exactly matches standalone output",
+          "Disabling restores original pixels"
+        ],
+        "native_text_batch": {
+          "native_text_batch": true,
+          "baseline_sha256": null,
+          "helper_sha256": "a8aef9cb6cbf9b39d3ade908885d2b0203491b67e002c092bb97ded1623ade43"
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/text-effects-runtime/blender-1.log"
+    }
+  ],
+  "live": "Loaded updated vendored library through stopped integration and re-adopted original CamKeys classes; no host draw errors, scene dirty false, no file save.",
+  "limits": [
+    "Font-effect fixture uses a flat neutral background; existing shared glass remains unchanged.",
+    "Full-panel Studio v7 captures precede this lettering refinement.",
+    "Actual Vulkan/OpenGL runtime not available on this Mac."
+  ]
+}
