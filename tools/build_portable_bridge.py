@@ -352,7 +352,7 @@ def main():
             and not name.startswith(("??", "?__", "?what@", "?_", "?terminate@"))
         }
         needed = {
-            name for name in needed if "@std@@" not in name and "__std_" not in name
+            name for name in needed if not name.split("@@", 1)[0].endswith("@std") and "__std_" not in name
         }
         requested = work / "requested.txt"
         requested.write_text("\n".join(sorted(needed | {free_symbol})))
