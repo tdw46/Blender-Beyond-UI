@@ -58,7 +58,7 @@ class PortableAdmissionTests(unittest.TestCase):
                 dict(
                     schema=1,
                     packages={
-                        "windows-x86_64/exact": dict(
+                        self.manifest["platform"] + "/exact": dict(
                             directory="packages/test",
                             manifest_sha256=portable.digest(path),
                         )
@@ -103,6 +103,36 @@ class PortableAdmissionTests(unittest.TestCase):
                 self.admit()
             path.write_bytes(before)
 
+    def test_explicit_windows_signing_variant_only(self):
+        variant = b"qualified signed host"
+        self.manifest["windows"] = {
+            "executable_variants": {hashlib.sha256(variant).hexdigest(): {}}
+        }
+        self.publish()
+        self.exe.write_bytes(variant)
+        self.assertEqual(self.admit()[0], (self.directory / "bridge.dll").resolve())
+        self.exe.write_bytes(variant + b"unqualified")
+        with self.assertRaises(BridgeUnavailable):
+            self.admit()
+
+    def test_signing_variants_never_relax_darwin_admission(self):
+        actual = hashlib.sha256(b"different signed host").hexdigest()
+        manifest = dict(self.manifest, platform="darwin-arm64",
+                        windows={"executable_variants": {actual: {}}})
+        self.assertFalse(portable.executable_matches(actual, manifest))
+        self.assertTrue(portable.executable_matches(manifest["executable_sha256"], manifest))
+
+    def test_darwin_metal_exact_package_admission_is_preserved(self):
+        self.manifest.update(platform="darwin-arm64", backends=["METAL", "BACKGROUND"])
+        variant = b"unqualified Metal executable"
+        self.manifest["windows"] = {"executable_variants": {hashlib.sha256(variant).hexdigest(): {}}}
+        self.publish()
+        args = dict(system="Darwin", machine="arm64", backend="METAL")
+        self.assertEqual(self.admit(**args)[0], (self.directory / "bridge.dll").resolve())
+        self.exe.write_bytes(variant)
+        with self.assertRaises(BridgeUnavailable):
+            self.admit(**args)
+
     def test_library_escape_rejected(self):
         self.manifest["library"] = "../../blender.exe"
         self.manifest["binary_sha256"] = portable.digest(self.exe)
@@ -136,6 +166,13 @@ class PortableAdmissionTests(unittest.TestCase):
         self.assertEqual(
             portable.checked_windows_addresses(data, manifest), ([0x1000], 0x2000)
         )
+        primary = manifest["executable_sha256"]
+        manifest["platform"] = "windows-x86_64"
+        manifest["executable_sha256"] = "different primary"
+        manifest["windows"]["executable_variants"] = {primary: {}}
+        self.assertEqual(portable.checked_windows_addresses(data, manifest), ([0x1000], 0x2000))
+        with self.assertRaises(ValueError):
+            portable.checked_windows_addresses(data + b"unqualified", manifest)
         manifest["windows"]["function_rvas"]["function"] = 0x2000
         with self.assertRaises(ValueError):
             portable.checked_windows_addresses(data, manifest)

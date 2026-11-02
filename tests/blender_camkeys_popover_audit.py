@@ -110,10 +110,34 @@ def tick():
 
             checks.append(dict(panel=name,owner_type=owner.bl_rna.identifier,controls=state['count'],painted=True,glass=True,viewport_source=True,window_overlay=True,backdrop_reused=True,survived_mousemove=True))
         elif phase==3:
+            if name=='appearance-dialog':
+                from camkeys_qa.ui_theme import STUDIO
+                dialog=next(iter(router.dialogs.values()))
+                operator=dialog.operator
+                state['appearance_previous']=STUDIO.to_dict()
+                operator.blender_colors=True
+                operator.check(bpy.context)
+                native=STUDIO.to_dict()
+                assert not native['colors'] and not native['surfaces'] and not native['variants'] and not native['operators'],native
+                operator.blender_colors=False
+                operator.accent=(.2,.4,.8)
+                operator.strength=1.5
+                operator.speed=4
+                operator.check(bpy.context)
+                custom=STUDIO.to_dict()
+                assert abs(custom['colors']['accent'][2]-.8)<1e-6,custom
+                assert STUDIO.animation.speed==4 and STUDIO.animation.strength==1.5
+                operator.motion=False
+                operator.check(bpy.context)
+                assert not STUDIO.animation.enabled
             window.event_simulate(type='ESC',value='PRESS',**point(state['host']))
         elif phase==4:
             assert not router.menus and not router.dialogs,(name,'Escape did not close')
             assert not state['bridge'].window_overlays,(name,'window draw handle leaked')
+            if name=='appearance-dialog':
+                from camkeys_qa.ui_theme import STUDIO
+                assert STUDIO.to_dict()==state['appearance_previous'],'Appearance Escape failed to restore theme and motion'
+                checks.append(dict(panel=name,blender_theme=True,accent_override=True,motion_strength_speed=True,cancel_restores=True))
             state['index']+=1;state['phase']=-1
         state['phase']+=1
         return .25

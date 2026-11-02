@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-02 \u2014 Windows QA checkpoint publication",
+  "reviewed": "2026-11-02 \u2014 Windows/NVIDIA repairs and hardware acceptance",
   "remaining_turns": [
-    1,
-    2
+    0,
+    0
   ],
   "implementation_turns": [
     0,
-    1
+    0
   ],
   "integration_qa_turns": [
-    1,
-    1
+    0,
+    0
   ],
   "active_hours": [
-    0.5,
-    2
+    0,
+    0
   ],
-  "confidence": "Moderate for the Windows/macOS QA pass; hardware findings can add implementation work. Linux native-host support and additional exact patch builds have no completion forecast.",
-  "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
+  "confidence": "Windows scope complete for the documented sampled checks. Mac hardware regression, physical trackpad and long-duration resource soak are unverified.",
+  "basis": "Actual RTX 4090 Laptop / 591.74 on official Blender 5.2.2. Separate Vulkan/OpenGL profiles and process restarts; original checkout and scene preserved.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "New actual Windows/NVIDIA popup, light/custom theme and 30fps deterministic motion-frame captures exist in the external QA bundle. Mac Metal and physical trackpad have no new captures. See docs/WINDOWS_NVIDIA_522_REPAIR.md.",
     "Compatibility qualification uses native execution and GPU readbacks, not new visual comparisons/GIFs. Windows/NVIDIA appearance and performance remain user QA.",
     "New actual live Uraraka and disposable popup PNGs show window-level sidebar overlap and viewport glass. No new GIF; existing bounce implementation retained. Earlier left-of-sidebar screenshots are superseded.",
     "Popover audit has actual paint/glass/event execution and live Uraraka readback. No new screenshot/GIF; appearance and motion unchanged.",
@@ -50,9 +51,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "406 unit tests; 16 exact-build native packages covering eight stock versions on macOS arm64 and Windows x64. Metal framebuffer/glass and popover execution passed; software OpenGL 4.2 and Vulkan 5.2 renderer CI passed. Windows line endings fixed and all ten CI jobs requalified. Refreshed CamKeys passed real menu/dialog/list/brush-curve consumer checks on 5.2.2; QA ZIP prepared without version changes. Published checkpoint preparation includes vendored LF rules and a Windows/NVIDIA QA checklist. No additional hardware QA completed this turn.",
-  "estimate_review": "Checkpoint publication closes packaging/handoff, not hardware QA. Remaining 1\u20132 turns / 0.5\u20132 active hours unchanged because Windows/NVIDIA testing and any resulting fixes remain; no implementation turn was subtracted for Git publication.",
-  "time_summary": "Forecast for the remaining Windows/macOS QA pass: 1\u20132 turns, 0.5\u20132 active hours excluding user hardware testing/wait time. Not measured. Other platform/patch qualification is unestimated.",
+  "latest_progress": "417 unit tests; repaired official Windows MSI/ZIP executable signing admission, popup-confirm property recording, headless native-fallback crash and reserved GLSL progress-ring identifier. Both NVIDIA backends passed renderer/glass, six CamKeys hosts, panels/lists/curves, popovers, exact-owner actions, search/keyboard, themes, motion and live Uraraka shape/list updates. Idle BUI draw/paint counts are zero over 30 seconds; retained owners stable and released after unregister. All eight Darwin native packages unchanged except shared adapter fingerprint. No new Mac hardware run.",
+  "estimate_review": "The planned local Windows/NVIDIA implementation and measured QA are complete. No additional local turn is forecast. Mac hardware verification and physical-device/long-soak coverage need separate evidence, not a claim of completion.",
+  "time_summary": "Local Windows repair/QA work complete. No forecast for unavailable Mac hardware or future physical-device/long-soak qualification.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -427,14 +428,14 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Blender 4.2+ compatibility packages and backend execution",
+  "checkpoint": "Windows/NVIDIA 5.2.2 repair qualification",
   "latest_review": "../popup-window-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-02",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
-    "metal": "Real native framebuffer copy and GPU execution on 4.2.0, 4.4.3, 5.1.2, 5.2.2; current popover input tests passed.",
-    "vulkan": "Actual Linux Mesa software execution on 5.2.2; Windows/NVIDIA hardware/window-host validation pending.",
-    "opengl": "Actual Linux Mesa software execution on 4.2.0; Windows hardware/window-host validation pending.",
+    "metal": "Historical hardware results retained. Current Darwin native binaries, executable fingerprints, symbols and backend declarations unchanged; new shared changes have unit coverage, no new Mac hardware run.",
+    "vulkan": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: native renderer, real viewport-backed glass, input, consumer panels and idle checks passed.",
+    "opengl": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: same hardware checks passed.",
     "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."
   }
 }

@@ -112,3 +112,37 @@ class IntegrationTests(unittest.TestCase):
         layout = Layout(state=state)
         tape.play(layout)
         self.assertEqual(state, {"options": False})
+
+    def test_popup_confirm_preserves_operator_properties_and_cancel_only(self):
+        for keyword in (False, True):
+            tape = Tape()
+            confirm = tape.root.template_popup_confirm
+            props = confirm(operator="test.apply") if keyword else confirm("test.apply")
+            props.tag = 3
+            self.assertIsNone(confirm("", cancel_text="Cancel"))
+            received = []
+
+            def replay(operator, **kwargs):
+                result = NS() if operator else None
+                received.append((operator, kwargs, result))
+                return result
+
+            tape.play(NS(template_popup_confirm=replay))
+            self.assertEqual(received[0][2].tag, 3)
+            self.assertEqual(received[1], ("", {"cancel_text": "Cancel"}, None))
+
+    def test_native_popup_fallback_rejects_headless_or_missing_window(self):
+        from unittest.mock import patch, Mock
+        from beyond_ui.registered_menu import RegisteredMenu
+
+        for background, window in ((True, NS()), (False, None)):
+            native = Mock()
+            canvas = NS()
+            menu = RegisteredMenu.__new__(RegisteredMenu)
+            menu.layout, menu.name = NS(canvas=canvas), "TEST_PT_popup"
+            with patch.dict("sys.modules", {"bpy": NS(app=NS(background=background), ops=native)}):
+                self.assertFalse(menu.native_fallback(NS(window=window), "unsupported"))
+            native.assert_not_called()
+            self.assertEqual(native.mock_calls, [])
+            self.assertIn("interactive window", canvas.menu_error)
+            self.assertFalse(canvas.popup_fallbacks[0]["custom"])

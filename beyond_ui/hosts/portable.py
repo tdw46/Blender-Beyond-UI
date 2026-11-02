@@ -22,6 +22,21 @@ def digest(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def executable_matches(actual, manifest):
+    """Admit only complete, explicitly qualified executable fingerprints.
+
+    Windows ZIP/MSI signing can differ for an otherwise identical PE image.
+    Equivalence is checked by developer tooling, never inferred at runtime.
+    Darwin and other platforms retain their single exact executable check.
+    """
+    if actual == manifest["executable_sha256"]:
+        return True
+    if manifest.get("platform") != "windows-x86_64":
+        return False
+    variants = manifest.get("windows", {}).get("executable_variants", {})
+    return isinstance(variants, dict) and actual in variants
+
+
 def platform_key(system, machine):
     aliases = {"AMD64": "x86_64", "amd64": "x86_64", "aarch64": "arm64"}
     arch = aliases.get(machine, machine)
@@ -76,7 +91,7 @@ def package(root, *, system, machine, build, backend, executable):
     binary = (directory / manifest["library"]).resolve(strict=True)
     if binary.parent != directory or digest(binary) != manifest["binary_sha256"]:
         raise BridgeUnavailable("Native UI binary fingerprint mismatch")
-    if digest(executable) != manifest["executable_sha256"]:
+    if not executable_matches(digest(executable), manifest):
         raise BridgeUnavailable("Native UI requires its exact stock Blender executable")
     return binary, manifest
 
@@ -113,7 +128,7 @@ def pe_sections(data):
 
 
 def checked_windows_addresses(data, manifest):
-    if hashlib.sha256(data).hexdigest() != manifest["executable_sha256"]:
+    if not executable_matches(hashlib.sha256(data).hexdigest(), manifest):
         raise ValueError("Windows executable fingerprint mismatch")
     sections = pe_sections(data)
     symbols = manifest["host_symbols"]

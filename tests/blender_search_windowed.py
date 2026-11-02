@@ -113,10 +113,9 @@ def tick():
         elif n == 3:
             c = current()[1]
             assert c.context_menu.target.part[0] == "row"
-            assert [r.key for r in c.context_menu.page.rows] == [
-                "SELECT_SEARCH",
-                "COPY_NAME",
-            ]
+            keys = [r.key for r in c.context_menu.page.rows]
+            assert keys.count("SELECT_SEARCH") == keys.count("COPY_NAME") == 1, keys
+            assert "JUMP_TARGET" in keys, keys
             emit("ESC")
         elif n == 4:
             emit("LEFTMOUSE", logical=state["point"](180, 100))

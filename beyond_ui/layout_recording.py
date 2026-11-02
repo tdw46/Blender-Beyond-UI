@@ -197,7 +197,11 @@ class Node:
                 outputs = (header._key, body._key if body else None)
                 tape.record(("call", self._key, name, args, kwargs, outputs))
                 return header, body
-            result = tape.node(self) if name in self.groups | self.operators else None
+            returns_properties = name in self.operators or (
+                name == "template_popup_confirm"
+                and bool(args[0] if args else kwargs.get("operator"))
+            )
+            result = tape.node(self) if name in self.groups or returns_properties else None
             tape.record(
                 ("call", self._key, name, args, kwargs, result._key if result else None)
             )

@@ -14,7 +14,7 @@
     "bridge_portable.cpp": "583741431c33f7c3ab59502d56334ceb9b309909fa537ae5d98a2b3f2707ce4c"
   },
   "adapters": {
-    "hosts/portable.py": "8fbf1abee2a20c3e7a78c45b94d5d9eca27f34ebff9facbf41d42b83ca3b7922",
+    "hosts/portable.py": "8ac653f9bad1d86ad18f455fc88f1a20af063a28a8b4daeb3f357c6b81f2687f",
     "hosts/portable_actions.py": "611765250b98928764ad7c8357101a9171b56cee335df3da28ed8ad3d419d1eb",
     "hosts/bridge.py": "2543bb45061471c3e727225f1b73f1a7123de4aae68bfaf9e8ba4bc0c117626d",
     "hosts/menu_context.py": "b4e2ab30955f3b84fffa206039f75088f4fc975bcd8f98c8769770d027cb6a0b",
@@ -153,7 +153,15 @@
     "free_slot_rva": 106510656,
     "pdb_guid": "0f2479ae-9ada-2f8f-4c4c-44205044422e",
     "pdb_age": 1,
-    "pdb_sha256": "29eb0f35291700a2f9d3651a3aa491575236826c39ceaaf581dcd22168cce624"
+    "pdb_sha256": "29eb0f35291700a2f9d3651a3aa491575236826c39ceaaf581dcd22168cce624",
+    "executable_variants": {
+      "f141a3c5754500e6f84361099a4cd53f0bb7662b6a0d2cfaaa8fbb63e92234a0": {
+        "qualification": "signing-only-equivalent",
+        "reference_sha256": "c9f9c33e538dd3e195ccb8dcc5986721f49df795e91288d4f6e82295a028e1c1",
+        "image_sha256": "87b6ad531a9062c25a8ec71dd1cdb3a4cf052eed3846a8df2fe7f576f03293ca",
+        "provenance": "Official Blender 5.2.2 Windows x64 MSI installation; valid Blender Foundation Authenticode signature. Reference ZIP verified against official SHA256 3849d17a682cba006075aaa3f3597ecb5c9c30ec31035b2e092c53e40679b535."
+      }
+    }
   },
   "library": "beyond-ui.dll",
   "binary_sha256": "635e20fb02be00419a2aa43a5f9576621cd6ae6e650afc7d747520a1fbfeeb08"

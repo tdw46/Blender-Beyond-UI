@@ -168,6 +168,12 @@ class RegisteredMenu:
             return False
         entry = {"target": self.name, "reason": str(error), "custom": False}
         canvas.popup_fallbacks = [*getattr(canvas, "popup_fallbacks", [])[-31:], entry]
+        # wm.call_panel/menu can dereference a missing GHOST window even when
+        # their Python poll succeeds. Keep headless failure observable and safe.
+        if bpy.app.background or getattr(context, "window", None) is None:
+            entry["unavailable"] = "Native popup requires an interactive window"
+            canvas.menu_error = f"{error}; native fallback: {entry['unavailable']}"
+            return False
         try:
             self.check(context, context_key(context))
             with override(context, self.pointers.values()):
