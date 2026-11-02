@@ -5,6 +5,13 @@ from beyond_ui.layout_recording import Tape
 from beyond_ui.hosts.floating import visible_region_rect
 
 class LiveDisplay(unittest.TestCase):
+    def test_unchanged_redraw_uses_recorded_signature(self):
+        from unittest.mock import patch
+
+        old, new = self.tape('0.251'), self.tape('0.251')
+        with patch('beyond_ui.layout_recording.freeze', side_effect=AssertionError('refrozen')):
+            self.assertTrue(old.patch_display(new))
+
     def tape(self, text, *, icon='NONE', enabled=True):
         tape = Tape()
         row = tape.root.row()

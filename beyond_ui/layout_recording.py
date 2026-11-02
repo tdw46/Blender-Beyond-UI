@@ -114,6 +114,12 @@ class Tape:
         if (len(self.commands) != len(newer.commands)
                 or self.extra_signature != newer.extra_signature):
             return False
+        # Recording already snapshots every command, including RNA identities.
+        # Most redraws do not change authored labels; avoid recursively freezing
+        # both command trees again for each visible list row.
+        if self.signature == newer.signature:
+            self.commands, self.signature = newer.commands, newer.signature
+            return True
         changes = []
         for index, (old, new) in enumerate(zip(self.commands, newer.commands)):
             if freeze(old) == freeze(new):

@@ -260,9 +260,9 @@ class Plan:
                     "NONE",
                     0,
                 } or node.options.get("icon_value"):
-                    text += 18
+                    text += node.options.get("icon_size", self.theme.icon_size) + 6
                 if node.options.get("trailing_icon") not in {None, "", "NONE", 0}:
-                    text += self.theme.icon_size + 6
+                    text += node.options.get("icon_size", self.theme.icon_size) + 6
                 minimum = {
                     "number": 280 if node.options.get("slider", True) else 130,
                     "toggle": 130,
@@ -373,7 +373,7 @@ class Plan:
         node.options["_wrapped_lines"] = tuple(lines)
         return max(
             0,
-            len(lines) * node.options.get("font_size", self.theme.font_size) * 1.55
+            len(lines) * node.options.get("line_height", node.options.get("font_size", self.theme.font_size) * 1.55)
             - self.base_height(node),
         )
 
@@ -396,7 +396,7 @@ class Plan:
             and node.label
         ):
             gutter = (
-                (self.theme.icon_size + 6)
+                (node.options.get("icon_size", self.theme.icon_size) + 6)
                 if node.options.get("icon") not in {None, "", "NONE", 0}
                 or node.options.get("icon_value")
                 else 0
@@ -431,6 +431,8 @@ class Plan:
                 + extra
             ),
         )
+        if "line_height" in node.options and node.options.get("_wrapped_lines") and "height" not in node.options:
+            height = len(node.options["_wrapped_lines"]) * node.options["line_height"]
         return available, max(0.0, height)
 
     def control_size(self, node, available):
@@ -457,7 +459,7 @@ class Plan:
             and node.label
         ):
             gutter = (
-                (self.theme.icon_size + 6)
+                (node.options.get("icon_size", self.theme.icon_size) + 6)
                 if node.options.get("icon") not in {None, "", "NONE", 0}
                 or node.options.get("icon_value")
                 else 0
@@ -492,12 +494,18 @@ class Plan:
                 + extra
             ),
         )
+        if "line_height" in node.options and node.options.get("_wrapped_lines") and "height" not in node.options:
+            height = len(node.options["_wrapped_lines"]) * node.options["line_height"]
         return available, max(0.0, height * sy)
 
     def compact_width(self, node):
         """Intrinsic icon rail width, without shrinking authored value controls."""
         if "width" in node.options:
             return self.fixed(node, 0) if self.sized else node.options["width"]
+        if "flex_grow" in node.options:
+            # Explicit flex children consume remaining width, even when their
+            # contents are only labels (media-object headers, help text, etc.).
+            return None
         if hasattr(node, "children"):
             if node.kind not in {"column", "row"} or not self.children(node):
                 return None
@@ -532,8 +540,8 @@ class Plan:
             ) * self.scale(node)[0]
         return None
 
-    def row_widths(self, node, width):
-        children, gap = self.children(node), self.gap(node)
+    def row_widths(self, node, width, children=None):
+        children, gap = self.children(node) if children is None else children, self.gap(node)
         usable = max(0.0, width - max(0, len(children) - 1) * gap)
         if node.kind == "split":
             factor = node.options.get("factor", 0) or 1 / max(1, len(children))
@@ -624,6 +632,25 @@ class Plan:
                 h = self.layout(child, available)[0]
                 cells.append((child, 0, y, available, h))
                 y += h + gap
+        elif node.kind == "row" and node.options.get("flex_wrap"):
+            lines, line, used = [], [], 0
+            for child in children:
+                minimum = min(available, self.minimum(child))
+                if line and used + gap + minimum > available:
+                    lines.append(line);line=[];used=0
+                used += (gap if line else 0) + minimum
+                line.append(child)
+            if line:lines.append(line)
+            y = 0
+            offset = {"start":0,"center":.5,"end":1}.get(node.options.get("align_items"),0)
+            for line in lines:
+                widths = self.row_widths(node,available,line)
+                heights = [self.layout(c,w)[0] for c,w in zip(line,widths)]
+                extent = max(heights,default=0)
+                x = max(0,available-sum(widths)-max(0,len(line)-1)*gap)*shift
+                for child,w,h in zip(line,widths,heights):
+                    cells.append((child,x,y+(extent-h)*offset,w,h));x+=w+gap
+                y += extent+gap
         elif node.kind in {"row", "split"}:
             widths = self.row_widths(node, available)
             x = (
@@ -683,6 +710,12 @@ class Plan:
             if self.panel_layout and cells and any(stacked(c) for c in children):
                 row_height = max(cell[4] for cell in cells)
                 cells = [(c, x, row_height - h, w, h) for c, x, y, w, h in cells]
+            # Explicit cross-axis alignment wins over automatic accessory alignment.
+            # Move complete retained children; never scale their text or hit bounds.
+            if cells and "align_items" in node.options:
+                extent = max(h for _, _, _, _, h in cells)
+                offset = {"start": 0, "center": 0.5, "end": 1}[node.options["align_items"]]
+                cells = [(c, x, (extent-h)*offset, w, h) for c, x, y, w, h in cells]
         elif node.kind == "grid" and children:
             natural = [self.natural(c) for c in children]
             cols, rows = grid_shape(

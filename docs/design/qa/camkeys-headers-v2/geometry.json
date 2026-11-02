@@ -1,0 +1,72 @@
+[
+  {
+    "panel": "auto_fov",
+    "width": 400,
+    "center_error_logical_units": 0.0,
+    "title_height": 28.0,
+    "subtitle_height": 23.0
+  },
+  {
+    "panel": "baking",
+    "width": 400,
+    "center_error_logical_units": 0.0,
+    "title_height": 28.0,
+    "subtitle_height": 23.0
+  },
+  {
+    "panel": "camkeys_linking",
+    "width": 400,
+    "center_error_logical_units": 0.0,
+    "title_height": 18.0,
+    "subtitle_height": 14.0
+  },
+  {
+    "panel": "camkeys_main",
+    "width": 400,
+    "center_error_logical_units": 0.0,
+    "title_height": 25.0,
+    "subtitle_height": 20.0
+  },
+  {
+    "panel": "camprops",
+    "width": 400,
+    "center_error_logical_units": 0.0,
+    "title_height": 28.0,
+    "subtitle_height": 23.0
+  },
+  {
+    "panel": "auto_fov",
+    "width": 280,
+    "center_error_logical_units": 0.0,
+    "title_height": 56.0,
+    "subtitle_height": 46.0
+  },
+  {
+    "panel": "baking",
+    "width": 280,
+    "center_error_logical_units": 0.0,
+    "title_height": 28.0,
+    "subtitle_height": 46.0
+  },
+  {
+    "panel": "camkeys_linking",
+    "width": 280,
+    "center_error_logical_units": 0.0,
+    "title_height": 18.0,
+    "subtitle_height": 14.0
+  },
+  {
+    "panel": "camkeys_main",
+    "width": 280,
+    "center_error_logical_units": 0.0,
+    "title_height": 25.0,
+    "subtitle_height": 20.0
+  },
+  {
+    "panel": "camprops",
+    "width": 280,
+    "center_error_logical_units": 0.0,
+    "title_height": 28.0,
+    "subtitle_height": 46.0
+  }
+]

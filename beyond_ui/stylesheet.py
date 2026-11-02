@@ -102,6 +102,7 @@ class StyleSheet:
         motion=None,
         text_effects=None,
         wide_numeric_motion_scale=0.15,
+        value_feedback=None,
     ):
         self._owners = WeakSet()
         self._canvases = WeakSet()
@@ -126,6 +127,7 @@ class StyleSheet:
                 motion=motion or {},
                 text_effects=text_effects or {},
                 wide_numeric_motion_scale=wide_numeric_motion_scale,
+                value_feedback={} if value_feedback is None else value_feedback,
             )
         )
         self._validate(self._data)
@@ -174,6 +176,8 @@ class StyleSheet:
                 raise ValueError("Surface needs lower and upper RGBA colors")
             for value in pair:
                 color(value)
+        from .value_feedback import normalize as feedback_options
+        feedback_options(data.get("value_feedback", {}))
         for key in ("opacity", "wide_numeric_motion_scale"):
             value = data[key]
             if not isfinite(value) or not 0 <= value <= 1:
@@ -242,6 +246,7 @@ class StyleSheet:
         )
         canvas.theme = next_theme
         canvas.wide_numeric_motion_scale = self._data["wide_numeric_motion_scale"]
+        canvas.value_feedback.configure(self._data.get("value_feedback", {}))
         canvas.animation = self.animation
         canvas.bind_animation(canvas._animation_parents, canvas._animation_wake)
         self._applied_revision[canvas] = self.revision
@@ -292,7 +297,9 @@ class StyleSheet:
         return self._variant_cache[key]
 
     def palette(self, base):
-        if self._cache is not None and self._cache[0] is base:
+        # Nested list rows inherit the parent's resolved palette. Applying this
+        # same preset twice wastes work and compounds its surface opacity.
+        if self._cache is not None and (self._cache[0] is base or self._cache[1] is base):
             return self._cache[1]
         from .gpu.skin import themed_roles
 

@@ -247,6 +247,10 @@ class Canvas(Group):
         self._motion_focus = None
         self.theme = theme or Theme()
         self.controls = {}
+        from .value_feedback import ValueFeedback
+        self.value_feedback = ValueFeedback(self)
+        if self.theme.stylesheet:
+            self.value_feedback.configure(self.theme.stylesheet._data.get("value_feedback", {}))
         self._sized_groups = WeakSet()
         self._composites = {}
         self._dirty = True
@@ -371,7 +375,8 @@ class Canvas(Group):
             child_active = widget.advance(local_clip) or child_active
         if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
             child_active = self.overlay["widget"].advance() or child_active
-        return bool(self._moving) or child_active or temporal
+        feedback_active = self.value_feedback.advance(clip)
+        return bool(self._moving) or child_active or temporal or feedback_active
 
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
@@ -478,6 +483,7 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        self.value_feedback.prune()
         self._button_press = None
         if hasattr((self.overlay or {}).get("widget"), "canvas"):
             self.cancel()
@@ -588,6 +594,7 @@ class Canvas(Group):
         return None
 
     def park(self):
+        self.value_feedback.clear()
         self.visible = False
         self.cancel()
         self.hover = None

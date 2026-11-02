@@ -1,0 +1,56 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 61058,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_artwork.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Native RNA selection renames only exact angle; new, cleared and invalid selections preserve titles",
+        "Five icons share two retained textures; header layouts fit narrow/wide bounds",
+        "Addon teardown releases artwork namespace and textures"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-icons-v1/runtime/blender-0.log"
+  },
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 61077,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_artwork.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Native RNA selection renames only exact angle; new, cleared and invalid selections preserve titles",
+        "Five icons share two retained textures; header layouts fit narrow/wide bounds",
+        "Addon teardown releases artwork namespace and textures"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/camkeys-icons-v1/runtime/blender-1.log"
+  }
+]

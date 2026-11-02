@@ -4,6 +4,19 @@ from beyond_ui.gpu.style import theme_palette
 
 
 class StylesheetTests(unittest.TestCase):
+    def test_nested_palette_reuses_surface_opacity_and_invalidates_on_edit(self):
+        base = theme_palette()
+        sheet = StyleSheet(opacity=0.5)
+        resolved = sheet.palette(base)
+        self.assertIs(sheet.palette(resolved), resolved)
+        self.assertIs(sheet.palette(base), resolved)
+        self.assertEqual(resolved['field'][3], base['field'][3] * 0.5)
+        sheet.update(opacity=0.75)
+        updated = sheet.palette(base)
+        self.assertIsNot(updated, resolved)
+        self.assertIs(sheet.palette(updated), updated)
+        self.assertEqual(updated['field'][3], base['field'][3] * 0.75)
+
     def test_large_heading_reserves_icon_and_wrapped_line_height(self):
         from beyond_ui import Layout
 

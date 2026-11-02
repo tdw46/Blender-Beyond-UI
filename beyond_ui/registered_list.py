@@ -308,9 +308,14 @@ def reflow_search_item(canvas, group=None):
         return
     index = group.children.index(column)
     before, after = group.children[:index], group.children[index + 1:]
+    def content(child):
+        if (child.options.get('_style_wrapper') and len(child.children) == 1
+                and not hasattr(child.children[0], 'children')):
+            return child.children[0]
+        return child
     if any(c.kind != "toggle" or c.label for c in before):
         return
-    if any(c.kind not in {"label", "button"} for c in after):
+    if any(content(c).kind not in {"label", "button"} for c in after):
         return
     name, search = column.children
     if name.label or search.label:
@@ -326,13 +331,14 @@ def reflow_search_item(canvas, group=None):
     for child in header.children:
         child.parent = header
         child.options.setdefault("height", 22)
-        if child.kind == "label":
+        leaf = content(child)
+        if leaf.kind == "label":
             child.options.setdefault("width", max(38, canvas.theme.font_size * 3.5))
-            child.options.setdefault("text_alignment", "RIGHT")
-            child.options.setdefault("text_inset", 0)
-        elif child.kind == "button" and not child.label:
+            leaf.options.setdefault("text_alignment", "RIGHT")
+            leaf.options.setdefault("text_inset", 0)
+        elif leaf.kind == "button" and not leaf.label:
             child.options.setdefault("width", 22)
-            child.options["list_action"] = True
+            leaf.options["list_action"] = True
     name.options.setdefault("font_weight", "bold")
     name.options.setdefault("_inline_style", {}).setdefault("font_weight", "bold")
     search.options.setdefault("height", 24)
@@ -552,6 +558,7 @@ class RegisteredList(CollectionList):
             shortcut_registry=self.parent.shortcut_registry,
             shortcut_namespace=f"{self.parent.shortcut_namespace}:list:{next(_serial)}",
         )
+        canvas.value_feedback.parent = self.parent.value_feedback
         canvas._scoped_shortcuts = {}
         canvas.wide_numeric_motion_scale = self.parent.wide_numeric_motion_scale
         canvas.bind_animation(
@@ -616,6 +623,8 @@ class RegisteredList(CollectionList):
             if item is not None:
                 for control in canvas.controls.values():
                     control.options["list_row"] = True
+                    if control.kind == "button" and not control.label and control.options.get("emboss") not in {"NONE", "NONE_OR_STATUS"}:
+                        control.options["list_action"] = True
                     if control.kind == "toggle" and not control.label:
                         control.options["width"] = 38
                 # Preserve authored secondary status instead of crushing the value

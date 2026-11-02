@@ -228,6 +228,7 @@ def icon(glyph, x, y, size, color):
     if icons.draw(glyph, x, y, size, color):
         return True
     supported = {
+        "BUI_TARGET",
         "⚙",
         "+",
         "×",
@@ -675,6 +676,11 @@ def icon(glyph, x, y, size, color):
             disc(0, 0, 0.66, 32)
         elif glyph == "○":
             ring(0.72, 0.57)
+        elif glyph == "BUI_TARGET":
+            ring(0.68, 0.57, 48)
+            ring(0.25, 0.16, 32)
+            for dx, dy in ((1,0),(-1,0),(0,1),(0,-1)):
+                line((dx*.5,dy*.5),(dx*.95,dy*.95),.065)
         elif glyph == "◉":
             ring(0.83, 0.71)
             disc(0, 0, 0.53, 32)

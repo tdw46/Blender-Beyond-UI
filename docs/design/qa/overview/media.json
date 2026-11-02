@@ -250,5 +250,9 @@
   {
     "title": "CamKeys Studio \u00b7 Lens Falloff",
     "path": "docs/media/panels/camkeys-studio-v7-flatten_falloff_popover.gif"
+  },
+  {
+    "title": "CamKeys response, bullseye action and live-value feedback",
+    "path": "docs/media/panels/camkeys-value-feedback.gif"
   }
 ]

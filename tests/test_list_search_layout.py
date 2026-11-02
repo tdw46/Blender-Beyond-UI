@@ -24,6 +24,21 @@ class ListSearchLayout(unittest.TestCase):
         self.assertEqual(name.options['_inline_style']['font_weight'],'bold')
         self.assertEqual(toggle.options['width'],32)
 
+    def test_value_surface_keeps_name_search_grid_and_button_owner(self):
+        from beyond_ui.canvas import Group
+        canvas, controls = self.build()
+        row = canvas.children[0]
+        value = controls[3]
+        wrapper = Group(canvas, 'column', row, _style_wrapper=True, width=54)
+        wrapper.children = [value]
+        row.children[row.children.index(value)] = wrapper
+        reflow_search_item(canvas)
+        canvas.arrange(320)
+        self.assertAlmostEqual(controls[1].rect[0], controls[2].rect[0]+canvas.theme.icon_size+6)
+        self.assertTrue(controls[4].options['list_action'])
+        self.assertIn(value, wrapper.children)
+        self.assertEqual(wrapper.options['width'], 54)
+
     def test_authored_geometry_is_not_restructured(self):
         canvas,controls=self.build();row=canvas.children[0];row.options['_inline_geometry']=True
         before=tuple(row.children);reflow_search_item(canvas)

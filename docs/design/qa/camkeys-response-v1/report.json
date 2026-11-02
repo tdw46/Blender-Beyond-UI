@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-02",
+  "unit_tests": 389,
+  "runtimes": [
+    {
+      "version": "5.1.2",
+      "passed": true,
+      "checks": [
+        "Pitch/yaw/zero-roll offsets correct for Z-up and imported Y-up; invalid capture explicit",
+        "Angle metadata aligns with search border; native name/search/capture retained; literal live values highlight and settle"
+      ]
+    },
+    {
+      "version": "5.2.2 LTS",
+      "passed": true,
+      "checks": [
+        "Pitch/yaw/zero-roll offsets correct for Z-up and imported Y-up; invalid capture explicit",
+        "Angle metadata aligns with search border; native name/search/capture retained; literal live values highlight and settle"
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "kind": "capture",
+      "passed": true,
+      "focus_events": [],
+      "cpu_median_ms": 2.3539789999631466
+    },
+    {
+      "kind": "narrow",
+      "passed": true,
+      "focus_events": [],
+      "cpu_median_ms": 2.1806874974572565
+    },
+    {
+      "kind": "feedback",
+      "passed": true,
+      "focus_events": [],
+      "cpu_median_ms": 2.049541501037311
+    }
+  ],
+  "benchmarks": [
+    {
+      "width": 400,
+      "scale": 1.0,
+      "samples_per_mode": 70,
+      "cpu_submission_ms": {
+        "False": {
+          "median": 2.1224584997980855,
+          "p95": 2.5686670014692936
+        },
+        "True": {
+          "median": 2.1767919988633366,
+          "p95": 2.432792000035988
+        }
+      },
+      "glass_owners": 1,
+      "retained_lens_batches": 3,
+      "resources_stable": true,
+      "layout_rebuilds": 0,
+      "note": "Same warmed panel, feedback disabled versus forced active; CPU submission only, not GPU completion or live scene FPS."
+    }
+  ],
+  "limits": [
+    "GPU captures use saved Uraraka in disposable Blender, not the user dirty scene.",
+    "CPU submission timings do not measure live viewport FPS or GPU completion.",
+    "Narrow 280-unit layout wraps accessories; a long name may truncate but full search text remains visible.",
+    "Generated artwork is a design target, not evidence of exact font/backdrop equivalence.",
+    "Metal runtime checked; no new OpenGL/Vulkan hardware qualification."
+  ],
+  "live_readback": {
+    "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+    "dirty": true,
+    "errors": {},
+    "fallbacks": {},
+    "modal_operators": 4,
+    "capture_summary_in_draw": true,
+    "target_icon_loaded": true,
+    "canvas_feedback_loaded": true,
+    "consumer_presets": true,
+    "scene_saved": false
+  }
+}

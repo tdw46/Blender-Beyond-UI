@@ -41,6 +41,7 @@ def run():
     canvases = []
     records = []
     timings = []
+    feedback_benchmarks = []
     try:
         from camkeys_qa._vendor.beyond_ui import Layout
         from camkeys_qa._vendor.beyond_ui.hosts.addon import PanelProxy
@@ -100,7 +101,7 @@ def run():
                 if (
                     os.environ.get("BEYOND_UI_STUDIO_ONLY")
                     and cls.__name__
-                    != "CAMKEYS_PT_" + os.environ["BEYOND_UI_STUDIO_ONLY"]
+                    not in {"CAMKEYS_PT_" + name for name in os.environ["BEYOND_UI_STUDIO_ONLY"].split(",")}
                 ):
                     continue
                 print("CAPTURE_START", cls.__name__, flush=True)
@@ -128,7 +129,8 @@ def run():
                     )
                     if sheet is not None:
                         sheet.apply(ui.canvas, variant=getattr(cls, "beyond_ui_style", ""))
-                    ui.title(text=labels[slug])
+                    if os.environ.get("BEYOND_UI_STUDIO_CAPTION", "1") != "0":
+                        ui.title(text=labels[slug])
                     try:
                         runtime.draw_functions.get(cls, cls.draw)(
                             PanelProxy(cls, ui), ctx
@@ -306,6 +308,82 @@ def run():
                                     png(
                                         frames / f"{frame:03d}.png", w, h, bytes(pixels)
                                     )
+                            if os.environ.get("BEYOND_UI_FEEDBACK_BENCH") and slug == "camkeys_linking":
+                                groups = [canvas]
+                                for node in canvas.controls.values():
+                                    widget = node.options.get("widget")
+                                    if hasattr(widget, "all_children"):
+                                        groups.extend(child for child, _, _ in widget.all_children())
+                                resources_before = (len(glass._owners), len(glass._lens_batches), id(skin._shader), id(skin._batch))
+                                layouts_before = [c.layout_count for c in groups]
+                                enabled_before = canvas.value_feedback.settings["enabled"]
+                                samples = {False: [], True: []}
+                                try:
+                                    # Interleave paired warm CPU-submission samples; no readback in timing.
+                                    for index in range(80):
+                                        for enabled in ((False, True) if index % 2 else (True, False)):
+                                            canvas.value_feedback.settings["enabled"] = enabled
+                                            if enabled:
+                                                for c in groups:
+                                                    now = c.value_feedback.clock()
+                                                    for control_key in c.value_feedback.values:
+                                                        control = c.controls.get(control_key)
+                                                        if control is not None:
+                                                            c.value_feedback.active[control_key] = (control, now)
+                                            fb.clear(color=(.08, .1, .12, 1))
+                                            start = time.perf_counter()
+                                            glass.lens(key, rect, canvas.theme.radius*dpi, (0,0,0,0), blur=.3)
+                                            with batch():
+                                                canvas.paint(rect, (0,0,w,h), font=fonts, preferences=ctx.preferences, backdrop=key)
+                                            elapsed = (time.perf_counter()-start)*1000
+                                            if index >= 10:samples[enabled].append(elapsed)
+                                    resources_after = (len(glass._owners), len(glass._lens_batches), id(skin._shader), id(skin._batch))
+                                    assert resources_after == resources_before
+                                    assert layouts_before == [c.layout_count for c in groups]
+                                    feedback_benchmarks.append(dict(width=width, scale=dpi, samples_per_mode=70,
+                                        cpu_submission_ms={str(k): dict(median=statistics.median(v), p95=sorted(v)[int(len(v)*.95)]) for k,v in samples.items()},
+                                        glass_owners=resources_after[0], retained_lens_batches=resources_after[1],
+                                        resources_stable=True, layout_rebuilds=0,
+                                        note="Same warmed panel, feedback disabled versus forced active; CPU submission only, not GPU completion or live scene FPS."))
+                                finally:
+                                    canvas.value_feedback.settings["enabled"] = enabled_before
+                                    for c in groups:c.value_feedback.active.clear()
+                            if os.environ.get("BEYOND_UI_FEEDBACK_DEMO") and slug == "camkeys_linking":
+                                frames = Path(os.environ["BEYOND_UI_FEEDBACK_DEMO"])
+                                if not frames.is_absolute():frames = ROOT / frames
+                                frames.mkdir(parents=True, exist_ok=True)
+                                active_angle = item.object.angle_items[item.object.angle_items_index]
+                                demo_key = item.object.data.shape_keys.key_blocks[active_angle.shapekey]
+                                original_value = demo_key.value
+                                clock = [100.0]
+                                def timed(c):
+                                    c.value_feedback.clear()
+                                    c.value_feedback.clock = lambda: clock[0]
+                                    for node in c.controls.values():
+                                        widget=node.options.get("widget")
+                                        if hasattr(widget,"all_children"):
+                                            for child,_,_ in widget.all_children():timed(child)
+                                timed(canvas)
+                                try:
+                                    for frame in range(45):
+                                        clock[0] = 100 + frame/30
+                                        demo_key.value = min(frame,15)/15*.863
+                                        for node in canvas.controls.values():
+                                            widget=node.options.get("widget")
+                                            if hasattr(widget,"refresh_display"):widget.refresh_display()
+                                        fb.clear(color=(.08,.1,.12,1))
+                                        glass.lens(key,rect,canvas.theme.radius*dpi,(0,0,0,0),blur=.3)
+                                        with batch():canvas.paint(rect,(0,0,w,h),font=fonts,preferences=ctx.preferences,backdrop=key)
+                                        pixels=fb.read_color(0,0,w,h,4,0,"UBYTE");pixels.dimensions=w*h*4
+                                        png(frames/f"{frame:03d}.png",w,h,bytes(pixels))
+                                    assert not canvas.value_feedback.advance()
+                                    for node in canvas.controls.values():
+                                        widget=node.options.get("widget")
+                                        if hasattr(widget,"all_children"):
+                                            assert not any(child.value_feedback.advance() for child,_,_ in widget.all_children())
+                                finally:
+                                    demo_key.value=original_value
+
 
                     finally:
                         glass.release(key)
@@ -319,6 +397,7 @@ def run():
             records=records,
             scene_loaded=bpy.data.filepath,
             paint_cpu_median_ms=statistics.median(timings),
+            feedback_benchmarks=feedback_benchmarks,
             stylesheet=sheet.to_dict() if sheet else None,
         )
     except Exception:

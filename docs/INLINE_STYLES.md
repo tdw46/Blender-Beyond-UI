@@ -64,10 +64,15 @@ keys fail explicitly instead of being silently ignored.
 | `width`, `height` | Explicit layout allocation, 1–4096 logical units. |
 | `min_width`, `max_width`, `min_height`, `max_height` | Container constraints; available host bounds still win over minimum width. Content fits an explicit height without changing its binding. |
 | `align` | Container content alignment: `left`, `center`, `right`, `expand`. |
-| `flex_grow` | Relative flexible width in a row, 0.01–100. Fixed/intrinsic widths retain precedence. |
+| `align_items` | Row cross-axis alignment: `start`, `center`, `end`; moves complete child blocks without changing their shapes or owners. |
+| `flex_grow` | Relative flexible width in a row, 0.01–100. Explicit fixed widths retain precedence; explicit flex prevents automatic intrinsic label shrinking. |
 | `display` | `flex` or `none`. Hidden descendants get zero geometry and cannot be hit; hiding an active owned edit cancels it. Native fallback remains visible. |
 | `text_align` | `left`, `center`, `right`, `expand` for ordinary control text. Active text editing retains caret/selection behavior. |
 | `font_weight`, `font_size` | `normal`/`bold`, 8–32 logical units. Ordinary labels/fields/buttons; specialized widget internals retain their own host-scale typography. |
+| `line_height` | Wrapped label line spacing, 8–96 logical units. Allocates one row per line; fixed container heights still constrain content. |
+| `color_role` | Semantic theme ink role, e.g. `title`, `muted`, `text`, `edge`; explicit `color` takes precedence. |
+| `icon_size` | Visible icon longest axis, 8–128 logical units. Preserve source proportions. |
+| `divider_width` | Separator stroke thickness, 0.25–8 logical units. |
 | `wrap` | Wrap an ordinary label. |
 | `radius` | Field/button surface corner radius, 0–64. Source switch/slider silhouettes and specialized widget internals remain shared. |
 | `color`, `background`, `accent` | Text/title color, field/input color, or semantic accent. Hex RGB/RGBA or 3/4-component colors. Unspecified roles still follow the host theme. |
@@ -266,3 +271,15 @@ bui.style(layout, list_item_layout="authored")
 `list_row_padding`, `list_row_align`, `list_row_height`, and explicit styles inside
 `draw_item()` remain available. Long names can still clip at narrow widths;
 icons and utility controls reserve their own lanes.
+
+Branded icon/title/subtitle rows and vertical rules can be authored with the
+[configurable header helper](ARTWORK.md), using this same style vocabulary per element.
+
+### Value feedback and wrapping
+
+`value_feedback=True/False` or a settings dictionary controls finite change ink
+using semantic theme roles. `flex_wrap=True` on a row group wraps children at
+minimum widths. `text_inset` provides a logical horizontal label inset.
+The reusable `BUI_TARGET` icon provides a bullseye for actions without replacing
+the native operator. See [value feedback](VALUE_FEEDBACK.md) for defaults,
+performance behavior, configuration and native-safe examples.

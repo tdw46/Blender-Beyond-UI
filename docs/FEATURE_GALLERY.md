@@ -442,3 +442,9 @@ Real Blender GPU captures of the shared change pulse. Appearance uses state snap
 ![CamKeys Studio · Lens Falloff](media/panels/camkeys-studio-v7-flatten_falloff_popover.gif)
 
 ![CamKeys Studio · live preset edits and owner menu snapshots](media/panels/camkeys-studio-v7-appearance.gif)
+
+## CamKeys response and changing values
+
+![CamKeys response, bullseye action and live-value feedback](media/panels/camkeys-value-feedback.gif)
+
+[Reference and multi-scale Blender captures](design/qa/camkeys-response-v1/index.html).

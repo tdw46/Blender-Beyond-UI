@@ -170,3 +170,7 @@ uv run ruff check beyond_ui tests tools
 GPL-3.0-or-later. Preserve the bundled [license](LICENSE),
 [notice](beyond_ui/NOTICE) and font licenses when vendoring.
 Derived from Beyond VTuber Tools' Effect Layers UI; see [provenance](docs/PROVENANCE.md).
+
+### Brand artwork
+
+Add transparent logos and section icons with native-safe `bui.header()` and `bui.heading()` helpers. [Artwork setup and reusable layout API](docs/ARTWORK.md).

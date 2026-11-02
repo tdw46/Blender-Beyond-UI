@@ -127,7 +127,8 @@ def paint(
             if t.stylesheet
             else (14 if getattr(canvas, "panel_layout", False) else 12)
         )
-        has_icon = has_icon and right - left >= (icon_size + 4) * scale
+        icon_size = current_style.get("icon_size", icon_size)
+        has_icon = has_icon and right - left >= (icon_size + (0 if icon_only else 4)) * scale
         gutter = (icon_size + 6 if value else icon_size) * scale if has_icon else 0
         tail = trailing_icon not in {None, "", "NONE", 0}
         tail_gutter = (icon_size + 6) * scale if tail else 0
@@ -272,6 +273,7 @@ def paint(
             text(control.label, (a, b, label_width + 6 * scale, d), ink)
         text(value, (a + label_width, b, c - label_width, d), ink, editor=canvas.editor)
 
+    feedback_now = canvas.value_feedback.clock()
     count = 0
     animation_colors = None
     status_colors = None
@@ -346,6 +348,8 @@ def paint(
                 value = control.binding.read() if control.binding else None
             except (ReferenceError, RuntimeError):
                 value = None
+            if control.binding is not None or control.options.get("value_feedback"):
+                canvas.value_feedback.observe(control, value if control.binding is not None else control.label, feedback_now)
             enabled = control.enabled
             alert = enabled and control.options.get("alert", False)
             status = control.options.get("status", "EMPTY")
@@ -365,7 +369,8 @@ def paint(
                     else status_colors.get(status, base_palette["muted"])
                 )
                 palette = dict(base_palette, field=(*tint[:3], 0.3))
-            ink = palette["text"] if enabled else palette["muted"]
+            role = "text" if "color" in current_style else current_style.get("color_role", "text")
+            ink = palette[role] if enabled else palette["muted"]
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
             menu_option = control.options.get("menu_option", False)
@@ -381,6 +386,11 @@ def paint(
                 chrome = False
             if selected and enabled:
                 ink = palette["selected_text"]
+            stable_ink = ink
+            feedback = canvas.value_feedback.amount(control, feedback_now)
+            if feedback:
+                tint = palette[canvas.value_feedback.options(control)["role"]]
+                ink = tuple(a + (b-a)*feedback for a,b in zip(ink,tint))
             if kind != "widget":
                 control.motion.begin_paint()
                 if enabled and kind in {
@@ -480,14 +490,12 @@ def paint(
                     control.options["widget"].paint(r, font, palette, backdrop=backdrop)
                 elif kind == "separator":
                     if not control.options.get("space"):
+                        thickness = current_style.get("divider_width", 1) * scale
+                        tint = ink if "color" in current_style or "color_role" in current_style else palette["muted"]
                         if control.options.get("vertical"):
-                            style.draw(
-                                a + c / 2, b, scale, d, palette["muted"], radius=0
-                            )
+                            style.draw(a + (c-thickness)/2, b, thickness, d, tint, radius=0)
                         else:
-                            style.draw(
-                                a, b + d / 2, c, scale, palette["muted"], radius=0
-                            )
+                            style.draw(a, b + (d-thickness)/2, c, thickness, tint, radius=0)
                 elif kind == "toggle" and control.options.get("bool_button"):
                     if control.options.get("section_disclosure"):
                         surface(
@@ -657,7 +665,7 @@ def paint(
                             text(
                                 control.label,
                                 mapped(label_rect),
-                                ink,
+                                stable_ink,
                                 (
                                     "title"
                                     if control.options.get("_slider_stacked")
@@ -830,7 +838,7 @@ def paint(
                 elif control.options.get("_wrapped_lines"):
                     lines = control.options["_wrapped_lines"]
                     line_height = (
-                        current_style.get("font_size", t.font_size) * 1.55 * scale
+                        current_style.get("line_height", current_style.get("font_size", t.font_size) * 1.55) * scale
                     )
                     has_icon = control.options.get("icon") not in {None, "", "NONE", 0}
                     for i, line in enumerate(lines):

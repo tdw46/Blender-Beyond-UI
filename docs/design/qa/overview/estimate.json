@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-02 \u2014 publication checkpoint; versions unchanged",
+  "reviewed": "2026-11-02 \u2014 publication checkpoint",
   "remaining_turns": [
     0,
     1
@@ -16,7 +16,7 @@
     0,
     0.25
   ],
-  "confidence": "Execution and GPU tooltip rendering verified; optional live user confirmation remains.",
+  "confidence": "Requested implementation and runtime checks complete; actual captures available for user review.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
@@ -26,6 +26,10 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Response and list changes now have a fresh actual Blender GIF, active/settled PNGs and multi-scale captures. Other older panel demos remain labeled by their existing capture batches.",
+    "Header refinement has 15 updated Blender PNGs and normalized reference crops; no new animation behavior or GIF.",
+    "Artwork pass: fresh generated references and 15 Blender PNGs for five panels at three scale/width combinations. No new GIF; shared motion unchanged.",
+    "Performance/motion pass has live numerical evidence and configuration readback; no new GIF or screenshot. Existing glass and animation rendering retained.",
     "Tooltip typography v2 has fresh Blender PNG and aligned reference overlay; no new motion behavior or dedicated GIF.",
     "Developer tooltip refinement has a generated reference and before/after Blender PNGs; no dedicated GIF added. Existing shared motion is unchanged.",
     "Developer menu/help and billboard fixes have numerical/execution evidence; no new screenshots/GIFs requested. Existing media inventory unchanged.",
@@ -39,8 +43,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Tooltip typography remeasured at equal card width: 13.5 description, 12.2 developer values, 12.5 bold labels; matched reference wrapping and 152.5-unit card height. Registered overlay and fresh Blender render in developer-tooltips-v2; installed and loaded in Uraraka.",
-  "estimate_review": "User accepted the latest tooltip refinement and requested commits/pushes for both projects. Publication adds no implementation scope; optional future user QA remains 0\u20131 turns. Refreshed all 375 unit tests successfully before committing.",
+  "latest_progress": "Checkpoint includes branded artwork/headers, response card, capture angles, finite value feedback, performance refinements and Separate Billboards default correction. 389 unit tests and lint pass; existing Blender 5.1/5.2 execution and GPU evidence retained.",
+  "estimate_review": "Reviewed for the requested repository checkpoint. Completed implementation stays closed; 0\u20131 optional user QA turns remain. No new feature scope or implementation time was added by committing.",
   "time_summary": "Optional confirmation/follow-up: 0\u20131 turn, roughly 0\u201315 active minutes. Forecast uncertain, not measured.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -288,9 +292,34 @@
       "work": "Measured tooltip typography, spacing, reference line breaks and card registration",
       "evidence": "docs/design/qa/developer-tooltips-v2/report.json",
       "turns": 1
+    },
+    {
+      "work": "Live callback profiling, retained signature/palette optimization and configurable 2x speed / half-strength CamKeys motion",
+      "evidence": "docs/design/qa/ui-performance-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Automatic shape-key angle naming, transparent logo and four section icons, native-safe reusable header/artwork API, styled list accessory alignment and Uraraka runtime reload.",
+      "evidence": "docs/design/qa/camkeys-icon-panels-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Configurable header element styling, semantic subtitle ink, cross-axis alignment, wrapped line height, all-panel dividers and scaled icons; current Blender comparisons.",
+      "evidence": "docs/design/qa/camkeys-headers-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Response card, bullseye icon, capture direction labels, shared responsive wrapping and configurable finite change feedback; reference and actual GPU evidence.",
+      "evidence": "docs/design/qa/camkeys-response-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Preserve Separate Billboards false default through automatic initialization; installed/live patch and regression execution.",
+      "evidence": "docs/design/qa/billboard-default-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optional user review of tooltip hierarchy and previous interaction fixes. No planned implementation remains in this batch; broader Vulkan/OpenGL qualification remains separate.",
+  "remaining_work": "Optional user review of the response card, angle metadata and changing-value accent. Exact generated font/backdrop identity and new platform qualification remain outside this batch.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -338,6 +367,6 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Accepted tooltip refinement; Beyond UI and CamKeys publication checkpoint",
-  "latest_review": "../developer-tooltips-v2/index.html"
+  "checkpoint": "CamKeys response and changing-value feedback",
+  "latest_review": "../camkeys-response-v1/index.html"
 }

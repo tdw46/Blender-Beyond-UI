@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "version": 1,
+  "date": "2026-11-02",
+  "prompt": "prompt.txt",
+  "output": "reference.png",
+  "dimensions": [
+    1920,
+    819
+  ],
+  "source_screenshots": [
+    "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/codex-clipboard-838f7c42-265e-4a01-a989-51db0ee15b74.png",
+    "/var/folders/r2/_6cvsms50k57c4dyw7j8l26r0000gn/T/codex-clipboard-56a08f14-a9cc-4d3a-a10c-dcd68dd2df95.png"
+  ],
+  "state_notes": "Generated Distance Only appears on while angle controls are visible. Implementation preserves native conditional behavior: Distance Only off for the angle controls. Font, glass background and live values differ from concept."
+}

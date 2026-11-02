@@ -16,6 +16,8 @@ _LAYOUT = {
     "max_height",
     "align",
     "flex_grow",
+    "flex_wrap",
+    "align_items",
     "display",
     "template",
     "surface",
@@ -32,6 +34,12 @@ _VISUAL = {
     "opacity",
     "radius",
     "font_size",
+    "icon_size",
+    "color_role",
+    "value_feedback",
+    "text_inset",
+    "line_height",
+    "divider_width",
     "font_weight",
     "text_effects",
     "text_align",
@@ -132,11 +140,30 @@ def normalize(*presets, **options):
             raise ValueError("wrap must be Boolean")
         elif key in {"gap", "radius", "surface_radius"}:
             _number(key, value, 0, 64)
+        elif key == "flex_wrap":
+            if type(value) is not bool:raise ValueError("flex_wrap must be Boolean")
+        elif key == "align_items":
+            if value not in {"start", "center", "end"}:
+                raise ValueError("align_items must be start, center or end")
+        elif key == "color_role":
+            if value not in _COLORS:
+                raise ValueError("color_role must name a semantic theme color")
+        elif key == "value_feedback":
+            from .value_feedback import normalize as feedback_options
+            result[key] = feedback_options(value)
+        elif key == "text_inset":
+            _number(key, value, 0, 64)
+        elif key == "line_height":
+            _number(key, value, 8, 96)
+        elif key == "divider_width":
+            _number(key, value, 0.25, 8)
         elif key == "flex_grow":
             _number(key, value, 0.01, 100)
         elif key == "text_effects":
             from .text_effects import normalize as text_effects
             result[key] = text_effects(value)
+        elif key == "icon_size":
+            _number(key, value, 8, 128)
         elif key == "font_size":
             _number(key, value, 8, 32)
         elif key == "value_width":
@@ -272,7 +299,7 @@ def apply_control(control, values, prepared=None):
         control.options["style_class"] = values["variant"]
     if "text_align" in values:
         control.options["text_alignment"] = values["text_align"]
-    for key in ("font_size", "font_weight", "radius", "label_width", "label_position", "button_padding"):
+    for key in ("font_size", "icon_size", "color_role", "value_feedback", "text_inset", "line_height", "divider_width", "font_weight", "radius", "label_width", "label_position", "button_padding"):
         if key in values:
             control.options[key] = values[key]
     colors = dict(merged.get("colors", {}))

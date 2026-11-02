@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "unit_tests": 383,
+  "changes": [
+    "Per-element header typography, line height, color role, icon size/slot, divider and spacing inputs",
+    "Explicit row cross-axis alignment retained through wrapping",
+    "Muted subtitles use semantic ink rather than surface opacity",
+    "Five consumer header presets, vertical dividers and centered icon/text blocks"
+  ],
+  "capture_runtime": "5.2.2 LTS",
+  "focus_audits": [
+    {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 73536,
+      "restore_requests": 0,
+      "seconds": 6.047179937362671,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 73599,
+      "restore_requests": 0,
+      "seconds": 5.849647045135498,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    }
+  ],
+  "scales": [
+    1,
+    1.5,
+    2
+  ],
+  "widths": [
+    280,
+    400
+  ],
+  "source_references": "../camkeys-icon-panels-v1/ immutable references; requested dividers additionally applied to all five headers",
+  "limitations": [
+    "Close reference match; original generated text glyphs and backdrop differ from actual Blender fonts and scene.",
+    "Narrow headers wrap instead of shrinking host text; generated references show wide layouts only.",
+    "Controls below headers retain the original functional layouts and actual saved-scene data.",
+    "Metal GPU captures; no new Vulkan/OpenGL qualification or GIF."
+  ],
+  "live_readback": "Code executed successfully: {\"file\": \"/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend\", \"dirty\": false, \"errors\": {}, \"fallbacks\": {}, \"artwork\": [\"logo\", \"objects\", \"linking\", \"perspective\", \"baking\"], \"modal_operators\": 4, \"speed\": 2.0, \"strength\": 0.35, \"new_callback\": true}\n\n",
+  "geometry_evidence": "geometry.json",
+  "alignment_check": "Ten wide/narrow header layouts: icon and divider center error <0.001 logical units; title and subtitle rows do not overlap."
+}
