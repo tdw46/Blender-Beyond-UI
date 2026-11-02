@@ -48,6 +48,8 @@ class CollectionList(Widget):
         self.reorder()
 
     def dimensions(self, font_size, available_width, available_height=None):
+        if not hasattr(self, "draw_item"):
+            self.row_height = max(type(self).row_height, 24 + self.row_padding[0] + self.row_padding[2])
         scale = max(0.01, font_size / self.design_font_size)
         self.width = max(1, min(560, available_width / scale))
         default_rows = getattr(self, "style_visible_rows", self.minimum)
@@ -152,6 +154,22 @@ class CollectionList(Widget):
         return next(
             (item for item, rect in self.visible() if contains(rect, x, y)), None
         )
+
+    @property
+    def row_padding(self):
+        return getattr(self, "style_row_padding", (2, 8, 2, 8))
+
+    def row_content_rect(self, rect, content_height=20):
+        """Same padded logical frame for row painting, events and owner menus."""
+        x, y, w, h = rect
+        top, right, bottom, left = self.row_padding
+        height = min(content_height, max(0, h - top - bottom))
+        spare = max(0, h - top - bottom - height)
+        factor = {"top": 0, "center": 0.5, "bottom": 1}[
+            getattr(self, "style_row_align", "center")
+        ]
+        return (x + min(left, w), y + top + spare * factor,
+                max(1, w - left - right), height)
 
     def divider_rect(self, rect):
         if not getattr(self, "style_dividers", True) or self.type != "DEFAULT":
@@ -600,10 +618,11 @@ class CollectionList(Widget):
             self.paint_filters(p, backdrop)
 
     def paint_row(self, p, item, r, active, editing):
+        r = self.row_content_rect(r)
         if editing:
             self.paint_editor(p, r, role="selected_text" if active else "text")
         else:
-            p.text(r, item.name, "selected_text" if active else "text", 11, inset=8)
+            p.text(r, item.name, "selected_text" if active else "text", 11, inset=0)
 
     def paint_filters(self, p, backdrop):
         from ..gpu import style
@@ -654,21 +673,21 @@ class CollectionList(Widget):
         width = lambda text: measure(font, 11 * p.scale, text)[0] / p.scale
         x, y, w, h = rect
         caret = width(edit.text[: edit.cursor])
-        shift = max(0, caret - max(1, w - 18))
+        shift = max(0, caret - max(1, w - 2))
         a, b = sorted((edit.anchor, edit.cursor))
-        with p.clip((x + 4, y, max(0, w - 8), h)):
+        with p.clip((x, y, w, h)):
             if a != b:
                 left, right = width(edit.text[:a]), width(edit.text[:b])
                 p.surface(
-                    (x + 8 + left - shift, y + 5, right - left, h - 10),
+                    (x + left - shift, y + 5, right - left, h - 10),
                     "selected",
                     0,
                     0,
                     motion_key=False,
                 )
-            p.text((x - shift, y, w + shift, h), edit.text, role=role, size=11, inset=8)
+            p.text((x - shift, y, w + shift, h), edit.text, role=role, size=11, inset=0)
             p.surface(
-                (x + 8 + caret - shift, y + 5, 1, h - 10),
+                (x + caret - shift, y + 5, 1, h - 10),
                 p.palette[role],
                 0,
                 0,

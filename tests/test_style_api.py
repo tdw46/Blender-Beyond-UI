@@ -152,9 +152,12 @@ class InlineStyleTests(unittest.TestCase):
             {"gap": -1},
             {"motion": {"speed": 0}},
             {"min_width": 100, "max_width": 50},
+            {"list_row_padding": 25},
+            {"list_row_align": "middle"},
         ):
             with self.assertRaises(ValueError):
                 normalize(options)
+        self.assertEqual(normalize(list_row_padding=(3, 8))["list_row_padding"], (3, 8, 3, 8))
 
     def test_formatting_is_local_lossless_and_owner_unchanged(self):
         ui = Layout()

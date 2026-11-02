@@ -164,6 +164,16 @@ def run():
                         slug=slug,
                         width=width,
                         height=canvas.height,
+                        list_content_frames=[
+                            dict(row=item.index, rim=outer, content=inner,
+                                 padding=widget.row_padding,
+                                 align=getattr(widget, "style_row_align", "center"))
+                            for control in canvas.controls.values()
+                            for widget in [control.options.get("widget")]
+                            if hasattr(widget, "row_map")
+                            for item, outer in widget.visible()
+                            for child, inner, cached_item in [widget.row_map[item.index]]
+                        ],
                         controls=[
                             dict(
                                 kind=c.kind,

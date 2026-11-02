@@ -45,6 +45,8 @@ _VISUAL = {
     "label_width",
     "button_padding",
     "list_dividers",
+    "list_row_padding",
+    "list_row_align",
 }
 
 
@@ -90,8 +92,12 @@ def normalize(*presets, **options):
     if unknown:
         raise ValueError("Unsupported style properties: " + ", ".join(sorted(unknown)))
     for key, value in tuple(result.items()):
-        if key in {"padding", "margin", "button_padding"}:
+        if key in {"padding", "margin", "button_padding", "list_row_padding"}:
             result[key] = _edges(key, value)
+            if key == "list_row_padding" and max(result[key]) > 24:
+                raise ValueError("list_row_padding edges must be at most 24")
+        elif key == "list_row_align" and value not in {"top", "center", "bottom"}:
+            raise ValueError("list_row_align must be top, center or bottom")
         elif key == "surface" and value not in {"none", "card", "field", "input"}:
             raise ValueError("surface must be none, card, field or input")
         elif key == "surface_region" and value not in {"group", "value"}:
@@ -246,6 +252,10 @@ def apply_control(control, values, prepared=None):
         control.options["widget"].style_visible_rows = values["list_rows"]
     if "list_dividers" in values and control.kind == "widget":
         control.options["widget"].style_dividers = values["list_dividers"]
+    if control.kind == "widget":
+        for key in ("list_row_padding", "list_row_align"):
+            if key in values:
+                setattr(control.options["widget"], "style_" + key.removeprefix("list_"), values[key])
     if "variant" in values:
         control.options["style_class"] = values["variant"]
     if "text_align" in values:
@@ -282,13 +292,15 @@ def apply(layout, values, scope):
         {k: v for k, v in target.options.items() if k in _LAYOUT and k != "align"},
         {k: v for k, v in values.items() if k in _LAYOUT},
     )
-    if values.keys() & {"list_row_height", "list_rows", "list_dividers"}:
+    if values.keys() & {"list_row_height", "list_rows", "list_dividers", "list_row_padding", "list_row_align"}:
         from .registered_list import RegisteredList
+        from .widgets.collection_list import CollectionList
 
+        list_type = RegisteredList if values.keys() & {"list_row_height", "list_rows"} else CollectionList
         if not any(
-            isinstance(c.options.get("widget"), RegisteredList) for c in _leaves(target)
+            isinstance(c.options.get("widget"), list_type) for c in _leaves(target)
         ):
-            raise ValueError("List styling requires a registered UIList")
+            raise ValueError("List styling requires a supported UIList (registered for row height/count)")
     if values.keys() & _NUMERIC and not any(
         c.kind == "number" for c in _leaves(target)
     ):

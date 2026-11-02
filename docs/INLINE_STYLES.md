@@ -86,6 +86,8 @@ keys fail explicitly instead of being silently ignored.
 | `surface_radius`, `surface_color` | Parent surface radius (0–64) and optional explicit tint. Unspecified tint comes from the host theme role. Uses the existing shared glass backdrop. |
 | `button_padding` | Minimum text-button padding in CSS edge order, such as `(6, 14)`. Centered content uses the larger of each opposing pair. Icon-only controls and menu-option rows retain their compact geometry. Explicit fixed size allocations may still constrain content. Host defaults are `button_padding_x=14`, `button_padding_y=6` in `StyleSheet.geometry`. |
 | `list_dividers` | Boolean; registered lists show subtle separators between populated rows by default. Does not add lines through empty space, or across grid/compact presentations. |
+| `list_row_padding` | Content insets inside the selection rim; default `(2, 8)` logical units (vertical, horizontal). Number or CSS-order 1–4 values, each 0–24. Applies to ordinary and registered lists. |
+| `list_row_align` | Vertical alignment of the whole row content: `center` (default), `top`, or `bottom`. The same padded rectangle drives painting, editing, menus and hit-testing. |
 
 The common container/color/motion vocabulary works with rendered Boolean,
 integer, float, string, enum, pointer, vector, color and compound controls, plus
@@ -208,3 +210,16 @@ Selected menu/list rims derive from the active selection and text theme colors.
 Override the shared `selection_rim` color role for an explicit branded rim.
 Inactive menu rows remain unboxed. Rims and dividers use retained analytic drawing;
 they add no framebuffer capture, blur target or idle refresh timer.
+
+List captions, switches and values are centered as one authored content group
+inside the selection rim. The full row remains selectable, including its padding.
+Registered row height is a minimum: visible content can grow it to fit its padding,
+up to the existing 88-unit safety limit. Oversized callbacks still fail explicitly.
+Height is retained while scrolling and remeasured after width/data/style changes;
+there is no all-items measurement scan or per-paint layout. Explicit padding in a
+consumer's `draw_item()` is additional to these shared row insets.
+
+```python
+layout.template_list("MY_UL_items", "", owner, "items", owner, "active_index")
+bui.style(layout, list_row_padding=(4, 10), list_row_align="center")
+```

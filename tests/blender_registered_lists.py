@@ -12,6 +12,32 @@ def run():
     checks = []
     try:
         fixture.register()
+        from beyond_ui import style
+
+        styled, _ = fixture.build(bpy.context)
+        style(styled, list_row_padding=(6, 12), list_row_height=28)
+        styled.canvas.arrange(560)
+        sw = next(c.options["widget"] for c in styled.canvas.controls.values() if c.kind == "widget")
+        assert sw.row_height >= 44, sw.row_height
+        builds = sw.builds
+        saved = next(iter(sw.row_map.values()))[0]
+        for alignment in ("center", "top", "bottom"):
+            style(styled, list_row_height=60, list_row_align=alignment)
+            styled.canvas.arrange(560)
+            frames = {item.index: r for item, r in sw.visible()}
+            for child, inner, item in sw.all_children():
+                outer = frames[item.index]
+                assert inner[0] - outer[0] == 12
+                assert outer[0] + outer[2] - inner[0] - inner[2] == 12
+                above, below = inner[1] - outer[1], outer[1] + outer[3] - inner[1] - inner[3]
+                assert min(above, below) >= 6
+                if alignment == "center": assert abs(above - below) < 1e-6
+                if alignment == "top": assert above == 6
+                if alignment == "bottom": assert below == 6
+                assert inner[3] == child.height  # No vertical scaling in paint.
+        assert saved in sw.live_canvases and sw.builds == builds
+        styled.canvas.park()
+        checks.append("Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners")
         ui, commits = fixture.build(bpy.context)
         canvas = ui.canvas
         canvas.arrange(560)
@@ -150,8 +176,9 @@ def run():
         )
         for name in ("BUI_UL_bad", "BUI_UL_invalid_filter"):
             prior = tuple(canvas.controls)
+            bad = Layout(context=bpy.context)
             try:
-                ui.template_list(
+                bad.template_list(
                     name,
                     "bad",
                     bpy.context.scene,
@@ -159,10 +186,14 @@ def run():
                     bpy.context.scene,
                     "bui_list_active",
                 )
+                # Adjacent styles now apply before callbacks are measured.
+                bad.canvas.arrange(560)
             except (UnsupportedControl, ValueError):
                 pass
             else:
                 raise AssertionError("Invalid callback admitted")
+            finally:
+                bad.canvas.park()
             assert tuple(canvas.controls) == prior
         for kind in ("GRID", "COMPACT"):
             other = Layout(

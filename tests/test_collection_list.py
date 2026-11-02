@@ -10,6 +10,24 @@ def event(kind, value="PRESS", **kw):
 
 
 class Lists(unittest.TestCase):
+    def test_content_frame_has_symmetric_default_insets_and_configurable_alignment(self):
+        widget, _ = self.fixture(2)
+        r = (2, 2, 300, 40)
+        x, y, w, h = widget.row_content_rect(r)
+        self.assertEqual((x - r[0], r[0] + r[2] - x - w), (8, 8))
+        self.assertEqual(y - r[1], r[1] + r[3] - y - h)
+        widget.style_row_padding = (3, 10, 5, 12)
+        widget.style_row_align = "top"
+        self.assertEqual(widget.row_content_rect(r), (14, 5, 278, 20))
+        widget.style_row_align = "bottom"
+        self.assertEqual(widget.row_content_rect(r), (14, 17, 278, 20))
+        widget.style_row_padding = (10, 8, 10, 8)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.row_height, 44)
+        widget.style_row_padding = (2, 8, 2, 8)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.row_height, 28)
+
     def fixture(self, count=10000, **kw):
         state = [0]
         source = NS(

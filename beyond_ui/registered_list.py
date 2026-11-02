@@ -544,7 +544,7 @@ class RegisteredList(CollectionList):
                 # field. Compact hosts use a second line; no bindings are removed.
                 reflow_list_status(canvas)
             canvas.arrange(width)
-            if item is not None and canvas.height > self.row_height - 4 + 0.01:
+            if item is not None and canvas.height + self.row_padding[0] + self.row_padding[2] > 84.01:
                 raise UnsupportedControl("multiline/oversized UIList row")
             if item is None and canvas.height > 480:
                 raise UnsupportedControl("UIList filter taller than 480 logical units")
@@ -591,8 +591,15 @@ class RegisteredList(CollectionList):
         return self.type != "COMPACT" and self.state.get("show_filter", False)
 
     def dimensions(self, font_size, available_width, available_height=None):
+        self._dimension_args = (font_size, available_width, available_height)
+        measure_key = (font_size, available_width, self.row_padding, self.epoch,
+                       getattr(self, "style_row_height", None))
+        if measure_key != getattr(self, "_row_measure_key", None):
+            self._row_measure_key = measure_key
+            self._measured_row_height = 0
         self.row_height = max(
             28,
+            self._measured_row_height,
             min(
                 88,
                 float(
@@ -613,7 +620,7 @@ class RegisteredList(CollectionList):
         if self.filter_canvas is not None and self.filter_visible:
             self.height = self.viewport + 30 + self.filter_canvas.height
             return result[0], self.height * font_size / self.design_font_size
-        return result
+        return result[0], self.height * font_size / self.design_font_size
 
     def filters(self):
         return () if self.draw_filter else super().filters()
@@ -664,19 +671,20 @@ class RegisteredList(CollectionList):
         next_cache, created = {}, []
         try:
             for item, rect in self.visible():
+                content_width = self.row_content_rect(rect)[2]
                 key = (
                     item.identity,
                     item.index,
                     selected,
-                    round(rect[2], 6),
-                    self.row_height,
+                    round(content_width, 6),
+                    self.row_padding,
                     self.epoch,
                 )
                 entry = self.cache.get(key)
-                canvas = entry[0] if entry else self.child(item, rect[2])
+                canvas = entry[0] if entry else self.child(item, content_width)
                 if entry is None:
                     created.append(canvas)
-                next_cache[key] = (canvas, rect, item)
+                next_cache[key] = (canvas, self.row_content_rect(rect, canvas.height), item)
             if sum(len(entry[0].controls) for entry in next_cache.values()) > 4096:
                 raise ValueError("Visible UIList rows exceed 4096 controls")
             if self.draw_filter and self.filter_visible and self.filter_canvas is None:
@@ -699,6 +707,17 @@ class RegisteredList(CollectionList):
         self.cache = next_cache
         self.row_map = {entry[2].index: entry for entry in self.cache.values()}
         self.live_canvases = {entry[0] for entry in self.cache.values()}
+        # Grow only when visible authored content needs it; never compress text
+        # or controls into padding. The 88-unit bound also bounds repeat layout.
+        from math import ceil
+
+        required = min(88, ceil(max((entry[0].height for entry in self.cache.values()), default=0)
+                               + self.row_padding[0] + self.row_padding[2] + 4))
+        if required > self.row_height:
+            self.row_height = self._measured_row_height = required
+            super().dimensions(*self._dimension_args)
+            self.parent.invalidate()
+            self.prepare()
         if self.filter_canvas and not self.filter_visible:
             self.filter_canvas.cancel()
             if self.active_child is self.filter_canvas:
@@ -905,7 +924,7 @@ class RegisteredList(CollectionList):
             a, b, c, d = p._clip
             paint(
                 canvas,
-                p.map((rect[0], rect[1], rect[2], canvas.height)),
+                p.map(entry[1]),
                 (a, b, c - a, d - b),
                 font=p.font,
                 palette=p.palette,
