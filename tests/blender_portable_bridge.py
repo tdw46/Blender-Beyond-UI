@@ -31,6 +31,25 @@ assert getattr(context, "beyond_probe", None) is None
 assert lib.beyond_context_active() == 0
 items = menu_native.enum_items(context.object, "rotation_mode", context)
 assert items and any(item.identifier == "XYZ" for item in items), items
+choices = [("A", "Alpha", "First"), ("B", "Beta", "Second")]
+callbacks = []
+def dynamic_items(self, ctx):
+    callbacks.append(ctx is not None)
+    return choices
+class BUI_PG_compatibility_enum(bpy.types.PropertyGroup):
+    choice: bpy.props.EnumProperty(items=dynamic_items)
+bpy.utils.register_class(BUI_PG_compatibility_enum)
+bpy.types.Scene.bui_compatibility_enum = bpy.props.PointerProperty(type=BUI_PG_compatibility_enum)
+try:
+    group = context.scene.bui_compatibility_enum
+    assert [item.identifier for item in menu_native.enum_items(group, "choice", context)] == ["A", "B"]
+    choices[:] = [("C", "Gamma", "Changed")]
+    assert [item.identifier for item in menu_native.enum_items(group, "choice", context)] == ["C"]
+    assert all(callbacks) and len(callbacks) >= 2
+finally:
+    del bpy.types.Scene.bui_compatibility_enum
+    bpy.utils.unregister_class(BUI_PG_compatibility_enum)
+
 portable_actions.property_api(lib)
 from beyond_ui.bindings import rna_binding
 from beyond_ui.context_menu import Target

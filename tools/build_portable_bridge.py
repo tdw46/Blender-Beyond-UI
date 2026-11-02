@@ -191,7 +191,7 @@ def main():
     memory = (checkout / "intern/guardedalloc/MEM_guardedalloc.h").read_text()
     flags = {
         "BUI_FAMILY": family,
-        "BUI_DRIVER_OPERATOR": int(system == "Windows" and family < 51),
+        "BUI_DRIVER_OPERATOR": int(family < 51),
         "BUI_PYRNA_C": int(
             (checkout / "source/blender/python/intern/bpy_rna.h").exists()
         ),
@@ -253,6 +253,12 @@ def main():
     )
     # MSVC may inline this accessor and omit its public symbol. Compile the
     # unchanged member definition against the exact full Layout declaration.
+    if family < 51:
+        intern = (checkout / "source/blender/editors/interface/interface_intern.hh").read_text()
+        active_flag = re.search(r"UI_BUT_ACTIVE_OVERRIDE\s*=\s*(\(1 << \d+\))", intern)
+        if active_flag is None:raise ValueError("Unrecognized native active override flag")
+        with (work / "bui_screen_declarations.hh").open("a") as header:
+            header.write("constexpr int BUI_ACTIVE_OVERRIDE = " + active_flag[1] + ";\n")
     accessor = ""
     if system == "Windows" and family >= 51:
         layout_source = (checkout / "source/blender/editors/interface/interface_layout.cc").read_text()

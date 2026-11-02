@@ -22,6 +22,7 @@
 #include "GPU_state.hh"
 #include "BLF_api.hh"
 #include "RNA_access.hh"
+#include "RNA_path.hh"
 #include "RNA_types.hh"
 #include "DNA_screen_types.h"
 #include "DNA_windowmanager_types.h"
@@ -178,7 +179,7 @@ static bool driver_operator(bContext *context, ID *id, const char *path, int ind
   ReportList reports{}; wmOperator op{}; op.type = type; op.reports = &reports;
   bool success = false;
   if (button) {
-    UI_but_flag_enable(button, UI_BUT_ACTIVE_OVERRIDE);
+    UI_but_flag_enable(button, BUI_ACTIVE_OVERRIDE);
     success = (type->exec(copy, &op) & OPERATOR_FINISHED) != 0;
   }
   BKE_reports_clear(&reports); UI_block_free(copy, block); CTX_free(copy);
