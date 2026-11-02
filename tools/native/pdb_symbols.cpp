@@ -44,6 +44,21 @@ int wmain(int argc,wchar_t **argv) {
   }
   symbol->Release();
  }
+ IDiaEnumSymbols *functions=nullptr;
+ if(SUCCEEDED(global->findChildren(SymTagFunction,nullptr,nsNone,&functions))) {
+  while(SUCCEEDED(functions->Next(1,&symbol,&count))&&count) {
+   BSTR name=nullptr;DWORD rva=0;
+   if(SUCCEEDED(symbol->get_name(&name))&&name) {
+    std::string key=utf8(name);
+    if(key.find("GPU_framebuffer_blit")!=std::string::npos || key.find("ANIM_copy_driver")!=std::string::npos || key.find("ANIM_paste_driver")!=std::string::npos || key.find("Layout::context")!=std::string::npos) {
+     symbol->get_relativeVirtualAddress(&rva);std::cerr << "PRIVATE " << key << " RVA=" << rva << std::endl;
+    }
+    SysFreeString(name);
+   }
+   symbol->Release();
+  }
+  functions->Release();
+ }
  std::ofstream output(argv[6]);auto *old=std::cout.rdbuf(output.rdbuf());std::cout<<'{';bool first=true;
  for(auto &pair:found) { if(!first)std::cout<<',';first=false;quote(pair.first);std::cout<<':'<<pair.second; }
  std::cout<<'}';std::cout.rdbuf(old);
