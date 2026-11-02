@@ -47,13 +47,17 @@ def actions(lib):
         key: function(lib, "bui_" + name, restype, args)
         for key, (name, restype, args) in signatures.items()
     }
+
     # Keep the actual current override context for the isolated native-action
     # route used by older Windows builds. Existing callers pass a reports slot.
     def contextual(callback):
         def call(_reports, owner, path, index, flags):
             import bpy
+
             return callback(bpy.context.as_pointer(), owner, path, index, flags)
+
         return call
+
     result["copy"] = contextual(result["copy"])
     result["paste"] = contextual(result["paste"])
     free = function(lib, "bui_free", None, [p, i])

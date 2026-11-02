@@ -60,6 +60,19 @@ def package(root, *, system, machine, build, backend, executable):
         path = (root / name).resolve(strict=True)
         if not path.is_relative_to(root.resolve()) or digest(path) != expected:
             raise BridgeUnavailable("Native UI source fingerprint mismatch")
+    expected_adapters = {
+        "hosts/portable.py",
+        "hosts/portable_actions.py",
+        "hosts/bridge.py",
+        "hosts/menu_context.py",
+        "hosts/menu_native.py",
+    }
+    if set(manifest.get("adapters", {})) != expected_adapters:
+        raise BridgeUnavailable("Native UI Python adapter inventory mismatch")
+    for name, expected in manifest["adapters"].items():
+        path = (root.parent / name).resolve(strict=True)
+        if not path.is_relative_to(root.parent.resolve()) or digest(path) != expected:
+            raise BridgeUnavailable("Native UI Python adapter fingerprint mismatch")
     binary = (directory / manifest["library"]).resolve(strict=True)
     if binary.parent != directory or digest(binary) != manifest["binary_sha256"]:
         raise BridgeUnavailable("Native UI binary fingerprint mismatch")

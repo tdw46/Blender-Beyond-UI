@@ -166,7 +166,9 @@ def main():
     assert host["version"] == [major, minor, patch], host
     build = host["build"]
     if args.runtime_only:
-        (work/"build-result.json").write_text(json.dumps(dict(blender=str(blender),version=version,build_hash=build)))
+        (work / "build-result.json").write_text(
+            json.dumps(dict(blender=str(blender), version=version, build_hash=build))
+        )
         return
     out = args.destination.resolve() / key / build
     out.mkdir(parents=True, exist_ok=True)
@@ -258,15 +260,25 @@ def main():
     # MSVC may inline this accessor and omit its public symbol. Compile the
     # unchanged member definition against the exact full Layout declaration.
     if family < 51:
-        intern = (checkout / "source/blender/editors/interface/interface_intern.hh").read_text()
+        intern = (
+            checkout / "source/blender/editors/interface/interface_intern.hh"
+        ).read_text()
         active_flag = re.search(r"UI_BUT_ACTIVE_OVERRIDE\s*=\s*(\(1 << \d+\))", intern)
-        if active_flag is None:raise ValueError("Unrecognized native active override flag")
+        if active_flag is None:
+            raise ValueError("Unrecognized native active override flag")
         with (work / "bui_screen_declarations.hh").open("a") as header:
-            header.write("constexpr int BUI_ACTIVE_OVERRIDE = " + active_flag[1] + ";\n")
+            header.write(
+                "constexpr int BUI_ACTIVE_OVERRIDE = " + active_flag[1] + ";\n"
+            )
     accessor = ""
     if system == "Windows" and family >= 51:
-        layout_source = (checkout / "source/blender/editors/interface/interface_layout.cc").read_text()
-        found_accessor = re.search(r"const bContextStore \*Layout::context\(\) const\s*\{[^{}]+\}", layout_source)
+        layout_source = (
+            checkout / "source/blender/editors/interface/interface_layout.cc"
+        ).read_text()
+        found_accessor = re.search(
+            r"const bContextStore \*Layout::context\(\) const\s*\{[^{}]+\}",
+            layout_source,
+        )
         if found_accessor is None or "return context_;" not in found_accessor[0]:
             raise ValueError("Unrecognized Layout context accessor")
         accessor = "namespace blender::ui {\n" + found_accessor[0] + "\n}\n"
@@ -320,6 +332,16 @@ def main():
             else ["OPENGL"] + (["VULKAN"] if family >= 43 else [])
         ),
         sources={"bridge_portable.cpp": sha(source)},
+        adapters={
+            name: sha(ROOT / "beyond_ui" / name)
+            for name in (
+                "hosts/portable.py",
+                "hosts/portable_actions.py",
+                "hosts/bridge.py",
+                "hosts/menu_context.py",
+                "hosts/menu_native.py",
+            )
+        },
         executable_sha256=sha(blender),
         free_symbol=free_symbol,
         qualification="built-for-user-qa",
@@ -364,7 +386,9 @@ def main():
             and not name.startswith(("??", "?__", "?what@", "?_", "?terminate@"))
         }
         needed = {
-            name for name in needed if not name.split("@@", 1)[0].endswith("@std") and "__std_" not in name
+            name
+            for name in needed
+            if not name.split("@@", 1)[0].endswith("@std") and "__std_" not in name
         }
         requested = work / "requested.txt"
         requested.write_text("\n".join(sorted(needed | {free_symbol})))
