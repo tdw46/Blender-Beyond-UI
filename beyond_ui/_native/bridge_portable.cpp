@@ -24,6 +24,7 @@
 #include "RNA_access.hh"
 #include "RNA_types.hh"
 #include "bui_screen_declarations.hh"
+#include "bui_layout_methods.hh"
 
 #ifdef _WIN32
 # define EXPORT extern "C" __declspec(dllexport)
