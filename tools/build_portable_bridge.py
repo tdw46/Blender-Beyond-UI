@@ -277,6 +277,7 @@ def main():
             "editors/include",
             "windowmanager",
             "gpu",
+            "gpu/intern",
             "blenfont",
             "depsgraph",
         )

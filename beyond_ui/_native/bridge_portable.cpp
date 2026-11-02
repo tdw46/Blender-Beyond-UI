@@ -16,6 +16,9 @@
 #include "DNA_userdef_types.h"
 #include "DEG_depsgraph_build.hh"
 #include "GPU_framebuffer.hh"
+#if BUI_FAMILY <= 51
+# include "gpu_framebuffer_private.hh"
+#endif
 #include "GPU_viewport.hh"
 #include "GPU_texture.hh"
 #include "GPU_matrix.hh"
@@ -129,7 +132,21 @@ EXPORT int bvt_probe_copy_framebuffer(void *opaque) {
   auto *destination = GPU_framebuffer_active_get();
   auto *source = static_cast<decltype(destination)>(opaque);
   if (!enabled || !source || !destination || source == destination) return 0;
-  GPU_framebuffer_blit(source, 0, destination, 0, GPU_COLOR_BIT); return 1;
+#if BUI_FAMILY <= 51
+  // Exact-header equivalent of Blender's release-build GPU_framebuffer_blit.
+  // Some Windows builds inline the public wrapper; retain native backend virtual
+  // dispatch and restore the previously bound destination, including sRGB.
+# if BUI_FAMILY < 50
+  auto *read = blender::gpu::unwrap(source);
+  auto *write = blender::gpu::unwrap(destination);
+# else
+  auto *read = source; auto *write = destination;
+# endif
+  read->blit_to(GPU_COLOR_BIT, 0, write, 0, 0, 0); write->bind(true);
+#else
+  GPU_framebuffer_blit(source, 0, destination, 0, GPU_COLOR_BIT);
+#endif
+  return 1;
 }
 EXPORT int bvt_probe_draw_viewport(ARegion *region, int x, int y) {
   if (!enabled || !region) return 0;
