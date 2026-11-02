@@ -4,6 +4,7 @@
 #include <functional>
 #include <optional>
 #include <string>
+#include "MEM_guardedalloc.h"
 #include "UI_interface_c.hh"
 #if __has_include("UI_interface_layout.hh")
 # include "UI_interface_layout.hh"
@@ -39,6 +40,13 @@ using Layout = uiLayout;
 using Block = uiBlock;
 using Button = uiBut;
 #endif
+#if BUI_FAMILY == 50
+# define BUI_EXTRA ButType::Extra
+# define BUI_NUM ButType::Num
+#else
+# define BUI_EXTRA UI_BTYPE_EXTRA
+# define BUI_NUM UI_BTYPE_NUM
+#endif
 struct _object;
 #if BUI_FAMILY >= 51
 namespace blender { const PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *); }
@@ -60,7 +68,8 @@ EXPORT void bui_free_slot(void *slot) { free_slot = slot; }
 EXPORT void bui_free(void *pointer, int kind) {
   if (!pointer || !free_slot) return;
 #if BUI_FREE_TYPED
-  (*static_cast<void (**)(void *, int)>(free_slot))(pointer, kind);
+  using Release = decltype(mem_guarded::internal::mem_freeN_ex);
+  (*static_cast<Release *>(free_slot))(pointer, static_cast<mem_guarded::internal::DestructorType>(kind));
 #else
   (*static_cast<void (**)(void *)>(free_slot))(pointer);
 #endif
@@ -86,9 +95,9 @@ EXPORT int bvt_probe_reserve(Layout *layout, int width, int height, uint64_t tok
   auto *block = uiLayoutGetBlock(layout); UI_block_layout_set_current(block, layout);
 # endif
 # if BUI_OPTIONAL_LABELS
-  uiDefBut(block, UI_BTYPE_EXTRA, 0, "", 0, 0, short(width), short(height), nullptr, 0, 0, std::nullopt);
+  uiDefBut(block, BUI_EXTRA, 0, "", 0, 0, short(width), short(height), nullptr, 0, 0, std::nullopt);
 # else
-  uiDefBut(block, UI_BTYPE_EXTRA, 0, "", 0, 0, short(width), short(height), nullptr, 0, 0, nullptr);
+  uiDefBut(block, BUI_EXTRA, 0, "", 0, 0, short(width), short(height), nullptr, 0, 0, nullptr);
 # endif
 # if BUI_FUNCTION_DRAW
   UI_but_func_drawextra_set(block, [token](const bContext *, rcti *rect) { present(token, rect); });
@@ -229,9 +238,9 @@ EXPORT void *beyond_context_property_enter(bContext *context, PointerRNA *owner,
 #if BUI_FAMILY >= 51
     auto *button=ui::uiDefButR(scope->block,ui::ButtonType::Num,std::nullopt,0,0,1,1,owner,name,-1,0,1,std::nullopt);
 #elif BUI_OPTIONAL_LABELS
-    auto *button=uiDefButR(scope->block,UI_BTYPE_NUM,0,std::nullopt,0,0,1,1,owner,name,-1,0,1,std::nullopt);
+    auto *button=uiDefButR(scope->block,BUI_NUM,0,std::nullopt,0,0,1,1,owner,name,-1,0,1,std::nullopt);
 #else
-    auto *button=uiDefButR(scope->block,UI_BTYPE_NUM,0,nullptr,0,0,1,1,owner,name,-1,0,1,nullptr);
+    auto *button=uiDefButR(scope->block,BUI_NUM,0,nullptr,0,0,1,1,owner,name,-1,0,1,nullptr);
 #endif
     if (!button) { free_block(scope); delete scope; return nullptr; }
 #if BUI_FAMILY >= 50

@@ -102,9 +102,11 @@ def main():
         if len(matches)!=1:raise ValueError('Cannot extract exact declaration: '+name)
         declarations.append(matches[0])
     threads=(checkout/'source/blender/blenlib/BLI_threads.h').read_text()
-    declaration=re.search(r'^bool BLI_thread_is_main\(void\);|^bool BLI_thread_is_main\(\);',threads,re.M)
+    declaration=re.search(r'^int BLI_thread_is_main\((?:void)?\);',threads,re.M)
     if declaration is None:raise ValueError('Missing main-thread declaration')
-    declarations.append(declaration[0])
+    thread_decl=declaration[0]
+    if 'extern "C"' in threads:thread_decl='extern "C" '+thread_decl
+    declarations.append(thread_decl)
     text='\n'.join(declarations)
     if family>=51:text='namespace blender {\n'+text+'\n}'
     (work/'bui_screen_declarations.hh').write_text('// SPDX-License-Identifier: GPL-2.0-or-later\n// Unchanged declarations from the exact Blender source archive.\n'+text+'\n')
