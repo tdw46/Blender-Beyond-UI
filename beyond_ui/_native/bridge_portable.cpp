@@ -23,6 +23,9 @@
 #include "BLF_api.hh"
 #include "RNA_access.hh"
 #include "RNA_types.hh"
+#include "DNA_screen_types.h"
+#include "DNA_windowmanager_types.h"
+#include "BKE_report.hh"
 #include "bui_screen_declarations.hh"
 #include "bui_layout_methods.hh"
 
@@ -152,8 +155,50 @@ EXPORT void bvt_probe_window_remove(wmWindow *window, void *handle) {
 // Context actions: all object layouts below come from this build's own headers.
 EXPORT void bui_driver_new(ID *id, const char *path, const char *name) { ANIM_copy_as_driver(id, path, name); }
 EXPORT bool bui_driver_available() { return ANIM_driver_can_paste(); }
-EXPORT bool bui_driver_copy(ReportList *r, ID *id, const char *path, int index, short flags) { return ANIM_copy_driver(r,id,path,index,flags); }
-EXPORT bool bui_driver_paste(ReportList *r, ID *id, const char *path, int index, short flags) { return ANIM_paste_driver(r,id,path,index,flags); }
+#if BUI_DRIVER_OPERATOR
+// Some stock Windows builds inline ANIM_copy/paste_driver completely. Execute
+// their original registered callbacks against an isolated native metadata button.
+// No visible button, live region, event handler or global context is replaced.
+static bool driver_operator(bContext *context, ID *id, const char *path, int index, bool paste) {
+  if (!context || !id || !path || !BLI_thread_is_main()) return false;
+  PointerRNA root = RNA_id_pointer_create(id), owner;
+  PropertyRNA *prop = nullptr;
+  if (!RNA_path_resolve_property(&root, path, &owner, &prop)) return false;
+  auto *type = WM_operatortype_find(paste ? "ANIM_OT_paste_driver_button" : "ANIM_OT_copy_driver_button", true);
+  if (!type || !type->exec) return false;
+  auto *copy = CTX_copy(context);
+  ARegion region{};
+  CTX_wm_region_popup_set(copy, nullptr); CTX_wm_region_set(copy, &region);
+# if BUI_ENUM_EMBOSS
+  auto *block = UI_block_begin(copy, &region, "Beyond UI driver action", blender::ui::EmbossType::None);
+# else
+  auto *block = UI_block_begin(copy, &region, "Beyond UI driver action", UI_EMBOSS_NONE);
+# endif
+  auto *button = uiDefButR_prop(block, BUI_NUM, 0, BUI_LABEL, 0, 0, 1, 1, &owner, prop, index, 0, 1, BUI_TIP);
+  ReportList reports{}; wmOperator op{}; op.type = type; op.reports = &reports;
+  bool success = false;
+  if (button) {
+    UI_but_flag_enable(button, UI_BUT_ACTIVE_OVERRIDE);
+    success = (type->exec(copy, &op) & OPERATOR_FINISHED) != 0;
+  }
+  BKE_reports_clear(&reports); UI_block_free(copy, block); CTX_free(copy);
+  return success;
+}
+#endif
+EXPORT bool bui_driver_copy(bContext *context, ID *id, const char *path, int index, short flags) {
+#if BUI_DRIVER_OPERATOR
+  return driver_operator(context,id,path,index,false);
+#else
+  return ANIM_copy_driver(nullptr,id,path,index,flags);
+#endif
+}
+EXPORT bool bui_driver_paste(bContext *context, ID *id, const char *path, int index, short flags) {
+#if BUI_DRIVER_OPERATOR
+  return driver_operator(context,id,path,index,true);
+#else
+  return ANIM_paste_driver(nullptr,id,path,index,flags);
+#endif
+}
 EXPORT void bui_relations(Main *main) { DEG_relations_tag_update(main); }
 EXPORT bUserMenu *bui_favorites(bContext *context) { return ED_screen_user_menu_ensure(context); }
 EXPORT void *bui_favorite_items(bUserMenu *menu) { return menu ? &menu->items : nullptr; }

@@ -191,6 +191,7 @@ def main():
     memory = (checkout / "intern/guardedalloc/MEM_guardedalloc.h").read_text()
     flags = {
         "BUI_FAMILY": family,
+        "BUI_DRIVER_OPERATOR": int(system == "Windows" and family < 51),
         "BUI_PYRNA_C": int(
             (checkout / "source/blender/python/intern/bpy_rna.h").exists()
         ),
