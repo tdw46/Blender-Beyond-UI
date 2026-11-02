@@ -176,13 +176,13 @@ static bool driver_operator(bContext *context, ID *id, const char *path, int ind
   auto *block = UI_block_begin(copy, &region, "Beyond UI driver action", UI_EMBOSS_NONE);
 # endif
   auto *button = uiDefButR_prop(block, BUI_NUM, 0, BUI_LABEL, 0, 0, 1, 1, &owner, prop, index, 0, 1, BUI_TIP);
-  ReportList reports{}; wmOperator op{}; op.type = type; op.reports = &reports;
+  ReportList reports{}; BKE_reports_init(&reports, 0); wmOperator op{}; op.type = type; op.reports = &reports;
   bool success = false;
   if (button) {
     UI_but_flag_enable(button, BUI_ACTIVE_OVERRIDE);
     success = (type->exec(copy, &op) & OPERATOR_FINISHED) != 0;
   }
-  BKE_reports_clear(&reports); UI_block_free(copy, block); CTX_free(copy);
+  BKE_reports_free(&reports); UI_block_free(copy, block); CTX_free(copy);
   return success;
 }
 #endif
