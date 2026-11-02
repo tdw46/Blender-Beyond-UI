@@ -100,6 +100,7 @@ class StyleSheet:
         variants=None,
         operators=None,
         motion=None,
+        text_effects=None,
         wide_numeric_motion_scale=0.15,
     ):
         self._owners = WeakSet()
@@ -123,6 +124,7 @@ class StyleSheet:
                 variants=variants or {},
                 operators=operators or {},
                 motion=motion or {},
+                text_effects=text_effects or {},
                 wide_numeric_motion_scale=wide_numeric_motion_scale,
             )
         )
@@ -131,6 +133,9 @@ class StyleSheet:
 
     @staticmethod
     def _validate(data):
+        from .text_effects import normalize
+
+        normalize(data["text_effects"])
         if not isinstance(data["name"], str):
             raise ValueError("Style name must be text")
         if "" in data["geometry_variants"]:
@@ -292,6 +297,7 @@ class StyleSheet:
         from .gpu.skin import themed_roles
 
         p = dict(base)
+        p["text_effects"] = MappingProxyType({**base.get("text_effects", {}), **self._data["text_effects"]})
         overrides = {key: color(value) for key, value in self._data["colors"].items()}
         p.update(overrides)
         if "accent" in overrides:

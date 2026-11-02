@@ -236,7 +236,7 @@ def paint(
                 b + (d - measure(active_font, size, "H")[1]) / 2,
                 0,
             )
-            blf.draw(active_font, str(value))
+            typography.draw_text(active_font, value, ink, palette.get("text_effects"), scale)
         finally:
             blf.disable(active_font, blf.CLIPPING)
 

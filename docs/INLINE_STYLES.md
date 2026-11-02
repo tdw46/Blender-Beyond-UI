@@ -223,3 +223,25 @@ consumer's `draw_item()` is additional to these shared row insets.
 layout.template_list("MY_UL_items", "", owner, "items", owner, "active_index")
 bui.style(layout, list_row_padding=(4, 10), list_row_align="center")
 ```
+
+### Subtle text outline and shadow
+
+All custom panel, widget and menu lettering now has a light black outline (28%
+opacity) and a small native-font drop shadow (20%, one logical pixel downward).
+The foreground glyph is drawn once; fonts and glyph geometry remain retained.
+These effects do not change text measurement, layout, glass or motion.
+
+```python
+# Per item, after any ordinary Blender layout call:
+bui.style(layout, text_effects={"outline_opacity": 0.2, "shadow_opacity": 0.15})
+# Or disable both on an item/group:
+bui.style(layout, text_effects={"outline": False, "shadow": False})
+# Add-on-wide, including menus and compound widgets:
+theme = bui.StyleSheet(text_effects={"shadow_offset": (0, -1), "shadow_blur": 3})
+```
+
+`text_effects` also accepts `outline` and `shadow` booleans, opacity values from
+0–1, a two-value logical `shadow_offset` from −8–8, and native blur levels 0/3/5.
+Partial settings inherit from the parent palette; updates use the existing
+stylesheet invalidation path. Missing native font-effect capabilities explicitly
+retain plain lettering. No scene settings or Blender preferences are modified.

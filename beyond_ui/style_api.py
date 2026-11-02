@@ -33,6 +33,7 @@ _VISUAL = {
     "radius",
     "font_size",
     "font_weight",
+    "text_effects",
     "text_align",
     "icon",
     "trailing_icon",
@@ -84,7 +85,7 @@ def normalize(*presets, **options):
         if not isinstance(preset, Mapping):
             raise TypeError("Style presets must be mappings")
         for key, value in preset.items():
-            if key in {"colors", "motion"} and key in result:
+            if key in {"colors", "motion", "text_effects"} and key in result:
                 result[key] = {**result[key], **value}
             else:
                 result[key] = deepcopy(value)
@@ -130,6 +131,9 @@ def normalize(*presets, **options):
             _number(key, value, 0, 64)
         elif key == "flex_grow":
             _number(key, value, 0.01, 100)
+        elif key == "text_effects":
+            from .text_effects import normalize as text_effects
+            result[key] = text_effects(value)
         elif key == "font_size":
             _number(key, value, 8, 32)
         elif key == "value_width":
@@ -271,9 +275,10 @@ def apply_control(control, values, prepared=None):
     }.items():
         if key in merged:
             colors.update({role: merged[key] for role in roles})
-    if colors or "opacity" in merged:
+    if colors or "opacity" in merged or "text_effects" in merged:
         control.options["_inline_sheet"] = StyleSheet(
-            colors=colors, opacity=merged.get("opacity", 1)
+            colors=colors, opacity=merged.get("opacity", 1),
+            text_effects=merged.get("text_effects", {})
         )
     if "motion" in merged:
         for key, value in merged["motion"].items():

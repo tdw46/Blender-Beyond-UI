@@ -7,9 +7,10 @@ owns GPU state and lifetime, clipping, transforms, input and retained backdrop.
 from ..menu_metrics import Metrics as menu_metrics
 
 
-def text_run(font, value, size, ink, position, clips, bold=0.0):
+def text_run(font, value, size, ink, position, clips, bold=0.0, effects=None, scale=1.0):
     """Draw in the host's restored viewport, after clipped geometry submission."""
     import blf
+    from .typography import draw_text
 
     blf.size(font, size)
     blf.color(font, *ink)
@@ -17,10 +18,10 @@ def text_run(font, value, size, ink, position, clips, bold=0.0):
     for clip in clips:
         blf.clipping(font, *clip)
         blf.position(font, *position, 0)
-        blf.draw(font, value)
+        draw_text(font, value, ink, effects, scale)
         if bold:
             blf.position(font, position[0] + bold, position[1], 0)
-            blf.draw(font, value)
+            draw_text(font, value, ink, effects, scale)
     blf.disable(font, blf.CLIPPING)
 
 
@@ -51,6 +52,7 @@ def enum_option(
             ink,
             (left, y + (h - measure("H", size)[1]) / 2),
             text_clip(bounds) if text_clip else (bounds,),
+            0.0, palette.get("text_effects"), scale,
         )
         if enqueue is not None:
             enqueue(args)
@@ -260,6 +262,7 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                             y + (h - measure(font, 11 * scale, "H")[1]) / 2,
                         ),
                         text_clip((x, y, x + w, y + h)),
+                        effects=palette.get("text_effects"), scale=scale,
                     )
             for index, rect, row in menu.visible_rows(page):
                 target = mapped(rect)
@@ -428,6 +431,7 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     palette["text"],
                     (x + 7 * scale, y + (h - measure(font, 11 * scale, "H")[1]) / 2),
                     (bounds,),
+                    effects=palette.get("text_effects"), scale=scale,
                 )
 
 
@@ -490,6 +494,7 @@ def field_value(
         ink,
         (origin, y + (h - measure(font, size, "H")[1]) / 2),
         clips((left, y, right, y + h)),
+        effects=palette.get("text_effects"), scale=scale,
     )
 
 
@@ -557,4 +562,5 @@ def search_field(
         palette["text"] if value else palette["muted"],
         (origin, y + (h - measure(font, size, "H")[1]) / 2),
         clips((left, y, right, y + h)),
+        effects=palette.get("text_effects"), scale=scale,
     )
