@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-02 \u2014 Windows/NVIDIA repairs and hardware acceptance",
+  "reviewed": "2026-11-02 \u2014 installed Windows build accepted; primary-branch publication",
   "remaining_turns": [
     0,
     0
@@ -51,8 +51,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "417 unit tests; repaired official Windows MSI/ZIP executable signing admission, popup-confirm property recording, headless native-fallback crash and reserved GLSL progress-ring identifier. Both NVIDIA backends passed renderer/glass, six CamKeys hosts, panels/lists/curves, popovers, exact-owner actions, search/keyboard, themes, motion and live Uraraka shape/list updates. Idle BUI draw/paint counts are zero over 30 seconds; retained owners stable and released after unregister. All eight Darwin native packages unchanged except shared adapter fingerprint. No new Mac hardware run.",
-  "estimate_review": "The planned local Windows/NVIDIA implementation and measured QA are complete. No additional local turn is forecast. Mac hardware verification and physical-device/long-soak coverage need separate evidence, not a claim of completion.",
+  "latest_progress": "417 unit tests; repaired official Windows MSI/ZIP executable signing admission, popup-confirm property recording, headless native-fallback crash and reserved GLSL progress-ring identifier. Both NVIDIA backends passed renderer/glass, six CamKeys hosts, panels/lists/curves, popovers, exact-owner actions, search/keyboard, themes, motion and live Uraraka shape/list updates. Idle BUI draw/paint counts are zero over 30 seconds; retained owners stable and released after unregister. All eight Darwin native packages unchanged except shared adapter fingerprint. No new Mac hardware run. Tyler installed the repaired CamKeys build, reported that everything looks good, and requested committing and merging to the primary branches. This is user visual acceptance of the installed Windows build; Mac hardware remains unverified.",
+  "estimate_review": "Implementation and local Windows QA are complete. User visual review accepted the installed build. This turn publishes the existing tested changes after repository CI; no new implementation or hardware run is required.",
   "time_summary": "Local Windows repair/QA work complete. No forecast for unavailable Mac hardware or future physical-device/long-soak qualification.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -428,7 +428,7 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Windows/NVIDIA 5.2.2 repair qualification",
+  "checkpoint": "User-accepted Windows/NVIDIA build; primary-branch publication",
   "latest_review": "../popup-window-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-02",
