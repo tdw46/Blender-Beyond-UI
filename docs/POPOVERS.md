@@ -109,3 +109,66 @@ were unavailable; immutable official 4.2.0 and installed-build source revisions
 are recorded in the [source audit](design/qa/panel-popovers-v1/source-audit.json).
 Installed runtimes are tested in disposable profiles. No unrelated live Blender
 scene or preferences are saved.
+
+## CamKeys popup lifetime correction — 2026-11-02
+
+The shared routed-popup driver used to treat an absent `context_menu` as a closed
+surface, even when a panel widget remained in `canvas.overlay`. Flatten Falloff
+therefore opened successfully and immediately vanished on the next event. The
+driver now finishes only after both menu and panel overlay are gone. No timer,
+new API dependency, glass, motion or geometry change is involved.
+
+[Audit results](design/qa/popover-audit-v1/report.json) record 11 actual Uraraka
+cases on Blender 5.2.2: all six registered CamKeys popover families, the Flatten
+operator route, Appearance and Add Billboard Group dialogs, shape-mode Dolly
+Expressions and angle-owned falloff. Each custom surface painted with glass,
+survived real mouse movement and dismissed with Escape. Separate embedded tests
+verified property edits, nested dismissal and exact-owner right-click menus;
+an injected custom-build failure opened the recorded native recovery path.
+397 unit tests passed. Owned test launches recorded no focus activation.
+
+The updated handler was patched in place in live Uraraka without unregistering
+RNA or saving the dirty scene; Flatten Falloff stayed open with 27 controls and
+an active glass backdrop. The consumer's chosen color mode was preserved.
+These are execution checks, not new visual-reference or all-data-state approval.
+
+## In-place window composition and viewport glass — 2026-11-02
+
+The preceding lifetime audit did not establish correct placement or backdrop
+content. User QA exposed two presentation defects: floating surfaces were drawn
+in `WINDOW/POST_PIXEL` before the sidebar, then constrained to its left; their
+backdrop came from that early framebuffer. A second child-canvas background coat
+also obscured the glass in panel popovers.
+
+`hosts/window_overlay.py` now multiplexes the already admitted native bridge's
+window callback across vendored libraries. This stage runs after area/sidebar
+composition and before native floating menus. Bounds include the sidebar;
+event ownership remains in the original invoking region. Painting uses actual
+framebuffer pixels (not Window RNA points on Retina), explicit projection and
+scissor scope. Teardown removes only the owned callback and scene invalidation
+handler. Missing native capability still raises the existing explicit fallback.
+
+Floating 3D View surfaces now sample the completed viewport's color/overlay
+textures through the same retained Gaussian/lens pipeline as embedded panels.
+Scene/view changes invalidate the source; popup hover animation reuses it.
+Properties editors and non-overlapping layouts use the completed composed
+framebuffer because no viewport exists behind those regions. PanelPopover owns
+one glass sheet; its child painter no longer adds a second background coat.
+
+[Actual captures and results](design/qa/popup-window-v1/index.html): 400 unit tests;
+11 Uraraka popup cases on each of Blender 5.1.2/5.2.2; sidebar-inclusive placement,
+real viewport source, cache reuse on hover, input survival, Escape and callback
+cleanup. Direct-dialog/menu/pie/search, exact-owner right-click, nested dismissal,
+RNA editing, undo and registration regressions passed. The live installed CamKeys
+vendor was updated and reloaded without saving Uraraka. All these GPU tests ran
+on macOS Metal; no new 4.2, Vulkan or OpenGL runtime qualification is claimed.
+
+The exact-build [Blender compositor source](https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/windowmanager/intern/wm_draw.cc#L1094-L1122)
+places window callbacks between overlapping regions and floating native menus.
+Exact 4.2/5.1/5.2 API/Manual fetches were attempted but unavailable in this audit;
+installed runtime execution supplies the 5.1/5.2 evidence. Native bridge source,
+binary fingerprints, admission list and minimum supported version are unchanged.
+
+Capture note: `screen.screenshot` recomposites region buffers and omits custom
+window callbacks. The new fixture reads the actual framebuffer once after the
+owned popup paints; this readback exists only in the test, never production.

@@ -1,0 +1,54 @@
+{
+  "runtime": 481635319888,
+  "errors": {},
+  "fallbacks": {},
+  "dirty": true,
+  "frame": 1,
+  "object": "Cube",
+  "hosts": {
+    "CAMKEYS_PT_auto_fov": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": [
+        {
+          "visible": true,
+          "deferred": false,
+          "resume": false,
+          "height": 806.45
+        }
+      ]
+    },
+    "CAMKEYS_PT_baking": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": []
+    },
+    "CAMKEYS_PT_camkeys_linking": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": [
+        {
+          "visible": false,
+          "deferred": true,
+          "resume": false,
+          "height": 566
+        }
+      ]
+    },
+    "CAMKEYS_PT_camkeys_main": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": []
+    },
+    "CAMKEYS_PT_camprops": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": []
+    },
+    "CAMKEYS_PT_lattice_auto_fov_modifier": {
+      "resume_timer": false,
+      "pending": 0,
+      "records": []
+    }
+  }
+}

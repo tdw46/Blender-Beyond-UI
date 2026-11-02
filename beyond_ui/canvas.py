@@ -19,6 +19,19 @@ class Theme:
     radius: float = 8.0
     font_size: float = 11.0
     palette: str = "BLENDER"
+    icon_size: float = 14.0
+    field_height: float = 26.0
+    button_height: float = 20.0
+    button_padding_x: float = 14.0
+    button_padding_y: float = 6.0
+    icon_button_size: float = 24.0
+    list_tool_size: float = 22.0
+    label_band: float = 26.0
+    list_row_height: float = 40.0
+    stylesheet: object = None
+    heading_height: float = 24.0
+    box_padding: float | None = None
+    separator_height: float = 8.0
 
     def __post_init__(self):
         if self.palette not in {"BLENDER", "REFERENCE"}:
@@ -66,7 +79,7 @@ class Group:
 
     def _sync_size_policy(self):
         registry = self.canvas._sized_groups
-        if any(
+        if "_insets" in self.options or self.options.get("_inline_geometry") or any(
             self.options.get(name, 0)
             for name in ("scale_x", "scale_y", "ui_units_x", "ui_units_y")
         ):
@@ -144,6 +157,20 @@ class Group:
         control.motion.toggle = kind == "toggle" and not options.get("bool_button")
         self.canvas._bind_motion(control.motion)
         self.canvas._motion_owners[control.motion] = control
+        ancestors, current = [], self
+        while current is not None:
+            ancestors.append(current)
+            current = current.parent
+        defaults = {}
+        for ancestor in reversed(ancestors):
+            if ancestor.options.get("_style_defaults"):
+                from .style_api import normalize
+
+                defaults = normalize(defaults, ancestor.options["_style_defaults"])
+        if defaults:
+            from .style_api import apply_control
+
+            apply_control(control, defaults)
         self.canvas.controls[key] = control
         self.children.append(control)
         self.canvas.invalidate()
@@ -220,6 +247,10 @@ class Canvas(Group):
         self._motion_focus = None
         self.theme = theme or Theme()
         self.controls = {}
+        from .value_feedback import ValueFeedback
+        self.value_feedback = ValueFeedback(self)
+        if self.theme.stylesheet:
+            self.value_feedback.configure(self.theme.stylesheet._data.get("value_feedback", {}))
         self._sized_groups = WeakSet()
         self._composites = {}
         self._dirty = True
@@ -344,12 +375,22 @@ class Canvas(Group):
             child_active = widget.advance(local_clip) or child_active
         if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
             child_active = self.overlay["widget"].advance() or child_active
-        return bool(self._moving) or child_active or temporal
+        feedback_active = self.value_feedback.advance(clip)
+        return bool(self._moving) or child_active or temporal or feedback_active
 
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
         clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
-        w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
+        previous = self.overlay
+        # Nested list guards require an attached owner during initial layout.
+        # Publish ownership transactionally before dimensions invokes callbacks.
+        self.overlay = {"widget": widget, "owner": owner, "clip": tuple(clip),
+                        "rect": tuple(clip)}
+        try:
+            w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
+        except Exception:
+            self.overlay = previous
+            raise
         widget.glass_blur = 0.7
         rect = (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h)
         if owner is not None and hasattr(widget, "anchor"):
@@ -384,6 +425,8 @@ class Canvas(Group):
             model.refresh_poll(context)
             if not control.enabled:
                 return False
+            if control.options.get("popover_author_error"):
+                return model.native_fallback(context, control.options["popover_author_error"])
             widget = model.build(self, control, context)
             self.cancel()
             self.open_widget(widget, control, clip)
@@ -400,7 +443,7 @@ class Canvas(Group):
                 else:
                     widget.cancel()
             self.menu_error = str(error)
-            return False
+            return model.native_fallback(context, error)
 
     def notify_changed(self, key):
         """Host revision hook, including read-only indicators; never polls RNA."""
@@ -440,6 +483,7 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        self.value_feedback.prune()
         self._button_press = None
         if hasattr((self.overlay or {}).get("widget"), "canvas"):
             self.cancel()
@@ -496,6 +540,30 @@ class Canvas(Group):
         self._width = width
         self._scale_numeric_motion()
         self._dirty = False
+        self._style_cards = []
+        self._style_surfaces = []
+        from .style_api import surface_rect
+
+        def surfaces(group):
+            if group.options.get("display") == "none":
+                return
+            if group.options.get("surface", "none") != "none":
+                self._style_surfaces.append((surface_rect(group), group.options))
+            for child in group.children:
+                if isinstance(child, Group):
+                    surfaces(child)
+
+        surfaces(self)
+        if self.theme.stylesheet is not None and self.theme.stylesheet.cards:
+
+            def cards(group, depth=0):
+                for child in group.children:
+                    if isinstance(child, Group):
+                        if child.kind == "box" and depth == 0:
+                            self._style_cards.append(child.rect)
+                        cards(child, depth + (child.kind == "box"))
+
+            cards(self)
         self.layout_count += 1
         return self.height
 
@@ -506,7 +574,7 @@ class Canvas(Group):
         controls = self._composites if composites else self.controls
         for control in controls.values():
             a, b, c, d = control.rect
-            if a < x + w and a + c > x and b < y + h and b + d > y:
+            if c > 0 and d > 0 and a < x + w and a + c > x and b < y + h and b + d > y:
                 yield control
 
     def hit(self, x, y, clip, *, include_disabled=False):
@@ -526,11 +594,14 @@ class Canvas(Group):
         return None
 
     def park(self):
+        self.value_feedback.clear()
         self.visible = False
         self.cancel()
         self.hover = None
 
     def cancel(self):
+        from .tooltips import hide
+        hide(self)
         self._button_press = None
         self.close_context()
         self.context_focus = None
@@ -606,6 +677,7 @@ class Canvas(Group):
     def open_enum_menu(self, control, clip, context):
         """Open an owned enum through the same bounded glass menu as context actions."""
         from .context_menu import Entry, Menu, Target
+        from .tooltips import property_description
 
         if not control.enabled or not control.binding.valid():
             return False
@@ -653,6 +725,9 @@ class Canvas(Group):
                         ),
                         checked=field.selected(item.identifier, before),
                         tip=item.description,
+                        tooltip=(lambda ctx, item=item: property_description(
+                            control.binding.context, ctx, item.description))
+                        if getattr(control.binding, 'context', None) else None,
                         divider=divider,
                     )
                 )
@@ -737,19 +812,24 @@ class Canvas(Group):
                 ),
                 rows,
                 (
-                    anchor
-                    or (
-                        control.rect[0] + control.rect[2] / 2,
-                        control.rect[1] + control.rect[3],
+                    (
+                        anchor
+                        or (
+                            control.rect[0] + control.rect[2] / 2,
+                            control.rect[1] + control.rect[3],
+                        )
                     )
-                )
-                if menu_type is PieMenu
-                else (control.rect[0], control.rect[1] + control.rect[3]),
+                    if menu_type is PieMenu
+                    else (control.rect[0], control.rect[1] + control.rect[3])
+                ),
                 clip,
                 context=context,
-                row_limit=4096
-                if control.options.get("menu_model") or control.options.get("hold_menu")
-                else len(rows),
+                row_limit=(
+                    4096
+                    if control.options.get("menu_model")
+                    or control.options.get("hold_menu")
+                    else len(rows)
+                ),
                 search_threshold=self.menu_search_threshold,
                 visible_refresh=bool(
                     control.options.get("menu_model")
@@ -779,7 +859,8 @@ class Canvas(Group):
             return True
         except Exception as error:
             self.menu_error = str(error)
-            return False
+            fallback = getattr(model, "native_fallback", None)
+            return fallback(context, error) if fallback else False
 
     def open_pie(
         self,
@@ -936,11 +1017,11 @@ class Canvas(Group):
                     control.key,
                     (control.kind,),
                     binding,
-                    source.valid
-                    if isinstance(source, Property)
-                    else binding.valid
-                    if binding
-                    else lambda: True,
+                    (
+                        source.valid
+                        if isinstance(source, Property)
+                        else binding.valid if binding else lambda: True
+                    ),
                     payload=control,
                 )
             valid = target.valid
@@ -966,6 +1047,14 @@ class Canvas(Group):
             from itertools import islice
 
             rows = list(islice(provider(target, context), Menu.limit))
+            # An extension's additional actions must not erase the exact bound
+            # property's native actions (paths, animation, drivers, developer UI).
+            if (provider is not default_entries and target.binding is not None
+                    and getattr(target.binding, 'context', None) is not None
+                    and not callable(target.payload)):
+                keys = {row.key for row in rows}
+                rows = [row for row in default_entries(target, context)
+                        if row.key not in keys] + rows
             if self.shortcut_registry is not None:
                 from .context_custom import CustomProperty
                 from .context_shortcuts import numeric_property_entry
@@ -1013,10 +1102,12 @@ class Canvas(Group):
                 context=context,
                 measure=measure,
                 scope=scope,
-                row_limit=4096
-                if control.options.get("operator_enum")
-                or control.options.get("menu_model")
-                else Menu.limit,
+                row_limit=(
+                    4096
+                    if control.options.get("operator_enum")
+                    or control.options.get("menu_model")
+                    else Menu.limit
+                ),
                 search_threshold=self.menu_search_threshold,
                 on_error=lambda error: setattr(self, "menu_error", str(error)),
                 on_tip=self._tooltip_wake,
@@ -1050,6 +1141,8 @@ class Canvas(Group):
     def event(
         self, event, x, y, clip, *, clipboard=None, context=None, menu_measure=None
     ):
+        from .tooltips import hover
+        hover(self, event, x, y, clip, context, menu_measure)
         try:
             return self._dispatch_event(
                 event,
@@ -1551,6 +1644,14 @@ class Canvas(Group):
                 control.action()
         elif control.kind in {"pointer", "search"}:
             try:
+                if control.kind == "search":
+                    from .search import clear_rect, field_rect
+                    from .context_menu import inside
+                    model = control.options["search_field"]
+                    if model.can_clear() and inside(clear_rect(field_rect(control)), x, y):
+                        model.clear()
+                        control.motion.pulse("body", 0.12)
+                        return True
                 picker = (
                     control.options["search_field"].open()
                     if control.kind == "search"
@@ -1606,7 +1707,9 @@ class Canvas(Group):
                         control.rect,
                         bool(control.label),
                         stacked=control.options.get("_slider_stacked"),
+                        label_width=control.options.get("_slider_label_width"),
                         label_band=control.options.get("_label_band", 24),
+                        value_width=control.options.get("value_width", 53),
                     )
                     lo, hi = (
                         control.options.get("min", 0.0),

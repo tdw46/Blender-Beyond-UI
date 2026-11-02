@@ -32,6 +32,18 @@ class PopoverContracts(unittest.TestCase):
         parent.open_widget(widget, owner, (0, 0, 320, 150))
         return parent, widget, state
 
+    def test_trackpad_scroll_follows_native_popup_without_relayout(self):
+        parent, widget, state = self.fixture()
+        count = widget.canvas.layout_count
+        for inverted in (False, True):
+            for delta, expected in ((17, 17), (0, 17), (-17, 0)):
+                gesture = NS(type="TRACKPADPAN", value="NOTHING", mouse_y=100 + delta,
+                             mouse_prev_y=100, is_direction_inverted=inverted)
+                self.assertTrue(widget.dispatch(gesture, 50, 50))
+                self.assertEqual(widget.scroll, expected)
+        self.assertEqual(widget.canvas.layout_count, count)
+        self.assertEqual(state, [False])
+
     def test_dimensions_scroll_without_changing_font_or_rebuilding(self):
         parent, widget, state = self.fixture()
         self.assertEqual(widget.width, 320)

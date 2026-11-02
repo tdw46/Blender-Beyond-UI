@@ -208,6 +208,8 @@ def run():
         if font is not None:
             font.close()
     (OUT / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+    if os.environ.get("BEYOND_UI_TEST_RESULT"):
+        Path(os.environ["BEYOND_UI_TEST_RESULT"]).write_text(json.dumps(result, indent=2))
     print(
         "BEYOND_UI_THEME",
         json.dumps(

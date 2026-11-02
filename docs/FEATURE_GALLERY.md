@@ -411,3 +411,46 @@ GPL-3.0-or-later. Preserve the license and notice when vendoring.
 ![Centered confirmation actions and external field labels](media/panels/menu-spacing-actions-v2.gif)
 
 ![Outlined scalar value fields and BVT switches](media/panels/menu-spacing-scalars-v2.gif)
+
+
+## CamKeys Studio preset previews
+
+Real Blender GPU captures of the shared change pulse. Appearance uses state snapshots. Generated references and conditional-state limits are on the Studio review page.
+
+![CamKeys Studio · Forced Perspective](media/panels/camkeys-studio-v7-auto_fov.gif)
+
+![CamKeys Studio · Baking](media/panels/camkeys-studio-v7-baking.gif)
+
+![CamKeys Studio · CamKeys Linking](media/panels/camkeys-studio-v7-camkeys_linking.gif)
+
+![CamKeys Studio · CamKeys](media/panels/camkeys-studio-v7-camkeys_main.gif)
+
+![CamKeys Studio · CamProps](media/panels/camkeys-studio-v7-camprops.gif)
+
+![CamKeys Studio · Lattice Perspective](media/panels/camkeys-studio-v7-lattice_auto_fov_modifier.gif)
+
+![CamKeys Studio · Billboard Emulation](media/panels/camkeys-studio-v7-billboard_settings.gif)
+
+![CamKeys Studio · Dolly Expressions](media/panels/camkeys-studio-v7-dolly_expressions.gif)
+
+![CamKeys Studio · Lens Compensation](media/panels/camkeys-studio-v7-lens_compensation.gif)
+
+![CamKeys Studio · Object Falloff](media/panels/camkeys-studio-v7-falloff_popover.gif)
+
+![CamKeys Studio · Distance Falloff](media/panels/camkeys-studio-v7-distance_falloff_popover.gif)
+
+![CamKeys Studio · Lens Falloff](media/panels/camkeys-studio-v7-flatten_falloff_popover.gif)
+
+![CamKeys Studio · live preset edits and owner menu snapshots](media/panels/camkeys-studio-v7-appearance.gif)
+
+## CamKeys response and changing values
+
+![CamKeys response, bullseye action and live-value feedback](media/panels/camkeys-value-feedback.gif)
+
+[Reference and multi-scale Blender captures](design/qa/camkeys-response-v1/index.html).
+
+## Theme visibility defaults
+
+![Theme visibility: original then improved Blender colors](media/panels/theme-visibility-v1.gif)
+
+[Comparison and theme checks](design/qa/theme-visibility-v1/index.html).

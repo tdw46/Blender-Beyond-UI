@@ -1,0 +1,86 @@
+{
+  "name": "CamKeys Studio",
+  "colors": {
+    "accent": "#F17C67",
+    "slider_fill": "#F17C67",
+    "toggle_on": "#39BFA5C2",
+    "selected": "#34786D66",
+    "selected_text": "#F5F2EC",
+    "bg": "#20272DB8",
+    "card": "#20272DB8",
+    "bar": "#303A42B8",
+    "field": "#303A42C4",
+    "input": "#131A20C7",
+    "text": "#F5F2EC",
+    "muted": "#ADB8BE",
+    "title": "#F5F2EC",
+    "hover": "#677A854D",
+    "toggle_off": "#444D557A",
+    "menu_glass": "#20272DB8",
+    "slider_track": "#59636B99",
+    "edge": "#B9CBD552"
+  },
+  "geometry": {
+    "padding": 8,
+    "gap": 6,
+    "radius": 8,
+    "font_size": 11,
+    "field_height": 24,
+    "button_height": 22,
+    "icon_button_size": 22,
+    "list_tool_size": 22,
+    "label_band": 24,
+    "list_row_height": 28
+  },
+  "geometry_variants": {
+    "compact": {
+      "gap": 4,
+      "box_padding": 6,
+      "heading_height": 18,
+      "field_height": 22,
+      "button_height": 20,
+      "separator_height": 4,
+      "label_band": 22
+    }
+  },
+  "surfaces": {
+    "card": [
+      "#20272DB8",
+      "#20272DB8"
+    ],
+    "input": [
+      "#131A20C7",
+      "#131A20C7"
+    ],
+    "selected": [
+      "#34786D66",
+      "#34786D66"
+    ],
+    "field": [
+      "#303A42C4",
+      "#38434BC4"
+    ]
+  },
+  "opacity": 1.0,
+  "cards": true,
+  "variants": {
+    "primary": {
+      "field": "#F06B57D9",
+      "hover": "#F17C67CC",
+      "text": "#FFF8F2"
+    }
+  },
+  "operators": {
+    "camkeys.bake_all": "primary",
+    "camkeys.bake_camkeys": "primary",
+    "camkeys.bake_camprops": "primary",
+    "camkeys.bake_auto_fov": "primary",
+    "camkeys.bake_all_keyframes": "primary"
+  },
+  "motion": {
+    "enabled": true,
+    "strength": 0.7,
+    "speed": 1.0
+  },
+  "wide_numeric_motion_scale": 0.15
+}

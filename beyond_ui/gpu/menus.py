@@ -7,9 +7,10 @@ owns GPU state and lifetime, clipping, transforms, input and retained backdrop.
 from ..menu_metrics import Metrics as menu_metrics
 
 
-def text_run(font, value, size, ink, position, clips, bold=0.0):
+def text_run(font, value, size, ink, position, clips, bold=0.0, effects=None, scale=1.0):
     """Draw in the host's restored viewport, after clipped geometry submission."""
     import blf
+    from .typography import draw_text
 
     blf.size(font, size)
     blf.color(font, *ink)
@@ -17,10 +18,10 @@ def text_run(font, value, size, ink, position, clips, bold=0.0):
     for clip in clips:
         blf.clipping(font, *clip)
         blf.position(font, *position, 0)
-        blf.draw(font, value)
+        draw_text(font, value, ink, effects, scale)
         if bold:
             blf.position(font, position[0] + bold, position[1], 0)
-            blf.draw(font, value)
+            draw_text(font, value, ink, effects, scale)
     blf.disable(font, blf.CLIPPING)
 
 
@@ -51,6 +52,7 @@ def enum_option(
             ink,
             (left, y + (h - measure("H", size)[1]) / 2),
             text_clip(bounds) if text_clip else (bounds,),
+            0.0, palette.get("text_effects"), scale,
         )
         if enqueue is not None:
             enqueue(args)
@@ -73,9 +75,13 @@ def enum_option(
             radius=0,
         )
     if color[3] > 0:
+        from . import skin
+
         highlight = menu_metrics.highlight(rect, scale)
         if not glass.lens(backdrop, highlight, 4 * scale, color, blur=0.4):
             style.draw(*highlight, color, radius=4 * scale)
+        skin.selection_outline(highlight, palette, scale, 4,
+                               color[3] / max(0.001, palette["selected"][3]))
     ink = (
         (palette["selected_text"] if color[3] > 0 and not item.get("heading") else TEXT)
         if item["enabled"] or item.get("heading")
@@ -256,6 +262,7 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                             y + (h - measure(font, 11 * scale, "H")[1]) / 2,
                         ),
                         text_clip((x, y, x + w, y + h)),
+                        effects=palette.get("text_effects"), scale=scale,
                     )
             for index, rect, row in menu.visible_rows(page):
                 target = mapped(rect)
@@ -394,6 +401,12 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                             ),
                         )
 
+    tooltip(menu, mapped, scale, font, palette, backdrop, clip)
+
+
+def tooltip(menu, mapped, scale, font, palette, backdrop, clip):
+    from . import glass, skin, typography
+    from .paint import measure
     if menu.tooltip:
         rect, lines = menu.tooltip
         panel = mapped(rect)
@@ -407,9 +420,14 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
             ):
                 menu.glass_ready = False
                 skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)
-            for i, line in enumerate(lines):
+            from ..tooltip_layout import Run
+            runs = getattr(menu, 'tooltip_runs', ()) or tuple(
+                Run(line, 10, 6 + i * 16, rect[2] - 20, 16)
+                for i, line in enumerate(lines))
+            for run in runs:
+                active_font = typography.face(font, run.role)
                 x, y, w, h = mapped(
-                    (rect[0] + 3, rect[1] + 6 + i * 16, rect[2] - 6, 16)
+                    (rect[0] + run.x, rect[1] + run.y, run.width, run.height)
                 )
                 bounds = (
                     max(x, clip[0]),
@@ -418,12 +436,13 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     min(y + h, clip[1] + clip[3]),
                 )
                 text_run(
-                    font,
-                    line,
-                    11 * scale,
+                    active_font,
+                    run.text,
+                    run.size * scale,
                     palette["text"],
-                    (x + 7 * scale, y + (h - measure(font, 11 * scale, "H")[1]) / 2),
+                    (x, y + (h - measure(active_font, run.size * scale, "H")[1]) / 2),
                     (bounds,),
+                    effects=palette.get("text_effects"), scale=scale,
                 )
 
 
@@ -486,6 +505,7 @@ def field_value(
         ink,
         (origin, y + (h - measure(font, size, "H")[1]) / 2),
         clips((left, y, right, y + h)),
+        effects=palette.get("text_effects"), scale=scale,
     )
 
 
@@ -553,4 +573,5 @@ def search_field(
         palette["text"] if value else palette["muted"],
         (origin, y + (h - measure(font, size, "H")[1]) / 2),
         clips((left, y, right, y + h)),
+        effects=palette.get("text_effects"), scale=scale,
     )

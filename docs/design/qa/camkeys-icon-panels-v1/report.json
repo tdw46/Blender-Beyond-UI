@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "unit_tests": 381,
+  "runtime": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "checks": [
+      "Native RNA selection renames only exact angle; new, cleared and invalid selections preserve titles",
+      "Five icons share two retained textures; header layouts fit narrow/wide bounds",
+      "Addon teardown releases artwork namespace and textures"
+    ]
+  },
+  "focus_audits": [
+    {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 64061,
+      "restore_requests": 0,
+      "seconds": 1.9121750593185425,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 64110,
+      "restore_requests": 0,
+      "seconds": 6.388218998908997,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 66789,
+      "restore_requests": 0,
+      "seconds": 5.836756944656372,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    }
+  ],
+  "texture_count": 2,
+  "icon_count": 5,
+  "live_readback": "Code executed successfully: {\"file\": \"/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend\", \"dirty\": false, \"errors\": {}, \"fallbacks\": {}, \"artwork\": [\"logo\", \"objects\", \"linking\", \"perspective\", \"baking\"], \"modal_operators\": 4, \"speed\": 2.0, \"strength\": 0.35, \"new_callback\": true}\n\n",
+  "captures": "Actual Blender 5.2.2 GPU renders of saved Uraraka panels, 400 logical units at 1x/2x; 280 at 1.5x. Disposable capture has CamKeys evaluation disabled; live user state unchanged.",
+  "limitations": [
+    "Different scene values, selection, state and backdrop from concept art; close layout match, not pixel-exact reproduction.",
+    "Secondary generated reference depicts panel tops only; full control bodies remain functional source layouts.",
+    "No new GIF; existing shared motion preserved.",
+    "Metal execution qualified; Vulkan/OpenGL not newly qualified in this batch.",
+    "At 280 logical units the short top-row angle name truncates before fixed value/capture controls; the complete name remains visible in its shape-key search row."
+  ],
+  "paint_cpu_median_ms": 1.2206874998810235,
+  "timing_scope": "Small offscreen warm sample, not live FPS or a paired before/after benchmark."
+}

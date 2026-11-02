@@ -38,6 +38,7 @@ class Layout:
         pointer_sources=None,
         id_actions=None,
         list_identity=None,
+        property_options=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
@@ -47,10 +48,12 @@ class Layout:
         self.pointer_sources = pointer_sources
         self.id_actions = id_actions
         self.list_identity = list_identity
+        self.property_options = property_options or {}
         self.commit = commit or (lambda before, after: None)
         self.state = state if state is not None else {}
         self._sequence = 0
         self._text_role = "body"
+        self.style_class = ""
         self.alert = False
         self.operator_context = "INVOKE_DEFAULT"
         self.search_popovers = True
@@ -63,6 +66,11 @@ class Layout:
         self._menu_stack = ()
         self._is_popover = False
         self._panel_stack = ()
+
+    def style_item(self, values, *, scope="last"):
+        from .style_api import apply
+
+        apply(self, values, scope)
 
     def _key(self, kind):
         self._sequence += 1
@@ -190,6 +198,7 @@ class Layout:
 
     def _options(self):
         return dict(
+            style_class=self.style_class,
             alert=bool(self.alert),
             emboss=self.emboss,
             activate_init=bool(self.activate_init),
@@ -208,9 +217,11 @@ class Layout:
             pointer_sources=self.pointer_sources,
             id_actions=self.id_actions,
             list_identity=self.list_identity,
+            property_options=self.property_options,
         )
         for name in (
             "_text_role",
+            "style_class",
             "alert",
             "operator_context",
             "search_popovers",
@@ -311,6 +322,13 @@ class Layout:
             **self._options(),
         )
 
+    def paragraph(self, *, text="", icon="NONE", translate=True):
+        """Responsive body copy, wrapped by the retained layout at its actual width."""
+        control = self.label(text=text, icon=icon, translate=translate)
+        control.options["wrap_text"] = True
+        control.options["section_heading"] = False
+        return control
+
     def title(
         self, *, text="", text_ctxt="", translate=True, icon="NONE", icon_value=0
     ):
@@ -400,6 +418,18 @@ class Layout:
         label = self._text(meta.name if text is None else text, text_ctxt, translate)
         options = self._options()
         options.update(icon=icon, icon_value=icon_value)
+        from .presentation import property_options
+
+        hints = property_options(data, property, self.property_options)
+        options.update(
+            {
+                k: v
+                for k, v in hints.items()
+                if k not in {"precision", "suffix", "slider"}
+            }
+        )
+        if slider is None and "slider" in hints:
+            slider = hints["slider"]
         if icon_value and self.canvas.icon_renderer is None:
             raise UnsupportedControl("Custom icon_value requires Canvas.icon_renderer")
         if not emboss:
@@ -486,7 +516,7 @@ class Layout:
                 hard_min=meta.hard_min,
                 hard_max=meta.hard_max,
                 integer=meta.type == "INT",
-                numeric=Numeric(meta, self.context),
+                numeric=Numeric(meta, self.context, presentation=hints),
                 slider=bool(slider),
                 slider_auto=slider is None,
                 **options,
@@ -969,6 +999,9 @@ class Layout:
         options = self._options()
         if not emboss:
             options["emboss"] = "NONE_OR_STATUS"
+        from .tooltips import operator_description
+        options["tooltip"] = lambda ctx: operator_description(
+            operator, properties, pointers, ctx or context)
         self.group.button(
             self._key(operator),
             label,
@@ -976,6 +1009,7 @@ class Layout:
             selected=depress or bool(self.active_default and self.is_popover),
             active_default=bool(self.active_default),
             operator_button=True,
+            operator_id=operator,
             icon=icon,
             context_menu=lambda target, ctx: context_rows(target, ctx),
             **options,
@@ -1504,10 +1538,16 @@ class Layout:
         control = self.group.add(
             "search" if self.search_popovers else "widget",
             self._key("search"),
-            model.widget.title,
+            (
+                model.widget.title
+                if text is None
+                else self._text(text, text_ctxt, translate)
+            ),
             widget=model.widget,
             binding=model.binding,
             search_field=model,
+            icon=icon,
+            search_icon=icon if icon not in {None, "", "NONE", 0} else model.icon,
             context_menu=model.entries,
             **self._options(),
         )
@@ -1791,8 +1831,7 @@ class Layout:
             changed=relayout,
             **extra,
         )
-        if listtype_name != "UI_UL_list":
-            widget.dimensions(self.canvas.theme.font_size, 560)
+        # Measure during retained layout, after adjacent style() hints are applied.
         control = self.group.widget(
             self._key("list"), widget, context_menu=widget.entries, **self._options()
         )

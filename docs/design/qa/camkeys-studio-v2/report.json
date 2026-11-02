@@ -1,0 +1,555 @@
+{
+  "date": "2026-11-01",
+  "library_branch": "codex/camkeys-theme-system",
+  "consumer_branch": "codex/camkeys-studio-theme",
+  "installed_branch": "codex/camkeys-studio-preview",
+  "unit_tests": 309,
+  "runs": {
+    "studio-refine-consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 3793,
+          "restore_requests": 0,
+          "seconds": 12.860324025154114,
+          "timeout": false
+        }
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 3881,
+          "restore_requests": 0,
+          "seconds": 50.66040802001953,
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-appearance": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Live accent also updates primary action buttons",
+          "Live opacity, type size and disable retain dialog and shared glass",
+          "Exact-owner Appearance property right-click",
+          "Blender color inheritance restored live",
+          "Cancel restores colors, metrics, opacity and motion atomically"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 6201,
+          "restore_requests": 0,
+          "seconds": 6.273068070411682,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Live accent also updates primary action buttons",
+          "Live opacity, type size and disable retain dialog and shared glass",
+          "Exact-owner Appearance property right-click",
+          "Blender color inheritance restored live",
+          "Cancel restores colors, metrics, opacity and motion atomically"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 6263,
+          "restore_requests": 0,
+          "seconds": 6.288308024406433,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-captures": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 6911,
+          "restore_requests": 0,
+          "seconds": 9.838804006576538,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-lattice": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7005,
+          "restore_requests": 0,
+          "seconds": 5.900766015052795,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-narrow": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7043,
+          "restore_requests": 0,
+          "seconds": 6.4496729373931885,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-wide": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7077,
+          "restore_requests": 0,
+          "seconds": 6.539574980735779,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-embedded": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7109,
+          "restore_requests": 0,
+          "seconds": 22.456605911254883,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-benchmark": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 6422,
+          "restore_requests": 0,
+          "seconds": 6.136608958244324,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ],
+    "studio-polish-consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 7965,
+          "restore_requests": 0,
+          "seconds": 12.648813009262085,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "focus_audit": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 8012,
+          "restore_requests": 0,
+          "seconds": 12.782765984535217,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        }
+      }
+    ]
+  },
+  "source_scene": {
+    "filename": "ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+    "sha256": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158",
+    "unchanged": true
+  },
+  "changes": [
+    "Panel geometry templates and independent card/heading/separator spacing",
+    "Neutral bold disclosure headings, visible heading icons and font-aware wrapping",
+    "Compact Forced Perspective and Baking, CamProps Angle Settings and slider, source list switch order",
+    "Readable narrow slider values and primary-button live accent updates",
+    "Kernel corroboration of stale macOS application termination records"
+  ],
+  "performance": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "backend": "METAL",
+    "dimensions": [
+      640,
+      560
+    ],
+    "dpi": 1.0,
+    "theme": "Factory Blender active theme; Standard viewport fixture, raw display-space capture",
+    "timings": {
+      "closed_fields": {
+        "before": {
+          "median_ms": 0.8392914896830916,
+          "p95_ms": 1.4299170579761267,
+          "max_ms": 2.021250082179904
+        },
+        "after": {
+          "median_ms": 0.8424373809248209,
+          "p95_ms": 1.4982081484049559,
+          "max_ms": 2.4770828895270824
+        }
+      },
+      "open_scalar": {
+        "before": {
+          "median_ms": 1.241291407495737,
+          "p95_ms": 1.951916143298149,
+          "max_ms": 2.701292047277093
+        },
+        "after": {
+          "median_ms": 1.2445836327970028,
+          "p95_ms": 2.0111671183258295,
+          "max_ms": 2.9384170193225145
+        }
+      },
+      "open_scalar_retained": {
+        "before": {
+          "median_ms": 1.3477288885042071,
+          "p95_ms": 2.0858340431004763,
+          "max_ms": 3.2216659747064114
+        },
+        "after": {
+          "median_ms": 1.333729480393231,
+          "p95_ms": 2.0889590959995985,
+          "max_ms": 3.592750057578087
+        }
+      },
+      "scrolled_controls": {
+        "before": {
+          "median_ms": 1.1602290906012058,
+          "p95_ms": 1.5517917927354574,
+          "max_ms": 3.3376249484717846
+        },
+        "after": {
+          "median_ms": 1.1609380599111319,
+          "p95_ms": 1.41970906406641,
+          "max_ms": 1.8450829666107893
+        }
+      }
+    },
+    "paired_method": "200 alternating before/after samples per state in one process, canvas, fonts, GPU context and retained backdrop; identical painter, theme tokens overlaid only for after. No geometry or visible-count changes. 20 warmups each; readback excluded.",
+    "workload": "144 action buttons in 24 rows, clipped and scrolled through a 520px viewport, with an identical 48-action searchable context menu on both revisions. Paint: 20 warmups each, 200 alternating CPU submission samples per revision. Framebuffer readback excluded",
+    "stable_resources": true,
+    "glass_card_count": 24,
+    "batch_admission": {
+      "native_text_batch": true,
+      "baseline_sha256": null,
+      "helper_sha256": "a8aef9cb6cbf9b39d3ade908885d2b0203491b67e002c092bb97ded1623ade43"
+    },
+    "retained_resources": {
+      "productions": 1,
+      "blur": 1,
+      "offscreens": 5,
+      "layout": 2,
+      "font_handles": [
+        25,
+        26
+      ],
+      "skin_shader": 481628649072,
+      "skin_batch": 481525983088,
+      "glass_batches": {
+        "0.3": 481628290928,
+        "0.4": 481628586144,
+        "0.7": 481628586192
+      }
+    },
+    "source_sha256": {
+      "beyond_ui/__init__.py": "896f0f80e1550a32d0ad5ca907edfb987c17282dd837f71b0e234f0c4f8b0db0",
+      "beyond_ui/_native/__init__.py": "0e572ab1e0894345693682ad31c04563e4567bc82aa4128b1bb258fde9f99800",
+      "beyond_ui/addon.py": "0758b5d80469ee03192049809d5933168440acaf621b7984e139a5f3ce006a66",
+      "beyond_ui/animation.py": "6ec8426431d21a1b2f3d3fd0e1610b9e7789f3dd4702b8f11d80e965e3d4ea67",
+      "beyond_ui/bindings.py": "ca696b09089b0aa2d87de27bf44ba71aa1c48bafb37fd5d73e2d3d40cd6314d6",
+      "beyond_ui/button_press.py": "f9a31b7e4fe78eecc69776e4bbb01fa83d7bffa4c8fea6be65ecbd5040fab50f",
+      "beyond_ui/canvas.py": "70943a3e38be4d1d420636f03750fcad849db453e079e29a8a4d5e3e407c177c",
+      "beyond_ui/components.py": "b3b69355cb1a2f2784f64a43184d499af0bf63816da86afff74108ecd14264be",
+      "beyond_ui/context_arguments.py": "6676c46bbac4fdafcccd523b25d517c82d070c4651f6e4db5aa71bf1d0c04144",
+      "beyond_ui/context_assets.py": "cd8c4a5fb7298d3cddcabee15c4f226056cdc54184859bcaada1541976f5c56d",
+      "beyond_ui/context_builtin.py": "7b302b0f86062cbc2210a28c5bfb89fd368ad881c73327983fe804171c1b1b69",
+      "beyond_ui/context_custom.py": "b1cb53936d88561b79120835fa7415faa62af837ea07b8d7dbb8ec7b9ec1041b",
+      "beyond_ui/context_custom_shortcuts.py": "c6f75937add2a380ad1cfa043dd2abe3a0635b126629337a63c318d146ae874f",
+      "beyond_ui/context_dispatch.py": "15af323595a58d879aa8bd204ebe38a8306dfe95b804687bba1df594979ecbad",
+      "beyond_ui/context_drivers.py": "9a175ab49da513fac764b076dd61477d4373b580808e575b54bfe02213809602",
+      "beyond_ui/context_edit.py": "7b313b9f0043729050acf6d26b8406a4b1127290cb23797049a6f66625142ce5",
+      "beyond_ui/context_editor.py": "2edf3e8c02d014f9b2c32cddd1bb3561e5bb1f12ce5f4e8573f11ea1ba822c02",
+      "beyond_ui/context_enums.py": "3110953d84d91191f8e6329314e4d58ec273b34fdd69af703fd4bb1eb665a53e",
+      "beyond_ui/context_extensions.py": "ba4abb5562f266f880038836e647201c7ff6e8acbbccf78f4be0a108187a3573",
+      "beyond_ui/context_fields.py": "062fe701caba411f7c4fe237bce284ae850a8d400081ba27bd57a36c5f170796",
+      "beyond_ui/context_files.py": "29076bfe34e8d05d0c0530d9cfe2b4742f98cda2ba5085d2b17fc2481501d0fe",
+      "beyond_ui/context_jump.py": "86eff3c7a3551bc139b6b0e4f50f482bb860e1dc525819da3a9b23f3dd93d51c",
+      "beyond_ui/context_keying.py": "92c3bbff12ea6556924e87c463d8a3e25001d80ef2444054052db767aec77bd3",
+      "beyond_ui/context_menu.py": "86b624b2df6ccceb9c05f33bfe84f417b20830394db81fddd0d8f675c145d5d4",
+      "beyond_ui/context_native_entries.py": "04fa7fec99c856f52f1a4f3547ba3a056957d483bf9f10a4d858d98c9a17d4ab",
+      "beyond_ui/context_overrides.py": "321902c6b146e4758c24751c57b68e5fe21a1648004987612b8193aca42422e3",
+      "beyond_ui/context_paths.py": "41067e619f78469630b8bb3b5a418c9fb2c9ee1dc097bd6eff76d6ba88d63589",
+      "beyond_ui/context_rna.py": "0e46e0b0fd72556fac370f4843261634d44eb4b89c6e1d224b3cd9a177ecabe7",
+      "beyond_ui/context_selected.py": "82f510457a22bb3be9059926d02d101ea2e3ff8348fac1f65e64cdf52b0f2563",
+      "beyond_ui/context_shortcuts.py": "a9a8959fea90231a1bb14a68de809720e6cfb58baddacab155f5a076125e5de1",
+      "beyond_ui/context_source.py": "0509ce60136ba88dd0e05a6504c6a4962dd54d36e68e4c0c376612d77794762e",
+      "beyond_ui/decorator.py": "8f80ac2bd091c3f7efd7e9fb005450a456ecfee127c6a71f7672553833d9b292",
+      "beyond_ui/dialog.py": "3a7204d6d4b1466249fa645bf4804aceb708ed9184450500e4dd91260d5ce444",
+      "beyond_ui/editing.py": "08f1d9552d75c7188137142b46acd06e8673deadbcaf60809ba16ede62c2f476",
+      "beyond_ui/enum_field.py": "acb77c68a01dec79d818697d5df589dcc4fa3c61e713e2431ce52e0ee79c2389",
+      "beyond_ui/event_field.py": "c95423a0ebe8c49154d273b6cc80cc8cb06c399e4ec979f854e8e23056c8e30a",
+      "beyond_ui/flow.py": "6f239e046c1534c65d66b61b301606476afd24d891fd9be4a08535be7581931b",
+      "beyond_ui/gpu/__init__.py": "822225d97d0e0f0b6187badda3d584b5f130999a3cf771909203bccef1f811c1",
+      "beyond_ui/gpu/glass.py": "b68fc3bb363106e98e718927c3fac4742751585029b73a31c5ccf5563b3b520c",
+      "beyond_ui/gpu/icons.py": "3e63672de78eaf58f69c0156dcc9e454b300e0de6abdbfd19ed7ed03913dc6bc",
+      "beyond_ui/gpu/menus.py": "fe8f7adacfde4414ca7af87b03869921cf9c17d3a995bba859dc033ace4ac38c",
+      "beyond_ui/gpu/paint.py": "7bbbdb3faafb4e8cf9b33f7354c841538afeeed717205de01cbae7a84c958bd4",
+      "beyond_ui/gpu/previews.py": "5966b0de21adf32982cfc9b104d2983c3191db5c2c8277011d734ff14dd83bc4",
+      "beyond_ui/gpu/progress.py": "a64b7761751b5bb68e18a5fae4287a24f9c7e87de18d3423165591ecf3118f7d",
+      "beyond_ui/gpu/skin.py": "a4c076d088b276fadffe80f13c2e9db4e878be6c4e3206d689e169456f57d787",
+      "beyond_ui/gpu/style.py": "2503bfcb3e63b79cece1704cb348a01627cec81b36326d01159ce06d9d5c5ca1",
+      "beyond_ui/gpu/transition.py": "db09c867631ef8e19df5cba4418f078624eec725855a67ff417a55d548a8a085",
+      "beyond_ui/gpu/typography.py": "3d2b823892ee3f3c8ec865156de890ef2bc364c96a548575e27b5afda67ea51f",
+      "beyond_ui/hosts/__init__.py": "771b8c7224a84cd327920389c2251bfc0282dda56222a500b1227929d6800681",
+      "beyond_ui/hosts/addon.py": "1102ff8145def3388d052883ba61b834a6a313eb1b9abba73f78217bfe17e707",
+      "beyond_ui/hosts/bridge.py": "78353d80e00fc0a8719132cca8984b099b53693dd871c8dd933240f2582d78f2",
+      "beyond_ui/hosts/floating.py": "902f561d01dd0055185e8954e5f659595c4a23762b885fce25a903a5f5390ed0",
+      "beyond_ui/hosts/menu_context.py": "c5e6c27ecb4d194a6dd3b9278b0d5e3ade069090259f467a943bd4f72892f8f8",
+      "beyond_ui/hosts/menu_native.py": "e77391bc29a546cea7f867cdb0554977d620b4c1cb6ccf0d9c6102606f0933c4",
+      "beyond_ui/hosts/panel.py": "dca29fcba4ec90e2d16c0a117304ef85f2cac93735d27b8b404408807e85c27f",
+      "beyond_ui/id_template.py": "bfd37f0d6524ac0e94cf19bdd79d2a2618861bbedc358d9f129d7a4a5c25ecda",
+      "beyond_ui/integration.py": "47cc6e05b468fdb39156577b84ff2bb92cdfb246a2ad0811415e442a2b727e5e",
+      "beyond_ui/invoke_keymaps.py": "36baacb3d61ac0e6016bdaf2f1dd2903a364b6afd817f957bb4e1128a743c2c9",
+      "beyond_ui/invoke_routing.py": "f213c91e56939ec81b2c321deaa8f79ab76683da28f5959ca540581984b4dc9e",
+      "beyond_ui/layout.py": "b9523d55a60f39efa0866602213535f0fcf30055d217fa76bafb743fda8ecabf",
+      "beyond_ui/layout_recording.py": "ee80761bf600a6a4ac8ab13af5e94df253c1b3555ebfb6c1eccea479076baef3",
+      "beyond_ui/lifecycle.py": "e671750e82297ddfb9f40735dbe4a366113a14695b57a989b334cfd9529149d7",
+      "beyond_ui/list_identity.py": "98ce962d9c9022ed256976a617e2ee47950d610396cd6d03533c46ed7e3fe975",
+      "beyond_ui/list_source.py": "ff89888133d9c0933a2c3adfe2bb13ee45a99f8b29deb9b619e47bccaeda18ab",
+      "beyond_ui/macro_safety.py": "be598de24221cb31b569908ca2dd34b1ea9f290d136e05a2db2fc088b0831b93",
+      "beyond_ui/materials.py": "78d26f323dd8a3280e51374e12c712cc08563c335eb84de70b146c8acd99b825",
+      "beyond_ui/menu_metrics.py": "32b48b8cee7c9e0f5301fe5691fbe783015c0bc400d6ee8b63141fda1ddb96cf",
+      "beyond_ui/menu_search.py": "c54b5c142f58b0379a23850db9b5205559229bf96f837b2272db0d1e272c4046",
+      "beyond_ui/native.py": "edb43e53c4574b75e8a9d1e860b744a200518e32eb76edcb2d4e225c76be6b3d",
+      "beyond_ui/numeric.py": "5830529d032488e2bb4f73d551597ba23bb5b6feae5f02b3451c18870a29de04",
+      "beyond_ui/operator_enum.py": "4aec5ffea510d851773a323dc4b8c171af27a39b7e84aefd22448b9929dd1b32",
+      "beyond_ui/panel_metrics.py": "e20762d072542521348adfd1b4736b1eca755840ae760b6df786d944dd68c6c4",
+      "beyond_ui/pie_layout.py": "85b573ef349af7bc1c4af04718e28c7b5776826f162c1e3902aa5da9fc274f32",
+      "beyond_ui/pie_menu.py": "ffeeea24615eb664fd0a0fcb13bf47b12a5de38590e791d0843a306b0d0fac9f",
+      "beyond_ui/pie_timing.py": "e206946a53dfb9b43a5032cb196241bbe180f9365b93961ef26394ba7288089d",
+      "beyond_ui/pointer.py": "bbaee708ff30c00fd147fd20be7df14f6ece100975f64a01e9576d8faa29fc95",
+      "beyond_ui/popover.py": "4efd6873aa05419a1160bb76839c2ad58e7beafb3ca1e69d15871f54b650d61c",
+      "beyond_ui/popup_focus.py": "25402ba76385bf3996a92e22d5e86dbc97533506dac472ee14e4f6297526d4dd",
+      "beyond_ui/property_popover.py": "751b08b90d3bcecf839f529b995434b6b3360686a4b09b8c16991f573811cbbd",
+      "beyond_ui/registered_list.py": "688eca553201c68f191cad985d5ed16c9e6cbcfa08f7b6693e6ec6ad412560e7",
+      "beyond_ui/registered_menu.py": "a41412b4b299d304779fc29a50d746cdedb64ebfe3982a2f4a9840a7b4ba79b0",
+      "beyond_ui/rna_owner.py": "931a3c10377a228f437b879e03aab3f15e730ceccaccf1bffa5f08031df966a4",
+      "beyond_ui/scalar_geometry.py": "6b790d0f0ee00a81e45bf70ef6eac1b77e65e873744d61b58f6b657778e5c84a",
+      "beyond_ui/search.py": "0b46cb3c86bb793198ebe4d321caede60bcdd2735977285519c46b92bcd0cf94",
+      "beyond_ui/standalone_pie.py": "872bc544061186103e241b9c46c4bdfb70e8ed3a323c0007c8531dabbea3c278",
+      "beyond_ui/stylesheet.py": "2662f999716b89ac16eb3baa928710ba8ae63a08cf0d6b565a6a52b2f55311b8",
+      "beyond_ui/virtual.py": "cfea7ee3293e903f07f2ba49cd5983298b0d88e28f745adc9417cb1f09718748",
+      "beyond_ui/widgets/__init__.py": "27ef333656b9033c833ea4ffa585f57ef0690cadb5e3381669859707865dff2a",
+      "beyond_ui/widgets/base.py": "c1029581df7f4d2c6ae927b62bf41078e7ee505041e03c158b9fb37c8f85d8a5",
+      "beyond_ui/widgets/collection_list.py": "415e185c97ee278dd44caaab8b784b30c0a8eaf59b844528136a08fad6220cdb",
+      "beyond_ui/widgets/color.py": "74414811b32164ca626a18b42694f943e009cabd68f03787d42fe2b52284b8d8",
+      "beyond_ui/widgets/context.py": "1ea913c1ff234363985269b6531da92fcf21956d36e1055c58d51aad197908af",
+      "beyond_ui/widgets/curve.py": "a2de141e6bd73bf7bcd5e508cefe8ad48f6d3df25d0f59366eb2d72d8d5ec3b3",
+      "beyond_ui/widgets/icon_paths.py": "a1c30cc74ba25bb5cfe74991358843eb1ae8e73c03c0e4665b8fa9bf3d07350c",
+      "beyond_ui/widgets/matrix.py": "7421ee78312e64b799e19bf39afd79577d0f8f558594d4c51c9cdeeabfa1481b",
+      "beyond_ui/widgets/metrics.py": "c12491db36cdce680f95847af1241bdf3ec39b69492fbe8318fd0ced677cd0fe",
+      "beyond_ui/widgets/palette.py": "eefd89e9c2e9bcdddf88abf48917914ee61a7d1bb9165a4ee0c59157ea78f5f2",
+      "beyond_ui/widgets/picker.py": "5b22ae6884b3d499c1abf46dd699e0e59a981bb16c01c11ecf292cdf7ac81da6",
+      "beyond_ui/widgets/progress.py": "ddeea5d1fdcddf1b48e89cf99589a08416b9a6cffa61e71f26eb20d5b8ad82f3",
+      "beyond_ui/widgets/ramp.py": "74127d0c023b2603f8ebc78c67b0379f590768089bf57fcbfea91ca6e855db75",
+      "beyond_ui/widgets/rna.py": "78ea4920e9d4d9001a83499d87bb74e40df9adcabc90ef01ec3cec618fcc0d43",
+      "beyond_ui/widgets/socket.py": "7e30dc4d4e3950561e6e2f683850554b6ae5074175047a1a3850f1eb3a2ca7ab"
+    },
+    "fixture_sha256": "0304414048ab96264cd603fd05222382ea276014ceb976d0b64cbf181ef623c9",
+    "source_root": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+    "loaded_package": "/Users/tylerwalker/dev/Blender-Beyond-UI/beyond_ui/__init__.py",
+    "exact_match": false,
+    "acceptance": "Actual production frames; existing shared field/menu styling. Generated-reference and motion acceptance remain open."
+  },
+  "media": {
+    "panel_states": 12,
+    "gifs": 13,
+    "embedded_images": 10,
+    "narrow_scales": [
+      1,
+      1.5,
+      2
+    ],
+    "wide_scales": [
+      1,
+      1.5,
+      2
+    ]
+  },
+  "exact_reference_match": false,
+  "reference_boundaries": [
+    "Generated lock symbols sometimes depict the wrong enabled/locked state. Actual RNA and original Blender icon identity remain authoritative.",
+    "Generated decorative glass lighting/rim and photographic backgrounds differ from the actual BVT backdrop; no pixel-exact claim.",
+    "Generated CamProps target depicts editable numeric cells where the source may expose display strings. No invented editable data binding.",
+    "Full safety/help copy and all seven distance options retained even where generated art omits them."
+  ],
+  "installed_validation": {
+    "passed": true,
+    "source_scene_loaded": true,
+    "objects": 63,
+    "draw_errors": {},
+    "keymap_refreshes": 5,
+    "focus_audit": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 13701,
+      "initial_frontmost_pid": 13701,
+      "new_instance": true,
+      "pid": 7695,
+      "restore_requests": 0,
+      "seconds": 13.649981021881104,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "vendor_working_tree_changes": false,
+    "consumer_files": [
+      "ui_theme.py",
+      "ui_panel.py",
+      "ui_lists.py",
+      "camkeys_translations.json"
+    ],
+    "next_launch_ready": true,
+    "original_scene_saved": false,
+    "consumer_changes": "Local preview branches; unrelated pre-existing changes preserved, not mass-committed."
+  },
+  "library_commit": "5f002bd355423dd0c0f94ebf3c0ecde2115a240d",
+  "historical_fixture_note": "The older blender_camkeys_consumer.py asserts that native fallbacks exist and fails against the completed custom migration. Current qualification uses blender_camkeys_custom.py; both 5.1.2 and 5.2.2 pass. The old failed run is retained in build/studio-polish-legacy-consumer."
+}

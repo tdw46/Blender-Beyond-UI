@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 from functools import lru_cache
 
@@ -37,6 +38,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--blender", action="append", required=True)
     parser.add_argument("--windowed", action="store_true")
+    parser.add_argument("--gpu-backend", choices=("metal", "opengl", "vulkan"))
     parser.add_argument(
         "--macos-noactivate",
         action="store_true",
@@ -64,6 +66,10 @@ def main():
             path = profile / folder
             path.mkdir(parents=True, exist_ok=True)
             env[key] = str(path)
+        # Recovery files (quit.blend) must not overwrite another session's temp.
+        temporary = profile / "temp"
+        temporary.mkdir(parents=True, exist_ok=True)
+        env["TEMP"] = env["TMP"] = env["TMPDIR"] = str(temporary)
         result = output / f"result-{i}.json"
         result.unlink(missing_ok=True)
         log = output / f"blender-{i}.log"
@@ -74,6 +80,13 @@ def main():
         else:
             require_no_focus(executable)
             command += ["--no-window-focus", "--enable-event-simulate"]
+            if sys.platform == "win32":
+                # GHOST's maximized ShowWindow path uses SW_SHOWMAXIMIZED even
+                # with --no-window-focus. A normal window honors SW_SHOWNOACTIVATE.
+                command += ["--window-geometry", "80", "80", "1280", "900"]
+        if args.gpu_backend:
+            command += ["--gpu-backend", args.gpu_backend]
+            env["BEYOND_UI_EXPECT_BACKEND"] = args.gpu_backend.upper()
         command += [
             "--python",
             str(
@@ -87,8 +100,6 @@ def main():
         launch_command = command
         launch_report = output / f"launch-{i}.json"
         if args.macos_noactivate:
-            import sys
-
             if not args.windowed or sys.platform != "darwin":
                 raise RuntimeError(
                     "LaunchServices capture requires a macOS windowed test"
@@ -97,6 +108,11 @@ def main():
             if not launcher.is_file():
                 raise RuntimeError(
                     "Compile tools/launch_blender_macos.swift before using this mode"
+                )
+            source = ROOT / "tools/launch_blender_macos.swift"
+            if launcher.stat().st_mtime < source.stat().st_mtime:
+                raise RuntimeError(
+                    "Recompile the changed macOS test launcher before using this mode"
                 )
             env["BEYOND_UI_TEST_LOG"] = str(log.resolve())
             command[-2:-2] = [
@@ -119,6 +135,8 @@ def main():
                     env=env,
                     stdout=stream,
                     stderr=subprocess.STDOUT,
+                    **({"creationflags": subprocess.CREATE_NO_WINDOW}
+                       if sys.platform == "win32" else {}),
                 ) as process:
                     pid = process.pid
                     try:

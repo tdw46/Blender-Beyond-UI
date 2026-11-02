@@ -1,0 +1,59 @@
+{
+  "version": "camkeys-icon-panels-v1",
+  "tool": "Built-in image_gen.imagegen",
+  "source_style": "Approved morphing-camera direction 2; existing CamKeys Studio coral/mint palette; actual Uraraka panel controls",
+  "sequence": "References generated before artwork/header implementation",
+  "acceptance": "Close, consistent match per user correction; not pixel-exact acceptance",
+  "records": [
+    {
+      "file": "logo-transparent.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "generation_brief": "Remove background from the approved morphing-camera mark; preserve the simple coral camera/lens and mint morph vertices. True transparent background, square/circle-safe silhouette.",
+      "source_output": "exec-f857baed-a27d-48e1-8327-dcd4c5eb5d1a.png",
+      "transparent_pixels": 1303852
+    },
+    {
+      "file": "section-icons.png",
+      "dimensions": [
+        1261,
+        1247
+      ],
+      "generation_brief": "Create four simple coral/mint line-and-vertex icons on transparent background: tracked objects triangle, camera-angle to shape-key linking, perspective lens rays, timeline/keyframe baking. Consistent weight, restrained macOS toolbar language, 2 by 2 atlas.",
+      "source_output": "exec-203a4a76-b1f0-4a72-a5eb-e38e67b9a841.png",
+      "transparent_pixels": 1329615
+    },
+    {
+      "file": "main-panel.png",
+      "dimensions": [
+        1048,
+        1501
+      ],
+      "generation_brief": "Redesign CamKeys main panel using the source Uraraka controls and Studio coral/mint palette. Transparent logo at left of compact title/subtitle header, camera section icon and tracked-object triangle icon; restrained macOS glass, compact utility rails, preserve native source controls.",
+      "source_output": "exec-6413c443-095b-42a3-b163-d93c372551e4.png",
+      "transparent_pixels": 0
+    },
+    {
+      "file": "linking-panel.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "generation_brief": "CamKeys Linking reference: compact branded title/subtitle, camera-angle/shape-key list with aligned name and native-icon search rows, inset numeric values and camera capture buttons, mint selection rim, angle response card with coral sensitivity slider and falloff action. Preserve source controls.",
+      "source_output": "exec-01349196-51ca-448d-a4f8-98560f7127e9.png",
+      "transparent_pixels": 0
+    },
+    {
+      "file": "secondary-headers.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "generation_brief": "Three panel-top references for Forced Perspective, CamProps and Baking. Use matching compact generated section icons, title/subtitle hierarchy and macOS glass in Studio coral/mint palette; preserve native controls below each header.",
+      "source_output": "exec-87ecfbec-7426-4055-a7b2-7b5f353ffae5.png",
+      "transparent_pixels": 0
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-02",
+  "request": "More pixel-exact typography against existing generated reference",
+  "reference": "../../references/developer-tooltips-v1/reference.png",
+  "reference_registration": {
+    "artboard": [
+      1774,
+      887
+    ],
+    "card_bounds": [
+      76,
+      74,
+      1624,
+      688
+    ],
+    "normalized_width": 360,
+    "normalized_height": 152.51231527093597
+  },
+  "actual_registration": {
+    "card_bounds": [
+      32,
+      32,
+      720,
+      305
+    ],
+    "logical_size": [
+      360,
+      152.5
+    ],
+    "capture": "implementation.png"
+  },
+  "typography": {
+    "body_size": 13.5,
+    "label_size": 12.5,
+    "value_size": 12.2,
+    "body_leading": 18,
+    "value_leading": 16,
+    "label_advance": 15,
+    "description_gap": 8,
+    "section_gap": 10,
+    "horizontal_padding": 16.5,
+    "top_padding": 7,
+    "bottom_padding": 13.5,
+    "body_max_width": 300,
+    "tracking": "Retained Inter kerning; no per-character draws. Font sizes selected using Blender BLF measurements against reference line widths."
+  },
+  "matched": [
+    "Description line ends at higher =",
+    "Second description line is less perspective distortion)",
+    "One Python value line",
+    "Data path wraps after mesh_object_items[0].",
+    "Normalized outer card height"
+  ],
+  "limitations": [
+    "Generated letterforms, tiny kerning differences and theme/glass colors are not pixel-identical.",
+    "Current capture is production GPU tooltip rendering with live Uraraka metadata/fonts/theme over a controlled backdrop."
+  ],
+  "tests": {
+    "unit": 375,
+    "runtime": "build/tooltip-layout-v2-runtime/summary.json"
+  },
+  "live": {
+    "pid": 11967,
+    "reloaded": true,
+    "saved": false,
+    "other_session_modified": false
+  }
+}

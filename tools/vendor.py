@@ -30,7 +30,7 @@ def vendor(destination, *, replace=False):
         if record.get("repository") != "Blender-Beyond-UI":
             raise ValueError("Destination is not a Beyond UI vendor record")
         actual = {
-            str(p.relative_to(target)): hashlib.sha256(p.read_bytes()).hexdigest()
+            p.relative_to(target).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in target.rglob("*")
             if p.is_file()
             and p.name != MARKER
@@ -38,7 +38,8 @@ def vendor(destination, *, replace=False):
             and p.suffix not in {".pyc", ".pyo"}
             and p.name != ".DS_Store"
         }
-        if actual != record.get("files"):
+        recorded = {name.replace("\\", "/"): value for name, value in record.get("files", {}).items()}
+        if actual != recorded:
             raise ValueError(
                 "Vendored files were edited; preserve that copy before updating"
             )
@@ -54,7 +55,7 @@ def vendor(destination, *, replace=False):
             ),
         )
         files = {
-            str(p.relative_to(copied)): hashlib.sha256(p.read_bytes()).hexdigest()
+            p.relative_to(copied).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(copied.rglob("*"))
             if p.is_file()
         }
@@ -86,7 +87,7 @@ def vendor(destination, *, replace=False):
                 ),
                 indent=2,
             )
-            + "\n"
+            + "\n", encoding="utf-8", newline="\n"
         )
         backup = Path(staging) / "previous"
         if target.exists():

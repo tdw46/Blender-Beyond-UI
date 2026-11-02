@@ -15,6 +15,7 @@ def _native_routes(classes):
         "popup_menu_pie",
         "call_menu",
         "call_menu_pie",
+        "call_panel",
         "invoke_search_popup",
     }
     found = []
@@ -138,6 +139,7 @@ class Integration:
                 "popup_menu_pie",
                 "call_menu",
                 "call_menu_pie",
+                "call_panel",
             ],
             limits=[
                 "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",

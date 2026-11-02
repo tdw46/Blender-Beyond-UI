@@ -170,7 +170,7 @@ class Painter:
                 else a + inset * self.scale
             )
             blf.position(font, x, b + (h - measure(font, size, "H")[1]) / 2, 0)
-            blf.draw(font, str(value))
+            typography.draw_text(font, value, self.palette["title" if weight == "title" and role == "text" else role], self.palette.get("text_effects"), self.scale)
         finally:
             blf.disable(font, blf.CLIPPING)
 

@@ -1,0 +1,84 @@
+[
+  {
+    "image": "distance_falloff_popover.png",
+    "prompt": "distance_falloff_popover-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1516,
+      1037
+    ],
+    "sha256": "77079621d4cebfbb2ecfde0537d162774f5b71c195aefaae31912e86a08ac031",
+    "status": "rejected: removed real options",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "flatten_falloff_popover.png",
+    "prompt": "flatten_falloff_popover-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      878,
+      1792
+    ],
+    "sha256": "03d5c93d860914e8c49c4db170876e4abf905395b45143ab77cdf2220b142c07",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "camkeys_linking.png",
+    "prompt": "camkeys_linking-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1026,
+      1533
+    ],
+    "sha256": "45cbb9e8bbeff99a140f565794624bffb8155c90145bb5eae0f569def8d6a614",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "camkeys_main.png",
+    "prompt": "camkeys_main-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1006,
+      1564
+    ],
+    "sha256": "f2152975fc4290c269097b96da40d33c0b9957f220eef95b7a98c32277e65114",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "lattice_auto_fov_modifier.png",
+    "prompt": "lattice_auto_fov_modifier-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1739,
+      904
+    ],
+    "sha256": "1c1078d3ef2b386f8850fb35e95f0383a8f0b3bb57aa04131f908364526d5fce",
+    "status": "visual specification; acceptance open",
+    "source": "input/lattice_auto_fov_modifier.png",
+    "input_sha256": "2bc32cf4251a67089a2be4726aaf6970dfcdaf12490f99f03f8b3a3a268809dc",
+    "state": "Disposable conditional scene state; original Uraraka file unchanged"
+  },
+  {
+    "image": "dolly_expressions.png",
+    "prompt": "dolly_expressions-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1308,
+      1202
+    ],
+    "sha256": "225d9c72ab7c3c4ec2fd99a8a3229de81ef7374c15f7061e9257a7e854cf4de5",
+    "status": "visual specification; acceptance open",
+    "source": "input/dolly_expressions.png",
+    "input_sha256": "7a39df0a3c48100d37824066b9595c47e1771658f3c9965f309f5f516b1cf477",
+    "state": "Disposable conditional scene state; original Uraraka file unchanged"
+  }
+]

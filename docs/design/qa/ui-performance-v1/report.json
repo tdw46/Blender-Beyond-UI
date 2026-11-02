@@ -1,0 +1,250 @@
+{
+  "runtime": "Blender 5.2.2 LTS, macOS Metal, live Uraraka",
+  "method": "Bounded instrumentation of existing callbacks. No viewport/input/scene changes; no profiler during timing samples. Warm visible CamKeys Linking panel; sequential samples, not a controlled foreground FPS or GPU-completion benchmark. cProfile used only to locate costs; its timing excluded below.",
+  "before": {
+    "seconds": 6.071514082999784,
+    "samples": {
+      "ui_author_ms": {
+        "n": 70,
+        "median_ms": 1.1855005013785558,
+        "p95_ms": 1.3849999995727558,
+        "max_ms": 1.7292080010520294
+      },
+      "ui_paint_ms": {
+        "n": 70,
+        "median_ms": 2.5971459999709623,
+        "p95_ms": 2.9414999989967328,
+        "max_ms": 3.4154999993916135
+      },
+      "camkeys_update_ms": {
+        "n": 70,
+        "median_ms": 1.320041000326455,
+        "p95_ms": 1.5357079992099898,
+        "max_ms": 1.6535830000066198
+      }
+    }
+  },
+  "after": {
+    "seconds": 6.064689666000049,
+    "samples": {
+      "ui_author_ms": {
+        "n": 72,
+        "median_ms": 0.948041499214014,
+        "p95_ms": 1.118041000154335,
+        "max_ms": 1.2297089997446164
+      },
+      "ui_paint_ms": {
+        "n": 72,
+        "median_ms": 2.3561039997730404,
+        "p95_ms": 2.8054579997842666,
+        "max_ms": 3.327458000057959
+      },
+      "camkeys_update_ms": {
+        "n": 72,
+        "median_ms": 1.3550835001296946,
+        "p95_ms": 1.4955419992475072,
+        "max_ms": 1.5996669990272494
+      }
+    }
+  },
+  "scene_renderer": {
+    "seconds": 6.059323916999347,
+    "n": 90,
+    "renderer_median_ms": 15.092312500200933,
+    "renderer_p95_ms": 20.68291599971417,
+    "median_draw_interval_ms": 63.92904200038174,
+    "note": "Observed live background-session redraw cadence, not a controlled foreground FPS benchmark; CPU submission includes potential driver waits."
+  },
+  "live": {
+    "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+    "dirty": false,
+    "frame": 1,
+    "active": "Cube",
+    "errors": {},
+    "motion_config": {
+      "enabled": true,
+      "strength": 0.35,
+      "speed": 2.0
+    },
+    "motions": [
+      {
+        "kind": "label",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "widget",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "separator",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "separator",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "toggle",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "separator",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "number",
+        "speed": 2.0,
+        "strength": 0.0525
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "number",
+        "speed": 2.0,
+        "strength": 0.0525
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "button",
+        "speed": 2.0,
+        "strength": 0.35
+      },
+      {
+        "kind": "toggle",
+        "speed": 2.0,
+        "strength": 0.35
+      }
+    ],
+    "hosts": [
+      {
+        "panel": "CAMKEYS_PT_camkeys_linking",
+        "valid": true,
+        "rect": [
+          33,
+          -108,
+          730,
+          1202
+        ],
+        "clip": [
+          33,
+          0,
+          730,
+          1094
+        ],
+        "canvas_width": 375.29411764705884,
+        "canvas_height": 566.0,
+        "controls": 17,
+        "layout_count": 1
+      }
+    ],
+    "profiling_finished": true,
+    "modal_count": 4
+  },
+  "changes": [
+    "Reuse captured command signatures on unchanged author redraws; changed labels and structure keep existing validation.",
+    "Reuse resolved stylesheet palettes in nested rows; prevent repeated opacity multiplication.",
+    "CamKeys preset motion speed 1 to 2; strength 0.7 to 0.35. Appearance controls remain available; shared library defaults unchanged."
+  ],
+  "validation": {
+    "unit_tests": 377,
+    "registered_list_runtime": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 49472,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 810,
+          "initial_frontmost_pid": 810,
+          "new_instance": true,
+          "pid": 49472,
+          "restore_requests": 0,
+          "seconds": 2.436545968055725,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "checks": [
+            "Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners",
+            "Visible literal values refresh in place; unchanged rows skip layout; 0.242 ms for 5 visible rows",
+            "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+            "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+            "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+            "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+            "Disabling the parent invalidates row bindings and releases retained child canvases",
+            "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+            "Deferred child menu actions recheck callback registration even without another mouse event"
+          ],
+          "version": "5.2.2 LTS",
+          "build": "d13f752e3b9c"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ui-performance-v1/list-windowed/blender-0.log"
+      }
+    ],
+    "headless_attempt": "Existing fixture schedules a timer; background Blender exited before execution. Re-run through no-focus windowed runner passed.",
+    "resources": "No new cache or GPU allocation paths. Existing stylesheet single-entry cache and retained list controls remain; runtime test confirms controls retained and unchanged rows skip layout."
+  },
+  "limitations": [
+    "BVT renderer remains a larger measured cost; its rendering and physics were not changed.",
+    "Sequential live samples can vary with scene activity; do not interpret the UI reduction as an equivalent total FPS increase.",
+    "No new screenshot/GIF or Vulkan/OpenGL performance qualification."
+  ]
+}

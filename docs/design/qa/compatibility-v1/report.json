@@ -1,0 +1,1443 @@
+{
+  "target": "Blender 4.2+; no minimum-version or package version increase",
+  "date": "2026-11-02",
+  "ci": "https://github.com/tdw46/Blender-Beyond-UI/actions/runs/41529177682",
+  "background": [
+    {
+      "passed": true,
+      "version": "4.2.0",
+      "build": "a51f293548ad",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "build": "d0cbe84903e8",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.3.2",
+      "build": "32f5fdce0a0a",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.4.3",
+      "build": "802179c51ccc",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.5.15 LTS",
+      "build": "5afeabba6097",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.0.1",
+      "build": "a3db93c5b259",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.2.0",
+      "build": "a51f293548ad",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "build": "d0cbe84903e8",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.3.2",
+      "build": "32f5fdce0a0a",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.4.3",
+      "build": "802179c51ccc",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "4.5.15 LTS",
+      "build": "5afeabba6097",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.0.1",
+      "build": "a3db93c5b259",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.1.2",
+      "build": "ec6e62d40fa9",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "platform": "windows-x86_64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    }
+  ],
+  "gpu": [
+    {
+      "blender": "build/portable-4.2.0/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 63104,
+      "command": [
+        "build/portable-4.2.0/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "metal",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_backend_renderer.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63104,
+        "restore_requests": 0,
+        "seconds": 3.6496829986572266,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.0",
+        "backend": "METAL",
+        "renderer": "Metal API",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "c24462f5e288de43ce56f2b1379030afb08c7c4558e4ce6ce5ec61ccffa0e5d0",
+          "21d4d1b2daa8b4fb70a6b72cd503346578e6878d54100cbe016697627782dabc"
+        ],
+        "native_framebuffer_copy": true,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/backend-metal-final/blender-0.log"
+    },
+    {
+      "blender": "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 63137,
+      "command": [
+        "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "metal",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_backend_renderer.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63137,
+        "restore_requests": 0,
+        "seconds": 3.5763700008392334,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "backend": "METAL",
+        "renderer": "Metal API",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "a1a889e389c5aadec273dc597512d8b2ec6445a38b98cbaa237b8fea10d1b244",
+          "68f2d8c55669c1052ea29f6c1184908ca24141ddf94e87bbb480c35a573e7b70"
+        ],
+        "native_framebuffer_copy": true,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/backend-metal-final/blender-1.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63168,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "metal",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_backend_renderer.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63168,
+        "restore_requests": 0,
+        "seconds": 3.099581003189087,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "backend": "METAL",
+        "renderer": "Metal API",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "7e636b50b6367c343a64a7be71a5ff3198be3ed91031a0bacaf4cdcf6e9dde4a",
+          "df2425a4702ea2d1a44e8c3ecb3298e7781142a45b0c753d65b2e5f7e58c8ab1"
+        ],
+        "native_framebuffer_copy": true,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/backend-metal-final/blender-2.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63197,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "metal",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_backend_renderer.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63197,
+        "restore_requests": 0,
+        "seconds": 3.225867986679077,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "backend": "METAL",
+        "renderer": "Metal API",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "7e636b50b6367c343a64a7be71a5ff3198be3ed91031a0bacaf4cdcf6e9dde4a",
+          "df2425a4702ea2d1a44e8c3ecb3298e7781142a45b0c753d65b2e5f7e58c8ab1"
+        ],
+        "native_framebuffer_copy": true,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/backend-metal-final/blender-3.log"
+    },
+    {
+      "blender": "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/runtime/blender-4.2.0-linux-x64/blender",
+      "pid": 2801,
+      "command": [
+        "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/runtime/blender-4.2.0-linux-x64/blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "opengl",
+        "--python",
+        "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/tests/blender_backend_renderer.py"
+      ],
+      "launch": null,
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.0",
+        "backend": "OPENGL",
+        "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "9f10b0b779009a59d71a16f66ec019027b74b99433f01f9d3e2e61d6a31d0035",
+          "f42e3b92172987b96c654f34444a9ea55cff9ecb1d1ee03ca9fdec4f012ab9c8"
+        ],
+        "native_framebuffer_copy": null,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/renderer-opengl/blender-0.log"
+    },
+    {
+      "blender": "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/runtime/blender-5.2.2-linux-x64/blender",
+      "pid": 3118,
+      "command": [
+        "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/runtime/blender-5.2.2-linux-x64/blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--gpu-backend",
+        "vulkan",
+        "--python",
+        "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/tests/blender_backend_renderer.py"
+      ],
+      "launch": null,
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "backend": "VULKAN",
+        "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "0bc8bace46677fbd411ecbc2d8aecad7ee0b84fc5425ba9337a9716c196209e1",
+          "c56c061e4f9aa0760797f1c15e3fcd8821204685465a4ae2bc8211b12d0cc8e1"
+        ],
+        "native_framebuffer_copy": null,
+        "host_integration": false,
+        "visual_acceptance": false
+      },
+      "log": "/home/runner/work/Blender-Beyond-UI/Blender-Beyond-UI/build/native/renderer-vulkan/blender-0.log"
+    }
+  ],
+  "windowed_current": [
+    {
+      "blender": "build/portable-4.2.0/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 63278,
+      "command": [
+        "build/portable-4.2.0/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63278,
+        "restore_requests": 0,
+        "seconds": 11.791302919387817,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "error": "",
+        "version": "4.2.0",
+        "checks": [
+          "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+          "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+          "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+          "Shared animation/tooltip timers settle and teardown clears all child state"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-final/blender-0.log"
+    },
+    {
+      "blender": "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 63338,
+      "command": [
+        "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63338,
+        "restore_requests": 0,
+        "seconds": 11.795161008834839,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "error": "",
+        "version": "4.4.3",
+        "checks": [
+          "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+          "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+          "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+          "Shared animation/tooltip timers settle and teardown clears all child state"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-final/blender-1.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 63385,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63385,
+        "restore_requests": 0,
+        "seconds": 11.91076409816742,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "error": "",
+        "version": "5.1.2",
+        "checks": [
+          "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+          "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+          "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+          "Shared animation/tooltip timers settle and teardown clears all child state"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-final/blender-2.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 63495,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 24445,
+        "new_instance": true,
+        "pid": 63495,
+        "restore_requests": 0,
+        "seconds": 12.146733045578003,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "error": "",
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+          "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+          "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+          "Shared animation/tooltip timers settle and teardown clears all child state"
+        ]
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-final/blender-3.log"
+    }
+  ],
+  "windowed_previous": [
+    [
+      {
+        "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "pid": 49643,
+        "command": [
+          "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 24445,
+          "initial_frontmost_pid": 24445,
+          "new_instance": true,
+          "pid": 49643,
+          "restore_requests": 0,
+          "seconds": 12.378415942192078,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "error": "",
+          "version": "5.1.2",
+          "checks": [
+            "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+            "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+            "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+            "Shared animation/tooltip timers settle and teardown clears all child state"
+          ]
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-5.1.2/blender-0.log"
+      }
+    ],
+    [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 49410,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_popovers_windowed.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 24445,
+          "initial_frontmost_pid": 24445,
+          "new_instance": true,
+          "pid": 49410,
+          "restore_requests": 0,
+          "seconds": 12.36515200138092,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "error": "",
+          "version": "5.2.2 LTS",
+          "checks": [
+            "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+            "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+            "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+            "Shared animation/tooltip timers settle and teardown clears all child state"
+          ]
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-popovers-5.2.2/blender-0.log"
+      }
+    ]
+  ],
+  "unit_tests": 405,
+  "packages": {
+    "schema": 1,
+    "packages": {
+      "darwin-arm64/d13f752e3b9c": {
+        "directory": "packages/darwin-arm64/d13f752e3b9c",
+        "manifest_sha256": "9df99f53a5d23798dd21b8b9813952ffa71718785332216b4b76eaa86e067818"
+      },
+      "darwin-arm64/a51f293548ad": {
+        "directory": "packages/darwin-arm64/a51f293548ad",
+        "manifest_sha256": "9975cbe324ee016ce4560ed1a56656723096f1b510486b224d45839ac0e7d070"
+      },
+      "darwin-arm64/ec6e62d40fa9": {
+        "directory": "packages/darwin-arm64/ec6e62d40fa9",
+        "manifest_sha256": "99623d13f85a65b655cff85a4264e4ea1164be96b3d5cc68b9cce94c326aacb3"
+      },
+      "darwin-arm64/32f5fdce0a0a": {
+        "directory": "packages/darwin-arm64/32f5fdce0a0a",
+        "manifest_sha256": "eb3d6d1c1feb5b2a52fa88fc33adde296154c3926d4dbc5da30883daf99dd034"
+      },
+      "darwin-arm64/802179c51ccc": {
+        "directory": "packages/darwin-arm64/802179c51ccc",
+        "manifest_sha256": "60a2be692c956be8c021969a7f7ad042f30f1e377c14cadfc98046a80f995a88"
+      },
+      "darwin-arm64/5afeabba6097": {
+        "directory": "packages/darwin-arm64/5afeabba6097",
+        "manifest_sha256": "9340549724589fe075081565cd2b40b5ebd8452fa926245f0e399f32c919b1f0"
+      },
+      "darwin-arm64/a3db93c5b259": {
+        "directory": "packages/darwin-arm64/a3db93c5b259",
+        "manifest_sha256": "c19f9ca1176636e7c01d7c20c6a3a33d05ac08512e1a78109e577714c9e74b80"
+      },
+      "darwin-arm64/d0cbe84903e8": {
+        "directory": "packages/darwin-arm64/d0cbe84903e8",
+        "manifest_sha256": "51756f18377a01bd146b414c34d3a02d48828eb1d54eb1235a581ce02355567f"
+      },
+      "windows-x86_64/a51f293548ad": {
+        "directory": "packages/windows-x86_64/a51f293548ad",
+        "manifest_sha256": "9071c29b7917a3ae40c5255eb6a72d33af23e447c119e6f5761db6b33dcc586b"
+      },
+      "windows-x86_64/d0cbe84903e8": {
+        "directory": "packages/windows-x86_64/d0cbe84903e8",
+        "manifest_sha256": "099e388db582a1906d31a8b4a2c97f77e91ab12c56a86f5b52385107eeb7dd98"
+      },
+      "windows-x86_64/32f5fdce0a0a": {
+        "directory": "packages/windows-x86_64/32f5fdce0a0a",
+        "manifest_sha256": "50ce0c215994f3865cbcbb4a301be2b5fb50e6ffa95232bf867c9b23169997a8"
+      },
+      "windows-x86_64/802179c51ccc": {
+        "directory": "packages/windows-x86_64/802179c51ccc",
+        "manifest_sha256": "1ebd615c733022e84af816f3965b132285c98c69e552f81c9a82007dcff76e60"
+      },
+      "windows-x86_64/5afeabba6097": {
+        "directory": "packages/windows-x86_64/5afeabba6097",
+        "manifest_sha256": "31b49d670a4434bc76c5c7deef3de16b4bd22c736f0f33e62c3fdcff115dab91"
+      },
+      "windows-x86_64/a3db93c5b259": {
+        "directory": "packages/windows-x86_64/a3db93c5b259",
+        "manifest_sha256": "796006920c2b78977283fc0d1474340226c1124cb74e2fe7fa35cfe4bffff067"
+      },
+      "windows-x86_64/ec6e62d40fa9": {
+        "directory": "packages/windows-x86_64/ec6e62d40fa9",
+        "manifest_sha256": "45728d486e38b13761b1836b8ec7b3ec85fd16b1fb2682b960b7fead12ccf748"
+      },
+      "windows-x86_64/d13f752e3b9c": {
+        "directory": "packages/windows-x86_64/d13f752e3b9c",
+        "manifest_sha256": "74e672fd46b521d6ecdbf56eb2467284e9a918e521d77a0e702d86d2bc47caf6"
+      }
+    }
+  },
+  "source_sha256": "583741431c33f7c3ab59502d56334ceb9b309909fa537ae5d98a2b3f2707ce4c",
+  "limits": [
+    "Exact stock builds only; other patch/custom builds require separate artifacts.",
+    "Windows/NVIDIA Vulkan/OpenGL window composition and visual/performance acceptance pending.",
+    "Linux software GPU rendering passed; Linux embedded native host unavailable.",
+    "Intel macOS unqualified.",
+    "No live scene or preferences saved; running Uraraka not restarted."
+  ],
+  "official_docs_requests": [
+    {
+      "version": "4.2",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/4.2/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.2",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/4.2/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.3",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/4.3/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.3",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/4.3/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.4",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/4.4/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.4",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/4.4/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.5",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/4.5/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "4.5",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/4.5/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.0",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/5.0/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.0",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/5.0/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.1",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/5.1/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.1",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/5.1/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.2",
+      "kind": "api",
+      "url": "https://docs.blender.org/api/5.2/gpu.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "version": "5.2",
+      "kind": "manual",
+      "url": "https://docs.blender.org/manual/en/5.2/editors/preferences/system.html",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "consumer": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 64724,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.microsoft.edgemac.app.hjlhbeffadgkonmpnblkfmhckmocohah",
+            "kind": "activation",
+            "pid": 24445,
+            "seconds": 4.257140040397644
+          }
+        ],
+        "final_frontmost_pid": 24445,
+        "initial_frontmost_pid": 36495,
+        "new_instance": true,
+        "pid": 64724,
+        "restore_requests": 0,
+        "seconds": 14.51412296295166,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.2.2 LTS",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 27,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 4,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 20,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 27,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 9,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 20,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 27,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 20,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 27,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 9,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 37,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 6,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 27,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 9,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_open_flatten_falloff_popover",
+              "callback": "invoke",
+              "routes": [
+                "call_panel"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_ui_appearance",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie",
+            "call_panel"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "input_errors": {},
+            "native_fallbacks": {},
+            "popup_fallbacks": [],
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [
+              {
+                "route": "macro-step:camkeys.begin_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              },
+              {
+                "route": "macro-step:camkeys.finish_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              }
+            ],
+            "preserved_macro_dependencies": [
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              }
+            ],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/compatibility-camkeys-final/blender-0.log"
+    }
+  ],
+  "qa_archive": {
+    "archive": "/Users/tylerwalker/dev/Blender-Beyond-UI/dist/compatibility-qa/CamKeys-BUI-compatibility-QA.zip",
+    "sha256": "eea387eff67cf79305facb33089f16d31e01309496c982802435a4dab5754428",
+    "files": 273,
+    "bytes": 3376875,
+    "consumer_version_unchanged": "3.5.6",
+    "qa_only": true,
+    "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+    "git_commit": "deb1e0a412f1ae2c68dd73e6e88c219586821179",
+    "includes_working_tree_changes": true
+  },
+  "publication": "Manifest line endings normalized to LF and catalog re-pinned; compiled binaries and adapter source fingerprints unchanged. Published artifact test added."
+}

@@ -33,10 +33,28 @@ core defects; full Blender API coverage is no longer the product release goal.
 Read the canonical shared Blender guidance AGENTS.md, guidance/core.md and
 relevant routed topics before implementation. Do not edit the shared guidance.
 Keep product bindings, registration, undo policy and renderer dependencies in
-the consuming extension. Preserve Blender 4.2 compatibility paths and use exact
+the consuming extension.
+
+Compatibility target confirmed by Tyler on 2026-11-02: support every release
+family from Blender 4.2 onward. Metal, Vulkan and OpenGL paths must retain the
+same controls and context actions wherever Blender provides that backend. Do not
+raise the minimum or count a native fallback as custom compatibility. Qualify
+exact stock builds for native ABI adapters; list unqualified builds and GPU
+validation separately from implemented version branches. Preserve Blender 4.2 compatibility paths and use exact
 versioned official API/Manual evidence for compatibility claims.
 
 ## Hard rule: exact generated-reference fidelity
+
+### Current acceptance correction — 2026-11-01
+
+Tyler subsequently clarified: "Doesn't have to be perfect, just close." For the
+current CamKeys styling/refinement work, prioritize a close, consistent match
+and practical readability over pixel-exact reproduction. Use the references and
+side-by-side evidence, report remaining differences honestly, and preserve all
+glass, motion, theme, ownership and performance requirements. Do not spend further
+turns chasing generated-artwork minutiae or treat them as release blockers.
+This explicit correction supersedes the exact-match acceptance wording below
+for this work; retain immutable references and evidence.
 
 Tyler requires implemented custom controls to match generated references
 EXACTLY. A generated reference is a visual specification, not loose inspiration.

@@ -1,0 +1,418 @@
+--- a/ui_panel.py
++++ b/ui_panel.py
+@@ -1,3 +1,5 @@
++from ._vendor import beyond_ui as bui
++from . import ui_theme
+ import bpy
+ import re
+ from bpy.app import translations as i18n
+@@ -5,7 +7,6 @@
+ from . import stepped_turnaround
+ 
+ class CamKeysPanel:
+-    beyond_ui_props = {"ShapeKey.value": {"disabled_accent": True}}
+ 
+     bl_space_type = "VIEW_3D"
+     bl_region_type = "UI"
+@@ -71,6 +72,7 @@
+         help_box = box.box()
+         row_help = help_box.row(align=True)
+         row_help.prop(props, "show_help_select_camera", text=i18n.pgettext_tip("HOW TO"), icon="TRIA_DOWN" if props.show_help_select_camera else "TRIA_RIGHT", emboss=False)
++        bui.style(row_help, ui_theme.HELP)
+ 
+         if props.show_help_select_camera:
+             utils.draw_wrapped_text(help_box, i18n.pgettext_tip("You can either use the viewport or the camera to drive your CamKeys. Baking only works if 'Camera' is selected."), context)
+@@ -83,6 +85,7 @@
+         
+         row = col.row()
+         row.template_list("CAMKEYS_UL_mesh_object_items", "", scene, "mesh_object_items", scene, "mesh_object_items_index", rows=3)
++        bui.style(row, ui_theme.TWO_LINE_LIST)
+         
+         list_actions = row.column(align=True)
+         list_actions.operator("camkeys.add_mesh_object_item", icon="ADD", text="")
+@@ -100,6 +103,7 @@
+         help_box = box.box()
+         row_help = help_box.row(align=True)
+         row_help.prop(props, "show_help_mesh_objects", text=i18n.pgettext_tip("HOW TO"), icon="TRIA_DOWN" if props.show_help_mesh_objects else "TRIA_RIGHT", emboss=False)
++        bui.style(row_help, ui_theme.HELP)
+         
+         if props.show_help_mesh_objects:
+             utils.draw_wrapped_text(help_box, mesh_help_text, context)
+@@ -382,6 +386,7 @@
+                     
+                     row = col.row()
+                     row.template_list("CAMSHAPEMATIC_UL_angle_items", "", obj, "angle_items", obj, "angle_items_index", rows=4)
++                    bui.style(row, ui_theme.TWO_LINE_LIST)
+                     
+                     list_actions = row.column(align=True)
+                     list_actions.operator("camkeys.add_angle_item", icon="ADD", text="")
+@@ -471,6 +476,7 @@
+                                 row_slider = col.row()
+                                 row_slider.enabled = False
+                                 row_slider.prop(key_block, "value", text=i18n.pgettext_tip("CamKey Value"), slider=True)
++                                bui.style(row_slider, ui_theme.CAMKEY_VALUE)
+ 
+                     
+                     if scene.UseViewportInsteadOfCamera:
+@@ -500,6 +506,7 @@
+ 
+                         row_help_dyn.alignment = "CENTER"
+                         row_help_dyn.prop(props, "show_help_cam_angles", text=i18n.pgettext_tip("HOW TO"), icon="TRIA_DOWN" if props.show_help_cam_angles else "TRIA_RIGHT", emboss=False)
++                        bui.style(row_help_dyn, ui_theme.HELP)
+ 
+                         if props.show_help_cam_angles:
+                             utils.draw_wrapped_text(help_box_dyn, angle_help_text, context)
+@@ -549,7 +556,6 @@
+ 
+ 
+ class CAMKEYS_PT_auto_fov(CamKeysPanel, bpy.types.Panel):
+-    beyond_ui_style = "compact"
+     bl_space_type = "VIEW_3D"
+     bl_region_type = "UI"
+     bl_category = "CamKeys"
+@@ -580,6 +586,7 @@
+         self.layout.label(text=i18n.pgettext_tip("Forced Perspective"))
+ 
+     def draw(self, context):
++        bui.style(self.layout, ui_theme.COMPACT, scope="group")
+         layout = self.layout
+         scene = context.scene
+         props = scene.camkeys_props
+@@ -768,14 +775,15 @@
+         fl_left.prop(compensation if compensation.enabled else active_mesh_obj_item,
+                      "apparent" if compensation.enabled else "auto_fov_max_strength",
+                      text=i18n.pgettext_tip("Apparent Focal Length"))
++        bui.style(fl_left, ui_theme.FOCAL)
+         fl_left.operator("camkeys.reset_apparent_focal_length", text="", icon='LOOP_BACK')
+ 
+         fl_right = fl_split.row(align=True)
+         # Unlock short lens checkbox (allows apparent FL below current lens)
+         unlock_icon = 'UNLOCKED' if active_mesh_obj_item.auto_fov_unlock_short_lens else 'LOCKED'
+         fl_right.prop(active_mesh_obj_item, "auto_fov_unlock_short_lens", text="", icon=unlock_icon, toggle=True)
+-        if not getattr(layout, "is_custom", False):
+-            fl_right.label(text=i18n.pgettext_tip("mm"))
++        fl_right.label(text=i18n.pgettext_tip("mm"))
++        bui.style(fl_right, ui_theme.HIDDEN)
+         
+         flatten_icon_id = 'NOCURVE'
+         # Determine if currently in short lens mode (apparent < current)
+@@ -910,6 +918,7 @@
+         help_box = layout.box()
+         row_help = help_box.row(align=True)
+         row_help.prop(props, "show_help_auto_fov", text=i18n.pgettext_tip("HOW TO"), icon="TRIA_DOWN" if props.show_help_auto_fov else "TRIA_RIGHT", emboss=False)
++        bui.style(row_help, ui_theme.HELP)
+ 
+         if props.show_help_auto_fov:
+             help_text = i18n.pgettext_tip(
+@@ -1110,6 +1119,7 @@
+                 help_box = box.box()
+                 row_help = help_box.row(align=True)
+                 row_help.prop(props, "show_help_cam_props", text=i18n.pgettext_tip("HOW TO"), icon="TRIA_DOWN" if props.show_help_cam_props else "TRIA_RIGHT", emboss=False)
++                bui.style(row_help, ui_theme.HELP)
+                 
+                 if props.show_help_cam_props:
+                     help_text = i18n.pgettext_tip("CamProps let you drive any Blender property based on camera angle. Right-click almost any property and choose 'Add to CamProps' to add it. The property will interpolate between captured and falloff values as the camera rotates.")
+@@ -1117,7 +1127,6 @@
+ 
+ 
+ class CAMKEYS_PT_baking(CamKeysPanel, bpy.types.Panel):
+-    beyond_ui_style = "compact"
+     bl_space_type = "VIEW_3D"
+     bl_region_type = "UI"
+     bl_category = "CamKeys"
+@@ -1148,12 +1157,14 @@
+         return expanded
+ 
+     def draw(self, context):
++        bui.style(self.layout, ui_theme.COMPACT, scope="group")
+         layout = self.layout
+         scene = context.scene
+         props = scene.camkeys_props
+ 
+         settings = layout.box()
+-        (settings.title if getattr(settings,"is_custom",False) else settings.label)(text=i18n.pgettext_tip("Bake Range"), icon="PREVIEW_RANGE")
++        settings.label(text=i18n.pgettext_tip("Bake Range"), icon="PREVIEW_RANGE")
++        bui.style(settings, ui_theme.HEADING)
+         range_row = settings.row(align=True)
+         range_row.prop(scene, "frame_start", text=i18n.pgettext_tip("Start"))
+         range_row.prop(scene, "frame_end", text=i18n.pgettext_tip("End"))
+@@ -1166,6 +1177,7 @@
+             text=i18n.pgettext_tip("Bake All"),
+             icon="REC",
+         )
++        bui.style(bake_all_row, ui_theme.PRIMARY)
+         cleanup_all_row = settings.row()
+         cleanup_all_row.scale_y = 1.05
+         cleanup_all_row.operator(
+@@ -1205,6 +1217,7 @@
+                 text=i18n.pgettext_tip("Bake CamKeys to Keyframes"),
+                 icon="REC",
+             )
++            bui.style(bake_row, ui_theme.PRIMARY)
+             camkeys_box.operator(
+                 "camkeys.cleanup_camkeys_actions",
+                 text=i18n.pgettext_tip("Clean Up CamKeys Baked Actions"),
+@@ -1245,6 +1258,7 @@
+                 text=i18n.pgettext_tip("Bake CamProps to Keyframes"),
+                 icon="REC",
+             )
++            bui.style(bake_row, ui_theme.PRIMARY)
+             camprops_box.operator(
+                 "camkeys.cleanup_camprops_actions",
+                 text=i18n.pgettext_tip("Clean Up CamProps Baked Actions"),
+@@ -1311,6 +1325,7 @@
+                     text=i18n.pgettext_tip("Bake Forced Perspective"),
+                     icon="REC",
+                 )
++                bui.style(bake_row, ui_theme.PRIMARY)
+                 help_box = auto_fov_box.box()
+                 utils.draw_wrapped_text(
+                     help_box,
+--- a/properties.py
++++ b/properties.py
+@@ -292,10 +292,6 @@
+     )
+ 
+ class CamKeysAddonProperties(bpy.types.PropertyGroup):
+-    beyond_ui_props = {name: {"trailing_icon": "INFO"} for name in (
+-        "show_help_select_camera", "show_help_mesh_objects", "show_help_cam_angles",
+-        "show_help_auto_fov", "show_help_cam_props",
+-    )}
+ 
+     tempObjFlag: bpy.props.IntProperty(default=0)
+     globObj: bpy.props.PointerProperty(type=bpy.types.Object)
+@@ -491,10 +487,6 @@
+     )
+ 
+ class CamPropTargetValue(bpy.types.PropertyGroup):
+-    beyond_ui_props = {
+-        "bin_size": {"precision": 1, "suffix": "°", "slider": False, "width": 72},
+-        "string_value": {"width": 64},
+-    }
+ 
+     """Stores a possible value for a cam prop"""
+     value_type: bpy.props.StringProperty(name="Value Type", default="FLOAT")
+@@ -645,7 +637,6 @@
+     parsed_prop_path: bpy.props.StringProperty(name="Parsed Prop Path", default="")
+ 
+ class CamKeysOtherObject(bpy.types.PropertyGroup):
+-    beyond_ui_props = {"auto_fov_max_strength": {"precision": 1, "suffix": "mm", "value_width": 78}}
+ 
+     """Reference to another object affected by Forced Perspective"""
+     object: bpy.props.PointerProperty(
+--- a/ui_lists.py
++++ b/ui_lists.py
+@@ -1,3 +1,5 @@
++from ._vendor import beyond_ui as bui
++from . import ui_theme
+ import bpy
+ import re
+ from bpy.app import translations as i18n
+@@ -43,44 +45,22 @@
+     return tooltip
+ 
+ class AngleItems_UL(bpy.types.UIList):
+-    beyond_ui_row_height = 48
+     bl_idname = "CAMSHAPEMATIC_UL_angle_items"
+     
+     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index):
+-        if getattr(layout, "is_custom", False):
+-            row = layout.row(align=True)
+-            row.prop(item, "enabled", text="")
+-            data_col = row.column(align=True)
+-            data_col.prop(item, "name", text="", emboss=False)
+-            if data and data.data.shape_keys:
+-                data_col.prop_search(item, "shapekey", data.data.shape_keys, "key_blocks", text="")
+-            else:
+-                data_col.label(text=utils.local_no_shapekeys())
+-            if data and data.data.shape_keys and item.shapekey in data.data.shape_keys.key_blocks:
+-                row.label(text=f"{data.data.shape_keys.key_blocks[item.shapekey].value:.3f}")
+-            else:
+-                row.label(text="-")
+-            row.operator("camkeys.capture_angle", text="", icon="RESTRICT_RENDER_OFF").index = index
+-            return
+         row = layout.row(align=True)
+         row.prop(item, "enabled", text="")
+-        row.prop(item, "name", text="", emboss=False)
+-        
++        data_col = row.column(align=True)
++        data_col.prop(item, "name", text="", emboss=False)
+         if data and data.data.shape_keys:
+-            row.prop_search(item, "shapekey", data.data.shape_keys, "key_blocks", text="")
++            data_col.prop_search(item, "shapekey", data.data.shape_keys, "key_blocks", text="")
+         else:
+-            row.label(text=utils.local_no_shapekeys())
+-        
+-        row.separator(factor=2.8)
+-        
+-        if (data and data.data.shape_keys and item.shapekey in data.data.shape_keys.key_blocks):
+-            current_val = data.data.shape_keys.key_blocks[item.shapekey].value
+-            row.label(text=f"{current_val:.3f}")
++            data_col.label(text=utils.local_no_shapekeys())
++        if data and data.data.shape_keys and item.shapekey in data.data.shape_keys.key_blocks:
++            row.label(text=f"{data.data.shape_keys.key_blocks[item.shapekey].value:.3f}")
+         else:
+             row.label(text="-")
+-        
+-        op = row.operator("camkeys.capture_angle", text="", icon="RESTRICT_RENDER_OFF")
+-        op.index = index
++        row.operator("camkeys.capture_angle", text="", icon="RESTRICT_RENDER_OFF").index = index
+ 
+ class CamKeysAutoAddEntries_UL(bpy.types.UIList):
+     bl_idname = "CAMKEYS_UL_auto_add_entries"
+@@ -281,6 +261,7 @@
+         num_label = row.row(align=True)
+         num_label.alignment = 'RIGHT'
+         num_label.label(text=str(index))
++        bui.style(num_label, ui_theme.INDEX)
+ 
+         row.prop(item, "name", text="")
+         row.prop(item, "distance_m", text="")
+@@ -338,32 +319,17 @@
+         op.owner_kind = owner_kind
+ 
+ class MeshObjectItems_UL(bpy.types.UIList):
+-    beyond_ui_row_height = 48
+     bl_idname = "CAMKEYS_UL_mesh_object_items"
+     
+     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index):
+-        if getattr(layout, "is_custom", False):
+-            row = layout.row(align=True)
+-            data_col = row.column(align=True)
+-            data_col.prop(item, "object", text="", icon="OBJECT_DATA")
+-            if item.object and item.object.find_armature():
+-                data_col.prop_search(item, "SelBone", item.object.find_armature().pose, "bones", text="", icon="BONE_DATA")
+-            else:
+-                data_col.label(text=utils.local_no_armature())
+-            row.prop(item, "enabled", text="")
+-            return
+         row = layout.row(align=True)
++        data_col = row.column(align=True)
++        data_col.prop(item, "object", text="", icon="OBJECT_DATA")
++        if item.object and item.object.find_armature():
++            data_col.prop_search(item, "SelBone", item.object.find_armature().pose, "bones", text="", icon="BONE_DATA")
++        else:
++            data_col.label(text=utils.local_no_armature())
+         row.prop(item, "enabled", text="")
+-        row.separator(factor=0.1)
+-        row.prop(item, "object", text="", icon="OBJECT_DATA")
+-        row.separator(factor=2.8)
+-        
+-        if item.object and item.object.find_armature():
+-            armature_obj = item.object.find_armature()
+-            pose = armature_obj.pose
+-            row.prop_search(item, "SelBone", pose, "bones", text="", icon="BONE_DATA")
+-        else:
+-            row.label(text=utils.local_no_armature())
+ 
+ class CamKeysOtherObjects_UL(bpy.types.UIList):
+     bl_idname = "CAMKEYS_UL_other_objects"
+@@ -376,7 +342,6 @@
+             row.prop(item, "object", text="", icon="OBJECT_DATA")
+ 
+ class CamPropValueItems_UL(bpy.types.UIList):
+-    beyond_ui_row_gap = 6
+ 
+     bl_idname = "CAMKEYS_UL_camprop_value_items"
+     
+@@ -388,12 +353,13 @@
+             is_basis = (item.enum_value == camprop.captured_value_enum)
+         
+         row = layout.row(align=False)
++        bui.style(row, ui_theme.BIN_ROW, scope="group")
+         
+         row.prop(item, "enabled", text="")
+         num_label = row.row(align=True)
+         num_label.alignment = 'CENTER'
+-        num_label.ui_units_x = 1.2
+         num_label.label(text=str(index))
++        bui.style(num_label, ui_theme.INDEX)
+         
+         if is_basis:
+             row.label(text=f"{item.name} ({i18n.pgettext_tip('BASIS')})")
+@@ -402,12 +368,14 @@
+         
+         if item.value_type == "ENUM":
+             row.prop(item, "bin_size", text="", emboss=True)
+-            if not getattr(layout, "is_custom", False):
+-                row.label(text=i18n.pgettext_tip("°"))
++            bui.style(row, ui_theme.BIN_VALUE)
++            row.label(text=i18n.pgettext_tip("°"))
++            bui.style(row, ui_theme.HIDDEN)
+         elif item.value_type == "STRING":
+             value = row.row()
+             value.enabled = False
+             value.prop(item, "string_value", text="", emboss=True)
++            bui.style(value, ui_theme.STRING_CELL)
+         elif item.value_type == "BOOL":
+             row.label(text=str(item.bool_value))
+ 
+@@ -636,10 +604,8 @@
+ 
+         # Description
+         box = layout.box()
+-        if getattr(layout, "is_custom", False):
+-            box.paragraph(text=desc_text, icon='INFO')
+-        else:
+-            box.label(text=desc_text, icon='INFO')
++        box.label(text=desc_text, icon='INFO')
++        bui.style(box, ui_theme.DESCRIPTION)
+         box.label(text=i18n.pgettext_tip("Left side = High effect"))
+         box.label(text=i18n.pgettext_tip("Right side = Low effect"))
+ 
+@@ -687,6 +653,7 @@
+         num_label = row.row(align=True)
+         num_label.alignment = 'RIGHT'
+         num_label.label(text=str(index))
++        bui.style(num_label, ui_theme.INDEX)
+ 
+         row.prop(item, "name", text="", emboss=False)
+ 
+--- a/lens_compensation.py
++++ b/lens_compensation.py
+@@ -122,7 +122,6 @@
+ 
+ 
+ class CamKeysLensCompensation(bpy.types.PropertyGroup):
+-    beyond_ui_props = {"apparent": {"precision": 1, "suffix": "mm", "value_width": 78}}
+ 
+     auto_add_stops: bpy.props.BoolProperty(
+         name="Auto Add Stops", default=False, options=set(),
+--- a/ui_theme.py
++++ b/ui_theme.py
+@@ -1,6 +1,7 @@
+ """CamKeys Studio: consumer-owned branding, over the reusable Beyond UI system."""
+ import bpy
+ from ._vendor.beyond_ui import StyleSheet
++from ._vendor import beyond_ui as bui
+ 
+ STUDIO = StyleSheet(
+     name='CamKeys Studio', cards=True,
+@@ -26,11 +27,24 @@
+         'field':('#303A42C4','#38434BC4'),
+     },
+     variants={'primary':{'field':'#F06B57D9','hover':'#F17C67CC','text':'#FFF8F2'}},
+-    operators={name:'primary' for name in (
+-        'camkeys.bake_all','camkeys.bake_camkeys','camkeys.bake_camprops',
+-        'camkeys.bake_auto_fov','camkeys.bake_all_keyframes')},
++
+     motion=dict(enabled=True,strength=0.7,speed=1.0),
+ )
++
++# Reusable presentation dictionaries consumed by bui.style().
++HELP = dict(trailing_icon="INFO", text_align="center")
++FOCAL = dict(units="mm", precision=1, value_width=78)
++CAMKEY_VALUE = dict(disabled_accent=True)
++BIN_VALUE = dict(units="°", precision=1, slider=False, width=72)
++BIN_ROW = dict(gap=6)
++INDEX = dict(width=24, text_align="center")
++STRING_CELL = dict(width=64)
++TWO_LINE_LIST = dict(list_row_height=48)
++COMPACT = dict(template="compact")
++HEADING = dict(font_weight="bold")
++PRIMARY = dict(variant="primary")
++HIDDEN = dict(display="none")
++DESCRIPTION = dict(wrap=True)
+ 
+ DEFAULT_STYLE = STUDIO.to_dict()
+ 

@@ -1,0 +1,171 @@
+[
+  {
+    "image": "lattice_auto_fov_modifier.png",
+    "prompt": "lattice_auto_fov_modifier-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      2089,
+      753
+    ],
+    "sha256": "19a3227d606fb59cbf53458853ea2a1167e78708d3aef5600f6c367175e943db",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "distance_falloff_popover.png",
+    "prompt": "distance_falloff_popover-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1558,
+      1010
+    ],
+    "sha256": "4a923199b695056ab6ec93e1ced2584042390be90fd53a61368f94a9a5a2b58f",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "flatten_falloff_popover.png",
+    "prompt": "flatten_falloff_popover-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      906,
+      1737
+    ],
+    "sha256": "09d4600bb2f8d86ed56ddb4267136ef6e77b3dcc7ab77e049f259a844b786bfb",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "dolly_expressions.png",
+    "prompt": "dolly_expressions-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      2041,
+      770
+    ],
+    "sha256": "7b28a99bc6ce90c72d99c70739ff5589be74d0cfd8bb9bc565eac064bbb88d5b",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "camkeys_linking.png",
+    "prompt": "camkeys_linking-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1071,
+      1469
+    ],
+    "sha256": "6d33bfb88e1b556aa02f6c3118d197fbb5cce033047a09b5e3656d1edd34209c",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "lens_compensation.png",
+    "prompt": "lens_compensation-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1235,
+      1274
+    ],
+    "sha256": "4876fd6895e6166ca90848eb9de5fa599f8eb95a05761788194c8955d78c508d",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "camkeys_main.png",
+    "prompt": "camkeys_main-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1027,
+      1531
+    ],
+    "sha256": "580be78f0714e0cdc9868d92e060e00de52f07efd4e055347fa2af3b1b5f7069",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "billboard_settings.png",
+    "prompt": "billboard_settings-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1667,
+      944
+    ],
+    "sha256": "c387ddfa1097ed716addb372f17c07accfc00224b06e2e6a352994307baa0c3f",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "logo.png",
+    "prompt": "logo-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      2014,
+      781
+    ],
+    "sha256": "cb11881c1b2f0e5d96855c3f5c3a353a45e669bbf8de710f73d13a44fb76b107",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "falloff_popover.png",
+    "prompt": "falloff_popover-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      1558,
+      1010
+    ],
+    "sha256": "3d636a1e581377121fb7dbf77564e8f0366212bbcb8eebe3ad98dcae052e947f",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "auto_fov.png",
+    "prompt": "auto_fov-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      927,
+      1697
+    ],
+    "sha256": "b3b46bfedba1134f6905d98fb68c1dcc73fbd307bdc46a8cdc2ec474f6f1322c",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "baking.png",
+    "prompt": "baking-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      922,
+      1706
+    ],
+    "sha256": "c49b60cece6ecdbbfaabdc59b48c87b8eccec7a689feac7b7f7b493d1774bba3",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  },
+  {
+    "image": "camprops.png",
+    "prompt": "camprops-prompt.txt",
+    "tool": "built-in image_gen",
+    "model_version": "not exposed by tool",
+    "dimensions": [
+      895,
+      1758
+    ],
+    "sha256": "0bd510ae9575d346cce763d49141f2f741ef4891681063bcadb426c88b4ca4e0",
+    "status": "visual specification; acceptance open",
+    "source": "Actual Uraraka consumer panel capture; source icons and real controls are authoritative"
+  }
+]

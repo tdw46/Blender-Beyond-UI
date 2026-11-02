@@ -164,18 +164,20 @@ def run():
             NS(type="APP", value="PRESS"), x + 2, y + 2, clip, context=copy_context
         )
         menu = canvas.context_menu
-        assert [r.key for r in menu.page.rows] == ["COPY_SHORTCUT", "HOST_SHORTCUT"]
-        menu.choose(0, copy_context)
+        keys = [r.key for r in menu.page.rows]
+        assert keys.count("COPY_SHORTCUT") == keys.count("HOST_SHORTCUT") == 1, keys
+        assert {"PATH", "FULL_PATH"}.issubset(keys), keys
+        menu.choose(keys.index("COPY_SHORTCUT"), copy_context)
         assert copy_context.window_manager.clipboard == before
         canvas.cancel()
         assert canvas.open_context(c, x + 2, y + 2, clip, context=copy_context)
-        canvas.context_menu.choose(1, copy_context)
+        canvas.context_menu.choose(next(i for i, row in enumerate(canvas.context_menu.page.rows) if row.key == "HOST_SHORTCUT"), copy_context)
         assert shortcut_calls == [c.key]
         canvas.cancel()
         assert canvas.open_context(c, x + 2, y + 2, clip, context=copy_context)
         stale = canvas.context_menu
         f.config.keymaps[0].keymap_items.remove(f.item)
-        stale.choose(1, copy_context)
+        stale.choose(next(i for i, row in enumerate(stale.page.rows) if row.key == "HOST_SHORTCUT"), copy_context)
         assert shortcut_calls == [c.key]
         canvas.context_provider = None
         canvas.cancel()

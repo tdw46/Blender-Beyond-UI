@@ -1,0 +1,76 @@
+name: Native compatibility qualification
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/native-compatibility-*']
+jobs:
+  packages:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022]
+        version: ['4.2.0', '4.2.23', '4.3.2', '4.4.3', '4.5.15', '5.0.1', '5.1.2', '5.2.2']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - name: Linux runtime dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libxkbcommon0 libsm6 libxxf86vm1 libxi6 libxfixes3 libxrender1 libgl1 libegl1
+      - uses: actions/cache@v4
+        with:
+          path: |
+            build/native/runtime
+            build/native/source
+            build/native/fmt
+            build/native/*.zip
+            build/native/*.xz
+            build/native/*.gz
+          key: native-inputs-${{ matrix.os }}-${{ matrix.version }}
+      - name: Build from exact Blender headers
+        run: python tools/build_portable_bridge.py --version ${{ matrix.version }} --workspace build/native
+      - name: Exercise portable admission and context actions
+        run: python tools/native/run_smoke.py build/native/build-result.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-${{ matrix.os }}-${{ matrix.version }}
+          path: |
+            beyond_ui/_native/packages/
+            beyond_ui/_native/catalog.json
+            build/native/*.log
+            build/native/*.json
+            build/native/smoke/
+  renderer:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '4.2.0'
+            backend: opengl
+          - version: '5.2.2'
+            backend: vulkan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y xvfb libxkbcommon0 libsm6 libxxf86vm1 libxi6 libxfixes3 libxrender1 libgl1 libegl1 mesa-vulkan-drivers
+      - run: python tools/build_portable_bridge.py --version ${{ matrix.version }} --workspace build/native --runtime-only
+      - name: Real software GPU execution
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a python tools/native/run_renderer.py build/native/build-result.json ${{ matrix.backend }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: renderer-${{ matrix.version }}-${{ matrix.backend }}
+          path: |
+            build/native/renderer-*/
+            build/native/*.log
+            build/native/*.json

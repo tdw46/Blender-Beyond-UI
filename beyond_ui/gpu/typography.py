@@ -114,3 +114,39 @@ def submitted_text(font):
         yield
     finally:
         flush_text(font)
+
+
+def draw_text(font, value, ink, effects=None, scale=1.0):
+    """One foreground glyph pass; optional native shadow-only pass first.
+
+    BLF retains glyph geometry and queues each effect with its own font state.
+    Transparent foreground on the first pass avoids double-compositing text.
+    This uses privately owned fonts and leaves SHADOW disabled for other draws.
+    """
+    import blf
+    from ..text_effects import DEFAULTS
+
+    cfg = DEFAULTS if not effects else {**DEFAULTS, **effects}
+    capable = all(hasattr(blf, name) for name in ('shadow', 'shadow_offset', 'SHADOW'))
+    if not capable:
+        blf.color(font, *ink)
+        blf.draw(font, str(value))
+        return
+    try:
+        if cfg['shadow'] and cfg['shadow_opacity']:
+            blf.shadow(font, cfg['shadow_blur'], 0, 0, 0, cfg['shadow_opacity'] * ink[3])
+            blf.shadow_offset(font, *(round(v * scale) for v in cfg['shadow_offset']))
+            blf.enable(font, blf.SHADOW)
+            blf.color(font, ink[0], ink[1], ink[2], 0)
+            blf.draw(font, str(value))
+        if cfg['outline'] and cfg['outline_opacity']:
+            blf.shadow(font, 6, 0, 0, 0, cfg['outline_opacity'] * ink[3])
+            blf.shadow_offset(font, 0, 0)
+            blf.enable(font, blf.SHADOW)
+        else:
+            blf.disable(font, blf.SHADOW)
+        blf.color(font, *ink)
+        blf.draw(font, str(value))
+    finally:
+        blf.disable(font, blf.SHADOW)
+        blf.color(font, *ink)

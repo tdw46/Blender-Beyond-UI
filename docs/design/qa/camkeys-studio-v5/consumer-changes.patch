@@ -1,0 +1,139 @@
+--- a/lens_compensation.py
++++ b/lens_compensation.py
+@@ -4,6 +4,8 @@
+ import math
+ 
+ import bpy
++from ._vendor import beyond_ui as bui
++from . import ui_theme
+ 
+ _busy = False
+ 
+@@ -238,6 +240,7 @@
+         row.label(text="Current Lens")
+         row.label(text=f"{current_lens(item):.2f} mm", translate=False)
+         layout.prop(config, "apparent")
++        bui.style(layout, ui_theme.FOCAL)
+         row = layout.row()
+         row.template_list(
+             "CAMKEYS_UL_lens_stops", "", config, "stops", config, "index", rows=3
+--- a/ui_lists.py
++++ b/ui_lists.py
+@@ -426,6 +426,7 @@
+             return
+ 
+         col = layout.column(align=True)
++        bui.style(col, ui_theme.MENU_OPTIONS, scope="group")
+         for enum_item in enum_prop.enum_items:
+             row = col.row(align=True)
+             row.prop_enum(owner, prop_name, enum_item.identifier, text=enum_item.name, icon=enum_item.icon)
+@@ -500,6 +501,7 @@
+             return
+ 
+         col = layout.column(align=True)
++        bui.style(col, ui_theme.MENU_OPTIONS, scope="group")
+         for enum_item in enum_prop.enum_items:
+             row = col.row(align=True)
+             row.prop_enum(
+--- a/ui_panel.py
++++ b/ui_panel.py
+@@ -178,6 +178,7 @@
+         row = box.row()
+         row.template_list("CAMKEYS_UL_camprop_value_items", "enum_bins", prop,
+                           "enum_values", prop, "enum_values_index", rows=2)
++        bui.style(row, ui_theme.ENUM_LIST)
+         rail = row.column(align=True)
+         rail.operator("camkeys.move_enum_value_up", text="", icon="TRIA_UP")
+         rail.operator("camkeys.move_enum_value_down", text="", icon="TRIA_DOWN")
+@@ -665,6 +666,7 @@
+                 "auto_fov_focus_object",
+                 text=i18n.pgettext_tip("Focus Object"),
+             )
++            bui.style(focus_box, ui_theme.FIELD_COLUMN)
+             if focus_obj is not None and focus_obj != obj:
+                 warning_row = focus_box.row(align=True)
+                 warning_row.alert = True
+@@ -837,6 +839,7 @@
+         col.separator()
+ 
+         row_dist = col.row(align=True)
++        bui.style(row_dist, ui_theme.PAIRED_FIELDS, scope="group")
+         row_dist.prop(active_mesh_obj_item, "auto_fov_near_distance", text=i18n.pgettext_tip("Near Dist"))
+         row_dist.prop(active_mesh_obj_item, "auto_fov_far_distance", text=i18n.pgettext_tip("Far Dist"))
+         # Distance Falloff popover
+@@ -858,6 +861,7 @@
+         col = layout.box().column(align=True)
+         col.label(text=i18n.pgettext_tip("Perspective Lag"))
+         col.prop(active_mesh_obj_item, "auto_fov_direction_lag", text=i18n.pgettext_tip("Perspective Lag"))
++        bui.style(col, ui_theme.FIELD_COLUMN)
+         col.prop(active_mesh_obj_item, "auto_fov_direction_lag_step", text=i18n.pgettext_tip("Stepped Lag"))
+         stepped_turnaround.draw(col, active_mesh_obj_item)
+ 
+@@ -870,6 +874,7 @@
+             "auto_fov_falloff_radius",
+             text=i18n.pgettext_tip("Falloff Radius"),
+         )
++        bui.style(row_multi, ui_theme.FIELD_COLUMN)
+ 
+         right = row_multi.row(align=True)
+         icon_id = 'RNDCURVE'
+@@ -983,6 +988,7 @@
+                         "cam_prop_items_index",
+                         rows=3,
+                     )
++                    bui.style(row, ui_theme.PROPERTY_LIST)
+                     
+                     list_actions = row.column(align=True)
+                     list_actions.operator("camkeys.remove_camprop_item", icon="REMOVE", text="")
+@@ -1096,6 +1102,7 @@
+ 
+                                 left = angle_falloff_row.row()
+                                 left.prop(active_camprop, "angle_sensitivity", slider=True, text=f"{i18n.pgettext_tip('Angle Sensitivity for')} {active_camprop.name}")
++                                bui.style(left, ui_theme.INLINE_SLIDER)
+ 
+                                 right = angle_falloff_row.row(align=True)
+                                 icon_id = 'RNDCURVE'
+@@ -1166,10 +1173,13 @@
+         settings.label(text=i18n.pgettext_tip("Bake Range"), icon="PREVIEW_RANGE")
+         bui.style(settings, ui_theme.HEADING)
+         range_row = settings.row(align=True)
++        bui.style(range_row, ui_theme.PAIRED_FIELDS, scope="group")
+         range_row.prop(scene, "frame_start", text=i18n.pgettext_tip("Start"))
+         range_row.prop(scene, "frame_end", text=i18n.pgettext_tip("End"))
+         settings.prop(props, "bake_frame_step")
++        bui.style(settings, ui_theme.FIELD_COLUMN)
+         settings.prop(props, "bake_scope")
++        bui.style(settings, ui_theme.FIELD_COLUMN)
+         bake_all_row = settings.row()
+         bake_all_row.scale_y = 1.15
+         bake_all_row.operator(
+--- a/ui_theme.py
++++ b/ui_theme.py
+@@ -35,9 +35,9 @@
+ HELP = dict(trailing_icon="INFO", text_align="center")
+ FOCAL = dict(units="mm", precision=1, value_width=78)
+ CAMKEY_VALUE = dict(disabled_accent=True)
+-BIN_VALUE = dict(units="°", precision=1, slider=False, width=72)
+-BIN_ROW = dict(gap=6)
+-INDEX = dict(width=24, text_align="center")
++BIN_VALUE = dict(units="°", precision=1, slider=False, width=64)
++BIN_ROW = dict(gap=4, padding=(4, 0))
++INDEX = dict(width=16, text_align="center")
+ STRING_CELL = dict(width=64)
+ TWO_LINE_LIST = dict(list_row_height=48)
+ COMPACT = dict(template="compact")
+@@ -45,6 +45,14 @@
+ PRIMARY = dict(variant="primary")
+ HIDDEN = dict(display="none")
+ DESCRIPTION = dict(wrap=True)
++# Reference-derived layout presets, in host logical units.
++PROPERTY_LIST = dict(list_rows=5, list_row_height=30)
++ENUM_LIST = dict(list_row_height=36)
++PAIRED_FIELDS = dict(gap=10, label_width=60)
++INLINE_SLIDER = dict(label_position="left", label_width=150, value_width=42)
++FIELD_COLUMN = dict(label_width=136)
++MENU_OPTIONS = dict(gap=3)
++
+ 
+ DEFAULT_STYLE = STUDIO.to_dict()
+ 

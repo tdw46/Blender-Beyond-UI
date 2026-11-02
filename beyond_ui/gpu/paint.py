@@ -73,10 +73,14 @@ def paint(
             preferences, reference=canvas.theme.palette == "REFERENCE"
         )
     t = canvas.theme
+    if t.stylesheet is not None:
+        palette = t.stylesheet.palette(palette)
 
     def mapped(r):
         a, b, c, d = r
         return x + a * sx, y + h - (b + d) * sy, c * sx, d * sy
+
+    current_style = {}
 
     def text(
         value,
@@ -90,11 +94,20 @@ def paint(
         inset=6,
         icon=None,
         icon_value=0,
+        trailing_icon=None,
     ):
-        active_font = typography.face(font, role)
+        face_role = role
+        if current_style.get("font_weight") == "bold":
+            face_role = "title"
+        elif current_style.get("font_weight") == "normal":
+            face_role = "body"
+        alignment = current_style.get("text_align")
+        if alignment and editor is None:
+            center, right_align = alignment == "CENTER", alignment == "RIGHT"
+        active_font = typography.face(font, face_role)
         a, b, c, d = r
         size = (
-            t.font_size
+            current_style.get("font_size", t.font_size)
             * scale
             * (12 / 11 if role == "title" else 9 / 11 if role == "secondary" else 1)
         )
@@ -109,15 +122,35 @@ def paint(
         if right <= left or top <= bottom:
             return
         has_icon = icon not in {None, "", "NONE", 0} or bool(icon_value)
-        icon_size = 14 if getattr(canvas, "panel_layout", False) else 12
-        has_icon = has_icon and right - left >= (icon_size + 4) * scale
+        icon_size = (
+            t.icon_size
+            if t.stylesheet
+            else (14 if getattr(canvas, "panel_layout", False) else 12)
+        )
+        icon_size = current_style.get("icon_size", icon_size)
+        has_icon = has_icon and right - left >= (icon_size + (0 if icon_only else 4)) * scale
         gutter = (icon_size + 6 if value else icon_size) * scale if has_icon else 0
+        tail = trailing_icon not in {None, "", "NONE", 0}
+        tail_gutter = (icon_size + 6) * scale if tail else 0
         group_left = (
-            max(left, a + (c - measure(active_font, size, str(value))[0] - gutter) / 2)
+            max(
+                left,
+                a
+                + (c - measure(active_font, size, str(value))[0] - gutter - tail_gutter)
+                / 2,
+            )
             if center
-            else max(left, right - measure(active_font, size, str(value))[0] - gutter)
-            if right_align
-            else left
+            else (
+                max(
+                    left,
+                    right
+                    - measure(active_font, size, str(value))[0]
+                    - gutter
+                    - tail_gutter,
+                )
+                if right_align
+                else left
+            )
         )
         if has_icon:
             icon_rect = (
@@ -141,6 +174,35 @@ def paint(
                 )
             left = group_left + gutter
         origin = group_left + gutter
+        if tail:
+            tail_x = min(
+                right - icon_size * scale,
+                origin + measure(active_font, size, str(value))[0] + 6 * scale,
+            )
+            if tail_x >= origin:
+                icon_rect = (
+                    tail_x,
+                    b + (d - icon_size * scale) / 2,
+                    icon_size * scale,
+                    icon_size * scale,
+                )
+                handled = (
+                    canvas.icon_renderer(trailing_icon, 0, icon_rect, ink)
+                    if canvas.icon_renderer
+                    else False
+                )
+                if not handled:
+                    style.icon(
+                        trailing_icon,
+                        tail_x + icon_size * scale / 2,
+                        b + d / 2,
+                        icon_size * scale,
+                        ink,
+                    )
+                # Leave room for hinted glyph ink beyond its advance width.
+                # Clipping exactly at the measured advance can drop the final
+                # glyph at small host scales even with ample button space.
+                right = min(right, tail_x - 2 * scale)
         if editor is not None:
             cursor = measure(active_font, size, value[: editor.cursor])[0]
             origin = left - max(0, cursor - max(0, right - left - 2 * scale))
@@ -175,11 +237,12 @@ def paint(
                 b + (d - measure(active_font, size, "H")[1]) / 2,
                 0,
             )
-            blf.draw(active_font, str(value))
+            typography.draw_text(active_font, value, ink, palette.get("text_effects"), scale)
         finally:
             blf.disable(active_font, blf.CLIPPING)
 
-    def surface(r, ink, radius=t.radius, flat=False):
+    def surface(r, ink, radius=None, flat=False):
+        radius = current_style.get("radius", t.radius if radius is None else radius)
         if backdrop is None or not glass.lens(backdrop, r, radius * scale, ink):
             skin.draw(
                 r,
@@ -210,11 +273,14 @@ def paint(
             text(control.label, (a, b, label_width + 6 * scale, d), ink)
         text(value, (a + label_width, b, c - label_width, d), ink, editor=canvas.editor)
 
+    feedback_now = canvas.value_feedback.clock()
     count = 0
     animation_colors = None
     status_colors = None
     base_palette = palette
-    numeric_states = {}  # Resolve shared scene/view settings once per visible host paint.
+    numeric_states = (
+        {}
+    )  # Resolve shared scene/view settings once per visible host paint.
     with gpu_state(), typography.submitted_text(font):
         # Geometry is clipped via scissor rectangle as well as logical culling.
         # The caller establishes scissor enable; no unsupported getter is used.
@@ -223,14 +289,35 @@ def paint(
         gpu.state.scissor_set(int(cx), int(cy), max(0, int(cw)), max(0, int(ch)))
         if background:
             style.draw(*rect, palette["bg"], radius=t.radius * scale)
+        if controls:
+            for card in getattr(canvas, "_style_cards", ()):
+                if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
+                    surface(mapped(card), palette["card"])
+                    skin.inset_outline(mapped(card), palette, scale, t.radius)
+            for bounds, options in getattr(canvas, "_style_surfaces", ()):
+                if bounds[1] + bounds[3] <= logical[1] or bounds[1] >= logical[1] + logical[3]:
+                    continue
+                radius = options.get("surface_radius", t.radius)
+                tint = options.get("surface_color", palette[options["surface"]])
+                opacity = options.get("_style_defaults", {}).get("opacity", 1)
+                surface(mapped(bounds), tint[:3] + (tint[3] * opacity,), radius)
+                skin.inset_outline(mapped(bounds), palette, scale, radius)
         for control in canvas.visible_controls(logical) if controls else ():
+            current_style = control.options.get("_inline_style", {})
             r = mapped(control.rect)
             if control.options.get("search_bar"):
                 a, b, c, d = r
                 inset = menu_metrics.SEARCH_INSET * scale
                 r = (a + inset, b, max(0, c - 2 * inset), d)
             a, b, c, d = r
-            palette = base_palette
+            palette = (
+                t.stylesheet.control_palette(base_palette, control)
+                if t.stylesheet is not None
+                else base_palette
+            )
+            inline_sheet = control.options.get("_inline_sheet")
+            if inline_sheet is not None:
+                palette = inline_sheet.palette(palette)
             kind = control.kind
             slider = kind == "number" and control.options.get("slider", True)
             external_label = (
@@ -261,6 +348,8 @@ def paint(
                 value = control.binding.read() if control.binding else None
             except (ReferenceError, RuntimeError):
                 value = None
+            if control.binding is not None or control.options.get("value_feedback"):
+                canvas.value_feedback.observe(control, value if control.binding is not None else control.label, feedback_now)
             enabled = control.enabled
             alert = enabled and control.options.get("alert", False)
             status = control.options.get("status", "EMPTY")
@@ -280,7 +369,9 @@ def paint(
                     else status_colors.get(status, base_palette["muted"])
                 )
                 palette = dict(base_palette, field=(*tint[:3], 0.3))
-            ink = palette["text"] if enabled else palette["muted"]
+            role = "text" if "color" in current_style else current_style.get("color_role", "text")
+            ink_role = "accent_text" if role == "accent" and "color" not in current_style else role
+            ink = palette.get(ink_role, palette[role]) if enabled else palette["muted"]
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
             menu_option = control.options.get("menu_option", False)
@@ -288,12 +379,20 @@ def paint(
                 chrome = False
             if (
                 control.options.get("list_row")
+                and kind not in {"number", "text", "event", "search"}
+                and not control.options.get("list_action")
                 and canvas.hover != control.key
                 and canvas.active is not control
             ):
                 chrome = False
             if selected and enabled:
                 ink = palette["selected_text"]
+            stable_ink = ink
+            feedback = canvas.value_feedback.amount(control, feedback_now)
+            if feedback:
+                feedback_role = canvas.value_feedback.options(control)["role"]
+                tint = palette.get("value_change", palette.get("accent_text", palette["accent"])) if feedback_role == "accent" else palette[feedback_role]
+                ink = tuple(a + (b-a)*feedback for a,b in zip(ink,tint))
             if kind != "widget":
                 control.motion.begin_paint()
                 if enabled and kind in {
@@ -318,7 +417,9 @@ def paint(
                             control.rect,
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
+                            label_width=control.options.get("_slider_label_width"),
                             label_band=control.options.get("_label_band", 24),
+                            value_width=control.options.get("value_width", 53),
                         )
                         control.motion.region(
                             "handle", (tx - 7, ty - 12, tw + 14, 24), circular=True
@@ -327,10 +428,12 @@ def paint(
             with (
                 typography.motion_text(font, control.motion),
                 control.motion.deform("reveal", row_rect),
-                nullcontext()
-                if (kind == "toggle" and not control.options.get("bool_button"))
-                or slider
-                else control.motion.deform("body", row_rect),
+                (
+                    nullcontext()
+                    if (kind == "toggle" and not control.options.get("bool_button"))
+                    or slider
+                    else control.motion.deform("body", row_rect)
+                ),
                 typography.submitted_text(font),
             ):
                 if external_label:
@@ -342,6 +445,7 @@ def paint(
                         inset=0 if getattr(canvas, "panel_layout", False) else 6,
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
+                        trailing_icon=control.options.get("trailing_icon"),
                     )
                 if (
                     kind
@@ -360,45 +464,63 @@ def paint(
                     and chrome
                     and not control.options.get("search_bar")
                 ):
-                    inset = kind in {"text", "number", "event"}
+                    inset = kind in {"text", "number", "event", "search"}
                     surface(
                         menu_metrics.highlight(r, scale) if menu_option else r,
-                        palette["selected"]
-                        if selected
-                        else palette["hover"]
-                        if canvas.hover == control.key
-                        else palette["input"]
-                        if inset and not (alert or colored)
-                        else palette["field"],
+                        (
+                            palette["selected"]
+                            if selected
+                            else (
+                                palette["hover"]
+                                if canvas.hover == control.key
+                                else (
+                                    palette["input"]
+                                    if inset and not (alert or colored)
+                                    else palette["field"]
+                                )
+                            )
+                        ),
                         flat=inset,
                     )
                     if kind == "button" and not menu_option:
                         skin.inset_outline(r, palette, scale, t.radius)
+                    if selected or menu_option and canvas.hover == control.key:
+                        skin.selection_outline(menu_metrics.highlight(r, scale) if menu_option else r,
+                                               palette, scale, current_style.get("radius", t.radius))
                 if kind == "widget":
                     typography.flush_text(font)
                     control.options["widget"].paint(r, font, palette, backdrop=backdrop)
                 elif kind == "separator":
                     if not control.options.get("space"):
+                        thickness = current_style.get("divider_width", 1) * scale
+                        tint = ink if "color" in current_style or "color_role" in current_style else palette["muted"]
                         if control.options.get("vertical"):
-                            style.draw(
-                                a + c / 2, b, scale, d, palette["muted"], radius=0
-                            )
+                            style.draw(a + (c-thickness)/2, b, thickness, d, tint, radius=0)
                         else:
-                            style.draw(
-                                a, b + d / 2, c, scale, palette["muted"], radius=0
-                            )
+                            style.draw(a, b + (d-thickness)/2, c, thickness, tint, radius=0)
                 elif kind == "toggle" and control.options.get("bool_button"):
-                    if value or canvas.hover == control.key:
+                    if control.options.get("section_disclosure"):
+                        surface(
+                            mapped(control.options.get("_section_rect", control.rect)),
+                            (
+                                palette["hover"]
+                                if canvas.hover == control.key
+                                else palette["bar"]
+                            ),
+                        )
+                    elif value or canvas.hover == control.key:
                         surface(r, palette["selected"] if value else palette["hover"])
                     alignment = control.options.get("text_alignment", "EXPAND")
                     text(
                         control.label,
                         r,
                         ink,
+                        role=control.options.get("text_role", "body"),
                         center=alignment in {"EXPAND", "CENTER"},
                         right_align=alignment == "RIGHT",
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
+                        trailing_icon=control.options.get("trailing_icon"),
                     )
                 elif kind == "toggle":
                     from ..scalar_geometry import switch_rect
@@ -417,19 +539,23 @@ def paint(
                         control.motion.position("body", bool(value)),
                         shape=control.motion.sample("body")[0],
                         scale=scale,
-                        palette=palette
-                        if enabled
-                        else dict(
-                            palette,
-                            text=palette["muted"],
-                            toggle_on=palette["toggle_off"],
+                        palette=(
+                            palette
+                            if enabled
+                            else dict(
+                                palette,
+                                text=palette["muted"],
+                                toggle_on=palette["toggle_off"],
+                            )
                         ),
                         backdrop=backdrop,
                     )
                 elif kind in {"pointer", "search"}:
-                    label = control.options[
+                    model = control.options[
                         "search_field" if kind == "search" else "pointer_field"
-                    ].label()
+                    ]
+                    label = model.label()
+                    clear = kind == "search" and model.can_clear()
                     quiet_pointer = (
                         control.options.get("list_row")
                         and kind == "pointer"
@@ -438,23 +564,28 @@ def paint(
                     )
                     text(
                         label if external_label or not prefix else f"{prefix}  {label}",
-                        (a, b, max(0, c - (0 if quiet_pointer else 22) * scale), d),
+                        (a, b, max(0, c - (44 if clear else 0 if quiet_pointer else 22) * scale), d),
                         ink,
-                        icon=control.options.get("icon")
-                        if not external_label
-                        else None,
-                        icon_value=control.options.get("icon_value", 0)
-                        if not external_label
-                        else 0,
+                        icon=(
+                            control.options.get("search_icon", control.options.get("icon"))
+                            if kind == "search" else control.options.get("icon") if not external_label else None
+                        ),
+                        icon_value=(
+                            control.options.get("icon_value", 0)
+                            if not external_label
+                            else 0
+                        ),
                     )
                     if not quiet_pointer:
                         style.icon(
                             "search" if kind == "search" else "▾",
-                            a + c - 12 * scale,
+                            a + c - (34 if clear else 12) * scale,
                             b + d / 2,
-                            (18 if kind == "search" else 10) * scale,
+                            (13 if kind == "search" else 10) * scale,
                             ink,
                         )
+                    if clear:
+                        style.icon("X", a + c - 11 * scale, b + d / 2, 11 * scale, ink)
                 elif kind == "decorator":
                     model = control.options["decorator"]
                     if model is not None:
@@ -521,7 +652,9 @@ def paint(
                             control.rect,
                             bool(control.label),
                             stacked=control.options.get("_slider_stacked"),
+                            label_width=control.options.get("_slider_label_width"),
                             label_band=control.options.get("_label_band", 24),
+                            value_width=control.options.get("value_width", 53),
                         )
                         if control.label:
                             lx, ly, lw, lh = label_rect
@@ -534,13 +667,15 @@ def paint(
                             text(
                                 control.label,
                                 mapped(label_rect),
-                                ink,
-                                "title"
-                                if control.options.get("_slider_stacked")
-                                else "body",
-                                inset=0
-                                if getattr(canvas, "panel_layout", False)
-                                else 6,
+                                stable_ink,
+                                (
+                                    "title"
+                                    if control.options.get("_slider_stacked")
+                                    else "body"
+                                ),
+                                inset=(
+                                    0 if getattr(canvas, "panel_layout", False) else 6
+                                ),
                                 icon=control.options.get("icon"),
                                 icon_value=control.options.get("icon_value", 0),
                             )
@@ -556,7 +691,8 @@ def paint(
                             shape=control.motion.sample("handle")[0],
                             scale=scale,
                             palette=palette,
-                            enabled=enabled,
+                            enabled=enabled
+                            or control.options.get("disabled_accent", False),
                         )
                         field = mapped(field)
                         with control.motion.deform("field", field):
@@ -566,16 +702,16 @@ def paint(
                                 field,
                                 ink,
                                 center=True,
-                                editor=canvas.editor
-                                if canvas.active is control
-                                else None,
+                                editor=(
+                                    canvas.editor if canvas.active is control else None
+                                ),
                             )
                     else:
                         if canvas.active is control and canvas.editor:
-                            text(
-                                label, r, ink, editor=canvas.editor
-                            ) if external_label else editing_text(
-                                control, label, r, ink
+                            (
+                                text(label, r, ink, editor=canvas.editor)
+                                if external_label
+                                else editing_text(control, label, r, ink)
                             )
                         else:
                             text(
@@ -592,9 +728,11 @@ def paint(
                         scale,
                         palette,
                         backdrop,
-                        canvas.editor.text
-                        if canvas.active is control and canvas.editor
-                        else value or "",
+                        (
+                            canvas.editor.text
+                            if canvas.active is control and canvas.editor
+                            else value or ""
+                        ),
                         canvas.editor if canvas.active is control else None,
                         lambda bounds: (
                             (
@@ -613,16 +751,18 @@ def paint(
                         else value
                     )
                     if canvas.active is control and canvas.editor:
-                        text(
-                            value or "", r, ink, editor=canvas.editor
-                        ) if external_label else editing_text(
-                            control, value or "", r, ink
+                        (
+                            text(value or "", r, ink, editor=canvas.editor)
+                            if external_label
+                            else editing_text(control, value or "", r, ink)
                         )
                     else:
                         text(
-                            str(value or "")
-                            if external_label
-                            else f"{prefix}  {value if value is not None else ''}",
+                            (
+                                str(value or "")
+                                if external_label or not prefix
+                                else f"{prefix}  {value if value is not None else ''}"
+                            ),
                             r,
                             ink,
                         )
@@ -697,46 +837,87 @@ def paint(
                     texture = texture() if callable(texture) else texture
                     if texture is not None:
                         style.preview(texture, *r, radius=t.radius * scale)
-                elif control.options.get("_heading_lines"):
-                    lines = control.options["_heading_lines"]
-                    line_height = 18 * scale
-                    top = b + d / 2 + len(lines) * line_height / 2
+                elif control.options.get("_wrapped_lines"):
+                    lines = control.options["_wrapped_lines"]
+                    line_height = (
+                        current_style.get("line_height", current_style.get("font_size", t.font_size) * 1.55) * scale
+                    )
+                    has_icon = control.options.get("icon") not in {None, "", "NONE", 0}
                     for i, line in enumerate(lines):
+                        gutter = 20 * scale if has_icon and i else 0
                         text(
                             line,
-                            (a, top - (i + 1) * line_height, c, line_height),
+                            (
+                                a + gutter,
+                                b + d - (i + 1) * line_height,
+                                c - gutter,
+                                line_height,
+                            ),
+                            ink,
+                            "body",
+                            icon=control.options.get("icon") if i == 0 else None,
+                        )
+                elif control.options.get("_heading_lines"):
+                    lines = control.options["_heading_lines"]
+                    line_height = max(18, t.font_size * 18 / 11) * scale
+                    top = b + d / 2 + len(lines) * line_height / 2
+                    for i, line in enumerate(lines):
+                        gutter = (
+                            control.options.get("_heading_icon_gutter", 0) * scale
+                            if i
+                            else 0
+                        )
+                        text(
+                            line,
+                            (
+                                a + gutter,
+                                top - (i + 1) * line_height,
+                                c - gutter,
+                                line_height,
+                            ),
                             ink,
                             "title",
                             inset=0,
+                            icon=control.options.get("icon") if i == 0 else None,
+                            icon_value=(
+                                control.options.get("icon_value", 0) if i == 0 else 0
+                            ),
                         )
                 else:
                     label_get = control.options.get("label_get")
                     text(
                         label_get() if label_get else control.label,
                         (a, b, max(0, c - 22 * scale), d) if menu_option else r,
-                        palette["muted"]
-                        if control.options.get("text_role") == "secondary"
-                        else ink,
+                        (
+                            palette["muted"]
+                            if control.options.get("text_role") == "secondary"
+                            else ink
+                        ),
                         control.options.get("text_role", "body"),
                         center=(kind == "button" and not menu_option)
                         or control.options.get("text_alignment") == "CENTER",
                         right_align=control.options.get("text_alignment") == "RIGHT",
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
-                        inset=menu_metrics.TEXT_INSET
-                        if menu_option
-                        else control.options.get(
-                            "text_inset",
-                            0
-                            if getattr(canvas, "panel_layout", False)
-                            and kind == "label"
-                            else 6,
+                        inset=(
+                            menu_metrics.TEXT_INSET
+                            if menu_option
+                            else control.options.get(
+                                "text_inset",
+                                (
+                                    0
+                                    if getattr(canvas, "panel_layout", False)
+                                    and kind == "label"
+                                    else 6
+                                ),
+                            )
                         ),
                     )
                     if menu_option and selected:
                         style.icon("✓", a + c - 12 * scale, b + d / 2, 12 * scale, ink)
             count += 1
         palette = base_palette
+        current_style = {}
         if not overlays:
             return count
         if controls:
@@ -779,4 +960,10 @@ def paint(
             context_menu(
                 canvas.context_menu, mapped, scale, font, palette, backdrop, clip
             )
+        tip = getattr(canvas, "_control_tip", None)
+        if tip is not None and tip.tooltip:
+            from .menus import tooltip
+            typography.flush_text(font)
+            with typography.motion_text(font, tip.motion):
+                tooltip(tip, mapped, scale, font, palette, backdrop, clip)
     return count

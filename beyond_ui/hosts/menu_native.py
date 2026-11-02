@@ -21,6 +21,12 @@ def api():
 
     global _REASON
     try:
+        from . import portable_actions
+        portable = portable_actions.library()
+        if portable is not None:
+            result = portable_actions.actions(portable)
+            _REASON = ""
+            return result
         if (platform.system(), platform.machine()) != ("Darwin", "arm64"):
             raise RuntimeError("Native menu adapter is unqualified on this platform")
         build = bpy.app.build_hash.decode()
@@ -245,6 +251,12 @@ def driver_apply(kind, source, target):
         identity.update_tag()
 
 
+def _favorite_items(menu):
+    functions = api()
+    resolve = functions.get("favorite_items") if functions else None
+    return resolve(menu) if resolve else menu + 88
+
+
 def _favorite_menus(context):
     functions = api()
     if functions is None or context.area is None:
@@ -290,11 +302,11 @@ def property_favorite(source, context, *, remove=False):
     )
     found = False
     for menu in _favorite_menus(context):
-        item = api()["find_property"](menu + 88, *args)
+        item = api()["find_property"](_favorite_items(menu), *args)
         if item:
             found = True
             if remove:
-                api()["remove_favorite"](menu + 88, item)
+                api()["remove_favorite"](_favorite_items(menu), item)
     if remove and found:
         context.preferences.is_dirty = True
     return found
@@ -316,7 +328,7 @@ def add_property_favorite(source, context):
     menu = functions["favorites"](context.as_pointer())
     if not menu:
         raise RuntimeError("Blender could not resolve this Quick Favorites menu")
-    items = menu + 88
+    items = _favorite_items(menu)
     index = -1 if source.index is None else source.index
     args = (items, path.encode(), source.name.encode(), index)
     if not functions["find_property"](*args):
@@ -392,10 +404,10 @@ def operator_favorite(idname, properties, invocation, context, *, operation="ADD
         matches = []
         for existing in _favorite_menus(context):
             match = functions["find_operator"](
-                existing + 88, op_type, prop_pointer, b"", INVOCATIONS.index(invocation)
+                _favorite_items(existing), op_type, prop_pointer, b"", INVOCATIONS.index(invocation)
             )
             if match:
-                matches.append((existing + 88, match))
+                matches.append((_favorite_items(existing), match))
         if operation == "QUERY":
             return bool(matches)
         if operation == "REMOVE":
@@ -409,7 +421,7 @@ def operator_favorite(idname, properties, invocation, context, *, operation="ADD
         menu = functions["favorites"](context.as_pointer())
         if not menu:
             raise RuntimeError("Blender could not resolve Quick Favorites")
-        args = (menu + 88, op_type, prop_pointer, b"", INVOCATIONS.index(invocation))
+        args = (_favorite_items(menu), op_type, prop_pointer, b"", INVOCATIONS.index(invocation))
         if not functions["find_operator"](*args):
             functions["add_operator"](args[0], info.name.encode(), *args[1:])
             context.preferences.is_dirty = True
@@ -427,6 +439,10 @@ def add_operator_favorite(idname, properties, invocation, context):
 def _enum_api():
     if api() is None:
         return None
+    from . import portable_actions
+    portable = portable_actions.library()
+    if portable is not None:
+        return portable_actions.enum_api(portable)
     # Enum callbacks can execute Python. PyDLL keeps the GIL held throughout.
     lib = C.PyDLL(None)
     pointer = getattr(lib, "_ZN7blender19pyrna_struct_as_ptrEP7_objectPKNS_9StructRNAE")
@@ -497,4 +513,7 @@ def enum_items(owner, name, context, *, include_separators=False):
     finally:
         if owned.value and raw.value:
             # RNA_enum_item_add uses raw MEM_reallocN; its allocation is Trivial.
-            C.CFUNCTYPE(None, C.c_void_p, C.c_int)(free.value)(raw, 0)
+            if callable(free):
+                free(raw)
+            else:
+                C.CFUNCTYPE(None, C.c_void_p, C.c_int)(free.value)(raw, 0)

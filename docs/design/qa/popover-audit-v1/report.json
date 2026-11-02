@@ -1,0 +1,153 @@
+{
+  "runtime": {
+    "passed": true,
+    "result": {
+      "passed": true,
+      "error": null,
+      "version": "5.2.2 LTS",
+      "checks": [
+        {
+          "panel": "CAMKEYS_PT_lens_compensation",
+          "owner_type": "MeshObjectItem",
+          "controls": 17,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_dolly_expressions",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_billboard_settings",
+          "owner_type": "MeshObjectItem",
+          "controls": 9,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_distance_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_flatten_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "flatten-operator",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "appearance-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "billboard-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "dolly-shapes",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "AngleItem",
+          "controls": 7,
+          "painted": true,
+          "glass": true,
+          "survived_mousemove": true
+        }
+      ],
+      "saved": false
+    },
+    "focus_events": [
+      {
+        "bundle": "com.openai.codex",
+        "kind": "activation",
+        "pid": 36495,
+        "seconds": 1.8859059810638428
+      }
+    ],
+    "restore_requests": 0
+  },
+  "embedded": {
+    "passed": true,
+    "result": {
+      "passed": true,
+      "error": "",
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+        "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+        "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+        "Shared animation/tooltip timers settle and teardown clears all child state"
+      ]
+    },
+    "focus_events": [],
+    "restore_requests": 0
+  },
+  "fallback": {
+    "passed": true,
+    "result": {
+      "passed": true,
+      "error": null,
+      "checks": [
+        "Real Billboard Emulation cog opens custom popover with nested registered list and captured owner",
+        "Native property/operator descriptions, delayed tooltip, real glass draw and finite timer work",
+        "Failed custom popover opens native recovery and records the original error"
+      ],
+      "version": "5.2.2 LTS"
+    },
+    "focus_events": [],
+    "restore_requests": 0
+  },
+  "live": {
+    "passed": true,
+    "popup": "CAMKEYS_PT_flatten_falloff_popover",
+    "controls": 27,
+    "survived_input": true,
+    "painted": true,
+    "glass": true,
+    "errors": null,
+    "saved": false,
+    "dirty": true
+  },
+  "unit_tests": 397
+}

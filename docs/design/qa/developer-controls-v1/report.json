@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-02",
+  "scope": [
+    "Developer hover information",
+    "Native property actions survive contributed menus",
+    "Developer operator/menu/popover context actions",
+    "CamKeys separate billboard upright axis"
+  ],
+  "reference": "BVT VRM_ShoostContextMenu.py::entries/paths and VRM_ShoostCanvas.py::_operator_tip/_control_tip",
+  "implementation": [
+    "Lazy Python identifiers and exact component paths when Developer Extras or Python Tooltips is enabled; ordinary show_tooltips remains authoritative",
+    "Inline property/menu operator help uses the same lazy tooltip path, cached per hovered row and preference signature",
+    "Copy Data Path/Full Data Path remain independent of Developer Extras; authored property menu contributions retain standard bound actions",
+    "Operator menus include Online Python Reference; menu/popover buttons expose Copy Python Command, Python Reference and Edit Source",
+    "Separate billboard grid preserves rest facing while aligning upright to the character instead of a tilted rest bone; pose-independent tracking observer unchanged",
+    "Registered menu/popover openers retain capability-checked Favorites and shortcut entries using the exact wm.call_menu/call_menu_pie/call_panel arguments."
+  ],
+  "tests": {
+    "unit_count": 371,
+    "developer_preferences": "build/developer-controls-v2/summary.json",
+    "developer_final": "build/developer-controls-openers/summary.json",
+    "native_context_regression": "build/developer-context-regression/summary.json",
+    "billboard_upright": "build/billboard-upright-v1/summary.json",
+    "billboard_geometry_regression": "build/billboard-upright-regression/summary.json",
+    "windowed_tooltips_popovers": "build/developer-tooltip-windowed/summary.json"
+  },
+  "live": {
+    "pid": 11967,
+    "scene": "Uraraka",
+    "runtime_identity": 481635319888,
+    "property_controls_checked": 18,
+    "panel_errors": {},
+    "modal_count": 4,
+    "frame": 1,
+    "active_object": "Cube",
+    "dirty_after": false,
+    "saved": false,
+    "separate_billboards_currently_enabled": false,
+    "separate_billboards_currently_ready": false,
+    "settings_preserved": true,
+    "other_session_modified": false,
+    "reload": "Targeted functions/classes; no RNA re-registration. Corrected a method-name mismatch before completing and verifying reload.",
+    "menu_popover_openers_checked": 8
+  },
+  "focus": {
+    "windowed_owned_pid": 32594,
+    "activation_events": [],
+    "restoration_requests": 0,
+    "headless_for_other_fixtures": true
+  },
+  "limits": [
+    "Separate billboards is off in the live scene; live visual billboard acceptance remains user QA. Both runtime matrix fixtures pass.",
+    "No new screenshots/GIFs for these behavior-only changes. Existing shared glass/bounce/theming rendering path retained.",
+    "Not a claim of universal native-button parity on unqualified platforms; existing explicit native admission limits remain.",
+    "Exact 4.2/5.1/5.2 official API documentation requests and 5.2 Manual request returned HTTP402; compatibility retains capability reads and was execution-tested on installed 5.1.2 and 5.2.2."
+  ]
+}

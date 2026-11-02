@@ -17,6 +17,7 @@ class AddonUI:
         commit=None,
         context_menu=None,
         animation=None,
+        stylesheet=None,
         layout_options=None,
         native_fallback=False,
     ):
@@ -26,7 +27,18 @@ class AddonUI:
         self.native_fallback = bool(native_fallback)
         self.commit = commit
         self.context_menu = context_menu
-        self.animation = animation or AnimationSettings()
+        from .stylesheet import StyleSheet
+
+        if callable(stylesheet):
+            stylesheet = stylesheet()
+        if stylesheet is not None and not isinstance(stylesheet, StyleSheet):
+            raise TypeError("stylesheet must be a StyleSheet")
+        self.stylesheet = stylesheet
+        if stylesheet is not None:
+            stylesheet._owners.add(self)
+        self.animation = animation or (
+            stylesheet.animation if stylesheet else AnimationSettings()
+        )
         self.layout_options = dict(layout_options or {})
         if set(self.layout_options) - {
             "resolve",

@@ -127,9 +127,9 @@ def _theme_palette(signature, missing=()):
     alpha = lambda color, a: color[:3] + (a,)
     p = dict(
         accent=alpha(accent, 1.0),
-        bg=alpha(regular, 0.48),
-        card=alpha(button, 0.55),
-        bar=alpha(button, 0.70),
+        bg=alpha(regular, 0.76),
+        card=alpha(button, 0.76),
+        bar=alpha(button, 0.78),
         field=alpha(field, 0.96),
         text=alpha(text, 1.0),
         selected_text=alpha(selected_text, 1.0),
@@ -139,7 +139,7 @@ def _theme_palette(signature, missing=()):
         toggle_off=alpha(toggle_off, 0.55),
         toggle_on=alpha(toggle_on, 0.76),
     )
-    p["muted"] = tuple(a * 0.55 + b * 0.45 for a, b in zip(text[:3], regular[:3])) + (
+    p["muted"] = tuple(a * 0.78 + b * 0.22 for a, b in zip(text[:3], regular[:3])) + (
         1.0,
     )
     p["selected"] = tuple(
@@ -154,8 +154,15 @@ def _theme_palette(signature, missing=()):
     light = sum(text[:3]) < sum(regular[:3])
     p["menu_glass"] = alpha(regular, 0.78) if light else (0.0, 0.0, 0.0, 0.0)
     if light:
+        p["input"] = tuple(v + (1-v)*0.5 for v in field[:3]) + (0.86,)
         p["selected"] = alpha(accent, 0.78)
-    p["api"] = shade(accent, 0.25, 1.0)
+    from .contrast import backgrounds, readable, over
+    grounds = backgrounds(p)
+    p["text"] = readable(p["text"], grounds)
+    p["muted"] = readable(p["muted"], grounds, 3.5)
+    p["api"] = readable(alpha(accent, 1.0), grounds, vivid=True)
+    p["selected_text"] = readable(p["selected_text"],
+        tuple(over(p["selected"], b) for b in grounds))
     # Retained layout items carry stable semantic tokens. Resolve at paint:
     # theme edits must not invalidate layout, thumbnails, geometry or blur.
     p["tokens"] = {
@@ -228,6 +235,7 @@ def icon(glyph, x, y, size, color):
     if icons.draw(glyph, x, y, size, color):
         return True
     supported = {
+        "BUI_TARGET",
         "⚙",
         "+",
         "×",
@@ -675,6 +683,11 @@ def icon(glyph, x, y, size, color):
             disc(0, 0, 0.66, 32)
         elif glyph == "○":
             ring(0.72, 0.57)
+        elif glyph == "BUI_TARGET":
+            ring(0.68, 0.57, 48)
+            ring(0.25, 0.16, 32)
+            for dx, dy in ((1,0),(-1,0),(0,1),(0,-1)):
+                line((dx*.5,dy*.5),(dx*.95,dy*.95),.065)
         elif glyph == "◉":
             ring(0.83, 0.71)
             disc(0, 0, 0.53, 32)
@@ -736,9 +749,9 @@ def icon(glyph, x, y, size, color):
     return True
 
 
-def slider_parts(x, y, width, height, scale=1.0):
+def slider_parts(x, y, width, height, scale=1.0, *, value_width=53):
     """One geometry contract for the visible track, numeric field and input."""
-    number_width = min(width * 0.48, 53.0 * scale)
+    number_width = min(max(0.0, width - 32.0 * scale), value_width * scale)
     track_width = max(1.0, width - number_width - 16.0 * scale)
     return (x + 7.0 * scale, y + height / 2.0, track_width), (
         x + width - number_width,

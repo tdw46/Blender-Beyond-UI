@@ -3,8 +3,11 @@
 No bpy import, registration, native loading, threads or timers at import time.
 """
 
+from .artwork import Artwork, ArtworkLibrary, header, heading
 from .integration import integrate
 from .addon import AddonUI
+from .stylesheet import StyleSheet
+from .style_api import style, prop
 from .pointer import PointerItems
 from .id_template import IDAction
 from .animation import AnimationSettings, animation_defaults
@@ -17,7 +20,11 @@ from .context_dispatch import ShortcutRegistry
 
 __version__ = "0.1.0"
 __all__ = [
+    "Artwork", "ArtworkLibrary", "header", "heading",
     "AddonUI",
+    "StyleSheet",
+    "style",
+    "prop",
     "integrate",
     "AnimationSettings",
     "animation_defaults",

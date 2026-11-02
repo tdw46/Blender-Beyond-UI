@@ -23,6 +23,16 @@ forecast = json.loads((OUT / "estimate.json").read_text())
 current = json.loads(
     (ROOT / "docs/design/qa/forced-perspective-v2/current-media.json").read_text()
 )
+studio_media = ROOT / "docs/design/qa/camkeys-studio-v7/current-media.json"
+if studio_media.exists():
+    current += json.loads(studio_media.read_text())
+response_media = ROOT / "docs/design/qa/camkeys-response-v1/current-media.json"
+if response_media.exists():
+    current = [r for r in current if r["path"] != "docs/media/panels/camkeys-studio-v7-camkeys_linking.gif"]
+    current += json.loads(response_media.read_text())
+visibility_media = ROOT / "docs/design/qa/theme-visibility-v1/current-media.json"
+if visibility_media.exists():
+    current += json.loads(visibility_media.read_text())
 current_paths = {r["path"] for r in current}
 archive = [r for r in rows if r["path"] not in current_paths]
 
@@ -35,7 +45,7 @@ def cards(items, historical=False):
 
 
 features = (
-    '<h2>Current controls · freshly captured</h2><p><a href="../forced-perspective-v2/index.html">Current panels: compact browser-style grid, aligned labels, centered icons and focal slider</a></p><p><a href="../camkeys-visual-v4/index.html">Earlier CamKeys list/brush behavior evidence (before the latest icon-centering pass)</a></p><p><a href="../core-review-v2/index.html">Earlier core review and QA notes (before the latest icon-centering pass)</a></p><div class="grid">'
+    '<h2>Current controls · freshly captured</h2><p><a href="../camkeys-list-element-v1/index.html">New CamKeys list elements: native icons, aligned names, inset search and clear actions</a></p><p><a href="../camkeys-studio-v7/index.html">CamKeys Studio: logo, presets, every panel, actual Blender captures and reference overlays</a></p><p><a href="../forced-perspective-v2/index.html">Current panels: compact browser-style grid, aligned labels, centered icons and focal slider</a></p><p><a href="../camkeys-visual-v4/index.html">Earlier CamKeys list/brush behavior evidence (before the latest icon-centering pass)</a></p><p><a href="../core-review-v2/index.html">Earlier core review and QA notes (before the latest icon-centering pass)</a></p><div class="grid">'
     + cards(current)
     + '</div><details id="archive"><summary>Historical feature archive ('
     + str(len(archive))
@@ -75,6 +85,7 @@ page = page.replace(
     "<h1>Beyond UI · Extension panel toolkit</h1>",
     "<h1>Beyond UI · Extension panel toolkit</h1><p>Latest progress: "
     + html.escape(forecast.get("latest_progress", "See the review record."))
+    + (" <a href=\"" + html.escape(forecast['latest_review'], quote=True) + "\">Latest visual comparison</a>." if forecast.get('latest_review') else "")
     + "</p>",
 )
 (OUT / "index.html").write_text(page)

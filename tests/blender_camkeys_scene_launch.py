@@ -4,7 +4,7 @@ import bpy, importlib.util, os, sys, json, traceback
 from pathlib import Path
 
 source = Path(os.environ["BEYOND_UI_CAMKEYS_ROOT"]).resolve()
-assert source.name == "CamKeys-beyond-ui", source
+assert (source / "__init__.py").is_file(), source
 scene_path = Path(os.environ["BEYOND_UI_CRASH_FILE"]).resolve()
 assert scene_path.is_file()
 spec = importlib.util.spec_from_file_location(

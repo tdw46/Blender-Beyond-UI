@@ -158,6 +158,32 @@ def retarget(rows, target, *, _depth=0, _budget=None):
 class RegisteredMenu:
     lookup = staticmethod(menu_class)
 
+    native_route = None
+
+    def native_fallback(self, context, error):
+        """Recover a failed custom opener without bypassing its owner or poll."""
+        import bpy
+        canvas = self.layout.canvas
+        if not getattr(canvas, "popup_native_fallback", True):
+            return False
+        entry = {"target": self.name, "reason": str(error), "custom": False}
+        canvas.popup_fallbacks = [*getattr(canvas, "popup_fallbacks", [])[-31:], entry]
+        # wm.call_panel/menu can dereference a missing GHOST window even when
+        # their Python poll succeeds. Keep headless failure observable and safe.
+        if bpy.app.background or getattr(context, "window", None) is None:
+            entry["unavailable"] = "Native popup requires an interactive window"
+            canvas.menu_error = f"{error}; native fallback: {entry['unavailable']}"
+            return False
+        try:
+            self.check(context, context_key(context))
+            with override(context, self.pointers.values()):
+                result = getattr(bpy.ops.wm, self.native_route or ("call_menu_pie" if self.pie else "call_menu"))("INVOKE_DEFAULT", name=self.name)
+            entry["result"] = sorted(result)
+            return bool({"FINISHED", "RUNNING_MODAL", "INTERFACE"} & result)
+        except Exception as failure:
+            canvas.menu_error = f"{error}; native fallback: {failure}"
+            return False
+
     def __init__(self, layout, name, *, source=None, depth=0):
         self.layout, self.context, self.name = layout, layout.context, name
         self.cls, self.depth, self.source = self.lookup(name), depth, source
@@ -245,10 +271,38 @@ class RegisteredMenu:
         ]
         if self.source is not None:
             rows.extend(default_entries(target, context))
+        else:
+            rows.extend(self.opener_entries(context))
         provider = self.layout.canvas.context_provider
         if provider:
             rows.extend(provider(target, context))
         return tuple(rows)
+
+    def developer_entries(self, context):
+        if not getattr(getattr(getattr(context, 'preferences', None), 'view', None),
+                       'show_developer_ui', False):
+            return ()
+        from .context_source import entry
+        from .tooltips import operator_command
+        route = 'wm.' + (self.native_route or ('call_menu_pie' if self.pie else 'call_menu'))
+        command = operator_command(route, {'name': self.name})
+        return (
+            Entry('COMMAND', 'Copy Python Command',
+                  lambda t, c: setattr(c.window_manager, 'clipboard', command)),
+            Entry('API', 'Online Python Reference',
+                  lambda t, c: operator('wm.doc_view')(doc_id=self.cls.__name__)),
+            entry(self.cls.draw),
+        )
+
+    def opener_entries(self, context):
+        route = 'wm.' + (self.native_route or ('call_menu_pie' if self.pie else 'call_menu'))
+        pointers = {key: value for key, value in self.pointers.values().items()
+                    if value is not None}
+        # Use the real opener/arguments for Favorites and shortcuts, while
+        # Edit Source points to the author's draw method, not wm.call_menu.
+        rows = operator_entries(route, {'name': self.name}, context,
+                                pointers=pointers)
+        return tuple(row for row in rows if row.key not in {'COMMAND', 'API', 'SOURCE'}) + self.developer_entries(context)
 
 
 class MenuLayout:
@@ -570,6 +624,7 @@ class MenuLayout:
                 "Active-native-button operator requires an explicit host action"
             )
         info = operator(idname).get_rna_type()
+        from .tooltips import operator_description
         identity = info.as_pointer()
         props = SimpleNamespace()
         args = Arguments()
@@ -664,6 +719,7 @@ class MenuLayout:
                 available,
                 icon=icon,
                 tip=info.description,
+                tooltip=lambda ctx: operator_description(idname, props, pointers.values(), ctx),
                 checked=depress,
                 context=context,
             ),

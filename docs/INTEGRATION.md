@@ -42,8 +42,8 @@ from ._vendor.beyond_ui import integrate; integrate(globals(), native_fallback=T
 This opt-in keeps those surfaces native when the adapter raises `UnsupportedControl`.
 It labels native panel bodies and reports the reason in
 `__beyond_ui_integration__.status` (`host.native_fallbacks` / `popups.native_fallbacks`).
-Default is strict; unexpected consumer errors are never converted into fallback.
-This does not implement unsupported controls or cover every nested popover route.
+Embedded panel bodies remain strict by default. Popup openers have a separate
+recovery policy below; native recovery never counts as custom control parity.
 
 The one-line integration initializes local, package-owned PropertyGroup lists
 with persistent `_beyond_ui_row_id` metadata. Initialization is deferred outside
@@ -157,8 +157,11 @@ title/icon and custom rows. Popups use the existing glass producer, retained
 backdrop, typography, theming, bounded motion and context routing. They preserve
 the invoking region's context even when drawn over the editor's main region.
 
-This is package-scoped: the hook re-registers the same owned Operator classes to
-install modal callbacks, then restores original methods during teardown. It
+This is package-scoped: existing modal classes are patched in place, preserving
+their registered RNA, running instances and consumer timers. Classes needing a
+new modal callback are re-registered; macro dependencies and nonmodal ancestors
+of registered modal classes remain protected. Original methods are restored on
+teardown. See [operator lifecycle safety](OPERATOR_LIFECYCLE.md). The hook
 passes a context facade and temporarily rebinds `bpy`/`ops`/`context` aliases in
 the current owned callback's globals, restoring them in `finally`. It does **not**
 modify the shared Blender modules or WindowManager type. Foreign menus continue
@@ -166,10 +169,16 @@ to use their native route. Code that strictly checks facade/RNA object types,
 imports `bpy` inside the callback, or opens menus indirectly through another
 module may need an explicit adapter.
 
-Host capability failures preserve the native route and are recorded in
-`status["popups"]["native_fallbacks"]` with `custom=False`. This degraded behavior
-is not custom parity. Unsupported custom layout content raises a specific error;
-it is not silently omitted.
+Host capability or custom popup-construction failures preserve the native route
+and are recorded in `status["popups"]["native_fallbacks"]` with `custom=False`.
+Registered panel/menu buttons likewise recover through native `call_panel` or
+`call_menu` after revalidating their exact owners, context and poll. Their records
+are in `status["host"]["popup_fallbacks"]` (and `canvas.popup_fallbacks` for low-level
+hosts). Set `canvas.popup_native_fallback = False` for strict opener diagnostics.
+Unsupported custom headers retain a recoverable opener. Failed custom surfaces
+are discarded before recovery; no operator action is retried. This degraded
+behavior is explicitly recorded and does not count as custom parity. Failures
+inside the original native UI itself cannot be repaired by switching renderers.
 
 ## Existing menu shortcuts
 
@@ -327,3 +336,56 @@ Use `tests/blender_popup_variants.py` with the same prepared consumer/runner to
 check property-only, confirmation, search, callback pie and keymap routes.
 [Popup-variant evidence and qualification limits](design/qa/popup-variants-v1/runtime.json).
 These are execution/GPU-resource checks, not new visual-reference acceptance.
+
+
+### Live labels and visible list rows
+
+Property and operator hover descriptions come from their native RNA metadata,
+including enum-choice help and Python operator description callbacks. Disabled
+controls retain help; Blender's `show_tooltips` preference is honored. Low-level
+controls can provide `tooltip="Help"` or a context-taking callable. Descriptions
+are resolved on hover, never in GPU paint or an idle polling loop. Shared menu
+glass, theme roles and finite reveal motion render the tooltip in panel, popup
+and active list-row hosts. Removed owners, edits, scrolling, dismissal and parking
+cancel pending help. Python description callbacks that require native-only
+`OperatorProperties` operations fall back to the operator's RNA description.
+
+Adopted native panel redraws re-evaluate visible UIList callbacks. Literal
+`layout.label(text=...)` values are patched into retained controls when only text
+changes; unchanged rows skip layout. Changed row structure rebuilds that row, and
+list membership/active-owner changes still invalidate the owning authoring tape.
+This requires no CamKeys-specific bindings or consumer edits. Ordinary bound RNA
+properties already read their current values. No polling timer or GPU-paint
+callback executes consumer authoring; the consumer retains responsibility for
+requesting its normal native region redraw when external state changes.
+
+Fully offscreen embedded panels reserve their cached height without running the
+panel body, custom cache-key callback, list callbacks, value refresh or layout.
+Native clipping detects their return; one deferred redraw refreshes ownership,
+list membership/filtering and displayed values before controls become interactive.
+There is no polling timer. Scene/object changes and explicit invalidation still
+revoke old owners. Structural changes while hidden take effect on return, so their
+reserved height stays stable while scrolling. This is automatic for one-line
+integration and `AddonUI`; low-level `PanelHost` consumers can call `defer_draw()`
+before authoring and return early when it returns `True`.
+See the [offscreen regression and timing evidence](design/qa/panel-offscreen-v1/report.json).
+
+Owned `bpy.ops.wm.call_panel(name=...)` calls inside routed invoke/execute callbacks
+now open custom panel popovers. Unsupported `keep_open=True` remains an observable
+native fallback. Floating hosts avoid overlapping sidebars, toolbars and headers,
+and use the invoking region for property/context guards while painting in the
+viewport. See [current consumer evidence](design/qa/camkeys-live-panels-v1/index.html).
+# Developer help and context actions
+
+Hover help retains the native RNA/operator description. Enabling Blender's
+Developer Extras or Python Tooltips adds Python identifiers and exact property
+paths; disabling Show Tooltips hides the entire tooltip. These details are resolved
+on hover, not in the paint loop. Menu fields use the same lazy help path.
+
+Bound properties retain their standard context actions even when a consumer adds
+its own context-menu rows. Copy Data Path and Copy Full Data Path are available
+independently of Developer Extras, including individual array components.
+Developer Extras adds applicable Python reference/source actions and Copy Python
+Command for operators and registered menu/popover openers. Availability still
+depends on the exact owner, current context and admitted native capabilities;
+unavailable actions are not fabricated against an unrelated native button.

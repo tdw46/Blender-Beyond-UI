@@ -10,6 +10,24 @@ def event(kind, value="PRESS", **kw):
 
 
 class Lists(unittest.TestCase):
+    def test_content_frame_has_symmetric_default_insets_and_configurable_alignment(self):
+        widget, _ = self.fixture(2)
+        r = (2, 2, 300, 40)
+        x, y, w, h = widget.row_content_rect(r)
+        self.assertEqual((x - r[0], r[0] + r[2] - x - w), (8, 8))
+        self.assertEqual(y - r[1], r[1] + r[3] - y - h)
+        widget.style_row_padding = (3, 10, 5, 12)
+        widget.style_row_align = "top"
+        self.assertEqual(widget.row_content_rect(r), (14, 5, 278, 20))
+        widget.style_row_align = "bottom"
+        self.assertEqual(widget.row_content_rect(r), (14, 17, 278, 20))
+        widget.style_row_padding = (10, 8, 10, 8)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.row_height, 44)
+        widget.style_row_padding = (2, 8, 2, 8)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.row_height, 28)
+
     def fixture(self, count=10000, **kw):
         state = [0]
         source = NS(
@@ -31,6 +49,17 @@ class Lists(unittest.TestCase):
         self.assertEqual(len(tuple(widget.visible(28, 56))), 1)
         self.assertEqual(tuple(widget.visible(28, 56))[0][0].index, 1)
         self.assertEqual(tuple(widget.visible(0, 0)), ())
+
+    def test_dividers_only_separate_populated_rows_and_follow_scroll(self):
+        widget, _ = self.fixture(2)
+        rows = list(widget.visible())
+        self.assertIsNotNone(widget.divider_rect(rows[0][1]))
+        self.assertIsNone(widget.divider_rect(rows[-1][1]))
+        widget.style_dividers = False
+        self.assertIsNone(widget.divider_rect(rows[0][1]))
+        widget, _ = self.fixture(100)
+        widget.scroll_to(widget.limit)
+        self.assertIsNone(widget.divider_rect(list(widget.visible())[-1][1]))
 
     def test_wildcards_reverse_original_indices(self):
         items = [
@@ -91,3 +120,18 @@ class Lists(unittest.TestCase):
         self.assertEqual(len(tuple(widget.visible())), 1)
         widget.toggle("reverse")
         self.assertNotIn("reverse", widget.state)
+
+    def test_styled_viewport_preserves_density_resize_and_cancellation(self):
+        widget, state = self.fixture(rows=3, maxrows=8)
+        widget.style_visible_rows = 5
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.viewport, 5 * 28)
+        self.assertEqual(state, [0])
+        widget.event(event("LEFTMOUSE"), widget.width / 2, widget.viewport + 12)
+        widget.event(event("MOUSEMOVE", "NOTHING"), 160, 600)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.visible_rows, 8)
+        widget.event(event("RIGHTMOUSE"), 160, 600)
+        widget.dimensions(11, 320)
+        self.assertEqual(widget.visible_rows, 5)
+        self.assertEqual(widget.row_height, 28)

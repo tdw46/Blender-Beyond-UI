@@ -1,6 +1,7 @@
 """Default RNA collection list, built from the shared source skin and motion."""
 
 from math import ceil
+from ..scroll import scroll_delta, scroll_step
 from .base import Widget, Painter, contains
 from ..list_source import ordered
 from ..context_menu import Target, Entry, default_entries
@@ -48,14 +49,16 @@ class CollectionList(Widget):
         self.reorder()
 
     def dimensions(self, font_size, available_width, available_height=None):
+        if not hasattr(self, "draw_item"):
+            self.row_height = max(type(self).row_height, 24 + self.row_padding[0] + self.row_padding[2])
         scale = max(0.01, font_size / self.design_font_size)
         self.width = max(1, min(560, available_width / scale))
+        default_rows = getattr(self, "style_visible_rows", self.minimum)
+        minimum, maximum = self.row_limits
         self.visible_rows = (
             1
             if self.type == "COMPACT"
-            else max(
-                self.minimum, min(self.maximum, self.state.get("rows", self.minimum))
-            )
+            else max(minimum, min(maximum, self.state.get("rows", default_rows)))
         )
         self.grid_columns = (
             max(1, min(self.columns, int(self.width / 76)))
@@ -70,6 +73,11 @@ class CollectionList(Widget):
         )
         self.scroll_to(self.state.get("scroll", 0))
         return self.width * scale, self.height * scale
+
+    @property
+    def row_limits(self):
+        default = getattr(self, "style_visible_rows", self.minimum)
+        return min(self.minimum, default), max(self.maximum, default)
 
     def reorder(self):
         self.filtered = ordered(
@@ -147,6 +155,31 @@ class CollectionList(Widget):
         return next(
             (item for item, rect in self.visible() if contains(rect, x, y)), None
         )
+
+    @property
+    def row_padding(self):
+        return getattr(self, "style_row_padding", (2, 8, 2, 8))
+
+    def row_content_rect(self, rect, content_height=20):
+        """Same padded logical frame for row painting, events and owner menus."""
+        x, y, w, h = rect
+        top, right, bottom, left = self.row_padding
+        height = min(content_height, max(0, h - top - bottom))
+        spare = max(0, h - top - bottom - height)
+        factor = {"top": 0, "center": 0.5, "bottom": 1}[
+            getattr(self, "style_row_align", "center")
+        ]
+        return (x + min(left, w), y + top + spare * factor,
+                max(1, w - left - right), height)
+
+    def divider_rect(self, rect):
+        if not getattr(self, "style_dividers", True) or self.type != "DEFAULT":
+            return None
+        x, y, w, h = rect
+        boundary = y + h + 2
+        if boundary + self.offset >= len(self.filtered) * self.row_height or boundary >= self.viewport:
+            return None
+        return (x + 6, boundary - 0.25, max(0, w - 12), 0.5)
 
     def scrollbar(self):
         track = (self.width - 6, 2, 3, max(0, self.viewport - 4))
@@ -283,9 +316,10 @@ class CollectionList(Widget):
                     )
                 else:
                     self.state["rows"] = max(
-                        self.minimum,
+                        self.row_limits[0],
                         min(
-                            self.maximum, round(before + (y - start) / self.row_height)
+                            self.row_limits[1],
+                            round(before + (y - start) / self.row_height),
                         ),
                     )
                     self.changed()
@@ -343,17 +377,11 @@ class CollectionList(Widget):
             (0, 0, self.width, self.viewport), x, y
         ):
             if self.type == "COMPACT":
-                self.navigate("UP_ARROW" if kind == "WHEELUPMOUSE" else "DOWN_ARROW")
+                step = scroll_step(event)
+                if step:
+                    self.navigate("UP_ARROW" if step < 0 else "DOWN_ARROW")
             else:
-                delta = (
-                    -self.row_height
-                    if kind == "WHEELUPMOUSE"
-                    else self.row_height
-                    if kind == "WHEELDOWNMOUSE"
-                    else getattr(event, "mouse_prev_y", 0)
-                    - getattr(event, "mouse_y", 0)
-                )
-                self.scroll_to(self.offset + delta)
+                self.scroll_to(self.offset + scroll_delta(event, self.row_height))
             return True
         if not press or kind != "LEFTMOUSE":
             return False
@@ -488,7 +516,7 @@ class CollectionList(Widget):
         return tuple(rows)
 
     def paint(self, rect, font, palette, *, backdrop=None):
-        from ..gpu import glass, style
+        from ..gpu import glass, style, skin
 
         p = Painter(
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
@@ -510,13 +538,20 @@ class CollectionList(Widget):
                 key = ("row", item.identity)
                 with p.deform(key, r):
                     if active:
-                        p.surface(r, "selected", 5, 0.5, motion_key=False)
+                        if not glass.lens(backdrop, p.map(r), 5 * p.scale, palette["selected"]):
+                            p.surface(r, "selected", 5, 0.5, motion_key=False)
+                        skin.selection_outline(p.map(r), palette, p.scale, 5)
                     editing = (
                         self.text_edit is not None
                         and self.field == "name"
                         and self.edit_item == item
                     )
                     self.paint_row(p, item, r, active, editing)
+                divider = self.divider_rect(r)
+                if divider is not None:
+                    skin.draw(p.map(divider),
+                              palette.get("list_divider", (*palette["edge"][:3], min(0.18, palette["edge"][3]))),
+                              radius=0, border=0)
                 self.motion.region(
                     key,
                     (
@@ -576,10 +611,11 @@ class CollectionList(Widget):
             self.paint_filters(p, backdrop)
 
     def paint_row(self, p, item, r, active, editing):
+        r = self.row_content_rect(r)
         if editing:
             self.paint_editor(p, r, role="selected_text" if active else "text")
         else:
-            p.text(r, item.name, "selected_text" if active else "text", 11, inset=8)
+            p.text(r, item.name, "selected_text" if active else "text", 11, inset=0)
 
     def paint_filters(self, p, backdrop):
         from ..gpu import style
@@ -630,21 +666,21 @@ class CollectionList(Widget):
         width = lambda text: measure(font, 11 * p.scale, text)[0] / p.scale
         x, y, w, h = rect
         caret = width(edit.text[: edit.cursor])
-        shift = max(0, caret - max(1, w - 18))
+        shift = max(0, caret - max(1, w - 2))
         a, b = sorted((edit.anchor, edit.cursor))
-        with p.clip((x + 4, y, max(0, w - 8), h)):
+        with p.clip((x, y, w, h)):
             if a != b:
                 left, right = width(edit.text[:a]), width(edit.text[:b])
                 p.surface(
-                    (x + 8 + left - shift, y + 5, right - left, h - 10),
+                    (x + left - shift, y + 5, right - left, h - 10),
                     "selected",
                     0,
                     0,
                     motion_key=False,
                 )
-            p.text((x - shift, y, w + shift, h), edit.text, role=role, size=11, inset=8)
+            p.text((x - shift, y, w + shift, h), edit.text, role=role, size=11, inset=0)
             p.surface(
-                (x + 8 + caret - shift, y + 5, 1, h - 10),
+                (x + caret - shift, y + 5, 1, h - 10),
                 p.palette[role],
                 0,
                 0,

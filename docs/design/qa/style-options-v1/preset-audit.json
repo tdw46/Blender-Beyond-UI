@@ -1,0 +1,79 @@
+{
+  "consumer": "/Users/tylerwalker/dev/CamKeys-beyond-ui/ui_theme.py",
+  "presets": {
+    "HELP": {
+      "trailing_icon": "INFO",
+      "text_align": "center"
+    },
+    "FOCAL": {
+      "units": "mm",
+      "precision": 1,
+      "value_width": 78
+    },
+    "CAMKEY_VALUE": {
+      "disabled_accent": true
+    },
+    "BIN_VALUE": {
+      "units": "\u00b0",
+      "precision": 1,
+      "slider": false,
+      "width": 64
+    },
+    "BIN_ROW": {
+      "gap": 4,
+      "padding": [
+        4,
+        0
+      ]
+    },
+    "INDEX": {
+      "width": 16,
+      "text_align": "center"
+    },
+    "STRING_CELL": {
+      "width": 64
+    },
+    "TWO_LINE_LIST": {
+      "list_row_height": 48
+    },
+    "COMPACT": {
+      "template": "compact"
+    },
+    "HEADING": {
+      "font_weight": "bold"
+    },
+    "PRIMARY": {
+      "variant": "primary"
+    },
+    "HIDDEN": {
+      "display": "none"
+    },
+    "DESCRIPTION": {
+      "wrap": true
+    },
+    "PROPERTY_LIST": {
+      "list_rows": 5,
+      "list_row_height": 30
+    },
+    "ENUM_LIST": {
+      "list_row_height": 36
+    },
+    "PAIRED_FIELDS": {
+      "gap": 10,
+      "label_width": 60
+    },
+    "INLINE_SLIDER": {
+      "label_position": "left",
+      "label_width": 150,
+      "value_width": 42
+    },
+    "FIELD_COLUMN": {
+      "label_width": 136
+    },
+    "MENU_OPTIONS": {
+      "gap": 3
+    }
+  },
+  "count": 19,
+  "all_valid": true
+}

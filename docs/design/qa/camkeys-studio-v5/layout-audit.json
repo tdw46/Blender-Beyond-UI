@@ -1,0 +1,191 @@
+{
+  "auto_fov": {
+    "fixes": [
+      "Full-width Focus Object, Perspective Lag and Falloff Radius value columns align at 136 logical units.",
+      "Near/Far fields retain a 10-unit gutter and 60-unit captions; compact lock controls keep their intrinsic layout."
+    ],
+    "remaining": [
+      "Reference shows an older exponent/unit placement and paired help icons; later user corrections take precedence.",
+      "Reference header caret and some rendered glyph/rim details differ."
+    ],
+    "reference_bounds_px": [
+      76,
+      32,
+      774,
+      1628
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "baking": {
+    "fixes": [
+      "Start/End gutter increased to 10 units. Frame Step and Bake Scope share the 136-unit field column.",
+      "Shared disclosure surface includes the trailing decorative icon at the same header height."
+    ],
+    "remaining": [
+      "Reference truncates the topology warning; all authored warning text is retained and wraps.",
+      "Generated optical rims and source icon geometry remain different."
+    ],
+    "reference_bounds_px": [
+      84,
+      27,
+      759,
+      1643
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camkeys_linking": {
+    "fixes": [
+      "Styled list retains compact 22-unit toolbar semantics."
+    ],
+    "remaining": [
+      "Source glyphs, list dividers and glass lighting differ from generated artwork.",
+      "HOW TO retains the later approved single info icon."
+    ],
+    "reference_bounds_px": [
+      42,
+      42,
+      941,
+      1448
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camkeys_main": {
+    "fixes": [
+      "Styled list retains compact 22-unit toolbar semantics and full-size switches."
+    ],
+    "remaining": [
+      "Source glyphs and glass lighting differ; HOW TO retains the later approved single info icon."
+    ],
+    "reference_bounds_px": [
+      42,
+      40,
+      923,
+      1483
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "camprops": {
+    "fixes": [
+      "Property list uses five visible 30-unit rows without magnifying typography.",
+      "Enum-bin rows are 36 units with four-unit vertical content padding.",
+      "Angle Sensitivity uses a 150-unit inline caption and 42-unit value field, stacking responsively when narrow.",
+      "Compact 16-unit index cells and 64-unit number fields keep item names visible at 260 logical pixels."
+    ],
+    "remaining": [
+      "Reference omits the real BASIS suffix; preserved for correct item identity. Narrow names truncate within their allotted column instead of disappearing.",
+      "Reference enlarges its top title relative to other panels; consistent host title scale is preserved. Native section nesting/separators remain visible."
+    ],
+    "reference_bounds_px": [
+      41,
+      53,
+      813,
+      1612
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "lattice_auto_fov_modifier": {
+    "fixes": [
+      "Current conditional lattice fixture recaptured with the same shared scale and aligned action rail."
+    ],
+    "remaining": [
+      "Generated icon shapes and optical rim remain different."
+    ],
+    "reference_bounds_px": [
+      74,
+      72,
+      1595,
+      752
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "billboard_settings": {
+    "fixes": [
+      "Current paired switch/step rows verified alongside shared field sizing."
+    ],
+    "remaining": [
+      "Generated Override Armature includes an extra switch absent from the authored action; no fake control added."
+    ],
+    "reference_bounds_px": [
+      65,
+      65,
+      1536,
+      804
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "dolly_expressions": {
+    "fixes": [
+      "Current empty-list state and aligned ON/OFF group recaptured."
+    ],
+    "remaining": [
+      "Real informational icon retained although omitted from the generated heading."
+    ],
+    "reference_bounds_px": [
+      52,
+      53,
+      1203,
+      1092
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "lens_compensation": {
+    "fixes": [
+      "Missing FOCAL preset applied: fixed one-decimal value, mm inside the 78-unit number field."
+    ],
+    "remaining": [
+      "Reference exponent notation is superseded by the user correction; generated surface lighting remains different."
+    ],
+    "reference_bounds_px": [
+      51,
+      52,
+      1133,
+      1170
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "falloff_popover": {
+    "fixes": [
+      "Option-column gap reduced from six to three logical units to match reference rhythm."
+    ],
+    "remaining": [
+      "Generated border bloom, glyphs and backdrop differ."
+    ],
+    "reference_bounds_px": [
+      66,
+      58,
+      1427,
+      868
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "distance_falloff_popover": {
+    "fixes": [
+      "Seven options preserved with three-unit gaps; correct Smooth state compared with v1 reference."
+    ],
+    "remaining": [
+      "Generated border bloom, glyphs and backdrop differ."
+    ],
+    "reference_bounds_px": [
+      66,
+      58,
+      1427,
+      881
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  },
+  "flatten_falloff_popover": {
+    "fixes": [
+      "Existing option rhythm, curve alignment, preset rail and import/export group recaptured."
+    ],
+    "remaining": [
+      "Generated glass and native glyph details differ; curve values are actual scene data."
+    ],
+    "reference_bounds_px": [
+      38,
+      36,
+      802,
+      1720
+    ],
+    "bounds_method": "Manually inspected outer panel rim, about +/-2 pixels. CSS registration only; original image pixels are unchanged."
+  }
+}

@@ -42,6 +42,7 @@ class Runtime:
         self.draw_patches = []
         self.layout_states = {}
         self.errors = {}
+        self.input_errors = {}
         self.fallbacks = {}
         self.hosts, self.canvases, self.classes = {}, {}, []
         self.running = set()
@@ -85,8 +86,8 @@ class Runtime:
                 return {"CANCELLED"}
             operator.generation = runtime.generation
             operator.window_key = key
-            runtime.running.add(key)
             context.window_manager.modal_handler_add(operator)
+            runtime.running.add(key)
             return {"RUNNING_MODAL"}
 
         def modal(operator, context, event):
@@ -94,11 +95,7 @@ class Runtime:
                 if operator.generation == runtime.generation:
                     runtime.running.discard(operator.window_key)
                 return {"CANCELLED"}
-            return (
-                {"RUNNING_MODAL"}
-                if any(h.event(context, event) for h in runtime.hosts.values())
-                else {"PASS_THROUGH"}
-            )
+            return runtime.dispatch_event(operator, context, event)
 
         def cancel(operator, context):
             if getattr(operator, "generation", None) == runtime.generation:
@@ -183,6 +180,39 @@ class Runtime:
             self.handlers.append((collection, callback))
         self.schedule_start()
 
+    def dispatch_event(self, operator, context, event):
+        """An owned action failure must never terminate the window input service."""
+        for definition, host in self.hosts.items():
+            try:
+                if host.event(context, event):
+                    return {"RUNNING_MODAL"}
+            except Exception as error:
+                # Blender raises RuntimeError for an operator's ERROR report,
+                # including expected refusals. Keep diagnostics bounded by panel
+                # and consume this event: replaying it could invoke another action.
+                import traceback
+
+                self.input_errors[definition.__name__] = {
+                    "event": event.type,
+                    "error": str(error),
+                    "traceback": traceback.format_exc(),
+                }
+                traceback.print_exc()
+                try:
+                    host.invalidate()
+                except Exception as cleanup_error:
+                    self.input_errors[definition.__name__]["cleanup_error"] = str(cleanup_error)
+                    # Even stale RNA during cancellation must not retain a hit target.
+                    host.records.clear()
+                self.canvases[definition].clear()
+                try:
+                    operator.report({"WARNING"}, "Beyond UI: " + str(error))
+                    self.redraw()
+                except Exception:
+                    pass  # Reporting cannot take down the input service either.
+                return {"RUNNING_MODAL"}
+        return {"PASS_THROUGH"}
+
     def schedule_start(self):
         import bpy
 
@@ -227,8 +257,6 @@ class Runtime:
             else 0
             for n in ("scene", "view_layer", "object")
         )
-        cache_key = getattr(definition, "cache_key", None)
-        fingerprint += (cache_key(context) if cache_key else None,)
         cache = self.canvases[definition]
         if key not in cache and len(cache) >= 64:
             # Window/region churn cannot retain an unbounded set of RNA/GPU owners.
@@ -240,6 +268,14 @@ class Runtime:
                 k: v for k, v in self.layout_states.items() if k[0] is not definition
             }
         cached = cache.get(key)
+        # Reserve known native space without author callbacks or binding reads.
+        # Context replacement still revokes old owners immediately. Paint detects
+        # re-entry and requests one authoring pass before exposing controls again.
+        if (cached is not None and cached[0][:3] == fingerprint
+                and host.defer_draw(native, context, cached[1])):
+            return
+        cache_key = getattr(definition, "cache_key", None)
+        fingerprint += (cache_key(context) if cache_key else None,)
         state = self.layout_states.setdefault((definition, key), {})
         tape = None
         if self.adopt:
@@ -254,10 +290,19 @@ class Runtime:
                 self.draw_error(definition, key, native, error, context, instance)
                 return
             fingerprint += (tuple(tape.signature),)
+        if (cached is not None and tape is not None and cached[0][:-1] == fingerprint[:-1]
+                and getattr(cached[1], "_author_tape", None) is not None
+                and cached[1]._author_tape.patch_display(tape)):
+            self.canvases[definition][key] = fingerprint, cached[1]
+            cached = self.canvases[definition][key]
         if cached is None or cached[0] != fingerprint:
             if cached is not None:
                 cached[1].park()
             canvas = Canvas(shortcut_registry=self.registry)
+            if self.config.stylesheet is not None:
+                self.config.stylesheet.apply(
+                    canvas, variant=getattr(definition, "beyond_ui_style", "")
+                )
             if self.config.context_menu is not None:
                 canvas.context_provider = self.config.context_menu
 
@@ -277,16 +322,22 @@ class Runtime:
                         )
                 self.redraw()
 
+            layout_options = dict(self.config.layout_options)
+            layout_options["property_options"] = {
+                **layout_options.get("property_options", {}),
+                **getattr(definition, "beyond_ui_props", {}),
+            }
             layout = Layout(
                 canvas=canvas,
                 context=context,
                 commit=commit,
                 state=state,
-                **self.config.layout_options,
+                **layout_options,
             )
             try:
                 if tape is not None:
                     tape.play(layout)
+                    canvas._author_tape = tape
                 else:
                     self.draw_functions[definition](
                         PanelProxy(definition, layout), context
@@ -300,6 +351,21 @@ class Runtime:
             self.canvases[definition][key] = fingerprint, canvas
         else:
             canvas = cached[1]
+        # Clipped panels are parked after paint. Native draw is authoring them
+        # again (including their reserved height), so resume before list callbacks
+        # validate their parent. Otherwise an ordinary value refresh turns an
+        # offscreen list into an error row and View2D clamps the scroll upward.
+        # The host still gates input on its painted/clipped record and parks
+        # unpainted canvases again; this does not schedule idle redraws.
+        canvas.visible = True
+        try:
+            for control in canvas.controls.values():
+                widget = control.options.get("widget")
+                if hasattr(widget, "refresh_display"):
+                    widget.refresh_display()
+        except Exception as error:
+            self.draw_error(definition, key, native, error, context, instance)
+            return
         self.errors.pop(definition.__name__, None)
         self.fallbacks.pop(definition.__name__, None)
         if not host.draw(native, context, canvas):
@@ -396,7 +462,11 @@ class Runtime:
         return {
             "registered": self.active,
             "draw_errors": dict(self.errors),
+            "input_errors": dict(self.input_errors),
             "native_fallbacks": dict(self.fallbacks),
+            "popup_fallbacks": [entry for cache in self.canvases.values()
+                                for _, canvas in cache.values()
+                                for entry in getattr(canvas, "popup_fallbacks", ())][-32:],
             "panels": {
                 d.__name__: {
                     "available": h.bridge is not None,

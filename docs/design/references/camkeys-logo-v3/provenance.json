@@ -1,0 +1,18 @@
+{
+  "version": "camkeys-logo-v3",
+  "tool": "image_gen.imagegen (built-in)",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "background": "graphite, opaque",
+  "source": "/Users/tylerwalker/.codex/generated_images/01a17f65-81cf-7512-b777-297bb8ea4825/exec-bef455fb-a601-4837-8720-8949855abbac.png",
+  "symbol_reference": "beyond_ui/assets/icons/svg/SHAPEKEY_DATA.svg; nested chamfered silhouette",
+  "status": "user review pending",
+  "circle_fit": {
+    "accent_radius_pixels": 483.81,
+    "canvas_radius_pixels": 627.0,
+    "accent_clearance_pixels": 143.19
+  },
+  "rejected_attempt": "Transparent first attempt used overlapping duplicate squares and had noisy alpha edges; not selected."
+}

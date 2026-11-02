@@ -35,10 +35,10 @@ void main(){
  float sweep=state.x*6.283185307;
  vec2 endp=radius*vec2(sin(sweep),cos(sweep));
  float cap=min(length(p-vec2(0.,radius)),length(p-endp))-state.y*.5;
- float active=angle<=sweep ? coverage : 1.-smoothstep(-.7,.7,cap);
- if(state.x<=0.)active=0.;
- if(state.x>=1.)active=coverage;
- vec4 c=mix(track,fill,active);c.a*=max(coverage,active);fragColor=c;
+ float filledCoverage=angle<=sweep ? coverage : 1.-smoothstep(-.7,.7,cap);
+ if(state.x<=0.)filledCoverage=0.;
+ if(state.x>=1.)filledCoverage=coverage;
+ vec4 c=mix(track,fill,filledCoverage);c.a*=max(coverage,filledCoverage);fragColor=c;
 }""")
         _shader = gpu.shader.create_from_info(info)
         _batch = batch_for_shader(

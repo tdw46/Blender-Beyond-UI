@@ -1,36 +1,59 @@
 {
-  "reviewed": "2026-10-31 \u2014 checkpoint pushed; scene startup crash repaired and verified",
+  "reviewed": "2026-11-02 \u2014 installed Windows build accepted; primary-branch publication",
   "remaining_turns": [
-    1,
-    1
+    0,
+    0
   ],
   "implementation_turns": [
     0,
-    1
+    0
   ],
   "integration_qa_turns": [
     0,
-    1
+    0
   ],
-  "active_hours": null,
-  "confidence": "Requested shared geometry and icon corrections are execution- and raster-tested; generated reference acceptance is still open.",
-  "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
+  "active_hours": [
+    0,
+    0
+  ],
+  "confidence": "Windows scope complete for the documented sampled checks. Mac hardware regression, physical trackpad and long-duration resource soak are unverified.",
+  "basis": "Actual RTX 4090 Laptop / 591.74 on official Blender 5.2.2. Separate Vulkan/OpenGL profiles and process restarts; original checkout and scene preserved.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
-    "built-in feature panels",
-    "new cross-platform native adapters"
+    "built-in feature panels"
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "input color-space template dedicated GIF",
-    "Dedicated direct-popup integration GIF (execution/resource checks only so far)",
-    "Popup-variant/keymap integration GIF (execution/resource checks only)",
-    "Core/brush historical GIFs predate the latest shared icon-centering pass; current panel/list evidence is in forced-perspective-v2. Earlier recordings are archived rather than labeled current."
+    "New actual Windows/NVIDIA popup, light/custom theme and 30fps deterministic motion-frame captures exist in the external QA bundle. Mac Metal and physical trackpad have no new captures. See docs/WINDOWS_NVIDIA_522_REPAIR.md.",
+    "Compatibility qualification uses native execution and GPU readbacks, not new visual comparisons/GIFs. Windows/NVIDIA appearance and performance remain user QA.",
+    "New actual live Uraraka and disposable popup PNGs show window-level sidebar overlap and viewport glass. No new GIF; existing bounce implementation retained. Earlier left-of-sidebar screenshots are superseded.",
+    "Popover audit has actual paint/glass/event execution and live Uraraka readback. No new screenshot/GIF; appearance and motion unchanged.",
+    "Full-saturation active-value correction verified through tests and live palette readback; earlier screenshots/GIFs predate this stronger signal.",
+    "Accent saturation refinement has numerical/live palette evidence. Earlier native-theme GIF predates this refinement; no new visual capture requested.",
+    "Input recovery and color precedence have execution/readback evidence; prior theme GIF demonstrates native-color mode, not custom accent precedence. No new captures requested.",
+    "Current theme visibility has actual before/after panel PNGs, a comparison GIF and light/custom GPU captures. Older gallery entries remain historical where labeled.",
+    "Head/body setup correction is behavioral; current custom dialog styling retained, no new capture required.",
+    "Response and list changes now have a fresh actual Blender GIF, active/settled PNGs and multi-scale captures. Other older panel demos remain labeled by their existing capture batches.",
+    "Header refinement has 15 updated Blender PNGs and normalized reference crops; no new animation behavior or GIF.",
+    "Artwork pass: fresh generated references and 15 Blender PNGs for five panels at three scale/width combinations. No new GIF; shared motion unchanged.",
+    "Performance/motion pass has live numerical evidence and configuration readback; no new GIF or screenshot. Existing glass and animation rendering retained.",
+    "Tooltip typography v2 has fresh Blender PNG and aligned reference overlay; no new motion behavior or dedicated GIF.",
+    "Developer tooltip refinement has a generated reference and before/after Blender PNGs; no dedicated GIF added. Existing shared motion is unchanged.",
+    "Developer menu/help and billboard fixes have numerical/execution evidence; no new screenshots/GIFs requested. Existing media inventory unchanged.",
+    "Tooltip/popover repair has actual runtime and GPU-render execution evidence; no new PNG/GIF capture produced.",
+    "Offscreen optimization has callback/timing and scroll regression evidence; no new GIF needed for behavior-only work.",
+    "Scroll repair is behavior-only; runtime scroll/height assertions are recorded in panel-scroll-v1, with no new visual or GIF capture.",
+    "List-element redesign has new native/reference comparisons and six final PNGs; no dedicated animation GIF yet. Existing 63 GIF inventory unchanged.",
+    "camkeys-live-panels-v1 has current Appearance/falloff PNG captures; no dedicated animated GIF for this behavior-only fix. Existing 63 GIF demos remain available.",
+    "Text-effects-v1 contains current font comparisons. Full Studio v7 panel captures precede this lettering refinement.",
+    "Current v7 images/GIFs, embedded screenshots, mobile comparisons and narrow/wide scale captures are available.",
+    "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
+    "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Pushed UI checkpoint 6f0a4ea. Isolated deferred macro-RNA startup crash; preserved registered macro children. 296 unit tests; macro lifecycle and full CamKeys regressions passed on 5.1.2/5.2.2; original scene opened with five refreshes and 15 nested macro-property writes. Installed repair; source blend unchanged.",
-  "estimate_review": "New crash scope was reproduced, repaired and execution-verified in this turn. It adds no remaining implementation budget. The separate generated-reference reconciliation pass remains because checkpoint approval explicitly acknowledged remaining visual differences.",
-  "time_summary": "One bounded reference reconciliation/review pass remains. No reliable wall-clock estimate: generated concepts still differ from authored source controls and active theme/backdrop.",
+  "latest_progress": "417 unit tests; repaired official Windows MSI/ZIP executable signing admission, popup-confirm property recording, headless native-fallback crash and reserved GLSL progress-ring identifier. Both NVIDIA backends passed renderer/glass, six CamKeys hosts, panels/lists/curves, popovers, exact-owner actions, search/keyboard, themes, motion and live Uraraka shape/list updates. Idle BUI draw/paint counts are zero over 30 seconds; retained owners stable and released after unregister. All eight Darwin native packages unchanged except shared adapter fingerprint. No new Mac hardware run. Tyler installed the repaired CamKeys build, reported that everything looks good, and requested committing and merging to the primary branches. This is user visual acceptance of the installed Windows build; Mac hardware remains unverified.",
+  "estimate_review": "Implementation and local Windows QA are complete. User visual review accepted the installed build. This turn publishes the existing tested changes after repository CI; no new implementation or hardware run is required.",
+  "time_summary": "Local Windows repair/QA work complete. No forecast for unavailable Mac hardware or future physical-device/long-soak qualification.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -182,13 +205,178 @@
       "work": "Deferred macro RNA lifecycle crash, original scene launch and consumer regression checks; installed repaired vendor.",
       "evidence": "docs/design/qa/macro-lifecycle-v1/runtime.json",
       "turns": 1
+    },
+    {
+      "work": "Reusable StyleSheet, reload-safe preset factory, live dialog/cancel, responsive copy, consumer layout and branded media, paired rendering benchmark.",
+      "evidence": "docs/design/qa/camkeys-studio-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Closed compact layout, heading/icon, list-order, numeric readability and live-accent corrections; renewed multi-scale/embedded/GIF evidence and no-focus launcher termination audit.",
+      "evidence": "docs/design/qa/camkeys-studio-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Requested slider accent, enum row grid/inset values, help icon, fixed numeric unit labels, generalized class hints and simplified logo; renewed runtime media.",
+      "evidence": "docs/design/qa/camkeys-studio-v3/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Square and circle-safe lens/shape-key logo revision; updated review previews.",
+      "evidence": "docs/design/references/camkeys-logo-v3/provenance.json",
+      "turns": 1
+    },
+    {
+      "work": "Generalized native-safe inline style helpers, reusable presets, units and container geometry; removed CamKeys presentation class overrides/custom list branches; four icon candidates with selection 2; runtime/performance/media validation.",
+      "evidence": "docs/design/qa/camkeys-studio-v4/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Studio v5: all-panel reference registration and modular spacing/sizing/alignment corrections",
+      "evidence": "docs/design/qa/camkeys-studio-v5/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Modular styling coverage audit and composable geometry repairs; 19 consumer presets validated",
+      "evidence": "docs/design/qa/style-options-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Twelve mobile-readable reference/Blender image comparisons",
+      "evidence": "docs/design/qa/camkeys-studio-v5/mobile/manifest.json",
+      "turns": 1
+    },
+    {
+      "work": "Reusable value/group surfaces, missing action colors, selection rims, subtle list dividers and comfortable text-button padding",
+      "evidence": "docs/design/qa/camkeys-studio-v6/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Default centered list content with configurable padding/alignment and shared input geometry",
+      "evidence": "docs/design/qa/camkeys-studio-v7/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Modal RNA preserved through adoption/teardown; stale CamKeys engine recovered live; shared native-direction trackpad scrolling and zero-delta fixes",
+      "evidence": "docs/design/qa/modal-scroll-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Unoccluded floating dialog bounds, original-region drawing guards, retained live UIList labels, generalized call_panel routing and actual CamKeys captures",
+      "evidence": "docs/design/qa/camkeys-live-panels-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Shared list name/search grid, original collection icons, transactional clear actions, live-value/right-click regression and multi-scale GPU captures",
+      "evidence": "docs/design/qa/camkeys-list-element-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Parked-list refresh retains panel height and native sidebar scroll; direct/adopted runtime regression and live host reload",
+      "evidence": "docs/design/qa/panel-scroll-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Offscreen authoring/value/layout culling, one-shot resume and hidden list membership validation",
+      "evidence": "docs/design/qa/panel-offscreen-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Native descriptions on ordinary controls; billboard list popover ownership and native popup/menu recovery",
+      "evidence": "docs/design/qa/tooltip-popovers-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Developer hover paths, contributed-menu native actions, menu/popover developer actions and tilted-bone billboard upright correction",
+      "evidence": "docs/design/qa/developer-controls-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Shared tooltip spacing, bold section labels, measured code wrapping, generated reference and GPU comparison",
+      "evidence": "docs/design/qa/developer-tooltips-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Measured tooltip typography, spacing, reference line breaks and card registration",
+      "evidence": "docs/design/qa/developer-tooltips-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Live callback profiling, retained signature/palette optimization and configurable 2x speed / half-strength CamKeys motion",
+      "evidence": "docs/design/qa/ui-performance-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Automatic shape-key angle naming, transparent logo and four section icons, native-safe reusable header/artwork API, styled list accessory alignment and Uraraka runtime reload.",
+      "evidence": "docs/design/qa/camkeys-icon-panels-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Configurable header element styling, semantic subtitle ink, cross-axis alignment, wrapped line height, all-panel dividers and scaled icons; current Blender comparisons.",
+      "evidence": "docs/design/qa/camkeys-headers-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Response card, bullseye icon, capture direction labels, shared responsive wrapping and configurable finite change feedback; reference and actual GPU evidence.",
+      "evidence": "docs/design/qa/camkeys-response-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Preserve Separate Billboards false default through automatic initialization; installed/live patch and regression execution.",
+      "evidence": "docs/design/qa/billboard-default-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Repair body-only setup and initialize mapped head/body on separate-mode enable; tested real custom dialog input and live scene repair.",
+      "evidence": "docs/design/qa/billboard-setup-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Theme-derived readable ink, stronger separators and translucent surfaces, preserved raw accent fills/data, before/after captures and live reload.",
+      "evidence": "docs/design/qa/theme-visibility-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Input refusal isolation, live input recovery and explicit primary/secondary color priority",
+      "evidence": "docs/INPUT_RECOVERY.md; tests/blender_input_recovery.py; tests/test_stylesheet.py",
+      "turns": 1
+    },
+    {
+      "work": "Preserve theme accent saturation while retaining contrast and explicit override priority",
+      "evidence": "tests/test_theme.py; docs/THEMING.md",
+      "turns": 1
+    },
+    {
+      "work": "Full saturation for transient numeric/value highlights with independent override role",
+      "evidence": "tests/test_theme.py; docs/THEMING.md",
+      "turns": 1
+    },
+    {
+      "work": "CamKeys angle labels use shared full-saturation theme ink",
+      "evidence": "CamKeys ui_theme.CAPTURE_ANGLE; build/angle-saturation-v1/live.json",
+      "turns": 1
+    },
+    {
+      "work": "Panel popup lifetime fix and CamKeys popup audit",
+      "evidence": "docs/design/qa/popover-audit-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Window-level popup presentation, viewport-backed glass, Retina/scissor correction and removal of duplicate popup background",
+      "evidence": "docs/design/qa/popup-window-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Exact-header native bridge, older driver clipboard/framebuffer paths, 16 admitted Windows/macOS packages, portable renderer CI and guarded consumer refresh",
+      "evidence": "docs/design/qa/compatibility-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Resolve the recorded generated-reference conflicts (original glyph artwork, author-supplied Lens/curve controls/separators, active theme/backdrop) and obtain visual acceptance. Runtime geometry and centering defects requested in this pass are closed.",
+  "remaining_work": "User Windows/NVIDIA Blender 5.2.2 Vulkan/OpenGL visual, window-composition and performance pass, followed by any reproducible fixes. Other patch builds need exact packages; Linux embedded host and Intel macOS remain unqualified.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
-      "details": "MacOS styling and shared spacing implemented; backdrop/glyph and minor generated-spacing differences remain visible for review."
+      "details": "Current target explicitly relaxed by Tyler to close, consistent visual matching. Minor generated glyph/rim/background differences remain documented, not pixel-exact release blockers."
     },
     {
       "batch": "Custom ID-property boundary audit",
@@ -200,7 +388,7 @@
     },
     {
       "batch": "Real consumer blockers",
-      "details": "CamKeys PropertyGroup lists have no stable row IDs; storage pointers change logical ownership after reorder. Advanced brush curves and draw-time synchronization also prevent full custom conversion."
+      "details": "Closed in the earlier custom-consumer pass: stable list IDs and consumer-owned brush undo/read-only drawing are implemented. Fresh 5.1.2/5.2.2 consumer checks passed in the style-options audit."
     },
     {
       "batch": "Brush undo behavior",
@@ -213,8 +401,41 @@
     {
       "batch": "Scene launch crash",
       "details": "Closed locally: Beyond UI re-registration invalidated CamKeys macro child RNA. Guard and teardown regression verified; repaired vendor installed. Fresh Blender process required."
+    },
+    {
+      "batch": "Explicit CamKeys Studio request",
+      "details": "New scope: logo, per-panel art, consumer redesign, reusable presets, live customization and native validation. Implementation and principal tests delivered; reference fidelity remains separate."
+    },
+    {
+      "batch": "Studio v3 user QA corrections",
+      "details": "Added and closed this turn: six visual/presentation requests, including reusable class hints. User review remains one pass; no extra implementation batch assumed."
+    },
+    {
+      "batch": "Inline style system and CamKeys migration",
+      "details": "Added and completed this turn; bounded CSS-inspired vocabulary with explicit applicability. Native fallback and functional lifecycle preserved."
+    },
+    {
+      "batch": "CamKeys list-element redesign",
+      "details": "Implemented and runtime-tested this turn; generated reference and actual Blender captures ready for optional user review."
+    },
+    {
+      "batch": "Popup composition user correction",
+      "details": "Newly identified and closed this turn: early region rendering pushed popovers left, wrong backdrop source and an extra background coat flattened glass. Implementation and two-runtime execution/capture complete; existing optional 0\u20131 user QA turn remains."
+    },
+    {
+      "batch": "Blender 4.2+ cross-platform support",
+      "details": "Explicit new scope includes older release families, exact-header build tooling, Windows PDB-bound host dispatch, Linux admission and platform/backend qualification. Native fallback does not count as custom UI parity."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "reference reconciliation and user acceptance of the compact panel candidate"
+  "checkpoint": "User-accepted Windows/NVIDIA build; primary-branch publication",
+  "latest_review": "../popup-window-v1/index.html",
+  "backend_support_review": {
+    "date": "2026-11-02",
+    "renderer": "Shared GPU API, shader/glass/resource checks passed.",
+    "metal": "Historical hardware results retained. Current Darwin native binaries, executable fingerprints, symbols and backend declarations unchanged; new shared changes have unit coverage, no new Mac hardware run.",
+    "vulkan": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: native renderer, real viewport-backed glass, input, consumer panels and idle checks passed.",
+    "opengl": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: same hardware checks passed.",
+    "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."
+  }
 }

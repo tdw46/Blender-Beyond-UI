@@ -1,5 +1,6 @@
 """Searchable custom data picker; identity snapshots are revalidated on commit."""
 
+from ..scroll import scroll_delta
 from .base import Widget, Painter, contains
 from ..components import matches
 from ..virtual import VirtualList
@@ -210,13 +211,7 @@ class DataPicker(Widget):
         if kind in {"WHEELUPMOUSE", "WHEELDOWNMOUSE", "TRACKPADPAN"} and contains(
             PICKER["list"], x, y
         ):
-            delta = (
-                -24
-                if kind == "WHEELUPMOUSE"
-                else 24
-                if kind == "WHEELDOWNMOUSE"
-                else getattr(event, "mouse_prev_y", 0) - getattr(event, "mouse_y", 0)
-            )
+            delta = scroll_delta(event, 24)
             self.rows.scroll(delta, PICKER["list"][3])
             return True
         if kind != "LEFTMOUSE" or not press:

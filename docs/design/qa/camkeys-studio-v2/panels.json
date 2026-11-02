@@ -1,0 +1,110 @@
+[
+  {
+    "panel": "CAMKEYS_PT_auto_fov",
+    "slug": "auto_fov",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/auto_fov.png",
+    "reference": "../../references/camkeys-studio-v1/auto_fov.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_baking",
+    "slug": "baking",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/baking.png",
+    "reference": "../../references/camkeys-studio-v1/baking.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_camkeys_linking",
+    "slug": "camkeys_linking",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/camkeys_linking.png",
+    "reference": "../../references/camkeys-studio-v2/camkeys_linking.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_camkeys_main",
+    "slug": "camkeys_main",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/camkeys_main.png",
+    "reference": "../../references/camkeys-studio-v2/camkeys_main.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_camprops",
+    "slug": "camprops",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/camprops.png",
+    "reference": "../../references/camkeys-studio-v1/camprops.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+    "slug": "lattice_auto_fov_modifier",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/lattice_auto_fov_modifier.png",
+    "reference": "../../references/camkeys-studio-v2/lattice_auto_fov_modifier.png",
+    "exact_match": false,
+    "notes": "Conditional fixture: a temporary lattice controller targets the existing Uraraka head mesh. Created only in the disposable test process; source scene unchanged."
+  },
+  {
+    "panel": "CAMKEYS_PT_billboard_settings",
+    "slug": "billboard_settings",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/billboard_settings.png",
+    "reference": "../../references/camkeys-studio-v1/billboard_settings.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_dolly_expressions",
+    "slug": "dolly_expressions",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/dolly_expressions.png",
+    "reference": "../../references/camkeys-studio-v2/dolly_expressions.png",
+    "exact_match": false,
+    "notes": "Shape Keys mode in a disposable copy. The empty expression target list reflects the scene data; the prior VRM dependency notice is archived separately."
+  },
+  {
+    "panel": "CAMKEYS_PT_lens_compensation",
+    "slug": "lens_compensation",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/lens_compensation.png",
+    "reference": "../../references/camkeys-studio-v1/lens_compensation.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_falloff_popover",
+    "slug": "falloff_popover",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v1/falloff_popover.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  },
+  {
+    "panel": "CAMKEYS_PT_distance_falloff_popover",
+    "slug": "distance_falloff_popover",
+    "reference_version": "camkeys-studio-v1",
+    "implementation": "implementation/distance_falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v1/distance_falloff_popover.png",
+    "exact_match": false,
+    "notes": "Seven real options retained. The incorrect shortened v2 generated variant is rejected; v1 is the comparison target."
+  },
+  {
+    "panel": "CAMKEYS_PT_flatten_falloff_popover",
+    "slug": "flatten_falloff_popover",
+    "reference_version": "camkeys-studio-v2",
+    "implementation": "implementation/flatten_falloff_popover.png",
+    "reference": "../../references/camkeys-studio-v2/flatten_falloff_popover.png",
+    "exact_match": false,
+    "notes": "Actual scene data; real Blender GPU render over a diagnostic backdrop. Compact templates, heading icons, shared alignment and neutral disclosure headers are implemented. Generated glyphs and optical glass remain an explicit reference boundary."
+  }
+]

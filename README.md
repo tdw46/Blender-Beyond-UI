@@ -1,5 +1,7 @@
 # Beyond UI for Blender
 
+Blender **4.2+** remains the compatibility target. See the [current platform/build qualification matrix](docs/COMPATIBILITY.md); implementation and actual GPU validation are tracked separately.
+
 **BVT liquid glass, bouncy controls, and Blender-style panel code.**
 Vendor one package into your add-on. Keep your operators and properties; author
 custom panels with familiar `self.layout.prop()`, `row()`, `menu()` and `popover()`
@@ -8,6 +10,44 @@ calls. No pip install or separate UI add-on required.
 [Quick integration guide](docs/INTEGRATION.md) · [Copy-ready add-on](examples/single_line.py) ·
 [Current visual review](docs/design/qa/core-review-v2/index.html) ·
 [Feature overview](docs/design/qa/overview/index.html)
+
+## Make it your own
+
+Opt into reusable presets for colors, opacity, sizes, glass cards and motion.
+Unspecified colors still follow Blender. Keep ordinary panel code and owner menus.
+
+```python
+from ._vendor.beyond_ui import integrate, StyleSheet
+studio = StyleSheet(colors={"accent": "#F17C67"},
+                    motion={"enabled": True, "strength": 0.7, "speed": 1.0})
+integrate(globals(), stylesheet=studio)
+```
+
+[Styling guide](docs/STYLING.md) · [Copy-ready presets](examples/theme_presets.py) ·
+[CamKeys Studio JSON](examples/themes/camkeys-studio.json) ·
+[CamKeys references vs Blender renders](docs/design/qa/camkeys-studio-v7/index.html)
+
+The CamKeys consumer preview includes a live Appearance dialog. These recordings
+show actual Blender renders; generated-reference acceptance remains open.
+
+| Live customization | Branded panel |
+| --- | --- |
+| ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v7-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v7-camkeys_main.gif) |
+
+## One extra line of styling
+
+Keep native Blender calls and add reusable styles after them:
+
+```python
+from ._vendor import beyond_ui as bui
+
+row.prop(camera, "lens")
+bui.style(row, units="mm", precision=1, value_width=78, padding=(3, 8))
+```
+
+The helper is a no-op on native Blender layouts. Compose dictionaries for spacing,
+alignment, dimensions, colors, typography, motion and numeric presentation.
+[Inline styling guide and supported options](docs/INLINE_STYLES.md).
 
 ## Drop it in
 
@@ -101,10 +141,11 @@ shared renderer, glass, motion and owner menus. Real embedded N-panel captures n
 
 ## Compatibility and scope
 
-**Embedded panels are currently execution-tested on macOS arm64 Blender 5.1.2
-and 5.2.2 and require admitted exact-build native adapters.** Unsupported hosts
-show an explicit availability reason. Copying the package does not qualify every
-Blender build, Windows or Linux. [Runtime details](docs/VALIDATION.md).
+**Blender 4.2+ is the target.** Exact stock builds from 4.2 through 5.2 have
+macOS arm64 and Windows x64 native-action packages. Metal and software
+OpenGL/Vulkan renderer checks pass; Windows/NVIDIA visual QA remains pending.
+Other patches, Intel macOS and Linux embedded hosts are not automatically qualified.
+See the [build and backend matrix](docs/COMPATIBILITY.md).
 
 The toolkit targets third-party N-panels, Properties panels and their reusable
 controls—not Blender's built-in modifier stacks or editor interfaces. Full
@@ -132,3 +173,7 @@ uv run ruff check beyond_ui tests tools
 GPL-3.0-or-later. Preserve the bundled [license](LICENSE),
 [notice](beyond_ui/NOTICE) and font licenses when vendoring.
 Derived from Beyond VTuber Tools' Effect Layers UI; see [provenance](docs/PROVENANCE.md).
+
+### Brand artwork
+
+Add transparent logos and section icons with native-safe `bui.header()` and `bui.heading()` helpers. [Artwork setup and reusable layout API](docs/ARTWORK.md).

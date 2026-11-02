@@ -203,3 +203,20 @@ disposable profiles and owned-process cleanup remain. Both final native-adapter
 runs on 5.1.2/5.2.2 observed no activation, with only Codex in the foreground.
 Evidence: `design/qa/context-overrides-v1/focus.json`. Earlier restoration capability
 and launch observations above are historical, not the current helper policy.
+
+### LaunchServices termination records (2026-11-01)
+
+The Studio motion capture exposed stale `NSRunningApplication.isTerminated`
+records: Blender had exited and was absent from the process table, but the launcher
+waited until its timeout. The launcher now corroborates termination using
+`kill(ownedPID, 0)` with **ESRCH only**; permission denial does not count as exit.
+Its report identifies `kernel-process-absent` versus `launch-services` evidence.
+This is process-lifetime evidence, not an OS exit-code or visual-success claim;
+the fixture's result and focus audit remain separate requirements. The runner
+rejects a launcher binary older than its Swift source. Recompile with:
+
+```sh
+swiftc tools/launch_blender_macos.swift -o build/focus-audit/launch-blender
+```
+
+No activation, focus restoration or extra Blender process is needed for this check.

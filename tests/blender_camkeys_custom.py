@@ -4,7 +4,7 @@ import bpy, importlib.util, os, sys, json, traceback
 from pathlib import Path
 
 source = Path(os.environ["BEYOND_UI_CAMKEYS_ROOT"]).resolve()
-assert source.name == "CamKeys-beyond-ui", source
+assert (source / "__init__.py").is_file(), source
 spec = importlib.util.spec_from_file_location(
     "camkeys_qa", source / "__init__.py", submodule_search_locations=[str(source)]
 )
@@ -46,6 +46,9 @@ def audit(label):
                 )
                 for attempt in range(8):
                     try:
+                        sheet = getattr(addon.__beyond_ui_integration__.ui, "stylesheet", None)
+                        if sheet is not None:
+                            sheet.apply(layout.canvas)
                         tape.play(layout)
                         break
                     except Exception:
@@ -116,7 +119,7 @@ def click(control, button="LEFTMOUSE"):
     x, y, _, _ = d.host.canvas.overlay["rect"]
     a, b, c, e = control.rect
     scale = d.host.scale
-    point = ((x + a + c / 2) * scale, main_region.height - (y + b + e / 2) * scale)
+    point = (d.host.rect[0] + (x + a + c / 2) * scale, d.host.rect[1] + d.host.rect[3] - (y + b + e / 2) * scale)
     event("MOUSEMOVE", "NOTHING", point)
     event(button, point=point)
     event(button, "RELEASE", point)

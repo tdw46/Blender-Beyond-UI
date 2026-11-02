@@ -34,10 +34,16 @@ def auto_slider(control):
 def prepare(canvas):
     from .widgets.collection_list import CollectionList
 
+    def content(node):
+        while node.options.get("_style_wrapper") and len(node.children) == 1:
+            node = node.children[0]
+        return node
+
     def visit(group):
         children = getattr(group, "children", ())
         if group.kind == "row" and any(
-            c.kind == "widget" and isinstance(c.options.get("widget"), CollectionList)
+            content(c).kind == "widget"
+            and isinstance(content(c).options.get("widget"), CollectionList)
             for c in children
         ):
             for c in children:
@@ -58,7 +64,22 @@ def prepare(canvas):
                     )
                 if child.kind == "number" and child.options.get("slider"):
                     child.options["_slider_stacked"] = bool(child.label)
-                    child.options["_label_band"] = LABEL_BAND
+                    child.options["_label_band"] = canvas.theme.label_band
+        # A leading disclosure row with a trailing section icon is an authored
+        # section header. Single centered help actions retain ordinary text.
+        if group.kind == "box" and children and children[0].kind == "row":
+            header = children[0].children
+            if (
+                len(header) == 2
+                and header[0].kind == "toggle"
+                and header[0].options.get("bool_button")
+                and header[0].options.get("icon") in {"TRIA_DOWN", "TRIA_RIGHT"}
+                and header[1].kind == "label"
+                and not header[1].label
+            ):
+                header[0].options["text_role"] = "title"
+                header[0].options["text_alignment"] = "LEFT"
+                header[0].options["section_disclosure"] = True
         if group.kind not in {"box", "column"}:
             return
         for i, child in enumerate(children[:-1]):
@@ -75,7 +96,14 @@ def prepare(canvas):
                 0,
             } or child.options.get("icon_value"):
                 continue
-            first = group.kind == "box" and i == 0
+            first = i == 0 and (
+                group.kind == "box"
+                or (
+                    group.kind == "column"
+                    and group.parent is not None
+                    and group.parent.kind == "box"
+                )
+            )
             divided = i > 0 and children[i - 1].kind == "separator"
             following = children[i + 1]
             if (first or divided) and following.kind not in {"label", "separator"}:
@@ -91,6 +119,11 @@ def span_labels(group):
     for child in children:
         leaves.extend(span_labels(child) if hasattr(child, "children") else (child,))
     if group.kind in {"row", "split"}:
+        for child in children:
+            if child.options.get("section_disclosure"):
+                # Include the decorative trailing icon in the header surface,
+                # without changing the authored control's owner or hit target.
+                child.options["_section_rect"] = group.rect
         labels = [c for c in leaves if c.options.get("_slider_stacked")]
         if len(labels) == 1:
             label = labels[0]

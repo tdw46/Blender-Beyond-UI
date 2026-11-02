@@ -2,6 +2,7 @@
 // Observe activation only; never restore or deliberately change application focus.
 import AppKit
 import Foundation
+import Darwin
 
 let args = CommandLine.arguments
 guard args.count == 2 else { exit(2) }
@@ -39,7 +40,15 @@ while !ready && Date().timeIntervalSince(start) < 20 {
     RunLoop.current.run(until: Date().addingTimeInterval(0.01))
 }
 var timedOut = false
+var terminationEvidence = "launch-services"
 while let app = owned, !app.isTerminated {
+    // LaunchServices can retain a stale running-application record after the
+    // owned process has exited. Confirm absence with the kernel before waiting
+    // or requesting termination; EPERM is not evidence of process exit.
+    if kill(app.processIdentifier, 0) == -1 && errno == ESRCH {
+        terminationEvidence = "kernel-process-absent"
+        break
+    }
     if Date().timeIntervalSince(start) > 85 {
         timedOut = true
         app.forceTerminate()
@@ -53,6 +62,7 @@ let report: [String: Any] = ["pid": owned?.processIdentifier ?? 0,
     "final_frontmost_pid": NSWorkspace.shared.frontmostApplication?.processIdentifier ?? 0,
     "activates": false, "new_instance": true, "restore_requests": 0,
     "events": events, "timeout": timedOut, "error": errorText ?? "",
+    "termination_evidence": terminationEvidence,
     "seconds": Date().timeIntervalSince(start)]
 try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]).write(to: URL(fileURLWithPath: reportPath))
 exit(owned == nil || errorText != nil || timedOut ? 1 : 0)

@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-02",
+  "cause": "Existing body-only definitions were treated as completed setup, so Create Head / Body skipped the selection dialog and left the head absent. Separate Billboards refresh also rebuilt before creating missing groups.",
+  "changes": [
+    "Complete empty/body-only setup without duplicating or replacing authored branches",
+    "Initialize missing head/body on explicit Separate Billboards enable; retain default false",
+    "Validate mapped head before partial setup; keep manual bone selection for unmapped rigs",
+    "Suppress recursive auto-initialization while refreshing"
+  ],
+  "runtimes": [
+    {
+      "version": "5.2.2 LTS",
+      "passed": true,
+      "checks": [
+        "Body-only setup opens a custom two-field dialog; simulated confirmation creates head/body and releases modal input",
+        "Enabling Separate Billboards creates and compiles missing groups in the property update",
+        "Repeated off/on preserves existing groups without duplicates",
+        "Unmapped rig reports manual selection; explicit head/body selection succeeds without native fallback",
+        "Subsequent Appearance dialog still opens and cancels through simulated input"
+      ],
+      "setup_seconds": [
+        0.12973425000018324
+      ],
+      "focus_events": []
+    },
+    {
+      "version": "5.1.2",
+      "passed": true,
+      "checks": [
+        "Body-only setup opens a custom two-field dialog; simulated confirmation creates head/body and releases modal input",
+        "Enabling Separate Billboards creates and compiles missing groups in the property update",
+        "Repeated off/on preserves existing groups without duplicates",
+        "Unmapped rig reports manual selection; explicit head/body selection succeeds without native fallback",
+        "Subsequent Appearance dialog still opens and cancels through simulated input"
+      ],
+      "setup_seconds": [
+        0.12919833299747552
+      ],
+      "focus_events": []
+    }
+  ],
+  "live": {
+    "passed": true,
+    "before": {
+      "dirty": true,
+      "modal": 3
+    },
+    "after": {
+      "dirty": true,
+      "modal": 3
+    },
+    "groups_before": [
+      [
+        "body",
+        "Hips",
+        true
+      ]
+    ],
+    "groups_after": [
+      [
+        "body",
+        "Hips",
+        true
+      ],
+      [
+        "head",
+        "Head",
+        false
+      ]
+    ],
+    "ready": true,
+    "status": "",
+    "seconds": 0.1744337500022084,
+    "saved": false,
+    "errors": {},
+    "router_error": null
+  },
+  "limitations": [
+    "Confirmed setup no-op and tested modal release; no separate full-application hang reproduced.",
+    "Test profile uses the live verified public humanoid bone-name map because the VRM add-on is not registered in the disposable profile.",
+    "No visual restyling or new screenshot/GIF; existing custom dialog/glass/animation route retained."
+  ]
+}

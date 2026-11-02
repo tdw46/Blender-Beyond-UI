@@ -1,0 +1,164 @@
+{
+  "date": "2026-11-01",
+  "commit": "5411abb",
+  "unit_tests": 333,
+  "presets_validated": 19,
+  "runs": {
+    "runtime": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "focus_events": [],
+        "checks": [
+          "Boolean/int/float/string/enum/pointer/vector/color styles preserve real bindings and retained layout",
+          "Native length and rotation codecs support explicit displayed units without changing storage",
+          "Value edits do not change style recording signatures",
+          "Composed row presets retain internal gaps, box padding and RNA owners",
+          "Unchanged native UILayout.prop calls plus style helpers render without extra RNA keywords"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Boolean/int/float/string/enum/pointer/vector/color styles preserve real bindings and retained layout",
+          "Native length and rotation codecs support explicit displayed units without changing storage",
+          "Value edits do not change style recording signatures",
+          "Composed row presets retain internal gaps, box padding and RNA owners",
+          "Unchanged native UILayout.prop calls plus style helpers render without extra RNA keywords"
+        ]
+      }
+    ],
+    "consumer": [
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ]
+      }
+    ],
+    "capture-run": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "lattice-run": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "checks": []
+      }
+    ],
+    "installed": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "focus_events": [],
+        "scene_loaded": true,
+        "refreshes": 5
+      }
+    ]
+  },
+  "geometry_comparison": [
+    {
+      "panel": "auto_fov",
+      "same_geometry": true,
+      "controls": 45
+    },
+    {
+      "panel": "baking",
+      "same_geometry": true,
+      "controls": 34
+    },
+    {
+      "panel": "camkeys_linking",
+      "same_geometry": true,
+      "controls": 18
+    },
+    {
+      "panel": "camkeys_main",
+      "same_geometry": true,
+      "controls": 20
+    },
+    {
+      "panel": "camprops",
+      "same_geometry": true,
+      "controls": 25
+    },
+    {
+      "panel": "billboard_settings",
+      "same_geometry": true,
+      "controls": 9
+    },
+    {
+      "panel": "dolly_expressions",
+      "same_geometry": true,
+      "controls": 12
+    },
+    {
+      "panel": "lens_compensation",
+      "same_geometry": true,
+      "controls": 17
+    },
+    {
+      "panel": "falloff_popover",
+      "same_geometry": true,
+      "controls": 8
+    },
+    {
+      "panel": "distance_falloff_popover",
+      "same_geometry": true,
+      "controls": 8
+    },
+    {
+      "panel": "flatten_falloff_popover",
+      "same_geometry": true,
+      "controls": 28
+    },
+    {
+      "panel": "lattice_auto_fov_modifier",
+      "same_geometry": true,
+      "controls": 7
+    }
+  ],
+  "visual_evidence": "All 12 captured control geometries equal the Studio v5 comparison states. Existing v5 media retained; no new appearance or pixel-exact acceptance claimed.",
+  "scope": "Composable styling repairs; no renderer, glass, motion or context-menu contract changes.",
+  "limits": [
+    "CSS-inspired options, not every CSS property",
+    "Specialized widget internals retain their documented APIs",
+    "No new Blender 4.2 runtime qualification in this pass"
+  ],
+  "scene_sha256_unchanged": "e2f9f5521a6ec4b016282859abc012af5020ef8c9a7fe29e9758eeb567563158",
+  "installed_vendor": "5411abbd4f36dfe3560c4c6169f05225263292eb"
+}

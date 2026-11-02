@@ -1,5 +1,6 @@
 """Registered Python panels in retained custom canvases; no native popup widgets."""
 
+from .scroll import SCROLL_EVENTS, scroll_delta
 from .registered_menu import RegisteredMenu, Proxy, LIMIT
 from .operator_enum import context_key
 from .hosts.menu_context import override
@@ -26,6 +27,8 @@ class PanelProxy(Proxy):
 class RegisteredPanel(RegisteredMenu):
     lookup = staticmethod(panel_class)
 
+    native_route = "call_panel"
+
     def __init__(self, layout, name, *, source=None):
         super().__init__(layout, name, source=source)
         self.direction = "VERTICAL"
@@ -49,6 +52,8 @@ class RegisteredPanel(RegisteredMenu):
         from .context_menu import default_entries
 
         rows = list(default_entries(target, context)) if self.source else []
+        if not self.source:
+            rows.extend(self.opener_entries(context))
         provider = self.layout.canvas.context_provider
         if provider:
             rows.extend(provider(target, context))
@@ -120,6 +125,7 @@ class RegisteredPanel(RegisteredMenu):
             pointer_sources=self.layout.pointer_sources,
             id_actions=self.layout.id_actions,
             list_identity=self.layout.list_identity,
+            property_options={**self.layout.property_options, **getattr(self.cls, "beyond_ui_props", {})},
         )
         ui._is_popover = True
         ui.operator_context = self.invocation
@@ -349,14 +355,14 @@ class PanelPopover(Widget):
             self.parent.cancel()
             return False
         if (
-            event.type in {"WHEELUPMOUSE", "WHEELDOWNMOUSE"}
+            event.type in SCROLL_EVENTS
             and contained
             and not captured
         ):
             old = self.scroll
-            step = -1 if event.type == "WHEELUPMOUSE" else 1
+            delta = scroll_delta(event, self.canvas.theme.row_height * 3)
             self.scroll = min(
-                max(0.0, self.scroll + step * self.canvas.theme.row_height * 3),
+                max(0.0, self.scroll + delta),
                 max(0, child.height - self.height),
             )
             if old != self.scroll:
@@ -418,6 +424,9 @@ class PanelPopover(Widget):
             font=font,
             backdrop=backdrop,
             palette=palette,
+            # The lens above owns the sheet. Painting the child canvas's
+            # background again flattens the glass into an almost opaque card.
+            background=False,
         )
         flush_text(font)
         thumb, track, _, limit = self.scrollbar()
@@ -541,7 +550,7 @@ def author(layout, panel, **options):
             icon=options["icon"],
         )
         model.attach(control)
-    except Exception:
+    except Exception as error:
         for key in set(canvas.controls) - before:
             control = canvas.controls.pop(key)
             control.motion.clear()
@@ -555,7 +564,17 @@ def author(layout, panel, **options):
             c.options.get("panel_model") for c in canvas.controls.values()
         )
         canvas.invalidate()
-        raise
+        if not getattr(canvas, "popup_native_fallback", True):
+            raise
+        # An unsupported custom header must not remove the opener itself.
+        control = layout.group.button(
+            layout._key("popover"),
+            layout._text(model.label if options["text"] is None else options["text"],
+                         options["text_ctxt"], options["translate"]),
+            None, icon=options["icon"],
+        )
+        model.attach(control)
+        control.options["popover_author_error"] = str(error)
 
 
 def panel_position(owner, clip, size, direction):

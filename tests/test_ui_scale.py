@@ -111,7 +111,7 @@ class UIScale(unittest.TestCase):
         pointer = canvas.add(
             "pointer", "p", pointer_field=NS(picker=lambda c, o: picker)
         )
-        search = canvas.add("search", "s", search_field=NS(open=lambda: picker))
+        search = canvas.add("search", "s", search_field=NS(open=lambda: picker, can_clear=lambda: False))
         color = canvas.color(
             "c", "Color", Binding(lambda: (0.1, 0.2, 0.3, 1), lambda v: None)
         )

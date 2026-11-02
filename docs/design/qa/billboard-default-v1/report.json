@@ -1,0 +1,20 @@
+{
+  "runtime": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "checks": [
+      "RNA default false",
+      "Automatic initialization preserves false and skips rig work",
+      "Explicit true still initializes groups"
+    ]
+  },
+  "live": {
+    "updated": true,
+    "existing_selections": [
+      false
+    ],
+    "dirty": true,
+    "saved": false
+  },
+  "change": "Automatic billboard group initialization now requires explicit Separate Billboards opt-in. Existing choices and explicit group-creation actions are preserved."
+}

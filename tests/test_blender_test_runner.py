@@ -12,7 +12,7 @@ from tools import run_blender_tests as runner
 
 class BlenderTestRunner(unittest.TestCase):
     def run_fixture(
-        self, windowed, help_text="--no-window-focus", timeout=False, macos=False
+        self, windowed, help_text="--no-window-focus", timeout=False, macos=False, windows=False
     ):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder)
@@ -23,6 +23,9 @@ class BlenderTestRunner(unittest.TestCase):
                 args.append("--windowed")
             if macos:
                 args.append("--macos-noactivate")
+                source = output / "tools/launch_blender_macos.swift"
+                source.parent.mkdir()
+                source.touch()
                 launcher = output / "build/focus-audit/launch-blender"
                 launcher.parent.mkdir(parents=True)
                 launcher.touch()
@@ -35,7 +38,8 @@ class BlenderTestRunner(unittest.TestCase):
             runner.require_no_focus.cache_clear()
             with (
                 patch("sys.argv", args),
-                patch("sys.platform", "darwin"),
+                patch("sys.platform", "win32" if windows else "darwin"),
+                patch.object(runner.subprocess, "CREATE_NO_WINDOW", 0x08000000, create=True),
                 patch.object(runner, "ROOT", output if macos else runner.ROOT),
                 # These are mocked-process tests; no Blender windows are launched.
                 patch.object(runner, "require_windowed_admission"),
@@ -60,6 +64,15 @@ class BlenderTestRunner(unittest.TestCase):
                 self.assertFalse(summary["passed"])
                 self.assertEqual(summary["pid"], 123)
                 command = summary["command"]
+                if windows:
+                    self.assertEqual(launch.call_args.kwargs["creationflags"], 0x08000000)
+                    if windowed:
+                        pos = command.index("--window-geometry")
+                        self.assertEqual(command[pos + 1:pos + 5], ["80", "80", "1280", "900"])
+                        self.assertLess(pos, command.index("--python"))
+                else:
+                    self.assertNotIn("creationflags", launch.call_args.kwargs)
+                    self.assertNotIn("--window-geometry", command)
                 if macos:
                     self.assertEqual(
                         command[-3:], ["--", "-ApplePersistenceIgnoreState", "YES"]
@@ -82,6 +95,9 @@ class BlenderTestRunner(unittest.TestCase):
 
     def test_windowed_launch_never_omits_no_focus(self):
         self.run_fixture(True)
+
+    def test_windows_uses_normal_nonactivating_window_without_console(self):
+        self.run_fixture(True, windows=True)
 
     def test_macos_restoration_override_is_process_local_and_after_blender_args(self):
         self.run_fixture(True, macos=True)
