@@ -86,7 +86,7 @@ def main():
     fmt=next((work/'fmt').iterdir())/'include'
     interface=(checkout/'source/blender/editors/include/UI_interface_c.hh').read_text()
     memory=(checkout/'intern/guardedalloc/MEM_guardedalloc.h').read_text()
-    flags={'BUI_FAMILY':family,'BUI_OPTIONAL_LABELS':int('std::optional<blender::StringRef> str' in interface or family>=51),
+    flags={'BUI_FAMILY':family,'BUI_PYRNA_C':int((checkout/'source/blender/python/intern/bpy_rna.h').exists()),'BUI_OPTIONAL_LABELS':int('std::optional<blender::StringRef> str' in interface or family>=51),
            'BUI_FUNCTION_DRAW':int(bool(re.search(r'UI_but_func_drawextra_set\([^;]+std::function',interface,re.S))),
            'BUI_ENUM_EMBOSS':int('enum class EmbossType' in interface),'BUI_FREE_TYPED':int('mem_freeN_ex' in memory)}
     # Extract unchanged public declarations to avoid unrelated editor DNA/OIIO
@@ -101,6 +101,10 @@ def main():
         matches=re.findall(r'^[A-Za-z][^;{}\n]*\b'+name+r'\([^;{}]*\);',screen,re.M)
         if len(matches)!=1:raise ValueError('Cannot extract exact declaration: '+name)
         declarations.append(matches[0])
+    threads=(checkout/'source/blender/blenlib/BLI_threads.h').read_text()
+    declaration=re.search(r'^bool BLI_thread_is_main\(void\);|^bool BLI_thread_is_main\(\);',threads,re.M)
+    if declaration is None:raise ValueError('Missing main-thread declaration')
+    declarations.append(declaration[0])
     text='\n'.join(declarations)
     if family>=51:text='namespace blender {\n'+text+'\n}'
     (work/'bui_screen_declarations.hh').write_text('// SPDX-License-Identifier: GPL-2.0-or-later\n// Unchanged declarations from the exact Blender source archive.\n'+text+'\n')
@@ -113,13 +117,13 @@ def main():
         qualification='built-for-user-qa',compile_defines=flags,source_archive_sha256=sha(archive))
     if system=='Windows':
         obj=work/'bridge.obj';response=work/'compile.rsp'
-        options=['/nologo','/c','/std:c++20','/O2','/MD','/EHsc','/DNDEBUG','/J','/DWIN32','/D_WIN32','/D_WINDOWS','/D__SSE2__']
+        options=['/nologo','/c','/std:c++20','/O2','/MD','/EHsc','/DNDEBUG','/utf-8','/J','/DWIN32','/D_WIN32','/D_WINDOWS','/D__SSE2__']
         options += ['/D'+k+'='+str(v) for k,v in flags.items()]+['/I'+str(p) for p in includes]+[str(source),'/Fo'+str(obj)]
         response.write_text('\n'.join('"'+x+'"' for x in options))
         run(['cl.exe','@'+str(response)],output=work/'compile.log')
         dump=run(['dumpbin.exe','/symbols',obj],output=work/'symbols.txt')
         undefined={line.split('|',1)[1].strip().split(' ',1)[0] for line in dump.splitlines() if 'UNDEF' in line and 'External' in line and '|' in line}
-        needed={name for name in undefined if name.startswith(('?','MEM_','BLI_')) and not name.startswith(('??','?__','?what@','?_','?terminate@'))}
+        needed={name for name in undefined if name.startswith(('?','MEM_','BLI_','pyrna_')) and not name.startswith(('??','?__','?what@','?_','?terminate@'))}
         needed={name for name in needed if '@std@@' not in name and '__std_' not in name}
         requested=work/'requested.txt';requested.write_text('\n'.join(sorted(needed|{free_symbol})))
         vs=Path(os.environ['VSINSTALLDIR']);dia=vs/'DIA SDK';tool=work/'pdb_symbols.exe'
@@ -153,7 +157,7 @@ def main():
         for line in dump.splitlines():
             name=line.split()[-1].split('@')[0]
             if system=='Darwin' and name.startswith('_'):name=name[1:]
-            if name.startswith(('_Z','MEM_','BLI_')) and not name.startswith(('_ZSt','_ZNSt','_ZTI','_ZTV','_Zdl','_Zn')):symbols.append(name)
+            if name.startswith(('_Z','MEM_','BLI_','pyrna_')) and not name.startswith(('_ZSt','_ZNSt','_ZTI','_ZTV','_Zdl','_Zn')):symbols.append(name)
         manifest['host_symbols']=sorted(set(symbols))
         if system=='Darwin':run(['codesign','--force','--sign','-',binary])
     manifest.update(library=binary.name,binary_sha256=sha(binary))

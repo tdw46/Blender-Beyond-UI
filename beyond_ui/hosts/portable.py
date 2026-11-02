@@ -33,6 +33,8 @@ def package(root, *, system, machine, build, backend, executable):
     """Validate all disk inputs before allowing any adapter code to load."""
     key = platform_key(system, machine) + '/' + build
     catalog = json.loads((root / 'catalog.json').read_text())
+    if catalog.get('schema') != 1:
+        raise BridgeUnavailable('Unsupported native catalog schema')
     entry = catalog.get('packages', {}).get(key)
     if entry is None:
         raise BridgeUnavailable(f'No packaged Beyond UI adapter for {key}')
@@ -47,6 +49,8 @@ def package(root, *, system, machine, build, backend, executable):
             or manifest['platform'] != platform_key(system, machine)
             or manifest['build_hash'] != build or backend not in manifest['backends']):
         raise BridgeUnavailable('Native UI platform/build/backend mismatch')
+    if set(manifest['sources']) != {'bridge_portable.cpp'}:
+        raise BridgeUnavailable('Native UI source inventory mismatch')
     for name, expected in manifest['sources'].items():
         path = (root / name).resolve(strict=True)
         if not path.is_relative_to(root.resolve()) or digest(path) != expected:

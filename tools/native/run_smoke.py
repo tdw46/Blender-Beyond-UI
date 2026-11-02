@@ -7,7 +7,11 @@ import sys
 root = Path(__file__).resolve().parents[2]
 record = Path(sys.argv[1]).resolve()
 build = json.loads(record.read_text())
-subprocess.run([sys.executable, str(root/'tools/run_blender_tests.py'),
+result = subprocess.run([sys.executable, str(root/'tools/run_blender_tests.py'),
                 '--blender', build['blender'], '--fixture',
                 str(root/'tests/blender_portable_bridge.py'), '--output',
-                str(record.parent/'smoke')], check=True, cwd=root)
+                str(record.parent/'smoke')], cwd=root)
+if result.returncode:
+    for log in (record.parent/"smoke").glob("*.log"):
+        print(log.read_text(errors="replace"), flush=True)
+    raise SystemExit(result.returncode)

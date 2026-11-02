@@ -12,7 +12,6 @@
 #include "WM_api.hh"
 #include "WM_types.hh"
 #include "BKE_context.hh"
-#include "BLI_threads.h"
 #include "DNA_userdef_types.h"
 #include "DEG_depsgraph_build.hh"
 #include "GPU_framebuffer.hh"
@@ -42,9 +41,11 @@ using Button = uiBut;
 #endif
 struct _object;
 #if BUI_FAMILY >= 51
-namespace blender { PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *); }
+namespace blender { const PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *); }
+#elif BUI_PYRNA_C
+extern "C" const PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *);
 #else
-PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *);
+const PointerRNA *pyrna_struct_as_ptr(_object *, const StructRNA *);
 #endif
 
 static bool enabled = false;
@@ -149,7 +150,7 @@ using Invocation = wmOperatorCallContext;
 #endif
 EXPORT void *bui_find_operator(Items *items, const wmOperatorType *op, IDProperty *props, const char *name, int invocation) { return ED_screen_user_menu_item_find_operator(items,op,props,name,Invocation(invocation)); }
 EXPORT void bui_add_operator(Items *items, const char *label, const wmOperatorType *op, const IDProperty *props, const char *name, int invocation) { ED_screen_user_menu_item_add_operator(items,label,op,props,name,Invocation(invocation)); }
-EXPORT PointerRNA *bui_rna_pointer(_object *object, const StructRNA *type) { return pyrna_struct_as_ptr(object,type); }
+EXPORT const PointerRNA *bui_rna_pointer(_object *object, const StructRNA *type) { return pyrna_struct_as_ptr(object,type); }
 EXPORT PropertyRNA *bui_rna_find(PointerRNA *owner, const char *name) { return RNA_struct_find_property(owner,name); }
 EXPORT void bui_enum_items(bContext *context, PointerRNA *owner, PropertyRNA *prop, const EnumPropertyItem **items, int *count, bool *owned) { RNA_property_enum_items(context,owner,prop,items,count,owned); }
 EXPORT void *bui_py_dict(const bContext *context) { return CTX_py_dict_get(context); }
