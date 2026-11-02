@@ -30,6 +30,9 @@ response_media = ROOT / "docs/design/qa/camkeys-response-v1/current-media.json"
 if response_media.exists():
     current = [r for r in current if r["path"] != "docs/media/panels/camkeys-studio-v7-camkeys_linking.gif"]
     current += json.loads(response_media.read_text())
+visibility_media = ROOT / "docs/design/qa/theme-visibility-v1/current-media.json"
+if visibility_media.exists():
+    current += json.loads(visibility_media.read_text())
 current_paths = {r["path"] for r in current}
 archive = [r for r in rows if r["path"] not in current_paths]
 

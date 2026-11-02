@@ -1,4 +1,4 @@
-"""Real consumer call_panel and dialog placement beside an overlapping sidebar."""
+"""Historical consumer fixture; use blender_camkeys_popover_audit for late-window captures."""
 import bpy, gpu, sys, os, json, traceback, importlib.util
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -27,9 +27,9 @@ def capture():
 def geometry(host):
     x,y,w,h=host.canvas.overlay['rect']; rx,ry,rw,rh=host.rect;scale=host.scale
     assert x>=0 and y>=0 and x+w<=rw/scale+.01 and y+h<=rh/scale+.01
-    # Native sidebar overlaps WINDOW: no custom popup pixel can extend beneath it.
+    # Window-level presentation includes the sidebar instead of displacing popups.
     if ui_region.width>1 and ui_region.x<region.x+region.width:
-        assert region.x+rx+rw<=ui_region.x+.01
+        assert region.x+rx+rw>=ui_region.x+ui_region.width-.01
     record=host.records[host.key]
     assert record.get('valid') and not host.reason, host.reason
     widget=host.canvas.overlay.get('widget')

@@ -448,3 +448,9 @@ Real Blender GPU captures of the shared change pulse. Appearance uses state snap
 ![CamKeys response, bullseye action and live-value feedback](media/panels/camkeys-value-feedback.gif)
 
 [Reference and multi-scale Blender captures](design/qa/camkeys-response-v1/index.html).
+
+## Theme visibility defaults
+
+![Theme visibility: original then improved Blender colors](media/panels/theme-visibility-v1.gif)
+
+[Comparison and theme checks](design/qa/theme-visibility-v1/index.html).

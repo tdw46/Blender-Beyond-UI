@@ -9,7 +9,7 @@ Panel, Menu, Header and UIList remain ordinary host-registered Blender classes. 
 ## Custom backend
 
 The member-by-member [custom parity ledger](CUSTOM_PARITY.json) is authoritative:
-**80 unimplemented / 57 partial / 0 reference-matched** members. Native delegation
+**72 unimplemented / 65 partial / 0 reference-matched** members. Native delegation
 does not count toward these totals. The table below groups current partial work.
 
 | Family | Custom support | Remaining examples |

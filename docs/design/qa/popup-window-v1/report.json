@@ -1,0 +1,429 @@
+{
+  "date": "2026-11-02",
+  "summary": "Window-level popup presentation and viewport-backed liquid glass",
+  "unit_tests": 400,
+  "runs": [
+    {
+      "batch": "placement5",
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        {
+          "panel": "CAMKEYS_PT_lens_compensation",
+          "owner_type": "MeshObjectItem",
+          "controls": 17,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_dolly_expressions",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_billboard_settings",
+          "owner_type": "MeshObjectItem",
+          "controls": 9,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_distance_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_flatten_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "flatten-operator",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "appearance-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "billboard-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "dolly-shapes",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "AngleItem",
+          "controls": 7,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        }
+      ],
+      "focus": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 756,
+        "initial_frontmost_pid": 756,
+        "new_instance": true,
+        "pid": 34065,
+        "restore_requests": 0,
+        "seconds": 19.48039197921753,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      }
+    },
+    {
+      "batch": "compat51",
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        {
+          "panel": "CAMKEYS_PT_lens_compensation",
+          "owner_type": "MeshObjectItem",
+          "controls": 17,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_dolly_expressions",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_billboard_settings",
+          "owner_type": "MeshObjectItem",
+          "controls": 9,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_distance_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 19,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_flatten_falloff_popover",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "flatten-operator",
+          "owner_type": "MeshObjectItem",
+          "controls": 27,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "appearance-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "billboard-dialog",
+          "owner_type": "MeshObjectItem",
+          "controls": 5,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "dolly-shapes",
+          "owner_type": "MeshObjectItem",
+          "controls": 12,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        },
+        {
+          "panel": "CAMKEYS_PT_falloff_popover",
+          "owner_type": "AngleItem",
+          "controls": 7,
+          "painted": true,
+          "glass": true,
+          "viewport_source": true,
+          "window_overlay": true,
+          "backdrop_reused": true,
+          "survived_mousemove": true
+        }
+      ],
+      "focus": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 756,
+        "initial_frontmost_pid": 756,
+        "new_instance": true,
+        "pid": 34451,
+        "restore_requests": 0,
+        "seconds": 20.792948007583618,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      }
+    },
+    {
+      "batch": "embedded",
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Actual N-panel input opens custom panel popovers and toggles their RNA fields",
+        "Right-click inside a popover exposes exact property actions; keyboard edits commit a slider number field",
+        "Escape dismisses the nested child before its parent; property-attached popovers retain exact enum owners",
+        "Shared animation/tooltip timers settle and teardown clears all child state"
+      ],
+      "focus": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 756,
+        "initial_frontmost_pid": 756,
+        "new_instance": true,
+        "pid": 35330,
+        "restore_requests": 0,
+        "seconds": 12.439170002937317,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      }
+    },
+    {
+      "batch": "direct",
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+        "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+        "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+        "Original callbacks restored and lifecycle unregister completes"
+      ],
+      "focus": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 2038,
+        "initial_frontmost_pid": 2038,
+        "new_instance": true,
+        "pid": 36152,
+        "restore_requests": 0,
+        "seconds": 12.34597396850586,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      }
+    },
+    {
+      "batch": "routes",
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Property-only popup edits/check refresh without executing; Escape cancels once",
+        "Confirmation message and action execute the original instance exactly once",
+        "Enum search filters real keyboard input, preserves original state, executes once, supports undo and cancels once",
+        "Callback pie keeps title outside the two directional slots; Blender RNA keymap matching and test-modal dispatch open list and held-key pie menus (ordinary foreground dispatch remains untested)",
+        "Keymap teardown restores native routes and preserves edited chords; explicit refresh re-adopts; unregister cancels pending search once",
+        "Menu-only package with zero Panel/Operator subclasses gets reversible one-line keymap adoption"
+      ],
+      "focus": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.openai.codex",
+            "kind": "activation",
+            "pid": 36495,
+            "seconds": 12.531487941741943
+          },
+          {
+            "bundle": "com.hnc.Discord",
+            "kind": "activation",
+            "pid": 2038,
+            "seconds": 14.316676020622253
+          }
+        ],
+        "final_frontmost_pid": 2038,
+        "initial_frontmost_pid": 2038,
+        "new_instance": true,
+        "pid": 35834,
+        "restore_requests": 0,
+        "seconds": 14.750566005706787,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      }
+    }
+  ],
+  "live": {
+    "painted": true,
+    "reason": "",
+    "viewport_source": [
+      536854434336,
+      4,
+      417,
+      17,
+      2602,
+      1509
+    ],
+    "glass_error": "",
+    "surface": [
+      904.7588235294118,
+      0,
+      280.0,
+      659.2941176470588
+    ],
+    "host": [
+      0,
+      0,
+      2602,
+      1401
+    ],
+    "window_rect": [
+      4,
+      417,
+      2602,
+      1401
+    ],
+    "sidebar": [
+      1755,
+      417,
+      851,
+      1401
+    ],
+    "saved": false
+  },
+  "changes": [
+    "Shared process-lifetime native window presenter after sidebar compositing; exact-build admission unchanged",
+    "Sidebar-inclusive popup bounds and Retina framebuffer coordinates",
+    "Completed viewport color/overlay source with cached Gaussian blur/refraction; reuse during hover checked",
+    "Remove extra child background coat from panel popovers; explicit window scissor scope",
+    "Shared ownership/input/bounce preserved, native fallback on unavailable host"
+  ],
+  "limits": [
+    "Actual GPU coverage: macOS Metal, Blender 5.1.2 and 5.2.2; 4.2 path retained but no new runtime test",
+    "No new Windows/Vulkan or OpenGL qualification",
+    "Non-overlap/Properties hosts use completed composed framebuffer instead of claiming a nonexistent viewport behind those regions",
+    "Static visual evidence; no new GIF. Existing finite motion path retained",
+    "Late-window captures omit later native floating menus. Native screen.screenshot recomposes regions and does not include these WM overlays"
+  ],
+  "native_source": "https://github.com/blender/blender/blob/d13f752e3b9c/source/blender/windowmanager/intern/wm_draw.cc#L1094-L1122"
+}

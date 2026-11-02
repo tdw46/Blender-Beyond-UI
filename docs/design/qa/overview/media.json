@@ -254,5 +254,9 @@
   {
     "title": "CamKeys response, bullseye action and live-value feedback",
     "path": "docs/media/panels/camkeys-value-feedback.gif"
+  },
+  {
+    "title": "Theme visibility: original then improved Blender colors",
+    "path": "docs/media/panels/theme-visibility-v1.gif"
   }
 ]

@@ -46,18 +46,18 @@ class LiveDisplay(unittest.TestCase):
         new.extra_signature = [(3, 1, "b")]
         self.assertFalse(old.patch_display(new))
 
-    def test_overlapping_sidebar_and_headers_excluded(self):
+    def test_window_overlay_includes_sidebar_excludes_headers(self):
         window = NS(type='WINDOW', x=4,y=417,width=2602,height=1509)
         sidebar = NS(type='UI', x=1766,y=417,width=840,height=1401)
         header = NS(type='HEADER',x=4,y=1872,width=2602,height=54)
         tool_header = NS(type='TOOL_HEADER',x=4,y=1818,width=2602,height=54)
         area = NS(regions=[window,sidebar,header,tool_header])
-        self.assertEqual(visible_region_rect(area,window),(0,0,1762,1401))
+        self.assertEqual(visible_region_rect(area,window),(0,0,2602,1401))
         sidebar.width=sidebar.height=1
         self.assertEqual(visible_region_rect(area,window),(0,0,2602,1401))
 
-    def test_nonoverlapping_sidebar_does_not_shrink_view_and_left_toolbar_offsets(self):
+    def test_window_overlay_includes_nonoverlapping_sidebar_and_toolbar(self):
         window=NS(type='WINDOW',x=100,y=30,width=700,height=500)
         sidebar=NS(type='UI',x=800,y=30,width=300,height=500)
         tools=NS(type='TOOLS',x=100,y=30,width=40,height=500)
-        self.assertEqual(visible_region_rect(NS(regions=[window,sidebar,tools]),window),(40,0,660,500))
+        self.assertEqual(visible_region_rect(NS(regions=[window,sidebar,tools]),window),(0,0,1000,500))

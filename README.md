@@ -1,5 +1,7 @@
 # Beyond UI for Blender
 
+Blender **4.2+** remains the compatibility target. See the [current platform/build qualification matrix](docs/COMPATIBILITY.md); implementation and actual GPU validation are tracked separately.
+
 **BVT liquid glass, bouncy controls, and Blender-style panel code.**
 Vendor one package into your add-on. Keep your operators and properties; author
 custom panels with familiar `self.layout.prop()`, `row()`, `menu()` and `popover()`
@@ -139,10 +141,11 @@ shared renderer, glass, motion and owner menus. Real embedded N-panel captures n
 
 ## Compatibility and scope
 
-**Embedded panels are currently execution-tested on macOS arm64 Blender 5.1.2
-and 5.2.2 and require admitted exact-build native adapters.** Unsupported hosts
-show an explicit availability reason. Copying the package does not qualify every
-Blender build, Windows or Linux. [Runtime details](docs/VALIDATION.md).
+**Blender 4.2+ is the target.** Exact stock builds from 4.2 through 5.2 have
+macOS arm64 and Windows x64 native-action packages. Metal and software
+OpenGL/Vulkan renderer checks pass; Windows/NVIDIA visual QA remains pending.
+Other patches, Intel macOS and Linux embedded hosts are not automatically qualified.
+See the [build and backend matrix](docs/COMPATIBILITY.md).
 
 The toolkit targets third-party N-panels, Properties panels and their reusable
 controls—not Blender's built-in modifier stacks or editor interfaces. Full

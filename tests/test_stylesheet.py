@@ -204,3 +204,34 @@ class StylesheetTests(unittest.TestCase):
         factory = lambda: current[0]
         current[0] = second
         self.assertIs(AddonUI("example", stylesheet=factory).stylesheet, second)
+
+class ExplicitThemePriority(unittest.TestCase):
+    def test_custom_accents_survive_nested_styles_and_native_mode_returns(self):
+        base = theme_palette()
+        coral = (241/255, 124/255, 103/255, 1)
+        mint = (57/255, 191/255, 165/255, .76)
+        sheet = StyleSheet(colors={'accent': coral, 'toggle_on': mint, 'edge': coral})
+        p = sheet.palette(base)
+        self.assertEqual(p['accent_text'], coral)
+        self.assertEqual(p['toggle_on'], mint)
+        child = StyleSheet(colors={'field': '#333333'})
+        nested = child.palette(p)
+        self.assertEqual(nested['accent_text'], coral)
+        self.assertEqual(nested['edge'], coral)
+        self.assertEqual(nested['toggle_on'], mint)
+        sheet.replace(colors={})
+        native = sheet.palette(base)
+        for role in ('accent', 'accent_text', 'toggle_on', 'slider_fill'):
+            self.assertEqual(native[role], base[role])
+        self.assertFalse(native['_color_overrides'])
+
+    def test_variant_ink_and_nested_opacity_are_preserved(self):
+        from types import SimpleNamespace
+        parent=StyleSheet(colors={'accent':'#FFAA00','card':'#11223380'}, opacity=.5,
+                          variants={'special':{'accent':'#00FF00','accent_text':'#CCFFCC'}})
+        p=parent.palette(theme_palette())
+        variant=parent.control_palette(p,SimpleNamespace(options={'style_class':'special'}))
+        child=StyleSheet(colors={'text':'#FFFFFF'},opacity=.5)
+        result=child.palette(variant)
+        self.assertEqual(result['accent_text'],(0.8,1.0,0.8,1.0))
+        self.assertAlmostEqual(result['card'][3],p['card'][3]*.5)

@@ -48,6 +48,23 @@ def run():
         from camkeys_qa._vendor.beyond_ui.gpu import glass, skin, typography
         from camkeys_qa._vendor.beyond_ui.gpu.paint import gpu_state, measure
 
+        if os.environ.get("BEYOND_UI_THEME_SIGNATURE_JSON"):
+            from camkeys_qa._vendor.beyond_ui.gpu import style
+            from camkeys_qa import ui_theme
+            signature=json.loads(Path(os.environ["BEYOND_UI_THEME_SIGNATURE_JSON"]).read_text())["signature"]
+            fields=(("radio","inner_sel"),("regular","inner"),("regular","text"),("tool","inner"),("num","inner"),("tab","inner_sel"),("numslider","inner"),("numslider","item"),("toggle","inner"),("toggle","inner_sel"),("radio","text_sel"))
+            native=bpy.context.preferences.themes[0].user_interface
+            for (widget,field),value in zip(fields,signature):
+                setattr(getattr(native,"wcol_"+widget),field,value)
+            ui_theme.STUDIO.replace(colors={},surfaces={},variants={},operators={})
+            # Optional immutable old functions for equivalent before/after evidence.
+            if os.environ.get("BEYOND_UI_THEME_BASELINE"):
+                import ast
+                baseline=Path(os.environ["BEYOND_UI_THEME_BASELINE"])
+                for module,name in ((style,"_theme_palette"),(skin,"themed_roles")):
+                    node=next(n for n in ast.parse((baseline/Path(module.__file__).name).read_text()).body if isinstance(n,ast.FunctionDef) and n.name==name)
+                    exec(compile(ast.Module(body=[node],type_ignores=[]),str(baseline),"exec"),module.__dict__)
+            style._theme_palette.cache_clear()
         fonts = typography.Fonts()
         batch, batch_info = configure()
         window = bpy.context.window

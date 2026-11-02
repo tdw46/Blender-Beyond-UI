@@ -151,6 +151,9 @@ def reference_inks():
     """Immutable artwork values; used only by explicitly selected fixtures."""
     return {
         "title": TEXT,
+        "accent_text": ROLES["tab"][1],
+        "value_change": ROLES["tab"][1],
+        "list_divider": EDGE[:3] + (0.18,),
         "edge": EDGE,
         "header_divider": rgba("5d6267", 0.28),
         "field_inset": rgba("101315", 0.35),
@@ -176,6 +179,7 @@ def themed_roles(p):
     data never passes through this function. Neutral shader rims are optics.
     """
     from .style import shade
+    from .contrast import backgrounds, readable
 
     owners = {
         "card": "card",
@@ -201,19 +205,26 @@ def themed_roles(p):
     alpha = lambda role, a: p[role][:3] + (a,)
     inks = {
         "title": p["text"],
-        "edge": alpha("muted", 0.45),
-        "header_divider": alpha("muted", 0.28),
+        "edge": alpha("text", 0.55),
+        "header_divider": alpha("text", 0.48),
         "field_inset": alpha("bg", 0.35),
-        "toolbar_divider": alpha("muted", 0.40),
-        "matrix_divider": alpha("muted", 0.24),
+        "toolbar_divider": alpha("text", 0.50),
+        "matrix_divider": alpha("text", 0.36),
+        "list_divider": alpha("text", 0.32),
         "grid_major": alpha("text", 0.27),
         "grid_minor": alpha("text", 0.14),
-        "curve": p["accent"],
+        "curve": readable(p["accent"], backgrounds(p), 3.0, vivid=True),
         "point_border": alpha("bg", 1.0),
-        "point_selected": p["accent"],
+        "point_selected": readable(p["accent"], backgrounds(p), 3.0, vivid=True),
         "point": p["text"],
         "marker_outer": alpha("bg", 0.8),
         "marker_ring": p["text"],
         "switch_shadow": alpha("bg", 0.30),
     }
+    inks["accent_text"] = readable(p["accent"], backgrounds(p), vivid=True)
+    # Changing values keep the source saturation at the readable ink's value.
+    # Do not whiten this transient signal like ordinary accent labels.
+    peak = max(p["accent"][:3])
+    gain = max(inks["accent_text"][:3]) / peak if peak else 1.0
+    inks["value_change"] = tuple(v * gain for v in p["accent"][:3]) + (p["accent"][3],)
     return surfaces, inks

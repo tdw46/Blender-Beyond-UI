@@ -1,6 +1,6 @@
 {
   "source_sha256": "e764b7968f03afaee13179fd25c54985ada823644d7ffd37407c292427de3133",
-  "python_adapter_sha256": "c5e6c27ecb4d194a6dd3b9278b0d5e3ade069090259f467a943bd4f72892f8f8",
+  "python_adapter_sha256": "b4e2ab30955f3b84fffa206039f75088f4fc975bcd8f98c8769770d027cb6a0b",
   "binary_sha256": "f51797b73c2df9ccc23b1623316a6c9e05434d41eb96051a3f6d46223a376a38",
   "library": "menu-context-e764b7968f03afae.dylib",
   "qualification": "Exact menu_native admission required; Darwin arm64 5.1.2/5.2.2 only"

@@ -1,31 +1,37 @@
 {
-  "reviewed": "2026-11-02 \u2014 head/body setup publication checkpoint",
+  "reviewed": "2026-11-02 \u2014 Windows QA checkpoint publication",
   "remaining_turns": [
-    0,
-    1
+    1,
+    2
   ],
   "implementation_turns": [
     0,
-    0
+    1
   ],
   "integration_qa_turns": [
-    0,
+    1,
     1
   ],
   "active_hours": [
-    0,
-    0.25
+    0.5,
+    2
   ],
-  "confidence": "Requested implementation and runtime checks complete; actual captures available for user review.",
+  "confidence": "Moderate for the Windows/macOS QA pass; hardware findings can add implementation work. Linux native-host support and additional exact patch builds have no completion forecast.",
   "basis": "User live screenshot invalidated the earlier offscreen-only completion estimate. Reproduced and repaired embedded BLF clipping/transform lifetime; original icon atlas, compact rails and narrow status rows now captured in the real N-panel.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
-    "built-in feature panels",
-    "new cross-platform native adapters"
+    "built-in feature panels"
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Compatibility qualification uses native execution and GPU readbacks, not new visual comparisons/GIFs. Windows/NVIDIA appearance and performance remain user QA.",
+    "New actual live Uraraka and disposable popup PNGs show window-level sidebar overlap and viewport glass. No new GIF; existing bounce implementation retained. Earlier left-of-sidebar screenshots are superseded.",
+    "Popover audit has actual paint/glass/event execution and live Uraraka readback. No new screenshot/GIF; appearance and motion unchanged.",
+    "Full-saturation active-value correction verified through tests and live palette readback; earlier screenshots/GIFs predate this stronger signal.",
+    "Accent saturation refinement has numerical/live palette evidence. Earlier native-theme GIF predates this refinement; no new visual capture requested.",
+    "Input recovery and color precedence have execution/readback evidence; prior theme GIF demonstrates native-color mode, not custom accent precedence. No new captures requested.",
+    "Current theme visibility has actual before/after panel PNGs, a comparison GIF and light/custom GPU captures. Older gallery entries remain historical where labeled.",
     "Head/body setup correction is behavioral; current custom dialog styling retained, no new capture required.",
     "Response and list changes now have a fresh actual Blender GIF, active/settled PNGs and multi-scale captures. Other older panel demos remain labeled by their existing capture batches.",
     "Header refinement has 15 updated Blender PNGs and normalized reference crops; no new animation behavior or GIF.",
@@ -44,9 +50,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Fixed body-only Create Head / Body no-op and automatic setup on Separate Billboards enable. Custom dialog confirmation/cancellation and real assignments passed in Uraraka copies on Blender 5.1.2/5.2.2. Repaired the live partial setup without saving.",
-  "estimate_review": "Reviewed for the requested commit/push checkpoint. Head/body setup work is closed; existing optional user QA remains 0\u20131 turns. Publication adds no implementation backlog.",
-  "time_summary": "Optional confirmation/follow-up: 0\u20131 turn, roughly 0\u201315 active minutes. Forecast uncertain, not measured.",
+  "latest_progress": "406 unit tests; 16 exact-build native packages covering eight stock versions on macOS arm64 and Windows x64. Metal framebuffer/glass and popover execution passed; software OpenGL 4.2 and Vulkan 5.2 renderer CI passed. Windows line endings fixed and all ten CI jobs requalified. Refreshed CamKeys passed real menu/dialog/list/brush-curve consumer checks on 5.2.2; QA ZIP prepared without version changes. Published checkpoint preparation includes vendored LF rules and a Windows/NVIDIA QA checklist. No additional hardware QA completed this turn.",
+  "estimate_review": "Checkpoint publication closes packaging/handoff, not hardware QA. Remaining 1\u20132 turns / 0.5\u20132 active hours unchanged because Windows/NVIDIA testing and any resulting fixes remain; no implementation turn was subtracted for Git publication.",
+  "time_summary": "Forecast for the remaining Windows/macOS QA pass: 1\u20132 turns, 0.5\u20132 active hours excluding user hardware testing/wait time. Not measured. Other platform/patch qualification is unestimated.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -323,9 +329,49 @@
       "work": "Repair body-only setup and initialize mapped head/body on separate-mode enable; tested real custom dialog input and live scene repair.",
       "evidence": "docs/design/qa/billboard-setup-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Theme-derived readable ink, stronger separators and translucent surfaces, preserved raw accent fills/data, before/after captures and live reload.",
+      "evidence": "docs/design/qa/theme-visibility-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Input refusal isolation, live input recovery and explicit primary/secondary color priority",
+      "evidence": "docs/INPUT_RECOVERY.md; tests/blender_input_recovery.py; tests/test_stylesheet.py",
+      "turns": 1
+    },
+    {
+      "work": "Preserve theme accent saturation while retaining contrast and explicit override priority",
+      "evidence": "tests/test_theme.py; docs/THEMING.md",
+      "turns": 1
+    },
+    {
+      "work": "Full saturation for transient numeric/value highlights with independent override role",
+      "evidence": "tests/test_theme.py; docs/THEMING.md",
+      "turns": 1
+    },
+    {
+      "work": "CamKeys angle labels use shared full-saturation theme ink",
+      "evidence": "CamKeys ui_theme.CAPTURE_ANGLE; build/angle-saturation-v1/live.json",
+      "turns": 1
+    },
+    {
+      "work": "Panel popup lifetime fix and CamKeys popup audit",
+      "evidence": "docs/design/qa/popover-audit-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Window-level popup presentation, viewport-backed glass, Retina/scissor correction and removal of duplicate popup background",
+      "evidence": "docs/design/qa/popup-window-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Exact-header native bridge, older driver clipboard/framebuffer paths, 16 admitted Windows/macOS packages, portable renderer CI and guarded consumer refresh",
+      "evidence": "docs/design/qa/compatibility-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optional user review of the response card, angle metadata and changing-value accent. Exact generated font/backdrop identity and new platform qualification remain outside this batch.",
+  "remaining_work": "User Windows/NVIDIA Blender 5.2.2 Vulkan/OpenGL visual, window-composition and performance pass, followed by any reproducible fixes. Other patch builds need exact packages; Linux embedded host and Intel macOS remain unqualified.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -370,9 +416,25 @@
     {
       "batch": "CamKeys list-element redesign",
       "details": "Implemented and runtime-tested this turn; generated reference and actual Blender captures ready for optional user review."
+    },
+    {
+      "batch": "Popup composition user correction",
+      "details": "Newly identified and closed this turn: early region rendering pushed popovers left, wrong backdrop source and an extra background coat flattened glass. Implementation and two-runtime execution/capture complete; existing optional 0\u20131 user QA turn remains."
+    },
+    {
+      "batch": "Blender 4.2+ cross-platform support",
+      "details": "Explicit new scope includes older release families, exact-header build tooling, Windows PDB-bound host dispatch, Linux admission and platform/backend qualification. Native fallback does not count as custom UI parity."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "CamKeys response and changing-value feedback",
-  "latest_review": "../camkeys-response-v1/index.html"
+  "checkpoint": "Blender 4.2+ compatibility packages and backend execution",
+  "latest_review": "../popup-window-v1/index.html",
+  "backend_support_review": {
+    "date": "2026-11-02",
+    "renderer": "Shared GPU API, shader/glass/resource checks passed.",
+    "metal": "Real native framebuffer copy and GPU execution on 4.2.0, 4.4.3, 5.1.2, 5.2.2; current popover input tests passed.",
+    "vulkan": "Actual Linux Mesa software execution on 5.2.2; Windows/NVIDIA hardware/window-host validation pending.",
+    "opengl": "Actual Linux Mesa software execution on 4.2.0; Windows hardware/window-host validation pending.",
+    "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."
+  }
 }

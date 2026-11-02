@@ -42,6 +42,7 @@ class Runtime:
         self.draw_patches = []
         self.layout_states = {}
         self.errors = {}
+        self.input_errors = {}
         self.fallbacks = {}
         self.hosts, self.canvases, self.classes = {}, {}, []
         self.running = set()
@@ -85,8 +86,8 @@ class Runtime:
                 return {"CANCELLED"}
             operator.generation = runtime.generation
             operator.window_key = key
-            runtime.running.add(key)
             context.window_manager.modal_handler_add(operator)
+            runtime.running.add(key)
             return {"RUNNING_MODAL"}
 
         def modal(operator, context, event):
@@ -94,11 +95,7 @@ class Runtime:
                 if operator.generation == runtime.generation:
                     runtime.running.discard(operator.window_key)
                 return {"CANCELLED"}
-            return (
-                {"RUNNING_MODAL"}
-                if any(h.event(context, event) for h in runtime.hosts.values())
-                else {"PASS_THROUGH"}
-            )
+            return runtime.dispatch_event(operator, context, event)
 
         def cancel(operator, context):
             if getattr(operator, "generation", None) == runtime.generation:
@@ -182,6 +179,39 @@ class Runtime:
             collection.append(callback)
             self.handlers.append((collection, callback))
         self.schedule_start()
+
+    def dispatch_event(self, operator, context, event):
+        """An owned action failure must never terminate the window input service."""
+        for definition, host in self.hosts.items():
+            try:
+                if host.event(context, event):
+                    return {"RUNNING_MODAL"}
+            except Exception as error:
+                # Blender raises RuntimeError for an operator's ERROR report,
+                # including expected refusals. Keep diagnostics bounded by panel
+                # and consume this event: replaying it could invoke another action.
+                import traceback
+
+                self.input_errors[definition.__name__] = {
+                    "event": event.type,
+                    "error": str(error),
+                    "traceback": traceback.format_exc(),
+                }
+                traceback.print_exc()
+                try:
+                    host.invalidate()
+                except Exception as cleanup_error:
+                    self.input_errors[definition.__name__]["cleanup_error"] = str(cleanup_error)
+                    # Even stale RNA during cancellation must not retain a hit target.
+                    host.records.clear()
+                self.canvases[definition].clear()
+                try:
+                    operator.report({"WARNING"}, "Beyond UI: " + str(error))
+                    self.redraw()
+                except Exception:
+                    pass  # Reporting cannot take down the input service either.
+                return {"RUNNING_MODAL"}
+        return {"PASS_THROUGH"}
 
     def schedule_start(self):
         import bpy
@@ -432,6 +462,7 @@ class Runtime:
         return {
             "registered": self.active,
             "draw_errors": dict(self.errors),
+            "input_errors": dict(self.input_errors),
             "native_fallbacks": dict(self.fallbacks),
             "popup_fallbacks": [entry for cache in self.canvases.values()
                                 for _, canvas in cache.values()

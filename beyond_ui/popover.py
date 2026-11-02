@@ -424,6 +424,9 @@ class PanelPopover(Widget):
             font=font,
             backdrop=backdrop,
             palette=palette,
+            # The lens above owns the sheet. Painting the child canvas's
+            # background again flattens the glass into an almost opaque card.
+            background=False,
         )
         flush_text(font)
         thumb, track, _, limit = self.scrollbar()

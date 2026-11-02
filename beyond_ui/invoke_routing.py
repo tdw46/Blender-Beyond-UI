@@ -421,7 +421,7 @@ class Router:
                 host.close()
                 return {"CANCELLED"}
             host.event(context, event)
-            if host.canvas.context_menu is None:
+            if host.canvas.context_menu is None and host.canvas.overlay is None:
                 router.menus.pop(key, None)
                 host.close()
                 return {"FINISHED"}

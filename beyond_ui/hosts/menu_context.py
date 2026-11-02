@@ -12,6 +12,10 @@ def api():
 
     if admission() is None:
         raise RuntimeError("String contexts require an admitted native adapter")
+    from . import portable_actions
+    portable = portable_actions.library()
+    if portable is not None:
+        return _configure(portable)
     root = Path(__file__).resolve().parents[1] / "_native"
     directory = root / "macos-arm64"
     record = json.loads((directory / "menu-context.json").read_text())
@@ -26,6 +30,11 @@ def api():
     ):
         raise RuntimeError("String-context adapter fingerprint mismatch")
     lib = C.PyDLL(str(binary))
+    return _configure(lib)
+
+
+def _configure(lib):
+    import ctypes as C
     lib.beyond_context_init.restype = C.c_int
     if not lib.beyond_context_init():
         raise RuntimeError("Native string-context symbols unavailable")
@@ -103,7 +112,10 @@ def override(context, values):
 def _property_api():
     import ctypes as C
 
-    lib = api()  # Exact build, executable, source and dylib admission first.
+    lib = api()  # Exact build, executable, source and library admission first.
+    if hasattr(lib, "bui_bridge_abi"):
+        from .portable_actions import property_api
+        return property_api(lib)
     runtime = C.PyDLL(None)  # Keep the GIL for Python RNA conversion.
     pointer = getattr(
         runtime, "_ZN7blender19pyrna_struct_as_ptrEP7_objectPKNS_9StructRNAE"

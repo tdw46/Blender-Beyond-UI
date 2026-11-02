@@ -1,0 +1,9 @@
+# Preserve native-adapter source fingerprints when vendored into another repo.
+* text=auto eol=lf
+*.py text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.json text eol=lf
+*.dylib binary
+*.dll binary
+*.so binary

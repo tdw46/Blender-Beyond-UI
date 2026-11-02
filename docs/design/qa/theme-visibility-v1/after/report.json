@@ -1,0 +1,1026 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "records": [
+    {
+      "panel": "CAMKEYS_PT_auto_fov",
+      "slug": "auto_fov",
+      "width": 400,
+      "height": 875.45,
+      "list_content_frames": [
+        {
+          "row": 0,
+          "rim": [
+            2.0,
+            2.0,
+            330.0,
+            24
+          ],
+          "content": [
+            10.0,
+            4.0,
+            314.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 1,
+          "rim": [
+            2.0,
+            30.0,
+            330.0,
+            24
+          ],
+          "content": [
+            10.0,
+            32.0,
+            314.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 2,
+          "rim": [
+            2.0,
+            58.0,
+            330.0,
+            24
+          ],
+          "content": [
+            10.0,
+            60.0,
+            314.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        }
+      ],
+      "controls": [
+        {
+          "kind": "label",
+          "label": "",
+          "rect": [
+            12.0,
+            14.5,
+            76.0,
+            52.0
+          ],
+          "icon": "camkeys.studio:perspective"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            97.0,
+            16.5,
+            1.0,
+            48.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "label",
+          "label": "Forced Perspective",
+          "rect": [
+            107.0,
+            14.0,
+            281.0,
+            28.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Lens, depth and camera effects",
+          "rect": [
+            107.0,
+            44.0,
+            281.0,
+            23.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "Disable Forced Perspective",
+          "rect": [
+            8.0,
+            77.0,
+            384.0,
+            26.45
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Focus FOV Around:",
+          "rect": [
+            14.0,
+            113.45,
+            372.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "enum",
+          "label": "",
+          "rect": [
+            14.0,
+            135.45,
+            372.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "pointer",
+          "label": "Focus Object",
+          "rect": [
+            14.0,
+            161.45,
+            372.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Camera Effect Locks",
+          "rect": [
+            14.0,
+            199.45,
+            372.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            221.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Dolly Zoom",
+          "rect": [
+            42.0,
+            221.45,
+            170.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Lens",
+          "rect": [
+            216.0,
+            221.45,
+            114.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            334.0,
+            221.45,
+            24.0,
+            22.0
+          ],
+          "icon": "CAMERA_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            221.45,
+            24.0,
+            22.0
+          ],
+          "icon": "SHAPEKEY_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            247.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Pincushion",
+          "rect": [
+            42.0,
+            247.45,
+            170.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Strength",
+          "rect": [
+            216.0,
+            247.45,
+            170.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            273.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Tangential",
+          "rect": [
+            42.0,
+            273.45,
+            170.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Strength",
+          "rect": [
+            216.0,
+            273.45,
+            170.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Apparent Focal Length",
+          "rect": [
+            14.0,
+            311.45,
+            266.0,
+            46.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            284.0,
+            335.45,
+            24.0,
+            22.0
+          ],
+          "icon": "LOOP_BACK"
+        },
+        {
+          "kind": "toggle",
+          "label": "",
+          "rect": [
+            312.0,
+            335.45,
+            46.0,
+            22.0
+          ],
+          "icon": "LOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "mm",
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            335.45,
+            24.0,
+            22.0
+          ],
+          "icon": "RNDCURVE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            14.0,
+            361.45,
+            372.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "number",
+          "label": "Near Dist",
+          "rect": [
+            14.0,
+            373.45,
+            164.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Far Dist",
+          "rect": [
+            188.0,
+            373.45,
+            164.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            373.45,
+            24.0,
+            22.0
+          ],
+          "icon": "SMOOTHCURVE"
+        },
+        {
+          "kind": "label",
+          "label": "Perspective Lag",
+          "rect": [
+            14.0,
+            411.45,
+            372.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Perspective Lag",
+          "rect": [
+            14.0,
+            433.45,
+            372.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "toggle",
+          "label": "Stepped Lag",
+          "rect": [
+            14.0,
+            459.45,
+            372.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "toggle",
+          "label": "Billboard Emulation",
+          "rect": [
+            14.0,
+            485.45,
+            344.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            485.45,
+            24.0,
+            22.0
+          ],
+          "icon": "PREFERENCES"
+        },
+        {
+          "kind": "label",
+          "label": "Multi-Object Falloff Settings: (0=infinite)",
+          "rect": [
+            14.0,
+            523.45,
+            372.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Falloff Radius",
+          "rect": [
+            14.0,
+            545.45,
+            344.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            545.45,
+            24.0,
+            22.0
+          ],
+          "icon": "LINCURVE"
+        },
+        {
+          "kind": "label",
+          "label": "Other Objects to Correct:",
+          "rect": [
+            14.0,
+            583.45,
+            372.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "widget",
+          "label": "",
+          "rect": [
+            14.0,
+            605.45,
+            346.0,
+            110.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            364.0,
+            605.45,
+            22.0,
+            22.0
+          ],
+          "icon": "ADD"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            364.0,
+            631.45,
+            22.0,
+            22.0
+          ],
+          "icon": "REMOVE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            364.0,
+            657.45,
+            22.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            364.0,
+            669.45,
+            22.0,
+            22.0
+          ],
+          "icon": "DOWNARROW_HLT"
+        },
+        {
+          "kind": "button",
+          "label": "Add All From Same Armature",
+          "rect": [
+            8.0,
+            725.45,
+            384.0,
+            23.0
+          ],
+          "icon": "ARMATURE_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Parent and Child Objects",
+          "rect": [
+            8.0,
+            752.45,
+            384.0,
+            23.0
+          ],
+          "icon": "CON_CHILDOF"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Selected Objects",
+          "rect": [
+            8.0,
+            779.45,
+            384.0,
+            23.0
+          ],
+          "icon": "RESTRICT_SELECT_OFF"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Scene Objects",
+          "rect": [
+            8.0,
+            806.45,
+            384.0,
+            23.0
+          ],
+          "icon": "SCENE_DATA"
+        },
+        {
+          "kind": "toggle",
+          "label": "HOW TO",
+          "rect": [
+            14.0,
+            839.45,
+            372.0,
+            22.0
+          ],
+          "icon": "TRIA_RIGHT"
+        }
+      ]
+    },
+    {
+      "panel": "CAMKEYS_PT_camkeys_linking",
+      "slug": "camkeys_linking",
+      "width": 400,
+      "height": 716.0,
+      "list_content_frames": [
+        {
+          "row": 0,
+          "rim": [
+            2.0,
+            2.0,
+            324.0,
+            50
+          ],
+          "content": [
+            10.0,
+            4.0,
+            308.0,
+            46.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 1,
+          "rim": [
+            2.0,
+            56.0,
+            324.0,
+            50
+          ],
+          "content": [
+            10.0,
+            58.0,
+            308.0,
+            46.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 2,
+          "rim": [
+            2.0,
+            110.0,
+            324.0,
+            50
+          ],
+          "content": [
+            10.0,
+            112.0,
+            308.0,
+            46.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 3,
+          "rim": [
+            2.0,
+            164.0,
+            324.0,
+            50
+          ],
+          "content": [
+            10.0,
+            166.0,
+            308.0,
+            46.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        }
+      ],
+      "controls": [
+        {
+          "kind": "label",
+          "label": "",
+          "rect": [
+            12.0,
+            8.0,
+            40.0,
+            32.0
+          ],
+          "icon": "camkeys.studio:linking"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            61.0,
+            9.5,
+            1.0,
+            29.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "label",
+          "label": "CamKeys Linking",
+          "rect": [
+            71.0,
+            8.0,
+            317.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Angles \u2192 shape keys",
+          "rect": [
+            71.0,
+            26.0,
+            317.0,
+            14.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Camera Angles + Shape Keys",
+          "rect": [
+            16.0,
+            54.0,
+            340.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "",
+          "rect": [
+            362.0,
+            54.0,
+            22.0,
+            24.0
+          ],
+          "icon": "camkeys.studio:objects"
+        },
+        {
+          "kind": "widget",
+          "label": "",
+          "rect": [
+            16.0,
+            84.0,
+            340.0,
+            242.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            84.0,
+            22.0,
+            22.0
+          ],
+          "icon": "ADD"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            112.0,
+            22.0,
+            22.0
+          ],
+          "icon": "REMOVE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            140.0,
+            22.0,
+            22.0
+          ],
+          "icon": "DOWNARROW_HLT"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            362.0,
+            168.0,
+            22.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            182.0,
+            22.0,
+            22.0
+          ],
+          "icon": "TRIA_UP"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            362.0,
+            210.0,
+            22.0,
+            22.0
+          ],
+          "icon": "TRIA_DOWN"
+        },
+        {
+          "kind": "label",
+          "label": "Angle response",
+          "rect": [
+            28.0,
+            352.0,
+            344.0,
+            20.0
+          ],
+          "icon": "camkeys.studio:objects"
+        },
+        {
+          "kind": "toggle",
+          "label": "Distance Only",
+          "rect": [
+            28.0,
+            381.0,
+            344.0,
+            24.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            28.0,
+            414.0,
+            344.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "number",
+          "label": "Angle Sensitivity",
+          "rect": [
+            28.0,
+            431.0,
+            344.0,
+            48.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Falloff",
+          "rect": [
+            28.0,
+            489.5,
+            70.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "Linear",
+          "rect": [
+            108.0,
+            488.0,
+            264.0,
+            23.0
+          ],
+          "icon": "LINCURVE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            28.0,
+            520.0,
+            344.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "number",
+          "label": "CamKey Value",
+          "rect": [
+            28.0,
+            537.0,
+            344.0,
+            48.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            28.0,
+            594.0,
+            344.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "Snap to View",
+          "rect": [
+            28.0,
+            611.0,
+            168.0,
+            23.0
+          ],
+          "icon": "BUI_TARGET"
+        },
+        {
+          "kind": "button",
+          "label": "Bake Keyframes",
+          "rect": [
+            204.0,
+            611.0,
+            168.0,
+            23.0
+          ],
+          "icon": "REC"
+        },
+        {
+          "kind": "toggle",
+          "label": "HOW TO",
+          "rect": [
+            145.5,
+            668.0,
+            109.0,
+            24.0
+          ],
+          "icon": "TRIA_RIGHT"
+        }
+      ]
+    }
+  ],
+  "scene_loaded": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+  "paint_cpu_median_ms": 1.888499999040505,
+  "feedback_benchmarks": [],
+  "stylesheet": {
+    "name": "CamKeys Studio",
+    "colors": {},
+    "geometry": {
+      "padding": 8,
+      "gap": 6,
+      "radius": 8,
+      "font_size": 11,
+      "field_height": 24,
+      "button_height": 22,
+      "icon_button_size": 22,
+      "list_tool_size": 22,
+      "label_band": 24,
+      "list_row_height": 28
+    },
+    "geometry_variants": {
+      "compact": {
+        "gap": 4,
+        "box_padding": 6,
+        "heading_height": 18,
+        "field_height": 22,
+        "button_height": 20,
+        "separator_height": 4,
+        "label_band": 22
+      }
+    },
+    "surfaces": {},
+    "opacity": 1.0,
+    "cards": true,
+    "variants": {},
+    "operators": {},
+    "motion": {
+      "enabled": true,
+      "strength": 0.35,
+      "speed": 2.0
+    },
+    "text_effects": {},
+    "wide_numeric_motion_scale": 0.15,
+    "value_feedback": {}
+  }
+}
