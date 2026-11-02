@@ -44,6 +44,18 @@ class InvokeRouting(unittest.TestCase):
         self.assertIs(namespace["ops"], bpy.ops)
         self.assertIs(bpy.context, context)
 
+    def test_owned_call_panel_routes_custom_and_foreign_stays_native(self):
+        router, bpy, context, calls = self.fixture()
+        bpy.types.Panel = bpy.types.Menu
+        bpy.ops.wm.call_panel = lambda *a, **kw: calls.append(("native_panel", kw)) or {"FINISHED"}
+        router.panel = lambda c, e, **kw: calls.append(("custom_panel", kw))
+        namespace = dict(__name__="consumer", bpy=bpy)
+        exec('def run(op, context):\n    bpy.ops.wm.call_panel(name="OWNED")\n    bpy.ops.wm.call_panel(name="FOREIGN")\n    return {"FINISHED"}', namespace)
+        with patch.dict(sys.modules, bpy=bpy):
+            router.call(namespace["run"], None, context)
+        self.assertEqual(calls, [("custom_panel", {"name":"OWNED"}), ("native_panel", {"name":"FOREIGN"})])
+        self.assertIs(namespace["bpy"], bpy)
+
     def test_exception_restores_global_aliases(self):
         router, bpy, context, calls = self.fixture()
         namespace = dict(__name__="consumer", bpy=bpy)
@@ -123,6 +135,18 @@ class InvokeRouting(unittest.TestCase):
             calls[-1],
             ("custom", {"draw": str, "title": "Tools", "icon": "INFO", "pie": True}),
         )
+
+    def test_custom_draw_failure_falls_back_once_without_reexecuting_operator(self):
+        router, bpy, context, calls = self.fixture()
+        def failed(*args, **kwargs):
+            raise RuntimeError("Custom layout failed")
+        router.menu = failed
+        namespace = dict(__name__="consumer", bpy=bpy)
+        exec('def run(op, context):\n    return bpy.ops.wm.call_menu(name="OWNED")', namespace)
+        with patch.dict(sys.modules, bpy=bpy):
+            self.assertEqual(router.call(namespace["run"], None, context), {"FINISHED"})
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(router.fallbacks[0]["reason"], "Custom layout failed")
 
     def test_redo_popup_is_observable_native_route(self):
         router, bpy, context, calls = self.fixture()

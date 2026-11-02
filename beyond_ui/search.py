@@ -4,6 +4,40 @@ from dataclasses import replace
 from .context_menu import Entry, default_entries
 from .pointer import PointerField, automatic
 from .widgets.picker import DataPicker
+from functools import lru_cache
+
+
+@lru_cache(maxsize=1)
+def _icon_names():
+    import bpy
+    return {i.value: i.identifier for i in
+            bpy.types.UILayout.bl_rna.functions['prop'].parameters['icon'].enum_items}
+
+
+def native_item_icon(value, fallback="NONE"):
+    """Resolve source artwork at authoring/refresh time, never during painting."""
+    if value is None:
+        return fallback
+    try:
+        import bpy
+        return _icon_names().get(bpy.types.UILayout.icon(value), fallback)
+    except (AttributeError, TypeError, ReferenceError, RuntimeError):
+        return fallback
+
+
+def field_rect(control):
+    from .scalar_geometry import entry_parts
+    if not control.label:
+        return control.rect
+    return entry_parts(control.rect,
+        label_width=control.options.get('_entry_label_width'),
+        stacked=control.options.get('_entry_stacked', False),
+        label_band=control.options.get('_label_band', 20))[1]
+
+
+def clear_rect(rect):
+    x, y, w, h = rect
+    return x + max(0, w - 22), y, min(22, w), h
 
 
 class CollectionSearch:
@@ -26,6 +60,7 @@ class CollectionSearch:
         meta = owner.bl_rna.properties[name]
         if meta.type != "COLLECTION":
             raise ValueError("Search source must be an RNA collection")
+        self.icon = native_item_icon(next(iter(getattr(owner, name)), None))
         target = self.source.owner().bl_rna.properties[self.source.name]
         if target.type not in {"STRING", "POINTER"}:
             raise ValueError("Collection search requires a string or pointer property")
@@ -69,6 +104,33 @@ class CollectionSearch:
             return self.pointer.item_label(value) if self.pointer else value
         except (ReferenceError, RuntimeError):
             return "Unavailable"
+
+    def can_clear(self):
+        try:
+            return bool(self.binding.read()) and (self.pointer is None or self.pointer.allow_none)
+        except (ReferenceError, RuntimeError):
+            return False
+
+    def clear(self):
+        def apply():
+            if not self.source.editable() or not self.binding.valid():
+                raise ReferenceError("Search property is no longer editable")
+            if self.control is not None and not self.control.enabled:
+                raise ReferenceError("Search control is disabled")
+            if self.pointer:
+                self.pointer.assign(self.binding.read(), None)
+            else:
+                from .bindings import Edit
+                edit = Edit(self.binding)
+                try:
+                    edit.update("")
+                    if self.binding.read() != "":
+                        raise ValueError("Property rejected clearing the search value")
+                    edit.finish()
+                except Exception:
+                    edit.finish(cancel=True)
+                    raise
+        return self.attempt(apply)
 
     def open(self):
         self.refresh()
@@ -121,7 +183,7 @@ class CollectionSearch:
                 continue
             key, label = value.as_pointer(), getattr(value, self.item_name)
             values[key] = value
-            rows.append((key, label, "object"))
+            rows.append((key, label, native_item_icon(value, self.icon)))
             keys[label] = key if label not in keys else None
         self.values, self.keys_by_name = values, keys
         self.snapshot = tuple((key, label) for key, label, icon in rows)

@@ -48,6 +48,7 @@ _VISUAL = {
     "list_dividers",
     "list_row_padding",
     "list_row_align",
+    "list_item_layout",
 }
 
 
@@ -99,6 +100,8 @@ def normalize(*presets, **options):
                 raise ValueError("list_row_padding edges must be at most 24")
         elif key == "list_row_align" and value not in {"top", "center", "bottom"}:
             raise ValueError("list_row_align must be top, center or bottom")
+        elif key == "list_item_layout" and value not in {"auto", "authored"}:
+            raise ValueError("list_item_layout must be auto or authored")
         elif key == "surface" and value not in {"none", "card", "field", "input"}:
             raise ValueError("surface must be none, card, field or input")
         elif key == "surface_region" and value not in {"group", "value"}:
@@ -254,6 +257,11 @@ def apply_control(control, values, prepared=None):
             widget.style_row_height = values["list_row_height"]
     if "list_rows" in values and control.kind == "widget":
         control.options["widget"].style_visible_rows = values["list_rows"]
+    if "list_item_layout" in values and control.kind == "widget":
+        widget = control.options["widget"]
+        if getattr(widget, "style_item_layout", "auto") != values["list_item_layout"]:
+            widget.style_item_layout = values["list_item_layout"]
+            widget.epoch += 1
     if "list_dividers" in values and control.kind == "widget":
         control.options["widget"].style_dividers = values["list_dividers"]
     if control.kind == "widget":
@@ -297,11 +305,11 @@ def apply(layout, values, scope):
         {k: v for k, v in target.options.items() if k in _LAYOUT and k != "align"},
         {k: v for k, v in values.items() if k in _LAYOUT},
     )
-    if values.keys() & {"list_row_height", "list_rows", "list_dividers", "list_row_padding", "list_row_align"}:
+    if values.keys() & {"list_row_height", "list_rows", "list_dividers", "list_row_padding", "list_row_align", "list_item_layout"}:
         from .registered_list import RegisteredList
         from .widgets.collection_list import CollectionList
 
-        list_type = RegisteredList if values.keys() & {"list_row_height", "list_rows"} else CollectionList
+        list_type = RegisteredList if values.keys() & {"list_row_height", "list_rows", "list_item_layout"} else CollectionList
         if not any(
             isinstance(c.options.get("widget"), list_type) for c in _leaves(target)
         ):

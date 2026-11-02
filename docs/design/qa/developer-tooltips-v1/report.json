@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-02",
+  "reference": "../../references/developer-tooltips-v1/reference.png",
+  "capture_source": "Live Uraraka 11967; actual property description/paths, retained host font and active theme, production GPU tooltip painter in an offscreen with controlled backdrop",
+  "changes": [
+    "16 host-unit content inset",
+    "12-unit separation after description; 10 between developer sections",
+    "Retained bold Python/Data Path labels above values",
+    "Measured width wrapping; prefer code punctuation, hard split only for unavoidably oversized token",
+    "Whole-tooltip clipping and ellipsis without stranded section headings",
+    "Shared tooltip painter for ordinary controls, menus, inline fields and popovers; unchanged glass, finite motion and preference gates"
+  ],
+  "tests": {
+    "unit": 375,
+    "runtime": "build/tooltip-layout-runtime/summary.json",
+    "versions": [
+      "5.1.2",
+      "5.2.2 LTS"
+    ],
+    "activation_events": []
+  },
+  "live": {
+    "pid": 11967,
+    "reloaded": true,
+    "errors": {},
+    "saved": false,
+    "other_session_modified": false
+  },
+  "visual_acceptance": "Close and consistent hierarchy; generated reference rim/brightness and exact geometry differ. Actual renderer keeps active-theme colors and shared liquid glass.",
+  "media": [
+    "before-tooltip.png",
+    "implementation.png"
+  ],
+  "performance": "Layout and wrapping are computed once at tooltip reveal, outside paint. No new GPU resources, polling or blur passes added to the production path. No new paired throughput claim."
+}

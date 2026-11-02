@@ -211,6 +211,9 @@ class CustomProperty(Property):
 
         rows.extend(native_entries(self, context))
         rows.append(numeric_property_entry(self, context))
+        if getattr(context.preferences.view, 'show_developer_ui', False):
+            from .context_source import entry
+            rows.append(entry(self.source))
         from .context_extensions import entries
 
         extra = entries(context, self)

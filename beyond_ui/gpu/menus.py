@@ -401,6 +401,12 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                             ),
                         )
 
+    tooltip(menu, mapped, scale, font, palette, backdrop, clip)
+
+
+def tooltip(menu, mapped, scale, font, palette, backdrop, clip):
+    from . import glass, skin, typography
+    from .paint import measure
     if menu.tooltip:
         rect, lines = menu.tooltip
         panel = mapped(rect)
@@ -414,9 +420,14 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
             ):
                 menu.glass_ready = False
                 skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)
-            for i, line in enumerate(lines):
+            from ..tooltip_layout import Run
+            runs = getattr(menu, 'tooltip_runs', ()) or tuple(
+                Run(line, 10, 6 + i * 16, rect[2] - 20, 16)
+                for i, line in enumerate(lines))
+            for run in runs:
+                active_font = typography.face(font, run.role)
                 x, y, w, h = mapped(
-                    (rect[0] + 3, rect[1] + 6 + i * 16, rect[2] - 6, 16)
+                    (rect[0] + run.x, rect[1] + run.y, run.width, run.height)
                 )
                 bounds = (
                     max(x, clip[0]),
@@ -425,11 +436,11 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     min(y + h, clip[1] + clip[3]),
                 )
                 text_run(
-                    font,
-                    line,
-                    11 * scale,
+                    active_font,
+                    run.text,
+                    run.size * scale,
                     palette["text"],
-                    (x + 7 * scale, y + (h - measure(font, 11 * scale, "H")[1]) / 2),
+                    (x, y + (h - measure(active_font, run.size * scale, "H")[1]) / 2),
                     (bounds,),
                     effects=palette.get("text_effects"), scale=scale,
                 )

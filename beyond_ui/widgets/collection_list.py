@@ -1,6 +1,7 @@
 """Default RNA collection list, built from the shared source skin and motion."""
 
 from math import ceil
+from ..scroll import scroll_delta, scroll_step
 from .base import Widget, Painter, contains
 from ..list_source import ordered
 from ..context_menu import Target, Entry, default_entries
@@ -376,19 +377,11 @@ class CollectionList(Widget):
             (0, 0, self.width, self.viewport), x, y
         ):
             if self.type == "COMPACT":
-                self.navigate("UP_ARROW" if kind == "WHEELUPMOUSE" else "DOWN_ARROW")
+                step = scroll_step(event)
+                if step:
+                    self.navigate("UP_ARROW" if step < 0 else "DOWN_ARROW")
             else:
-                delta = (
-                    -self.row_height
-                    if kind == "WHEELUPMOUSE"
-                    else (
-                        self.row_height
-                        if kind == "WHEELDOWNMOUSE"
-                        else getattr(event, "mouse_prev_y", 0)
-                        - getattr(event, "mouse_y", 0)
-                    )
-                )
-                self.scroll_to(self.offset + delta)
+                self.scroll_to(self.offset + scroll_delta(event, self.row_height))
             return True
         if not press or kind != "LEFTMOUSE":
             return False

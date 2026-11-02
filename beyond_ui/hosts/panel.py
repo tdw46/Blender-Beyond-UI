@@ -23,6 +23,8 @@ class PanelHost:
         self.animation = animation or AnimationSettings()
         self._animation_keys = set()
         self._animation_callback = self._animate
+        self._resume_keys = set()
+        self._resume_callback = self._resume_layouts
         self._tooltip_keys = set()
         self._tooltip_callback = self._reveal_tooltips
         self._in_tooltip_callback = False
@@ -91,7 +93,16 @@ class PanelHost:
             context.region.as_pointer(),
         )
 
-    def draw(self, layout, context, canvas):
+    def defer_draw(self, layout, context, canvas):
+        """Reserve a parked panel without reading bindings or rebuilding rows."""
+        record = self.records.get(self._key(context))
+        if (record is None or record["canvas"] is not canvas
+                or record["scene"] != context.scene.as_pointer()
+                or canvas.visible or record["valid"] or record.get("resume")):
+            return False
+        return self.draw(layout, context, canvas, deferred=True)
+
+    def draw(self, layout, context, canvas, *, deferred=False):
         """Reserve ONE canvas in an exclusively host-owned Panel block.
 
         Returns False on unavailable hosts, so caller can draw its native path.
@@ -114,22 +125,27 @@ class PanelHost:
             ),
         )
         width = max(1.0, context.region.width / scale - 20.0)
-        from ..gpu.paint import measure
-        from ..gpu.typography import face
+        if deferred:
+            height = canvas.height
+        else:
+            from ..gpu.paint import measure
+            from ..gpu.typography import face
 
-        font, size = self.font, canvas.theme.font_size
-        measure_key = (id(self), int(font), getattr(font, "title", int(font)), size)
-        if canvas._text_measure_key != measure_key:
-            canvas.set_text_measure(
-                lambda text, role: measure(
-                    face(font, role), size * (12 / 11 if role == "title" else 1), text
-                )[0],
-                measure_key,
-            )
-        if getattr(canvas, "panel_layout", False) != self.panel_layout:
-            canvas.panel_layout = self.panel_layout
-            canvas.invalidate()
-        height = canvas.arrange(width)
+            font, size = self.font, canvas.theme.font_size
+            measure_key = (id(self), int(font), getattr(font, "title", int(font)), size)
+            if canvas._text_measure_key != measure_key:
+                canvas.set_text_measure(
+                    lambda text, role: measure(
+                        face(font, role), size * (12 / 11 if role == "title" else 1), text
+                    )[0],
+                    measure_key,
+                )
+            if getattr(canvas, "panel_layout", False) != self.panel_layout:
+                canvas.panel_layout = self.panel_layout
+                canvas.invalidate()
+            # Resume before reflowing registered lists validates their parent.
+            canvas.visible = True
+            height = canvas.arrange(width)
         record = self.records.get(key)
         if record is None:
             token = self.bridge.next_token
@@ -158,9 +174,12 @@ class PanelHost:
         self.bridge.records[record["token"]] = lambda *rect: self._paint(key, *rect)
         record["valid"] = False
         record["painted"] = False
-        canvas.visible = True
-        canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
-        canvas._tooltip_wake = lambda delay: self._schedule_tooltip(key, delay)
+        record["deferred"] = deferred
+        record["resume"] = False
+        if not deferred:
+            canvas.visible = True
+            canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
+            canvas._tooltip_wake = lambda delay: self._schedule_tooltip(key, delay)
         raw = getattr(layout, "raw", layout)
         return bool(
             self.bridge.library.bvt_probe_reserve(
@@ -188,7 +207,16 @@ class PanelHost:
         canvas = record["canvas"]
         if right <= left or top <= bottom:
             record["valid"] = False
-            canvas.park()
+            if canvas.visible:
+                canvas.park()
+            return
+        if record.get("deferred"):
+            # Native clipping is authoritative. Do not paint or interact with
+            # cached RNA until the next native authoring pass has refreshed it.
+            record["valid"] = False
+            if not record.get("resume"):
+                record["resume"] = True
+                self._request_resume(key)
             return
         canvas.visible = True
         record["painted"] = True
@@ -237,6 +265,29 @@ class PanelHost:
             backdrop=backdrop,
         )
 
+    def _request_resume(self, key):
+        """One deferred redraw: a tag set during paint is cleared by Blender."""
+        import bpy
+
+        self._resume_keys.add(key)
+        if not bpy.app.timers.is_registered(self._resume_callback):
+            bpy.app.timers.register(self._resume_callback, first_interval=0.0)
+
+    def _resume_layouts(self):
+        import bpy
+
+        keys, self._resume_keys = self._resume_keys, set()
+        if self.closed:
+            return None
+        for window in bpy.context.window_manager.windows:
+            for area in window.screen.areas:
+                for region in area.regions:
+                    key = (window.as_pointer(), area.as_pointer(), region.as_pointer())
+                    record = self.records.get(key) if key in keys else None
+                    if record and record.get("resume"):
+                        region.tag_redraw()
+        return None
+
     def _viewport_draw(self):
         import bpy
         from ..gpu import glass
@@ -254,7 +305,7 @@ class PanelHost:
         if record:
             record["valid"] = record["painted"]
             record["painted"] = False
-            if not record["valid"]:
+            if not record["valid"] and record["canvas"].visible:
                 record["canvas"].park()
 
     def event(self, context, event):
@@ -325,6 +376,8 @@ class PanelHost:
                         canvas._motion_focus.hover = None
                         canvas._motion_focus.pointer = None
                     region.tag_redraw()
+                from ..tooltips import hide_all
+                hide_all(canvas)
                 continue
             sx = w / max(1.0, canvas._width)
             sy = h / max(1.0, canvas.height)
@@ -389,7 +442,8 @@ class PanelHost:
         try:
             for key in tuple(self._tooltip_keys):
                 record = self.records.get(key)
-                menu = record["canvas"].active_menu() if record else None
+                from ..tooltips import active
+                menu = (record["canvas"].active_menu() or active(record["canvas"])) if record else None
                 owner = next(
                     (
                         (w, a, r)
@@ -507,10 +561,13 @@ class PanelHost:
             if isinstance(key, tuple) and key and key[0] == id(self):
                 glass._owners.pop(key, None)
         self.records.clear()
+        self._resume_keys.clear()
         self._animation_keys.clear()
         self._tooltip_keys.clear()
         import bpy
 
+        if bpy.app.timers.is_registered(self._resume_callback):
+            bpy.app.timers.unregister(self._resume_callback)
         if bpy.app.timers.is_registered(self._animation_callback):
             bpy.app.timers.unregister(self._animation_callback)
         if bpy.app.timers.is_registered(self._tooltip_callback):

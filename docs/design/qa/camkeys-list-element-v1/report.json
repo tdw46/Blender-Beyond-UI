@@ -1,0 +1,3990 @@
+{
+  "date": "2026-11-02",
+  "status": "Implemented; ready for user visual QA",
+  "reference": "../../references/camkeys-list-element-v1/element-v2.png",
+  "unit_tests": 359,
+  "runtimes": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 9032,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_camkeys_list_redesign.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 449,
+        "initial_frontmost_pid": 449,
+        "new_instance": true,
+        "pid": 9032,
+        "restore_requests": 0,
+        "seconds": 5.080670952796936,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "backend": "METAL",
+        "captures": [
+          {
+            "file": "list-360-1x.png",
+            "width": 360,
+            "scale": 1,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-360-1.5x.png",
+            "width": 360,
+            "scale": 1.5,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-360-2x.png",
+            "width": 360,
+            "scale": 2,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-1x.png",
+            "width": 280,
+            "scale": 1,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-1.5x.png",
+            "width": 280,
+            "scale": 1.5,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-2x.png",
+            "width": 280,
+            "scale": 2,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "live_values": true,
+        "clear_action": true,
+        "search_icons": true,
+        "right_click": true,
+        "timing_ms": {
+          "median": 1.2433749998308485,
+          "max": 1.8410830002721923
+        },
+        "timing_scope": "Warm CPU paint submission only; readback excluded, 20 samples per width/scale; not paired speed qualification"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/list-redesign-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 9076,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_camkeys_list_redesign.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 449,
+        "initial_frontmost_pid": 449,
+        "new_instance": true,
+        "pid": 9076,
+        "restore_requests": 0,
+        "seconds": 5.160375952720642,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "backend": "METAL",
+        "captures": [
+          {
+            "file": "list-360-1x.png",
+            "width": 360,
+            "scale": 1,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-360-1.5x.png",
+            "width": 360,
+            "scale": 1.5,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-360-2x.png",
+            "width": 360,
+            "scale": 2,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      157.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      246.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      219.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      262.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-1x.png",
+            "width": 280,
+            "scale": 1,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-1.5x.png",
+            "width": 280,
+            "scale": 1.5,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "file": "list-280-2x.png",
+            "width": 280,
+            "scale": 2,
+            "rows": [
+              {
+                "index": 0,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.251",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 1,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 2,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.000",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              },
+              {
+                "index": 3,
+                "controls": [
+                  {
+                    "kind": "toggle",
+                    "label": "",
+                    "rect": [
+                      0.0,
+                      0.0,
+                      32.0,
+                      20.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "text",
+                    "label": "",
+                    "rect": [
+                      58.0,
+                      0.0,
+                      77.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "search",
+                    "label": "",
+                    "rect": [
+                      38.0,
+                      26.0,
+                      166.0,
+                      24.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "label",
+                    "label": "0.221",
+                    "rect": [
+                      139.5,
+                      0.0,
+                      38.5,
+                      22.0
+                    ],
+                    "icon": "NONE"
+                  },
+                  {
+                    "kind": "button",
+                    "label": "",
+                    "rect": [
+                      182.0,
+                      0.0,
+                      22.0,
+                      22.0
+                    ],
+                    "icon": "RESTRICT_RENDER_OFF"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "live_values": true,
+        "clear_action": true,
+        "search_icons": true,
+        "right_click": true,
+        "timing_ms": {
+          "median": 1.2628749996110855,
+          "max": 1.4271670002017345
+        },
+        "timing_scope": "Warm CPU paint submission only; readback excluded, 20 samples per width/scale; not paired speed qualification"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/list-redesign-final/blender-1.log"
+    }
+  ],
+  "consumer_regressions": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 8347,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 449,
+        "initial_frontmost_pid": 449,
+        "new_instance": true,
+        "pid": 8347,
+        "restore_requests": 0,
+        "seconds": 12.34984004497528,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.1.2",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 19,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 2,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_open_flatten_falloff_popover",
+              "callback": "invoke",
+              "routes": [
+                "call_panel"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_ui_appearance",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie",
+            "call_panel"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {},
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [
+              {
+                "route": "macro-step:camkeys.begin_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              },
+              {
+                "route": "macro-step:camkeys.finish_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              }
+            ],
+            "preserved_macro_dependencies": [
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              }
+            ],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/list-redesign-consumer/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 8393,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 449,
+        "initial_frontmost_pid": 449,
+        "new_instance": true,
+        "pid": 8393,
+        "restore_requests": 0,
+        "seconds": 12.529736042022705,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.2.2 LTS",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 19,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 2,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_open_flatten_falloff_popover",
+              "callback": "invoke",
+              "routes": [
+                "call_panel"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_ui_appearance",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie",
+            "call_panel"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {},
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [
+              {
+                "route": "macro-step:camkeys.begin_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              },
+              {
+                "route": "macro-step:camkeys.finish_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              }
+            ],
+            "preserved_macro_dependencies": [
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              }
+            ],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/list-redesign-consumer/blender-1.log"
+    }
+  ],
+  "limits": [
+    "Original consumer draw_item in disposable scene; no Uraraka scene saved or modified.",
+    "Long primary names may clip at 280 logical units; source icons, numeric values and actions retain dedicated lanes.",
+    "Still captures do not establish complete motion or cross-backend qualification.",
+    "The compact host-scale implementation is close to the concept, not pixel identical."
+  ],
+  "source_sha256": {
+    "beyond_ui/search.py": "733468241a4da8effe53ae2e8b5476a3864c179e15ca9d94a81caf6258e991a8",
+    "beyond_ui/layout.py": "78491a70185e000937da703b61d377f73f7803258afdff2c7eb0eb94c5c35e7b",
+    "beyond_ui/registered_list.py": "ec7d7c42ebaac4f31974ce9dad4f5bae8623cc74aca0887092cb9b76a7d50b69",
+    "beyond_ui/gpu/paint.py": "84df7ea25848df2e55953fa3e67112ffc44cf6739e98c3981cb2e7ab48687b1e",
+    "beyond_ui/canvas.py": "1a114972b3e5de10d757167cce1c9676266e097224b5b2aaa732c8f5c04378ff",
+    "beyond_ui/style_api.py": "62368f793f6236381b108de1b64d598bf8f69308c54e5d1e57bdb6c98638e04b"
+  }
+}

@@ -43,6 +43,31 @@ def run():
         canvas.arrange(560)
         control = next(c for c in canvas.controls.values() if c.kind == "widget")
         widget = control.options["widget"]
+        # Native panel redraw refreshes only visible literal labels. Existing
+        # controls, active editor and unrelated row canvases remain retained.
+        from time import perf_counter
+        sample = next((child, item) for child, rect, item in widget.all_children()
+                      if item is not None and any(c.kind == "label" for c in child.controls.values()))
+        row_canvas, row_item = sample
+        row_label = next(c for c in row_canvas.controls.values() if c.kind == "label")
+        original_name = widget.source.collection()[row_item.index].name
+        row_controls = tuple(row_canvas.controls.values())
+        builds_before = widget.builds
+        draws_before = fixture.draws
+        widget.source.collection()[row_item.index].name = "Updated live value"
+        started = perf_counter()
+        widget.refresh_display()
+        duration = (perf_counter() - started) * 1000
+        assert row_label.label == "Updated live value", row_label.label
+        assert tuple(row_canvas.controls.values()) == row_controls
+        assert widget.builds == builds_before
+        assert fixture.draws - draws_before == len(widget.row_map)
+        counts = row_canvas.layout_count
+        widget.refresh_display()
+        assert row_canvas.layout_count == counts
+        widget.source.collection()[row_item.index].name = original_name
+        widget.refresh_display()
+        checks.append(f"Visible literal values refresh in place; unchanged rows skip layout; {duration:.3f} ms for {len(widget.row_map)} visible rows")
         clip = (0, 0, 560, 640)
 
         def send(kind, point, value="PRESS", **kw):

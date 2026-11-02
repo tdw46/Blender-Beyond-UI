@@ -119,7 +119,7 @@ def click(control, button="LEFTMOUSE"):
     x, y, _, _ = d.host.canvas.overlay["rect"]
     a, b, c, e = control.rect
     scale = d.host.scale
-    point = ((x + a + c / 2) * scale, main_region.height - (y + b + e / 2) * scale)
+    point = (d.host.rect[0] + (x + a + c / 2) * scale, d.host.rect[1] + d.host.rect[3] - (y + b + e / 2) * scale)
     event("MOUSEMOVE", "NOTHING", point)
     event(button, point=point)
     event(button, "RELEASE", point)

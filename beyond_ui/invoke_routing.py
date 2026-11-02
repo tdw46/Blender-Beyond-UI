@@ -30,7 +30,7 @@ class WindowManager(Forward):
             return self.router.dialog(
                 operator, self.context, self.event, width=width, mode="PROPERTIES"
             )
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("invoke_popup", error)
             import bpy
 
@@ -55,7 +55,7 @@ class WindowManager(Forward):
 
         try:
             self.router.dialog(operator, self.context, self.event, mode="SEARCH")
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("invoke_search_popup", error)
             return self._raw.invoke_search_popup(operator)
         # Native API returns None; the caller returns RUNNING_MODAL itself.
@@ -78,7 +78,7 @@ class WindowManager(Forward):
             return self.router.dialog(
                 operator, self.context, event, mode="CONFIRM", **options
             )
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("invoke_confirm", error)
             return self._raw.invoke_confirm(operator, event, **options)
 
@@ -89,7 +89,7 @@ class WindowManager(Forward):
             self.router.menu(
                 self.context, event, draw=draw_func, title=title, icon=icon, pie=True
             )
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("popup_menu_pie", error)
             return self._raw.popup_menu_pie(event, draw_func, title=title, icon=icon)
 
@@ -116,7 +116,7 @@ class WindowManager(Forward):
         )
         try:
             return self.router.dialog(operator, self.context, self.event, **options)
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("invoke_props_dialog", error)
             # Older Blender releases expose fewer optional dialog arguments.
             import bpy
@@ -135,7 +135,7 @@ class WindowManager(Forward):
             self.router.menu(
                 self.context, self.event, draw=draw_func, title=title, icon=icon
             )
-        except BridgeUnavailable as error:
+        except Exception as error:
             self.router.note_fallback("popup_menu", error)
             return self._raw.popup_menu(draw_func, title=title, icon=icon)
 
@@ -146,6 +146,7 @@ class Router:
         self.config = integration.ui
         self.operators = tuple(sorted(operators, key=lambda cls: len(cls.__mro__)))
         self.registration_pending = set()
+        self.in_place = set()
         self.patches = []
         self.originals = {}
         self.dialogs = {}
@@ -184,11 +185,14 @@ class Router:
 
         facade_context = self.context(context, event)
         wm = Forward(bpy.ops.wm)
-        for name in ("call_menu", "call_menu_pie"):
-            native = getattr(bpy.ops.wm, name)
+        for name in ("call_menu", "call_menu_pie", "call_panel"):
+            native = getattr(bpy.ops.wm, name, None)
+            if native is None:
+                continue
 
             def menu(*args, _name=name, _native=native, **kwargs):
-                cls = bpy.types.Menu.bl_rna_get_subclass_py(kwargs.get("name", ""))
+                base = bpy.types.Panel if _name == "call_panel" else bpy.types.Menu
+                cls = base.bl_rna_get_subclass_py(kwargs.get("name", ""))
                 module = getattr(cls, "__module__", "")
                 owner = self.integration.owner
                 if cls is None or not (
@@ -198,13 +202,16 @@ class Router:
                 from .hosts.bridge import BridgeUnavailable
 
                 try:
-                    self.menu(
-                        context,
-                        event,
-                        name=kwargs["name"],
-                        pie=_name == "call_menu_pie",
-                    )
-                except BridgeUnavailable as error:
+                    if _name == "call_panel":
+                        if kwargs.get("keep_open", False):
+                            raise BridgeUnavailable("Persistent call_panel keep_open is not adapted")
+                        self.panel(context, event, name=kwargs["name"])
+                    else:
+                        self.menu(
+                            context, event, name=kwargs["name"],
+                            pie=_name == "call_menu_pie",
+                        )
+                except Exception as error:
                     self.note_fallback(_name, error)
                     return _native(*args, **kwargs)
                 return {"FINISHED"}
@@ -265,6 +272,18 @@ class Router:
                 "Preserved registered macro child RNA; its own popup callbacks keep native routing",
             )
 
+        # Existing modal RNA must survive adoption/reload: unregistering it
+        # destroys running instances, timers and consumer-held references.
+        from .operator_lifecycle import modal_registration_policy
+
+        self.in_place, ancestors = modal_registration_policy(self.operators)
+        self.operators = tuple(cls for cls in self.operators if cls not in ancestors)
+        for cls in ancestors:
+            self.note_fallback(
+                "modal-ancestor:" + cls.bl_idname,
+                "Preserved registered modal descendant RNA; new popup callbacks require native routing",
+            )
+
         router = self
         self.registry.register()
         self.active = True
@@ -313,7 +332,7 @@ class Router:
                     if dialog is None:
                         return (
                             originals["modal"](op, context, event)
-                            if originals["modal"] and router.active
+                            if originals["modal"]
                             else {"CANCELLED"}
                         )
                     try:
@@ -359,13 +378,15 @@ class Router:
         # Snapshot inherited methods before patching any base to avoid wrapping
         # an already-adapted inherited method a second time.
         for cls in reversed(self.operators):
-            bpy.utils.unregister_class(cls)
-            self.registration_pending.add(cls)
+            if cls not in self.in_place:
+                bpy.utils.unregister_class(cls)
+                self.registration_pending.add(cls)
         for cls, own, replacements in self.patches:
             for key, value in replacements.items():
                 setattr(cls, key, value)
-            bpy.utils.register_class(cls)
-            self.registration_pending.discard(cls)
+            if cls not in self.in_place:
+                bpy.utils.register_class(cls)
+                self.registration_pending.discard(cls)
 
         def invoke(op, context, event):
             host, router.pending = router.pending, None
@@ -378,7 +399,7 @@ class Router:
                     host = router.menu(
                         context, event, name=op.menu_name, pie=op.pie, start=False
                     )
-                except BridgeUnavailable as error:
+                except Exception as error:
                     route = "call_menu_pie" if op.pie else "call_menu"
                     router.note_fallback("keymap:" + route, error)
                     return getattr(bpy.ops.wm, route)(
@@ -592,6 +613,11 @@ class Router:
                 else None,
             ):
                 raise RuntimeError(host.canvas.menu_error)
+            if host.canvas.context_menu is None:
+                for entry in getattr(host.canvas, "popup_fallbacks", ()):
+                    self.note_fallback("call_menu", entry["reason"])
+                host.close()
+                return None
             if not start:
                 return host
             self.pending = host
@@ -599,6 +625,45 @@ class Router:
             result = getattr(getattr(bpy.ops, namespace), key)("INVOKE_DEFAULT")
             if "RUNNING_MODAL" not in result:
                 raise RuntimeError("Custom menu input did not start")
+        except Exception:
+            self.pending = None
+            host.close()
+            raise
+
+    def panel(self, context, event, *, name):
+        from .layout import Layout
+        from .popover import RegisteredPanel
+        from .hosts.bridge import BridgeUnavailable
+        import bpy
+
+        host = self.host(context)
+        try:
+            def commit(before, after):
+                if self.config.commit:
+                    self.config.commit(before, after)
+                elif bpy.ops.ed.undo_push.poll():
+                    bpy.ops.ed.undo_push(message="Custom Panel Property")
+                else:
+                    raise RuntimeError("Panel property undo is unavailable")
+            layout = Layout(host.canvas, context, commit=commit, **self.config.layout_options)
+            host.canvas.context_provider = self.config.context_menu
+            model = RegisteredPanel(layout, name)
+            owner = host.canvas.button("panel-owner", model.label, None)
+            model.attach(owner)
+            x, y = host.anchor(event)
+            owner.rect = (x, y, 1, 1)
+            if not host.canvas.open_panel(owner, host.clip, context):
+                raise BridgeUnavailable(host.canvas.menu_error or "Panel could not open")
+            if host.canvas.overlay is None:
+                for entry in getattr(host.canvas, "popup_fallbacks", ()):
+                    self.note_fallback("call_panel", entry["reason"])
+                host.close()
+                return None
+            self.pending = host
+            namespace, key = self.idname.split(".")
+            if "RUNNING_MODAL" not in getattr(getattr(bpy.ops, namespace), key)("INVOKE_DEFAULT"):
+                raise RuntimeError("Custom panel input did not start")
+            return host
         except Exception:
             self.pending = None
             host.close()
@@ -651,7 +716,7 @@ class Router:
             for cls, originals, replacements in self.patches
         ]
         for cls, *_ in reversed(restore):
-            if cls.is_registered:
+            if cls.is_registered and cls not in self.in_place:
                 bpy.utils.unregister_class(cls)
         for cls, originals, replacements, registered in restore:
             for key in replacements:
@@ -660,9 +725,10 @@ class Router:
                         delattr(cls, key)
                     else:
                         setattr(cls, key, originals[key])
-            if registered:
+            if registered and cls not in self.in_place:
                 bpy.utils.register_class(cls)
         self.patches.clear()
         self.registration_pending.clear()
+        self.in_place.clear()
         self.originals.clear()
         self.registry.close()

@@ -373,7 +373,8 @@ def paint(
                 chrome = False
             if (
                 control.options.get("list_row")
-                and kind not in {"number", "text", "event"}
+                and kind not in {"number", "text", "event", "search"}
+                and not control.options.get("list_action")
                 and canvas.hover != control.key
                 and canvas.active is not control
             ):
@@ -451,7 +452,7 @@ def paint(
                     and chrome
                     and not control.options.get("search_bar")
                 ):
-                    inset = kind in {"text", "number", "event"}
+                    inset = kind in {"text", "number", "event", "search"}
                     surface(
                         menu_metrics.highlight(r, scale) if menu_option else r,
                         (
@@ -540,9 +541,11 @@ def paint(
                         backdrop=backdrop,
                     )
                 elif kind in {"pointer", "search"}:
-                    label = control.options[
+                    model = control.options[
                         "search_field" if kind == "search" else "pointer_field"
-                    ].label()
+                    ]
+                    label = model.label()
+                    clear = kind == "search" and model.can_clear()
                     quiet_pointer = (
                         control.options.get("list_row")
                         and kind == "pointer"
@@ -551,10 +554,11 @@ def paint(
                     )
                     text(
                         label if external_label or not prefix else f"{prefix}  {label}",
-                        (a, b, max(0, c - (0 if quiet_pointer else 22) * scale), d),
+                        (a, b, max(0, c - (44 if clear else 0 if quiet_pointer else 22) * scale), d),
                         ink,
                         icon=(
-                            control.options.get("icon") if not external_label else None
+                            control.options.get("search_icon", control.options.get("icon"))
+                            if kind == "search" else control.options.get("icon") if not external_label else None
                         ),
                         icon_value=(
                             control.options.get("icon_value", 0)
@@ -565,11 +569,13 @@ def paint(
                     if not quiet_pointer:
                         style.icon(
                             "search" if kind == "search" else "▾",
-                            a + c - 12 * scale,
+                            a + c - (34 if clear else 12) * scale,
                             b + d / 2,
-                            (18 if kind == "search" else 10) * scale,
+                            (13 if kind == "search" else 10) * scale,
                             ink,
                         )
+                    if clear:
+                        style.icon("X", a + c - 11 * scale, b + d / 2, 11 * scale, ink)
                 elif kind == "decorator":
                     model = control.options["decorator"]
                     if model is not None:
@@ -744,7 +750,7 @@ def paint(
                         text(
                             (
                                 str(value or "")
-                                if external_label
+                                if external_label or not prefix
                                 else f"{prefix}  {value if value is not None else ''}"
                             ),
                             r,
@@ -944,4 +950,10 @@ def paint(
             context_menu(
                 canvas.context_menu, mapped, scale, font, palette, backdrop, clip
             )
+        tip = getattr(canvas, "_control_tip", None)
+        if tip is not None and tip.tooltip:
+            from .menus import tooltip
+            typography.flush_text(font)
+            with typography.motion_text(font, tip.motion):
+                tooltip(tip, mapped, scale, font, palette, backdrop, clip)
     return count

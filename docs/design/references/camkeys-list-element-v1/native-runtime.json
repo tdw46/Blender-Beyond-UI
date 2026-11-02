@@ -1,0 +1,49 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 4838,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_camkeys_list_native.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 2038,
+      "initial_frontmost_pid": 2038,
+      "new_instance": true,
+      "pid": 4838,
+      "restore_requests": 0,
+      "seconds": 5.059476017951965,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "icons": {
+        "Basis": "SHAPEKEY_DATA",
+        "Cam_Left": "SHAPEKEY_DATA",
+        "Cam_Right": "SHAPEKEY_DATA",
+        "Cam_Bottom": "SHAPEKEY_DATA",
+        "Cam_Top": "SHAPEKEY_DATA"
+      }
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/list-native-baseline-v2/blender-0.log"
+  }
+]

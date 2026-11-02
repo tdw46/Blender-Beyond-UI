@@ -27,6 +27,8 @@ def property_row(
     label = text or meta.name
 
     def entry(*args, **kwargs):
+        from .tooltips import property_description
+        kwargs['tooltip'] = lambda ctx: property_description(source, ctx, kwargs.get('tip'))
         if context_factory is not None:
             kwargs["context"] = context_factory(source)
         return Entry(*args, **kwargs)

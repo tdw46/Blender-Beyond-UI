@@ -4,6 +4,8 @@ Source behavior: BVT VRM_ShoostContextMenu / VRM_ShoostCanvas. Actions and
 capabilities are rechecked on input; painting only consumes prepared rows.
 """
 
+from .scroll import scroll_step
+
 from dataclasses import dataclass, replace
 from itertools import islice
 from contextlib import nullcontext
@@ -81,6 +83,7 @@ class Entry:
     activate_init: bool = False
     decorator: object = None  # Prepared on input; never query RNA during paint.
     status: object = None  # Animation-state provider, also prepared on input.
+    tooltip: object = None  # Lazy native/RNA help, evaluated on hover only.
 
 
 @dataclass
@@ -542,12 +545,24 @@ class Menu:
     def hide_tip(self):
         changed = self.tooltip is not None or self.tip_pending is not None
         self.tooltip = self.tip_pending = None
+        self.tooltip_runs = ()
         if changed:
             self.on_tip(None)
 
     def hover_tip(self, index, x, y, context):
         prefs = getattr(getattr(context, "preferences", None), "view", None)
-        text = self.page.rows[index].tip if index is not None else ""
+        row = self.page.rows[index] if index is not None else None
+        try:
+            key = (id(row), getattr(prefs, 'show_developer_ui', False),
+                   getattr(prefs, 'show_tooltips_python', False))
+            cached = getattr(self, '_tip_text', None)
+            if cached is None or cached[0] != key:
+                text = (row.tooltip(context) if row.tooltip else row.tip) if row else ""
+                self._tip_text = key, text
+            else:
+                text = cached[1]
+        except (ReferenceError, RuntimeError, AttributeError, TypeError, ValueError):
+            text = ""
         if not text or not getattr(prefs, "show_tooltips", True):
             self.hide_tip()
             return
@@ -571,7 +586,7 @@ class Menu:
         remaining = pending[4] - self.motion.clock()
         if remaining > 0:
             return remaining
-        from textwrap import wrap
+        from .tooltip_layout import layout
 
         index, text, _, _, _ = pending
         row = next((r for i, r, _ in self.visible_rows() if i == index), None)
@@ -579,28 +594,15 @@ class Menu:
             self.hide_tip()
             return None
         cx, cy, cw, ch = self.clip
-        width = min(320.0, cw)
-        chars = max(12, int((width - 20) / 6.5))
-        lines = tuple(
-            line
-            for para in text.splitlines()
-            for line in wrap(para, chars, break_on_hyphens=False)
-        )
-        count = min(len(lines), max(0, int((ch - 12) / 16)))
-        if not count:
+        width, height, runs = layout(text, cw, ch, self.measure)
+        if not runs:
             self.hide_tip()
             return None
-        width = min(
-            width, max(48.0, max(self.measure(line, 11) for line in lines) + 20)
-        )
-        height = count * 16 + 12
         x = max(cx, min(row[0], cx + cw - width))
         above, below = row[1] - height - 6, row[1] + row[3] + 6
         y = max(cy, min(above if above >= cy else below, cy + ch - height))
-        shown = list(lines[:count])
-        if len(lines) > count:
-            shown[-1] += "…"
-        self.tooltip = ((x, y, width, height), tuple(shown))
+        self.tooltip_runs = runs
+        self.tooltip = ((x, y, width, height), tuple(run.text for run in runs))
         self.motion.pulse("tooltip", 0.12)
         return None
 
@@ -1023,11 +1025,9 @@ class Menu:
         ) or (over and kind in {"WHEELUPMOUSE", "WHEELDOWNMOUSE", "TRACKPADPAN"}):
             delta = -1 if kind in {"UP_ARROW", "WHEELUPMOUSE"} else 1
             if kind == "TRACKPADPAN":
-                delta = (
-                    -1
-                    if getattr(event, "mouse_y", 0) > getattr(event, "mouse_prev_y", 0)
-                    else 1
-                )
+                delta = scroll_step(event)
+                if not delta:
+                    return True
             if kind.startswith("PAGE_"):
                 delta = (-1 if kind == "PAGE_UP" else 1) * self.capacity
             p = self.page
@@ -1038,7 +1038,7 @@ class Menu:
                 if kind == "END"
                 else max(0, min(len(p.rows) - 1, p.highlight + delta))
             )
-            step = -1 if kind in {"END", "UP_ARROW", "PAGE_UP", "WHEELUPMOUSE"} else 1
+            step = -1 if kind == "END" or delta < 0 else 1
             while 0 <= p.highlight < len(p.rows) and p.rows[p.highlight].heading:
                 p.highlight += step
             if not 0 <= p.highlight < len(p.rows):

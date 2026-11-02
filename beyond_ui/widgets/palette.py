@@ -1,6 +1,7 @@
 """Virtualized palette swatches, stable host identities, host-owned undo/editing."""
 
 from dataclasses import dataclass
+from ..scroll import SCROLL_EVENTS, scroll_step
 from .base import Widget, Painter, contains
 from ..gpu import skin, style
 from ..editing import to_display
@@ -72,10 +73,10 @@ class Palette(Widget):
             return False
         kind = event.type
         press = event.value in {"PRESS", "DOUBLE_CLICK"}
-        if kind in {"WHEELUPMOUSE", "WHEELDOWNMOUSE"} and contains(self.grid, x, y):
+        if kind in SCROLL_EVENTS and contains(self.grid, x, y):
             limit = max(0, (self.source.count() + 5) // 6 - 3)
             self.row_offset = max(
-                0, min(limit, self.row_offset + (-1 if kind == "WHEELUPMOUSE" else 1))
+                0, min(limit, self.row_offset + scroll_step(event))
             )
             return True
         if kind == "LEFTMOUSE" and press:

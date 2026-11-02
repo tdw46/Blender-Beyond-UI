@@ -1,0 +1,965 @@
+{
+  "change": "Skip fully offscreen panel authoring, live rows and layout; retain native space, resume once before enabling input.",
+  "baseline": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 20409,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 20409,
+        "restore_requests": 0,
+        "seconds": 7.1602699756622314,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": true,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            10,
+            50,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 1.0447079998812114,
+          "max_ms": 1.1918330001208233
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-before/blender-0.log"
+    }
+  ],
+  "adopted": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 22494,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.apple.finder",
+            "kind": "activation",
+            "pid": 810,
+            "seconds": 6.801751971244812
+          }
+        ],
+        "final_frontmost_pid": 810,
+        "initial_frontmost_pid": 2038,
+        "new_instance": true,
+        "pid": 22494,
+        "restore_requests": 0,
+        "seconds": 8.077982068061829,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls",
+          "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": true,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 0.038353499803633895,
+          "max_ms": 0.044499999603431206
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-adopted-final/blender-0.log"
+    }
+  ],
+  "version_matrix": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 21414,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 21414,
+        "restore_requests": 0,
+        "seconds": 7.85001003742218,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls",
+          "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": true,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 0.04170849979345803,
+          "max_ms": 0.07570899924758123
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 21481,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 21481,
+        "restore_requests": 0,
+        "seconds": 8.025348901748657,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls",
+          "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": true,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 0.03379199961273116,
+          "max_ms": 0.04266700034349924
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-final/blender-1.log"
+    }
+  ],
+  "direct_panels": [
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 22236,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 22236,
+        "restore_requests": 0,
+        "seconds": 7.999529957771301,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls",
+          "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": false,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 0.03987500031144009,
+          "max_ms": 0.0815840003269841
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-direct-final/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 22290,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 22290,
+        "restore_requests": 0,
+        "seconds": 7.997175931930542,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Parked list reauthors without owner error, replacement or height collapse",
+          "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+          "Ten live list updates preserve offscreen panel height and native scroll position",
+          "Returning to list resumes current row values and retained controls",
+          "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+        ],
+        "scroll": [
+          0.0,
+          -4150.0
+        ],
+        "error": null,
+        "adopted_native_panel": false,
+        "draw_errors": [],
+        "offscreen_work": {
+          "callback_deltas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "native_draw_calls": 10,
+          "median_ms": 0.03775000050154631,
+          "max_ms": 0.04475000059755985
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-direct-final/blender-1.log"
+    }
+  ],
+  "list_regressions": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 22374,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 744,
+        "new_instance": true,
+        "pid": 22374,
+        "restore_requests": 0,
+        "seconds": 2.4023079872131348,
+        "termination_evidence": "kernel-process-absent",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "checks": [
+          "Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners",
+          "Visible literal values refresh in place; unchanged rows skip layout; 0.268 ms for 5 visible rows",
+          "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+          "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+          "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+          "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+          "Disabling the parent invalidates row bindings and releases retained child canvases",
+          "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+          "Deferred child menu actions recheck callback registration even without another mouse event"
+        ],
+        "version": "5.2.2 LTS",
+        "build": "d13f752e3b9c"
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-lists/blender-0.log"
+    }
+  ],
+  "consumer": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 21720,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--no-window-focus",
+        "--enable-event-simulate",
+        "--python-expr",
+        "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+        "--python",
+        "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py",
+        "--",
+        "-ApplePersistenceIgnoreState",
+        "YES"
+      ],
+      "launch": {
+        "activates": false,
+        "error": "",
+        "events": [
+          {
+            "bundle": "com.openai.codex",
+            "kind": "activation",
+            "pid": 744,
+            "seconds": 1.4033939838409424
+          }
+        ],
+        "final_frontmost_pid": 744,
+        "initial_frontmost_pid": 21713,
+        "new_instance": true,
+        "pid": 21720,
+        "restore_requests": 0,
+        "seconds": 13.176574945449829,
+        "termination_evidence": "launch-services",
+        "timeout": false
+      },
+      "focus_policy": "no-window-focus",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "qualification": "custom collection and brush curve consumer checks",
+        "version": "5.2.2 LTS",
+        "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+        "checks": [
+          "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+          "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+          "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+          "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+          "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+          "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+          "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+          "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+          "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+        ],
+        "audits": [
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "empty",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "tracked-mesh",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 19,
+            "passed": true
+          },
+          {
+            "state": "camprop-populated",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 13,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "enabled",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_auto_fov",
+            "controls": 1,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_baking",
+            "controls": 33,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_linking",
+            "controls": 2,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camkeys_main",
+            "controls": 23,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_camprops",
+            "controls": 5,
+            "passed": true
+          },
+          {
+            "state": "lattice-properties",
+            "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+            "controls": 0,
+            "passed": true
+          }
+        ],
+        "glass": [
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          },
+          {
+            "productions": 1,
+            "error": ""
+          }
+        ],
+        "status": {
+          "state": "registered",
+          "panels": [
+            "CAMKEYS_PT_auto_fov",
+            "CAMKEYS_PT_baking",
+            "CAMKEYS_PT_camkeys_linking",
+            "CAMKEYS_PT_camkeys_main",
+            "CAMKEYS_PT_camprops",
+            "CAMKEYS_PT_lattice_auto_fov_modifier"
+          ],
+          "other_panels": [
+            "CAMKEYS_PT_billboard_settings",
+            "CAMKEYS_PT_dolly_expressions",
+            "CAMKEYS_PT_lens_compensation",
+            "CAMKEYS_PT_distance_falloff_popover",
+            "CAMKEYS_PT_falloff_popover",
+            "CAMKEYS_PT_flatten_falloff_popover"
+          ],
+          "limits": [
+            "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+            "Only supported Layout calls/modes are converted; draw errors appear in status.",
+            "Exact-build embedded adapters are required for custom rendering."
+          ],
+          "native_routes": [
+            {
+              "class": "CAMKEYS_OT_billboard_groups",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_distance_stop_vector",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_configure_camprop_values",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_export_curve",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_open_flatten_falloff_popover",
+              "callback": "invoke",
+              "routes": [
+                "call_panel"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_edit_vector_stop",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            },
+            {
+              "class": "CAMKEYS_OT_ui_appearance",
+              "callback": "invoke",
+              "routes": [
+                "invoke_props_dialog"
+              ]
+            }
+          ],
+          "routed_routes": [
+            "invoke_props_dialog",
+            "invoke_popup",
+            "invoke_confirm",
+            "invoke_search_popup",
+            "popup_menu",
+            "popup_menu_pie",
+            "call_menu",
+            "call_menu_pie",
+            "call_panel"
+          ],
+          "host": {
+            "registered": true,
+            "draw_errors": {},
+            "native_fallbacks": {},
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "list_identity": {
+            "pending": 0,
+            "errors": []
+          },
+          "popups": {
+            "dialogs": 0,
+            "menus": 0,
+            "error": null,
+            "native_fallbacks": [
+              {
+                "route": "macro-step:camkeys.finish_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              },
+              {
+                "route": "macro-step:camkeys.begin_dolly_navigation",
+                "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+                "custom": false
+              }
+            ],
+            "preserved_macro_dependencies": [
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.pan_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.orbit_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.begin_dolly_navigation"
+              },
+              {
+                "macro": "camkeys.dolly_navigation",
+                "operator": "camkeys.finish_dolly_navigation"
+              }
+            ],
+            "keymap_routes": 0
+          }
+        },
+        "performance": null,
+        "error": null
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/offscreen-consumer/blender-0.log"
+    }
+  ],
+  "unit_tests_passed": 363,
+  "measurement": {
+    "runtime": "Blender 5.2.2 macOS; factory-startup UI scale",
+    "workload": "10 native redraws while a 5-row custom list is fully clipped, changing one row label each time",
+    "scope": "Runtime.draw only, including native reservation; not total viewport or application CPU",
+    "before_median_ms": 1.0447079998812114,
+    "after_median_ms": 0.038353499803633895,
+    "reduction_percent": 96.3287827978732,
+    "before_callbacks": [
+      10,
+      50,
+      0,
+      0
+    ],
+    "after_callbacks": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "callback_order": [
+      "panel body",
+      "list rows",
+      "filter draw",
+      "filter items"
+    ]
+  },
+  "behavior": [
+    "No background polling. One-shot resume callback returns None and is removed on teardown.",
+    "No stale cached controls painted or made interactive before refresh.",
+    "Scene/object changes bypass deferral. Hidden structural changes reconcile on return.",
+    "Native row height and View2D scroll retained during hidden value updates.",
+    "Source glass, theme and motion rendering unchanged."
+  ],
+  "qualification_limits": [
+    "No new visual comparison requested or performed.",
+    "5.1.2 adopted matrix preceded the final direct-list membership-resume correction; final correction tested on both versions in direct panels, 5.2.2 adopted panels and list regression.",
+    "Exact-version official docs requests failed in web tool; existing timer/region APIs exercised in installed runtimes.",
+    "Focus audits show no owned Blender activation. One intermediate direct run recorded SecurityAgent activation of unknown origin; no focus restoration was performed."
+  ],
+  "source_sha256": {
+    "beyond_ui/hosts/addon.py": "5cb819faa6bc55ebcba243382a08986bca3a449738e1402bd37df20250874f3a",
+    "beyond_ui/hosts/panel.py": "e13050d794d6bd2b209430743f0264646b788b16c2c46b40c568fb55f9f11d04",
+    "beyond_ui/registered_list.py": "c451befa763a79ab448352818c1c902b2a1124224746b07aa9d60083f298f973",
+    "tests/blender_panel_scroll.py": "9d38aa07440e60f90e7542656569790c8a8d570bf3a0eadd1378a1831d90de64",
+    "tests/test_panel_defer.py": "ed40e94c0586f0ff6fabe4e16e1f8b18551c608bd12b6cdd744c7e72657e5297"
+  }
+}

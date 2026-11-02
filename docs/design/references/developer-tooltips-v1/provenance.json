@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "tool": "Built-in image_gen",
+  "prompt": "Use case: ui-mockup. Edit the provided actual Blender tooltip capture into a polished macOS-inspired developer tooltip reference. Preserve the subdued slate/teal/warm dark liquid-glass palette, translucent blurred glass with subtle rim and restrained round corners. Show only one tooltip, straight-on, no desktop, no explanatory annotations. Make a compact 360 logical-pixel wide tooltip rendered at 2x: 16px inner padding, readable 12px body; description first, then a 14px vertical gap. Distinct bold 11px label 'Python' on its own line, a 4px gap then regular-weight 11px identifier. Another 12px vertical gap then bold 11px label 'Data Path', 4px gap then regular-weight 11px wrapped path. Align everything to identical left inset. Wrap identifiers at dots or brackets, never split a word arbitrarily. Exact text: description 'Target apparent focal length in mm (higher = less perspective distortion)'; Python value 'MeshObjectItem.auto_fov_max_strength'; Data Path value \"bpy.data.scenes['Scene'].mesh_object_items[0].auto_fov_max_strength\". Gentle off-white text, labels slightly brighter, no buttons or icons, no gradients inside individual text fields, no individual field boxes. Leave sufficient bottom padding. High aesthetic macOS typography and spacing, a practical compact developer tooltip. Existing source image is a layout/style input, improve hierarchy substantially.",
+  "source": "../../qa/developer-tooltips-v1/before-tooltip.png",
+  "reference": "reference.png",
+  "logical_spec": {
+    "width": 360,
+    "padding": 16,
+    "body_font": 12,
+    "detail_font": 11
+  },
+  "state": "Developer tooltip, Apparent Focal Length, rest",
+  "acceptance": "Close consistent match per current CamKeys acceptance correction. Theme-derived production glass and font rasterization differ from generated artwork."
+}

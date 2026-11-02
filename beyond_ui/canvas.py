@@ -376,7 +376,16 @@ class Canvas(Group):
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
         clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
-        w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
+        previous = self.overlay
+        # Nested list guards require an attached owner during initial layout.
+        # Publish ownership transactionally before dimensions invokes callbacks.
+        self.overlay = {"widget": widget, "owner": owner, "clip": tuple(clip),
+                        "rect": tuple(clip)}
+        try:
+            w, h = widget.dimensions(self.theme.font_size, clip[2], clip[3])
+        except Exception:
+            self.overlay = previous
+            raise
         widget.glass_blur = 0.7
         rect = (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h)
         if owner is not None and hasattr(widget, "anchor"):
@@ -411,6 +420,8 @@ class Canvas(Group):
             model.refresh_poll(context)
             if not control.enabled:
                 return False
+            if control.options.get("popover_author_error"):
+                return model.native_fallback(context, control.options["popover_author_error"])
             widget = model.build(self, control, context)
             self.cancel()
             self.open_widget(widget, control, clip)
@@ -427,7 +438,7 @@ class Canvas(Group):
                 else:
                     widget.cancel()
             self.menu_error = str(error)
-            return False
+            return model.native_fallback(context, error)
 
     def notify_changed(self, key):
         """Host revision hook, including read-only indicators; never polls RNA."""
@@ -582,6 +593,8 @@ class Canvas(Group):
         self.hover = None
 
     def cancel(self):
+        from .tooltips import hide
+        hide(self)
         self._button_press = None
         self.close_context()
         self.context_focus = None
@@ -657,6 +670,7 @@ class Canvas(Group):
     def open_enum_menu(self, control, clip, context):
         """Open an owned enum through the same bounded glass menu as context actions."""
         from .context_menu import Entry, Menu, Target
+        from .tooltips import property_description
 
         if not control.enabled or not control.binding.valid():
             return False
@@ -704,6 +718,9 @@ class Canvas(Group):
                         ),
                         checked=field.selected(item.identifier, before),
                         tip=item.description,
+                        tooltip=(lambda ctx, item=item: property_description(
+                            control.binding.context, ctx, item.description))
+                        if getattr(control.binding, 'context', None) else None,
                         divider=divider,
                     )
                 )
@@ -835,7 +852,8 @@ class Canvas(Group):
             return True
         except Exception as error:
             self.menu_error = str(error)
-            return False
+            fallback = getattr(model, "native_fallback", None)
+            return fallback(context, error) if fallback else False
 
     def open_pie(
         self,
@@ -1022,6 +1040,14 @@ class Canvas(Group):
             from itertools import islice
 
             rows = list(islice(provider(target, context), Menu.limit))
+            # An extension's additional actions must not erase the exact bound
+            # property's native actions (paths, animation, drivers, developer UI).
+            if (provider is not default_entries and target.binding is not None
+                    and getattr(target.binding, 'context', None) is not None
+                    and not callable(target.payload)):
+                keys = {row.key for row in rows}
+                rows = [row for row in default_entries(target, context)
+                        if row.key not in keys] + rows
             if self.shortcut_registry is not None:
                 from .context_custom import CustomProperty
                 from .context_shortcuts import numeric_property_entry
@@ -1108,6 +1134,8 @@ class Canvas(Group):
     def event(
         self, event, x, y, clip, *, clipboard=None, context=None, menu_measure=None
     ):
+        from .tooltips import hover
+        hover(self, event, x, y, clip, context, menu_measure)
         try:
             return self._dispatch_event(
                 event,
@@ -1609,6 +1637,14 @@ class Canvas(Group):
                 control.action()
         elif control.kind in {"pointer", "search"}:
             try:
+                if control.kind == "search":
+                    from .search import clear_rect, field_rect
+                    from .context_menu import inside
+                    model = control.options["search_field"]
+                    if model.can_clear() and inside(clear_rect(field_rect(control)), x, y):
+                        model.clear()
+                        control.motion.pulse("body", 0.12)
+                        return True
                 picker = (
                     control.options["search_field"].open()
                     if control.kind == "search"

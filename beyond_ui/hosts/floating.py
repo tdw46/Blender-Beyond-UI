@@ -7,6 +7,32 @@ from ..gpu.typography import Fonts, face
 from ..gpu.paint import measure, paint
 
 
+def visible_region_rect(area, region):
+    """Unoccluded drawing space, in WINDOW-region pixels (not screen pixels).
+
+    POST_PIXEL runs before overlapping UI/TOOLS regions. Constrain floating
+    surfaces to the exposed viewport rather than painting under those regions.
+    """
+    left, bottom, right, top = 0, 0, region.width, region.height
+    for other in area.regions:
+        if other is region or other.type not in {"UI", "TOOLS", "HEADER", "TOOL_HEADER"}:
+            continue
+        if other.width <= 1 or other.height <= 1:
+            continue
+        x, y = other.x - region.x, other.y - region.y
+        x2, y2 = x + other.width, y + other.height
+        if x2 <= left or x >= right or y2 <= bottom or y >= top:
+            continue
+        if other.type in {"HEADER", "TOOL_HEADER"}:
+            if y <= bottom: bottom = min(top, y2)
+            else: top = max(bottom, y)
+        elif x <= left:
+            left = min(right, x2)
+        else:
+            right = max(left, x)
+    return left, bottom, max(1, right-left), max(1, top-bottom)
+
+
 class FloatingHost(PanelHost):
     def __init__(
         self, owner, context, *, animation=None, registry=None, stylesheet=None
@@ -75,9 +101,9 @@ class FloatingHost(PanelHost):
         self.region.tag_redraw()
 
     def size(self):
-        self.rect = (0, 0, self.region.width, self.region.height)
-        self.canvas._width = self.region.width / self.scale
-        self.canvas.height = self.region.height / self.scale
+        self.rect = visible_region_rect(self.area, self.region)
+        self.canvas._width = self.rect[2] / self.scale
+        self.canvas.height = self.rect[3] / self.scale
         self.clip = (0, 0, self.canvas._width, self.canvas.height)
         self.canvas._event_clip = self.clip
 
@@ -85,8 +111,8 @@ class FloatingHost(PanelHost):
         if event is None:
             return self.clip[2] / 2, self.clip[3] / 2
         return (
-            (event.mouse_x - self.region.x) / self.scale,
-            (self.region.y + self.region.height - event.mouse_y) / self.scale,
+            (event.mouse_x - self.region.x - self.rect[0]) / self.scale,
+            (self.region.y + self.rect[1] + self.rect[3] - event.mouse_y) / self.scale,
         )
 
     def _draw(self):
@@ -112,16 +138,20 @@ class FloatingHost(PanelHost):
             )
             record["backdrop"] = backdrop if ready else None
             record["glass_error"] = "" if ready else glass.error
-            paint(
-                self.canvas,
-                self.rect,
-                self.rect,
-                preferences=context.preferences,
-                font=self.font,
-                backdrop=record["backdrop"],
-                background=False,
-                controls=False,
-            )
+            # Ownership guards use the invoking region, while pixels target the
+            # viewport. Otherwise sidebar-authored popovers paint only a shell.
+            with context.temp_override(window=self.window, area=self.area,
+                                       region=self.origin_region):
+                paint(
+                    self.canvas,
+                    self.rect,
+                    self.rect,
+                    preferences=context.preferences,
+                    font=self.font,
+                    backdrop=record["backdrop"],
+                    background=False,
+                    controls=False,
+                )
             record["valid"] = True
         except Exception as error:
             self.reason = f"{type(error).__name__}: {error}"

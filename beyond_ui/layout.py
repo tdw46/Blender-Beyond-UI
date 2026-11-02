@@ -999,6 +999,9 @@ class Layout:
         options = self._options()
         if not emboss:
             options["emboss"] = "NONE_OR_STATUS"
+        from .tooltips import operator_description
+        options["tooltip"] = lambda ctx: operator_description(
+            operator, properties, pointers, ctx or context)
         self.group.button(
             self._key(operator),
             label,
@@ -1544,6 +1547,7 @@ class Layout:
             binding=model.binding,
             search_field=model,
             icon=icon,
+            search_icon=icon if icon not in {None, "", "NONE", 0} else model.icon,
             context_menu=model.entries,
             **self._options(),
         )

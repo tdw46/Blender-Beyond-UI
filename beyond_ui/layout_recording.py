@@ -28,6 +28,8 @@ def list_arguments(args, kwargs):
 class Tape:
     def __init__(self, state=None):
         self.commands, self.signature = [], []
+        self.display_targets = {}
+        self.extra_signature = []
         self.state = state if state is not None else {}
         self.next_id = 1
         self.root = Node(self, 0)
@@ -56,6 +58,7 @@ class Tape:
                     except (TypeError, AttributeError):
                         pass
                 self.signature.append((len(values), active, token))
+                self.extra_signature.append((len(values), active, token))
 
     def node(self, parent=None):
         result = Node(self, self.next_id, parent)
@@ -88,17 +91,47 @@ class Tape:
 
     def play(self, layout):
         values = {0: layout}
-        for kind, target, name, args, kwargs, outputs in self.commands:
+        for index, (kind, target, name, args, kwargs, outputs) in enumerate(self.commands):
             if kind == "set":
                 setattr(values[target], name, args[0])
             else:
                 result = getattr(values[target], name)(*args, **kwargs)
+                if name in {"label", "title"} and result is not None:
+                    self.display_targets[index] = (result, values[target])
                 if isinstance(outputs, tuple):
                     for key, value in zip(outputs, result):
                         if key is not None:
                             values[key] = value
                 elif outputs is not None:
                     values[outputs] = result
+
+    def patch_display(self, newer):
+        """Update literal label text without replacing controls or edit state.
+
+        Called on the owner's native authoring redraw, never by GPU painting or
+        an idle timer. Structural changes are explicitly rejected for rebuilding.
+        """
+        if (len(self.commands) != len(newer.commands)
+                or self.extra_signature != newer.extra_signature):
+            return False
+        changes = []
+        for index, (old, new) in enumerate(zip(self.commands, newer.commands)):
+            if freeze(old) == freeze(new):
+                continue
+            if index not in self.display_targets:
+                return False
+            old_kw, new_kw = dict(old[4]), dict(new[4])
+            old_kw.pop("text", None)
+            new_kw.pop("text", None)
+            if freeze((*old[:4], old_kw, old[5])) != freeze((*new[:4], new_kw, new[5])):
+                return False
+            changes.append((index, new[4]))
+        for index, kwargs in changes:
+            control, layout = self.display_targets[index]
+            control.label = layout._text(kwargs.get("text", ""), kwargs.get("text_ctxt", ""), kwargs.get("translate", True))
+            layout.canvas.invalidate()
+        self.commands, self.signature = newer.commands, newer.signature
+        return True
 
 
 class Node:

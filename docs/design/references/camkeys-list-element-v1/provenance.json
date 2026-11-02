@@ -1,0 +1,28 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-02",
+  "status": "Concept only; not implemented or approved",
+  "references": [
+    "user Photo 1.jpg",
+    "native Blender 5.2.2 AngleItems_UL capture"
+  ],
+  "versions": [
+    {
+      "file": "panel-v1.png",
+      "prompt": "Create one high fidelity UI mockup of an improved CamKeys list panel, macOS inspired precise restrained layout, front-facing flat screenshot, 744x650 approximate canvas. Use first supplied screenshot as palette and control inventory, second is native Blender structure and exact source shape-key and camera icons. Retain dark slate translucent liquid glass, mint switches/selection rim, soft offwhite text, neutral background. Title: \"CamKeys (Camera Angles + ShapeKeys)\" in semibold. Four neat equal-height two-line rows. Each first line: full-sized mint enabled toggle left, editable name Cam_Left / Cam_Right / Cam_Bottom / Cam_Top in a fixed aligned column, right aligned read-only value 0.251 / 0.000 / 0.000 / 0.221 in dedicated narrow column, camera capture icon far right. Each second line: clear dark inset rounded search field under the name column, native Blender SHAPEKEY_DATA icon (two stacked outlined diamond-like quadrilaterals) on left, selected shape-key name matching row name, small magnifier on right and clear × far right. Top name text and second-line selected-name text MUST have the same left text origin; reserve the shape-key icon gutter under empty leading space on top. Second line search field must stretch through value column, no orphan magnifiers. First selected row subtle mint glass highlight with light rim. Other rows no individual boxes, subtle dividers. Compact right-hand vertical toolbar has +, minus, down chevron, separator, up triangle, down triangle, all centered and evenly spaced. Footer Filter with disclosure left, tiny grip middle, 4 / 4 right. All original controls retained, no invented controls or tabs. Native source icons must be recognizable. Consistent modest text and icon sizing, comfortable horizontal/vertical padding. No captions outside panel."
+    },
+    {
+      "file": "element-v1.png",
+      "prompt": "Generate a polished macOS desktop UI concept focusing ONLY on ONE CamKeys UI list element, shown large enough to review on a phone. Two examples of that same component vertically on a small dark slate glass sample: upper selected state, lower unselected state, no entire panel, no list toolbar, no title or explanations. Refine the screenshot's design with Apple macOS restrained type hierarchy, compact precise grid, elegant padding, subtle dark inset field, very subtle mint rim and softly blurred translucent glass. Absolutely no huge gradients, no exaggerated glowing strokes. Retain EVERY control.\nExact element contents: enabled mint toggle at far left, semibold editable row name \"Cam_Left\", right-aligned small regular weight read-only numeric value \"0.251\", camera capture button at far right with native camera silhouette. Beneath is a recognizable shape-key search field: native Blender SHAPEKEY_DATA icon of two overlapping outlined polygon/diamond tiles at the leading edge, regular-weight text \"Cam_Left\", small magnifying glass, and clear × on the right, with comfortable 10 px internal padding. The search field is inset darker than the container with a fine light inner rim and modest rounded corners. VERY IMPORTANT: editable name on top and selected shape-key text below MUST share EXACT same left text x-coordinate. The search field outer left edge and its type icon extend LEFT of that text column; do not align its outer edge with the title, align its TEXT with title. The search field fills nearly all width beneath name, value and camera columns; left switch gutter remains empty below switch. All icons centered in their hit zones. Top row's name is visually primary; the selected shape-key value is visibly a searchable field with separate icon and clear action, not a second unstyled text label. Upper selected item has soft mint tinted glass and fine mint rim; lower unselected item is neutral slate glass, no individual outer outline, with same control geometry. One subtle divider between items. Both examples identical Cam_Left and 0.251 content to compare states. Match user's slate/offwhite/mint palette from supplied screenshot but improve overall spatial design. High fidelity, flat orthographic UI mockup, landscape approximately 1100x620 with generous outer margin, crisp legible typography. Do not add extra fields, labels, badges, colorful art, or arrows."
+    },
+    {
+      "file": "element-v2.png",
+      "prompt": "Refine this UI component reference with one precise layout correction. In BOTH the selected upper row and unselected lower row, move the TOP bold Cam_Left name 90 pixels to the RIGHT so the C starts at EXACTLY the same x-coordinate as the C in the Cam_Left search field directly below it (roughly x=480 in this image). The two text baselines must form a clean vertical left column. Leave the mint toggles, numeric values, camera buttons, inset search-field bounds, type icons, magnifiers, clears, materials, colors and all other geometry unchanged. Do not move the lower search text. This exact alignment is the purpose of the edit. Preserve macOS styling and image size."
+    }
+  ],
+  "limits": [
+    "Generated name/search text origins remain slightly offset; implementation must use a shared text grid.",
+    "Implementation must use retained Blender source glyphs, not generated artwork.",
+    "Real glass, bounce, exact owners and right-click behavior unchanged; no production code edited this turn."
+  ]
+}

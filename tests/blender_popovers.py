@@ -119,6 +119,7 @@ def run():
         )
         assert canvas.overlay is None
         bad = Layout(context=ctx)
+        bad.canvas.popup_native_fallback = False
         bad.popover("BUI_PT_bad")
         bad.canvas.arrange(560)
         assert not bad.canvas.open_panel(
@@ -126,6 +127,7 @@ def run():
         )
         assert bad.canvas.overlay is None
         failed = Layout(context=ctx)
+        failed.canvas.popup_native_fallback = False
         failed.popover("BUI_PT_failed")
         failed.canvas.arrange(320)
         assert not failed.canvas.open_panel(
@@ -139,6 +141,7 @@ def run():
 
         original = tuple(canvas.controls)
         original_children = tuple(canvas.children)
+        canvas.popup_native_fallback = False
         try:
             ui.popover("BUI_PT_bad_header")
         except UnsupportedControl:

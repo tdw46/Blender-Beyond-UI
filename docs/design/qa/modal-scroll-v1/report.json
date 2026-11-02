@@ -1,0 +1,402 @@
+{
+  "date": "2026-11-01",
+  "unit_tests": 350,
+  "runtimes": {
+    "modal": [
+      {
+        "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "pid": 65484,
+        "command": [
+          "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_modal_lifecycle.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 65484,
+          "restore_requests": 0,
+          "seconds": 3.945738911628723,
+          "termination_evidence": "launch-services",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "ticks": 58,
+          "routes": [
+            333,
+            333
+          ],
+          "instance_preserved": true,
+          "restored_modal_dispatch": true,
+          "custom_invoke_preserved": true
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-lifecycle-v2/blender-0.log"
+      },
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 65527,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_modal_lifecycle.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 65527,
+          "restore_requests": 0,
+          "seconds": 4.063333034515381,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "ticks": 58,
+          "routes": [
+            333,
+            333
+          ],
+          "instance_preserved": true,
+          "restored_modal_dispatch": true,
+          "custom_invoke_preserved": true
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-lifecycle-v2/blender-1.log"
+      }
+    ],
+    "dialogs": [
+      {
+        "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "pid": 66496,
+        "command": [
+          "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 66496,
+          "restore_requests": 0,
+          "seconds": 12.63293206691742,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "checks": [
+            "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+            "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+            "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+            "Original callbacks restored and lifecycle unregister completes"
+          ],
+          "glass": [
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            }
+          ],
+          "calls": [
+            [
+              "execute",
+              7,
+              true
+            ],
+            [
+              "cancel",
+              7
+            ],
+            [
+              "menu"
+            ],
+            [
+              "cancel",
+              7
+            ]
+          ],
+          "error": null
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-scroll-dialogs/blender-0.log"
+      },
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 66681,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_direct_popups.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 66681,
+          "restore_requests": 0,
+          "seconds": 12.245486974716187,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "checks": [
+            "Original invoke state and edited operator properties reach execute exactly once; Escape cancels exactly once",
+            "Direct owned wm.call_menu, wm.call_menu_pie and WindowManager.popup_menu use custom menu engine with real shared glass",
+            "Native operator undo, check-driven conditional controls and exact operator-property right-click ownership pass",
+            "Original callbacks restored and lifecycle unregister completes"
+          ],
+          "glass": [
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            },
+            {
+              "productions": 1,
+              "error": ""
+            }
+          ],
+          "calls": [
+            [
+              "execute",
+              7,
+              true
+            ],
+            [
+              "cancel",
+              7
+            ],
+            [
+              "menu"
+            ],
+            [
+              "cancel",
+              7
+            ]
+          ],
+          "error": null
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-scroll-dialogs/blender-1.log"
+      }
+    ],
+    "macros": [
+      {
+        "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "pid": 67413,
+        "command": [
+          "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_macro_lifecycle.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 67413,
+          "restore_requests": 0,
+          "seconds": 2.4591140747070312,
+          "termination_evidence": "launch-services",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.1.2"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-scroll-macros/blender-0.log"
+      },
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 67457,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_macro_lifecycle.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 13701,
+          "initial_frontmost_pid": 13701,
+          "new_instance": true,
+          "pid": 67457,
+          "restore_requests": 0,
+          "seconds": 2.47579288482666,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/modal-scroll-macros/blender-1.log"
+      }
+    ]
+  },
+  "live": {
+    "running": true,
+    "engine_running": true,
+    "engine_pointer": 522125547352,
+    "in_place": true,
+    "last_tick": 1118611.321035541,
+    "dirty": false,
+    "frame": 1,
+    "active": "root",
+    "selected": [],
+    "mode": "OBJECT",
+    "modals": [
+      [
+        "buib3fd05c0630e920e_OT_input",
+        522127450776
+      ],
+      [
+        "ShapekeyViewportUpdateOperator",
+        522125547352
+      ],
+      [
+        "BVT_OT_SpringSimulationEngine",
+        522126607320
+      ],
+      [
+        "BVT_OT_ShoostCanvasInput",
+        522185516824
+      ]
+    ],
+    "runtime_errors": {},
+    "router_error": null,
+    "navigation_result": [
+      "FINISHED"
+    ],
+    "pointer_after_navigation": 522125547352,
+    "later_tick": 1118632.597995041,
+    "dirty_after_navigation": false,
+    "trackpad_delta": 12
+  },
+  "scope": [
+    "Registered modal operator lifetime",
+    "Popup/list trackpad direction"
+  ],
+  "limitations": [
+    "No physical trackpad input injected; user feel confirmation remains",
+    "4.2 source checked, runtime unavailable",
+    "No new Vulkan/OpenGL qualification claimed; these changes do not touch GPU code"
+  ]
+}

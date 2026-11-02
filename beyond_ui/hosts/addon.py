@@ -227,8 +227,6 @@ class Runtime:
             else 0
             for n in ("scene", "view_layer", "object")
         )
-        cache_key = getattr(definition, "cache_key", None)
-        fingerprint += (cache_key(context) if cache_key else None,)
         cache = self.canvases[definition]
         if key not in cache and len(cache) >= 64:
             # Window/region churn cannot retain an unbounded set of RNA/GPU owners.
@@ -240,6 +238,14 @@ class Runtime:
                 k: v for k, v in self.layout_states.items() if k[0] is not definition
             }
         cached = cache.get(key)
+        # Reserve known native space without author callbacks or binding reads.
+        # Context replacement still revokes old owners immediately. Paint detects
+        # re-entry and requests one authoring pass before exposing controls again.
+        if (cached is not None and cached[0][:3] == fingerprint
+                and host.defer_draw(native, context, cached[1])):
+            return
+        cache_key = getattr(definition, "cache_key", None)
+        fingerprint += (cache_key(context) if cache_key else None,)
         state = self.layout_states.setdefault((definition, key), {})
         tape = None
         if self.adopt:
@@ -254,6 +260,11 @@ class Runtime:
                 self.draw_error(definition, key, native, error, context, instance)
                 return
             fingerprint += (tuple(tape.signature),)
+        if (cached is not None and tape is not None and cached[0][:-1] == fingerprint[:-1]
+                and getattr(cached[1], "_author_tape", None) is not None
+                and cached[1]._author_tape.patch_display(tape)):
+            self.canvases[definition][key] = fingerprint, cached[1]
+            cached = self.canvases[definition][key]
         if cached is None or cached[0] != fingerprint:
             if cached is not None:
                 cached[1].park()
@@ -296,6 +307,7 @@ class Runtime:
             try:
                 if tape is not None:
                     tape.play(layout)
+                    canvas._author_tape = tape
                 else:
                     self.draw_functions[definition](
                         PanelProxy(definition, layout), context
@@ -309,6 +321,21 @@ class Runtime:
             self.canvases[definition][key] = fingerprint, canvas
         else:
             canvas = cached[1]
+        # Clipped panels are parked after paint. Native draw is authoring them
+        # again (including their reserved height), so resume before list callbacks
+        # validate their parent. Otherwise an ordinary value refresh turns an
+        # offscreen list into an error row and View2D clamps the scroll upward.
+        # The host still gates input on its painted/clipped record and parks
+        # unpainted canvases again; this does not schedule idle redraws.
+        canvas.visible = True
+        try:
+            for control in canvas.controls.values():
+                widget = control.options.get("widget")
+                if hasattr(widget, "refresh_display"):
+                    widget.refresh_display()
+        except Exception as error:
+            self.draw_error(definition, key, native, error, context, instance)
+            return
         self.errors.pop(definition.__name__, None)
         self.fallbacks.pop(definition.__name__, None)
         if not host.draw(native, context, canvas):
@@ -406,6 +433,9 @@ class Runtime:
             "registered": self.active,
             "draw_errors": dict(self.errors),
             "native_fallbacks": dict(self.fallbacks),
+            "popup_fallbacks": [entry for cache in self.canvases.values()
+                                for _, canvas in cache.values()
+                                for entry in getattr(canvas, "popup_fallbacks", ())][-32:],
             "panels": {
                 d.__name__: {
                     "available": h.bridge is not None,

@@ -432,7 +432,8 @@ def operator_entries(
         return ()
     rows = []
     if getattr(context.preferences.view, "show_developer_ui", False):
-        command = f"bpy.ops.{idname}({', '.join(f'{k}={v!r}' for k, v in properties.items())})"
+        from .tooltips import operator_command
+        command = operator_command(idname, properties)
         rows.append(
             Entry(
                 "COMMAND",
@@ -505,6 +506,8 @@ def operator_entries(
     if getattr(context.preferences.view, "show_developer_ui", False):
         from .context_source import entry, operator_subject
 
+        rows.append(Entry("API", "Online Python Reference",
+                          lambda t, c: operator("wm.doc_view")(doc_id=idname)))
         rows.append(entry(operator_subject(idname)))
     if getattr(context.preferences.view, "show_tooltips_python", False):
         rows = [

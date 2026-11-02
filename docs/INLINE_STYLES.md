@@ -88,6 +88,7 @@ keys fail explicitly instead of being silently ignored.
 | `list_dividers` | Boolean; registered lists show subtle separators between populated rows by default. Does not add lines through empty space, or across grid/compact presentations. |
 | `list_row_padding` | Content insets inside the selection rim; default `(2, 8)` logical units (vertical, horizontal). Number or CSS-order 1–4 values, each 0–24. Applies to ordinary and registered lists. |
 | `list_row_align` | Vertical alignment of the whole row content: `center` (default), `top`, or `bottom`. The same padded rectangle drives painting, editing, menus and hit-testing. |
+| `list_item_layout` | `auto` (default) aligns an authored unembossed name above a collection search field, preserving its toggle, status and action controls. `authored` keeps the original callback layout. Explicitly styled groups retain their geometry. |
 
 The common container/color/motion vocabulary works with rendered Boolean,
 integer, float, string, enum, pointer, vector, color and compound controls, plus
@@ -245,3 +246,23 @@ theme = bui.StyleSheet(text_effects={"shadow_offset": (0, -1), "shadow_blur": 3}
 Partial settings inherit from the parent palette; updates use the existing
 stylesheet invalidation path. Missing native font-effect capabilities explicitly
 retain plain lettering. No scene settings or Blender preferences are modified.
+
+### Name and search list items
+
+An ordinary `UIList.draw_item()` with a name/search column now gets a shared
+text grid, compact status/action lanes and a full-width inset search field.
+No CamKeys-specific identifiers or rewritten callbacks are involved. The field
+uses the collection item's Blender icon and retains search, clear and property
+context menus. A clear operation uses the original binding and host commit policy.
+Read-only values stay read-only; display refresh preserves their control objects.
+
+To keep a list's authored geometry:
+
+```python
+layout.template_list("MY_UL_items", "", owner, "items", owner, "active_index")
+bui.style(layout, list_item_layout="authored")
+```
+
+`list_row_padding`, `list_row_align`, `list_row_height`, and explicit styles inside
+`draw_item()` remain available. Long names can still clip at narrow widths;
+icons and utility controls reserve their own lanes.

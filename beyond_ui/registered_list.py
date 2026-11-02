@@ -284,6 +284,69 @@ class ListProxy(Proxy):
         return control
 
 
+def reflow_search_item(canvas, group=None):
+    """Normalize authored name/search columns; retain every control and owner.
+
+    A narrow semantic pattern, not a product/name heuristic. Explicitly styled
+    groups keep their authored geometry. No callbacks or binding reads here.
+    """
+    from .canvas import Group
+    group = canvas if group is None else group
+    for child in tuple(group.children):
+        if hasattr(child, "children"):
+            reflow_search_item(canvas, child)
+    if group.kind != "row" or group.options.get("_inline_geometry"):
+        return
+    columns = [c for c in group.children if c.kind == "column" and
+               len(c.children) == 2 and c.children[0].kind == "text" and
+               c.children[1].kind == "search" and
+               c.children[0].options.get("emboss") in {"NONE", "NONE_OR_STATUS"}]
+    if len(columns) != 1:
+        return
+    column = columns[0]
+    if column.options.get("_inline_geometry") or column._effective_enabled != group._effective_enabled:
+        return
+    index = group.children.index(column)
+    before, after = group.children[:index], group.children[index + 1:]
+    if any(c.kind != "toggle" or c.label for c in before):
+        return
+    if any(c.kind not in {"label", "button"} for c in after):
+        return
+    name, search = column.children
+    if name.label or search.label:
+        return
+    has_icon = search.options.get("search_icon", search.options.get("icon")) not in {None, "", "NONE", 0}
+    gutter = canvas.theme.icon_size + 6 if has_icon else 0
+    header = Group(canvas, "row", column, gap=4)
+    # This inset moves the editable control itself, so caret and hit geometry
+    # share the same text origin as the search's retained icon gutter.
+    header.options["_insets"] = (0, 0, 0, gutter)
+    header._sync_size_policy()
+    header.children = [name, *after]
+    for child in header.children:
+        child.parent = header
+        child.options.setdefault("height", 22)
+        if child.kind == "label":
+            child.options.setdefault("width", max(38, canvas.theme.font_size * 3.5))
+            child.options.setdefault("text_alignment", "RIGHT")
+            child.options.setdefault("text_inset", 0)
+        elif child.kind == "button" and not child.label:
+            child.options.setdefault("width", 22)
+            child.options["list_action"] = True
+    name.options.setdefault("font_weight", "bold")
+    name.options.setdefault("_inline_style", {}).setdefault("font_weight", "bold")
+    search.options.setdefault("height", 24)
+    column.children = [header, search]
+    column.options["gap"] = 4
+    group.children = [*before, column]
+    group.options["gap"] = 6
+    for toggle in before:
+        # The full 28-unit switch keeps its intrinsic shape; only its empty
+        # list gutter is tightened, leaving more space for long names.
+        if toggle.options.get("width") == 38:
+            toggle.options["width"] = 32
+
+
 def reflow_list_status(canvas, group=None):
     """Keep authored value and secondary status in one compact column."""
     from .canvas import Group
@@ -307,7 +370,7 @@ def reflow_list_status(canvas, group=None):
     column = Group(canvas, "column", group, gap=0, align=True)
     column.children = [value, status]
     value.options["height"] = 20
-    has_icon = value.options.get("icon") not in {None, "", "NONE", 0} or bool(
+    has_icon = value.options.get("search_icon", value.options.get("icon")) not in {None, "", "NONE", 0} or bool(
         value.options.get("icon_value")
     )
     status.options.update(
@@ -438,7 +501,40 @@ class RegisteredList(CollectionList):
                 self.scroll_to(self.offset)
         self.epoch += 1
 
-    def child(self, item, width):
+    def row_tape(self, item):
+        from .layout_recording import Tape
+        from .layout import UnsupportedControl
+
+        if not self.source.valid_item(item):
+            raise ReferenceError("List row changed before authoring")
+        tape = Tape({"_inside_list_callback": True})
+        tape.root._values.update(use_property_decorate=False,
+                                 operator_context=self.source.layout.operator_context)
+        row = tape.root.row(align=True)
+        args = (self.context, row, self.source.resolve(),
+                self.source.collection()[item.index], 0, self.source.active_resolve(),
+                self.source.active_prop, item.index,
+                self.flags[item.index] if self.flags else 0)
+        params = tuple(signature(self.draw_item).parameters.values())
+        n = len(params) - 1
+        if any(p.kind == Parameter.VAR_POSITIONAL for p in params):
+            n = len(args)
+        if n < 6:
+            raise UnsupportedControl("UIList draw_item signature")
+        self.invoke(self.draw_item, *args[:n])
+        return tape
+
+    def refresh_display(self):
+        """Re-evaluate only visible rows on their owning native panel redraw."""
+        if getattr(self, "_resume_display", False):
+            # Membership, ordering and filters may have changed while parked.
+            # Revalidate once on return, never on each hidden native redraw.
+            self.refresh()
+            self._resume_display = False
+        else:
+            self.prepare(live=True)
+
+    def child(self, item, width, tape=None):
         from .canvas import Canvas
         from .layout import Layout, UnsupportedControl
         from .popover import guard_controls
@@ -512,27 +608,9 @@ class RegisteredList(CollectionList):
             if item is None:
                 self.invoke(self.draw_filter, self.context, ui)
             else:
-                if not self.source.valid_item(item):
-                    raise ReferenceError("List row changed before authoring")
-                row = ui.row(align=True)
-                args = (
-                    self.context,
-                    row,
-                    self.source.resolve(),
-                    self.source.collection()[item.index],
-                    0,
-                    self.source.active_resolve(),
-                    self.source.active_prop,
-                    item.index,
-                    self.flags[item.index] if self.flags else 0,
-                )
-                params = tuple(signature(self.draw_item).parameters.values())
-                n = len(params) - 1
-                if any(p.kind == Parameter.VAR_POSITIONAL for p in params):
-                    n = len(args)
-                if n < 6:
-                    raise UnsupportedControl("UIList draw_item signature")
-                self.invoke(self.draw_item, *args[:n])
+                tape = tape if tape is not None else self.row_tape(item)
+                tape.play(ui)
+                canvas._row_tape = tape
             if len(canvas.controls) > 128:
                 raise ValueError("UIList callback exceeds 128 controls")
             if item is not None:
@@ -543,6 +621,8 @@ class RegisteredList(CollectionList):
                 # Preserve authored secondary status instead of crushing the value
                 # field. Compact hosts use a second line; no bindings are removed.
                 reflow_list_status(canvas)
+                if getattr(self, "style_item_layout", "auto") == "auto":
+                    reflow_search_item(canvas)
             canvas.arrange(width)
             if item is not None and canvas.height + self.row_padding[0] + self.row_padding[2] > 84.01:
                 raise UnsupportedControl("multiline/oversized UIList row")
@@ -664,7 +744,7 @@ class RegisteredList(CollectionList):
                 canvas.shortcut_registry.release(token)
         canvas.park()
 
-    def prepare(self):
+    def prepare(self, *, live=False):
         if not hasattr(self, "viewport"):
             return
         selected = self.selected()
@@ -681,9 +761,13 @@ class RegisteredList(CollectionList):
                     self.epoch,
                 )
                 entry = self.cache.get(key)
-                canvas = entry[0] if entry else self.child(item, content_width)
-                if entry is None:
+                canvas = entry[0] if entry else None
+                tape = self.row_tape(item) if live and entry else None
+                if canvas is None or (tape is not None and not canvas._row_tape.patch_display(tape)):
+                    canvas = self.child(item, content_width, tape)
                     created.append(canvas)
+                elif tape is not None:
+                    canvas.arrange(content_width)
                 next_cache[key] = (canvas, self.row_content_rect(rect, canvas.height), item)
             if sum(len(entry[0].controls) for entry in next_cache.values()) > 4096:
                 raise ValueError("Visible UIList rows exceed 4096 controls")
@@ -697,7 +781,7 @@ class RegisteredList(CollectionList):
             raise
         replacements = {entry[2].identity: entry[0] for entry in next_cache.values()}
         for key, (canvas, _, _) in self.cache.items():
-            if key not in next_cache:
+            if key not in next_cache or next_cache[key][0] is not canvas:
                 replacement = replacements.get(self.cache[key][2].identity)
                 if replacement:
                     transfer_motion(canvas, replacement)
@@ -738,6 +822,7 @@ class RegisteredList(CollectionList):
         self.active_child = None
         super().cancel()
         if not self.parent.visible or self.owner is not None and not self.owner.enabled:
+            self._resume_display = True
             for canvas, _, _ in tuple(self.cache.values()):
                 self.release(canvas)
             if self.filter_canvas:
@@ -845,6 +930,11 @@ class RegisteredList(CollectionList):
                     ):
                         chosen = (canvas, rect)
                         break
+            if event.type == "MOUSEMOVE":
+                from .tooltips import hide_all
+                for child, _, _ in children:
+                    if chosen is None or child is not chosen[0]:
+                        hide_all(child)
             if chosen is None or self.drag or self.text_edit:
                 return None
             canvas, rect = chosen
@@ -958,7 +1048,7 @@ class RegisteredList(CollectionList):
 
         p = Painter(rect, self.width, self.height, font, palette, backdrop)
         for canvas, r, _ in self.all_children():
-            if canvas.overlay or canvas.context_menu:
+            if canvas.overlay or canvas.context_menu or getattr(canvas, "_control_tip", None):
                 paint(
                     canvas,
                     p.map((r[0], r[1], r[2], canvas.height)),
