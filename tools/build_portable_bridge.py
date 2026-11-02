@@ -86,7 +86,9 @@ def main():
     fmt=next((work/'fmt').iterdir())/'include'
     interface=(checkout/'source/blender/editors/include/UI_interface_c.hh').read_text()
     memory=(checkout/'intern/guardedalloc/MEM_guardedalloc.h').read_text()
-    flags={'BUI_FAMILY':family,'BUI_PYRNA_C':int((checkout/'source/blender/python/intern/bpy_rna.h').exists()),'BUI_OPTIONAL_LABELS':int('std::optional<blender::StringRef> str' in interface or family>=51),
+    flags={'BUI_FAMILY':family,'BUI_PYRNA_C':int((checkout/'source/blender/python/intern/bpy_rna.h').exists()),'BUI_OPTIONAL_LABELS':int(bool(re.search(r'uiDefButR\([^;]+std::optional<[^>]+> str',interface,re.S))),
+           'BUI_OPTIONAL_TIP':int(bool(re.search(r'uiDefBut\([^;]+std::optional<[^>]+> tip',interface,re.S))),
+           'BUI_FREE_DESTRUCTOR':int('DestructorType' in memory),
            'BUI_FUNCTION_DRAW':int(bool(re.search(r'UI_but_func_drawextra_set\([^;]+std::function',interface,re.S))),
            'BUI_ENUM_EMBOSS':int('enum class EmbossType' in interface),'BUI_FREE_TYPED':int('mem_freeN_ex' in memory)}
     # Extract unchanged public declarations to avoid unrelated editor DNA/OIIO
@@ -112,7 +114,8 @@ def main():
     (work/'bui_screen_declarations.hh').write_text('// SPDX-License-Identifier: GPL-2.0-or-later\n// Unchanged declarations from the exact Blender source archive.\n'+text+'\n')
     includes=[checkout/'source/blender'/p for p in ('blenlib','blenkernel','makesdna','makesrna','editors/include','windowmanager','gpu','blenfont','depsgraph')]
     includes += [checkout/'intern/guardedalloc',checkout/'intern/atomic',fmt,work]
-    free_symbol=('?mem_freeN_ex@internal@mem_guarded@@3P6AXPEAXW4DestructorType@12@@ZEA' if flags['BUI_FREE_TYPED'] else 'MEM_freeN') if system=='Windows' else ('_ZN11mem_guarded8internal12mem_freeN_exE' if flags['BUI_FREE_TYPED'] else 'MEM_freeN')
+    free_enum='DestructorType' if flags['BUI_FREE_DESTRUCTOR'] else 'AllocationType'
+    free_symbol=('?mem_freeN_ex@internal@mem_guarded@@3P6AXPEAXW4'+free_enum+'@12@@ZEA' if flags['BUI_FREE_TYPED'] else 'MEM_freeN') if system=='Windows' else ('_ZN11mem_guarded8internal12mem_freeN_exE' if flags['BUI_FREE_TYPED'] else 'MEM_freeN')
     manifest=dict(schema=1,abi='beyond-ui-portable-v1',platform=key,build_hash=build,version=version,family=family,
         backends=['BACKGROUND']+(['METAL'] if system=='Darwin' else ['OPENGL']+(['VULKAN'] if family>=43 else [])),
         sources={'bridge_portable.cpp':sha(source)},executable_sha256=sha(blender),free_symbol=free_symbol,
@@ -133,7 +136,7 @@ def main():
         pdb=blender.with_suffix('.pdb');guid,age=pe_identity(blender.read_bytes());mapping=work/'rvas.json'
         dll=next((dia/'bin').rglob('amd64/msdia140.dll'),None) or dia/'bin/amd64/msdia140.dll'
         if not dll.exists():dll=next(vs.rglob('msdia140.dll'))
-        run([tool,dll,pdb,requested,'{'+guid+'}',str(age),mapping])
+        diagnostic=run([tool,dll,pdb,requested,'{'+guid+'}',str(age),mapping],output=work/'pdb.log');print(diagnostic,flush=True)
         found=json.loads(mapping.read_text());missing=needed-set(found)
         if missing:raise ValueError('PDB symbols missing: '+repr(sorted(missing)))
         symbols=sorted(needed);count=len(symbols)
@@ -151,7 +154,7 @@ def main():
     else:
         binary=out/('beyond-ui.dylib' if system=='Darwin' else 'beyond-ui.so')
         options=['c++','-std=c++20','-O2','-DNDEBUG','-funsigned-char','-fPIC','-fvisibility=hidden']
-        if family==42 and system=='Darwin':options+=['-fdelayed-template-parsing']
+        if family<=43 and system=='Darwin':options+=['-fdelayed-template-parsing']
         options+=['-D'+k+'='+str(v) for k,v in flags.items()]+['-I'+str(p) for p in includes]
         options+=['-dynamiclib','-undefined','dynamic_lookup'] if system=='Darwin' else ['-shared']
         run([*options,source,'-o',binary],output=work/'compile.log')

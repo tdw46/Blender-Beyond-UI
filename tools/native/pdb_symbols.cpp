@@ -34,6 +34,9 @@ int wmain(int argc,wchar_t **argv) {
   BSTR name=nullptr;DWORD rva=0;
   if(SUCCEEDED(symbol->get_name(&name))&&name) {
    std::string key=utf8(name);
+   if(key.find("GPU_framebuffer_blit")!=std::string::npos || key.find("ANIM_copy_driver")!=std::string::npos || key.find("ANIM_paste_driver")!=std::string::npos || key.find("?context@Layout")!=std::string::npos) {
+    DWORD candidate=0;symbol->get_relativeVirtualAddress(&candidate);std::cerr << key << " RVA=" << candidate << std::endl;
+   }
    if(wanted.count(key)&&SUCCEEDED(symbol->get_relativeVirtualAddress(&rva))) {
     if(found.count(key)&&found[key]!=rva)return 10; found[key]=rva;
    }
