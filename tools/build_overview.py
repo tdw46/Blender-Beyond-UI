@@ -39,6 +39,10 @@ if onboarding_media.exists():
 live_onboarding_media = ROOT / "docs/design/qa/onboarding-live-v1/current-media.json"
 if live_onboarding_media.exists():
     current += json.loads(live_onboarding_media.read_text())
+recovery_media = ROOT / "docs/design/qa/onboarding-recovery-v1/current-media.json"
+if recovery_media.exists():
+    current = [r for r in current if r["path"] != "docs/media/panels/onboarding-live-v1.gif"]
+    current += json.loads(recovery_media.read_text())
 current_paths = {r["path"] for r in current}
 archive = [r for r in rows if r["path"] not in current_paths]
 

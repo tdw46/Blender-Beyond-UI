@@ -40,7 +40,7 @@ def run():
    outline_radii.append(radius);return original_outline(rect,palette,scale,radius)
   style.icon,skin.inset_outline=observed_icon,observed_outline
   with bpy.context.temp_override(area=area,region=region):
-   stages=[('target',0,'ANGLES'),('workflow',1,'ANGLES'),('detected',2,'ANGLES'),('angles',2,'ANGLES'),('perspective',2,'PERSPECTIVE'),('dolly',2,'DOLLY'),('ready',3,'ANGLES')]
+   stages=[('target',0,'ANGLES'),('workflow',1,'ANGLES'),('detected',2,'ANGLES'),('angles',2,'ANGLES'),('perspective',2,'PERSPECTIVE'),('dolly',2,'DOLLY'),('dolly-linked',2,'DOLLY'),('ready',3,'ANGLES')]
    if os.environ.get('BEYOND_UI_CAPTURE_HELP'):stages=[(key,-1,'ANGLES') for key in os.environ['BEYOND_UI_CAPTURE_HELP'].split(',')]
    for slug,stage,route in stages:
     if os.environ.get('BEYOND_UI_CAPTURE_STAGES') and slug not in os.environ['BEYOND_UI_CAPTURE_STAGES'].split(','):continue
@@ -50,6 +50,10 @@ def run():
      state.step=1
      assert bpy.ops.camkeys.setup_navigate()=={'FINISHED'},state.error
      assert ob.onboarding_view.prepared_item(state,bpy.context) is not None
+     assert ob.visible(bpy.context)
+     if slug=='dolly-linked':
+      assert bpy.ops.camkeys.setup_snap_front()=={'FINISHED'},state.error
+      assert bpy.ops.camkeys.setup_dolly_current()=={'FINISHED'},state.error
     layout=Layout(context=bpy.context);ui_theme.STUDIO.apply(layout.canvas)
     if stage<0:
      from types import SimpleNamespace
@@ -65,7 +69,7 @@ def run():
      if card:copy_records[slug].extend([card.title,card.description])
     canvas.set_text_measure(lambda t,r:measure(typography.face(fonts,r),canvas.theme.font_size,t)[0],'fixture')
     width=320;canvas.arrange(width);dpi=2
-    if slug in {'perspective','dolly'}:
+    if slug in {'perspective','dolly','dolly-linked'}:
      from camkeys_qa._vendor.beyond_ui.scalar_geometry import slider_parts
      numeric=next(c for c in canvas.controls.values() if c.label in {'Apparent focal length','Start lens'})
      value=slider_parts(numeric.rect,True,stacked=numeric.options.get('_slider_stacked'),label_band=numeric.options.get('_label_band',24))[2]

@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 live effect setup and Dolly view actions completed",
+  "reviewed": "2026-11-03 \u2014 user accepted wizard fixes; publication checkpoint",
   "remaining_turns": [
     0,
     1
@@ -17,7 +17,7 @@
     0.25
   ],
   "confidence": "Requested batch is implemented and locally execution-tested. The optional remaining turn allows user-reported corrections; it is not a forecast for cross-platform qualification.",
-  "basis": "New scope closed: real pre-step effect setup, native lens binding, viewport/camera Dolly and 75% front framing. 453 unit tests; 5.1.2/5.2.2 actual geometry and lock checks; 136 messages in 12 languages; updated Uraraka-bound Metal captures.",
+  "basis": "Five newly reported wizard corrections closed. 453 BUI unit tests; Blender 5.1.2/5.2.2 transition, geometry, lock and rollback checks; 140 setup/help messages in 12 languages; three updated Uraraka-bound Metal captures.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Wizard recovery: updated subject, focal reset and Dolly/Unlink Metal PNGs and stage-snapshot GIF. No continuous interaction recording or physical Windows capture.",
     "Live onboarding: two new Uraraka-bound Metal component PNGs, before/after comparisons and a two-stage snapshot GIF. No continuous interaction or physical Windows capture of these new actions.",
     "Localized onboarding/help: nine new actual Metal PNGs across Japanese, Chinese, German and English; all 13 popup playback/cleanup checks recorded. No new animation behavior or dedicated locale GIF. Existing wizard/media GIF remains; source clips contain baked-in English artwork.",
     "Onboarding: seven actual Metal stage captures and a stage-snapshot GIF, plus a 1.2-second media loop capture. No physical Windows capture or recorded full page-transition GIF; source clips loop in real custom help popups.",
@@ -59,8 +60,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Live Forced Perspective setup and viewport-first Dolly now include current-view locking, 75% front framing, native lens units and value-centered question-mark buttons. Verified on Blender 5.1.2/5.2.2 with 12-language coverage and refreshed Metal captures; no version changes.",
-  "estimate_review": "Publication-only turn: fast-forwarded both primary branches with the Windows history retained. No implementation scope or estimate changed: 0 implementation turns, 0\u20131 optional review/fix turn.",
+  "latest_progress": "Wizard Unlink now uses the main UI lock callback to restore the original recorded lens and distance, with an open-padlock icon. Subject subtitle updated across 12 locales. Verified camera/viewport restoration in Blender 5.1.2 and 5.2.2; installed copy synchronized.",
+  "estimate_review": "User reports the fixes work great and requests publication. No added implementation scope or new QA work. Remaining implementation 0; optional future correction budget 0\u20131 turn, separate from physical Windows and older-version qualification.",
   "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -438,6 +439,16 @@
       "work": "Lens Tricks media correction, shared Viewport defaults, camera-optional Forced Perspective setup and final-step Back navigation.",
       "evidence": "docs/design/qa/onboarding-navigation-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Wizard visibility/recovery, corrected front direction, Dolly/Unlink, orthographic capture and targeted focal reset, with locale coverage",
+      "evidence": "docs/design/qa/onboarding-recovery-v1/live-522.json",
+      "turns": 1
+    },
+    {
+      "work": "Restore original lens on wizard Unlink using main UI callback; unlock icon and subject subtitle in 12 languages",
+      "evidence": "docs/design/qa/onboarding-recovery-v1/live-522.json",
+      "turns": 1
     }
   ],
   "remaining_work": "No known remaining implementation work in this requested batch. Optional user review of localized copy/help placement; native-speaker translation review and physical Windows/Blender 4.2 onboarding qualification remain separate. Existing live Uraraka requires a fresh launch to load the new registration/catalog.",
@@ -501,7 +512,7 @@
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "Live preview and viewport-first Dolly setup",
-  "latest_review": "../onboarding-live-v1/index.html",
+  "latest_review": "../onboarding-recovery-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",

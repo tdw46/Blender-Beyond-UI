@@ -1,0 +1,54 @@
+{
+  "target": [
+    "CamKeys",
+    "Choose your subject",
+    "A character's head or any focus object",
+    "Subject",
+    "Armature",
+    "Focus bone",
+    "You can choose another bone.",
+    "Use object origin",
+    "Next",
+    "Open full controls"
+  ],
+  "perspective": [
+    "CamKeys",
+    "Set up forced perspective",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Apparent focal length",
+    "Adjust the slider to preview the effect.",
+    "Next",
+    "Back",
+    "Open full controls"
+  ],
+  "dolly": [
+    "CamKeys",
+    "Set up a dolly zoom",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Start lens",
+    "Frame your subject, then lock Dolly Zoom at the current view.",
+    "Snap to Front View",
+    "Dolly at Current View",
+    "Next",
+    "Back",
+    "Open full controls"
+  ],
+  "dolly-linked": [
+    "CamKeys",
+    "Set up a dolly zoom",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Start lens",
+    "Frame your subject, then lock Dolly Zoom at the current view.",
+    "Snap to Front View",
+    "Unlink Dolly",
+    "Next",
+    "Back",
+    "Open full controls"
+  ]
+}
