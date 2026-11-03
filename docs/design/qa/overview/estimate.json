@@ -1,8 +1,8 @@
 {
-  "reviewed": "2026-11-02 \u2014 installed Windows build accepted; primary-branch publication",
+  "reviewed": "2026-11-03 \u2014 publication review and Mac handoff",
   "remaining_turns": [
     0,
-    0
+    1
   ],
   "implementation_turns": [
     0,
@@ -10,13 +10,13 @@
   ],
   "integration_qa_turns": [
     0,
-    0
+    1
   ],
   "active_hours": [
     0,
-    0
+    0.5
   ],
-  "confidence": "Windows scope complete for the documented sampled checks. Mac hardware regression, physical trackpad and long-duration resource soak are unverified.",
+  "confidence": "Requested optimization implemented, installed and tested on NVIDIA Vulkan/OpenGL. Current Metal hardware remains unverified.",
   "basis": "Actual RTX 4090 Laptop / 591.74 on official Blender 5.2.2. Separate Vulkan/OpenGL profiles and process restarts; original checkout and scene preserved.",
   "excludes": [
     "user review waits",
@@ -25,6 +25,9 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Necessary-update optimization has byte-identical before/after NVIDIA Vulkan settled angle-panel PNGs and numerical live/cadence evidence. No new animation clip or Mac hardware capture.",
+    "BUI attribution has raw timings, profile, resource/admission/restoration and focus logs; no new screenshots/clips. No visual change applied. OpenGL/Metal attribution remains unverified.",
+    "Viewport performance repair has timings, native runtime readback and focus logs; no new screenshot/GIF. No styling change.",
     "New actual Windows/NVIDIA popup, light/custom theme and 30fps deterministic motion-frame captures exist in the external QA bundle. Mac Metal and physical trackpad have no new captures. See docs/WINDOWS_NVIDIA_522_REPAIR.md.",
     "Compatibility qualification uses native execution and GPU readbacks, not new visual comparisons/GIFs. Windows/NVIDIA appearance and performance remain user QA.",
     "New actual live Uraraka and disposable popup PNGs show window-level sidebar overlap and viewport glass. No new GIF; existing bounce implementation retained. Earlier left-of-sidebar screenshots are superseded.",
@@ -51,9 +54,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "417 unit tests; repaired official Windows MSI/ZIP executable signing admission, popup-confirm property recording, headless native-fallback crash and reserved GLSL progress-ring identifier. Both NVIDIA backends passed renderer/glass, six CamKeys hosts, panels/lists/curves, popovers, exact-owner actions, search/keyboard, themes, motion and live Uraraka shape/list updates. Idle BUI draw/paint counts are zero over 30 seconds; retained owners stable and released after unregister. All eight Darwin native packages unchanged except shared adapter fingerprint. No new Mac hardware run. Tyler installed the repaired CamKeys build, reported that everything looks good, and requested committing and merging to the primary branches. This is user visual acceptance of the installed Windows build; Mac hardware remains unverified.",
-  "estimate_review": "Implementation and local Windows QA are complete. User visual review accepted the installed build. This turn publishes the existing tested changes after repository CI; no new implementation or hardware run is required.",
-  "time_summary": "Local Windows repair/QA work complete. No forecast for unavailable Mac hardware or future physical-device/long-soak qualification.",
+  "latest_progress": "Explicit panel revisions skip unchanged authored commands while preserving glass redraw. Literal row text updates skip full row callbacks. Combined RNA reads retain exact-owner checks. 431 unit tests; Vulkan/OpenGL live dependency checks, nine list interactions and five scroll/offscreen checks pass. Angle author/refresh 3.55\u21921.56 ms, orbit approximately 39\u219234\u201335 ms; before/after settled PNG byte-identical. Full backup and runtime/vendored hashes verified; scene not saved.",
+  "estimate_review": "Implementation remains complete. Publishing the tested optimizations and exact consumer vendor pin adds no implementation work; current Mac Metal hardware verification remains open. CI-equivalent checks are rerun for publication.",
+  "time_summary": "Performance measurements are actual; 0\u20130.5 active hours is only an optional review allowance, not measured implementation time.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -370,9 +373,29 @@
       "work": "Exact-header native bridge, older driver clipboard/framebuffer paths, 16 admitted Windows/macOS packages, portable renderer CI and guarded consumer refresh",
       "evidence": "docs/design/qa/compatibility-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Uraraka row-authoring/owner-validation reduction and BVT discovery cache",
+      "evidence": "docs/VIEWPORT_REDRAW_PERFORMANCE.md",
+      "turns": 1
+    },
+    {
+      "work": "Full-session viewport validation and independent Extreme PBR redraw/cloud-readiness repair",
+      "evidence": "docs/VIEWPORT_REDRAW_PERFORMANCE.md",
+      "turns": 1
+    },
+    {
+      "work": "Live full/native ABBA and per-slice BUI attribution; isolated visible-angle-list comparison and profiling; restoration/focus checks",
+      "evidence": "docs/BUI_PERFORMANCE_ATTRIBUTION.md",
+      "turns": 1
+    },
+    {
+      "work": "Dependency-aware panel content retention, text-only live row refresh and single-resolution exact-owner reads; installed and validated",
+      "evidence": "docs/NECESSARY_UPDATE_PERFORMANCE.md",
+      "turns": 1
     }
   ],
-  "remaining_work": "User Windows/NVIDIA Blender 5.2.2 Vulkan/OpenGL visual, window-composition and performance pass, followed by any reproducible fixes. Other patch builds need exact packages; Linux embedded host and Intel macOS remain unqualified.",
+  "remaining_work": "Optional user review of installed behavior; external current Metal hardware verification. No identified unfinished implementation item within the requested optimization.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -425,10 +448,14 @@
     {
       "batch": "Blender 4.2+ cross-platform support",
       "details": "Explicit new scope includes older release families, exact-header build tooling, Windows PDB-bound host dispatch, Linux admission and platform/backend qualification. Native fallback does not count as custom UI parity."
+    },
+    {
+      "batch": "Necessary-update BUI performance",
+      "details": "Closed: explicit panel revisions, text-only row refresh and per-access ownership reduction implemented, installed and verified. See docs/NECESSARY_UPDATE_PERFORMANCE.md. Required rendering/scene evaluation cost remains; no claim of zero BUI overhead."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "User-accepted Windows/NVIDIA build; primary-branch publication",
+  "checkpoint": "Content/row revisions installed; working Blender restored",
   "latest_review": "../popup-window-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-02",
@@ -437,5 +464,11 @@
     "vulkan": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: native renderer, real viewport-backed glass, input, consumer panels and idle checks passed.",
     "opengl": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: same hardware checks passed.",
     "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."
-  }
+  },
+  "scope_changes": [
+    {
+      "batch": "Uraraka transform performance",
+      "details": "New user-requested scope; measured and installed this turn. Full working-profile latency and Mac hardware remain separate from isolated timing evidence."
+    }
+  ]
 }

@@ -42,7 +42,7 @@ def callbacks(cls):
             getattr(cls, name, None),
             tuple(getattr(getattr(cls, name, None), "_draw_funcs", ())),
         )
-        for name in ("draw_item", "draw_filter", "filter_items")
+        for name in ("draw_item", "draw_filter", "filter_items", "draw_item_cache_key", "draw_item_texts")
     )
 
 
@@ -422,6 +422,7 @@ class RegisteredList(CollectionList):
         self.row_map, self.live_canvases = {}, set()
         self.pending = self.drawing = False
         self.faulted = False
+        self._painting_context = None
         self.data_pending = False
         self.flags = ()
         self.active_child = None
@@ -429,12 +430,21 @@ class RegisteredList(CollectionList):
         self.epoch = 0
         self.proxy = ListProxy(self)
         self.draw_item = python_callback(self.cls, "draw_item")
+        self.draw_item_cache_key = python_callback(self.cls, "draw_item_cache_key")
+        self.draw_item_texts = python_callback(self.cls, "draw_item_texts")
+        if self.draw_item_texts is not None and self.draw_item_cache_key is None:
+            raise ValueError("draw_item_texts requires a complete structural draw_item_cache_key")
         self.draw_filter = python_callback(self.cls, "draw_filter")
         self.filter_items = python_callback(self.cls, "filter_items")
         if self.draw_item is None:
             from .layout import UnsupportedControl
 
             raise UnsupportedControl("UIList without a Python draw_item callback")
+        params = tuple(signature(self.draw_item).parameters.values())
+        self.draw_item_arg_count = (
+            9 if any(p.kind == Parameter.VAR_POSITIONAL for p in params)
+            else len(params) - 1
+        )
         super().__init__(source, state, **options)
 
     def check(self, context, scope=None, *, poll=True):
@@ -446,7 +456,8 @@ class RegisteredList(CollectionList):
         ):
             raise ReferenceError("UIList registration/callbacks changed; rebuild it")
         if (
-            context_key(context) != self.scope
+            (poll or self._painting_context is not context)
+            and context_key(context) != self.scope
             or not self.pointers.valid()
             or not self.source.valid()
         ):
@@ -521,20 +532,37 @@ class RegisteredList(CollectionList):
                 self.source.collection()[item.index], 0, self.source.active_resolve(),
                 self.source.active_prop, item.index,
                 self.flags[item.index] if self.flags else 0)
-        params = tuple(signature(self.draw_item).parameters.values())
-        n = len(params) - 1
-        if any(p.kind == Parameter.VAR_POSITIONAL for p in params):
-            n = len(args)
+        n = self.draw_item_arg_count
         if n < 6:
             raise UnsupportedControl("UIList draw_item signature")
         self.invoke(self.draw_item, *args[:n])
         return tape
 
+    def row_display_revision(self, item):
+        """One validated callback scope for structural and literal dependencies."""
+        from .layout_recording import freeze
+
+        if not self.source.valid_item(item):
+            raise ReferenceError("List row changed before authoring")
+        def read(proxy, context, data, value, index):
+            revision = self.draw_item_cache_key(proxy, context, data, value, index)
+            texts = self.draw_item_texts(proxy, context, data, value, index) if self.draw_item_texts else None
+            if self.draw_item_texts is not None and not isinstance(texts, (tuple, list)):
+                raise ValueError("draw_item_texts must return a tuple/list of strings")
+            return freeze(revision), texts
+        return self.invoke(read, self.context, self.source.resolve(),
+                           self.source.collection()[item.index], item.index)
+
     def refresh_display(self):
         """Re-evaluate only visible rows on their owning native panel redraw."""
-        if getattr(self, "_resume_display", False):
+        if (getattr(self, "_resume_display", False)
+                or hasattr(self, "viewport") and any(
+                    not self.source.valid_item(item) for item, _ in self.visible()
+                )):
             # Membership, ordering and filters may have changed while parked.
-            # Revalidate once on return, never on each hidden native redraw.
+            # A retained panel can also observe an external same-size reorder.
+            # Check only visible membership; rebuild the snapshot on change.
+            # Never scan the full collection during ordinary row painting.
             self.refresh()
             self._resume_display = False
         else:
@@ -581,7 +609,12 @@ class RegisteredList(CollectionList):
             def current():
                 if not canvas.visible:
                     raise ReferenceError("List row canvas was released")
-                self.check(self.context, poll=False)
+                # The synchronous read-only row paint validates this scope once
+                # at entry. Keep exact row membership and RNA-owner resolution
+                # below live on every access, including custom property getters.
+                # Input/author callbacks never inherit this paint-only scope.
+                if self._painting_context is not self.context:
+                    self.check(self.context, poll=False)
                 if item is not None and not self.source.valid_item(item):
                     raise ReferenceError("List row owner changed during edit")
                 return original()
@@ -771,12 +804,24 @@ class RegisteredList(CollectionList):
                 )
                 entry = self.cache.get(key)
                 canvas = entry[0] if entry else None
-                tape = self.row_tape(item) if live and entry else None
+                revision = getattr(canvas, "_row_revision", None)
+                texts = None
+                if self.draw_item_cache_key is not None and (live or canvas is None):
+                    revision, texts = self.row_display_revision(item)
+                refresh = live and entry and (
+                    self.draw_item_cache_key is None
+                    or canvas._row_revision != revision
+                )
+                tape = self.row_tape(item) if refresh else None
                 if canvas is None or (tape is not None and not canvas._row_tape.patch_display(tape)):
                     canvas = self.child(item, content_width, tape)
                     created.append(canvas)
                 elif tape is not None:
                     canvas.arrange(content_width)
+                elif live and texts is not None:
+                    canvas._row_tape.patch_texts(texts)
+                    canvas.arrange(content_width)
+                canvas._row_revision = revision
                 next_cache[key] = (canvas, self.row_content_rect(rect, canvas.height), item)
             if sum(len(entry[0].controls) for entry in next_cache.values()) > 4096:
                 raise ValueError("Visible UIList rows exceed 4096 controls")
@@ -1021,17 +1066,27 @@ class RegisteredList(CollectionList):
         if entry:
             canvas = entry[0]
             a, b, c, d = p._clip
-            paint(
-                canvas,
-                p.map(entry[1]),
-                (a, b, c - a, d - b),
-                font=p.font,
-                palette=p.palette,
-                backdrop=p.backdrop,
-                background=False,
-                overlays=False,
-            )
-            flush_text(p.font)
+            # Paint is synchronous/read-only on Blender's main thread. Resolve
+            # the unchanged window/area/scene scope once for this row. RNA owner,
+            # membership and validity checks remain live for every field access;
+            # input and author callbacks always perform the full scope check.
+            self.check(self.context, poll=False)
+            previous = self._painting_context
+            self._painting_context = self.context
+            try:
+                paint(
+                    canvas,
+                    p.map(entry[1]),
+                    (a, b, c - a, d - b),
+                    font=p.font,
+                    palette=p.palette,
+                    backdrop=p.backdrop,
+                    background=False,
+                    overlays=False,
+                )
+                flush_text(p.font)
+            finally:
+                self._painting_context = previous
 
     def paint_filters(self, p, backdrop):
         if not self.draw_filter:

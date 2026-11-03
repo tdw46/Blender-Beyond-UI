@@ -94,6 +94,33 @@ host; wide/narrow and 1×/1.5×/2× captures retain normal control scale.
 
 ## Remaining gaps
 
+### Optional authored-row revision
+
+A Python UIList may implement
+`draw_item_cache_key(self, context, data, item, index)`. Its returned immutable
+value must cover **every input that changes authored commands or literal text**,
+including external data and relevant list settings. Return tuples of primitives
+and stable RNA identities; arbitrary mutable objects are not value snapshots.
+Do not include ordinary bound values unless they also change row structure/text.
+The callback is read-only and runs for visible rows on authoring/refresh, never
+from paint or an idle timer. An unchanged revision retains the row's tape;
+bindings still read current RNA and validate exact ownership for editing.
+Selection, index, width, ordering and callback replacement retain their existing
+invalidation. Hidden rows are revalidated on re-entry. Lists without this opt-in
+keep the original visible-row draw callback behavior. Incorrect/incomplete keys
+are a consumer bug; no dependency inference or persistent global cache is used.
+
+An optional companion `draw_item_texts(self, context, data, item, index)` can
+return all literal label/title texts in author order as a tuple/list of strings.
+With this hook, `draw_item_cache_key` covers structural dependencies; returned
+literal texts need not be part of that key. BUI patches only changed text commands,
+retaining controls, bindings, active edits and motion. Intrinsic/wrapped text still
+invalidates layout when necessary; fixed-width values do not. The hook requires
+the structural key, and must cover every literal label, including conditional
+ones. Wrong counts/types fail explicitly. Native Blender ignores both hooks and
+continues using `draw_item`. Both callbacks share one validated read-only scope;
+neither runs in GPU paint or in an added timer.
+
 Native-only callbacks, callback-backed setting get/set/update functions, dynamic
 enum settings, array/flag settings, native UIList persistence, writes to proxy settings during callbacks,
 nested lists, multiline/oversized row content and unsupported `Layout` calls are

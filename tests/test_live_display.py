@@ -5,6 +5,73 @@ from beyond_ui.layout_recording import Tape
 from beyond_ui.hosts.floating import visible_region_rect
 
 class LiveDisplay(unittest.TestCase):
+    def test_retained_text_refresh_matches_full_recording_without_authoring(self):
+        ui = Layout()
+        old = self.tape('0.000')
+        old.play(ui)
+        ui.canvas.arrange(300)
+        control = next(iter(ui.canvas.controls.values()))
+        for value in ('0.250', '0.800', '0.000'):
+            old.patch_texts((value, 'Unchanged'))
+            self.assertEqual(control.label, value)
+            self.assertEqual(old.signature, self.tape(value).signature)
+        with self.assertRaises(ValueError): old.patch_texts(('missing label',))
+        with self.assertRaises(TypeError): old.patch_texts((3, 'Unchanged'))
+
+    def test_fixed_value_refresh_preserves_geometry_motion_and_other_edit(self):
+        from beyond_ui import style
+        def record(value, wrap=False):
+            tape = Tape()
+            tape.root.label(text=value, translate=False)
+            style(tape.root, width=48, wrap=wrap)
+            tape.root.label(text='Stable', translate=False)
+            return tape
+        ui = Layout()
+        old = record('0.000')
+        old.play(ui)
+        ui.canvas.arrange(300)
+        control = next(iter(ui.canvas.controls.values()))
+        before = (ui.canvas.layout_count, ui.canvas.backdrop_revision, control.rect)
+        edit = object()
+        ui.canvas.edit = edit
+        for value in ('0.125', '0.800', '1.000'):
+            self.assertTrue(old.patch_display(record(value)))
+            ui.canvas.arrange(300)
+            self.assertEqual(control.label, value)
+            self.assertEqual((ui.canvas.layout_count, ui.canvas.backdrop_revision, control.rect), before)
+            self.assertIs(ui.canvas.edit, edit)
+        self.assertFalse(old.patch_display(record('1.000', wrap=True)))
+
+    def test_changed_text_uses_recorded_non_display_command_snapshots(self):
+        from unittest.mock import patch
+        import beyond_ui.layout_recording as recording
+        ui = Layout()
+        old, new = self.tape('0.000'), self.tape('0.250')
+        old.play(ui)
+        original = recording.freeze
+        def freeze(value):
+            # Only the changed label's text-free structural signature needs
+            # comparison. All other command snapshots already exist.
+            if isinstance(value, tuple) and len(value) == 6:
+                self.assertEqual(value[2], 'label')
+                self.assertNotIn('text', value[4])
+            return original(value)
+        with patch.object(recording, 'freeze', freeze):
+            self.assertTrue(old.patch_display(new))
+
+    def test_intrinsic_label_reflows_without_cancelling_an_unrelated_edit(self):
+        ui = Layout()
+        old = self.tape('Short')
+        old.play(ui)
+        ui.canvas.arrange(300)
+        count = ui.canvas.layout_count
+        edit = object()
+        ui.canvas.edit = edit
+        self.assertTrue(old.patch_display(self.tape('A much longer label')))
+        ui.canvas.arrange(300)
+        self.assertGreater(ui.canvas.layout_count, count)
+        self.assertIs(ui.canvas.edit, edit)
+
     def test_unchanged_redraw_uses_recorded_signature(self):
         from unittest.mock import patch
 

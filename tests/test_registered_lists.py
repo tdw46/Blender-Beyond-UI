@@ -7,6 +7,37 @@ from beyond_ui.registered_list import SHOW, NEVER, filter_order
 
 
 class RegisteredLists(unittest.TestCase):
+    def test_paint_scope_cache_never_skips_owner_or_input_validation(self):
+        from unittest.mock import patch, Mock
+        from beyond_ui.registered_list import RegisteredList
+        widget = object.__new__(RegisteredList)
+        context = NS()
+        widget.faulted = False
+        widget.scope = ('scope',)
+        widget._painting_context = context
+        widget.pointers = NS(valid=Mock(return_value=True))
+        widget.source = NS(valid=Mock(return_value=True))
+        widget.parent = NS(visible=True)
+        widget.owner = None
+        widget.name = 'List'
+        widget.cls = type('List', (), {})
+        from beyond_ui.registered_list import callbacks
+        widget.callback_key = callbacks(widget.cls)
+        with patch('beyond_ui.registered_list.context_key', return_value=('scope',)) as key, patch('beyond_ui.registered_list.list_class', return_value=widget.cls):
+            widget.check(context, poll=False)
+            key.assert_not_called()
+            widget.source.valid.assert_called_once()
+            widget.check(context, poll=True)
+            key.assert_called_once_with(context)
+            widget.source.valid.return_value = False
+            with self.assertRaises(ReferenceError):
+                widget.check(context, poll=False)
+            widget.source.valid.return_value = True
+            widget._painting_context = None
+            key.return_value = ('different context',)
+            with self.assertRaises(ReferenceError):
+                widget.check(context, poll=False)
+
     def setUp(self):
         self.items = tuple(Item(i, i, str(i), "name") for i in range(4))
 

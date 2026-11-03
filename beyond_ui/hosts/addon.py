@@ -278,19 +278,42 @@ class Runtime:
         fingerprint += (cache_key(context) if cache_key else None,)
         state = self.layout_states.setdefault((definition, key), {})
         tape = None
+        author_revision = None
+        reuse_author = False
         if self.adopt:
-            from ..layout_recording import Tape
+            from ..layout_recording import Tape, freeze
 
-            tape = Tape(state)
             try:
-                self.draw_functions[definition](
-                    PanelProxy(definition, tape.root, instance), context
-                )
+                revision_key = getattr(definition, "beyond_ui_draw_cache_key", None)
+                if revision_key is not None:
+                    # Explicit consumer contract: all authored branches/text and
+                    # captured owners must be represented. Bound values and live
+                    # lists still refresh below; backdrop changes do not author.
+                    author_revision = (
+                        freeze(revision_key(context)), freeze(state),
+                        context.space_data.as_pointer(), context.mode,
+                        context.region.width, context.preferences.system.ui_scale,
+                        context.preferences.view.language,
+                        context.preferences.view.use_translate_interface,
+                        context.preferences.view.use_translate_tooltips,
+                    )
+                    reuse_author = (
+                        cached is not None and cached[0][:-1] == fingerprint
+                        and getattr(cached[1], "_author_revision", None) == author_revision
+                        and getattr(cached[1], "_author_tape", None) is not None
+                    )
+                if reuse_author:
+                    tape = cached[1]._author_tape
+                else:
+                    tape = Tape(state)
+                    self.draw_functions[definition](
+                        PanelProxy(definition, tape.root, instance), context
+                    )
             except Exception as error:
                 self.draw_error(definition, key, native, error, context, instance)
                 return
             fingerprint += (tuple(tape.signature),)
-        if (cached is not None and tape is not None and cached[0][:-1] == fingerprint[:-1]
+        if (not reuse_author and cached is not None and tape is not None and cached[0][:-1] == fingerprint[:-1]
                 and getattr(cached[1], "_author_tape", None) is not None
                 and cached[1]._author_tape.patch_display(tape)):
             self.canvases[definition][key] = fingerprint, cached[1]
@@ -370,6 +393,12 @@ class Runtime:
         self.fallbacks.pop(definition.__name__, None)
         if not host.draw(native, context, canvas):
             native.label(text="Custom panel unavailable: " + host.reason, icon="INFO")
+        # List/disclosure defaults can be initialized by construction/arrange.
+        # Acknowledge that completed state, not its pre-construction snapshot.
+        canvas._author_revision = (
+            (author_revision[0], freeze(state), *author_revision[2:])
+            if author_revision is not None else None
+        )
 
     def draw_error(self, definition, key, native, error, context=None, instance=None):
         self.errors[definition.__name__] = f"{type(error).__name__}: {error}"

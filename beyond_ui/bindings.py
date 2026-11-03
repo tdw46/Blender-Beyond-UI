@@ -14,12 +14,16 @@ class Binding:
     context: object = None
     context_target: object = None
     snapshot: object = None
+    _checked_reader: object = None
 
     def frozen(self):
         """Capture dynamic selection ownership once before edits or menus."""
         return self.snapshot() if self.snapshot is not None else self
 
     def read(self):
+        checked = self._checked_reader
+        if checked is not None and self.get is checked[0] and self.valid is checked[1]:
+            return checked[2]()
         if not self.valid():
             raise ReferenceError("The control owner is no longer valid")
         return self.get()
@@ -100,16 +104,31 @@ def rna_binding(
         except (ReferenceError, AttributeError, RuntimeError):
             return False
 
-    def get():
-        value = getattr(current(), property_name)
+    def value_from(obj):
+        value = getattr(obj, property_name)
         if index is not None:
             return value[index]
         # RNA arrays cannot be retained or deep-copied safely across undo.
         return (
             tuple(value)
-            if getattr(current().bl_rna.properties[property_name], "is_array", False)
+            if getattr(obj.bl_rna.properties[property_name], "is_array", False)
             else value
         )
+
+    def get():
+        return value_from(current())
+
+    def checked_read():
+        # Validate and read the same resolved owner in one synchronous access.
+        # Nothing is cached across fields, callbacks, edits or paint passes.
+        try:
+            obj = current()
+            allowed = property_name in obj.bl_rna.properties and not readonly(obj, property_name)
+        except (ReferenceError, AttributeError, RuntimeError):
+            allowed = False
+        if not allowed:
+            raise ReferenceError("The control owner is no longer valid")
+        return value_from(obj)
 
     def set_value(value):
         obj = current()
@@ -126,4 +145,5 @@ def rna_binding(
         valid,
         commit,
         Property(resolve, property_name, index, commit, source=source),
+        _checked_reader=(get, valid, checked_read),
     )
