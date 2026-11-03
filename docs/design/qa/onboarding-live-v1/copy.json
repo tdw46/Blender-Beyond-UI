@@ -1,0 +1,28 @@
+{
+  "perspective": [
+    "CamKeys",
+    "Set up forced perspective",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Apparent focal length",
+    "Adjust the slider to preview the effect.",
+    "Next",
+    "Back",
+    "Open full controls"
+  ],
+  "dolly": [
+    "CamKeys",
+    "Set up a dolly zoom",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Start lens",
+    "Frame your subject, then lock Dolly Zoom at the current view.",
+    "Snap to Front View",
+    "Dolly at Current View",
+    "Next",
+    "Back",
+    "Open full controls"
+  ]
+}

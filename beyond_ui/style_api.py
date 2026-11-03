@@ -143,8 +143,8 @@ def normalize(*presets, **options):
         elif key == "flex_wrap":
             if type(value) is not bool:raise ValueError("flex_wrap must be Boolean")
         elif key == "align_items":
-            if value not in {"start", "center", "end"}:
-                raise ValueError("align_items must be start, center or end")
+            if value not in {"start", "center", "end", "value"}:
+                raise ValueError("align_items must be start, center, end or value")
         elif key == "color_role":
             if value not in _COLORS:
                 raise ValueError("color_role must name a semantic theme color")

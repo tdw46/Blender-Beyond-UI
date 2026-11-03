@@ -283,3 +283,14 @@ minimum widths. `text_inset` provides a logical horizontal label inset.
 The reusable `BUI_TARGET` icon provides a bullseye for actions without replacing
 the native operator. See [value feedback](VALUE_FEEDBACK.md) for defaults,
 performance behavior, configuration and native-safe examples.
+
+### Align help/cog accessories to values
+
+Use `bui.style(row, scope="group", align_items="value", gap=7)` on a property
+row with a trailing help or settings column. BUI aligns the first editable
+value in each child column with the center of icon-only accessories, using
+the same slider/entry geometry as painting and hit testing. Top labels and
+extra field padding do not push the accessory down. Rows with no editable
+field use child centers. Existing `start`, `center` and `end` remain unchanged.
+This is retained layout work, not a per-frame adjustment; the same property
+bindings, right-click targets and animations remain in place.

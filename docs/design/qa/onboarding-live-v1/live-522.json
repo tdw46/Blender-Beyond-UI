@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    {
+      "check": "effect prepared before step, actual evaluated vertices change, Back/Next retains edits without duplication",
+      "vertex_delta": 0.7318138548851258
+    },
+    {
+      "check": "viewport default without scene camera; 75 percent front fit; current-view lock and recapture do not jump",
+      "extent": 0.7500002186568696
+    },
+    {
+      "check": "selected camera, rotated local-front mesh, shifted portrait frame, fixed camera and real native lens codec",
+      "extent": 0.7499995231628418,
+      "lens_unit": "CAMERA"
+    },
+    "constrained camera rejected and original transform restored",
+    {
+      "check": "lattice cage front framing",
+      "extent": 0.7499991655349731
+    }
+  ]
+}

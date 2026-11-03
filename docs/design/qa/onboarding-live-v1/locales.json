@@ -1,0 +1,155 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "locales": [
+    {
+      "language": "JP",
+      "locale": "ja_JP",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "ES",
+      "locale": "es",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "KO",
+      "locale": "ko_KR",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "CN",
+      "locale": "zh_HANS",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "TW",
+      "locale": "zh_HANT",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "PT_BR",
+      "locale": "pt_BR",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "PT_PT",
+      "locale": "pt_PT",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "FR",
+      "locale": "fr_FR",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "DE",
+      "locale": "de_DE",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "RU",
+      "locale": "ru_RU",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    },
+    {
+      "language": "IT",
+      "locale": "it_IT",
+      "messages": 136,
+      "widths": [
+        240,
+        320,
+        480
+      ]
+    }
+  ],
+  "help_topics": [
+    "angles",
+    "outline",
+    "perspective",
+    "dolly",
+    "billboard",
+    "camprops",
+    "camprops_comparison",
+    "apparent_fov",
+    "camera_source",
+    "tracked_objects",
+    "falloff",
+    "distance",
+    "baking"
+  ],
+  "panels": [
+    {
+      "panel": "CAMKEYS_PT_camkeys_main",
+      "help_controls": 3
+    },
+    {
+      "panel": "CAMKEYS_PT_camkeys_linking",
+      "help_controls": 4
+    },
+    {
+      "panel": "CAMKEYS_PT_auto_fov",
+      "help_controls": 1
+    },
+    {
+      "panel": "CAMKEYS_PT_camprops",
+      "help_controls": 1
+    },
+    {
+      "panel": "CAMKEYS_PT_baking",
+      "help_controls": 1
+    }
+  ],
+  "user_names_preserved": true,
+  "idempotent_catalog": true
+}

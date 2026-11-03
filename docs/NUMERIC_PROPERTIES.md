@@ -97,3 +97,18 @@ Compact fields and menu motion are unchanged. Configure
 strength settings continue to win. [QA v2](design/qa/numeric-props-v2/index.html)
 preserves v1 and compares the actual original/reduced motion side by side.
 [Event property support](EVENT_PROPERTIES.md) is the next implemented prop slice.
+
+### Native camera focal lengths
+
+RNA properties tagged with `unit=CAMERA` (camera and viewport lenses) retain
+Blender's millimeter storage, independently of scene length units/scale.
+`bui.style(layout, units="mm", precision=1)` displays `50.0 (mm)` and edits the
+real RNA owner. Bare arithmetic uses millimeters; explicit length input such as
+`5cm` converts to 50 mm. Other display units are rejected for this RNA category.
+The ordinary LENGTH and ROTATION codecs retain their existing conversions.
+
+The millimeter contract is documented for [Blender 4.2 Camera.lens](https://docs.blender.org/api/4.2/bpy.types.Camera.html#bpy.types.Camera.lens)
+and [5.1 Camera.lens](https://docs.blender.org/api/5.1/bpy.types.Camera.html#bpy.types.Camera.lens).
+Actual 5.1.2 and 5.2.2 RNA/lens round trips are covered by
+`tests/blender_onboarding_live.py`; 5.2 documentation retrieval was unavailable
+during this check. Physical Windows and 4.2 execution remain separate QA.

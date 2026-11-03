@@ -46,6 +46,10 @@ def run():
     if os.environ.get('BEYOND_UI_CAPTURE_STAGES') and slug not in os.environ['BEYOND_UI_CAPTURE_STAGES'].split(','):continue
     glyphs.clear();outline_radii.clear()
     state.step=stage;state.route=route;state.manual_angles=slug!='detected'
+    if stage==2 and route in {'PERSPECTIVE','DOLLY'}:
+     state.step=1
+     assert bpy.ops.camkeys.setup_navigate()=={'FINISHED'},state.error
+     assert ob.onboarding_view.prepared_item(state,bpy.context) is not None
     layout=Layout(context=bpy.context);ui_theme.STUDIO.apply(layout.canvas)
     if stage<0:
      from types import SimpleNamespace
@@ -61,6 +65,12 @@ def run():
      if card:copy_records[slug].extend([card.title,card.description])
     canvas.set_text_measure(lambda t,r:measure(typography.face(fonts,r),canvas.theme.font_size,t)[0],'fixture')
     width=320;canvas.arrange(width);dpi=2
+    if slug in {'perspective','dolly'}:
+     from camkeys_qa._vendor.beyond_ui.scalar_geometry import slider_parts
+     numeric=next(c for c in canvas.controls.values() if c.label in {'Apparent focal length','Start lens'})
+     value=slider_parts(numeric.rect,True,stacked=numeric.options.get('_slider_stacked'),label_band=numeric.options.get('_label_band',24))[2]
+     help_control=min((c for c in canvas.controls.values() if c.kind=='button' and not c.label and c.rect[0]>numeric.rect[0]),key=lambda c:abs(c.rect[1]+c.rect[3]/2-(value[1]+value[3]/2)))
+     assert abs(help_control.rect[1]+help_control.rect[3]/2-(value[1]+value[3]/2))<.01
     w,h=int((width+24)*dpi),int((canvas.height+24)*dpi)
     off=gpu.types.GPUOffScreen(w,h,format='RGBA8');under=gpu.types.GPUOffScreen(w,h,format='RGBA8');key=('onboarding',slug)
     timings=[];frame_tokens=[]

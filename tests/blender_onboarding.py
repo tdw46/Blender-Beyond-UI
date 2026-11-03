@@ -67,7 +67,7 @@ try:
     state.source='CAMERA';assert ob.validate(state,workflow=True)
     state.source='VIEWPORT';assert not ob.validate(state,workflow=True)
    else:
-    state.camera=camera;bpy.context.scene.camera=camera
+    state.camera=camera;bpy.context.scene.camera=camera;state.source='CAMERA'
    outcome=bpy.ops.camkeys.setup_create()
    assert outcome=={'FINISHED'},(route,state.error)
    item=bpy.context.scene.mesh_object_items[0]

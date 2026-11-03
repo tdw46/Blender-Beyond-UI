@@ -83,10 +83,12 @@ class Numeric:
 
     def validate_presentation(self):
         units = self.presentation.get("units")
-        if units and self.unit not in {"NONE", "LENGTH", "ROTATION"}:
+        if units and self.unit not in {"NONE", "LENGTH", "ROTATION", "CAMERA"}:
             raise ValueError(
-                "Explicit units support plain values, lengths and rotations"
+                "Explicit units support plain values, lengths, rotations and camera millimeters"
             )
+        if units and self.unit == "CAMERA" and units != "mm":
+            raise ValueError("Camera focal lengths use millimeters")
         if units and self.subtype in {"FACTOR", "PERCENTAGE"}:
             raise ValueError(
                 "Factor/percentage fields keep their native unit semantics"
@@ -159,6 +161,10 @@ class Numeric:
                 return text + "%"
             suffix = self.presentation.get("suffix")
             return text + (f" ({suffix})" if suffix else "")
+        if self.unit == "CAMERA":
+            return _decimal_text(
+                value, self.presentation.get("precision", self.precision), " mm"
+            )
         if self.integer:
             return str(int(value)) + ("%" if self.subtype == "PERCENTAGE" else "")
         if self.unit == "ROTATION":
@@ -187,6 +193,19 @@ class Numeric:
         if text == self.format(original, state):
             return original  # Merely focusing a rounded field must be lossless.
         units = self.presentation.get("units")
+        if self.unit == "CAMERA":
+            raw = text.strip().removesuffix("(mm)").strip()
+            if re.search(r"[A-Za-z]", re.sub(r"\d[eE][+-]?\d+", "0", raw)):
+                from bpy.utils import units as blender_units
+
+                result = 1000 * blender_units.to_value(
+                    "METRIC", "LENGTH", checked_units(raw)
+                )
+            else:
+                result = number(raw)
+            if not math.isfinite(result):
+                raise ValueError("Value must be finite")
+            return result
         if units:
             raw = text.strip().removesuffix("(" + units + ")").strip()
             # Bare numbers/expressions use the explicitly displayed unit. Native

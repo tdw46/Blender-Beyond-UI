@@ -606,6 +606,37 @@ class Plan:
             for w, weight in zip(fixed, weights)
         ]
 
+    def value_center(self, node, width):
+        """Editable-row anchor for authored accessory alignment, retained at layout."""
+        height, cells = self.layout(node, width)
+        if hasattr(node, "children"):
+            top = self.insets(node)[0]
+            for child, _x, y, w, h in cells:
+                anchor = self.value_center(child, w)
+                if anchor is not None:
+                    natural_height = self.layout(child, w)[0]
+                    return top + y + anchor * (h / natural_height if natural_height else 1)
+            return None
+        from .scalar_geometry import slider_parts, entry_parts
+
+        rect = (0, 0, width, height)
+        if node.kind == "number" and node.options.get("slider", True):
+            field = slider_parts(
+                rect, bool(node.label), stacked=node.options.get("_slider_stacked"),
+                label_band=node.options.get("_label_band", 24),
+                label_width=node.options.get("_slider_label_width"),
+                value_width=node.options.get("value_width", 53),
+            )[2]
+        elif node.kind in {"number", "text", "event", "enum", "pointer", "search"}:
+            field = entry_parts(
+                rect, bool(node.label), stacked=node.options.get("_entry_stacked", False),
+                label_band=node.options.get("_label_band", 20),
+                label_width=node.options.get("_entry_label_width"),
+            )[1]
+        else:
+            return None
+        return field[1] + field[3] / 2
+
     def layout(self, node, width):
         width = self.bound_width(node, width)
         fixed_width = self.fixed(node, 0) if self.sized else None
@@ -652,8 +683,13 @@ class Plan:
                 heights = [self.layout(c,w)[0] for c,w in zip(line,widths)]
                 extent = max(heights,default=0)
                 x = max(0,available-sum(widths)-max(0,len(line)-1)*gap)*shift
-                for child,w,h in zip(line,widths,heights):
-                    cells.append((child,x,y+(extent-h)*offset,w,h));x+=w+gap
+                anchors = [self.value_center(c, w) for c, w in zip(line, widths)] if node.options.get("align_items") == "value" else []
+                anchors = [h/2 if a is None else a for a, h in zip(anchors, heights)]
+                center = max(anchors, default=0)
+                for index, (child,w,h) in enumerate(zip(line,widths,heights)):
+                    dy = center-anchors[index] if anchors else (extent-h)*offset
+                    cells.append((child,x,y+dy,w,h));x+=w+gap
+                if anchors:extent=max(center-a+h for a,h in zip(anchors,heights))
                 y += extent+gap
         elif node.kind in {"row", "split"}:
             widths = self.row_widths(node, available)
@@ -718,8 +754,14 @@ class Plan:
             # Move complete retained children; never scale their text or hit bounds.
             if cells and "align_items" in node.options:
                 extent = max(h for _, _, _, _, h in cells)
-                offset = {"start": 0, "center": 0.5, "end": 1}[node.options["align_items"]]
-                cells = [(c, x, (extent-h)*offset, w, h) for c, x, y, w, h in cells]
+                if node.options["align_items"] == "value":
+                    anchors = [self.value_center(c, w) for c, _, _, w, _ in cells]
+                    anchors = [h/2 if a is None else a for a, (_, _, _, _, h) in zip(anchors, cells)]
+                    center = max(anchors)
+                    cells = [(c, x, center-a, w, h) for a, (c, x, _, w, h) in zip(anchors, cells)]
+                else:
+                    offset = {"start": 0, "center": 0.5, "end": 1}[node.options["align_items"]]
+                    cells = [(c, x, (extent-h)*offset, w, h) for c, x, y, w, h in cells]
         elif node.kind == "grid" and children:
             natural = [self.natural(c) for c in children]
             cols, rows = grid_shape(

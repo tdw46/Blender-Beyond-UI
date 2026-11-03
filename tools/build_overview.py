@@ -36,6 +36,9 @@ if visibility_media.exists():
 onboarding_media = ROOT / "docs/design/qa/camkeys-onboarding-v2/current-media.json"
 if onboarding_media.exists():
     current += json.loads(onboarding_media.read_text())
+live_onboarding_media = ROOT / "docs/design/qa/onboarding-live-v1/current-media.json"
+if live_onboarding_media.exists():
+    current += json.loads(live_onboarding_media.read_text())
 current_paths = {r["path"] for r in current}
 archive = [r for r in rows if r["path"] not in current_paths]
 

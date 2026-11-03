@@ -8,6 +8,26 @@ from test_numeric import codec
 
 
 class InlineStyleTests(unittest.TestCase):
+    def test_help_accessory_centers_on_stacked_value_instead_of_whole_field(self):
+        from beyond_ui.scalar_geometry import slider_parts
+        for width in (240, 320, 480):
+            ui = Layout()
+            ui.canvas.panel_layout = True
+            row = ui.row()
+            style(row, scope="group", gap=7, align_items="value")
+            col = row.column()
+            field = self.number(col)
+            style(col, slider=True, label_position="top", font_size=11)
+            accessory = row.column()
+            style(accessory, scope="group", width=24)
+            help_button = accessory.group.button("help", "", lambda: None, icon="QUESTION")
+            style(accessory, width=24, height=24)
+            ui.canvas.arrange(width)
+            value = slider_parts(field.rect, True, stacked=field.options["_slider_stacked"],
+                                 label_band=field.options.get("_label_band", 24))[2]
+            self.assertAlmostEqual(help_button.rect[1]+help_button.rect[3]/2, value[1]+value[3]/2)
+            self.assertEqual(help_button.rect[3], 24)
+
     def test_value_surface_excludes_caption_and_preserves_owner(self):
         ui = Layout()
         ui.canvas.panel_layout = True

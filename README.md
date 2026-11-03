@@ -45,6 +45,11 @@ layout, shared motion and visible-only media playback.
 
 ![CamKeys Demo First wizard — actual Blender stage snapshots](docs/media/panels/camkeys-onboarding-v2.gif)
 
+[Live effect setup and viewport-first Dolly review](docs/design/qa/onboarding-live-v1/index.html):
+real property previews, source-aware camera selection and aligned help accessories.
+
+![Live effect wizard — updated stage snapshots](docs/media/panels/onboarding-live-v1.gif)
+
 These are actual Metal component renders, not a live-sidebar recording or a
 pixel-perfect acceptance claim. The supplied clips loop without transport chrome.
 

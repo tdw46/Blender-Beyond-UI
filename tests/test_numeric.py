@@ -32,6 +32,20 @@ def codec(subtype="NONE", unit="NONE", **kw):
 
 
 class NumericSemantics(unittest.TestCase):
+    def test_camera_lens_is_millimeters_independent_of_scene_scale(self):
+        n = codec(unit="CAMERA")
+        n.context.scene.unit_settings.system = "METRIC"
+        n.context.scene.unit_settings.scale_length = 100
+        n.presentation = {"units": "mm", "precision": 1}
+        n.validate_presentation()
+        self.assertEqual(n.format(50), "50.0 (mm)")
+        self.assertEqual(n.parse("75 (mm)", 50), 75)
+        self.assertEqual(n.parse("50+25", 50), 75)
+        self.assertEqual(n.display_scale(n.snapshot()), 1)
+        n.presentation["units"] = "m"
+        with self.assertRaises(ValueError):
+            n.validate_presentation()
+
     def test_rotation_and_roundtrip(self):
         n = codec("ANGLE")
         self.assertEqual(n.format(math.pi / 2), "90°")

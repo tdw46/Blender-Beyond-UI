@@ -1,0 +1,64 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 10695,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--gpu-backend",
+      "metal",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_onboarding_live.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 756,
+      "initial_frontmost_pid": 756,
+      "new_instance": true,
+      "pid": 10695,
+      "restore_requests": 0,
+      "seconds": 4.649374961853027,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        {
+          "check": "effect prepared before step, actual evaluated vertices change, Back/Next retains edits without duplication",
+          "vertex_delta": 0.7318138548851258
+        },
+        {
+          "check": "viewport default without scene camera; 75 percent front fit; current-view lock and recapture do not jump",
+          "extent": 0.7500002186568696
+        },
+        {
+          "check": "selected camera, rotated local-front mesh, shifted portrait frame, fixed camera and real native lens codec",
+          "extent": 0.7499995231628418,
+          "lens_unit": "CAMERA"
+        },
+        "constrained camera rejected and original transform restored",
+        {
+          "check": "lattice cage front framing",
+          "extent": 0.7499991655349731
+        }
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-live-522/blender-0.log"
+  }
+]

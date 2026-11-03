@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 onboarding branches merged into main/master",
+  "reviewed": "2026-11-03 \u2014 live effect setup and Dolly view actions completed",
   "remaining_turns": [
     0,
     1
@@ -17,7 +17,7 @@
     0.25
   ],
   "confidence": "Requested batch is implemented and locally execution-tested. The optional remaining turn allows user-reported corrections; it is not a forecast for cross-platform qualification.",
-  "basis": "129 messages audited in 12 languages; 451 unit tests; Blender 5.1.2/5.2.2 locale/layout and 13 actual popup playback/cleanup checks; Japanese/Chinese/German Metal renders from saved Uraraka bindings.",
+  "basis": "New scope closed: real pre-step effect setup, native lens binding, viewport/camera Dolly and 75% front framing. 453 unit tests; 5.1.2/5.2.2 actual geometry and lock checks; 136 messages in 12 languages; updated Uraraka-bound Metal captures.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Live onboarding: two new Uraraka-bound Metal component PNGs, before/after comparisons and a two-stage snapshot GIF. No continuous interaction or physical Windows capture of these new actions.",
     "Localized onboarding/help: nine new actual Metal PNGs across Japanese, Chinese, German and English; all 13 popup playback/cleanup checks recorded. No new animation behavior or dedicated locale GIF. Existing wizard/media GIF remains; source clips contain baked-in English artwork.",
     "Onboarding: seven actual Metal stage captures and a stage-snapshot GIF, plus a 1.2-second media loop capture. No physical Windows capture or recorded full page-transition GIF; source clips loop in real custom help popups.",
     "Scroll ownership is behavior-only, with queued input, unit sequence and native View2D execution evidence. No new screenshots/GIFs; physical momentum on macOS/Windows remains user QA.",
@@ -58,7 +59,7 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Wizard translations, full-panel help, Viewport-first setup, Lens Tricks media and final Back navigation are merged into Beyond UI main and CamKeys master. Installed CamKeys is on master with matching committed content; no version changes.",
+  "latest_progress": "Live Forced Perspective setup and viewport-first Dolly now include current-view locking, 75% front framing, native lens units and value-centered question-mark buttons. Verified on Blender 5.1.2/5.2.2 with 12-language coverage and refreshed Metal captures; no version changes.",
   "estimate_review": "Publication-only turn: fast-forwarded both primary branches with the Windows history retained. No implementation scope or estimate changed: 0 implementation turns, 0\u20131 optional review/fix turn.",
   "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
   "observed_pace": {
@@ -499,8 +500,8 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "localized onboarding and full-panel help review",
-  "latest_review": "../camkeys-onboarding-v2/index.html#ready",
+  "checkpoint": "Live preview and viewport-first Dolly setup",
+  "latest_review": "../onboarding-live-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -533,6 +534,10 @@
     {
       "batch": "Localized onboarding and full-panel help coverage",
       "details": "Completed: all 12 catalog languages, localized directional/navigation labels, measured CJK wrapping, and 13 feature guides accessed from all five full-panel headers and relevant rows. Physical platform and native-speaker acceptance remain separate."
+    },
+    {
+      "batch": "Live effect onboarding and Dolly view actions",
+      "details": "Added and closed this turn: setup before configuration, live property binding, source-aware camera picker, current-view locking, 75% front framing, camera-unit codec, 12-language copy and review media. No remaining implementation budget; optional 0\u20131 user QA turn remains. Additional user correction closed: shared align_items=value centers help accessories on the editable row."
     }
   ]
 }
