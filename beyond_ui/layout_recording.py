@@ -6,14 +6,14 @@ from .layout import Layout, UnsupportedControl
 def freeze(value):
     if value is None or isinstance(value, (str, bool, int, float)):
         return value
-    if hasattr(value, "as_pointer"):
-        return ("RNA", value.as_pointer())
     if isinstance(value, dict):
         return tuple((k, freeze(v)) for k, v in value.items())
     if isinstance(value, (list, tuple)):
         return tuple(freeze(v) for v in value)
     if isinstance(value, (set, frozenset)):
         return frozenset(freeze(v) for v in value)
+    if hasattr(value, "as_pointer"):
+        return ("RNA", value.as_pointer())
     return (type(value).__name__, id(value))
 
 
@@ -28,6 +28,8 @@ def list_arguments(args, kwargs):
 class Tape:
     def __init__(self, state=None):
         self.commands, self.signature = [], []
+        self.command_signatures = []
+        self.command_offsets = []
         self.display_targets = {}
         self.extra_signature = []
         self.state = state if state is not None else {}
@@ -38,7 +40,10 @@ class Tape:
         if len(self.commands) >= 4096:
             raise ValueError("UI draw exceeds 4096 recorded commands")
         self.commands.append(command)
-        self.signature.append(freeze(command))
+        snapshot = freeze(command)
+        self.command_offsets.append(len(self.signature))
+        self.signature.append(snapshot)
+        self.command_signatures.append(snapshot)
         kind, _, name, args, kwargs, _ = command
         if kind == "call" and name == "template_list":
             from .list_identity import KEY
@@ -119,10 +124,11 @@ class Tape:
         # both command trees again for each visible list row.
         if self.signature == newer.signature:
             self.commands, self.signature = newer.commands, newer.signature
+            self.command_signatures = newer.command_signatures
             return True
         changes = []
         for index, (old, new) in enumerate(zip(self.commands, newer.commands)):
-            if freeze(old) == freeze(new):
+            if self.command_signatures[index] == newer.command_signatures[index]:
                 continue
             if index not in self.display_targets:
                 return False
@@ -135,9 +141,51 @@ class Tape:
         for index, kwargs in changes:
             control, layout = self.display_targets[index]
             control.label = layout._text(kwargs.get("text", ""), kwargs.get("text_ctxt", ""), kwargs.get("translate", True))
-            layout.canvas.invalidate()
+            # A fixed-width, single-line value changes pixels, not geometry.
+            # Reauthoring a label must not cancel another field's live edit/menu,
+            # reset motion, or recapture an unchanged glass backdrop.
+            fixed_width = "width" in control.options or any(
+                "width" in child.options
+                and len(getattr(child, "children", ())) == 1
+                and child.children[0] is control
+                for child in layout.group.children
+            )
+            if not fixed_width or control.options.get("wrap_text"):
+                layout.canvas._dirty = True
         self.commands, self.signature = newer.commands, newer.signature
+        self.command_signatures = newer.command_signatures
         return True
+
+    def patch_texts(self, texts):
+        """Explicit row contract: replace all literal labels in author order.
+
+        Call only when the consumer's structural revision is unchanged. Reuse
+        ordinary display patching, including intrinsic-width invalidation, while
+        recording only changed label commands instead of rerunning the row.
+        """
+        from copy import copy
+
+        if not isinstance(texts, (tuple, list)) or len(texts) != len(self.display_targets):
+            raise ValueError("draw_item_texts must return every literal label in author order")
+        newer = None
+        for (index, _), value in zip(self.display_targets.items(), texts):
+            if not isinstance(value, str):
+                raise TypeError("draw_item_texts values must be strings")
+            command = self.commands[index]
+            if command[4].get("text", "") == value:
+                continue
+            if newer is None:
+                newer = copy(self)
+                newer.commands = list(self.commands)
+                newer.signature = list(self.signature)
+                newer.command_signatures = list(self.command_signatures)
+            updated = (*command[:4], {**command[4], "text": value}, command[5])
+            newer.commands[index] = updated
+            snapshot = freeze(updated)
+            newer.command_signatures[index] = snapshot
+            newer.signature[self.command_offsets[index]] = snapshot
+        if newer is not None and not self.patch_display(newer):
+            raise ValueError("Text refresh changed row structure")
 
 
 class Node:
