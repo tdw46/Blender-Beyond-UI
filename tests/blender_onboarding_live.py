@@ -26,6 +26,14 @@ def run():
    layout=Layout(context=bpy.context);ob.CAMKEYS_PT_setup.draw(PanelProxy(ob.CAMKEYS_PT_setup,layout),bpy.context)
    field=next(c for c in layout.canvas.controls.values() if c.label=='Apparent focal length')
    assert field.binding.context.name=='auto_fov_max_strength' and field.binding.context.resolve()==item
+   assert item.auto_fov_unlock_short_lens
+   short_lens=area.spaces.active.lens*.5
+   field.binding.write(short_lens)
+   assert abs(item.auto_fov_max_strength-short_lens)<1e-4
+   item.auto_fov_unlock_short_lens=False
+   assert not item.auto_fov_unlock_short_lens
+   item.auto_fov_unlock_short_lens=True
+   checks.append('new full-panel/wizard settings default unlocked and the real focal binding accepts below-view lens values')
    def verts(value):
     field.binding.write(value);utils.invalidate_all_caches();utils.update_auto_fov_correction(scene)
     bpy.context.view_layer.update();dg=bpy.context.evaluated_depsgraph_get();dg.update()
