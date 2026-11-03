@@ -1,0 +1,406 @@
+{
+  "date": "2026-11-03",
+  "repositories": [
+    {
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI",
+      "before": "de182c11cd4bdeb28f2f8e7020ef17386876932b",
+      "after": "3b6b864eace43ca76ace1ce3b61a64b27549fb3a"
+    },
+    {
+      "path": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+      "before": "2dcc2a1320cf14872bc0c8b827815b33f9fce166",
+      "after": "5bd2f288ab1e92fe7b8734641637452ef874177c"
+    },
+    {
+      "path": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys",
+      "before": "2dcc2a1320cf14872bc0c8b827815b33f9fce166",
+      "after": "5bd2f288ab1e92fe7b8734641637452ef874177c"
+    },
+    {
+      "path": "/Users/tylerwalker/Documents/Blender/extensions/user_default/beyond_vrm_extension_suite",
+      "before": "282439069cd0694b18f41bc633eeb1833f04fd83",
+      "after": "9da830b22b3b0d730d63e5403df089b61f669f8d"
+    }
+  ],
+  "unit_tests": 431,
+  "bvt_lookup_tests": 3,
+  "runs": {
+    "panel-content": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 97695,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_content_revision.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 2038,
+          "initial_frontmost_pid": 2038,
+          "new_instance": true,
+          "pid": 97695,
+          "restore_requests": 0,
+          "seconds": 19.814885020256042,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "error": null,
+          "checks": [
+            "Moving viewport and live values reuse panel authoring; labels remain current",
+            "Falloff label change invalidates authored content",
+            "Help, active item and distance mode refresh their controls",
+            "Same-size external row reorder keeps exact current ownership",
+            "Deletion refreshes without stale-owner errors",
+            "Unchanged main panel authoring skipped while editable lens remains live",
+            "Camera/viewport branch change rebuilds correct controls"
+          ],
+          "version": "5.2.2 LTS",
+          "backend": "METAL",
+          "renderer": "Metal API",
+          "addon_source": "/Users/tylerwalker/dev/CamKeys-beyond-ui/__init__.py",
+          "status": {
+            "registered": true,
+            "draw_errors": {},
+            "input_errors": {},
+            "native_fallbacks": {},
+            "popup_fallbacks": [],
+            "panels": {
+              "CAMKEYS_PT_auto_fov": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_baking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_linking": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camkeys_main": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_camprops": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              },
+              "CAMKEYS_PT_lattice_auto_fov_modifier": {
+                "available": true,
+                "reason": "",
+                "menus": "",
+                "property_contributions": ""
+              }
+            }
+          },
+          "saved": false,
+          "warm_draw": {
+            "samples": 585,
+            "median_ms": 0.4100419901078567,
+            "p95_ms": 1.0392080002930015,
+            "max_ms": 21.71170800284017
+          },
+          "warm_paint": {
+            "samples": 454,
+            "median_ms": 0.9425410025869496,
+            "p95_ms": 2.894749995903112,
+            "max_ms": 3.7932919949525967
+          },
+          "idle": null,
+          "disabled_idle": null,
+          "resources": null,
+          "timing_scope": "Dependency and live-binding correctness, not a performance measurement",
+          "authored_calls": {
+            "CAMKEYS_PT_camkeys_linking": 8,
+            "CAMKEYS_PT_camkeys_main": 2,
+            "CAMKEYS_PT_auto_fov": 131,
+            "CAMKEYS_PT_camprops": 1
+          },
+          "glass_owners_after_unregister": 0
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-handoff-20261103/panel-content/blender-0.log"
+      }
+    ],
+    "list-revision": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 97685,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_list_revision.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "checks": [
+            "Unchanged rows skip authoring",
+            "Bound values remain live",
+            "Changed literal reauthors one row",
+            "Deletion invalidates exact owner"
+          ]
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-handoff-20261103/list-revision/blender-0.log"
+      }
+    ],
+    "registered_lists": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 97945,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_registered_lists.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 2038,
+          "initial_frontmost_pid": 2038,
+          "new_instance": true,
+          "pid": 97945,
+          "restore_requests": 0,
+          "seconds": 2.78472101688385,
+          "termination_evidence": "launch-services",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "checks": [
+            "Padded list content auto-fits, centers by default and supports top/bottom alignment without rebuilding owners",
+            "Visible literal values refresh in place; unchanged rows skip layout; 0.243 ms for 5 visible rows",
+            "First click only selects; active row switches commit once and retain springs; menus target the clicked property",
+            "Embedded enum menus use host bounds; moving a row during text edit prevents commit and rollback to the replacement",
+            "Custom draw_filter state commits recompute filter_items; cached layouts do not repeat callbacks",
+            "Ctrl-F edits custom filter_name; right-click cancels without opening a menu or retaining the draft query",
+            "Disabling the parent invalidates row bindings and releases retained child canvases",
+            "Registered callbacks retain original items in grid/compact layouts; compact mode omits the filter",
+            "Deferred child menu actions recheck callback registration even without another mouse event"
+          ],
+          "version": "5.2.2 LTS",
+          "build": "d13f752e3b9c"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-handoff-20261103/registered_lists/blender-0.log"
+      }
+    ],
+    "panel_scroll": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 97965,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_panel_scroll.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 2038,
+          "initial_frontmost_pid": 2038,
+          "new_instance": true,
+          "pid": 97965,
+          "restore_requests": 0,
+          "seconds": 8.40036404132843,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "checks": [
+            "Parked list reauthors without owner error, replacement or height collapse",
+            "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+            "Ten live list updates preserve offscreen panel height and native scroll position",
+            "Returning to list resumes current row values and retained controls",
+            "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+          ],
+          "scroll": [
+            0.0,
+            -4150.0
+          ],
+          "error": null,
+          "adopted_native_panel": true,
+          "draw_errors": [],
+          "offscreen_work": {
+            "callback_deltas": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "native_draw_calls": 10,
+            "median_ms": 0.04685449675889686,
+            "max_ms": 0.059250000049360096
+          }
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-handoff-20261103/panel_scroll/blender-0.log"
+      }
+    ],
+    "backend_renderer": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 98011,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_backend_renderer.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 2038,
+          "initial_frontmost_pid": 2038,
+          "new_instance": true,
+          "pid": 98011,
+          "restore_requests": 0,
+          "seconds": 3.263167977333069,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "backend": "METAL",
+          "renderer": "Metal API",
+          "glass": true,
+          "retained_resources": true,
+          "hashes": [
+            "7e636b50b6367c343a64a7be71a5ff3198be3ed91031a0bacaf4cdcf6e9dde4a",
+            "df2425a4702ea2d1a44e8c3ecb3298e7781142a45b0c753d65b2e5f7e58c8ab1"
+          ],
+          "native_framebuffer_copy": true,
+          "host_integration": false,
+          "visual_acceptance": false
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-handoff-20261103/backend_renderer/blender-0.log"
+      }
+    ]
+  },
+  "scene_source_unchanged": true,
+  "live_sessions_reloaded": false,
+  "bvt_preflight": {
+    "schema": 1,
+    "accepted": false,
+    "scope": "Source continuity only; fresh native platform runtime tests remain required",
+    "packages": [
+      {
+        "package": "/Users/tylerwalker/Library/Application Support/Blender/5.2/extensions/.user/user_default/beyond_vrm_extension_suite/native_shader/darwin-arm64",
+        "errors": [
+          "host_files: source changed: VRM_Compositor.py",
+          "renderer_files: source changed: src/beyond_npr/shadow_scene.py"
+        ],
+        "status": "blocked",
+        "platform": {
+          "system": "Darwin",
+          "machine": "arm64",
+          "backend": "METAL",
+          "blender_hash": "d13f752e3b9c"
+        },
+        "executable_checked": true,
+        "runtime_checked": false
+      }
+    ]
+  },
+  "bvt_continuity": {
+    "changed_files": [
+      "VRM_Materials.py",
+      "tests/test_vrm_search_lookup.py"
+    ],
+    "compositor_same_before_after": true,
+    "renderer_pin_same_before_after": true,
+    "renderer_pin": "160000 commit a6e7e950ce51be107ff06c435d9de22a3136933d\tthird_party/beyond_npr",
+    "preflight_failures_preexist_this_pull": true,
+    "native_packages_modified": false,
+    "certificates_modified": false
+  },
+  "limits": [
+    "Metal execution and retained-resource checks passed; no before/after Metal speedup or visual fidelity claim.",
+    "Live Uraraka and Midoriya were not reloaded or saved; updated installed packages load on next normal launch.",
+    "BVT certificate mismatch predates this pull; certificates and native packages were not changed."
+  ]
+}

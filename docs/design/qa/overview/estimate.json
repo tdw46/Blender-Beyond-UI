@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 publication review and Mac handoff",
+  "reviewed": "2026-11-03 \u2014 Mac qualification and QA publication review",
   "remaining_turns": [
     0,
     1
@@ -10,14 +10,14 @@
   ],
   "integration_qa_turns": [
     0,
-    1
+    0
   ],
   "active_hours": [
     0,
-    0.5
+    0
   ],
-  "confidence": "Requested optimization implemented, installed and tested on NVIDIA Vulkan/OpenGL. Current Metal hardware remains unverified.",
-  "basis": "Actual RTX 4090 Laptop / 591.74 on official Blender 5.2.2. Separate Vulkan/OpenGL profiles and process restarts; original checkout and scene preserved.",
+  "confidence": "Requested Mac work is closed. Optional user review remains; no required implementation or runtime QA is forecast.",
+  "basis": "Two completed before/after full-scene runs per CamKeys version, retained-source BVT controls, plus one slower intermediate run preserved transparently. CPU panel authoring improves; shared-workstation throughput is variable. No thermal or guaranteed FPS claim.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,7 +25,8 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Necessary-update optimization has byte-identical before/after NVIDIA Vulkan settled angle-panel PNGs and numerical live/cadence evidence. No new animation clip or Mac hardware capture.",
+    "Mac handoff now has actual late-window before/after main/angle PNGs and four-sample popup GIFs. Full-rate motion and pixel-identical live-simulation screenshots are not claimed. See mac-performance-v1/report.json.",
+    "Necessary-update optimization has byte-identical before/after NVIDIA Vulkan settled angle-panel PNGs and numerical live/cadence evidence. Current Mac captures and separate timing are now in mac-performance-v1; no full-rate new animation recording.",
     "BUI attribution has raw timings, profile, resource/admission/restoration and focus logs; no new screenshots/clips. No visual change applied. OpenGL/Metal attribution remains unverified.",
     "Viewport performance repair has timings, native runtime readback and focus logs; no new screenshot/GIF. No styling change.",
     "New actual Windows/NVIDIA popup, light/custom theme and 30fps deterministic motion-frame captures exist in the external QA bundle. Mac Metal and physical trackpad have no new captures. See docs/WINDOWS_NVIDIA_522_REPAIR.md.",
@@ -54,9 +55,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Explicit panel revisions skip unchanged authored commands while preserving glass redraw. Literal row text updates skip full row callbacks. Combined RNA reads retain exact-owner checks. 431 unit tests; Vulkan/OpenGL live dependency checks, nine list interactions and five scroll/offscreen checks pass. Angle author/refresh 3.55\u21921.56 ms, orbit approximately 39\u219234\u201335 ms; before/after settled PNG byte-identical. Full backup and runtime/vendored hashes verified; scene not saved.",
-  "estimate_review": "Implementation remains complete. Publishing the tested optimizations and exact consumer vendor pin adds no implementation work; current Mac Metal hardware verification remains open. CI-equivalent checks are rerun for publication.",
-  "time_summary": "Performance measurements are actual; 0\u20130.5 active hours is only an optional review allowance, not measured implementation time.",
+  "latest_progress": "Explicit panel revisions skip unchanged authored commands while preserving glass redraw. Literal row text updates skip full row callbacks. Combined RNA reads retain exact-owner checks. 431 unit tests; Vulkan/OpenGL live dependency checks, nine list interactions and five scroll/offscreen checks pass. Angle author/refresh 3.55\u21921.56 ms, orbit approximately 39\u219234\u201335 ms; before/after settled PNG byte-identical. Full backup and runtime/vendored hashes verified; scene not saved. Mac sync: all three merges pulled; 431 unit tests and Metal copied-Uraraka panel revision, list, scroll/offscreen and glass/resource checks pass without focus activation. No live scene saved or reloaded. Mac recovery completed: exact-build native proof requalified and installed; nine output comparisons exact; repeated Uraraka timings and late-window panel/popup glass captures published. See mac-performance-v1/report.json.",
+  "estimate_review": "Mac sync, certificate recovery, hardware execution, before/after timing and visual checks are complete. This publication turn adds no implementation scope; only optional user review remains.",
+  "time_summary": "No remaining required implementation or QA time for the Mac handoff. Optional user review is excluded; benchmark timings are recorded separately.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -393,9 +394,14 @@
       "work": "Dependency-aware panel content retention, text-only live row refresh and single-resolution exact-owner reads; installed and validated",
       "evidence": "docs/NECESSARY_UPDATE_PERFORMANCE.md",
       "turns": 1
+    },
+    {
+      "work": "Renewed exact-build Mac shader/worker certificate with affected-source and ordinary admission evidence; preserved Windows changes; repeated full Uraraka timings and late-window panel/popup captures.",
+      "evidence": "docs/design/qa/mac-performance-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optional user review of installed behavior; external current Metal hardware verification. No identified unfinished implementation item within the requested optimization.",
+  "remaining_work": "No remaining required work for the Mac handoff. Optional user visual review only. Save current work and restart Blender to load the updated modules and renewed Mac native certificate together.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -455,12 +461,12 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Content/row revisions installed; working Blender restored",
-  "latest_review": "../popup-window-v1/index.html",
+  "checkpoint": "Mac source-bound certificate requalified and installed; copied Uraraka Metal before/after and popup review complete",
+  "latest_review": "../mac-performance-v1/index.html",
   "backend_support_review": {
-    "date": "2026-11-02",
+    "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
-    "metal": "Historical hardware results retained. Current Darwin native binaries, executable fingerprints, symbols and backend declarations unchanged; new shared changes have unit coverage, no new Mac hardware run.",
+    "metal": "Current Apple M5 Pro / stock Blender 5.2.2 Metal: source-bound native certificate requalified, installed, ordinary admission/output/worker tests passed; matched Uraraka timings and actual panel/popup glass captures complete.",
     "vulkan": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: native renderer, real viewport-backed glass, input, consumer panels and idle checks passed.",
     "opengl": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: same hardware checks passed.",
     "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."

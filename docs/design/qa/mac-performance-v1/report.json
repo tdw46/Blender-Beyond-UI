@@ -1,0 +1,1066 @@
+{
+  "date": "2026-11-03",
+  "scope": "Mac Apple M5 Pro / official Blender 5.2.2 d13f752e3b9c Metal; disposable Uraraka copy",
+  "before_camkeys": "2dcc2a1",
+  "after_camkeys": "5bd2f28",
+  "bui_head": "3b6b864",
+  "bvt_head": "9da830b2",
+  "renderer_head": "a6e7e950ce51be107ff06c435d9de22a3136933d",
+  "performance": {
+    "orbit": {
+      "before": {
+        "author_median_ms_range": [
+          1.7891875031637028,
+          1.979415988898836
+        ],
+        "paint_median_ms_range": [
+          2.600708496174775,
+          2.952000009827316
+        ],
+        "timer_median_ms_range": [
+          76.08479200280271,
+          87.72727099858457
+        ],
+        "publication_rate_range": [
+          11.280681506305376,
+          12.724124351639858
+        ],
+        "authored_calls": [
+          {
+            "CAMKEYS_PT_camkeys_linking": 64
+          },
+          {
+            "CAMKEYS_PT_camkeys_linking": 57
+          }
+        ]
+      },
+      "after": {
+        "author_median_ms_range": [
+          0.4482084987103008,
+          0.4819999885512516
+        ],
+        "paint_median_ms_range": [
+          2.0946459990227595,
+          2.24491699191276
+        ],
+        "timer_median_ms_range": [
+          75.11116600653622,
+          77.37522899697069
+        ],
+        "publication_rate_range": [
+          12.53796164170346,
+          13.056893400838849
+        ],
+        "authored_calls": [
+          {},
+          {}
+        ]
+      }
+    },
+    "transform": {
+      "before": {
+        "author_median_ms_range": [
+          1.6794795010355301,
+          1.9590840092860162
+        ],
+        "paint_median_ms_range": [
+          2.5306669995188713,
+          2.9656660044565797
+        ],
+        "timer_median_ms_range": [
+          80.37720900028944,
+          94.50729149102699
+        ],
+        "publication_rate_range": [
+          10.551509132199145,
+          12.324793288042974
+        ],
+        "authored_calls": [
+          {
+            "CAMKEYS_PT_camkeys_linking": 62
+          },
+          {
+            "CAMKEYS_PT_camkeys_linking": 53
+          }
+        ]
+      },
+      "after": {
+        "author_median_ms_range": [
+          0.4428329993970692,
+          0.4636249941540882
+        ],
+        "paint_median_ms_range": [
+          2.0357499888632447,
+          2.1509164944291115
+        ],
+        "timer_median_ms_range": [
+          80.17493749503046,
+          82.85183399857488
+        ],
+        "publication_rate_range": [
+          11.88933113346445,
+          12.439509901568039
+        ],
+        "authored_calls": [
+          {},
+          {}
+        ]
+      }
+    },
+    "idle": {
+      "before": {
+        "author_median_ms_range": [
+          1.7958960015675984,
+          1.8018330010818318
+        ],
+        "paint_median_ms_range": [
+          2.656083001056686,
+          2.721666998695582
+        ],
+        "timer_median_ms_range": [
+          69.94708300044294,
+          72.0494375054841
+        ],
+        "publication_rate_range": [
+          13.598712871950204,
+          14.363459241890727
+        ],
+        "authored_calls": [
+          {
+            "CAMKEYS_PT_camkeys_linking": 72
+          },
+          {
+            "CAMKEYS_PT_camkeys_linking": 69
+          }
+        ]
+      },
+      "after": {
+        "author_median_ms_range": [
+          0.44654100202023983,
+          0.47033299051690847
+        ],
+        "paint_median_ms_range": [
+          2.0776250021299347,
+          2.146040991647169
+        ],
+        "timer_median_ms_range": [
+          67.17079150257632,
+          67.31749999744352
+        ],
+        "publication_rate_range": [
+          14.394826342590441,
+          14.913544936224381
+        ],
+        "authored_calls": [
+          {},
+          {}
+        ]
+      }
+    }
+  },
+  "native_qualification_performance": {
+    "orbit": {
+      "prior_qualified_source_publications_per_second": 13.016848121488675,
+      "current_source_publications_per_second": 12.797427521271153,
+      "ratio": 0.9831433386815589
+    },
+    "transform": {
+      "prior_qualified_source_publications_per_second": 12.131153359334784,
+      "current_source_publications_per_second": 12.164420517516245,
+      "ratio": 1.0027422914537523
+    },
+    "idle": {
+      "prior_qualified_source_publications_per_second": 14.283574682887828,
+      "current_source_publications_per_second": 14.654185639407412,
+      "ratio": 1.025946653043624
+    }
+  },
+  "native_qualification": {
+    "unchanged_binary": true,
+    "source_mismatches": [
+      "VRM_Compositor.py",
+      "src/beyond_npr/shadow_scene.py"
+    ],
+    "new_covered_dependency": "src/beyond_npr/shadow_partition.py",
+    "ordinary_admission": {
+      "shader_active": true,
+      "worker_active": true,
+      "idle_allowance": 18,
+      "pending_scopes": 0,
+      "probe_override": false
+    },
+    "render_comparison": {
+      "passed": true,
+      "outputs": [
+        {
+          "file": "animation_0001.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "animation_0002.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "final_.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "legacy_.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "off_.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "playblast_0001.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "playblast_0002.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "restored_.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        },
+        {
+          "file": "viewport_.exr",
+          "max": 0.0,
+          "mean": 0.0,
+          "different_values": 0
+        }
+      ],
+      "scope": "Prior qualified source vs current source, unchanged binary, ordinary admission"
+    },
+    "partition": {
+      "passed": true,
+      "directional": {
+        "passed": true,
+        "checks": [
+          {
+            "phase": 0,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 1,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 2,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 3,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 4,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 5,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 6,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 7,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 8,
+            "pixel_differences": 0
+          }
+        ],
+        "unaffected_source_retained": true,
+        "failure_rollback": true
+      },
+      "world": {
+        "passed": true,
+        "checks": [
+          {
+            "phase": 0,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 1,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 2,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 3,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 4,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 5,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 6,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 7,
+            "pixel_differences": 0
+          },
+          {
+            "phase": 8,
+            "pixel_differences": 0
+          }
+        ],
+        "unaffected_source_retained": true,
+        "failure_rollback": true
+      }
+    }
+  },
+  "configuration": {
+    "timing_scope": "CPU submissions and drained publication throughput; shared workstation, not isolated GPU frame time",
+    "backend": "METAL",
+    "renderer": "Metal API",
+    "version": "5.2.2 LTS",
+    "build": "d13f752e3b9c",
+    "bvt": "/Users/tylerwalker/Documents/Blender/extensions/user_default/beyond_vrm_extension_suite",
+    "vrm": "/Users/tylerwalker/Documents/Blender/extensions/user_default/vrm/__init__.py",
+    "camkeys": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/mac-requalification-20261103/cam-after",
+    "region": [
+      2602,
+      1518
+    ],
+    "sidebar": [
+      801,
+      1414
+    ],
+    "ui_scale": 2.0,
+    "spring": true,
+    "uv_paused": false,
+    "engine": "BVT_TRUE_MTOON_RENDER",
+    "shading": "MATERIAL",
+    "effects": [
+      [
+        "Scene",
+        []
+      ],
+      [
+        "Character 1",
+        [
+          [
+            "LINE",
+            true
+          ],
+          [
+            "DIFFUSION",
+            false
+          ]
+        ]
+      ]
+    ],
+    "worker_profile": {
+      "gates": [
+        "power",
+        "cadence",
+        "outputs",
+        "interactions",
+        "lifecycle"
+      ],
+      "cpu": "Apple M5 Pro",
+      "workers": 4,
+      "max_sources": 64,
+      "max_vertices": 500000,
+      "frame_change": true
+    }
+  },
+  "popups": [
+    {
+      "panel": "CAMKEYS_PT_billboard_settings",
+      "glass": true,
+      "viewport_source": true,
+      "controls": 9
+    },
+    {
+      "panel": "CAMKEYS_PT_flatten_falloff_popover",
+      "glass": true,
+      "viewport_source": true,
+      "controls": 27
+    },
+    {
+      "panel": "appearance-dialog",
+      "glass": true,
+      "viewport_source": true,
+      "controls": 12
+    }
+  ],
+  "scene_original_unchanged": true,
+  "evidence_root": "/Users/tylerwalker/Documents/Blender/recovery/mac-native-requalification-20261103",
+  "limitations": [
+    "Shared workstation: existing live Blender sessions and other apps remained running. CPU submission times and drained publication throughput are not isolated GPU frame times or a thermal measurement.",
+    "Warm idle keeps authored physics, UV animation and CamKeys enabled; it is not a quiescent-idle benchmark. Earlier no-idle-loop BUI fixtures remain separate evidence.",
+    "Visual comparisons cover current main/angle panels and Billboard, flattened falloff and Appearance popups. Moving values and simulation settling vary between separate processes; screenshots are not asserted byte-identical.",
+    "Region POST_PIXEL viewport captures omit late BVT scene composition and are excluded from visual acceptance; use the late-window PNGs.",
+    "A first baseline used VRM 4.5.0 rather than 4.10.2 and is excluded. It was repeated with the same actual VRM dependency.",
+    "after-2 completed timing but failed a test-only obsolete Canvas.popup_fallbacks assertion. Its logs and timings are retained separately; the corrected full run is after-3.",
+    "Existing user sessions were not restarted, reloaded, paused or saved. The renewed certificate is for ordinary next-launch registration. Windows binaries, renderer branches and sources unchanged.",
+    "Earlier native qualification limits remain recorded, including the unrelated pre-existing precision-edge test failure; no new platform scope.",
+    "The slower after-2 timing remains valid diagnostic data despite its later fixture-only assertion failure: orbit 10.33/s, transform 9.69/s. It is shown in full, not counted as a completed qualification run; no assured whole-scene FPS gain is claimed."
+  ],
+  "all_timing_runs_including_failed_visual_fixture": [
+    {
+      "run": "before-1",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.029815665999195,
+          "draw": {
+            "n": 64,
+            "median_ms": 1.7891875031637028,
+            "p95_ms": 2.8252909978618845,
+            "mean_ms": 1.8548093289609824
+          },
+          "paint": {
+            "n": 64,
+            "median_ms": 2.600708496174775,
+            "p95_ms": 3.2955839997157454,
+            "mean_ms": 2.69969070359366
+          },
+          "timer_intervals": {
+            "n": 63,
+            "median_ms": 76.08479200280271,
+            "p95_ms": 95.20650000195019,
+            "mean_ms": 78.37365476191894
+          },
+          "publications": 64,
+          "publications_per_second": 12.724124351639858,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 64
+          },
+          "distinct_output_states": 64,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.030510334006976,
+          "draw": {
+            "n": 62,
+            "median_ms": 1.6794795010355301,
+            "p95_ms": 2.5843330076895654,
+            "mean_ms": 1.7940590978175732
+          },
+          "paint": {
+            "n": 62,
+            "median_ms": 2.5306669995188713,
+            "p95_ms": 3.274208997027017,
+            "mean_ms": 2.655838741995995
+          },
+          "timer_intervals": {
+            "n": 61,
+            "median_ms": 80.37720900028944,
+            "p95_ms": 93.42800000740681,
+            "mean_ms": 81.16437363930687
+          },
+          "publications": 62,
+          "publications_per_second": 12.324793288042974,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 62
+          },
+          "distinct_output_states": 62,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.012720041006105,
+          "draw": {
+            "n": 72,
+            "median_ms": 1.7958960015675984,
+            "p95_ms": 2.876667000236921,
+            "mean_ms": 1.8829554584145727
+          },
+          "paint": {
+            "n": 72,
+            "median_ms": 2.656083001056686,
+            "p95_ms": 3.3928749908227473,
+            "mean_ms": 2.6898947073479778
+          },
+          "timer_intervals": {
+            "n": 71,
+            "median_ms": 69.94708300044294,
+            "p95_ms": 79.74316700710915,
+            "mean_ms": 69.43777522533757
+          },
+          "publications": 72,
+          "publications_per_second": 14.363459241890727,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 72
+          },
+          "distinct_output_states": 72,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "before-2",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.052886207995471,
+          "draw": {
+            "n": 57,
+            "median_ms": 1.979415988898836,
+            "p95_ms": 2.9588339966721833,
+            "mean_ms": 2.031218578371121
+          },
+          "paint": {
+            "n": 57,
+            "median_ms": 2.952000009827316,
+            "p95_ms": 3.7487910012714565,
+            "mean_ms": 3.006628631530411
+          },
+          "timer_intervals": {
+            "n": 56,
+            "median_ms": 87.72727099858457,
+            "p95_ms": 101.67570800695103,
+            "mean_ms": 88.52180208928725
+          },
+          "publications": 57,
+          "publications_per_second": 11.280681506305376,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 57
+          },
+          "distinct_output_states": 57,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.022978167005931,
+          "draw": {
+            "n": 53,
+            "median_ms": 1.9590840092860162,
+            "p95_ms": 3.2426250108983368,
+            "mean_ms": 2.0729897179715513
+          },
+          "paint": {
+            "n": 53,
+            "median_ms": 2.9656660044565797,
+            "p95_ms": 4.003167006885633,
+            "mean_ms": 3.041888282410273
+          },
+          "timer_intervals": {
+            "n": 52,
+            "median_ms": 94.50729149102699,
+            "p95_ms": 106.02799999469426,
+            "mean_ms": 94.75901201921471
+          },
+          "publications": 53,
+          "publications_per_second": 10.551509132199145,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 53
+          },
+          "distinct_output_states": 53,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.07400962500833,
+          "draw": {
+            "n": 69,
+            "median_ms": 1.8018330010818318,
+            "p95_ms": 2.8470420074881986,
+            "mean_ms": 1.909700406848561
+          },
+          "paint": {
+            "n": 69,
+            "median_ms": 2.721666998695582,
+            "p95_ms": 3.4989590058103204,
+            "mean_ms": 2.8015235940878536
+          },
+          "timer_intervals": {
+            "n": 68,
+            "median_ms": 72.0494375054841,
+            "p95_ms": 83.34516600007191,
+            "mean_ms": 73.46716789705918
+          },
+          "publications": 69,
+          "publications_per_second": 13.598712871950204,
+          "authors": {
+            "CAMKEYS_PT_camkeys_linking": 69
+          },
+          "distinct_output_states": 69,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "after-1",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.054801167003461,
+          "draw": {
+            "n": 66,
+            "median_ms": 0.4482084987103008,
+            "p95_ms": 0.5880000098841265,
+            "mean_ms": 0.4609943324326058
+          },
+          "paint": {
+            "n": 66,
+            "median_ms": 2.0946459990227595,
+            "p95_ms": 2.5362080050399527,
+            "mean_ms": 2.1482543930742946
+          },
+          "timer_intervals": {
+            "n": 65,
+            "median_ms": 75.11116600653622,
+            "p95_ms": 92.18129199871328,
+            "mean_ms": 76.68947884611462
+          },
+          "publications": 66,
+          "publications_per_second": 13.056893400838849,
+          "authors": {},
+          "distinct_output_states": 66,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.046541250005248,
+          "draw": {
+            "n": 60,
+            "median_ms": 0.4636249941540882,
+            "p95_ms": 0.574958001379855,
+            "mean_ms": 0.4814686828467529
+          },
+          "paint": {
+            "n": 60,
+            "median_ms": 2.1509164944291115,
+            "p95_ms": 2.610208000987768,
+            "mean_ms": 2.1813903003931046
+          },
+          "timer_intervals": {
+            "n": 59,
+            "median_ms": 82.85183399857488,
+            "p95_ms": 95.67445899301674,
+            "mean_ms": 84.00618713556284
+          },
+          "publications": 60,
+          "publications_per_second": 11.88933113346445,
+          "authors": {},
+          "distinct_output_states": 60,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.071266458005994,
+          "draw": {
+            "n": 73,
+            "median_ms": 0.47033299051690847,
+            "p95_ms": 0.6140829937066883,
+            "mean_ms": 0.4866158624406113
+          },
+          "paint": {
+            "n": 73,
+            "median_ms": 2.146040991647169,
+            "p95_ms": 2.938332996563986,
+            "mean_ms": 2.217488546380518
+          },
+          "timer_intervals": {
+            "n": 72,
+            "median_ms": 67.31749999744352,
+            "p95_ms": 78.58045800821856,
+            "mean_ms": 69.43011805560673
+          },
+          "publications": 73,
+          "publications_per_second": 14.394826342590441,
+          "authors": {},
+          "distinct_output_states": 73,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "after-2",
+      "full_fixture_passed": false,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.03539666699362,
+          "draw": {
+            "n": 52,
+            "median_ms": 0.5957085086265579,
+            "p95_ms": 1.216459000715986,
+            "mean_ms": 0.6642146721647945
+          },
+          "paint": {
+            "n": 52,
+            "median_ms": 2.8996045075473376,
+            "p95_ms": 4.028750001452863,
+            "mean_ms": 3.0015528836184577
+          },
+          "timer_intervals": {
+            "n": 51,
+            "median_ms": 99.1895420011133,
+            "p95_ms": 112.06833399774041,
+            "mean_ms": 96.69406780392141
+          },
+          "publications": 52,
+          "publications_per_second": 10.326892485125024,
+          "authors": {},
+          "distinct_output_states": 52,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.057499709000695,
+          "draw": {
+            "n": 49,
+            "median_ms": 0.584541994612664,
+            "p95_ms": 0.7440420013153926,
+            "mean_ms": 0.5969465101418104
+          },
+          "paint": {
+            "n": 49,
+            "median_ms": 2.8374999965308234,
+            "p95_ms": 3.631790998042561,
+            "mean_ms": 2.873002551793007
+          },
+          "timer_intervals": {
+            "n": 48,
+            "median_ms": 104.64212549413787,
+            "p95_ms": 119.04508399311453,
+            "mean_ms": 103.58265452092989
+          },
+          "publications": 49,
+          "publications_per_second": 9.688581872342183,
+          "authors": {},
+          "distinct_output_states": 49,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.010933957993984,
+          "draw": {
+            "n": 65,
+            "median_ms": 0.5306669918354601,
+            "p95_ms": 0.6475410045823082,
+            "mean_ms": 0.5392821380295433
+          },
+          "paint": {
+            "n": 65,
+            "median_ms": 2.421249999315478,
+            "p95_ms": 2.842959002009593,
+            "mean_ms": 2.463100691630433
+          },
+          "timer_intervals": {
+            "n": 64,
+            "median_ms": 76.3834585013683,
+            "p95_ms": 86.30525000626221,
+            "mean_ms": 77.09530403121789
+          },
+          "publications": 65,
+          "publications_per_second": 12.971633740314012,
+          "authors": {},
+          "distinct_output_states": 65,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "after-3",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.02474020900263,
+          "draw": {
+            "n": 63,
+            "median_ms": 0.4819999885512516,
+            "p95_ms": 0.6898749998072162,
+            "mean_ms": 0.4994530939415748
+          },
+          "paint": {
+            "n": 63,
+            "median_ms": 2.24491699191276,
+            "p95_ms": 2.9650409996975213,
+            "mean_ms": 2.3362525548907884
+          },
+          "timer_intervals": {
+            "n": 62,
+            "median_ms": 77.37522899697069,
+            "p95_ms": 93.51599999354221,
+            "mean_ms": 79.74704369342128
+          },
+          "publications": 63,
+          "publications_per_second": 12.53796164170346,
+          "authors": {},
+          "distinct_output_states": 63,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.064508208000916,
+          "draw": {
+            "n": 63,
+            "median_ms": 0.4428329993970692,
+            "p95_ms": 0.6202500080689788,
+            "mean_ms": 0.46751323772320846
+          },
+          "paint": {
+            "n": 63,
+            "median_ms": 2.0357499888632447,
+            "p95_ms": 2.536667001550086,
+            "mean_ms": 2.094182522832564
+          },
+          "timer_intervals": {
+            "n": 62,
+            "median_ms": 80.17493749503046,
+            "p95_ms": 87.43549999780953,
+            "mean_ms": 80.38728561293664
+          },
+          "publications": 63,
+          "publications_per_second": 12.439509901568039,
+          "authors": {},
+          "distinct_output_states": 63,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.028985416996875,
+          "draw": {
+            "n": 75,
+            "median_ms": 0.44654100202023983,
+            "p95_ms": 0.5543750012293458,
+            "mean_ms": 0.4645589067755888
+          },
+          "paint": {
+            "n": 75,
+            "median_ms": 2.0776250021299347,
+            "p95_ms": 2.6042079989565536,
+            "mean_ms": 2.119677879769976
+          },
+          "timer_intervals": {
+            "n": 74,
+            "median_ms": 67.17079150257632,
+            "p95_ms": 74.1970829985803,
+            "mean_ms": 67.10805968936798
+          },
+          "publications": 75,
+          "publications_per_second": 14.913544936224381,
+          "authors": {},
+          "distinct_output_states": 75,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "bvt-baseline-2",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.002018084007432,
+          "draw": {
+            "n": 64,
+            "median_ms": 0.46179200580809265,
+            "p95_ms": 0.5680000031134114,
+            "mean_ms": 0.4788014846326405
+          },
+          "paint": {
+            "n": 64,
+            "median_ms": 2.1925414985162206,
+            "p95_ms": 2.6939170056721196,
+            "mean_ms": 2.251195187909616
+          },
+          "timer_intervals": {
+            "n": 63,
+            "median_ms": 78.21291701111477,
+            "p95_ms": 86.99695901304949,
+            "mean_ms": 78.29266004767898
+          },
+          "publications": 64,
+          "publications_per_second": 12.794835789303178,
+          "authors": {},
+          "distinct_output_states": 64,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.067667541996343,
+          "draw": {
+            "n": 62,
+            "median_ms": 0.4509584978222847,
+            "p95_ms": 0.5731670098612085,
+            "mean_ms": 0.4673696610318016
+          },
+          "paint": {
+            "n": 62,
+            "median_ms": 2.1567919975495897,
+            "p95_ms": 2.805832991725765,
+            "mean_ms": 2.2187741443274485
+          },
+          "timer_intervals": {
+            "n": 61,
+            "median_ms": 82.27400000032503,
+            "p95_ms": 89.47249999619089,
+            "mean_ms": 81.66010450804606
+          },
+          "publications": 62,
+          "publications_per_second": 12.234425302409615,
+          "authors": {},
+          "distinct_output_states": 62,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.045429584002704,
+          "draw": {
+            "n": 72,
+            "median_ms": 0.480041497212369,
+            "p95_ms": 0.6209999992279336,
+            "mean_ms": 0.5037233481238622
+          },
+          "paint": {
+            "n": 72,
+            "median_ms": 2.1922914966125973,
+            "p95_ms": 2.6218749990221113,
+            "mean_ms": 2.250843763047467
+          },
+          "timer_intervals": {
+            "n": 71,
+            "median_ms": 69.82162500207778,
+            "p95_ms": 78.02920900576282,
+            "mean_ms": 70.07924414097994
+          },
+          "publications": 72,
+          "publications_per_second": 14.270340870138563,
+          "authors": {},
+          "distinct_output_states": 72,
+          "compilations_delta": 0
+        }
+      }
+    },
+    {
+      "run": "bvt-baseline-3",
+      "full_fixture_passed": true,
+      "workloads": {
+        "orbit": {
+          "seconds": 5.0608585409936495,
+          "draw": {
+            "n": 67,
+            "median_ms": 0.4715410032076761,
+            "p95_ms": 0.5519999976968393,
+            "mean_ms": 0.47451859655435574
+          },
+          "paint": {
+            "n": 67,
+            "median_ms": 2.1969999943394214,
+            "p95_ms": 2.5283330032834783,
+            "mean_ms": 2.2217468653958456
+          },
+          "timer_intervals": {
+            "n": 66,
+            "median_ms": 76.12052049807971,
+            "p95_ms": 80.08054200035986,
+            "mean_ms": 75.58446022713642
+          },
+          "publications": 67,
+          "publications_per_second": 13.238860453674173,
+          "authors": {},
+          "distinct_output_states": 67,
+          "compilations_delta": 0
+        },
+        "transform": {
+          "seconds": 5.0715498339995975,
+          "draw": {
+            "n": 61,
+            "median_ms": 0.479416994494386,
+            "p95_ms": 0.5598749994533136,
+            "mean_ms": 0.4820758183429506
+          },
+          "paint": {
+            "n": 61,
+            "median_ms": 2.1812079939991236,
+            "p95_ms": 2.9355409933486953,
+            "mean_ms": 2.2606187699015297
+          },
+          "timer_intervals": {
+            "n": 60,
+            "median_ms": 82.83052100159694,
+            "p95_ms": 92.91337500326335,
+            "mean_ms": 83.21111388334732
+          },
+          "publications": 61,
+          "publications_per_second": 12.027881416259952,
+          "authors": {},
+          "distinct_output_states": 61,
+          "compilations_delta": 0
+        },
+        "idle": {
+          "seconds": 5.036089000001084,
+          "draw": {
+            "n": 72,
+            "median_ms": 0.4983540056855418,
+            "p95_ms": 0.6327919982140884,
+            "mean_ms": 0.5064536938637806
+          },
+          "paint": {
+            "n": 72,
+            "median_ms": 2.2485630033770576,
+            "p95_ms": 2.99370801076293,
+            "mean_ms": 2.326093653917067
+          },
+          "timer_intervals": {
+            "n": 71,
+            "median_ms": 69.65004200174008,
+            "p95_ms": 80.88200000929646,
+            "mean_ms": 70.07606514085175
+          },
+          "publications": 72,
+          "publications_per_second": 14.29680849563709,
+          "authors": {},
+          "distinct_output_states": 72,
+          "compilations_delta": 0
+        }
+      }
+    }
+  ],
+  "deployment": {
+    "installed": true,
+    "proof": "/Users/tylerwalker/Library/Application Support/Blender/5.2/extensions/.user/user_default/beyond_vrm_extension_suite/native_shader/darwin-arm64/qualification.json",
+    "sha256": "d374d54c44652d567f10a4162f061d9f9660f08b0c81b97192e2740a45172eb7",
+    "preflight": {
+      "schema": 1,
+      "accepted": true,
+      "scope": "Source continuity only; fresh native platform runtime tests remain required",
+      "packages": [
+        {
+          "package": "/Users/tylerwalker/Library/Application Support/Blender/5.2/extensions/.user/user_default/beyond_vrm_extension_suite/native_shader/darwin-arm64",
+          "errors": [],
+          "status": "source-compatible",
+          "platform": {
+            "system": "Darwin",
+            "machine": "arm64",
+            "backend": "METAL",
+            "blender_hash": "d13f752e3b9c"
+          },
+          "executable_checked": true,
+          "runtime_checked": false
+        }
+      ]
+    },
+    "live_sessions_restarted": false,
+    "windows_sources_or_packages_changed": false
+  },
+  "visual_review": {
+    "main_and_linking": "No missing labels, icons or alignment changes observed in same-scale before/after captures. Live numeric values and character blink/physics differ between captures.",
+    "popups": "Billboard, flattened falloff/curve and Appearance visibly use blurred viewport imagery. Popups paint above the sidebar and Escape closes them. Tall falloff has a scroll lane.",
+    "motion": "Four opening samples retained per popup. Existing speed/strength retained; this is sparse capture, not a full animation qualification.",
+    "capture_source": "Late native window presentation; early region captures excluded from scene appearance judgment."
+  }
+}
