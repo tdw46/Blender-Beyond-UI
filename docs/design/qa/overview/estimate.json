@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 scrolling fixes publication review",
+  "reviewed": "2026-11-03 \u2014 publication checkpoint: wizard translations and full-panel help",
   "remaining_turns": [
     0,
     1
@@ -10,14 +10,14 @@
   ],
   "integration_qa_turns": [
     0,
-    0
+    1
   ],
   "active_hours": [
     0,
-    0
+    0.25
   ],
-  "confidence": "Scroll ownership implementation and Mac execution checks are complete. Physical momentum/wheel acceptance on Mac and Windows remains optional user QA.",
-  "basis": "443 unit tests; Blender 5.1.2/5.2.2 no-focus Metal queued input and explicit native View2D tests cover both edges and gesture retention. Real physical device behavior remains separate.",
+  "confidence": "Requested batch is implemented and locally execution-tested. The optional remaining turn allows user-reported corrections; it is not a forecast for cross-platform qualification.",
+  "basis": "129 messages audited in 12 languages; 451 unit tests; Blender 5.1.2/5.2.2 locale/layout and 13 actual popup playback/cleanup checks; Japanese/Chinese/German Metal renders from saved Uraraka bindings.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,8 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Localized onboarding/help: nine new actual Metal PNGs across Japanese, Chinese, German and English; all 13 popup playback/cleanup checks recorded. No new animation behavior or dedicated locale GIF. Existing wizard/media GIF remains; source clips contain baked-in English artwork.",
+    "Onboarding: seven actual Metal stage captures and a stage-snapshot GIF, plus a 1.2-second media loop capture. No physical Windows capture or recorded full page-transition GIF; source clips loop in real custom help popups.",
     "Scroll ownership is behavior-only, with queued input, unit sequence and native View2D execution evidence. No new screenshots/GIFs; physical momentum on macOS/Windows remains user QA.",
     "Mac handoff now has actual late-window before/after main/angle PNGs and four-sample popup GIFs. Full-rate motion and pixel-identical live-simulation screenshots are not claimed. See mac-performance-v1/report.json.",
     "Necessary-update optimization has byte-identical before/after NVIDIA Vulkan settled angle-panel PNGs and numerical live/cadence evidence. Current Mac captures and separate timing are now in mac-performance-v1; no full-rate new animation recording.",
@@ -56,9 +58,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "List edge chaining added: further outward scrolling at the top/bottom passes to the parent, including empty, short, grid and compact lists. Boundary-reaching input is consumed once to avoid double scrolling. 443 unit tests and Blender 5.1.2/5.2.2 queued input checks pass. Updated both full CamKeys vendors and reloaded idle BUI hosts in Uraraka; three current list instances, six available panels, no draw/input errors and scene unchanged.",
-  "estimate_review": "Scroll ownership and edge chaining implementation and Mac execution checks are complete. This commit/push turn adds no implementation scope. Remaining implementation stays 0; optional physical Mac/Windows device QA stays 0\u20131 turn.",
-  "time_summary": "No further implementation time forecast for this fix. Optional user device checks excluded; failures would add scope.",
+  "latest_progress": "Completed the wizard/help catalogs, namespaced navigation, CJK card wrapping, preserved data names, native fallback help wrapping and all-five-panel question-mark coverage. Thirteen guides open with shared glass; twelve play looping media and all stop on close. Installed consumer and vendor synchronized.",
+  "estimate_review": "Commit/push checkpoint only: implemented scope and the 0\u20131 optional review/fix-turn estimate are unchanged. Latest remote Windows commits are ancestors of both publication branches.",
+  "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -410,13 +412,33 @@
       "work": "List top/bottom chaining to parent; full vendor sync and live reload",
       "evidence": "docs/design/qa/scroll-chaining-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Onboarding reference iconography, shared help-row geometry, correct button rim radius and trailing artwork, unboxed Back navigation, scaled media clipping and localized directional aliases.",
+      "evidence": "docs/design/qa/camkeys-onboarding-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Left-align onboarding Back arrow/text with zero extra leading inset; updated installed consumer and capture review.",
+      "evidence": "docs/design/qa/camkeys-onboarding-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Reference-sized bold subject labels and larger workflow card typography through existing BUI options; actual Metal capture verification.",
+      "evidence": "docs/design/qa/camkeys-onboarding-v2/report.json",
+      "turns": 1
+    },
+    {
+      "work": "All wizard/help locales, CJK card layout, explicit data-name preservation, scoped navigation context and full-panel question-mark guides; actual locale/popup tests and Metal capture review.",
+      "evidence": "docs/design/qa/onboarding-locales-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "No remaining required work for the Mac handoff. Optional user visual review only. Save current work and restart Blender to load the updated modules and renewed Mac native certificate together.",
+  "remaining_work": "No known remaining implementation work in this requested batch. Optional user review of localized copy/help placement; native-speaker translation review and physical Windows/Blender 4.2 onboarding qualification remain separate. Existing live Uraraka requires a fresh launch to load the new registration/catalog.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
-      "details": "Current target explicitly relaxed by Tyler to close, consistent visual matching. Minor generated glyph/rim/background differences remain documented, not pixel-exact release blockers."
+      "details": "Historical Studio acceptance was close/consistent. Current onboarding request explicitly requires very close pixel fidelity; seven comparisons expose remaining tint/typography/height differences for review."
     },
     {
       "batch": "Custom ID-property boundary audit",
@@ -472,8 +494,8 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "List edge chaining and native gesture ownership active in Uraraka; physical Windows input QA pending",
-  "latest_review": "../mac-performance-v1/index.html",
+  "checkpoint": "localized onboarding and full-panel help review",
+  "latest_review": "../onboarding-locales-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -494,6 +516,18 @@
     {
       "batch": "List boundary handoff",
       "details": "Requested and closed this turn; no additional implementation budget. Physical device acceptance remains user QA."
+    },
+    {
+      "batch": "CamKeys onboarding and animated help",
+      "details": "New explicit scope: conditional setup wizard, three workflow branches, generic BUI wizard/media/help components, pinned animated-preview dependency, eight feature demos and full-panel help. Design approval precedes implementation."
+    },
+    {
+      "batch": "Directional shape-first onboarding and reference corrections",
+      "details": "Added and implemented: read-only alias detection, editable confirmation, native auto-add execution, duplicate preservation and Add More manual route; media overlay captions removed."
+    },
+    {
+      "batch": "Localized onboarding and full-panel help coverage",
+      "details": "Completed: all 12 catalog languages, localized directional/navigation labels, measured CJK wrapping, and 13 feature guides accessed from all five full-panel headers and relevant rows. Physical platform and native-speaker acceptance remain separate."
     }
   ]
 }

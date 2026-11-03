@@ -1,0 +1,499 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 61321,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--gpu-backend",
+      "metal",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_camkeys_custom.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 61321,
+      "restore_requests": 0,
+      "seconds": 13.303152918815613,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "qualification": "custom collection and brush curve consumer checks",
+      "version": "5.2.2 LTS",
+      "source": "/Users/tylerwalker/dev/CamKeys-beyond-ui",
+      "checks": [
+        "Actual Add to CamProps contribution executes against the exact clicked camera lens",
+        "Real Billboard Groups dialog retains prefilled bone search fields, executes once and supports native undo",
+        "Real export dialog exposes exact operator-property context actions and cancels without writing files",
+        "Real registered CamKeys menu opens through the custom engine and dismisses cleanly",
+        "Persistent list IDs initialize outside draw, survive reorder, reject stale/deleted rows and repair duplicate IDs",
+        "Three actual CamKeys brush popovers: read-only drawing, exact handle context, drag cancellation, presets, point deletion and idle timer cleanup",
+        "Six panel definitions audited across empty, mesh, CamProp, enabled and lattice contexts; custom list identities initialized and used",
+        "Persistent row IDs survive a saved blend copy and reload into a separate scene",
+        "CamKeys disable/re-enable restores original classes and closes custom hosts, without retaining its startup timer"
+      ],
+      "audits": [
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_setup",
+          "controls": 12,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_auto_fov",
+          "controls": 6,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_baking",
+          "controls": 37,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "controls": 5,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "controls": 28,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_camprops",
+          "controls": 5,
+          "passed": true
+        },
+        {
+          "state": "empty",
+          "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+          "controls": 0,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_setup",
+          "controls": 12,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_auto_fov",
+          "controls": 6,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_baking",
+          "controls": 37,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "controls": 21,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "controls": 28,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_camprops",
+          "controls": 10,
+          "passed": true
+        },
+        {
+          "state": "tracked-mesh",
+          "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+          "controls": 0,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_setup",
+          "controls": 12,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_auto_fov",
+          "controls": 6,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_baking",
+          "controls": 37,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "controls": 21,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "controls": 28,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_camprops",
+          "controls": 24,
+          "passed": true
+        },
+        {
+          "state": "camprop-populated",
+          "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+          "controls": 0,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_setup",
+          "controls": 12,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_auto_fov",
+          "controls": 6,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_baking",
+          "controls": 37,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "controls": 21,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "controls": 28,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_camprops",
+          "controls": 10,
+          "passed": true
+        },
+        {
+          "state": "enabled",
+          "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+          "controls": 0,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_setup",
+          "controls": 12,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_auto_fov",
+          "controls": 6,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_baking",
+          "controls": 37,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "controls": 7,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "controls": 28,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_camprops",
+          "controls": 10,
+          "passed": true
+        },
+        {
+          "state": "lattice-properties",
+          "panel": "CAMKEYS_PT_lattice_auto_fov_modifier",
+          "controls": 0,
+          "passed": true
+        }
+      ],
+      "glass": [
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        },
+        {
+          "productions": 1,
+          "error": ""
+        }
+      ],
+      "status": {
+        "state": "registered",
+        "panels": [
+          "CAMKEYS_PT_setup",
+          "CAMKEYS_PT_auto_fov",
+          "CAMKEYS_PT_baking",
+          "CAMKEYS_PT_camkeys_linking",
+          "CAMKEYS_PT_camkeys_main",
+          "CAMKEYS_PT_camprops",
+          "CAMKEYS_PT_lattice_auto_fov_modifier"
+        ],
+        "other_panels": [
+          "CAMKEYS_PT_billboard_settings",
+          "CAMKEYS_PT_dolly_expressions",
+          "CAMKEYS_PT_lens_compensation",
+          "CAMKEYS_PT_distance_falloff_popover",
+          "CAMKEYS_PT_falloff_popover",
+          "CAMKEYS_PT_flatten_falloff_popover"
+        ],
+        "limits": [
+          "Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.",
+          "Only supported Layout calls/modes are converted; draw errors appear in status.",
+          "Exact-build embedded adapters are required for custom rendering."
+        ],
+        "native_routes": [
+          {
+            "class": "CAMKEYS_OT_billboard_groups",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_show_example",
+            "callback": "invoke",
+            "routes": [
+              "invoke_popup"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_auto_add_directional_shapekeys",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_angle_falloff_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_camprop_falloff_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_distance_stop_vector",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_configure_camprop_values",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_export_curve",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_open_flatten_falloff_popover",
+            "callback": "invoke",
+            "routes": [
+              "call_panel"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_edit_vector_stop",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          },
+          {
+            "class": "CAMKEYS_OT_ui_appearance",
+            "callback": "invoke",
+            "routes": [
+              "invoke_props_dialog"
+            ]
+          }
+        ],
+        "routed_routes": [
+          "invoke_props_dialog",
+          "invoke_popup",
+          "invoke_confirm",
+          "invoke_search_popup",
+          "popup_menu",
+          "popup_menu_pie",
+          "call_menu",
+          "call_menu_pie",
+          "call_panel"
+        ],
+        "host": {
+          "registered": true,
+          "draw_errors": {},
+          "input_errors": {},
+          "native_fallbacks": {},
+          "popup_fallbacks": [],
+          "panels": {
+            "CAMKEYS_PT_setup": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_auto_fov": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_baking": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_camkeys_linking": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_camkeys_main": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_camprops": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            },
+            "CAMKEYS_PT_lattice_auto_fov_modifier": {
+              "available": true,
+              "reason": "",
+              "menus": "",
+              "property_contributions": ""
+            }
+          }
+        },
+        "list_identity": {
+          "pending": 0,
+          "errors": []
+        },
+        "popups": {
+          "dialogs": 0,
+          "menus": 0,
+          "error": null,
+          "native_fallbacks": [
+            {
+              "route": "macro-step:camkeys.begin_dolly_navigation",
+              "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+              "custom": false
+            },
+            {
+              "route": "macro-step:camkeys.finish_dolly_navigation",
+              "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+              "custom": false
+            }
+          ],
+          "preserved_macro_dependencies": [
+            {
+              "macro": "camkeys.pan_navigation",
+              "operator": "camkeys.begin_dolly_navigation"
+            },
+            {
+              "macro": "camkeys.pan_navigation",
+              "operator": "camkeys.finish_dolly_navigation"
+            },
+            {
+              "macro": "camkeys.orbit_navigation",
+              "operator": "camkeys.begin_dolly_navigation"
+            },
+            {
+              "macro": "camkeys.orbit_navigation",
+              "operator": "camkeys.finish_dolly_navigation"
+            },
+            {
+              "macro": "camkeys.dolly_navigation",
+              "operator": "camkeys.begin_dolly_navigation"
+            },
+            {
+              "macro": "camkeys.dolly_navigation",
+              "operator": "camkeys.finish_dolly_navigation"
+            }
+          ],
+          "keymap_routes": 0
+        }
+      },
+      "performance": null,
+      "error": null
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-final-consumer-windowed/blender-0.log"
+  }
+]

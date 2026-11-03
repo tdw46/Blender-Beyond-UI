@@ -1,0 +1,10 @@
+{
+  "falloff": [
+    "Falloff",
+    "Sensitivity sets the angle range. Falloff sets how the value blends toward its off-angle state. Choose Custom to edit the response curve."
+  ],
+  "baking": [
+    "Baking",
+    "Choose the scene camera, frame range, step and scope. Bake the enabled effects. Keep live setup removal disabled for a reversible result, and disable live evaluation when previewing baked keys."
+  ]
+}

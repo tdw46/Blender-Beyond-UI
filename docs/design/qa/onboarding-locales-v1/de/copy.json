@@ -1,0 +1,30 @@
+{
+  "target": [
+    "CamKeys",
+    "Motiv auswählen",
+    "Ein Charakter oder ein beliebiges Fokusobjekt.",
+    "Motiv",
+    "Skelett",
+    "Fokusknochen",
+    "Du kannst einen anderen Knochen wählen.",
+    "Objektursprung verwenden",
+    "Weiter",
+    "Alle Steuerelemente öffnen"
+  ],
+  "workflow": [
+    "CamKeys",
+    "Was möchtest du tun?",
+    "Formschlüssel × Kamerawinkel",
+    "Formschlüssel × Kamerawinkel",
+    "Formen beim Ändern der Ansicht mischen.",
+    "Erzwungene Perspektive",
+    "Erzwungene Perspektive",
+    "Proportionen von Charakter- oder Szenenteilen unabhängig vom tatsächlichen Kamerasichtfeld steuern.",
+    "Dolly-Zoom + Kameratricks",
+    "Dolly-Zoom + Kameratricks",
+    "Bildausschnitt bei Kamerabewegung beibehalten",
+    "Weiter",
+    "Zurück",
+    "Alle Steuerelemente öffnen"
+  ]
+}

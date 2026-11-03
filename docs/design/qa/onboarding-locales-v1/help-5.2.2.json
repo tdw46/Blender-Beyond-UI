@@ -1,0 +1,138 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 85184,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--gpu-backend",
+      "metal",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_onboarding_popup.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 85184,
+      "restore_requests": 0,
+      "seconds": 32.699825048446655,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "error": null,
+      "checks": [
+        {
+          "topic": "angles",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "outline",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "perspective",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "dolly",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "billboard",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "camprops",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "camprops_comparison",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "apparent_fov",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "camera_source",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "tracked_objects",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "falloff",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "distance",
+          "custom_popup": true,
+          "glass": true,
+          "animated": true,
+          "closed_and_idle": true
+        },
+        {
+          "topic": "baking",
+          "custom_popup": true,
+          "glass": true,
+          "animated": false,
+          "closed_and_idle": true
+        }
+      ],
+      "version": "5.2.2 LTS"
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-final-help-5.2.2/blender-0.log"
+  }
+]

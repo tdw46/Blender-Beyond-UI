@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "backend": "METAL",
+  "records": [
+    {
+      "stage": "target",
+      "width": 688,
+      "height": 1145,
+      "controls": 20,
+      "warm_submit_ms": [
+        0.5556250107474625
+      ],
+      "texture_bytes": 678400,
+      "glass": true,
+      "required_icons": [
+        "BUI_EXTERNAL"
+      ],
+      "button_rims_match": true
+    },
+    {
+      "stage": "workflow",
+      "width": 688,
+      "height": 1069,
+      "controls": 11,
+      "warm_submit_ms": [
+        0.5249999958323315
+      ],
+      "texture_bytes": 2306560,
+      "glass": true,
+      "required_icons": [
+        "BUI_BACK",
+        "BUI_EXTERNAL"
+      ],
+      "button_rims_match": true
+    }
+  ],
+  "hidden_stopped": true,
+  "source_scene": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+  "limits": [
+    "Offscreen component captures with real BUI shared glass, not a screenshot of the live N panel.",
+    "Source media sampled at 10 FPS; all durations preserved."
+  ]
+}

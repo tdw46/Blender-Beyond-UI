@@ -383,6 +383,8 @@ class Plan:
             return node.options["widget"].dimensions(
                 self.theme.font_size, available, node.options.get("height")
             )
+        if node.options.get("choice_card") is not None:
+            return node.options["choice_card"].dimensions(available,self.theme.font_size,self.measure)
         extra = self.slider_extra(node, available)
         extra = max(
             extra,
@@ -446,6 +448,8 @@ class Plan:
                 self.theme.font_size, available, node.options.get("height")
             )
             return min(available, w * sx), h * sy
+        if node.options.get("choice_card") is not None:
+            return node.options["choice_card"].dimensions(available,self.theme.font_size,self.measure)
         extra = self.slider_extra(node, available)
         extra = max(
             extra,

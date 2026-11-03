@@ -1,0 +1,162 @@
+[
+  {
+    "attachment": 1,
+    "name": "Camkeys - Auto FOV - Side by side 3_opt_opt_opt.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Camkeys - Auto FOV - Side by side 3_opt_opt_opt.mp4",
+    "exists": true,
+    "bytes": 748649,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1024,
+          "height": 654
+        }
+      ],
+      "format": {
+        "duration": "6.960000"
+      }
+    }
+  },
+  {
+    "attachment": 2,
+    "name": "Camera x Shapekeys = Camkeys_opt_opt.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Camera x Shapekeys = Camkeys_opt_opt.mp4",
+    "exists": true,
+    "bytes": 463975,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 650,
+          "height": 650
+        }
+      ],
+      "format": {
+        "duration": "6.159000"
+      }
+    }
+  },
+  {
+    "attachment": 3,
+    "name": "Uraraka Dolly Zoom_opt_opt.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Uraraka Dolly Zoom_opt_opt.mp4",
+    "exists": true,
+    "bytes": 586055,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1200,
+          "height": 840
+        }
+      ],
+      "format": {
+        "duration": "4.242000"
+      }
+    }
+  },
+  {
+    "attachment": 4,
+    "name": "Stepped Turn Around_opt.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Stepped Turn Around_opt.mp4",
+    "exists": true,
+    "bytes": 4934459,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1200,
+          "height": 1010
+        }
+      ],
+      "format": {
+        "duration": "5.100000"
+      }
+    }
+  },
+  {
+    "attachment": 5,
+    "name": "Camkeys - Camprops_opt_opt_opt.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Camkeys - Camprops_opt_opt_opt.mp4",
+    "exists": true,
+    "bytes": 390566,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 272,
+          "height": 284
+        }
+      ],
+      "format": {
+        "duration": "3.870000"
+      }
+    }
+  },
+  {
+    "attachment": 6,
+    "name": "Camkeys AutoFOV Comparison.mp4",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Camkeys AutoFOV Comparison.mp4",
+    "exists": true,
+    "bytes": 32153649,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1080
+        }
+      ],
+      "format": {
+        "duration": "18.760000"
+      }
+    }
+  },
+  {
+    "attachment": 7,
+    "name": "CamKeys Rebrand For CamShapeMatic Upgrade_opt.webm",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/CamKeys Rebrand For CamShapeMatic Upgrade_opt.webm",
+    "exists": true,
+    "bytes": 2030256,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "vp9",
+          "width": 1080,
+          "height": 896
+        }
+      ],
+      "format": {
+        "duration": "13.300000"
+      }
+    }
+  },
+  {
+    "attachment": 8,
+    "name": "Camkeys - CamProps Outline Width Demo - Sm_opt.gif",
+    "source": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/3D/Addon Docs/Camkeys/Camkeys - CamProps Outline Width Demo - Sm_opt.gif",
+    "exists": true,
+    "bytes": 960696,
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "gif",
+          "width": 852,
+          "height": 430
+        }
+      ],
+      "format": {
+        "duration": "2.340000"
+      }
+    }
+  }
+]

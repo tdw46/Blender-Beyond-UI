@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-03",
+  "type": "generated UI reference",
+  "version": 1,
+  "image": "reference.png",
+  "prompt": "prompt.txt",
+  "style_reference": "../camkeys-onboarding-v1/direction-b.png",
+  "sha256": "a85e482221d577710af70335a589260c41c3d8fafaacfe1349da33dd56098796",
+  "notes": [
+    "User requested regeneration and implementation; not yet user-reviewed.",
+    "Existing CamKeys morphing-camera logo and actual video replace generated aperture/character artwork.",
+    "All media overlay chrome omitted by request. Native shape-key search icon/clear affordances retained."
+  ]
+}

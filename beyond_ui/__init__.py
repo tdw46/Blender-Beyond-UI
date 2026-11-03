@@ -3,6 +3,8 @@
 No bpy import, registration, native loading, threads or timers at import time.
 """
 
+from .wizard import wizard, help_button, help_row, badge, choice, segmented
+from .media import MediaLibrary, media
 from .artwork import Artwork, ArtworkLibrary, header, heading
 from .integration import integrate
 from .addon import AddonUI
@@ -20,6 +22,8 @@ from .context_dispatch import ShortcutRegistry
 
 __version__ = "0.1.0"
 __all__ = [
+    "wizard", "help_button", "help_row", "badge", "choice", "segmented",
+    "MediaLibrary", "media",
     "Artwork", "ArtworkLibrary", "header", "heading",
     "AddonUI",
     "StyleSheet",

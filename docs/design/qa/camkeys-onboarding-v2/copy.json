@@ -1,0 +1,93 @@
+{
+  "target": [
+    "CamKeys",
+    "Choose your subject",
+    "A character or any focus object.",
+    "Subject",
+    "Armature",
+    "Focus bone",
+    "You can choose another bone.",
+    "Use object origin",
+    "Next",
+    "Open full controls"
+  ],
+  "workflow": [
+    "CamKeys",
+    "What would you like to do?",
+    "Shapekeys × Camera Angle",
+    "Shapekeys × Camera Angle",
+    "Blend shapes as the view changes.",
+    "Forced Perspective",
+    "Forced Perspective",
+    "Control proportions of parts of your character/scene independent of true camera FOV.",
+    "Dolly Zoom + Camera Tricks",
+    "Dolly Zoom + Camera Tricks",
+    "Hold framing while the camera moves",
+    "Next",
+    "Back",
+    "Open full controls"
+  ],
+  "detected": [
+    "CamKeys",
+    "Your first camera angle",
+    "Confirm the shape keys to add.",
+    "Left",
+    "Right",
+    "Top",
+    "Bottom",
+    "Existing links are kept. Nothing is added until you confirm.",
+    "Add detected shapes",
+    "Add More…",
+    "Back",
+    "Open full controls"
+  ],
+  "angles": [
+    "CamKeys",
+    "Your first camera angle",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Shape key",
+    "Move to the view you want to capture.",
+    "Capture this view",
+    "Sensitivity",
+    "Drive properties",
+    "Create setup",
+    "Back",
+    "Open full controls"
+  ],
+  "perspective": [
+    "CamKeys",
+    "Set up forced perspective",
+    "Camera",
+    "Apparent focal length",
+    "Start with a stable lens. Fine-tune later.",
+    "Create setup",
+    "Back",
+    "Open full controls"
+  ],
+  "dolly": [
+    "CamKeys",
+    "Set up a dolly zoom",
+    "Camera",
+    "Start lens",
+    "Move the camera while keeping your subject framed.",
+    "Preview",
+    "Create setup",
+    "Back",
+    "Open full controls"
+  ],
+  "ready": [
+    "CamKeys",
+    "You’re ready",
+    "head_.002",
+    "Camera angles",
+    "Open controls",
+    "Add More…",
+    "Add another workflow",
+    "Learn more",
+    "Billboard",
+    "CamProps",
+    "Lens tricks"
+  ]
+}

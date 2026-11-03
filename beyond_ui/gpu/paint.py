@@ -78,7 +78,9 @@ def paint(
 
     def mapped(r):
         a, b, c, d = r
-        return x + a * sx, y + h - (b + d) * sy, c * sx, d * sy
+        offset = getattr(canvas, "page_motion", None)
+        shift = offset.position("slide", 0.0) if offset else 0.0
+        return x + (a + shift) * sx, y + h - (b + d) * sy, c * sx, d * sy
 
     current_style = {}
 
@@ -463,6 +465,7 @@ def paint(
                     and not slider
                     and chrome
                     and not control.options.get("search_bar")
+                    and not control.options.get("choice_card")
                 ):
                     inset = kind in {"text", "number", "event", "search"}
                     surface(
@@ -483,11 +486,15 @@ def paint(
                         flat=inset,
                     )
                     if kind == "button" and not menu_option:
-                        skin.inset_outline(r, palette, scale, t.radius)
+                        skin.inset_outline(r, palette, scale, current_style.get("radius", t.radius))
                     if selected or menu_option and canvas.hover == control.key:
                         skin.selection_outline(menu_metrics.highlight(r, scale) if menu_option else r,
                                                palette, scale, current_style.get("radius", t.radius))
-                if kind == "widget":
+                if control.options.get("choice_card"):
+                    typography.flush_text(font)
+                    control.options["choice_card"].paint(r,font,palette,selected=selected,
+                        hovered=canvas.hover == control.key,backdrop=backdrop)
+                elif kind == "widget":
                     typography.flush_text(font)
                     control.options["widget"].paint(r, font, palette, backdrop=backdrop)
                 elif kind == "separator":
@@ -899,6 +906,7 @@ def paint(
                         right_align=control.options.get("text_alignment") == "RIGHT",
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
+                        trailing_icon=control.options.get("trailing_icon"),
                         inset=(
                             menu_metrics.TEXT_INSET
                             if menu_option

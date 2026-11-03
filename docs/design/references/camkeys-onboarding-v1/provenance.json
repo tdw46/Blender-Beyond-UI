@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-03",
+  "tool": "image_gen.imagegen",
+  "version": 1,
+  "type": "generated concepts, not runtime captures",
+  "style_references": [
+    "../camkeys-icon-panels-v1/main-panel.png",
+    "Existing user-approved BVT glass and CamKeys mint/coral style"
+  ],
+  "images": [
+    {
+      "id": "a",
+      "title": "Guided glass",
+      "image": "direction-a.png",
+      "prompt": "direction-a-prompt.txt",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "2ee93e28d0d69e7b0c892fd59663982104e72ae207c685165763221a3c0707a5",
+      "approval": "pending"
+    },
+    {
+      "id": "b",
+      "title": "Demo first",
+      "image": "direction-b.png",
+      "prompt": "direction-b-prompt.txt",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "9a50ea1a83ce947ee2372338f6de44b24544a15241a7e8cefdd62fd3e5c1da8d",
+      "approval": "Approved by Tyler: B Demo First"
+    },
+    {
+      "id": "c",
+      "title": "Compact inspector",
+      "image": "direction-c.png",
+      "prompt": "direction-c-prompt.txt",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "0070dc7570f29368be38ddc36ce78cfa7eb16e0f4b1a007627e717c3236d5d54",
+      "approval": "pending"
+    },
+    {
+      "id": "d",
+      "title": "Step cards",
+      "image": "direction-d.png",
+      "prompt": "direction-d-prompt.txt",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "75c0b4652c6ffc2d4f11c5f587aa34895ddbbaef947b51ca2f643137855b0008",
+      "approval": "pending"
+    }
+  ],
+  "notes": [
+    "Six screens per board, four direction variants. Branches 3A/3B/3C are alternative paths.",
+    "Generated demo thumbnails, timings, logo glyphs and progress labels are illustrative; implementation uses supplied media and approved existing logo.",
+    "Implementation follows B, with existing large CamKeys artwork, real supplied clips, corrected logical four-step progression and Back navigation.",
+    "Latest explicit overrides: no media overlay captions/controls/timestamps; Sonic on subject screen; preserve custom Forced Perspective and Dolly descriptions in step 2."
+  ]
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 86821,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--gpu-backend",
+      "metal",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_onboarding_locales.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 2038,
+      "initial_frontmost_pid": 2038,
+      "new_instance": true,
+      "pid": 86821,
+      "restore_requests": 0,
+      "seconds": 4.260312080383301,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "locales": [
+        {
+          "language": "JP",
+          "locale": "ja_JP",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "ES",
+          "locale": "es",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "KO",
+          "locale": "ko_KR",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "CN",
+          "locale": "zh_HANS",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "TW",
+          "locale": "zh_HANT",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "PT_BR",
+          "locale": "pt_BR",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "PT_PT",
+          "locale": "pt_PT",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "FR",
+          "locale": "fr_FR",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "DE",
+          "locale": "de_DE",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "RU",
+          "locale": "ru_RU",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        },
+        {
+          "language": "IT",
+          "locale": "it_IT",
+          "messages": 129,
+          "widths": [
+            240,
+            320,
+            480
+          ]
+        }
+      ],
+      "help_topics": [
+        "angles",
+        "outline",
+        "perspective",
+        "dolly",
+        "billboard",
+        "camprops",
+        "camprops_comparison",
+        "apparent_fov",
+        "camera_source",
+        "tracked_objects",
+        "falloff",
+        "distance",
+        "baking"
+      ],
+      "panels": [
+        {
+          "panel": "CAMKEYS_PT_camkeys_main",
+          "help_controls": 3
+        },
+        {
+          "panel": "CAMKEYS_PT_camkeys_linking",
+          "help_controls": 4
+        },
+        {
+          "panel": "CAMKEYS_PT_auto_fov",
+          "help_controls": 1
+        },
+        {
+          "panel": "CAMKEYS_PT_camprops",
+          "help_controls": 1
+        },
+        {
+          "panel": "CAMKEYS_PT_baking",
+          "help_controls": 1
+        }
+      ],
+      "user_names_preserved": true,
+      "idempotent_catalog": true
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-final-installed-locales-5.2.2/blender-0.log"
+  }
+]

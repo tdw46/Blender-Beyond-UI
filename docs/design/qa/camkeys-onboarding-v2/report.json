@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-03",
+  "status": "Implemented review candidate; not pixel-perfect acceptance",
+  "references": [
+    "../../references/camkeys-onboarding-v1/direction-b.png",
+    "../../references/camkeys-directional-setup-v1/reference.png"
+  ],
+  "unit_tests": 449,
+  "runtime_evidence": {
+    "setup": "setup-runtime.json",
+    "popup": "popup-runtime.json",
+    "eyedropper": "eyedropper-runtime.json",
+    "consumer": "consumer-runtime.json",
+    "capture": "capture-runtime.json"
+  },
+  "new_behavior": [
+    "Directional detection is read-only; confirmation calls the existing auto-add operator using validated per-call entries.",
+    "Configured offsets and global presets preserved; ambiguous matches rejected; existing links skipped.",
+    "Add More opens manual capture; no detections uses the existing manual form.",
+    "Seven actual stage captures; native help popup playback stops when closed.",
+    "No UI media overlays, controls or times. Source footage retains its own baked-in text.",
+    "Reference-style ready feature rows: clapperboard, stacked layers and aperture, with independently sized right-hand help buttons.",
+    "Shared BUI ordinary actions now paint trailing icons; button glass and outline use the same configured radius.",
+    "Back uses an unboxed arrow/text group; Open controls uses adjustment artwork and Open full controls has a trailing external-link icon.",
+    "Removed redundant directional heading; narrowed detection rows; media corners restore alpha blending and scale with UI.",
+    "Localized directional aliases across existing catalog languages, with exact configured-name precedence and ambiguity rejection.",
+    "Back arrow and text are left-aligned with zero leading inset in every onboarding footer.",
+    "Subject, Armature and Focus bone now use explicit 12.5-unit bold labels. Workflow titles increased from 11.5 to 14.5 units, description text from 9.5 to 11.5, with 16-unit line spacing."
+  ],
+  "copy_exceptions": {
+    "step2_perspective": "Control proportions of parts of your character/scene independent of true camera FOV.",
+    "step2_dolly": "Hold framing while the camera moves",
+    "media_overlays": "omitted by explicit user request"
+  },
+  "performance": "Latest instrumented capture warm CPU submission 0.44\u20130.79 ms; excludes decoding/upload, GPU completion and viewport work. Not an FPS or comparative benchmark claim.",
+  "focus": "No owned test-window activation or focus restoration in the final recorded windowed checks.",
+  "installation": {
+    "path": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys",
+    "branch": "codex/demo-first-onboarding-installed",
+    "live_session_reloaded": false,
+    "scene_or_preferences_saved": false
+  },
+  "limits": [
+    "Production BUI component GPU renders over a controlled shared-glass backdrop, not a live sidebar screenshot.",
+    "Original footage is aspect-preserving and sampled at 10 FPS, max edge 320px; generated media artwork and source glyphs are not identical.",
+    "Some typography, tint and overall panel height differ from generated artwork; side-by-side/overlay review is provided rather than a pixel-exact claim.",
+    "Physical Windows Vulkan/OpenGL and Blender 4.2 wizard QA are not newly qualified. Exact versioned docs requests were blocked by HTTP 402/403; installed 5.1.2/5.2.2 behavior was executed.",
+    "The live Uraraka session was not reloaded or saved; installed code is ready for a fresh Blender launch.",
+    "New wizard/help translation coverage and full-panel question-mark help sweep remain pending; localized shape-name detection is implemented, not full locale qualification."
+  ],
+  "files": {
+    "angles-actual.png": "1416d7b84bacaccc61706c7cfb5c4bb50e42e57781e7705f3a721f2832041151",
+    "angles-comparison.png": "ff7eae1c37ce5a9480425611bd0b8c0d4cc5b435ea3fa5f635fd816d21b9cfe2",
+    "angles-reference.png": "33cd67ea6881ba5d83256a3eea115ea6da1ebf9b3aa4025ebce47a66440ab2aa",
+    "angles.png": "4d417793bf2550a106103e5a361fb3194da6272f6eb88d948a26440aba691abf",
+    "detected-actual.png": "83b9b873ec6e248d50921ada166656c7c13eb88ba715007519c216b49d402558",
+    "detected-comparison.png": "ae51c2b641d3c8bb50ccb098a1524f120b28e5fe4603ee30cd4c767814345a3d",
+    "detected-reference.png": "c55a6867341346c225d70ec16921f05b97b8d57358cfa3aac1bf51676d0f13db",
+    "detected.png": "c42c8ebaf8d4355636dfe19c7f43441db23899d52491c25227ce82cfb5c1f457",
+    "dolly-actual.png": "9b1fcc55d6e764546f3272a1f174a429adbdcd1b91aac9a39f641123cc097c59",
+    "dolly-comparison.png": "58a622bcaaefa4d5208a7e1972b760cc529fad8b84cf280abb9997110635f51b",
+    "dolly-reference.png": "4b6ffc5718ef544a4b3429f67e37054dccdc206f891e7014867911a214f829d5",
+    "dolly.png": "94769cbc5b8f72cdf1cd302f0d475e21103cd0f14093087a04c59e3a1b0dbe0e",
+    "perspective-actual.png": "550b08fe77f4246fb2572f60c4c27b3e0f48db2dddad5898b3588b345bae1e9d",
+    "perspective-comparison.png": "0717d5ad15faf97d2b3dc608959343577227d226fbe76ff081fa6713b48a9b28",
+    "perspective-reference.png": "5c84bf4226f8dacdea43c50c69b7a7169cc36243df46d5d01b0f9642930bf291",
+    "perspective.png": "4cc31def07405205621197c3478a7859b0551f8c2fb3e0e6b4448011cb544751",
+    "ready-actual.png": "9d6a4c290e7bc227d0f5c6a2d94084751fbebc23ddae2c439e46ba3c5571f76f",
+    "ready-comparison.png": "ed6ed5a59800c7476a42e27a536a0f2165fd1076dadb182274a5fd62d9beac69",
+    "ready-reference.png": "4058994d9772fe35c5d36a341e461643d31feff0cd40b422647ad602d10b9494",
+    "ready.png": "4e78f7e84c2bd4d7b9a99e27ad7d79157e25a2a97159f2a552cbabeec584a0f4",
+    "target-actual.png": "73a63ffcdb72c81d50e426fdfb94c6d285647afcaf8792d0af96f8173b9b0e37",
+    "target-comparison.png": "8db914cbdd3341c6fc3e5c0d243ae374d12bd9130ae8ee03e9cddaef71646892",
+    "target-reference.png": "792feab8462670649c8d797d36cd8c524a3a226340b19e963118c1a8f1993cb0",
+    "target.png": "b506bd733ba8f67f3026b33614a573dd3d026bf46c027c7a12b5e9a7c58caf90",
+    "workflow-actual.png": "6ace1da2e4eb5a96446741b003fcc0eeaaa1dfbd82a46183aa2e7e6a36825a0b",
+    "workflow-comparison.png": "e5a81be6b7da1690f9dc72e2a10b2bc4c42c28545b735df617dccf00ba86f8dc",
+    "workflow-reference.png": "aecf47082f3e3f69fbaf8f5df44345119eb7d8d3b2fcaf4f3bd992220f5df1d9",
+    "workflow.png": "1d504d0893d50c54e28fe9d1d754a22c4680c82428d2b5f145dac5c71946770b"
+  },
+  "installed_source_sha256": "ea8674687be7368ba03225ee72863e2c54cb8c01a388bf49298b6a072636a8e1",
+  "localization_and_help_review": "../onboarding-locales-v1/report.json"
+}

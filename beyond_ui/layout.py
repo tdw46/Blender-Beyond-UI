@@ -67,6 +67,57 @@ class Layout:
         self._is_popover = False
         self._panel_stack = ()
 
+    def beyond_badge(self, text, *, translate=True, text_ctxt='', **options):
+        from .widgets.badge import Badge
+        return self.group.widget(self._key("badge"), Badge(self._text(text,text_ctxt,translate), **options), **self._options())
+
+    def beyond_choice(self, data, property, value, *, library=None, media_key=None,
+                      title='', description='', **options):
+        from .widgets.choice_card import ChoiceCard
+        control = self.prop_enum(data, property, value, text=title)
+        control.options['choice_card'] = ChoiceCard(self.canvas, self._text(title) if title else control.label,
+            self._text(description), library, media_key, **options)
+        control.options['menu_option'] = False
+        control.options['height'] = options.get('height', 94)
+        return control
+
+    def beyond_segments(self, data, property, *, icons=None, height=28):
+        """Enum segments retain exact property bindings, menus and shared motion."""
+        row = self.row(align=True)
+        row.group.options['gap'] = 0
+        field = row._enum_field(row._binding(data, property))
+        for item in field.snapshot():
+            if not item.identifier:
+                continue
+            control = row._enum_button(data, property, item, translate=False)
+            control.options.update(menu_option=False, height=height, text_align='center',
+                                   icon=(icons or {}).get(item.identifier, 'NONE'))
+        return row
+
+    def beyond_progress(self, step, steps):
+        from .widgets.stepper import Stepper
+        return self.group.widget(self._key("progress"), Stepper(step, steps), **self._options())
+
+    def beyond_page(self, token, *, direction=1):
+        from .animation import Motion
+        previous = self.state.get("_bui_page_token")
+        self.state["_bui_page_token"] = token
+        motion = getattr(self.canvas, "page_motion", None)
+        if motion is None:
+            motion = self.canvas.page_motion = Motion()
+            self.canvas._bind_motion(motion)
+        if previous is not None and previous != token:
+            motion.retarget("slide", (48.0 if direction >= 0 else -48.0) * min(4.0, motion.strength), 0.0)
+            if motion.wake:
+                motion.wake(motion)
+
+    def beyond_media(self, library, key, *, height=160, radius=12, caption="", caption_size=10, caption_padding=8):
+        from .widgets.media import MediaWidget
+        if not 24 <= height <= 1024 or not 0 <= radius <= 64:
+            raise ValueError("Invalid media dimensions")
+        return self.group.widget(self._key("media"),
+            MediaWidget(library, key, self.canvas, height, radius, caption=caption, caption_size=caption_size, caption_padding=caption_padding), **self._options())
+
     def style_item(self, values, *, scope="last"):
         from .style_api import apply
 

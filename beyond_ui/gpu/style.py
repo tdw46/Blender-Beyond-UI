@@ -236,6 +236,12 @@ def icon(glyph, x, y, size, color):
         return True
     supported = {
         "BUI_TARGET",
+        "back_arrow",
+        "external_link",
+        "adjustments",
+        "aperture",
+        "clapperboard",
+        "help",
         "⚙",
         "+",
         "×",
@@ -293,6 +299,15 @@ def icon(glyph, x, y, size, color):
         "NOCURVE",
     }
     glyph = {
+        "EYEDROPPER": "eyedropper",
+        "QUESTION": "help",
+        "BUI_HELP": "help",
+        "BUI_BACK": "back_arrow",
+        "BUI_EXTERNAL": "external_link",
+        "BUI_ADJUSTMENTS": "adjustments",
+        "BUI_APERTURE": "aperture",
+        "BUI_CLAPPERBOARD": "clapperboard",
+        "BUI_LAYERS": "layers",
         "FILE_FOLDER": "folder",
         "FOLDER_REDIRECT": "folder",
         "EMPTY_ARROWS": "axes",
@@ -302,6 +317,7 @@ def icon(glyph, x, y, size, color):
         "HIDE_OFF": "👁",
         "VIEWZOOM": "search",
         "CAMERA_DATA": "camera",
+        "VIEW_CAMERA": "camera",
         "IMAGE_DATA": "image",
         "MATERIAL": "material",
         "INFO": "◉",
@@ -395,6 +411,39 @@ def icon(glyph, x, y, size, color):
                 points.append((-0.70 + 1.40 * t, -0.70 + 1.40 * value))
             for a, b in zip(points, points[1:]):
                 line(a, b, 0.075)
+        elif glyph == "back_arrow":
+            line((.72, 0), (-.72, 0), .065)
+            line((-.72, 0), (-.15, .57), .065)
+            line((-.72, 0), (-.15, -.57), .065)
+        elif glyph == "external_link":
+            for a, b in (((-.1,.68),(-.68,.68)), ((-.68,.68),(-.68,-.68)),
+                         ((-.68,-.68),(.68,-.68)), ((.68,-.68),(.68,-.1)),
+                         ((-.08,-.08),(.74,.74)), ((.12,.74),(.74,.74)),
+                         ((.74,.74),(.74,.12))):
+                line(a,b,.065)
+        elif glyph == "adjustments":
+            for y, knob in ((.56,-.25),(0,.3),(-.56,-.1)):
+                line((-.78,y),(.78,y),.055)
+                line((knob,y-.19),(knob,y+.19),.09)
+        elif glyph == "clapperboard":
+            for a,b in (((-.8,.12),(.8,.12)), ((.8,.12),(.8,-.64)),
+                        ((.8,-.64),(-.8,-.64)), ((-.8,-.64),(-.8,.12)),
+                        ((-.8,.2),(.73,.72)), ((.73,.72),(.83,.43)),
+                        ((.83,.43),(-.7,-.09))):
+                line(a,b,.06)
+            for x in (-.42,.08,.58):
+                y=.2+(x+.8)*.34
+                line((x,y),(x+.22,y-.24),.055)
+            line((-.5,-.37),(.14,-.37),.05)
+        elif glyph == "aperture":
+            ring(.84,.74)
+            for i in range(6):
+                a=i*math.tau/6
+                b=a+math.tau/6
+                p=(.37*math.cos(a),.37*math.sin(a))
+                q=(.37*math.cos(b),.37*math.sin(b))
+                r=(.75*math.cos(b+.36),.75*math.sin(b+.36))
+                line(p,q,.045);line(q,r,.045)
         elif glyph == "✓":
             line((-0.65, -0.02), (-0.20, -0.43), 0.10)
             line((-0.20, -0.43), (0.70, 0.60), 0.10)
@@ -526,6 +575,12 @@ def icon(glyph, x, y, size, color):
             for i in range(len(points)):
                 line(points[i], points[(i + 1) % len(points)], 0.055)
             ring(0.32, 0.23, 24)
+        elif glyph == "help":
+            # Shared circled help glyph; retained geometry, centered ink bounds.
+            ring(.91,.81,48)
+            points=((-0.28,.30),(-0.23,.46),(-0.08,.53),(.13,.50),(.27,.37),(.26,.20),(.12,.06),(0,-.05),(0,-.19))
+            for a,b in zip(points,points[1:]):line(a,b,.055)
+            disc(0,-.46,.07,16)
         elif glyph == "eyedropper":
             # Blender-style pipette: hollow diagonal tube, pointed sampling
             # tip, cross-guard and a solid rounded rubber bulb. One cached batch.
@@ -1090,7 +1145,7 @@ def clear():
     _preview_shader = _preview_batch = None
 
 
-def preview(texture, x, y, w, h, radius=6.0):
+def preview(texture, x, y, w, h, radius=6.0, *, display_space=False):
     """One retained texture draw with rounded coverage; no mask render target."""
     global _preview_shader, _preview_batch
     import gpu
@@ -1107,6 +1162,7 @@ def preview(texture, x, y, w, h, radius=6.0):
         info.push_constant("MAT4", "mvp")
         info.push_constant("VEC4", "rect")
         info.push_constant("FLOAT", "radius")
+        info.push_constant("BOOL", "display_space")
         info.vertex_source(
             "void main(){uv=pos;gl_Position=mvp*vec4(rect.xy+pos*rect.zw,0.0,1.0);}"
         )
@@ -1114,7 +1170,7 @@ def preview(texture, x, y, w, h, radius=6.0):
 void main(){
     vec4 color=texture(image,uv);
     vec3 rgb=max(color.rgb,vec3(0.0));
-    color.rgb=mix(1.055*pow(rgb,vec3(1.0/2.4))-0.055,rgb*12.92,lessThan(rgb,vec3(0.0031308)));
+    if (!display_space) color.rgb=mix(1.055*pow(rgb,vec3(1.0/2.4))-0.055,rgb*12.92,lessThan(rgb,vec3(0.0031308)));
     float r=min(radius,min(rect.z,rect.w)*0.5);
     vec2 q=abs((uv-0.5)*rect.zw)-rect.zw*0.5+r;
     float d=length(max(q,vec2(0.0)))+min(max(q.x,q.y),0.0)-r;
@@ -1128,6 +1184,8 @@ void main(){
             {"pos": ((0, 0), (1, 0), (0, 1), (1, 1))},
             indices=((0, 1, 2), (2, 1, 3)),
         )
+    # BLF/native batching may change blending between controls. Own rounded alpha.
+    gpu.state.blend_set("ALPHA")
     _preview_shader.bind()
     _preview_shader.uniform_sampler("image", texture)
     _preview_shader.uniform_float(
@@ -1135,6 +1193,7 @@ void main(){
     )
     _preview_shader.uniform_float("rect", (x, y, w, h))
     _preview_shader.uniform_float("radius", radius)
+    _preview_shader.uniform_bool("display_space", display_space)
     _preview_batch.draw(_preview_shader)
 
 

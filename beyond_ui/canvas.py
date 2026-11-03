@@ -326,6 +326,8 @@ class Canvas(Group):
         self._animation_wake = wake
         for control in self.controls.values():
             self._bind_motion(control.motion)
+        if hasattr(self, "page_motion"):
+            self._bind_motion(self.page_motion)
 
     def bind_context_tooltips(self, schedule):
         """Host one-shot scheduler: delay seconds starts/replaces, None cancels."""

@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-03",
+  "scope": "Wizard localization and full-panel feature help",
+  "catalog_messages": 129,
+  "languages": [
+    "English",
+    "Japanese",
+    "Korean",
+    "Spanish",
+    "Simplified Chinese",
+    "Traditional Chinese",
+    "Brazilian Portuguese",
+    "European Portuguese",
+    "French",
+    "German",
+    "Russian",
+    "Italian"
+  ],
+  "unit_tests": 451,
+  "help_topics": 13,
+  "animated_topics": 12,
+  "full_panel_headers": 5,
+  "features": [
+    "Scoped navigation translations avoid native Back/Top ambiguity",
+    "Interface and tooltip preference handling",
+    "User object, bone and shape-key names preserved",
+    "Measured CJK wrapping with stable font sizes",
+    "Native fallback help translates before wrapping",
+    "Full-panel headers and feature accessories retain source metadata, theme and motion",
+    "Media playback advances while visible; Escape stops every topic and its timer"
+  ],
+  "validation": [
+    "Blender 5.1.2 and 5.2.2 Metal: all locales at 240/320/480 logical widths",
+    "All 13 actual custom popup invocations, shared glass, animation-frame progress and cleanup on both runtimes",
+    "Japanese, Chinese and German actual GPU renders using saved Uraraka bindings",
+    "Installed package verified using a scoped SHA-256 manifest and complete vendor refresh"
+  ],
+  "limits": [
+    "Translations have not received native-speaker review.",
+    "Component captures use a controlled shared glass backdrop; they are not live-sidebar screenshots.",
+    "Source video captions are baked into original English clips and remain unchanged.",
+    "No new physical Windows/Vulkan/OpenGL or Blender 4.2 onboarding qualification in this pass.",
+    "Existing live Uraraka session was not re-registered or saved; new classes/catalog load on next launch."
+  ],
+  "images": {
+    "ja/target.png": "4875f47a968439b36c02ed4c3acf586aa705bced43eb82a5ee2f6130f5035cdd",
+    "ja/workflow.png": "ce5792d1dc5be5bc758267e1827e59f1f936462fd50080ed476df6bb6cb21b17",
+    "zh/target.png": "231eed94430875dab6f0b2c59ff6cf9791a4878dff49bcc64ea8a65a9e7731ba",
+    "zh/workflow.png": "61c3ec0936a51d9123b7ccb800ac318c3ade8564dfd71355db363d7dd180db96",
+    "de/target.png": "20063a44d8504b4e1f1454bf3c9b643371ccf364ee67d514942fa743181ca538",
+    "de/workflow.png": "240b0645e732e616208bfc05123eceb8468c36f4d4e906f201eaedbeac87d7cf",
+    "help-ja/falloff.png": "a535ff73a306d64eeb877f70776808165eec427c112b06773abca825a054aa96",
+    "help/falloff.png": "35065e18187e1ba9ce1016fbbe8018f642b4c897da95a52b42d4ed440f018947",
+    "help/baking.png": "83172764229464a2c801c517da94bae9814d9ccb296fd7a5b442b81babcbc9a4"
+  },
+  "focus_audit": [
+    {
+      "test": "locales-5.1.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "help-5.1.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "help-5.2.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "installed-locales-5.2.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "installed-setup-5.2.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "headless"
+    },
+    {
+      "test": "installed-setup-5.1.2",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "headless"
+    },
+    {
+      "test": "capture-ja",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "capture-de",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "capture-zh",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "capture-help",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    },
+    {
+      "test": "capture-help-ja",
+      "events": [],
+      "restore_requests": 0,
+      "mode": "no-window-focus"
+    }
+  ],
+  "installed_source_files": 46,
+  "actual_popup_evidence": [
+    "help-5.1.2.json",
+    "help-5.2.2.json"
+  ],
+  "installed_runtime_evidence": [
+    "installed-locales-5.2.2.json",
+    "installed-setup-5.2.2.json",
+    "installed-setup-5.1.2.json"
+  ]
+}

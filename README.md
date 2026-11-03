@@ -34,6 +34,20 @@ show actual Blender renders; generated-reference acceptance remains open.
 | --- | --- |
 | ![CamKeys Studio live appearance snapshots](docs/media/panels/camkeys-studio-v7-appearance.gif) | ![CamKeys Studio panel change motion](docs/media/panels/camkeys-studio-v7-camkeys_main.gif) |
 
+## Guided setup and animated examples
+
+Compose native-safe `bui.wizard`, `bui.choice`, `bui.badge`, `bui.segmented` and
+`bui.media` helpers. Consumers own validation and undo; the library owns reusable
+layout, shared motion and visible-only media playback.
+
+[Integration and lifetime contract](docs/WIZARD_MEDIA.md) ·
+[CamKeys reference comparisons](docs/design/qa/camkeys-onboarding-v2/index.html)
+
+![CamKeys Demo First wizard — actual Blender stage snapshots](docs/media/panels/camkeys-onboarding-v2.gif)
+
+These are actual Metal component renders, not a live-sidebar recording or a
+pixel-perfect acceptance claim. The supplied clips loop without transport chrome.
+
 ## One extra line of styling
 
 Keep native Blender calls and add reusable styles after them:
