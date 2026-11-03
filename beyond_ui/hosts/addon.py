@@ -2,10 +2,12 @@
 
 import hashlib
 import inspect
+import time
 from ..canvas import Canvas
 from ..layout import Layout
 from ..context_dispatch import ShortcutRegistry
 from .panel import PanelHost
+from ..scroll import NativeScrollGesture, SCROLL_EVENTS, panel_scroll_region
 
 
 class PanelProxy:
@@ -52,6 +54,7 @@ class Runtime:
         self.start_callback = self.start
         self.refresh_callback = self.refresh
         self.handlers = []
+        self.native_scroll = NativeScrollGesture()
         self.input_id = (
             "bui" + hashlib.sha256(config.owner.encode()).hexdigest()[:16] + ".input"
         )
@@ -100,6 +103,7 @@ class Runtime:
         def cancel(operator, context):
             if getattr(operator, "generation", None) == runtime.generation:
                 runtime.running.discard(getattr(operator, "window_key", None))
+                runtime.native_scroll.clear(getattr(operator, "window_key", None))
 
         op = type(
             self.input_id.replace(".", "_OT_"),
@@ -156,10 +160,12 @@ class Runtime:
 
         @persistent
         def before(*args):
+            runtime.native_scroll.clear()
             runtime.refresh()
 
         @persistent
         def before_load(*args):
+            runtime.native_scroll.clear()
             runtime.generation += 1
             runtime.running.clear()
             runtime.refresh()
@@ -182,6 +188,23 @@ class Runtime:
 
     def dispatch_event(self, operator, context, event):
         """An owned action failure must never terminate the window input service."""
+        scroll_key = None
+        window = getattr(context, "window", None)
+        if event.type in SCROLL_EVENTS:
+            scroll_key = panel_scroll_region(context, event)
+            if scroll_key is not None:
+                scroll_time = time.monotonic()
+                if self.native_scroll.continuing(scroll_key, scroll_time):
+                    return {"PASS_THROUGH"}
+            elif window is not None:
+                self.native_scroll.clear(window.as_pointer())
+        elif window is not None and (
+            event.type == "WINDOW_DEACTIVATE"
+            or (getattr(event, "value", None) == "PRESS"
+                and event.type not in {"MOUSEMOVE", "INBETWEEN_MOUSEMOVE", "TIMER"})
+        ):
+            # Explicit actions can open a popup/start an edit immediately.
+            self.native_scroll.clear(window.as_pointer())
         for definition, host in self.hosts.items():
             try:
                 if host.event(context, event):
@@ -211,6 +234,8 @@ class Runtime:
                 except Exception:
                     pass  # Reporting cannot take down the input service either.
                 return {"RUNNING_MODAL"}
+        if scroll_key is not None:
+            self.native_scroll.remember(scroll_key, scroll_time)
         return {"PASS_THROUGH"}
 
     def schedule_start(self):
@@ -461,6 +486,7 @@ class Runtime:
         import bpy
 
         self.active = False
+        self.native_scroll.clear()
         for callback in (self.start_callback, self.refresh_callback):
             if bpy.app.timers.is_registered(callback):
                 bpy.app.timers.unregister(callback)

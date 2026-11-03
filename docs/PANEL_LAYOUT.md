@@ -61,3 +61,33 @@ can set `canvas.automatic_sliders = False` and call `canvas.invalidate()` to opt
 out. Slider labels use a 26-unit band above the original BVT track, bubble and
 separate number field. Stored RNA values, edit limits, actions and owners remain
 unchanged.
+
+
+## Native panel scroll ownership
+
+The AddonUI input service keeps a scroll gesture with Blender's native N-panel
+or Properties region once every custom host has passed it through. Moving the
+pointer over a list, or scrolling a list under a stationary pointer, cannot let
+that list intercept the continuing gesture. A new gesture starting on a list
+still operates the list immediately.
+
+Ownership expires after 300 ms without scroll input. Mouse movement, redraws and
+zero-delta trackpad tail events do not end the gesture. Explicit clicks/keys,
+deactivation, region changes, file load, undo/redo and teardown clear it. The
+state is bounded, per runtime/window/region, and stores no RNA references. It
+measures input arrival times with a monotonic clock, with no timer or idle polling.
+Wheel and trackpad directions still use the shared scroll-delta policy.
+
+This is a cross-platform inactivity heuristic; Blender exposes no portable
+momentum-end phase used by this policy. It does not change popup routing,
+renderer/backend behavior, scene evaluation or list virtualization.
+
+Execution evidence and physical-device limits: [scroll ownership report](design/qa/scroll-ownership-v1/report.json).
+
+At the top or bottom of a collection list, further outward scrolling bubbles to
+its parent. The event that reaches the boundary is consumed by the list; the
+next outward event goes to the panel, avoiding simultaneous list/panel movement.
+This applies to DEFAULT/GRID viewports and COMPACT selection boundaries, including
+empty or non-overflowing lists. Inward scrolling still works immediately on a new
+gesture. Zero-delta input does not start a parent scroll; active edits and popups
+retain their existing capture policy. See [edge handoff checks](design/qa/scroll-chaining-v1/report.json).

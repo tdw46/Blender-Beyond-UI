@@ -379,9 +379,19 @@ class CollectionList(Widget):
             if self.type == "COMPACT":
                 step = scroll_step(event)
                 if step:
+                    rows = self.source.items
+                    if not rows or self.selected() == rows[0 if step < 0 else -1].index:
+                        return False
                     self.navigate("UP_ARROW" if step < 0 else "DOWN_ARROW")
             else:
-                self.scroll_to(self.offset + scroll_delta(event, self.row_height))
+                delta = scroll_delta(event, self.row_height)
+                # Bubble outward input at an edge to the containing panel.
+                # The event that reaches the edge belongs to this list; only
+                # subsequent input passes through, avoiding a double scroll.
+                if delta and (self.offset <= 0 if delta < 0 else self.offset >= self.limit):
+                    return False
+                if delta:
+                    self.scroll_to(self.offset + delta)
             return True
         if not press or kind != "LEFTMOUSE":
             return False

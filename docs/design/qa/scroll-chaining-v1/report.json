@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-03",
+  "change": "List edge scroll chaining to parent panel",
+  "unit_tests": {
+    "passed": true,
+    "count": 443
+  },
+  "runs": {
+    "metal-52": [
+      {
+        "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "pid": 20166,
+        "command": [
+          "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_scroll_ownership.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 756,
+          "initial_frontmost_pid": 756,
+          "new_instance": true,
+          "pid": 20166,
+          "restore_requests": 0,
+          "seconds": 5.4474170207977295,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "error": null,
+          "checks": [
+            "Queued wheel events pass through after entering list; explicit native View2D consumer moves sidebar",
+            "After quiet interval a new wheel gesture scrolls the list immediately",
+            "At bottom, continued downward wheel passes to native parent without changing list offset",
+            "At top, continued upward wheel passes to native parent without changing list offset"
+          ],
+          "events": [
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "RUNNING_MODAL"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ]
+          ],
+          "version": "5.2.2 LTS"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/scroll-chaining-v1/metal-52/blender-0.log"
+      }
+    ],
+    "metal-51": [
+      {
+        "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "pid": 20417,
+        "command": [
+          "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--gpu-backend",
+          "metal",
+          "--python-expr",
+          "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+          "--python",
+          "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_scroll_ownership.py",
+          "--",
+          "-ApplePersistenceIgnoreState",
+          "YES"
+        ],
+        "launch": {
+          "activates": false,
+          "error": "",
+          "events": [],
+          "final_frontmost_pid": 756,
+          "initial_frontmost_pid": 756,
+          "new_instance": true,
+          "pid": 20417,
+          "restore_requests": 0,
+          "seconds": 5.371329069137573,
+          "termination_evidence": "kernel-process-absent",
+          "timeout": false
+        },
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "error": null,
+          "checks": [
+            "Queued wheel events pass through after entering list; explicit native View2D consumer moves sidebar",
+            "After quiet interval a new wheel gesture scrolls the list immediately",
+            "At bottom, continued downward wheel passes to native parent without changing list offset",
+            "At top, continued upward wheel passes to native parent without changing list offset"
+          ],
+          "events": [
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "RUNNING_MODAL"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ],
+            [
+              "PASS_THROUGH"
+            ]
+          ],
+          "version": "5.1.2"
+        },
+        "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/scroll-chaining-v1/metal-51/blender-0.log"
+      }
+    ]
+  },
+  "live_uraraka": {
+    "pid": 12478,
+    "active": true,
+    "running_windows": 1,
+    "current_list_instances": 3,
+    "available_panels": 6,
+    "draw_errors": {},
+    "input_errors": {},
+    "dirty_before": false,
+    "dirty_after": false,
+    "scene_saved": false
+  },
+  "limits": [
+    "Queued wheel events are delivered through the custom input service. Native View2D operations are invoked explicitly after pass-through because inactive windows do not run native region keymaps.",
+    "Trackpad coverage is synthetic event sequences; physical Mac/Windows momentum remains user QA.",
+    "No renderer, theme, native ABI or version changes; no new visual captures requested."
+  ]
+}

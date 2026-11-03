@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 Mac qualification and QA publication review",
+  "reviewed": "2026-11-03 \u2014 scrolling fixes publication review",
   "remaining_turns": [
     0,
     1
@@ -16,8 +16,8 @@
     0,
     0
   ],
-  "confidence": "Requested Mac work is closed. Optional user review remains; no required implementation or runtime QA is forecast.",
-  "basis": "Two completed before/after full-scene runs per CamKeys version, retained-source BVT controls, plus one slower intermediate run preserved transparently. CPU panel authoring improves; shared-workstation throughput is variable. No thermal or guaranteed FPS claim.",
+  "confidence": "Scroll ownership implementation and Mac execution checks are complete. Physical momentum/wheel acceptance on Mac and Windows remains optional user QA.",
+  "basis": "443 unit tests; Blender 5.1.2/5.2.2 no-focus Metal queued input and explicit native View2D tests cover both edges and gesture retention. Real physical device behavior remains separate.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Scroll ownership is behavior-only, with queued input, unit sequence and native View2D execution evidence. No new screenshots/GIFs; physical momentum on macOS/Windows remains user QA.",
     "Mac handoff now has actual late-window before/after main/angle PNGs and four-sample popup GIFs. Full-rate motion and pixel-identical live-simulation screenshots are not claimed. See mac-performance-v1/report.json.",
     "Necessary-update optimization has byte-identical before/after NVIDIA Vulkan settled angle-panel PNGs and numerical live/cadence evidence. Current Mac captures and separate timing are now in mac-performance-v1; no full-rate new animation recording.",
     "BUI attribution has raw timings, profile, resource/admission/restoration and focus logs; no new screenshots/clips. No visual change applied. OpenGL/Metal attribution remains unverified.",
@@ -55,9 +56,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Explicit panel revisions skip unchanged authored commands while preserving glass redraw. Literal row text updates skip full row callbacks. Combined RNA reads retain exact-owner checks. 431 unit tests; Vulkan/OpenGL live dependency checks, nine list interactions and five scroll/offscreen checks pass. Angle author/refresh 3.55\u21921.56 ms, orbit approximately 39\u219234\u201335 ms; before/after settled PNG byte-identical. Full backup and runtime/vendored hashes verified; scene not saved. Mac sync: all three merges pulled; 431 unit tests and Metal copied-Uraraka panel revision, list, scroll/offscreen and glass/resource checks pass without focus activation. No live scene saved or reloaded. Mac recovery completed: exact-build native proof requalified and installed; nine output comparisons exact; repeated Uraraka timings and late-window panel/popup glass captures published. See mac-performance-v1/report.json.",
-  "estimate_review": "Mac sync, certificate recovery, hardware execution, before/after timing and visual checks are complete. This publication turn adds no implementation scope; only optional user review remains.",
-  "time_summary": "No remaining required implementation or QA time for the Mac handoff. Optional user review is excluded; benchmark timings are recorded separately.",
+  "latest_progress": "List edge chaining added: further outward scrolling at the top/bottom passes to the parent, including empty, short, grid and compact lists. Boundary-reaching input is consumed once to avoid double scrolling. 443 unit tests and Blender 5.1.2/5.2.2 queued input checks pass. Updated both full CamKeys vendors and reloaded idle BUI hosts in Uraraka; three current list instances, six available panels, no draw/input errors and scene unchanged.",
+  "estimate_review": "Scroll ownership and edge chaining implementation and Mac execution checks are complete. This commit/push turn adds no implementation scope. Remaining implementation stays 0; optional physical Mac/Windows device QA stays 0\u20131 turn.",
+  "time_summary": "No further implementation time forecast for this fix. Optional user device checks excluded; failures would add scope.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -399,6 +400,16 @@
       "work": "Renewed exact-build Mac shader/worker certificate with affected-source and ordinary admission evidence; preserved Windows changes; repeated full Uraraka timings and late-window panel/popup captures.",
       "evidence": "docs/design/qa/mac-performance-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Native panel scroll ownership across custom UI lists; consumer installation and Mac execution checks",
+      "evidence": "docs/design/qa/scroll-ownership-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "List top/bottom chaining to parent; full vendor sync and live reload",
+      "evidence": "docs/design/qa/scroll-chaining-v1/report.json",
+      "turns": 1
     }
   ],
   "remaining_work": "No remaining required work for the Mac handoff. Optional user visual review only. Save current work and restart Blender to load the updated modules and renewed Mac native certificate together.",
@@ -461,7 +472,7 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Mac source-bound certificate requalified and installed; copied Uraraka Metal before/after and popup review complete",
+  "checkpoint": "List edge chaining and native gesture ownership active in Uraraka; physical Windows input QA pending",
   "latest_review": "../mac-performance-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
@@ -475,6 +486,14 @@
     {
       "batch": "Uraraka transform performance",
       "details": "New user-requested scope; measured and installed this turn. Full working-profile latency and Mac hardware remain separate from isolated timing evidence."
+    },
+    {
+      "batch": "Native scroll gesture ownership",
+      "details": "User-reported list interception added and implemented this turn. Unit wheel/trackpad sequences and actual Mac custom input routing verified; physical-device acceptance remains separate."
+    },
+    {
+      "batch": "List boundary handoff",
+      "details": "Requested and closed this turn; no additional implementation budget. Physical device acceptance remains user QA."
     }
   ]
 }

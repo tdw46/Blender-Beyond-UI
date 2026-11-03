@@ -76,3 +76,60 @@ class Scrolling(unittest.TestCase):
         self.assertEqual(widget.row_offset, 1)
         widget.event(event(-8), 30, 90)
         self.assertEqual(widget.row_offset, 0)
+
+
+class ListScrollChaining(unittest.TestCase):
+    def widget(self, count=100, kind='DEFAULT'):
+        active = [0]
+        source = NS(items=tuple(Item(i, i, str(i), 'name') for i in range(count)),
+                    active=Binding(lambda: active[0], lambda v: active.__setitem__(0, v)))
+        source.select = lambda item: source.active.write(item.index)
+        widget = CollectionList(source, {}, type=kind)
+        widget.dimensions(11, 320)
+        return widget, active
+
+    def test_wheel_and_trackpad_chain_outward_at_both_edges(self):
+        for mode in ('DEFAULT', 'GRID'):
+            for down, up in ((event(kind='WHEELDOWNMOUSE'), event(kind='WHEELUPMOUSE')),
+                             (event(12), event(-12))):
+                widget, _ = self.widget(kind=mode)
+                self.assertFalse(widget.event(up, 5, 5))
+                self.assertTrue(widget.event(down, 5, 5))
+                self.assertGreater(widget.offset, 0)
+                widget.scroll_to(widget.limit)
+                self.assertFalse(widget.event(down, 5, 5))
+                self.assertTrue(widget.event(up, 5, 5))
+                self.assertLess(widget.offset, widget.limit)
+
+    def test_reaching_edge_does_not_scroll_both_list_and_panel(self):
+        widget, _ = self.widget()
+        widget.scroll_to(widget.limit-1)
+        self.assertTrue(widget.event(event(100), 5, 5))
+        self.assertEqual(widget.offset, widget.limit)
+        self.assertFalse(widget.event(event(1), 5, 5))
+        widget.scroll_to(1)
+        self.assertTrue(widget.event(event(-100), 5, 5))
+        self.assertEqual(widget.offset, 0)
+        self.assertFalse(widget.event(event(-1), 5, 5))
+
+    def test_empty_short_and_compact_lists_chain_without_changing_selection(self):
+        for count in (0, 1):
+            for mode in ('DEFAULT', 'GRID', 'COMPACT'):
+                widget, active = self.widget(count, mode)
+                for e in (event(10), event(-10)):
+                    self.assertFalse(widget.event(e, 5, 5))
+                    self.assertEqual(active[0], 0)
+        widget, active = self.widget(kind='COMPACT')
+        self.assertFalse(widget.event(event(-10), 5, 5))
+        self.assertTrue(widget.event(event(10), 5, 5))
+        self.assertEqual(active[0], 1)
+        active[0] = 99
+        self.assertFalse(widget.event(event(10), 5, 5))
+        self.assertTrue(widget.event(event(-10), 5, 5))
+        self.assertEqual(active[0], 98)
+
+    def test_zero_delta_does_not_start_parent_scroll(self):
+        for mode in ('DEFAULT', 'GRID', 'COMPACT'):
+            widget, _ = self.widget(kind=mode)
+            self.assertTrue(widget.event(event(0), 5, 5))
+            self.assertEqual(widget.offset, 0)
