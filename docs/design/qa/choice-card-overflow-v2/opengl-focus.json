@@ -1,0 +1,16 @@
+{
+  "sampling_interval_s": 0.05,
+  "duration_s": 17.048882400034927,
+  "foreground_changes": [
+    {
+      "time_s": 0,
+      "hwnd": 132466,
+      "pid": 31796,
+      "class": "Chrome_WidgetWin_1"
+    }
+  ],
+  "owned_pids": [
+    30100
+  ],
+  "owned_foreground_observed": false
+}

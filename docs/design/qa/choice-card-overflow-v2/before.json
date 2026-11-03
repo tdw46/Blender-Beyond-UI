@@ -1,0 +1,528 @@
+{
+  "passed": true,
+  "native_adapter": true,
+  "baseline": true,
+  "overflow_lines": 43,
+  "samples": [
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -688.0
+      ],
+      "view100": [
+        100.23866271972656,
+        -587.8544311523438
+      ],
+      "requested": [
+        260.0,
+        354.0
+      ],
+      "actual": [
+        23,
+        107,
+        344,
+        531
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 139.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Camera Angle",
+          "width": 152.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": false
+        },
+        {
+          "text": "Blend shapes as the",
+          "width": 165.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": false
+        },
+        {
+          "text": "view changes.",
+          "width": 118.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 75.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 128.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Control proportions",
+          "width": 160.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": false
+        },
+        {
+          "text": "of parts of your",
+          "width": 127.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "character/scene",
+          "width": 135.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "independent of true",
+          "width": 162.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": false
+        },
+        {
+          "text": "camera FOV.",
+          "width": 107.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 139.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Camera Tricks",
+          "width": 157.0,
+          "available": 143.84000000000003,
+          "size": 21.75,
+          "fits": false
+        },
+        {
+          "text": "Hold framing while",
+          "width": 153.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": false
+        },
+        {
+          "text": "the camera moves",
+          "width": 152.0,
+          "available": 143.84000000000003,
+          "size": 17.25,
+          "fits": false
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000244140625
+      ],
+      "view100": [
+        92.72076416015625,
+        -543.765380859375
+      ],
+      "requested": [
+        260.0,
+        354.0
+      ],
+      "actual": [
+        25,
+        60,
+        338,
+        574
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 150.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Camera Angle",
+          "width": 164.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Blend shapes as the",
+          "width": 176.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        },
+        {
+          "text": "view changes.",
+          "width": 126.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 134.83536723163843,
+          "size": 23.51129943502825,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 138.0,
+          "available": 134.83536723163843,
+          "size": 23.51129943502825,
+          "fits": false
+        },
+        {
+          "text": "Control proportions",
+          "width": 171.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "of parts of your",
+          "width": 134.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": true
+        },
+        {
+          "text": "character/scene",
+          "width": 145.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "independent of true",
+          "width": 173.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "camera FOV.",
+          "width": 113.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 150.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Camera Tricks",
+          "width": 169.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Hold framing while",
+          "width": 165.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        },
+        {
+          "text": "the camera moves",
+          "width": 161.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -588.6700439453125
+      ],
+      "view100": [
+        85.76670837402344,
+        -502.9830017089844
+      ],
+      "requested": [
+        260.0,
+        354.0
+      ],
+      "actual": [
+        27,
+        9,
+        331,
+        621
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 161.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": false
+        },
+        {
+          "text": "Camera Angle",
+          "width": 176.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": false
+        },
+        {
+          "text": "Blend shapes as the",
+          "width": 194.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "view changes.",
+          "width": 139.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "Forced",
+          "width": 87.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 147.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": false
+        },
+        {
+          "text": "Control proportions",
+          "width": 188.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "of parts of your",
+          "width": 148.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "character/scene",
+          "width": 159.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "independent of true",
+          "width": 190.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "camera FOV.",
+          "width": 125.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 164.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": false
+        },
+        {
+          "text": "Camera Tricks",
+          "width": 181.0,
+          "available": 124.7235593220339,
+          "size": 25.4364406779661,
+          "fits": false
+        },
+        {
+          "text": "Hold framing while",
+          "width": 180.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        },
+        {
+          "text": "the camera moves",
+          "width": 179.0,
+          "available": 124.7235593220339,
+          "size": 20.173728813559322,
+          "fits": false
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000854492188
+      ],
+      "view100": [
+        92.72077941894531,
+        -543.7654418945312
+      ],
+      "requested": [
+        260.0,
+        354.0
+      ],
+      "actual": [
+        25,
+        60,
+        338,
+        574
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 150.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Camera Angle",
+          "width": 164.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Blend shapes as the",
+          "width": 176.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        },
+        {
+          "text": "view changes.",
+          "width": 126.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 134.83536723163843,
+          "size": 23.51129943502825,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 138.0,
+          "available": 134.83536723163843,
+          "size": 23.51129943502825,
+          "fits": false
+        },
+        {
+          "text": "Control proportions",
+          "width": 171.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "of parts of your",
+          "width": 134.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": true
+        },
+        {
+          "text": "character/scene",
+          "width": 145.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "independent of true",
+          "width": 173.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": false
+        },
+        {
+          "text": "camera FOV.",
+          "width": 113.0,
+          "available": 134.83536723163843,
+          "size": 18.646892655367232,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 150.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Camera Tricks",
+          "width": 169.0,
+          "available": 134.83536723163843,
+          "size": 23.511299435028246,
+          "fits": false
+        },
+        {
+          "text": "Hold framing while",
+          "width": 165.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        },
+        {
+          "text": "the camera moves",
+          "width": 161.0,
+          "available": 134.83536723163843,
+          "size": 18.64689265536723,
+          "fits": false
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "backend": "VULKAN",
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c"
+}

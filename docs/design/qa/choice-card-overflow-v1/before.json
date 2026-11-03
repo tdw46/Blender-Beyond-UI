@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "baseline": true,
+  "tested": 8127,
+  "overflow_cases": 642,
+  "examples": [
+    {
+      "width": 194,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "Forced Perspective",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 195,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "Forced Perspective",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 163,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "Erzwungene Perspektive",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 164,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "Erzwungene Perspektive",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 157,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 158,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 159,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 174,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 175,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 176,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 177,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 178,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 210,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 211,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 212,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 213,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 214,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 215,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 245,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    },
+    {
+      "width": 246,
+      "pixel_scale": 1,
+      "theme_size": 11,
+      "title": "\u5f37\u5236\u30d1\u30fc\u30b9\u30da\u30af\u30c6\u30a3\u30d6",
+      "violations": [
+        "bottom"
+      ]
+    }
+  ],
+  "captures": [
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-194.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-220.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-260.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-268.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-280.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-320.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\before\\card-400.png"
+  ],
+  "backend": "VULKAN",
+  "gpu": "NVIDIA GeForce RTX 4090 Laptop GPU",
+  "blender": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "limits": "Offscreen component/font checks. Live N-panel resizing and Metal execution are separate."
+}

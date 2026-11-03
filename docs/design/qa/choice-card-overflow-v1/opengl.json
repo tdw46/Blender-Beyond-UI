@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "baseline": false,
+  "tested": 8127,
+  "overflow_cases": 0,
+  "examples": [],
+  "captures": [
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-220.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-260.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-268.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-280.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-320.png",
+    "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\choice-card-overflow\\opengl\\card-400.png"
+  ],
+  "backend": "OPENGL",
+  "gpu": "NVIDIA GeForce RTX 4090 Laptop GPU/PCIe/SSE2",
+  "blender": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "limits": "Offscreen component/font checks. Live N-panel resizing and Metal execution are separate."
+}

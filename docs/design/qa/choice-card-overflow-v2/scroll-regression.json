@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    "Parked list reauthors without owner error, replacement or height collapse",
+    "Fully offscreen updates invoke zero panel, list-row or filter callbacks",
+    "Ten live list updates preserve offscreen panel height and native scroll position",
+    "Returning to list resumes current row values and retained controls",
+    "Collection deletion/replacement while hidden is resolved on reentry; no stale rows"
+  ],
+  "scroll": [
+    0.0,
+    -3002.0
+  ],
+  "error": null,
+  "adopted_native_panel": true,
+  "draw_errors": [],
+  "offscreen_work": {
+    "callback_deltas": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "native_draw_calls": 10,
+    "median_ms": 0.06079999729990959,
+    "max_ms": 0.11370005086064339
+  }
+}

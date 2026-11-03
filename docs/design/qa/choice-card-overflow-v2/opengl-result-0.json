@@ -1,0 +1,1253 @@
+{
+  "passed": true,
+  "native_adapter": true,
+  "baseline": false,
+  "overflow_lines": 0,
+  "samples": [
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -688.0
+      ],
+      "view100": [
+        100.23866271972656,
+        -587.8544311523438
+      ],
+      "requested": [
+        229.41126986246496,
+        440.0
+      ],
+      "actual": [
+        23,
+        -22,
+        344,
+        660
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 139.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Camera",
+          "width": 84.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 63.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Blend shapes as",
+          "width": 134.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "the view",
+          "width": 69.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "changes.",
+          "width": 75.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 75.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 128.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 60.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "proportions of",
+          "width": 117.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "parts of your",
+          "width": 106.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "character/scene",
+          "width": 135.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "independent of",
+          "width": 125.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "true camera",
+          "width": 100.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 40.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 139.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Camera",
+          "width": 84.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Tricks",
+          "width": 68.0,
+          "available": 142.00529969541248,
+          "size": 21.75,
+          "fits": true
+        },
+        {
+          "text": "Hold framing",
+          "width": 106.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "while the camera",
+          "width": 140.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        },
+        {
+          "text": "moves",
+          "width": 54.0,
+          "available": 142.00529969541248,
+          "size": 17.25,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000244140625
+      ],
+      "view100": [
+        92.72076416015625,
+        -543.765380859375
+      ],
+      "requested": [
+        208.37133329216329,
+        473.0
+      ],
+      "actual": [
+        25,
+        -133,
+        338,
+        767
+      ],
+      "text": [
+        {
+          "text": "Shapekeys",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "\u00d7 Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 68.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Blend shapes",
+          "width": 118.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "as the view",
+          "width": 99.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "changes.",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Perspectiv",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "e",
+          "width": 14.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 65.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "proportions of",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "parts of your",
+          "width": 111.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "character/sce",
+          "width": 123.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "ne",
+          "width": 22.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "independent",
+          "width": 110.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "of true camera",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 43.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "+ Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Tricks",
+          "width": 73.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Hold framing",
+          "width": 113.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "while the",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "camera moves",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -588.6700439453125
+      ],
+      "view100": [
+        85.76670837402344,
+        -502.9830017089844
+      ],
+      "requested": [
+        188.91774248828975,
+        587.0
+      ],
+      "actual": [
+        27,
+        -399,
+        331,
+        1029
+      ],
+      "text": [
+        {
+          "text": "Shapeke",
+          "width": 109.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "ys \u00d7",
+          "width": 52.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "Camera",
+          "width": 97.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 73.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "Blend",
+          "width": 54.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "shapes as",
+          "width": 97.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "the view",
+          "width": 82.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "changes.",
+          "width": 88.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 87.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "Perspecti",
+          "width": 117.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "ve",
+          "width": 30.0,
+          "available": 119.79713738525265,
+          "size": 25.41822827938671,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 71.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "proportions",
+          "width": 111.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "of parts of",
+          "width": 100.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "your",
+          "width": 43.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "character/s",
+          "width": 111.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "cene",
+          "width": 48.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "independen",
+          "width": 113.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "t of true",
+          "width": 77.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "camera",
+          "width": 72.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 47.0,
+          "available": 119.79713738525265,
+          "size": 20.159284497444634,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000854492188
+      ],
+      "view100": [
+        92.72077941894531,
+        -543.7654418945312
+      ],
+      "requested": [
+        208.37133329216329,
+        473.0
+      ],
+      "actual": [
+        25,
+        -133,
+        338,
+        767
+      ],
+      "text": [
+        {
+          "text": "Shapekeys",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "\u00d7 Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 68.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Blend shapes",
+          "width": 118.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "as the view",
+          "width": 99.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "changes.",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Perspectiv",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "e",
+          "width": 14.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 65.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "proportions of",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "parts of your",
+          "width": 111.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "character/sce",
+          "width": 123.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "ne",
+          "width": 22.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "independent",
+          "width": 110.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "of true camera",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 43.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "+ Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Tricks",
+          "width": 73.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Hold framing",
+          "width": 113.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "while the",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "camera moves",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 420,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000854492188
+      ],
+      "view100": [
+        92.72077941894531,
+        -543.7654418945312
+      ],
+      "requested": [
+        208.37133329216329,
+        473.0
+      ],
+      "actual": [
+        25,
+        -133,
+        338,
+        767
+      ],
+      "text": [
+        {
+          "text": "Shapekeys",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "\u00d7 Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 68.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Blend shapes",
+          "width": 118.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "as the view",
+          "width": 99.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "changes.",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Perspectiv",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "e",
+          "width": 14.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 65.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "proportions of",
+          "width": 124.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "parts of your",
+          "width": 111.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "character/sce",
+          "width": 123.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "ne",
+          "width": 22.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "independent",
+          "width": 110.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "of true camera",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 43.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "+ Camera",
+          "width": 112.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Tricks",
+          "width": 73.0,
+          "available": 131.48127985401155,
+          "size": 23.512684989429175,
+          "fits": true
+        },
+        {
+          "text": "Hold framing",
+          "width": 113.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "while the",
+          "width": 80.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        },
+        {
+          "text": "camera moves",
+          "width": 128.0,
+          "available": 131.48127985401155,
+          "size": 18.64799154334038,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 341,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000854492188
+      ],
+      "view100": [
+        92.7720718383789,
+        -543.7654418945312
+      ],
+      "requested": [
+        159.08482060149447,
+        735.0
+      ],
+      "actual": [
+        25,
+        -557,
+        258,
+        1191
+      ],
+      "text": [
+        {
+          "text": "Shape",
+          "width": 73.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "keys \u00d7",
+          "width": 77.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "Camer",
+          "width": 76.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "a",
+          "width": 14.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "Angle",
+          "width": 68.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "Blend",
+          "width": 50.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "shapes",
+          "width": 63.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "as the",
+          "width": 53.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "view",
+          "width": 41.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "changes",
+          "width": 75.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": ".",
+          "width": 5.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "Force",
+          "width": 66.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "d",
+          "width": 15.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "Persp",
+          "width": 67.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "ective",
+          "width": 71.0,
+          "available": 79.53556675641997,
+          "size": 23.49591836734694,
+          "fits": true
+        },
+        {
+          "text": "Control",
+          "width": 65.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "proporti",
+          "width": 69.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "ons of",
+          "width": 55.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "parts of",
+          "width": 67.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "your",
+          "width": 39.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "characte",
+          "width": 77.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "r/scene",
+          "width": 68.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "indepen",
+          "width": 71.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "dent of",
+          "width": 62.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "true",
+          "width": 35.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "camera",
+          "width": 65.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        },
+        {
+          "text": "FOV.",
+          "width": 43.0,
+          "available": 79.53556675641997,
+          "size": 18.63469387755102,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "region": 540,
+      "ui_scale": 1.5,
+      "view0": [
+        0.0,
+        -636.4000854492188
+      ],
+      "view100": [
+        92.671630859375,
+        -543.7654418945312
+      ],
+      "requested": [
+        281.9774285184956,
+        354.0
+      ],
+      "actual": [
+        25,
+        60,
+        458,
+        574
+      ],
+      "text": [
+        {
+          "text": "Shapekeys \u00d7",
+          "width": 150.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Camera Angle",
+          "width": 164.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Blend shapes as the",
+          "width": 176.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "view changes.",
+          "width": 126.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "Forced",
+          "width": 81.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Perspective",
+          "width": 138.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Control proportions of",
+          "width": 194.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "parts of your",
+          "width": 111.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "character/scene",
+          "width": 145.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "independent of true",
+          "width": 173.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "camera FOV.",
+          "width": 113.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "Dolly Zoom +",
+          "width": 150.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Camera Tricks",
+          "width": 169.0,
+          "available": 209.4632350314628,
+          "size": 23.511299435028246,
+          "fits": true
+        },
+        {
+          "text": "Hold framing while the",
+          "width": 198.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        },
+        {
+          "text": "camera moves",
+          "width": 128.0,
+          "available": 209.4632350314628,
+          "size": 18.64689265536723,
+          "fits": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "backend": "OPENGL",
+  "version": "5.2.2 LTS",
+  "build": "d13f752e3b9c",
+  "idle_layout_count": 8,
+  "hit_areas_verified": true
+}

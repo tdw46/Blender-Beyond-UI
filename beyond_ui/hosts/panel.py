@@ -6,6 +6,7 @@ exist only while visible controls settle. Nothing is registered on import.
 
 from ..animation import AnimationSettings
 from .bridge import load, BridgeUnavailable
+from .. import panel_geometry
 
 
 class PanelHost:
@@ -124,20 +125,20 @@ class PanelHost:
                 getattr(context.preferences.view, "ui_scale", 1.0),
             ),
         )
-        width = max(1.0, context.region.width / scale - 20.0)
+        record = self.records.get(key)
+        paint_scale = panel_geometry.pixel_scale(context.region, scale)
+        gutter = record.get("native_gutter", 20) if record else 20
+        width = panel_geometry.available_width(context.region.width, paint_scale, gutter)
         if deferred:
             height = canvas.height
         else:
-            from ..gpu.paint import measure
-            from ..gpu.typography import face
+            from ..gpu.typography import text_measurer
 
             font, size = self.font, canvas.theme.font_size
-            measure_key = (id(self), int(font), getattr(font, "title", int(font)), size)
+            measure_key = (id(self), int(font), getattr(font, "title", int(font)), size, paint_scale)
             if canvas._text_measure_key != measure_key:
                 canvas.set_text_measure(
-                    lambda text, role: measure(
-                        face(font, role), size * (12 / 11 if role == "title" else 1), text
-                    )[0],
+                    text_measurer(font, size, paint_scale),
                     measure_key,
                 )
             if getattr(canvas, "panel_layout", False) != self.panel_layout:
@@ -146,7 +147,6 @@ class PanelHost:
             # Resume before reflowing registered lists validates their parent.
             canvas.visible = True
             height = canvas.arrange(width)
-        record = self.records.get(key)
         if record is None:
             token = self.bridge.next_token
             self.bridge.next_token += 1
@@ -176,6 +176,7 @@ class PanelHost:
         record["painted"] = False
         record["deferred"] = deferred
         record["resume"] = False
+        record["layout_pixel_scale"] = paint_scale
         if not deferred:
             canvas.visible = True
             canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
@@ -223,6 +224,18 @@ class PanelHost:
         record["valid"] = True
         record["rect"] = (x0, y0, x1 - x0, y1 - y0)
         record["clip"] = (left, bottom, right - left, top - bottom)
+        # Native panel tabs, borders and scroll gutters reduce the Extra button's
+        # width independently of its reserved height. Reflow against that actual
+        # width instead of compressing a wider canvas and clipping its text.
+        gutter = panel_geometry.measured_gutter(
+            region.width, x1 - x0, record["layout_pixel_scale"]
+        )
+        previous_gutter = record.get("native_gutter")
+        if previous_gutter is None or gutter > previous_gutter or gutter < previous_gutter - 1:
+            record["native_gutter"] = gutter
+            record["resume"] = True
+            canvas.invalidate()
+            self._request_resume(key)
         # Native header text may still be queued before our framebuffer/clip changes.
         from ..gpu.typography import flush_text
 

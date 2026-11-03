@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "checks": [
+    "ANGLES: Next reaches step 3, double-click cannot exit, deliberate Open still works",
+    "PERSPECTIVE: Next reaches step 3, double-click cannot exit, deliberate Open still works",
+    "DOLLY: Next reaches step 3, double-click cannot exit, deliberate Open still works"
+  ],
+  "version": "5.2.2 LTS",
+  "status": {
+    "registered": true,
+    "draw_errors": {},
+    "input_errors": {},
+    "native_fallbacks": {},
+    "popup_fallbacks": [],
+    "panels": {
+      "CAMKEYS_PT_setup": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_auto_fov": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_baking": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_camkeys_linking": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_camkeys_main": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_camprops": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      },
+      "CAMKEYS_PT_lattice_auto_fov_modifier": {
+        "available": false,
+        "reason": "Not started",
+        "menus": "Not started",
+        "property_contributions": "Not started"
+      }
+    }
+  }
+}

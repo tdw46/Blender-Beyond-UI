@@ -1,0 +1,17 @@
+{
+  "vendor_files": 247,
+  "native_files_unchanged": 46,
+  "source_base": "0b1161fceca412952d0705610e74c4ed34947cd2",
+  "working_tree_changes": true,
+  "installed": "C:\\Users\\tyler\\Documents\\Blender\\extensions\\user_default\\CamKeys\\_vendor\\beyond_ui",
+  "backup": "C:\\Users\\tyler\\Documents\\CamKeys-Backups\\choice-card-overflow-20261103-154800",
+  "live_load": "MCP connection refused; installed for next restart. User PID 19220 left running.",
+  "checks": "457 unit tests; Ruff; custom parity ledger; 8127 real-font cases each on Vulkan and OpenGL with zero overflow; installed Vulkan repeat passed.",
+  "source_hashes": {
+    "gpu/typography.py": "80fb90b6bb7f04e2917539d77c57dab3282b214b6a49f9d5ea66a9aab5441f23",
+    "hosts/panel.py": "ba1a3a71f71e5e4d5c62dbdb64467d6e7f96b0f69b38b8f5c2b2a41bff13e928",
+    "hosts/floating.py": "eb7f5e1434784ae5383fa36ad0c63e42fca4827abff2af82da9c019822b76a10",
+    "widgets/choice_card.py": "77da16053b75667dea047b20051ffbe415f068a5c59c2cbbb9d4fc49577069af"
+  },
+  "install_note": "Vendor replacement completed, then cleanup encountered the loaded native DLL. The remaining old DLL tree was moved into loaded-native-staging inside the backup; binary hashes are unchanged."
+}

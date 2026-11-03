@@ -1,0 +1,26 @@
+{
+  "backup": "C:\\Users\\tyler\\Documents\\CamKeys-Backups\\native-card-width-20261103-161115",
+  "installed": "C:\\Users\\tyler\\Documents\\Blender\\extensions\\user_default\\CamKeys\\_vendor\\beyond_ui",
+  "changed": [
+    {
+      "target": "C:\\Users\\tyler\\Documents\\Blender\\extensions\\user_default\\CamKeys\\_vendor\\beyond_ui",
+      "files": [
+        "hosts/panel.py",
+        "panel_geometry.py",
+        "vendor-record.json"
+      ]
+    },
+    {
+      "target": "C:\\Users\\tyler\\Documents\\CamKeys-Perf-20261102\\camkeys\\_vendor\\beyond_ui",
+      "files": [
+        "hosts/panel.py",
+        "panel_geometry.py",
+        "vendor-record.json"
+      ]
+    }
+  ],
+  "native_files_unchanged": 46,
+  "vendor_files_verified": 248,
+  "source_base": "0b1161fceca412952d0705610e74c4ed34947cd2",
+  "working_tree_changes": true
+}

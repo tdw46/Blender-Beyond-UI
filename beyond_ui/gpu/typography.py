@@ -66,6 +66,25 @@ def face(font, role="body"):
     return getattr(font, "title", int(font)) if role == "title" else int(font)
 
 
+def text_measurer(font, font_size, pixel_scale=1.0):
+    """Keep the two-argument layout contract, with exact sized glyph metrics.
+
+    Compound controls use at_size instead of rescaling hinted glyph advances
+    measured at another size. pixel_scale is the host's logical-to-pixel scale.
+    """
+    from .paint import measure
+
+    def callback(text, role):
+        size = font_size() if callable(font_size) else font_size
+        return measure(face(font, role), size * (12 / 11 if role == "title" else 1), text)[0]
+
+    def at_size(text, role, size):
+        return measure(face(font, role), size * pixel_scale, text)[0] / pixel_scale
+
+    callback.at_size = at_size
+    return callback
+
+
 @contextmanager
 def motion_text(font, motion, *, force=False):
     """Submit owned fonts inside finite transforms; retain batching at rest."""

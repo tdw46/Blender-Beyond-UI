@@ -1627,6 +1627,12 @@ class Canvas(Group):
             self.open_panel(control, clip, context)
             return True
         if control.kind == "button":
+            # Blender marks a subsequent click as DOUBLE_CLICK. A press may
+            # already have navigated/rebuilt this canvas, leaving a different
+            # action under the pointer. Ordinary buttons act on PRESS only;
+            # event-aware controls (e.g. list-row rename) own their semantics.
+            if event.value == "DOUBLE_CLICK" and not control.options.get("action_event"):
+                return True
             if control.options.get("hold_menu") or control.options.get(
                 "release_action"
             ):

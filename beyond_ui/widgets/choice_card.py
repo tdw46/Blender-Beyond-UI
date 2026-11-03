@@ -1,8 +1,7 @@
 """Enum-backed media choice chrome. Button dispatch/context remains native BUI."""
 from .base import Painter
 from .media import MediaWidget
-from ..gpu import skin, style, typography
-from ..gpu.paint import measure
+from ..gpu import skin
 from ..text_wrap import wrap_text
 
 class ChoiceCard:
@@ -15,16 +14,8 @@ class ChoiceCard:
         self.font_size,self.description_size,self.line_height=font_size,description_size,line_height
         self.rim_width,self.radio_size=rim_width,radio_size
         self.media=MediaWidget(library,media_key,canvas,height-2*padding,radius-2) if library else None
-        self._lines={}
+        self._text_layout = ((), ())
         self.render_height=height
-
-    def lines(self, text, font, size, width):
-        key=(text,int(font),size,round(width,2))
-        if key not in self._lines:
-            result=wrap_text(text,width,lambda value:measure(font,size,value)[0])
-            if len(self._lines)>8:self._lines.clear()
-            self._lines[key]=result
-        return self._lines[key]
 
     def dimensions(self, available, font_size, measure=None):
         """Wrap during retained layout; narrow cards grow instead of clipping copy."""
@@ -32,9 +23,19 @@ class ChoiceCard:
         width = available / scale
         mw = min(self.media_width, width*.35)
         limit = max(20, width-self.padding*2-mw-10-self.radio_size-8)
-        def count(text,size,role):
-            return len(wrap_text(text,limit,lambda value:measure(value,role)*size/font_size if measure else len(value)*size*.58))
-        text_height=count(self.title,self.font_size,'title')*(self.line_height+1)+4+count(self.description,self.description_size,'body')*self.line_height
+        sized_measure = getattr(measure, 'at_size', None)
+        def lines(text, size, role):
+            def width_of(value):
+                if sized_measure is not None:
+                    return sized_measure(value, role, size * scale) / scale
+                if measure is not None:
+                    return measure(value, role) * size / font_size
+                return len(value) * size * .58
+            return wrap_text(text, limit, width_of)
+        titles = lines(self.title, self.font_size, 'title')
+        copy = lines(self.description, self.description_size, 'body')
+        self._text_layout = titles, copy
+        text_height=len(titles)*(self.line_height+1)+4+len(copy)*self.line_height
         self.render_height=max(self.height,text_height+2*self.padding)
         return available, self.render_height*scale
 
@@ -51,9 +52,9 @@ class ChoiceCard:
         if self.media:
             self.media.paint(p.map((pad,pad,mw,height-2*pad)),font,palette,backdrop=backdrop)
         tx=pad+mw+10;available=max(20,width-tx-pad-self.radio_size-8)
-        title_font=typography.face(font,'title')
-        titles=self.lines(self.title,title_font,self.font_size,available)
-        copy=self.lines(self.description,typography.face(font,'body'),self.description_size,available)
+        # Paint precisely the lines that reserved this card's height. A second
+        # wrap with different hinted font metrics can add an unreserved line.
+        titles, copy = self._text_layout
         total=len(titles)*(self.line_height+1)+len(copy)*self.line_height+4
         top=max(pad,(height-total)/2)
         for line in titles:

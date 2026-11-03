@@ -1,0 +1,225 @@
+{
+  "passed": true,
+  "trace": [
+    {
+      "phase": "loaded",
+      "state": {
+        "step": 1,
+        "force": true,
+        "dismissed": false,
+        "route": "PERSPECTIVE",
+        "error": "",
+        "visible": true
+      }
+    },
+    {
+      "phase": "before click",
+      "state": {
+        "step": 1,
+        "force": true,
+        "dismissed": false,
+        "route": "PERSPECTIVE",
+        "error": "",
+        "visible": true
+      },
+      "rect": [
+        16.0,
+        446.34606706031207,
+        271.2808941374947,
+        32.0
+      ],
+      "xy": [
+        908,
+        196
+      ],
+      "record": [
+        18,
+        15,
+        360,
+        633
+      ],
+      "clip": [
+        18,
+        15,
+        360,
+        633
+      ],
+      "height": 533.3460670603121,
+      "props": {
+        "action": "NEXT",
+        "route": ""
+      }
+    },
+    {
+      "phase": "after click",
+      "state": {
+        "step": 2,
+        "force": true,
+        "dismissed": false,
+        "route": "PERSPECTIVE",
+        "error": "",
+        "visible": true
+      },
+      "status": {
+        "registered": true,
+        "draw_errors": {},
+        "input_errors": {},
+        "native_fallbacks": {},
+        "popup_fallbacks": [],
+        "panels": {
+          "CAMKEYS_PT_setup": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_auto_fov": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_baking": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_camkeys_linking": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_camkeys_main": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_camprops": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          },
+          "CAMKEYS_PT_lattice_auto_fov_modifier": {
+            "available": true,
+            "reason": "",
+            "menus": "",
+            "property_contributions": ""
+          }
+        }
+      }
+    },
+    {
+      "controls": [
+        {
+          "label": "",
+          "rect": [
+            263.2808941374947,
+            18.0,
+            24.0,
+            24.0
+          ],
+          "key": "2159012269136:camkeys.show_example:1"
+        },
+        {
+          "label": "Viewport",
+          "rect": [
+            71.0,
+            249.3460670603121,
+            108.14044706874736,
+            26.0
+          ],
+          "key": "2159012277968:enum:1"
+        },
+        {
+          "label": "Camera",
+          "rect": [
+            179.14044706874736,
+            249.3460670603121,
+            108.14044706874736,
+            26.0
+          ],
+          "key": "2159012277968:enum:2"
+        },
+        {
+          "label": "",
+          "rect": [
+            232.28089413749473,
+            338.34606706031207,
+            24.0,
+            24.0
+          ],
+          "key": "2159011635280:camkeys.reset_apparent_focal_length:1"
+        },
+        {
+          "label": "",
+          "rect": [
+            263.2808941374947,
+            338.34606706031207,
+            24.0,
+            24.0
+          ],
+          "key": "2159011632720:camkeys.show_example:1"
+        },
+        {
+          "label": "Next",
+          "rect": [
+            16.0,
+            398.34606706031207,
+            271.2808941374947,
+            34.0
+          ],
+          "key": "2159012030544:camkeys.setup_create:1"
+        },
+        {
+          "label": "Back",
+          "rect": [
+            16.0,
+            439.34606706031207,
+            131.64044706874736,
+            32.0
+          ],
+          "key": "2158680144336:camkeys.setup_navigate:1"
+        },
+        {
+          "label": "Open full controls",
+          "rect": [
+            155.64044706874736,
+            441.34606706031207,
+            131.64044706874736,
+            28.0
+          ],
+          "key": "2158680144336:camkeys.setup_navigate:2"
+        }
+      ],
+      "record": [
+        18,
+        70,
+        360,
+        578
+      ],
+      "height": 487.34606706031207,
+      "region": [
+        629,
+        97
+      ]
+    },
+    {
+      "dispatch": "{'RUNNING_MODAL'}"
+    },
+    {
+      "phase": "after double click",
+      "state": {
+        "step": 2,
+        "force": true,
+        "dismissed": false,
+        "route": "PERSPECTIVE",
+        "error": "",
+        "visible": true
+      }
+    }
+  ]
+}

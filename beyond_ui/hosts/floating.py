@@ -3,8 +3,8 @@
 from .panel import PanelHost
 from .bridge import load, BridgeUnavailable
 from ..canvas import Canvas
-from ..gpu.typography import Fonts, face
-from ..gpu.paint import measure, paint
+from ..gpu.typography import Fonts, text_measurer
+from ..gpu.paint import paint
 
 
 def visible_region_rect(area, region):
@@ -69,11 +69,7 @@ class FloatingHost(PanelHost):
         self.reason = ""
         self.scale = max(0.5, getattr(context.preferences.system, "ui_scale", 1.0))
         self.canvas.set_text_measure(
-            lambda text, role: measure(
-                face(self.font, role),
-                self.canvas.theme.font_size * (12 / 11 if role == "title" else 1),
-                text,
-            )[0],
+            text_measurer(self.font, lambda: self.canvas.theme.font_size, self.scale),
             (id(self), int(self.font)),
         )
         self.canvas.bind_animation(
