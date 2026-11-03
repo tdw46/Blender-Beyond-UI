@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 viewport-first setup, final Back navigation and Lens Tricks media correction",
+  "reviewed": "2026-11-03 \u2014 onboarding branches merged into main/master",
   "remaining_turns": [
     0,
     1
@@ -58,8 +58,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Completed 12-language wizard/help coverage and the requested follow-up: Lens Tricks reuses the supplied AutoFOV comparison clip; new CamKeys/CamProps scenes and Forced Perspective setup default to Viewport; final workflow screens retain Back. Explicit saved Camera choices are preserved and Dolly Zoom remains camera-driven.",
-  "estimate_review": "Added and closed the three requested onboarding corrections in this publication turn. Requested implementation remains complete: 0 implementation turns, 0\u20131 optional review/fix turn. Windows fixes and version numbers remain unchanged.",
+  "latest_progress": "Wizard translations, full-panel help, Viewport-first setup, Lens Tricks media and final Back navigation are merged into Beyond UI main and CamKeys master. Installed CamKeys is on master with matching committed content; no version changes.",
+  "estimate_review": "Publication-only turn: fast-forwarded both primary branches with the Windows history retained. No implementation scope or estimate changed: 0 implementation turns, 0\u20131 optional review/fix turn.",
   "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
