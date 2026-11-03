@@ -89,7 +89,7 @@ def run():
         folder=OUT/'motion';folder.mkdir(exist_ok=True);png(folder/f'{frame:03}.png',w,h,bytes(pixels))
        if frame==1:png(OUT/f'{slug}.png',w,h,bytes(pixels))
       expected={'BUI_ADJUSTMENTS','BUI_CLAPPERBOARD','BUI_LAYERS','BUI_APERTURE'} if slug=='ready' else {'BUI_EXTERNAL'}
-      if stage in {1,2}:expected.add('BUI_BACK')
+      if stage>0:expected.add('BUI_BACK')
       if stage<0:expected=set()
       assert expected.issubset(glyphs),(slug,expected-glyphs)
       if stage>=0:assert (17 if stage==2 else 16) in outline_radii,(slug,outline_radii)

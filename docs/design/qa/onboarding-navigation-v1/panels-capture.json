@@ -1,0 +1,88 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 93162,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--gpu-backend",
+      "metal",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/capture_onboarding.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 93162,
+      "restore_requests": 0,
+      "seconds": 5.160816073417664,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "records": [
+        {
+          "stage": "perspective",
+          "width": 688,
+          "height": 1025,
+          "controls": 16,
+          "warm_submit_ms": [
+            0.632875002338551
+          ],
+          "texture_bytes": 522240,
+          "glass": true,
+          "required_icons": [
+            "BUI_BACK",
+            "BUI_EXTERNAL"
+          ],
+          "button_rims_match": true
+        },
+        {
+          "stage": "ready",
+          "width": 688,
+          "height": 1163,
+          "controls": 21,
+          "warm_submit_ms": [
+            0.6910829979460686
+          ],
+          "texture_bytes": 1341440,
+          "glass": true,
+          "required_icons": [
+            "BUI_ADJUSTMENTS",
+            "BUI_APERTURE",
+            "BUI_BACK",
+            "BUI_CLAPPERBOARD",
+            "BUI_LAYERS"
+          ],
+          "button_rims_match": true
+        }
+      ],
+      "hidden_stopped": true,
+      "source_scene": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+      "limits": [
+        "Offscreen component captures with real BUI shared glass, not a screenshot of the live N panel.",
+        "Source media sampled at 10 FPS; all durations preserved."
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-navigation-panels/blender-0.log"
+  }
+]

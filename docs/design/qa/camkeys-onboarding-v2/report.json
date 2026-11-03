@@ -79,5 +79,6 @@
     "workflow.png": "1d504d0893d50c54e28fe9d1d754a22c4680c82428d2b5f145dac5c71946770b"
   },
   "installed_source_sha256": "ea8674687be7368ba03225ee72863e2c54cb8c01a388bf49298b6a072636a8e1",
-  "localization_and_help_review": "../onboarding-locales-v1/report.json"
+  "localization_and_help_review": "../onboarding-locales-v1/report.json",
+  "viewport_navigation_followup": "../onboarding-navigation-v1/report.json"
 }

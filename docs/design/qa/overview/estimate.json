@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-03 \u2014 publication checkpoint: wizard translations and full-panel help",
+  "reviewed": "2026-11-03 \u2014 viewport-first setup, final Back navigation and Lens Tricks media correction",
   "remaining_turns": [
     0,
     1
@@ -58,8 +58,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Completed the wizard/help catalogs, namespaced navigation, CJK card wrapping, preserved data names, native fallback help wrapping and all-five-panel question-mark coverage. Thirteen guides open with shared glass; twelve play looping media and all stop on close. Installed consumer and vendor synchronized.",
-  "estimate_review": "Commit/push checkpoint only: implemented scope and the 0\u20131 optional review/fix-turn estimate are unchanged. Latest remote Windows commits are ancestors of both publication branches.",
+  "latest_progress": "Completed 12-language wizard/help coverage and the requested follow-up: Lens Tricks reuses the supplied AutoFOV comparison clip; new CamKeys/CamProps scenes and Forced Perspective setup default to Viewport; final workflow screens retain Back. Explicit saved Camera choices are preserved and Dolly Zoom remains camera-driven.",
+  "estimate_review": "Added and closed the three requested onboarding corrections in this publication turn. Requested implementation remains complete: 0 implementation turns, 0\u20131 optional review/fix turn. Windows fixes and version numbers remain unchanged.",
   "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -432,6 +432,11 @@
       "work": "All wizard/help locales, CJK card layout, explicit data-name preservation, scoped navigation context and full-panel question-mark guides; actual locale/popup tests and Metal capture review.",
       "evidence": "docs/design/qa/onboarding-locales-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Lens Tricks media correction, shared Viewport defaults, camera-optional Forced Perspective setup and final-step Back navigation.",
+      "evidence": "docs/design/qa/onboarding-navigation-v1/report.json",
+      "turns": 1
     }
   ],
   "remaining_work": "No known remaining implementation work in this requested batch. Optional user review of localized copy/help placement; native-speaker translation review and physical Windows/Blender 4.2 onboarding qualification remain separate. Existing live Uraraka requires a fresh launch to load the new registration/catalog.",
@@ -495,7 +500,7 @@
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "localized onboarding and full-panel help review",
-  "latest_review": "../onboarding-locales-v1/index.html",
+  "latest_review": "../camkeys-onboarding-v2/index.html#ready",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",

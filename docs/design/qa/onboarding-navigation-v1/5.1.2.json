@@ -1,0 +1,42 @@
+[
+  {
+    "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+    "pid": 92718,
+    "command": [
+      "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/Blender-Beyond-UI/tests/blender_onboarding.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.1.2",
+      "checks": [
+        "Viewport defaults shared by CamKeys/CamProps; Lens Tricks maps to the supplied comparison clip",
+        "recorded and arranged 0/ANGLES",
+        "whole-card selection retains exact enum binding; 240/320/480 widths",
+        "recorded and arranged 1/ANGLES",
+        "recorded and arranged 2/ANGLES",
+        "recorded and arranged 2/PERSPECTIVE",
+        "recorded and arranged 2/DOLLY",
+        "recorded and arranged 3/ANGLES",
+        "recorded and arranged 3/PERSPECTIVE",
+        "recorded and arranged 3/DOLLY",
+        "camera-angle creation + repeat-click idempotency",
+        "PERSPECTIVE creates an enabled, functional effect",
+        "DOLLY creates an enabled, functional effect",
+        "Directional detection, ambiguity rejection, selected confirmation, normalized offsets, duplicate skip, unchanged presets and Add More manual path",
+        "eight pinned clips decoded; full-duration timelines and loops",
+        "registration/teardown and no background playback"
+      ]
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/onboarding-defaults-5.1.2/blender-0.log"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-03",
+  "changes": [
+    "Lens Tricks/apparent focal-length help uses the hash-verified Camkeys AutoFOV Comparison.mp4; subject Sonic clip unchanged",
+    "New/unset CamKeys and CamProps sources default to Viewport; explicit saved Camera settings retained",
+    "Forced Perspective exposes the Viewport/Camera selector and needs no camera in Viewport mode",
+    "All final workflow screens retain left-aligned Back without changing created effects"
+  ],
+  "verification": [
+    "Blender 5.1.2/5.2.2 real setup workflows, no-camera viewport Forced Perspective, explicit-camera validation, final Back controls and non-mutating navigation",
+    "All 13 custom popup playback/glass/cleanup checks on both versions",
+    "Current Metal captures using saved Uraraka bindings; no owned Blender activation or restoration. The 5.1.2 popup audit observed Discord/Edge focus changes, preserved in its raw log."
+  ],
+  "media_source_sha256": "32d39a6d30c8d23a1416d1591230d067b2b4f35e1bd4d27b87fe34a378abe759",
+  "limits": [
+    "Component renders over controlled shared backdrop, not a live sidebar screenshot",
+    "Existing saved source choices are not migrated or overwritten",
+    "No new physical Windows or Blender 4.2 execution in this pass"
+  ],
+  "images": {
+    "panels/ready.png": "4b9cb860a6b293f1b86d8959f5f1625486f0ad2cfeb591b07671a9f2c4ca1b69",
+    "panels/perspective.png": "82d923f0964235801bff41cae2c88bd94eece3d7d0039562f1756d3fce865e44",
+    "lens/apparent_fov.png": "60d774066aa3b47cd6f5dd73f1b701f325119401bccd9902f353b265072e1072"
+  }
+}

@@ -13,6 +13,9 @@ try:
  from camkeys_qa._vendor.beyond_ui.layout_recording import Tape
  from camkeys_qa._vendor.beyond_ui.hosts.addon import PanelProxy
  state=bpy.context.scene.camkeys_setup
+ assert state.source=='VIEWPORT' and bpy.context.scene.UseViewportInsteadOfCamera
+ assert ob.HELP_MEDIA['apparent_fov']=='camprops_comparison'
+ checks.append('Viewport defaults shared by CamKeys/CamProps; Lens Tricks maps to the supplied comparison clip')
  assert ob.visible(bpy.context)
  assert bpy.ops.camkeys.setup_navigate() == {'CANCELLED'}
  assert not bpy.context.scene.mesh_object_items
@@ -24,7 +27,7 @@ try:
  state.shapekey='Smile';state.source='CAMERA'
  area=next(a for a in bpy.context.screen.areas if a.type=='VIEW_3D');region=next(r for r in area.regions if r.type=='WINDOW')
  with bpy.context.temp_override(area=area,region=region):
-  for stage,route in ((0,'ANGLES'),(1,'ANGLES'),(2,'ANGLES'),(2,'PERSPECTIVE'),(2,'DOLLY'),(3,'ANGLES')):
+  for stage,route in ((0,'ANGLES'),(1,'ANGLES'),(2,'ANGLES'),(2,'PERSPECTIVE'),(2,'DOLLY'),(3,'ANGLES'),(3,'PERSPECTIVE'),(3,'DOLLY')):
    state.step=stage;state.route=route
    t=Tape();ob.CAMKEYS_PT_setup.draw(PanelProxy(ob.CAMKEYS_PT_setup,t.root),bpy.context)
    layout=Layout(context=bpy.context);ui_theme.STUDIO.apply(layout.canvas);t.play(layout);layout.canvas.arrange(320)
@@ -37,6 +40,9 @@ try:
       card=c.options['choice_card']
       assert c.binding is not None
       assert c.rect[3]>=card.height
+   if stage==3:
+    back=[c for c in layout.canvas.controls.values() if c.label=='Back']
+    assert len(back)==1 and back[0].options['icon']=='BUI_BACK' and back[0].options['text_alignment']=='LEFT'
    if stage==1:
     choices=[c for c in layout.canvas.controls.values() if 'choice_card' in c.options]
     assert len(choices)==3
@@ -53,17 +59,29 @@ try:
   assert bpy.ops.camkeys.setup_create()=={'CANCELLED'} and len(obj.angle_items)==1
   checks.append('camera-angle creation + repeat-click idempotency')
   # Both effect routes exercise the existing engine, not a cosmetic ready screen.
+  camera=state.camera
   for route in ('PERSPECTIVE','DOLLY'):
    state.step=2;state.route=route
+   if route=='PERSPECTIVE':
+    state.camera=None;bpy.context.scene.camera=None
+    state.source='CAMERA';assert ob.validate(state,workflow=True)
+    state.source='VIEWPORT';assert not ob.validate(state,workflow=True)
+   else:
+    state.camera=camera;bpy.context.scene.camera=camera
    outcome=bpy.ops.camkeys.setup_create()
    assert outcome=={'FINISHED'},(route,state.error)
    item=bpy.context.scene.mesh_object_items[0]
    assert item.auto_fov_enabled
+   assert bpy.context.scene.UseViewportInsteadOfCamera==(route=='PERSPECTIVE')
+   if route=='PERSPECTIVE':assert bpy.context.scene.camera is None
+   before=len(obj.angle_items)
+   assert bpy.ops.camkeys.setup_navigate(action='BACK')=={'FINISHED'} and state.step==2
+   assert len(obj.angle_items)==before
    if route=='DOLLY':
     assert item.auto_fov_dolly_lock.active
     item.auto_fov_dolly_lock.active=False
    checks.append(route+' creates an enabled, functional effect')
-  state.step=2;state.route='ANGLES'
+  state.step=2;state.route='ANGLES';state.source='CAMERA'
   assert bpy.ops.camkeys.setup_capture()=={'FINISHED'}
   assert state.captured
   # Read-only detection first, then the existing auto-add operator on confirmation.
@@ -105,8 +123,9 @@ try:
   assert not ob.visible(bpy.context)
   assert bpy.ops.camkeys.setup_navigate(action='START')=={'FINISHED'} and ob.visible(bpy.context)
   assert set(ob.HELP_MEDIA)<=set(ob.HELP)
-  assert len(set(ob.HELP_MEDIA.values()))==8
-  for key in set(ob.HELP_MEDIA.values()):
+  assert len(demo_media.LIBRARY.provider.clips)==8
+  assert set(ob.HELP_MEDIA.values())<=set(demo_media.LIBRARY.provider.clips)
+  for key in demo_media.LIBRARY.provider.clips:
    frame=demo_media.LIBRARY.provider.frame(key,0);assert len(frame[3]())==frame[1]*frame[2]*4
    meta=demo_media.LIBRARY.provider.clips[key][0]
    assert demo_media.LIBRARY.provider.frame(key,meta['duration_ms']*100)[0]>=0

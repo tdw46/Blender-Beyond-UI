@@ -1,0 +1,28 @@
+{
+  "perspective": [
+    "CamKeys",
+    "Set up forced perspective",
+    "Source",
+    "Viewport",
+    "Camera",
+    "Apparent focal length",
+    "Start with a stable lens. Fine-tune later.",
+    "Create setup",
+    "Back",
+    "Open full controls"
+  ],
+  "ready": [
+    "CamKeys",
+    "You’re ready",
+    "head_.002",
+    "Camera angles",
+    "Open controls",
+    "Add More…",
+    "Add another workflow",
+    "Learn more",
+    "Billboard",
+    "CamProps",
+    "Lens tricks",
+    "Back"
+  ]
+}
