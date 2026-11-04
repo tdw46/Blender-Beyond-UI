@@ -1,0 +1,62 @@
+{
+  "status": "Research only \u2014 not a general popping fix",
+  "date": "2026-11-04",
+  "installed": {
+    "commit": "60d2015",
+    "branch": "codex/ray-volume-exact-preview",
+    "schema": 15,
+    "known_popping": true
+  },
+  "withdrawn": {
+    "commit": "dcb2ed5",
+    "schema": 16,
+    "reason": "User requires exact lens projection; bounded candidate limited distortion."
+  },
+  "fixed_constraints": [
+    "Real camera fixed",
+    "Screen framing fixed",
+    "No hidden lens clamp"
+  ],
+  "render_metrics": [
+    {
+      "lens_mm": 12.5,
+      "mean_absolute_rgb_difference_255": 0.0031301440329218107
+    },
+    {
+      "lens_mm": 25.0,
+      "mean_absolute_rgb_difference_255": 0.0016023662551440329
+    },
+    {
+      "lens_mm": 100.0,
+      "mean_absolute_rgb_difference_255": 0.00037551440329218103
+    }
+  ],
+  "orbit_summary": {
+    "samples": 900,
+    "summary": {
+      "admitted": 612,
+      "no-positive-depth-root": 111,
+      "projection-plane-crossing": 177
+    },
+    "max_volume_error": 8.303913112683858e-11,
+    "maximum_nearby_root_delta": 0.0001571304981133892,
+    "nearby_admission_losses": 0,
+    "multiple_root_samples": 134,
+    "production_ready": false
+  },
+  "remaining": [
+    "Continuous positive radial-depth solution, especially long lens/open regions",
+    "Exact visible-image reconstruction when target projection plane crosses source",
+    "Geometry Nodes float32, falloff, multi-object, root conditioning and cadence tests",
+    "Matched viewport/GPU close-zoom performance; no FPS repair claimed"
+  ],
+  "live_scene_saved": false,
+  "radial_normalization_alternative": {
+    "status": "not suitable for installation",
+    "outside_plane_domain": 723,
+    "positive_scales": 613,
+    "rescued_anchored_failures": 66,
+    "maximum_scale": 6.430305078804951,
+    "reason": "Open-region signed-volume cancellation; large depth/size change can reproduce reported explosion."
+  }
+}

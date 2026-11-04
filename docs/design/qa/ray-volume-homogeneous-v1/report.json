@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-04",
+  "status": "Executable research prototype; not installed and not production-complete",
+  "camera_and_framing": "Real camera unchanged. Same target projection/framing convention as prior fixed-framing reference; no lens clamp.",
+  "sweep": {
+    "passed": true,
+    "samples": 900,
+    "max_volume_error": 6.503841909477615e-11,
+    "max_ray_residual": 6.980527267330672e-15,
+    "max_small_step_distance": 2.3317739210876203e-05,
+    "samples_with_behind_vertices": 177,
+    "limitations": "Moving projective fan closure; not the old fixed-depth closure. No claim of physical enclosed volume for the open Head selection. Unclipped topology retains negative target depths."
+  },
+  "actual_recorded_gn": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "samples": 900,
+    "maximum_position_error": 1.9797603975080236e-06,
+    "maximum_relative_open_fan_volume_error": 0.00025011107093964036,
+    "limitations": "Recorded pre-effect geometry with Head faces and transformed closure anchor; not the live full modifier stack, falloff or shared companion pipeline."
+  },
+  "render_metrics": [
+    {
+      "lens_mm": 12.5,
+      "mae_rgb255": 2.829218106995885e-05
+    },
+    {
+      "lens_mm": 25.0,
+      "mae_rgb255": 0.00042695473251028805
+    },
+    {
+      "lens_mm": 100.0,
+      "mae_rgb255": 9.77366255144033e-05
+    }
+  ],
+  "texture_metrics": {
+    "target": 0.0,
+    "raw-projective": 17.937847916666666,
+    "corrected-projective": 0.0006791666666666666
+  },
+  "hardware": "Apple M5 Pro",
+  "dense_timings": [
+    {
+      "label": "schema15",
+      "ratio": 0.5,
+      "median_ms": 4.445083002792671,
+      "p95_ms": 6.356791011057794
+    },
+    {
+      "label": "projective",
+      "ratio": 0.5,
+      "median_ms": 2.032271004281938,
+      "p95_ms": 2.34695800463669
+    },
+    {
+      "label": "schema15-repeat",
+      "ratio": 0.5,
+      "median_ms": 4.0383749874308705,
+      "p95_ms": 4.556291009066626
+    },
+    {
+      "label": "projective-repeat",
+      "ratio": 0.5,
+      "median_ms": 1.9930415000999346,
+      "p95_ms": 2.3695830022916198
+    },
+    {
+      "label": "schema15",
+      "ratio": 2.0,
+      "median_ms": 3.962562492233701,
+      "p95_ms": 4.399041994474828
+    },
+    {
+      "label": "projective",
+      "ratio": 2.0,
+      "median_ms": 1.905749988509342,
+      "p95_ms": 2.214666979853064
+    },
+    {
+      "label": "schema15-repeat",
+      "ratio": 2.0,
+      "median_ms": 4.349291499238461,
+      "p95_ms": 5.161375011084601
+    },
+    {
+      "label": "projective-repeat",
+      "ratio": 2.0,
+      "median_ms": 1.938124987646006,
+      "p95_ms": 2.243416995042935
+    }
+  ],
+  "dense_workload": {
+    "vertices": 40962,
+    "faces": 81920,
+    "scope": "New standalone triangular full-influence kernel versus shipped full graph on same mesh. Not equivalent feature coverage or full viewport FPS; not an Uraraka-stack speedup claim."
+  },
+  "clipping": [
+    {
+      "vertices": 642,
+      "bmesh_ms": 1.115874998504296,
+      "vector_compute_ms": 0.22012500267010182,
+      "vector_with_mesh_publication_ms": 0.44968748989049345
+    },
+    {
+      "vertices": 10242,
+      "bmesh_ms": 17.053625007974915,
+      "vector_compute_ms": 1.2162920029368252,
+      "vector_with_mesh_publication_ms": 3.7658540095435455
+    },
+    {
+      "vertices": 40962,
+      "bmesh_ms": 71.77664601476863,
+      "vector_compute_ms": 3.8693750102538615,
+      "vector_with_mesh_publication_ms": 13.292103991261683
+    }
+  ],
+  "compatibility": [
+    "4.2.23 LTS",
+    "4.3.2",
+    "4.4.3",
+    "4.5.15 LTS",
+    "5.0.1",
+    "5.1.2",
+    "5.2.2 LTS"
+  ],
+  "not_completed": [
+    "General UV/material/BVT integration, normals/raycast/curvature and other scene occlusion",
+    "Nonconvex/multiple-loop/open-surface clipping and attribute preservation",
+    "Shared companion horizon, falloff, n-gons, billboard, undo and saved asset migration",
+    "Live Uraraka viewport/GPU performance and cross-platform hardware qualification"
+  ],
+  "installed": "60d2015 schema15; known popping still present; no live scene or preferences saved",
+  "cut_transition_checks": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "samples": 442,
+    "failures": [],
+    "max_witness_displacement": 0.0006952540581739441,
+    "max_radial_scale_delta": 9.341705893950447e-06,
+    "limitations": "Convex closed sphere, paired lens perturbations around vertex crossings. One unchanged vertex witnesses global normalization continuity; not a Hausdorff or rendered continuity test, not a proof for arbitrary topology."
+  },
+  "volume_contract": "Total closed volume or declared open-patch signed fan metric; not local Jacobian preservation or curvature invariance."
+}

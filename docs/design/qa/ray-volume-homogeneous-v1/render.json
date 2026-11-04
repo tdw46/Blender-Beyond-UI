@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "projective": "projective-2.5.png",
+      "beta": 0.020696653663336322,
+      "lens": 2.5,
+      "target": "target-2.5.png",
+      "lift": "lift-2.5.png",
+      "volume_error": 2.220446049250313e-16,
+      "minimum_depth": -1.9772887809108928,
+      "clipped": "clipped-2.5.png",
+      "clipping": {
+        "vertices": 237,
+        "faces": 403,
+        "cap_faces": 1,
+        "all_surface_edges_manifold": true,
+        "nonmanifold_surface_edges": 0,
+        "volume_error": 2.960070433211115e-08,
+        "minimum_depth": 1.1023103070328943e-05,
+        "scale": 1.1074070854047073,
+        "clip_build_ms": 1.7777920002117753,
+        "warm_median_ms": 1.3435000000754371
+      }
+    },
+    {
+      "projective": "projective-12.5.png",
+      "beta": 0.0131099804929864,
+      "lens": 12.5,
+      "target": "target-12.5.png",
+      "lift": "lift-12.5.png",
+      "volume_error": 0.0,
+      "minimum_depth": 1.3396504288335334,
+      "clipped": "clipped-12.5.png",
+      "clipping": {
+        "vertices": 507,
+        "faces": 1002,
+        "cap_faces": 0,
+        "all_surface_edges_manifold": false,
+        "nonmanifold_surface_edges": 1,
+        "volume_error": 3.2143606665258062e-09,
+        "minimum_depth": 1.3564943075180054,
+        "scale": 1.0000000010714536,
+        "clip_build_ms": 1.5050840156618506,
+        "warm_median_ms": 1.5327500004786998
+      }
+    },
+    {
+      "projective": "projective-25.png",
+      "beta": 0.007231756151507638,
+      "lens": 25,
+      "target": "target-25.png",
+      "lift": "lift-25.png",
+      "volume_error": 3.3306690738754696e-16,
+      "minimum_depth": 2.4313279393622302,
+      "clipped": "clipped-25.png",
+      "clipping": {
+        "vertices": 507,
+        "faces": 1002,
+        "cap_faces": 0,
+        "all_surface_edges_manifold": false,
+        "nonmanifold_surface_edges": 1,
+        "volume_error": 7.795288547995938e-08,
+        "minimum_depth": 2.4554555416107178,
+        "scale": 0.9999999740157062,
+        "clip_build_ms": 1.6307499899994582,
+        "warm_median_ms": 1.424999994924292
+      }
+    },
+    {
+      "projective": "projective-100.png",
+      "beta": -0.005964818376753292,
+      "lens": 100,
+      "target": "target-100.png",
+      "lift": "lift-100.png",
+      "volume_error": 5.551115123125783e-16,
+      "minimum_depth": 4.744636281840439,
+      "clipped": "clipped-100.png",
+      "clipping": {
+        "vertices": 507,
+        "faces": 1002,
+        "cap_faces": 0,
+        "all_surface_edges_manifold": false,
+        "nonmanifold_surface_edges": 1,
+        "volume_error": 1.1273431510527843e-07,
+        "minimum_depth": 4.640654563903809,
+        "scale": 1.000000037578108,
+        "clip_build_ms": 1.4357919862959534,
+        "warm_median_ms": 1.263125508558005
+      }
+    }
+  ],
+  "live_scene_untouched": true,
+  "renderer": "Cycles CPU 8 samples, fixed source-face emission colors",
+  "limitations": "Triangulated Suzanne with boundary fills; original nonmanifold surface edges are reported explicitly. Clipping rebuilds topology, places the new cap inside the real near clip slab, and removes hidden geometry. Does not prove unchanged volume under arbitrary open meshes or shader/texture/scene-occlusion parity."
+}

@@ -1,0 +1,24 @@
+{
+  "legacy": {
+    "median_of_block_medians_ms": 7.4608125069062226,
+    "median_of_block_p95_ms": 9.16295799834188,
+    "blocks": 8,
+    "sample_count": 480
+  },
+  "accepted": {
+    "median_of_block_medians_ms": 8.81970849877689,
+    "median_of_block_p95_ms": 10.512708497117274,
+    "blocks": 8,
+    "sample_count": 480
+  },
+  "experiment": {
+    "median_of_block_medians_ms": 8.874541999830399,
+    "median_of_block_p95_ms": 10.624375005136244,
+    "blocks": 8,
+    "sample_count": 480
+  },
+  "maximum_coordinate_difference": 0.0,
+  "candidate_relative_change_percent": 0.6217155709977495,
+  "decision": "Rejected for promotion: no measured speed improvement; exact geometry retained.",
+  "workload": "Saved Uraraka7modifiers, 25/100mm apparent vs50mm real; CPU writes+depsgraph, no UI/GPU FPS claim. Two repeats of six orderedblocks, 10warm+60measured perblock."
+}

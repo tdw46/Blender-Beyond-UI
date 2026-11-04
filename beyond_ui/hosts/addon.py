@@ -301,6 +301,23 @@ class Runtime:
             return
         cache_key = getattr(definition, "cache_key", None)
         fingerprint += (cache_key(context) if cache_key else None,)
+        interaction_context = (context.mode, context.space_data.as_pointer())
+        if self.adopt and cached is not None and cached[0][:4] == fingerprint:
+            canvas = cached[1]
+            # A native redraw can change conditional accessories while a scalar
+            # is being dragged. Replacing its canvas would cancel the transaction
+            # (restoring the old value) and briefly change View2D's reserved
+            # height. Keep this exact owner and geometry through mouse release;
+            # values remain live, and the next draw authors the new structure.
+            if (getattr(canvas, "_author_context", None) == interaction_context
+                    and canvas.edit is not None and canvas.editor is None
+                    and canvas.active is not None and canvas.active.kind == "number"
+                    and not canvas.edit.closed and canvas.edit.binding.valid()):
+                canvas._author_revision = None
+                canvas.visible = True
+                if not host.draw(native, context, canvas):
+                    native.label(text="Custom panel unavailable: " + host.reason, icon="INFO")
+                return
         state = self.layout_states.setdefault((definition, key), {})
         tape = None
         author_revision = None
@@ -424,6 +441,7 @@ class Runtime:
             (author_revision[0], freeze(state), *author_revision[2:])
             if author_revision is not None else None
         )
+        canvas._author_context = interaction_context
 
     def draw_error(self, definition, key, native, error, context=None, instance=None):
         self.errors[definition.__name__] = f"{type(error).__name__}: {error}"

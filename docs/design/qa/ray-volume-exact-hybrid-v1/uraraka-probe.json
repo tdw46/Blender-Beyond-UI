@@ -1,0 +1,150 @@
+[
+  {
+    "selection": "Head",
+    "ratio": 0.05,
+    "admitted": false,
+    "minimum_virtual_depth": -2.3410482539063513,
+    "cause": "virtual projection plane intersects source"
+  },
+  {
+    "selection": "Head",
+    "ratio": 0.1,
+    "admitted": false,
+    "minimum_virtual_depth": -0.6705241269531756,
+    "cause": "virtual projection plane intersects source"
+  },
+  {
+    "selection": "Head",
+    "ratio": 0.25,
+    "admitted": true,
+    "depth_scale": 3.473739007332322,
+    "minimum_depth": 0.5431006430604087,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 6.800116025829084e-16,
+    "volume_error": 3.2094327195864025e-12
+  },
+  {
+    "selection": "Head",
+    "ratio": 0.5,
+    "admitted": true,
+    "depth_scale": 1.4575089923965794,
+    "minimum_depth": 0.9789441052769619,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.0245584642661925e-16,
+    "volume_error": 1.8340884366807586e-13
+  },
+  {
+    "selection": "Head",
+    "ratio": 0.4748539924621582,
+    "admitted": true,
+    "depth_scale": 1.5309317713599293,
+    "minimum_depth": 0.9630724845035913,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.0939474033052647e-16,
+    "volume_error": 1.8340884366807586e-13
+  },
+  {
+    "selection": "Head",
+    "ratio": 1.0,
+    "admitted": true,
+    "depth_scale": 1.0000000000000326,
+    "minimum_depth": 1.0778426941106733,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 3.8163916471489756e-16,
+    "volume_error": 4.574118861455645e-14
+  },
+  {
+    "selection": "Head",
+    "ratio": 2.0,
+    "admitted": true,
+    "depth_scale": 0.8859576674579636,
+    "minimum_depth": 1.1024949434503755,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 3.8163916471489756e-16,
+    "volume_error": 4.5852210917018965e-14
+  },
+  {
+    "selection": "Head",
+    "ratio": 5.0,
+    "admitted": true,
+    "depth_scale": 0.838118546140342,
+    "minimum_depth": 1.112836208142407,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 3.8163916471489756e-16,
+    "volume_error": 4.574118861455645e-14
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 0.05,
+    "admitted": false,
+    "minimum_virtual_depth": -2.3410482539063513,
+    "cause": "virtual projection plane intersects source"
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 0.1,
+    "admitted": false,
+    "minimum_virtual_depth": -0.6705241269531756,
+    "cause": "virtual projection plane intersects source"
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 0.25,
+    "admitted": true,
+    "depth_scale": 3.180394542170128,
+    "minimum_depth": 0.6065121915302039,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 7.216449660063518e-16,
+    "volume_error": 2.1891377599558837e-12
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 0.5,
+    "admitted": true,
+    "depth_scale": 1.3141459873904013,
+    "minimum_depth": 1.0099345319608208,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.163336342344337e-16,
+    "volume_error": 5.284661597215745e-14
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 0.4748539924621582,
+    "admitted": true,
+    "depth_scale": 1.36760015088645,
+    "minimum_depth": 0.9983794774702991,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.2327252813834093e-16,
+    "volume_error": 1.0536016503692736e-13
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 1.0,
+    "admitted": true,
+    "depth_scale": 0.9999999999999785,
+    "minimum_depth": 1.0778426941106851,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.0245584642661925e-16,
+    "volume_error": 0.0
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 2.0,
+    "admitted": true,
+    "depth_scale": 0.921982584441234,
+    "minimum_depth": 1.094707526128075,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 3.677613769070831e-16,
+    "volume_error": 1.8474111129762605e-13
+  },
+  {
+    "selection": "whole mesh",
+    "ratio": 5.0,
+    "admitted": true,
+    "depth_scale": 0.8882391006077984,
+    "minimum_depth": 1.1020017716815422,
+    "focus_depth": 1.294010224098792,
+    "projection_error": 4.0939474033052647e-16,
+    "volume_error": 1.3100631690576847e-14
+  }
+]

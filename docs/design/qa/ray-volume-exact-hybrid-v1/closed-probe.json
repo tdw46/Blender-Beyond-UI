@@ -1,0 +1,167 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "rows": [
+    {
+      "ratio": 0.05,
+      "framing": "original",
+      "admitted": false,
+      "cause": "Virtual camera plane intersects source mesh",
+      "minimum_virtual_depth": -1.7070312500000002,
+      "virtual_distance": 0.2
+    },
+    {
+      "ratio": 0.05,
+      "framing": "outside-camera",
+      "admitted": false,
+      "cause": "No positive affine-depth volume root",
+      "roots": [
+        "(-0.09193777417873154+13.883922984870566j)",
+        "(-0.09193777417873154-13.883922984870566j)",
+        "(9.252040580151194+0j)"
+      ]
+    },
+    {
+      "ratio": 0.1,
+      "framing": "original",
+      "admitted": false,
+      "cause": "Virtual camera plane intersects source mesh",
+      "minimum_virtual_depth": -0.35351562500000017,
+      "virtual_distance": 0.4
+    },
+    {
+      "ratio": 0.1,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 2.556314059079816,
+      "focus_depth": 4.0,
+      "minimum_depth": 2.615995591451318,
+      "volume_error": 2.220446049250313e-16,
+      "projection_error": 2.7755575615628914e-17,
+      "virtual_distance": 0.6414062500000001,
+      "framing_scale": 0.6236297198538368
+    },
+    {
+      "ratio": 0.25,
+      "framing": "original",
+      "admitted": true,
+      "depth_scale": 1.0917810628320943,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4089029089510614,
+      "volume_error": 2.220446049250313e-16,
+      "projection_error": 2.7755575615628914e-17,
+      "virtual_distance": 1.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 0.25,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 1.0917810628320943,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4089029089510614,
+      "volume_error": 2.220446049250313e-16,
+      "projection_error": 2.7755575615628914e-17,
+      "virtual_distance": 1.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 0.5,
+      "framing": "original",
+      "admitted": true,
+      "depth_scale": 1.0470000840823017,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4331476107273162,
+      "volume_error": 0.0,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 2.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 0.5,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 1.0470000840823017,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4331476107273162,
+      "volume_error": 0.0,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 2.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 1.0,
+      "framing": "original",
+      "admitted": true,
+      "depth_scale": 1.0000000000000002,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.45859375,
+      "volume_error": 0.0,
+      "projection_error": 0.0,
+      "virtual_distance": 4.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 1.0,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 1.0000000000000002,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.45859375,
+      "volume_error": 0.0,
+      "projection_error": 0.0,
+      "virtual_distance": 4.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 2.0,
+      "framing": "original",
+      "admitted": true,
+      "depth_scale": 0.9721214141715978,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4736873906086583,
+      "volume_error": 2.220446049250313e-16,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 8.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 2.0,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 0.9721214141715978,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.4736873906086583,
+      "volume_error": 2.220446049250313e-16,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 8.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 5.0,
+      "framing": "original",
+      "admitted": true,
+      "depth_scale": 0.9541424938969025,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.48342129041363,
+      "volume_error": 3.3306690738754696e-16,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 20.0,
+      "framing_scale": 1.0
+    },
+    {
+      "ratio": 5.0,
+      "framing": "outside-camera",
+      "admitted": true,
+      "depth_scale": 0.9541424938969025,
+      "focus_depth": 4.0,
+      "minimum_depth": 3.48342129041363,
+      "volume_error": 3.3306690738754696e-16,
+      "projection_error": 1.3877787807814457e-17,
+      "virtual_distance": 20.0,
+      "framing_scale": 1.0
+    }
+  ],
+  "production": false,
+  "limitations": "Closed triangulated Suzanne only. Projection and volume feasibility, not live performance, masks or continuity qualification."
+}

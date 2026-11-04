@@ -1,0 +1,79 @@
+{
+  "installed_commit": "60d2015",
+  "schema": 15,
+  "path": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys/__init__.py",
+  "runtime_schema": 15,
+  "focal": 23.742698669433594,
+  "view_source": true,
+  "enabled": true,
+  "rows": [
+    {
+      "object": "belt.001",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "body.001",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "Hair.002",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "Hair.003",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "head_.002",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "NeckPlate.001",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    },
+    {
+      "object": "wrists.001",
+      "state": [
+        -0.02682986482977867,
+        0.0,
+        1.2954858541488647
+      ]
+    }
+  ],
+  "mode": "OBJECT",
+  "frame": 1,
+  "active": "Cube",
+  "selection": [],
+  "saved": false,
+  "dirty": false,
+  "backup_groups": [
+    [
+      "CamKeys_AutoFOV_before_repair",
+      14
+    ]
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "Real simulated drag crosses conditional icon threshold three times without release, rollback, canvas replacement or scroll jump; one commit and fresh accessory after release"
+  ],
+  "commits": [
+    [
+      30.0,
+      79.74819946289062
+    ]
+  ],
+  "version": "5.1.2"
+}

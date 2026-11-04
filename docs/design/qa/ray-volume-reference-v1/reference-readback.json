@@ -1,0 +1,13 @@
+{
+  "runtime": "Blender 5.2.2",
+  "source_vertices": 507,
+  "evaluated_vertices": 507,
+  "max_source_evaluated_coordinate_difference": 0,
+  "baseline_lens": 24.65804100036621,
+  "baseline_focus_depth": 3.370826005935669,
+  "current_lens": 7.832540988922119,
+  "current_distance": 1.0707311630249023,
+  "projection_x": 0.21757055819034576,
+  "projection_y": 0.3330453336238861,
+  "notes": "Read-only MCP in unsaved Suzanne session; earlier 2.5 camera state inferred from captured dolly relation, not replayed live."
+}

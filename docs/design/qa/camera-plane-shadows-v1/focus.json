@@ -1,0 +1,82 @@
+[
+  {
+    "run": "extra-candidate-gpu",
+    "pid": 91298,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "extra-candidate-replay",
+    "pid": 92085,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-before",
+    "pid": 96519,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-after",
+    "pid": 97234,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-no-shadow",
+    "pid": 97895,
+    "initial_frontmost_pid": 810,
+    "final_frontmost_pid": 756,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-depth-first",
+    "pid": 98379,
+    "initial_frontmost_pid": 756,
+    "final_frontmost_pid": 756,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-rebuild",
+    "pid": 98728,
+    "initial_frontmost_pid": 756,
+    "final_frontmost_pid": 756,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "full-opaque-casters",
+    "pid": 99317,
+    "initial_frontmost_pid": 756,
+    "final_frontmost_pid": 756,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "drag-native",
+    "pid": 95775,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  },
+  {
+    "run": "drag-native-512",
+    "pid": 97560,
+    "initial_frontmost_pid": 36495,
+    "final_frontmost_pid": 36495,
+    "test_activation_events": [],
+    "restore_requests": 0
+  }
+]

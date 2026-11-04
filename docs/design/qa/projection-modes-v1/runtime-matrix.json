@@ -1,0 +1,1150 @@
+[
+  {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.474270990001969,
+        "p95_ms": 2.210454201849643
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.8350415048189461,
+        "p95_ms": 2.6068663530168115
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "4.2.23 LTS",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.1237709986744449,
+        "p95_ms": 1.496858945756684
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.4628754870500416,
+        "p95_ms": 1.9139437368721692
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "4.3.2",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 0.9455209947191179,
+        "p95_ms": 1.2675639358349144
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.230270994710736,
+        "p95_ms": 1.5153146043303423
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "4.4.3",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.0588335135253146,
+        "p95_ms": 1.3615125222713687
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.3118335045874119,
+        "p95_ms": 1.918381587893236
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "4.5.15 LTS",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.959729488589801,
+        "p95_ms": 2.3786356934579085
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.9518749904818833,
+        "p95_ms": 2.903470846649724
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "5.0.1",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.2313955230638385,
+        "p95_ms": 1.5672660025302318
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.4923540002200752,
+        "p95_ms": 1.9875413549016223
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  },
+  {
+    "passed": true,
+    "version": "5.1.2",
+    "vertices": 10242,
+    "rows": [
+      {
+        "artistic": false,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.050000011920928955,
+        "min_depth": -5.894449234008789,
+        "max_error": 7.142074309740565e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.10000002384185791,
+        "min_depth": -2.784952163696289,
+        "max_error": 4.904518391413148e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.24998998641967773,
+        "min_depth": -0.00010085105895996094,
+        "max_error": 2.4862004011083627e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25,
+        "min_depth": 0.0,
+        "max_error": 2.373635652475059e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.25001001358032227,
+        "min_depth": 0.00010085105895996094,
+        "max_error": 2.488980044290656e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": false,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": false,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.002735614776611328
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.05,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.1,
+        "effective_ratio": 0.25819867849349976,
+        "min_depth": 0.08087873458862305,
+        "max_error": 2.660985956026707e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.24999,
+        "effective_ratio": 0.2589673697948456,
+        "min_depth": 0.0882866382598877,
+        "max_error": 5.316496185514552e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25,
+        "effective_ratio": 0.25896963477134705,
+        "min_depth": 0.08830833435058594,
+        "max_error": 5.31624976929379e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.25001,
+        "effective_ratio": 0.2589719295501709,
+        "min_depth": 0.08833050727844238,
+        "max_error": 2.6510542738833465e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 0.5,
+        "effective_ratio": 0.5,
+        "min_depth": 1.587401032447815,
+        "max_error": 2.3837719709263183e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 1.0,
+        "effective_ratio": 1.0,
+        "min_depth": 3.0,
+        "max_error": 0.0
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 2.0,
+        "effective_ratio": 2.0,
+        "min_depth": 4.40972375869751,
+        "max_error": 5.387344117480097e-07
+      },
+      {
+        "artistic": true,
+        "requested_ratio": 4.0,
+        "effective_ratio": 4.0,
+        "min_depth": 5.952754020690918,
+        "max_error": 6.161742760468769e-07
+      },
+      {
+        "artistic": true,
+        "sweep_samples": 121,
+        "max_vertex_step": 0.001676321029663086
+      },
+      {
+        "source_boundary": "side",
+        "max_vertex_step": 1.4354699347963686e-06
+      },
+      {
+        "source_boundary": "camera_plane",
+        "max_vertex_step": 9.999999974752427e-07
+      }
+    ],
+    "timings": [
+      {
+        "artistic": false,
+        "median_ms": 1.1248329828958958,
+        "p95_ms": 1.8338562644203191
+      },
+      {
+        "artistic": true,
+        "median_ms": 1.560999997309409,
+        "p95_ms": 2.0691896119387816
+      }
+    ],
+    "limits": "Full asset depsgraph plus readback; not GPU viewport FPS. Falloff does not preserve local/global volume generally."
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "schema": 17,
+  "mode": "EXACT",
+  "head_vertices": 12913,
+  "finite": true,
+  "visible_modifiers": 7,
+  "all_artistic_inputs": false,
+  "release_version": "3.5.6",
+  "blend_saved": false,
+  "visual_acceptance": "No new live motion or GPU visual acceptance."
+}

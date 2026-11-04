@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-03 \u2014 production ray-volume candidate and four-runtime checks; speed target remains open",
+  "reviewed": "2026-11-04 \u2014 shared exact shadow traversal and compact bounds reduce 2.5 mm render time 149\u219257 ms; 96 orbit buffers identical",
   "remaining_turns": [
-    1,
-    3
-  ],
-  "implementation_turns": [
     1,
     2
   ],
-  "integration_qa_turns": [
+  "implementation_turns": [
     0,
+    1
+  ],
+  "integration_qa_turns": [
+    1,
     1
   ],
   "active_hours": [
     0.5,
     2
   ],
-  "confidence": "Low for the requested no-regression speed target. Integration and four-runtime execution are complete; the final matched Uraraka CPU workload is still 16% slower. Not installed.",
-  "basis": "Closed the production graph, saved-input migration/rollback, shared falloff, curve/billboard and four-runtime integration work. Exact volume reduction still adds about 1.2 ms in the matched Uraraka workload; no cadence reduction or approximate geometry introduced.",
+  "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
+  "basis": "Closed the dominant repeated-AA traversal cost and packed-bound memory admission gap: 2.5 mm completed scene renders improved 2.59\u00d7 with all 96 matched orbit buffers identical. Remaining work is full-size restarted viewport qualification and any additional optimization justified by its residual extreme-lens cost; 57 ms at 640\u00d7480 is not a 60fps claim.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,7 +25,16 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Ray-volume integration has numerical, migration and matched CPU timing evidence only; installed runtime and live Uraraka unchanged. Approved v2 renders remain the visual reference; no new actual viewport/GPU capture.",
+    "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
+    "Camera-plane shadows: exact float-buffer comparisons and fresh-process Metal timings; no new GIF or exhaustive live motion capture. Private geometry/color snapshots remain untracked. Drag repair has actual native input evidence on 5.1.2/5.2.2.",
+    "Long-lens repair: actual matched live Metal before/after PNGs and comparison. No new motion GIF, isolated full-scene FPS gain, exhaustive overlap sweep or physical Windows capture. Short-lens rendering stall remains open.",
+    "Projection modes: four actual production-GN CPU Cycles renders and a comparison matrix; no new live Uraraka motion/GPU FPS recording or physical Windows capture. Artistic effective lens is labeled explicitly.",
+    "Reference calibration: actual CPU 7.8 mm near-identical comparison and two rejected 2.5 mm continuations. No new live Uraraka motion, production GN/GPU/Windows evidence.",
+    "Source-relative visibility: actual CPU front/side render matrices, synthetic closed character proxy, 2.7M point checks and actual BVH/dihedral measurements. No live Uraraka motion or material/GPU/Windows visual acceptance.",
+    "Soft-front radial: actual CPU front/side PNG matrices at fixed camera settings; synthetic closed character proxy plus numerical recorded Head tests. No live Uraraka animation, real-material proof or physical Windows capture. Installed preview unchanged.",
+    "Homogeneous radial prototype: actual CPU target/projective/clipped PNGs plus a checker correction comparison. No live Uraraka animation/GPU FPS capture or general material/companion acceptance; installed preview unchanged.",
+    "Exact radial hybrid: seven actual Cycles CPU PNGs and three paired comparisons; diagnostic emission shading only. No live Uraraka animation, production float32 graph, GPU FPS or Windows/backend acceptance.",
+    "Ray-volume preview installed and numerically read back in live Uraraka. No new visual/GPU capture. Selected open-region domain rejection reproduced in disposable Blender; approved v2 renders remain the visual reference.",
     "v2 front/back redistribution: nine actual CPU renders comparing new/previous algorithms on the same closed triangulated Suzanne fixture; editable .blend. No production Uraraka, animation recording or physical Windows evidence.",
     "Ray-volume prototype: nine actual CPU diagnostic renders and a static comparison, plus editable .blend. No animated GIF, Uraraka production comparison or physical Windows/backend qualification yet.",
     "Focal accessories: fresh actual full-panel and wizard PNGs. No new motion behavior/GIF. Deformation prototype has numerical evidence only, no production geometry or shader visual acceptance.",
@@ -67,9 +76,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Candidate integrated and execution-tested: 8.74 ms vs 7.53 ms old graph in matched Uraraka CPU workload. Same scheduling and shared falloff. Installed master unchanged; no speed-parity claim.",
-  "estimate_review": "Reduced remaining budget from 2\u20134 to 1\u20133 turns because graph integration and most compatibility checks closed. Performance qualification remains a concrete failed gate, not generic pending QA. Time range is widened to 0.5\u20132 active hours because several exact-reduction optimizations still leave measurable overhead.",
-  "time_summary": "Uncertain 0.5\u20132 active-hour optimization/integration forecast, not a delivery promise; no claim that this long engineering pass followed the historical one-minute-turn pace.",
+  "latest_progress": "Installed exact shared-AA search and compact bounds in BVT on disk. Metal 2.5 mm warm median 148.61\u219257.44 ms; 96 matched full-scene frames, 162 material cases and 12 geometry replay cases have zero pixel differences. Restart needed; live scene untouched.",
+  "estimate_review": "Reduced remaining turns 1\u20133 to 1\u20132 and active estimate 1\u20134 h to 0.5\u20132 h after completing shared-ray traversal and compact storage. Residual full-size viewport performance remains a concrete open gate; no claim of a complete extreme-lens performance solution.",
+  "time_summary": "Uncertain 0.5\u20132 active hours for restarted full-size viewport qualification and targeted residual optimization; measured render times are not a completion forecast.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -476,9 +485,34 @@
       "work": "Production ray-volume integration, shared reference/falloff, saved-scene migration/rollback and four-runtime geometry/asset/update checks",
       "evidence": "docs/design/qa/ray-volume-integration-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Installed accepted ray-volume candidate; exact corner-reuse experiment rejected after matching geometry but no timing gain",
+      "evidence": "docs/design/qa/ray-volume-integration-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Source-relative visibility guard, positive radial volume normalization, actual GN and fixed-ray distortion prototype comparisons",
+      "evidence": "docs/design/qa/ray-volume-visibility-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Read-only actual Suzanne projection calibration, valid-range exact affine volume proof, 7.8 mm render match and 28 closed-solid checks",
+      "evidence": "docs/design/qa/ray-volume-reference-v1/render.json",
+      "turns": 1
+    },
+    {
+      "work": "Exact-default and opt-in Artistic projection modes, additive saved-scene migration, six strings in twelve languages, seven-family runtime tests, source-boundary continuity and installed Uraraka reload",
+      "evidence": "docs/design/qa/projection-modes-v1/index.html",
+      "turns": 2
+    },
+    {
+      "work": "Shared exact AA traversal, per-ray bound rejection and compact bounds within the existing shadow budget",
+      "evidence": "docs/design/qa/offscreen-shadows-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Optimize exact face reduction to the previous baseline; expose invalid-domain status; install/reload only after the performance gate and then verify live Uraraka behavior. Windows hardware follow-up remains separate.",
+  "remaining_work": "Finish the extreme short-lens exact shadow-query optimization without lowering quality, then recheck motion/hitching and hardware coverage. The shadow shader update needs a real Blender restart; the BUI drag repair is already active.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -538,8 +572,8 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Live preview and viewport-first Dolly setup",
-  "latest_review": "../ray-volume-integration-v1/index.html",
+  "checkpoint": "next motion and hardware QA checkpoint",
+  "latest_review": "../offscreen-shadows-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -584,6 +618,26 @@
     {
       "batch": "Total-volume front/back appearance correction",
       "details": "Replaced local conservation (caused flattening) with global finite-mesh volume solve and constant camera-depth offset. Prototype delivered; new face-reduction optimization gate explicitly remains."
+    },
+    {
+      "batch": "Exact fixed-camera stability investigation",
+      "details": "Bounded candidate rejected and withdrawn. Exact single-parameter hybrid solves recorded short-lens case but fails long-lens roots in 111/900 samples; 177 projection-plane crossings require separate exact-visible-image research. Remaining range increased for concrete newly exposed math and integration work."
+    },
+    {
+      "batch": "Projective radial topology/material research",
+      "details": "900/900 actual Head GN cases and zero-volume transition probes pass. New shader interpolation defect demonstrated and corrected in one fixture. General capping/material integration and ~14 ms dense topology publication remain concrete additional scope."
+    },
+    {
+      "batch": "Explicit Exact versus Artistic contract",
+      "details": "Exact now permits camera-plane clipping and is default. Artistic is approximate, opt-in, with a continuous whole-mesh lens safety bound. No promise of an exact exterior 2.5 mm image or invariant shaders."
+    },
+    {
+      "batch": "Long-lens redistribution regression and Uraraka rendering stall",
+      "details": "Long-lens depth/position regression repaired with shared conditioned volume normalization and optimized field evaluation. Captured Head max drift54cm\u21924mm. Separately measured camera-source orbit has zero CamKeys updates and substantial Metal/surface-ink latency; live GPU isolation is concrete newly added work, not a solved speed gain."
+    },
+    {
+      "batch": "Camera-plane shadow quality and scalar drag interruption",
+      "details": "Added shadow quality requirement preserved, exact candidate optimization validated; added drag/scroll regression closed. Extreme 2.5 mm query cost remains explicitly open despite partial optimization."
     }
   ],
   "windows_wizard_click_through": {

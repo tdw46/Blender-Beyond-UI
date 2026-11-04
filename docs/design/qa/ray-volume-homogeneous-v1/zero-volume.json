@@ -1,0 +1,258 @@
+{
+  "passed": true,
+  "cases": 36,
+  "rows": [
+    {
+      "ratio": 0.05,
+      "offset": -0.01,
+      "beta": 8.336821102775994e-07,
+      "scale": 7.368063329549466,
+      "absolute_volume_error": 2.1684043449710089e-16
+    },
+    {
+      "ratio": 0.05,
+      "offset": -0.0001,
+      "beta": 8.37703001640036e-11,
+      "scale": 7.368062997309911,
+      "absolute_volume_error": 2.532018648568335e-16
+    },
+    {
+      "ratio": 0.05,
+      "offset": -1e-07,
+      "beta": 8.377424649175989e-17,
+      "scale": 7.368062997280773,
+      "absolute_volume_error": 5.825514093366773e-17
+    },
+    {
+      "ratio": 0.05,
+      "offset": -1e-10,
+      "beta": 8.377425043696792e-23,
+      "scale": 7.368062997280773,
+      "absolute_volume_error": 1.1590331997244939e-17
+    },
+    {
+      "ratio": 0.05,
+      "offset": 0.0,
+      "beta": 0.0,
+      "scale": 7.368062997280773,
+      "absolute_volume_error": 0.0
+    },
+    {
+      "ratio": 0.05,
+      "offset": 1e-10,
+      "beta": 8.377425043696792e-23,
+      "scale": 7.368062997280773,
+      "absolute_volume_error": 1.1590331997244939e-17
+    },
+    {
+      "ratio": 0.05,
+      "offset": 1e-07,
+      "beta": 8.377424649175989e-17,
+      "scale": 7.368062997280773,
+      "absolute_volume_error": 2.230150267498989e-16
+    },
+    {
+      "ratio": 0.05,
+      "offset": 0.0001,
+      "beta": 8.377030016400342e-11,
+      "scale": 7.368062997309826,
+      "absolute_volume_error": 2.804017868590636e-17
+    },
+    {
+      "ratio": 0.05,
+      "offset": 0.01,
+      "beta": 8.336821083118187e-07,
+      "scale": 7.368063244129631,
+      "absolute_volume_error": 2.6281060661048627e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": -0.01,
+      "beta": 3.07145652801209e-07,
+      "scale": 1.5874012846750023,
+      "absolute_volume_error": 1.968911145233676e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": -0.0001,
+      "beta": 3.086274216175995e-11,
+      "scale": 1.587401051991297,
+      "absolute_volume_error": 2.1917146916794472e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": -1e-07,
+      "beta": 3.086419607591153e-17,
+      "scale": 1.5874010519681996,
+      "absolute_volume_error": 2.4368394091699413e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": -1e-10,
+      "beta": 3.086419752940923e-23,
+      "scale": 1.5874010519681996,
+      "absolute_volume_error": 1.7518610668509555e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": 0.0,
+      "beta": 0.0,
+      "scale": 1.5874010519681996,
+      "absolute_volume_error": 0.0
+    },
+    {
+      "ratio": 0.5,
+      "offset": 1e-10,
+      "beta": 3.086419752940923e-23,
+      "scale": 1.5874010519681996,
+      "absolute_volume_error": 1.7518610668509555e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": 1e-07,
+      "beta": 3.086419607591153e-17,
+      "scale": 1.5874010519681996,
+      "absolute_volume_error": 1.2932762412985694e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": 0.0001,
+      "beta": 3.0862742161759676e-11,
+      "scale": 1.5874010519912916,
+      "absolute_volume_error": 4.05559375145359e-16
+    },
+    {
+      "ratio": 0.5,
+      "offset": 0.01,
+      "beta": 3.0714565013298136e-07,
+      "scale": 1.5874012789291547,
+      "absolute_volume_error": 3.122502256758253e-17
+    },
+    {
+      "ratio": 2.0,
+      "offset": -0.01,
+      "beta": -3.071440558752564e-07,
+      "scale": 0.6299601596552721,
+      "absolute_volume_error": 1.734723475976807e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": -0.0001,
+      "beta": -3.086274214559574e-11,
+      "scale": 0.6299605249107754,
+      "absolute_volume_error": 1.3723153472963712e-15
+    },
+    {
+      "ratio": 2.0,
+      "offset": -1e-07,
+      "beta": -3.086419607591152e-17,
+      "scale": 0.6299605249474365,
+      "absolute_volume_error": 3.4280670102000775e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": -1e-10,
+      "beta": -3.086419752940923e-23,
+      "scale": 0.6299605249474366,
+      "absolute_volume_error": 7.052904856038217e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": 0.0,
+      "beta": -0.0,
+      "scale": 0.6299605249474366,
+      "absolute_volume_error": 0.0
+    },
+    {
+      "ratio": 2.0,
+      "offset": 1e-10,
+      "beta": -3.086419752940923e-23,
+      "scale": 0.6299605249474366,
+      "absolute_volume_error": 7.052904856038217e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": 1e-07,
+      "beta": -3.086419607591152e-17,
+      "scale": 0.6299605249474365,
+      "absolute_volume_error": 3.4280670102000775e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": 0.0001,
+      "beta": -3.086274214559466e-11,
+      "scale": 0.6299605249107763,
+      "absolute_volume_error": 4.3195969804538104e-16
+    },
+    {
+      "ratio": 2.0,
+      "offset": 0.01,
+      "beta": -3.0714404520245717e-07,
+      "scale": 0.6299601605673787,
+      "absolute_volume_error": 7.693498615957139e-16
+    },
+    {
+      "ratio": 5.0,
+      "offset": -0.01,
+      "beta": -6.142710784345708e-07,
+      "scale": 0.34199420004006986,
+      "absolute_volume_error": 4.85722573273506e-16
+    },
+    {
+      "ratio": 5.0,
+      "offset": -0.0001,
+      "beta": -6.172548411877327e-11,
+      "scale": 0.3419951892358277,
+      "absolute_volume_error": 2.1882316922003375e-15
+    },
+    {
+      "ratio": 5.0,
+      "offset": -1e-07,
+      "beta": -6.172839215182285e-17,
+      "scale": 0.3419951893353393,
+      "absolute_volume_error": 3.139459591664488e-16
+    },
+    {
+      "ratio": 5.0,
+      "offset": -1e-10,
+      "beta": -6.172839505881846e-23,
+      "scale": 0.3419951893353394,
+      "absolute_volume_error": 1.3241812755860826e-15
+    },
+    {
+      "ratio": 5.0,
+      "offset": 0.0,
+      "beta": -0.0,
+      "scale": 0.3419951893353394,
+      "absolute_volume_error": 0.0
+    },
+    {
+      "ratio": 5.0,
+      "offset": 1e-10,
+      "beta": -6.172839505881846e-23,
+      "scale": 0.3419951893353394,
+      "absolute_volume_error": 1.3241812755860826e-15
+    },
+    {
+      "ratio": 5.0,
+      "offset": 1e-07,
+      "beta": -6.172839215182285e-17,
+      "scale": 0.3419951893353393,
+      "absolute_volume_error": 1.4174203414285853e-15
+    },
+    {
+      "ratio": 5.0,
+      "offset": 0.0001,
+      "beta": -6.172548411876249e-11,
+      "scale": 0.3419951892358258,
+      "absolute_volume_error": 4.549447841020737e-16
+    },
+    {
+      "ratio": 5.0,
+      "offset": 0.01,
+      "beta": -6.142709717125114e-07,
+      "scale": 0.34199419805970827,
+      "absolute_volume_error": 6.938893903907228e-17
+    }
+  ]
+}

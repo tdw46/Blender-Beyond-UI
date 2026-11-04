@@ -1,0 +1,47 @@
+{
+  "status": "Exact shadow optimization qualified on Metal; extreme-lens stall remains open. Drag/scroll interruption repaired and hot-reloaded.",
+  "preserved": [
+    "Every caster triangle",
+    "Four-sample AA and gradients",
+    "Original alpha, UV, sidedness and bias tests",
+    "Complete hierarchy fallback",
+    "Existing shadow resolution and memory cap",
+    "Accepted CamKeys deformation",
+    "Windows shader paths unchanged"
+  ],
+  "changes": [
+    "Retain the existing third-pass candidate triangle ID in the unused fourth lane; exact-test it before full traversal. No new pass or texture.",
+    "Reuse already certified-lit AA samples rather than tracing them again.",
+    "Retain the active scalar edit canvas and native panel height until release; reauthor conditional accessories afterward. Owner/context changes still invalidate."
+  ],
+  "quality": {
+    "material_cases": 162,
+    "material_samples_per_variant": 2654208,
+    "replay_triangles": 135334,
+    "replay_behind_camera_corners": 68458,
+    "replay_cases": 12,
+    "replay_pixel_differences": 0,
+    "full_scene_lenses_mm": [
+      2.5,
+      8.81,
+      50,
+      250
+    ],
+    "full_scene_pixel_differences": 0
+  },
+  "limits": [
+    "Matched full-scene buffers are 640x480 at the final sampled pose for each lens; they are not exhaustive motion/material visual acceptance.",
+    "Full-scene short-lens rendering remains slow: 2.5 mm measured 171.2 ms before and 165.9 ms after; this modest difference is not a realtime completion claim.",
+    "A diagnostic shadow bypass measured about 18.2 ms at 2.5 mm; it was never installed.",
+    "The shader implementation is installed on disk but has not been hot-reloaded into the user session. It requires a real Blender restart. All GPU verification used fresh owned processes.",
+    "Physical Windows GPU qualification was not rerun. New shadow optimization is Metal-host-only; Windows retains its previous path.",
+    "No new GIF or user-scene save. Private geometry, color buffers, and file-path records remain in ignored build output."
+  ],
+  "bui_checks": [
+    "465 unit tests passed",
+    "Native simulated drag and scroll preservation on 5.1.2 and 5.2.2 Metal",
+    "248-file vendor manifests verified in source and installed CamKeys",
+    "Live installed runtime reports no draw/input errors"
+  ],
+  "next": "Investigate exact receiver-query cost under extreme projected geometry; cold rebuild, source ordering, depth prepass and constant-alpha prototypes did not solve it. Do not ship those rejected prototypes or lower shadow quality."
+}

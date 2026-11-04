@@ -1,0 +1,6310 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "samples": 900,
+  "maximum_position_error": 1.9797603975080236e-06,
+  "maximum_relative_open_fan_volume_error": 0.00025011107093964036,
+  "rows": [
+    {
+      "pitch": -60,
+      "yaw": 0,
+      "ratio": 0.05,
+      "position_error": 9.00211381438254e-07,
+      "relative_open_fan_volume_error": 2.6963359129217324e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 0,
+      "ratio": 0.25,
+      "position_error": 3.2603525301766467e-07,
+      "relative_open_fan_volume_error": 3.1817409601009317e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 0,
+      "ratio": 0.5,
+      "position_error": 2.33954059680741e-07,
+      "relative_open_fan_volume_error": 7.497136089162915e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 0,
+      "ratio": 2.0,
+      "position_error": 2.1346411371858665e-07,
+      "relative_open_fan_volume_error": 3.525754395572456e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 0,
+      "ratio": 5.0,
+      "position_error": 3.2211154343819715e-07,
+      "relative_open_fan_volume_error": 3.64005253403743e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 10,
+      "ratio": 0.05,
+      "position_error": 1.0618063299716596e-06,
+      "relative_open_fan_volume_error": 0.0001074128028837329
+    },
+    {
+      "pitch": -60,
+      "yaw": 10,
+      "ratio": 0.25,
+      "position_error": 3.339958425385703e-07,
+      "relative_open_fan_volume_error": 3.233514645240021e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 10,
+      "ratio": 0.5,
+      "position_error": 2.2499825913513405e-07,
+      "relative_open_fan_volume_error": 3.7733971229858554e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 10,
+      "ratio": 2.0,
+      "position_error": 1.972873524547225e-07,
+      "relative_open_fan_volume_error": 4.996612657615085e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 10,
+      "ratio": 5.0,
+      "position_error": 3.440693139289408e-07,
+      "relative_open_fan_volume_error": 8.891502077545965e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 20,
+      "ratio": 0.05,
+      "position_error": 9.32235828976502e-07,
+      "relative_open_fan_volume_error": 3.183355368763241e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 20,
+      "ratio": 0.25,
+      "position_error": 3.447099294895395e-07,
+      "relative_open_fan_volume_error": 1.618411382686702e-08
+    },
+    {
+      "pitch": -60,
+      "yaw": 20,
+      "ratio": 0.5,
+      "position_error": 2.2470199168012073e-07,
+      "relative_open_fan_volume_error": 2.544613681321195e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 20,
+      "ratio": 2.0,
+      "position_error": 1.9739809054009072e-07,
+      "relative_open_fan_volume_error": 3.4500647572932586e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 20,
+      "ratio": 5.0,
+      "position_error": 3.4741361165657736e-07,
+      "relative_open_fan_volume_error": 6.958987244432002e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 30,
+      "ratio": 0.05,
+      "position_error": 8.611833011151759e-07,
+      "relative_open_fan_volume_error": 2.508751044572044e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 30,
+      "ratio": 0.25,
+      "position_error": 3.3340948535354187e-07,
+      "relative_open_fan_volume_error": 3.2277752540776916e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 30,
+      "ratio": 0.5,
+      "position_error": 2.1504297009755646e-07,
+      "relative_open_fan_volume_error": 1.3234979072684894e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 30,
+      "ratio": 2.0,
+      "position_error": 2.0738163053479752e-07,
+      "relative_open_fan_volume_error": 3.5245828265306756e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 30,
+      "ratio": 5.0,
+      "position_error": 3.342869567823925e-07,
+      "relative_open_fan_volume_error": 4.5266235177976455e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 40,
+      "ratio": 0.05,
+      "position_error": 8.579301402633632e-07,
+      "relative_open_fan_volume_error": 8.800196863334442e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 40,
+      "ratio": 0.25,
+      "position_error": 3.375951105333286e-07,
+      "relative_open_fan_volume_error": 4.799085612350318e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 40,
+      "ratio": 0.5,
+      "position_error": 2.256555182711395e-07,
+      "relative_open_fan_volume_error": 1.7389905750064827e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 40,
+      "ratio": 2.0,
+      "position_error": 1.915406082630966e-07,
+      "relative_open_fan_volume_error": 4.528368805822858e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 40,
+      "ratio": 5.0,
+      "position_error": 3.288752257191163e-07,
+      "relative_open_fan_volume_error": 3.457436383680346e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 50,
+      "ratio": 0.05,
+      "position_error": 9.164941650041669e-07,
+      "relative_open_fan_volume_error": 3.9963692256339556e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 50,
+      "ratio": 0.25,
+      "position_error": 3.574767015734892e-07,
+      "relative_open_fan_volume_error": 7.569616093827669e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 50,
+      "ratio": 0.5,
+      "position_error": 2.2427057144724927e-07,
+      "relative_open_fan_volume_error": 1.0321495628740074e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 50,
+      "ratio": 2.0,
+      "position_error": 2.1325165566743465e-07,
+      "relative_open_fan_volume_error": 3.026410707129834e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 50,
+      "ratio": 5.0,
+      "position_error": 3.3501496754517746e-07,
+      "relative_open_fan_volume_error": 4.525391279774915e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 60,
+      "ratio": 0.05,
+      "position_error": 8.694846225232311e-07,
+      "relative_open_fan_volume_error": 7.7929646864483e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 60,
+      "ratio": 0.25,
+      "position_error": 3.705471196546739e-07,
+      "relative_open_fan_volume_error": 8.474174255312938e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 60,
+      "ratio": 0.5,
+      "position_error": 2.456310115306337e-07,
+      "relative_open_fan_volume_error": 2.779695928367687e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 60,
+      "ratio": 2.0,
+      "position_error": 1.99857511873347e-07,
+      "relative_open_fan_volume_error": 1.7126378897724948e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 60,
+      "ratio": 5.0,
+      "position_error": 3.3466471105469964e-07,
+      "relative_open_fan_volume_error": 1.0339741213671871e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 70,
+      "ratio": 0.05,
+      "position_error": 9.99205593821273e-07,
+      "relative_open_fan_volume_error": 2.9906765792730994e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 70,
+      "ratio": 0.25,
+      "position_error": 3.179500236427657e-07,
+      "relative_open_fan_volume_error": 7.876281157948029e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 70,
+      "ratio": 0.5,
+      "position_error": 2.2561435208956482e-07,
+      "relative_open_fan_volume_error": 8.259389655873584e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 70,
+      "ratio": 2.0,
+      "position_error": 2.0526428090583693e-07,
+      "relative_open_fan_volume_error": 1.1304166402936744e-07
+    },
+    {
+      "pitch": -60,
+      "yaw": 70,
+      "ratio": 5.0,
+      "position_error": 3.4317559349794635e-07,
+      "relative_open_fan_volume_error": 4.2047136227019166e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 80,
+      "ratio": 0.05,
+      "position_error": 1.0798072378470636e-06,
+      "relative_open_fan_volume_error": 1.5731592724277377e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 80,
+      "ratio": 0.25,
+      "position_error": 3.4642383095473406e-07,
+      "relative_open_fan_volume_error": 2.0611636273759615e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 80,
+      "ratio": 0.5,
+      "position_error": 2.5427173033776285e-07,
+      "relative_open_fan_volume_error": 1.132624377919722e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 80,
+      "ratio": 2.0,
+      "position_error": 2.248617041455958e-07,
+      "relative_open_fan_volume_error": 1.6268551541465115e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 80,
+      "ratio": 5.0,
+      "position_error": 3.795230556491447e-07,
+      "relative_open_fan_volume_error": 9.301646350934334e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 90,
+      "ratio": 0.05,
+      "position_error": 8.409909364459622e-07,
+      "relative_open_fan_volume_error": 2.9546427056992286e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 90,
+      "ratio": 0.25,
+      "position_error": 3.252561686650779e-07,
+      "relative_open_fan_volume_error": 3.5378939619024052e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 90,
+      "ratio": 0.5,
+      "position_error": 2.1936806460232106e-07,
+      "relative_open_fan_volume_error": 1.3772030782455147e-07
+    },
+    {
+      "pitch": -60,
+      "yaw": 90,
+      "ratio": 2.0,
+      "position_error": 1.9532356221318992e-07,
+      "relative_open_fan_volume_error": 1.958534719226357e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 90,
+      "ratio": 5.0,
+      "position_error": 3.1105411646414893e-07,
+      "relative_open_fan_volume_error": 6.037259460245359e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 100,
+      "ratio": 0.05,
+      "position_error": 1.034297135937834e-06,
+      "relative_open_fan_volume_error": 1.675809963996855e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 100,
+      "ratio": 0.25,
+      "position_error": 3.480169894487517e-07,
+      "relative_open_fan_volume_error": 2.6970513870239188e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 100,
+      "ratio": 0.5,
+      "position_error": 2.329635799824814e-07,
+      "relative_open_fan_volume_error": 2.3931134611743232e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 100,
+      "ratio": 2.0,
+      "position_error": 2.1901906266386106e-07,
+      "relative_open_fan_volume_error": 2.6510739473017964e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 100,
+      "ratio": 5.0,
+      "position_error": 3.7639907657371907e-07,
+      "relative_open_fan_volume_error": 9.152971736758886e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 110,
+      "ratio": 0.05,
+      "position_error": 1.0664075080768498e-06,
+      "relative_open_fan_volume_error": 1.8120339548843845e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 110,
+      "ratio": 0.25,
+      "position_error": 3.5100949347111055e-07,
+      "relative_open_fan_volume_error": 1.1477781321600489e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 110,
+      "ratio": 0.5,
+      "position_error": 2.2949206490707752e-07,
+      "relative_open_fan_volume_error": 1.9131747258871457e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 110,
+      "ratio": 2.0,
+      "position_error": 2.270751200406096e-07,
+      "relative_open_fan_volume_error": 2.863250188189781e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 110,
+      "ratio": 5.0,
+      "position_error": 3.5978428503113946e-07,
+      "relative_open_fan_volume_error": 8.917723452395165e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 120,
+      "ratio": 0.05,
+      "position_error": 8.606349739537222e-07,
+      "relative_open_fan_volume_error": 3.800856522073737e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 120,
+      "ratio": 0.25,
+      "position_error": 3.4206156307448055e-07,
+      "relative_open_fan_volume_error": 1.1164573616717632e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 120,
+      "ratio": 0.5,
+      "position_error": 2.3827248263330603e-07,
+      "relative_open_fan_volume_error": 1.594137378257976e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 120,
+      "ratio": 2.0,
+      "position_error": 2.1707480790666978e-07,
+      "relative_open_fan_volume_error": 4.24630638895529e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 120,
+      "ratio": 5.0,
+      "position_error": 3.5486158034281345e-07,
+      "relative_open_fan_volume_error": 5.0390863438498634e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 130,
+      "ratio": 0.05,
+      "position_error": 8.574002094974276e-07,
+      "relative_open_fan_volume_error": 2.8150549373551215e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 130,
+      "ratio": 0.25,
+      "position_error": 3.3991460579585464e-07,
+      "relative_open_fan_volume_error": 6.407643554195985e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 130,
+      "ratio": 0.5,
+      "position_error": 2.523263811227139e-07,
+      "relative_open_fan_volume_error": 1.580650489896307e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 130,
+      "ratio": 2.0,
+      "position_error": 2.0933639199860465e-07,
+      "relative_open_fan_volume_error": 3.9984073177068424e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 130,
+      "ratio": 5.0,
+      "position_error": 3.517249533846467e-07,
+      "relative_open_fan_volume_error": 1.9681429232143444e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 140,
+      "ratio": 0.05,
+      "position_error": 9.19319430803256e-07,
+      "relative_open_fan_volume_error": 2.3396603563430318e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 140,
+      "ratio": 0.25,
+      "position_error": 3.4957963457316055e-07,
+      "relative_open_fan_volume_error": 8.339153791059317e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 140,
+      "ratio": 0.5,
+      "position_error": 2.2715541758699942e-07,
+      "relative_open_fan_volume_error": 5.709446393442619e-08
+    },
+    {
+      "pitch": -60,
+      "yaw": 140,
+      "ratio": 2.0,
+      "position_error": 2.0535532962995262e-07,
+      "relative_open_fan_volume_error": 4.625210679898295e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 140,
+      "ratio": 5.0,
+      "position_error": 3.2272200645167004e-07,
+      "relative_open_fan_volume_error": 2.4629787615859655e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 150,
+      "ratio": 0.05,
+      "position_error": 1.0707366535633867e-06,
+      "relative_open_fan_volume_error": 3.099963858810284e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 150,
+      "ratio": 0.25,
+      "position_error": 3.3268654275886433e-07,
+      "relative_open_fan_volume_error": 7.80595377436466e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 150,
+      "ratio": 0.5,
+      "position_error": 2.3066856957854043e-07,
+      "relative_open_fan_volume_error": 2.9844532667078205e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 150,
+      "ratio": 2.0,
+      "position_error": 2.1547304851488036e-07,
+      "relative_open_fan_volume_error": 4.1664925659490315e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 150,
+      "ratio": 5.0,
+      "position_error": 3.824457399659309e-07,
+      "relative_open_fan_volume_error": 6.587975479466213e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 160,
+      "ratio": 0.05,
+      "position_error": 9.256995707751514e-07,
+      "relative_open_fan_volume_error": 1.006936672487413e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 160,
+      "ratio": 0.25,
+      "position_error": 3.256121243744303e-07,
+      "relative_open_fan_volume_error": 1.2557561361647984e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 160,
+      "ratio": 0.5,
+      "position_error": 2.2382055853142901e-07,
+      "relative_open_fan_volume_error": 6.204113392138666e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 160,
+      "ratio": 2.0,
+      "position_error": 2.268191909848838e-07,
+      "relative_open_fan_volume_error": 4.8872290376089644e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 160,
+      "ratio": 5.0,
+      "position_error": 3.494044820140374e-07,
+      "relative_open_fan_volume_error": 4.553279162855528e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 170,
+      "ratio": 0.05,
+      "position_error": 1.0351172181621848e-06,
+      "relative_open_fan_volume_error": 1.6492457809214045e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 170,
+      "ratio": 0.25,
+      "position_error": 3.265330965618318e-07,
+      "relative_open_fan_volume_error": 1.9310243162928842e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 170,
+      "ratio": 0.5,
+      "position_error": 2.5864705888167805e-07,
+      "relative_open_fan_volume_error": 9.815199091378624e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 170,
+      "ratio": 2.0,
+      "position_error": 2.2807850097450455e-07,
+      "relative_open_fan_volume_error": 2.4191119214478363e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 170,
+      "ratio": 5.0,
+      "position_error": 3.755397686155959e-07,
+      "relative_open_fan_volume_error": 2.8140724453895594e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 180,
+      "ratio": 0.05,
+      "position_error": 9.156099638474302e-07,
+      "relative_open_fan_volume_error": 1.7796068510822494e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 180,
+      "ratio": 0.25,
+      "position_error": 3.3795381737533603e-07,
+      "relative_open_fan_volume_error": 8.422937613605797e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 180,
+      "ratio": 0.5,
+      "position_error": 2.4182496360936057e-07,
+      "relative_open_fan_volume_error": 1.1385048455103686e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 180,
+      "ratio": 2.0,
+      "position_error": 2.1760400148451708e-07,
+      "relative_open_fan_volume_error": 5.948043983794449e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 180,
+      "ratio": 5.0,
+      "position_error": 3.5482417271026634e-07,
+      "relative_open_fan_volume_error": 8.143505049884592e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 190,
+      "ratio": 0.05,
+      "position_error": 9.888307346272995e-07,
+      "relative_open_fan_volume_error": 5.425774840528419e-07
+    },
+    {
+      "pitch": -60,
+      "yaw": 190,
+      "ratio": 0.25,
+      "position_error": 3.438244391418266e-07,
+      "relative_open_fan_volume_error": 5.018936567791066e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 190,
+      "ratio": 0.5,
+      "position_error": 2.414649880044806e-07,
+      "relative_open_fan_volume_error": 1.4212128104817978e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 190,
+      "ratio": 2.0,
+      "position_error": 2.3521937397852355e-07,
+      "relative_open_fan_volume_error": 2.2727920683252023e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 190,
+      "ratio": 5.0,
+      "position_error": 3.917388822216594e-07,
+      "relative_open_fan_volume_error": 8.254157840259513e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 200,
+      "ratio": 0.05,
+      "position_error": 8.22954915769003e-07,
+      "relative_open_fan_volume_error": 9.878614006142428e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 200,
+      "ratio": 0.25,
+      "position_error": 3.511480635154385e-07,
+      "relative_open_fan_volume_error": 1.5260201306377397e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 200,
+      "ratio": 0.5,
+      "position_error": 2.499514848430806e-07,
+      "relative_open_fan_volume_error": 1.7687194630577885e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 200,
+      "ratio": 2.0,
+      "position_error": 2.0832434444173487e-07,
+      "relative_open_fan_volume_error": 3.8865112210628716e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 200,
+      "ratio": 5.0,
+      "position_error": 3.582407428481815e-07,
+      "relative_open_fan_volume_error": 0.00012529698439367465
+    },
+    {
+      "pitch": -60,
+      "yaw": 210,
+      "ratio": 0.05,
+      "position_error": 1.0329115758267449e-06,
+      "relative_open_fan_volume_error": 2.8014675957810375e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 210,
+      "ratio": 0.25,
+      "position_error": 3.25694146319222e-07,
+      "relative_open_fan_volume_error": 4.9257451542050745e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 210,
+      "ratio": 0.5,
+      "position_error": 2.418465836484529e-07,
+      "relative_open_fan_volume_error": 2.7501544668240285e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 210,
+      "ratio": 2.0,
+      "position_error": 2.310919249293164e-07,
+      "relative_open_fan_volume_error": 1.4877920496259023e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 210,
+      "ratio": 5.0,
+      "position_error": 3.9589416145346945e-07,
+      "relative_open_fan_volume_error": 3.795292934261063e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 220,
+      "ratio": 0.05,
+      "position_error": 8.947754830401777e-07,
+      "relative_open_fan_volume_error": 1.5457974883559267e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 220,
+      "ratio": 0.25,
+      "position_error": 3.5294138589492263e-07,
+      "relative_open_fan_volume_error": 3.933611403938997e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 220,
+      "ratio": 0.5,
+      "position_error": 2.3036174923163344e-07,
+      "relative_open_fan_volume_error": 3.945984998865448e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 220,
+      "ratio": 2.0,
+      "position_error": 2.2379970232577762e-07,
+      "relative_open_fan_volume_error": 1.1788019629532798e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 220,
+      "ratio": 5.0,
+      "position_error": 3.428691366380576e-07,
+      "relative_open_fan_volume_error": 5.208930658151534e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 230,
+      "ratio": 0.05,
+      "position_error": 8.851374171392479e-07,
+      "relative_open_fan_volume_error": 5.157229819863218e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 230,
+      "ratio": 0.25,
+      "position_error": 3.421277945392376e-07,
+      "relative_open_fan_volume_error": 6.086371164948368e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 230,
+      "ratio": 0.5,
+      "position_error": 2.2683913059040606e-07,
+      "relative_open_fan_volume_error": 1.2552680148658624e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 230,
+      "ratio": 2.0,
+      "position_error": 2.1144333128830795e-07,
+      "relative_open_fan_volume_error": 3.279793815980092e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 230,
+      "ratio": 5.0,
+      "position_error": 3.4302835549837596e-07,
+      "relative_open_fan_volume_error": 1.5627318261435263e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 240,
+      "ratio": 0.05,
+      "position_error": 9.065533246310764e-07,
+      "relative_open_fan_volume_error": 7.544434014850054e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 240,
+      "ratio": 0.25,
+      "position_error": 3.465278344272349e-07,
+      "relative_open_fan_volume_error": 3.8410260566723586e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 240,
+      "ratio": 0.5,
+      "position_error": 2.1994990317963925e-07,
+      "relative_open_fan_volume_error": 6.727287941155069e-07
+    },
+    {
+      "pitch": -60,
+      "yaw": 240,
+      "ratio": 2.0,
+      "position_error": 2.062778154954259e-07,
+      "relative_open_fan_volume_error": 1.6857119623292505e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 240,
+      "ratio": 5.0,
+      "position_error": 3.59633031354889e-07,
+      "relative_open_fan_volume_error": 1.6062413556339195e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 250,
+      "ratio": 0.05,
+      "position_error": 8.954231578428562e-07,
+      "relative_open_fan_volume_error": 1.9947835110611933e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 250,
+      "ratio": 0.25,
+      "position_error": 3.366808711824376e-07,
+      "relative_open_fan_volume_error": 1.5794467294272252e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 250,
+      "ratio": 0.5,
+      "position_error": 2.365672169268862e-07,
+      "relative_open_fan_volume_error": 1.5221552930322346e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 250,
+      "ratio": 2.0,
+      "position_error": 2.141355022189373e-07,
+      "relative_open_fan_volume_error": 1.1037174144190587e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 250,
+      "ratio": 5.0,
+      "position_error": 3.5369825335251903e-07,
+      "relative_open_fan_volume_error": 4.168263814396944e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 260,
+      "ratio": 0.05,
+      "position_error": 1.0643100036844544e-06,
+      "relative_open_fan_volume_error": 3.694824171529554e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 260,
+      "ratio": 0.25,
+      "position_error": 3.615798473965981e-07,
+      "relative_open_fan_volume_error": 6.870877807818587e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 260,
+      "ratio": 0.5,
+      "position_error": 2.3793637637936627e-07,
+      "relative_open_fan_volume_error": 3.554322273835453e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 260,
+      "ratio": 2.0,
+      "position_error": 2.3881061772534906e-07,
+      "relative_open_fan_volume_error": 3.716968275591093e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 260,
+      "ratio": 5.0,
+      "position_error": 3.7827657428657346e-07,
+      "relative_open_fan_volume_error": 2.7166264582323407e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 270,
+      "ratio": 0.05,
+      "position_error": 8.38533518177087e-07,
+      "relative_open_fan_volume_error": 2.3197370253247307e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 270,
+      "ratio": 0.25,
+      "position_error": 3.5544452003932747e-07,
+      "relative_open_fan_volume_error": 3.2267656095985586e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 270,
+      "ratio": 0.5,
+      "position_error": 2.118474795587133e-07,
+      "relative_open_fan_volume_error": 3.3687633749224233e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 270,
+      "ratio": 2.0,
+      "position_error": 1.9958542774034527e-07,
+      "relative_open_fan_volume_error": 4.229931886745586e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 270,
+      "ratio": 5.0,
+      "position_error": 3.090537701311291e-07,
+      "relative_open_fan_volume_error": 6.295400004741047e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 280,
+      "ratio": 0.05,
+      "position_error": 1.221522306416034e-06,
+      "relative_open_fan_volume_error": 4.229414526801811e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 280,
+      "ratio": 0.25,
+      "position_error": 3.6525112712126884e-07,
+      "relative_open_fan_volume_error": 2.7624946827842223e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 280,
+      "ratio": 0.5,
+      "position_error": 2.3096625678675764e-07,
+      "relative_open_fan_volume_error": 4.762960327253651e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 280,
+      "ratio": 2.0,
+      "position_error": 2.116252562078813e-07,
+      "relative_open_fan_volume_error": 2.6462402306748345e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 280,
+      "ratio": 5.0,
+      "position_error": 3.6955894699985947e-07,
+      "relative_open_fan_volume_error": 4.788101145725143e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 290,
+      "ratio": 0.05,
+      "position_error": 8.974746910084264e-07,
+      "relative_open_fan_volume_error": 8.157530811070401e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 290,
+      "ratio": 0.25,
+      "position_error": 3.17424238449604e-07,
+      "relative_open_fan_volume_error": 2.123631047601382e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 290,
+      "ratio": 0.5,
+      "position_error": 2.2494078422141683e-07,
+      "relative_open_fan_volume_error": 5.114036771391994e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 290,
+      "ratio": 2.0,
+      "position_error": 2.0931514477240398e-07,
+      "relative_open_fan_volume_error": 1.2112446283851774e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 290,
+      "ratio": 5.0,
+      "position_error": 3.7019320564546376e-07,
+      "relative_open_fan_volume_error": 5.893028684611501e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 300,
+      "ratio": 0.05,
+      "position_error": 8.742259813843134e-07,
+      "relative_open_fan_volume_error": 2.8915038183807695e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 300,
+      "ratio": 0.25,
+      "position_error": 3.4688747962974276e-07,
+      "relative_open_fan_volume_error": 2.025440278874413e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 300,
+      "ratio": 0.5,
+      "position_error": 2.2623158457690806e-07,
+      "relative_open_fan_volume_error": 8.20688227576305e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 300,
+      "ratio": 2.0,
+      "position_error": 2.0159184699330979e-07,
+      "relative_open_fan_volume_error": 1.9656046329252774e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 300,
+      "ratio": 5.0,
+      "position_error": 3.380240907180365e-07,
+      "relative_open_fan_volume_error": 0.00013333803523396526
+    },
+    {
+      "pitch": -60,
+      "yaw": 310,
+      "ratio": 0.05,
+      "position_error": 8.587751607613825e-07,
+      "relative_open_fan_volume_error": 1.843228692388621e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 310,
+      "ratio": 0.25,
+      "position_error": 3.368385597113388e-07,
+      "relative_open_fan_volume_error": 1.96902579174818e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 310,
+      "ratio": 0.5,
+      "position_error": 2.26278118020673e-07,
+      "relative_open_fan_volume_error": 1.967262255320179e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 310,
+      "ratio": 2.0,
+      "position_error": 2.0948954526645025e-07,
+      "relative_open_fan_volume_error": 4.293668986354859e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 310,
+      "ratio": 5.0,
+      "position_error": 3.2949504547019615e-07,
+      "relative_open_fan_volume_error": 5.496550931516353e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 320,
+      "ratio": 0.05,
+      "position_error": 8.42565743397472e-07,
+      "relative_open_fan_volume_error": 3.7482263688382034e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 320,
+      "ratio": 0.25,
+      "position_error": 3.6741650166760564e-07,
+      "relative_open_fan_volume_error": 2.061861247404373e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 320,
+      "ratio": 0.5,
+      "position_error": 2.2983896164063822e-07,
+      "relative_open_fan_volume_error": 2.840919212543369e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 320,
+      "ratio": 2.0,
+      "position_error": 1.9219622160449035e-07,
+      "relative_open_fan_volume_error": 3.680946533968221e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 320,
+      "ratio": 5.0,
+      "position_error": 3.0556694596839407e-07,
+      "relative_open_fan_volume_error": 7.041873650170949e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 330,
+      "ratio": 0.05,
+      "position_error": 9.346909881635668e-07,
+      "relative_open_fan_volume_error": 4.37180319246e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 330,
+      "ratio": 0.25,
+      "position_error": 3.396198708927045e-07,
+      "relative_open_fan_volume_error": 1.878514240183371e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 330,
+      "ratio": 0.5,
+      "position_error": 2.2317174686037333e-07,
+      "relative_open_fan_volume_error": 3.0409644884987763e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 330,
+      "ratio": 2.0,
+      "position_error": 1.9704776765827603e-07,
+      "relative_open_fan_volume_error": 4.539179931262183e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 330,
+      "ratio": 5.0,
+      "position_error": 3.4416024696781733e-07,
+      "relative_open_fan_volume_error": 7.380346762309031e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 340,
+      "ratio": 0.05,
+      "position_error": 9.326566212664034e-07,
+      "relative_open_fan_volume_error": 5.4416429767778496e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 340,
+      "ratio": 0.25,
+      "position_error": 3.483658961300762e-07,
+      "relative_open_fan_volume_error": 1.0379109437907985e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 340,
+      "ratio": 0.5,
+      "position_error": 2.276624457842047e-07,
+      "relative_open_fan_volume_error": 2.0609338123867005e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 340,
+      "ratio": 2.0,
+      "position_error": 1.853425648512541e-07,
+      "relative_open_fan_volume_error": 5.290108978694974e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 340,
+      "ratio": 5.0,
+      "position_error": 3.178958327687553e-07,
+      "relative_open_fan_volume_error": 8.707801464380438e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 350,
+      "ratio": 0.05,
+      "position_error": 9.072897442230499e-07,
+      "relative_open_fan_volume_error": 5.068185144629922e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 350,
+      "ratio": 0.25,
+      "position_error": 3.17267089933182e-07,
+      "relative_open_fan_volume_error": 1.091602753933163e-05
+    },
+    {
+      "pitch": -60,
+      "yaw": 350,
+      "ratio": 0.5,
+      "position_error": 2.3754815492438297e-07,
+      "relative_open_fan_volume_error": 3.1861505805919066e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 350,
+      "ratio": 2.0,
+      "position_error": 2.1794754734294486e-07,
+      "relative_open_fan_volume_error": 3.3046115097690176e-06
+    },
+    {
+      "pitch": -60,
+      "yaw": 350,
+      "ratio": 5.0,
+      "position_error": 3.1849876847012126e-07,
+      "relative_open_fan_volume_error": 2.5235113398469622e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 0,
+      "ratio": 0.05,
+      "position_error": 1.6456759523997277e-06,
+      "relative_open_fan_volume_error": 0.0001286859486353542
+    },
+    {
+      "pitch": -30,
+      "yaw": 0,
+      "ratio": 0.25,
+      "position_error": 5.055017702204623e-07,
+      "relative_open_fan_volume_error": 4.608690864649212e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 0,
+      "ratio": 0.5,
+      "position_error": 2.697095877746136e-07,
+      "relative_open_fan_volume_error": 4.5712392064078955e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 0,
+      "ratio": 2.0,
+      "position_error": 2.458929864168624e-07,
+      "relative_open_fan_volume_error": 3.250718889424853e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 0,
+      "ratio": 5.0,
+      "position_error": 4.057607343455061e-07,
+      "relative_open_fan_volume_error": 2.623886027208755e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 10,
+      "ratio": 0.05,
+      "position_error": 1.1795834684580342e-06,
+      "relative_open_fan_volume_error": 3.61398910397881e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 10,
+      "ratio": 0.25,
+      "position_error": 3.946644149266376e-07,
+      "relative_open_fan_volume_error": 2.4774350837697412e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 10,
+      "ratio": 0.5,
+      "position_error": 2.1487564705324758e-07,
+      "relative_open_fan_volume_error": 8.351834169806338e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 10,
+      "ratio": 2.0,
+      "position_error": 2.2096259977288923e-07,
+      "relative_open_fan_volume_error": 2.440504435186064e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 10,
+      "ratio": 5.0,
+      "position_error": 3.496235352340449e-07,
+      "relative_open_fan_volume_error": 8.299081156248889e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 20,
+      "ratio": 0.05,
+      "position_error": 1.3964753881046121e-06,
+      "relative_open_fan_volume_error": 1.7577708145477544e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 20,
+      "ratio": 0.25,
+      "position_error": 4.5842118256977926e-07,
+      "relative_open_fan_volume_error": 2.331493219731584e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 20,
+      "ratio": 0.5,
+      "position_error": 2.143035474633237e-07,
+      "relative_open_fan_volume_error": 1.4173321912336334e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 20,
+      "ratio": 2.0,
+      "position_error": 2.159650842603611e-07,
+      "relative_open_fan_volume_error": 1.2383024393325393e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 20,
+      "ratio": 5.0,
+      "position_error": 3.7612187631097527e-07,
+      "relative_open_fan_volume_error": 7.421745921476486e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 30,
+      "ratio": 0.05,
+      "position_error": 1.5222441607232184e-06,
+      "relative_open_fan_volume_error": 6.219824551811914e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 30,
+      "ratio": 0.25,
+      "position_error": 4.1866897149134275e-07,
+      "relative_open_fan_volume_error": 1.058301103262771e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 30,
+      "ratio": 0.5,
+      "position_error": 1.9957236185863536e-07,
+      "relative_open_fan_volume_error": 7.27881671402919e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 30,
+      "ratio": 2.0,
+      "position_error": 2.3103470137009197e-07,
+      "relative_open_fan_volume_error": 2.664308476130195e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 30,
+      "ratio": 5.0,
+      "position_error": 4.184493658243582e-07,
+      "relative_open_fan_volume_error": 0.000116255312104796
+    },
+    {
+      "pitch": -30,
+      "yaw": 40,
+      "ratio": 0.05,
+      "position_error": 1.1249037126792594e-06,
+      "relative_open_fan_volume_error": 0.00010172856085355342
+    },
+    {
+      "pitch": -30,
+      "yaw": 40,
+      "ratio": 0.25,
+      "position_error": 3.6000940772940027e-07,
+      "relative_open_fan_volume_error": 2.899885538520941e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 40,
+      "ratio": 0.5,
+      "position_error": 1.836974523605761e-07,
+      "relative_open_fan_volume_error": 3.2299214196562787e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 40,
+      "ratio": 2.0,
+      "position_error": 1.7030098620196554e-07,
+      "relative_open_fan_volume_error": 5.5442786844883685e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 40,
+      "ratio": 5.0,
+      "position_error": 3.3372740237958e-07,
+      "relative_open_fan_volume_error": 2.3349349699719468e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 50,
+      "ratio": 0.05,
+      "position_error": 1.0400318926073737e-06,
+      "relative_open_fan_volume_error": 6.61027028403538e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 50,
+      "ratio": 0.25,
+      "position_error": 2.87572112567247e-07,
+      "relative_open_fan_volume_error": 9.656263251667241e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 50,
+      "ratio": 0.5,
+      "position_error": 1.857498389545853e-07,
+      "relative_open_fan_volume_error": 2.4376883981047648e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 50,
+      "ratio": 2.0,
+      "position_error": 1.9973403997397554e-07,
+      "relative_open_fan_volume_error": 1.1200257364341049e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 50,
+      "ratio": 5.0,
+      "position_error": 3.624110600508601e-07,
+      "relative_open_fan_volume_error": 7.00917262344003e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 60,
+      "ratio": 0.05,
+      "position_error": 1.647667944970621e-06,
+      "relative_open_fan_volume_error": 1.7966548561121343e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 60,
+      "ratio": 0.25,
+      "position_error": 4.77477839599949e-07,
+      "relative_open_fan_volume_error": 2.8134915003641403e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 60,
+      "ratio": 0.5,
+      "position_error": 2.754842114427447e-07,
+      "relative_open_fan_volume_error": 4.280866150918605e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 60,
+      "ratio": 2.0,
+      "position_error": 2.97377962255041e-07,
+      "relative_open_fan_volume_error": 3.5441718224449303e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 60,
+      "ratio": 5.0,
+      "position_error": 4.727742810572977e-07,
+      "relative_open_fan_volume_error": 4.06279888307548e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 70,
+      "ratio": 0.05,
+      "position_error": 1.2352205028820507e-06,
+      "relative_open_fan_volume_error": 0.00014212621209930276
+    },
+    {
+      "pitch": -30,
+      "yaw": 70,
+      "ratio": 0.25,
+      "position_error": 4.107116549079137e-07,
+      "relative_open_fan_volume_error": 3.331400409312124e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 70,
+      "ratio": 0.5,
+      "position_error": 2.325681400794366e-07,
+      "relative_open_fan_volume_error": 2.5428591453380278e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 70,
+      "ratio": 2.0,
+      "position_error": 2.1164339525370224e-07,
+      "relative_open_fan_volume_error": 9.312340035538824e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 70,
+      "ratio": 5.0,
+      "position_error": 3.6412375248318085e-07,
+      "relative_open_fan_volume_error": 5.021223562329258e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 80,
+      "ratio": 0.05,
+      "position_error": 1.40975941576027e-06,
+      "relative_open_fan_volume_error": 4.3219599981547674e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 80,
+      "ratio": 0.25,
+      "position_error": 3.8210552621986693e-07,
+      "relative_open_fan_volume_error": 4.970295093609245e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 80,
+      "ratio": 0.5,
+      "position_error": 2.6891765014802615e-07,
+      "relative_open_fan_volume_error": 3.935409694788561e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 80,
+      "ratio": 2.0,
+      "position_error": 2.668222267576681e-07,
+      "relative_open_fan_volume_error": 3.5281557542399256e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 80,
+      "ratio": 5.0,
+      "position_error": 4.558763344597594e-07,
+      "relative_open_fan_volume_error": 5.772885273125361e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 90,
+      "ratio": 0.05,
+      "position_error": 1.477901657942482e-06,
+      "relative_open_fan_volume_error": 2.880138721617076e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 90,
+      "ratio": 0.25,
+      "position_error": 4.4032353019307635e-07,
+      "relative_open_fan_volume_error": 3.6378038977824545e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 90,
+      "ratio": 0.5,
+      "position_error": 2.6911878792112987e-07,
+      "relative_open_fan_volume_error": 9.630540690253042e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 90,
+      "ratio": 2.0,
+      "position_error": 2.9791549827073993e-07,
+      "relative_open_fan_volume_error": 1.071354037751604e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 90,
+      "ratio": 5.0,
+      "position_error": 5.067249460033452e-07,
+      "relative_open_fan_volume_error": 9.199238229862239e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 100,
+      "ratio": 0.05,
+      "position_error": 1.369916396098958e-06,
+      "relative_open_fan_volume_error": 6.04651554840796e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 100,
+      "ratio": 0.25,
+      "position_error": 4.1528016025971226e-07,
+      "relative_open_fan_volume_error": 2.672989836560724e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 100,
+      "ratio": 0.5,
+      "position_error": 2.4097983675197554e-07,
+      "relative_open_fan_volume_error": 2.4344643721363468e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 100,
+      "ratio": 2.0,
+      "position_error": 2.828873328919457e-07,
+      "relative_open_fan_volume_error": 1.0956975670106672e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 100,
+      "ratio": 5.0,
+      "position_error": 5.081288341202139e-07,
+      "relative_open_fan_volume_error": 1.1010829762403418e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 110,
+      "ratio": 0.05,
+      "position_error": 1.2687350969819988e-06,
+      "relative_open_fan_volume_error": 9.296153445914612e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 110,
+      "ratio": 0.25,
+      "position_error": 4.197486588308763e-07,
+      "relative_open_fan_volume_error": 9.137184823204691e-07
+    },
+    {
+      "pitch": -30,
+      "yaw": 110,
+      "ratio": 0.5,
+      "position_error": 2.416580213715491e-07,
+      "relative_open_fan_volume_error": 2.248179054498145e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 110,
+      "ratio": 2.0,
+      "position_error": 2.3221696765496347e-07,
+      "relative_open_fan_volume_error": 1.6733556621018053e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 110,
+      "ratio": 5.0,
+      "position_error": 3.5948698084986574e-07,
+      "relative_open_fan_volume_error": 2.550658022260066e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 120,
+      "ratio": 0.05,
+      "position_error": 1.1076708833490656e-06,
+      "relative_open_fan_volume_error": 7.167026687204814e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 120,
+      "ratio": 0.25,
+      "position_error": 3.63214144760704e-07,
+      "relative_open_fan_volume_error": 2.445466940470542e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 120,
+      "ratio": 0.5,
+      "position_error": 2.0753165186349065e-07,
+      "relative_open_fan_volume_error": 1.950198138600534e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 120,
+      "ratio": 2.0,
+      "position_error": 2.5195578245984507e-07,
+      "relative_open_fan_volume_error": 2.2409546393653557e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 120,
+      "ratio": 5.0,
+      "position_error": 4.3821093176354964e-07,
+      "relative_open_fan_volume_error": 5.21167340827855e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 130,
+      "ratio": 0.05,
+      "position_error": 1.2395161022027423e-06,
+      "relative_open_fan_volume_error": 5.706247157710731e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 130,
+      "ratio": 0.25,
+      "position_error": 4.049306951969811e-07,
+      "relative_open_fan_volume_error": 1.6772795731201384e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 130,
+      "ratio": 0.5,
+      "position_error": 2.1169370256757247e-07,
+      "relative_open_fan_volume_error": 2.4177668139668818e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 130,
+      "ratio": 2.0,
+      "position_error": 1.683422392595446e-07,
+      "relative_open_fan_volume_error": 5.291820397201885e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 130,
+      "ratio": 5.0,
+      "position_error": 4.5950115601378627e-07,
+      "relative_open_fan_volume_error": 7.909343442946692e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 140,
+      "ratio": 0.05,
+      "position_error": 1.1795752040688612e-06,
+      "relative_open_fan_volume_error": 6.005073299220065e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 140,
+      "ratio": 0.25,
+      "position_error": 3.4851189256723814e-07,
+      "relative_open_fan_volume_error": 2.4031356695597417e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 140,
+      "ratio": 0.5,
+      "position_error": 1.846625256041179e-07,
+      "relative_open_fan_volume_error": 3.0912424528239946e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 140,
+      "ratio": 2.0,
+      "position_error": 2.5657685420732435e-07,
+      "relative_open_fan_volume_error": 2.2375696333343242e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 140,
+      "ratio": 5.0,
+      "position_error": 4.666339907810624e-07,
+      "relative_open_fan_volume_error": 0.0001738333451246632
+    },
+    {
+      "pitch": -30,
+      "yaw": 150,
+      "ratio": 0.05,
+      "position_error": 1.4795631309016954e-06,
+      "relative_open_fan_volume_error": 3.0991355702725265e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 150,
+      "ratio": 0.25,
+      "position_error": 4.6127211816848757e-07,
+      "relative_open_fan_volume_error": 1.3932279083528343e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 150,
+      "ratio": 0.5,
+      "position_error": 2.941750595342185e-07,
+      "relative_open_fan_volume_error": 1.1646491462236064e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 150,
+      "ratio": 2.0,
+      "position_error": 3.0107746251673007e-07,
+      "relative_open_fan_volume_error": 2.1367278194905914e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 150,
+      "ratio": 5.0,
+      "position_error": 3.970533279940014e-07,
+      "relative_open_fan_volume_error": 4.021636315565402e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 160,
+      "ratio": 0.05,
+      "position_error": 1.0009120546827788e-06,
+      "relative_open_fan_volume_error": 4.4464236956809344e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 160,
+      "ratio": 0.25,
+      "position_error": 3.4379534019635116e-07,
+      "relative_open_fan_volume_error": 2.649208288696414e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 160,
+      "ratio": 0.5,
+      "position_error": 2.3990847886068423e-07,
+      "relative_open_fan_volume_error": 1.9119000213896342e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 160,
+      "ratio": 2.0,
+      "position_error": 2.698082557373027e-07,
+      "relative_open_fan_volume_error": 2.8059926626022857e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 160,
+      "ratio": 5.0,
+      "position_error": 4.6025404198957176e-07,
+      "relative_open_fan_volume_error": 6.910799370885012e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 170,
+      "ratio": 0.05,
+      "position_error": 1.5882781031484328e-06,
+      "relative_open_fan_volume_error": 3.4771850895953804e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 170,
+      "ratio": 0.25,
+      "position_error": 4.6609498105532055e-07,
+      "relative_open_fan_volume_error": 5.285635630891683e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 170,
+      "ratio": 0.5,
+      "position_error": 3.093083560390397e-07,
+      "relative_open_fan_volume_error": 1.4091109467928575e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 170,
+      "ratio": 2.0,
+      "position_error": 3.0842506237860334e-07,
+      "relative_open_fan_volume_error": 9.260984046299825e-07
+    },
+    {
+      "pitch": -30,
+      "yaw": 170,
+      "ratio": 5.0,
+      "position_error": 4.7576163231255464e-07,
+      "relative_open_fan_volume_error": 8.234140108243082e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 180,
+      "ratio": 0.05,
+      "position_error": 1.7632971791581298e-06,
+      "relative_open_fan_volume_error": 9.008114294273284e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 180,
+      "ratio": 0.25,
+      "position_error": 5.408249779126351e-07,
+      "relative_open_fan_volume_error": 4.5404662404324725e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 180,
+      "ratio": 0.5,
+      "position_error": 3.346865344866501e-07,
+      "relative_open_fan_volume_error": 3.5997746141269715e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 180,
+      "ratio": 2.0,
+      "position_error": 3.324480728483792e-07,
+      "relative_open_fan_volume_error": 3.1557682446781143e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 180,
+      "ratio": 5.0,
+      "position_error": 3.935206991378948e-07,
+      "relative_open_fan_volume_error": 7.20308199116948e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 190,
+      "ratio": 0.05,
+      "position_error": 1.6498491458571962e-06,
+      "relative_open_fan_volume_error": 5.1753530717846274e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 190,
+      "ratio": 0.25,
+      "position_error": 4.802649932189595e-07,
+      "relative_open_fan_volume_error": 3.273370193057623e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 190,
+      "ratio": 0.5,
+      "position_error": 3.155029761892081e-07,
+      "relative_open_fan_volume_error": 6.270969410637761e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 190,
+      "ratio": 2.0,
+      "position_error": 3.25620747254618e-07,
+      "relative_open_fan_volume_error": 1.0152739041702219e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 190,
+      "ratio": 5.0,
+      "position_error": 4.361320251611289e-07,
+      "relative_open_fan_volume_error": 3.680381751136608e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 200,
+      "ratio": 0.05,
+      "position_error": 1.0170253141872365e-06,
+      "relative_open_fan_volume_error": 1.3079159442153099e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 200,
+      "ratio": 0.25,
+      "position_error": 3.452324552899455e-07,
+      "relative_open_fan_volume_error": 3.903107156832952e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 200,
+      "ratio": 0.5,
+      "position_error": 2.349571850412957e-07,
+      "relative_open_fan_volume_error": 1.577634967731001e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 200,
+      "ratio": 2.0,
+      "position_error": 2.598194799308118e-07,
+      "relative_open_fan_volume_error": 4.137654157676529e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 200,
+      "ratio": 5.0,
+      "position_error": 4.758634726265143e-07,
+      "relative_open_fan_volume_error": 5.095263170940001e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 210,
+      "ratio": 0.05,
+      "position_error": 1.5046949162211831e-06,
+      "relative_open_fan_volume_error": 1.6146280964024484e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 210,
+      "ratio": 0.25,
+      "position_error": 4.467632078730688e-07,
+      "relative_open_fan_volume_error": 2.5092696929185365e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 210,
+      "ratio": 0.5,
+      "position_error": 2.99008841575521e-07,
+      "relative_open_fan_volume_error": 8.080665188425762e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 210,
+      "ratio": 2.0,
+      "position_error": 3.1464451732965415e-07,
+      "relative_open_fan_volume_error": 5.0646729501058196e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 210,
+      "ratio": 5.0,
+      "position_error": 3.674158424171736e-07,
+      "relative_open_fan_volume_error": 6.642891196639855e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 220,
+      "ratio": 0.05,
+      "position_error": 1.0847188116613893e-06,
+      "relative_open_fan_volume_error": 2.6821032663937316e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 220,
+      "ratio": 0.25,
+      "position_error": 3.601448946843888e-07,
+      "relative_open_fan_volume_error": 1.0016074297292121e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 220,
+      "ratio": 0.5,
+      "position_error": 2.083358657811729e-07,
+      "relative_open_fan_volume_error": 1.2309290064682621e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 220,
+      "ratio": 2.0,
+      "position_error": 2.2225060725133972e-07,
+      "relative_open_fan_volume_error": 9.416971029629906e-07
+    },
+    {
+      "pitch": -30,
+      "yaw": 220,
+      "ratio": 5.0,
+      "position_error": 4.547558540846097e-07,
+      "relative_open_fan_volume_error": 0.00013240462321717494
+    },
+    {
+      "pitch": -30,
+      "yaw": 230,
+      "ratio": 0.05,
+      "position_error": 1.3005434466029087e-06,
+      "relative_open_fan_volume_error": 3.6872023222445094e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 230,
+      "ratio": 0.25,
+      "position_error": 3.924321417825283e-07,
+      "relative_open_fan_volume_error": 5.330824758875696e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 230,
+      "ratio": 0.5,
+      "position_error": 2.0909553444248274e-07,
+      "relative_open_fan_volume_error": 4.400719912911466e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 230,
+      "ratio": 2.0,
+      "position_error": 1.7645089167572792e-07,
+      "relative_open_fan_volume_error": 2.855267346335566e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 230,
+      "ratio": 5.0,
+      "position_error": 4.735379750542279e-07,
+      "relative_open_fan_volume_error": 0.00011253675444100608
+    },
+    {
+      "pitch": -30,
+      "yaw": 240,
+      "ratio": 0.05,
+      "position_error": 1.0619540036227448e-06,
+      "relative_open_fan_volume_error": 9.814756838633087e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 240,
+      "ratio": 0.25,
+      "position_error": 3.4932468950810147e-07,
+      "relative_open_fan_volume_error": 5.471592399719505e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 240,
+      "ratio": 0.5,
+      "position_error": 1.9714990751040773e-07,
+      "relative_open_fan_volume_error": 3.3640827336700596e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 240,
+      "ratio": 2.0,
+      "position_error": 2.6662411700684174e-07,
+      "relative_open_fan_volume_error": 9.229653224918088e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 240,
+      "ratio": 5.0,
+      "position_error": 4.227507905962824e-07,
+      "relative_open_fan_volume_error": 6.946487190040429e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 250,
+      "ratio": 0.05,
+      "position_error": 1.3675520730282997e-06,
+      "relative_open_fan_volume_error": 2.873293198835114e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 250,
+      "ratio": 0.25,
+      "position_error": 4.1731767219665983e-07,
+      "relative_open_fan_volume_error": 1.2580088668001643e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 250,
+      "ratio": 0.5,
+      "position_error": 2.3844437790909723e-07,
+      "relative_open_fan_volume_error": 1.8559866679312975e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 250,
+      "ratio": 2.0,
+      "position_error": 2.2695197365862896e-07,
+      "relative_open_fan_volume_error": 6.2083669614132475e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 250,
+      "ratio": 5.0,
+      "position_error": 3.393479994784343e-07,
+      "relative_open_fan_volume_error": 5.3273131970899e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 260,
+      "ratio": 0.05,
+      "position_error": 1.4183588051830398e-06,
+      "relative_open_fan_volume_error": 9.214991567252362e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 260,
+      "ratio": 0.25,
+      "position_error": 4.1341599688049513e-07,
+      "relative_open_fan_volume_error": 5.265610397797715e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 260,
+      "ratio": 0.5,
+      "position_error": 2.745964082784269e-07,
+      "relative_open_fan_volume_error": 2.477003729617344e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 260,
+      "ratio": 2.0,
+      "position_error": 2.6555239962533506e-07,
+      "relative_open_fan_volume_error": 5.006109009997317e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 260,
+      "ratio": 5.0,
+      "position_error": 5.014768875710729e-07,
+      "relative_open_fan_volume_error": 6.538097549013688e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 270,
+      "ratio": 0.05,
+      "position_error": 1.4914937662702243e-06,
+      "relative_open_fan_volume_error": 3.510514369597928e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 270,
+      "ratio": 0.25,
+      "position_error": 4.3489841294874765e-07,
+      "relative_open_fan_volume_error": 2.881800200094098e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 270,
+      "ratio": 0.5,
+      "position_error": 2.993030263631624e-07,
+      "relative_open_fan_volume_error": 1.0680578389932194e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 270,
+      "ratio": 2.0,
+      "position_error": 2.869090935941898e-07,
+      "relative_open_fan_volume_error": 1.786244255208569e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 270,
+      "ratio": 5.0,
+      "position_error": 5.296364706808276e-07,
+      "relative_open_fan_volume_error": 7.898674352357915e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 280,
+      "ratio": 0.05,
+      "position_error": 1.4503526125642097e-06,
+      "relative_open_fan_volume_error": 5.0561680258631725e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 280,
+      "ratio": 0.25,
+      "position_error": 4.097001787828347e-07,
+      "relative_open_fan_volume_error": 1.8203656112603106e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 280,
+      "ratio": 0.5,
+      "position_error": 2.7897142240718154e-07,
+      "relative_open_fan_volume_error": 3.935548625566554e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 280,
+      "ratio": 2.0,
+      "position_error": 2.784169970126982e-07,
+      "relative_open_fan_volume_error": 3.75454824561583e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 280,
+      "ratio": 5.0,
+      "position_error": 4.775317807848012e-07,
+      "relative_open_fan_volume_error": 0.0001250451094081395
+    },
+    {
+      "pitch": -30,
+      "yaw": 290,
+      "ratio": 0.05,
+      "position_error": 1.2496482534318787e-06,
+      "relative_open_fan_volume_error": 6.290519754736934e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 290,
+      "ratio": 0.25,
+      "position_error": 3.9486939884536554e-07,
+      "relative_open_fan_volume_error": 3.4282982709354926e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 290,
+      "ratio": 0.5,
+      "position_error": 2.2324919490834816e-07,
+      "relative_open_fan_volume_error": 2.1912085649500312e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 290,
+      "ratio": 2.0,
+      "position_error": 2.1556405216394126e-07,
+      "relative_open_fan_volume_error": 2.6829573686049102e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 290,
+      "ratio": 5.0,
+      "position_error": 3.560813772729432e-07,
+      "relative_open_fan_volume_error": 1.3016645621588552e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 300,
+      "ratio": 0.05,
+      "position_error": 1.5757649203251844e-06,
+      "relative_open_fan_volume_error": 3.317402314007012e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 300,
+      "ratio": 0.25,
+      "position_error": 4.7019314208807117e-07,
+      "relative_open_fan_volume_error": 1.562015627509794e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 300,
+      "ratio": 0.5,
+      "position_error": 2.7637515531697687e-07,
+      "relative_open_fan_volume_error": 4.376281230733525e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 300,
+      "ratio": 2.0,
+      "position_error": 3.0290357133644363e-07,
+      "relative_open_fan_volume_error": 2.4608403446979565e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 300,
+      "ratio": 5.0,
+      "position_error": 5.09898645084661e-07,
+      "relative_open_fan_volume_error": 6.69493304588098e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 310,
+      "ratio": 0.05,
+      "position_error": 9.842809877147474e-07,
+      "relative_open_fan_volume_error": 8.006791456693918e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 310,
+      "ratio": 0.25,
+      "position_error": 3.163665331928911e-07,
+      "relative_open_fan_volume_error": 2.244800990180984e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 310,
+      "ratio": 0.5,
+      "position_error": 1.8390000855461608e-07,
+      "relative_open_fan_volume_error": 1.630764044546762e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 310,
+      "ratio": 2.0,
+      "position_error": 2.270643093549296e-07,
+      "relative_open_fan_volume_error": 1.0348983698005298e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 310,
+      "ratio": 5.0,
+      "position_error": 3.4834093964875024e-07,
+      "relative_open_fan_volume_error": 2.6837736581519778e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 320,
+      "ratio": 0.05,
+      "position_error": 1.0964701626092754e-06,
+      "relative_open_fan_volume_error": 3.601982021828043e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 320,
+      "ratio": 0.25,
+      "position_error": 3.2962975005101924e-07,
+      "relative_open_fan_volume_error": 2.3036955560939987e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 320,
+      "ratio": 0.5,
+      "position_error": 1.8661128242669633e-07,
+      "relative_open_fan_volume_error": 2.829980591312342e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 320,
+      "ratio": 2.0,
+      "position_error": 1.8015222247314e-07,
+      "relative_open_fan_volume_error": 3.515744828064271e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 320,
+      "ratio": 5.0,
+      "position_error": 3.2677531125457904e-07,
+      "relative_open_fan_volume_error": 7.0999937602511665e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 330,
+      "ratio": 0.05,
+      "position_error": 1.44764890186444e-06,
+      "relative_open_fan_volume_error": 4.96927187751961e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 330,
+      "ratio": 0.25,
+      "position_error": 3.486475154135249e-07,
+      "relative_open_fan_volume_error": 3.6681786822923e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 330,
+      "ratio": 0.5,
+      "position_error": 2.0472706840912736e-07,
+      "relative_open_fan_volume_error": 1.980682560076552e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 330,
+      "ratio": 2.0,
+      "position_error": 2.2972775703955506e-07,
+      "relative_open_fan_volume_error": 3.758302492506971e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 330,
+      "ratio": 5.0,
+      "position_error": 4.264125605946134e-07,
+      "relative_open_fan_volume_error": 2.0981190167468355e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 340,
+      "ratio": 0.05,
+      "position_error": 1.3076035004777609e-06,
+      "relative_open_fan_volume_error": 9.018820729789212e-06
+    },
+    {
+      "pitch": -30,
+      "yaw": 340,
+      "ratio": 0.25,
+      "position_error": 4.051156928808197e-07,
+      "relative_open_fan_volume_error": 2.6452988938663324e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 340,
+      "ratio": 0.5,
+      "position_error": 2.2655757603295967e-07,
+      "relative_open_fan_volume_error": 2.343228355128346e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 340,
+      "ratio": 2.0,
+      "position_error": 2.1391821469762817e-07,
+      "relative_open_fan_volume_error": 1.161614334876937e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 340,
+      "ratio": 5.0,
+      "position_error": 3.5036613277306117e-07,
+      "relative_open_fan_volume_error": 4.476217287519013e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 350,
+      "ratio": 0.05,
+      "position_error": 1.2167776419769183e-06,
+      "relative_open_fan_volume_error": 6.790363645992059e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 350,
+      "ratio": 0.25,
+      "position_error": 4.0517844779319745e-07,
+      "relative_open_fan_volume_error": 1.807810376153185e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 350,
+      "ratio": 0.5,
+      "position_error": 2.2381642528213064e-07,
+      "relative_open_fan_volume_error": 2.863593464086378e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 350,
+      "ratio": 2.0,
+      "position_error": 2.337125533102835e-07,
+      "relative_open_fan_volume_error": 2.6082644037250802e-05
+    },
+    {
+      "pitch": -30,
+      "yaw": 350,
+      "ratio": 5.0,
+      "position_error": 3.7168549837929277e-07,
+      "relative_open_fan_volume_error": 1.058114685514866e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "ratio": 0.05,
+      "position_error": 9.308886674830319e-07,
+      "relative_open_fan_volume_error": 4.053816052973502e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "ratio": 0.25,
+      "position_error": 3.1811674627846287e-07,
+      "relative_open_fan_volume_error": 4.868263393520422e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "ratio": 0.5,
+      "position_error": 1.651231174015777e-07,
+      "relative_open_fan_volume_error": 1.5196648703419413e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "ratio": 2.0,
+      "position_error": 1.8355230668731792e-07,
+      "relative_open_fan_volume_error": 2.4573157018537017e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 0,
+      "ratio": 5.0,
+      "position_error": 2.3247146296867527e-07,
+      "relative_open_fan_volume_error": 9.826239660370994e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 10,
+      "ratio": 0.05,
+      "position_error": 1.519023779650297e-06,
+      "relative_open_fan_volume_error": 1.5058146191071486e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 10,
+      "ratio": 0.25,
+      "position_error": 4.333246859111739e-07,
+      "relative_open_fan_volume_error": 2.266019690377874e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 10,
+      "ratio": 0.5,
+      "position_error": 2.628744347754619e-07,
+      "relative_open_fan_volume_error": 7.066083452578198e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 10,
+      "ratio": 2.0,
+      "position_error": 2.646774526215978e-07,
+      "relative_open_fan_volume_error": 2.5987528474047394e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 10,
+      "ratio": 5.0,
+      "position_error": 5.123680346663662e-07,
+      "relative_open_fan_volume_error": 9.950383162982135e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 20,
+      "ratio": 0.05,
+      "position_error": 1.4182670045048695e-06,
+      "relative_open_fan_volume_error": 2.9681949580973033e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 20,
+      "ratio": 0.25,
+      "position_error": 4.295422774136526e-07,
+      "relative_open_fan_volume_error": 2.8685496924474307e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 20,
+      "ratio": 0.5,
+      "position_error": 2.5787533519672223e-07,
+      "relative_open_fan_volume_error": 1.6756334544565377e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 20,
+      "ratio": 2.0,
+      "position_error": 2.7360119592145793e-07,
+      "relative_open_fan_volume_error": 6.672542519892133e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 20,
+      "ratio": 5.0,
+      "position_error": 4.6311733914450315e-07,
+      "relative_open_fan_volume_error": 2.2462114708687864e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 30,
+      "ratio": 0.05,
+      "position_error": 1.1553346397352726e-06,
+      "relative_open_fan_volume_error": 1.2974611758087562e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 30,
+      "ratio": 0.25,
+      "position_error": 4.023514101891834e-07,
+      "relative_open_fan_volume_error": 4.135255705906005e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 30,
+      "ratio": 0.5,
+      "position_error": 2.098542483119914e-07,
+      "relative_open_fan_volume_error": 4.4628385414746674e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 30,
+      "ratio": 2.0,
+      "position_error": 2.209961418309092e-07,
+      "relative_open_fan_volume_error": 4.176776505682156e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 30,
+      "ratio": 5.0,
+      "position_error": 3.13900709647541e-07,
+      "relative_open_fan_volume_error": 5.819352145441936e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 40,
+      "ratio": 0.05,
+      "position_error": 8.530793231820155e-07,
+      "relative_open_fan_volume_error": 0.00011272468251199985
+    },
+    {
+      "pitch": 0,
+      "yaw": 40,
+      "ratio": 0.25,
+      "position_error": 2.902260265447154e-07,
+      "relative_open_fan_volume_error": 4.590460712994293e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 40,
+      "ratio": 0.5,
+      "position_error": 1.6014550052734222e-07,
+      "relative_open_fan_volume_error": 1.256280754213801e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 40,
+      "ratio": 2.0,
+      "position_error": 1.8678977098396388e-07,
+      "relative_open_fan_volume_error": 5.109520388568711e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 40,
+      "ratio": 5.0,
+      "position_error": 3.3110125907676036e-07,
+      "relative_open_fan_volume_error": 3.5299120922038796e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 50,
+      "ratio": 0.05,
+      "position_error": 1.0558896932355566e-06,
+      "relative_open_fan_volume_error": 9.861201239780293e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 50,
+      "ratio": 0.25,
+      "position_error": 3.1416802448447356e-07,
+      "relative_open_fan_volume_error": 1.655216779816726e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 50,
+      "ratio": 0.5,
+      "position_error": 2.1310270881258475e-07,
+      "relative_open_fan_volume_error": 1.6885738175265175e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 50,
+      "ratio": 2.0,
+      "position_error": 2.682291693201222e-07,
+      "relative_open_fan_volume_error": 4.722686818148247e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 50,
+      "ratio": 5.0,
+      "position_error": 3.9929768069768556e-07,
+      "relative_open_fan_volume_error": 4.541441313821171e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 60,
+      "ratio": 0.05,
+      "position_error": 1.1942211122217827e-06,
+      "relative_open_fan_volume_error": 4.0983627645485576e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 60,
+      "ratio": 0.25,
+      "position_error": 3.432934737590543e-07,
+      "relative_open_fan_volume_error": 5.932237721495426e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 60,
+      "ratio": 0.5,
+      "position_error": 2.474857188072832e-07,
+      "relative_open_fan_volume_error": 1.7050467005175207e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 60,
+      "ratio": 2.0,
+      "position_error": 2.74548325851498e-07,
+      "relative_open_fan_volume_error": 1.1777991043460112e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 60,
+      "ratio": 5.0,
+      "position_error": 4.7263901992167234e-07,
+      "relative_open_fan_volume_error": 6.478412608090789e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 70,
+      "ratio": 0.05,
+      "position_error": 1.6761557002364924e-06,
+      "relative_open_fan_volume_error": 7.357818039233077e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 70,
+      "ratio": 0.25,
+      "position_error": 5.070059840850405e-07,
+      "relative_open_fan_volume_error": 1.2367443118055377e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 70,
+      "ratio": 0.5,
+      "position_error": 3.097549807762334e-07,
+      "relative_open_fan_volume_error": 1.3693923627045024e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 70,
+      "ratio": 2.0,
+      "position_error": 3.104507488860264e-07,
+      "relative_open_fan_volume_error": 3.147347950749335e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 70,
+      "ratio": 5.0,
+      "position_error": 4.0866578876475046e-07,
+      "relative_open_fan_volume_error": 4.008808056243929e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 80,
+      "ratio": 0.05,
+      "position_error": 1.73109555490214e-06,
+      "relative_open_fan_volume_error": 4.872536641908898e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 80,
+      "ratio": 0.25,
+      "position_error": 5.000992854276021e-07,
+      "relative_open_fan_volume_error": 1.6735508601817273e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 80,
+      "ratio": 0.5,
+      "position_error": 3.1441111758567786e-07,
+      "relative_open_fan_volume_error": 1.4287222075415329e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 80,
+      "ratio": 2.0,
+      "position_error": 3.1026332436567827e-07,
+      "relative_open_fan_volume_error": 1.0398618975560048e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 80,
+      "ratio": 5.0,
+      "position_error": 4.133212669898967e-07,
+      "relative_open_fan_volume_error": 1.2717158177855126e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 90,
+      "ratio": 0.05,
+      "position_error": 6.822401994455163e-07,
+      "relative_open_fan_volume_error": 4.4744214037661934e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 90,
+      "ratio": 0.25,
+      "position_error": 2.340101408204731e-07,
+      "relative_open_fan_volume_error": 1.6251069820283348e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 90,
+      "ratio": 0.5,
+      "position_error": 1.7104025640257703e-07,
+      "relative_open_fan_volume_error": 1.4319685625707734e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 90,
+      "ratio": 2.0,
+      "position_error": 2.1990399368121416e-07,
+      "relative_open_fan_volume_error": 1.7109635501721954e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 90,
+      "ratio": 5.0,
+      "position_error": 3.3420323797273e-07,
+      "relative_open_fan_volume_error": 5.402497859563482e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 100,
+      "ratio": 0.05,
+      "position_error": 1.7070422921872108e-06,
+      "relative_open_fan_volume_error": 3.764094189595557e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 100,
+      "ratio": 0.25,
+      "position_error": 5.228862389738964e-07,
+      "relative_open_fan_volume_error": 1.1867824479816491e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 100,
+      "ratio": 0.5,
+      "position_error": 3.1519845333782825e-07,
+      "relative_open_fan_volume_error": 1.3394391433552144e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 100,
+      "ratio": 2.0,
+      "position_error": 3.0392004202184353e-07,
+      "relative_open_fan_volume_error": 2.0895177703539325e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 100,
+      "ratio": 5.0,
+      "position_error": 4.313712547165949e-07,
+      "relative_open_fan_volume_error": 6.249912841260752e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 110,
+      "ratio": 0.05,
+      "position_error": 1.6400701756680292e-06,
+      "relative_open_fan_volume_error": 2.7508425133104808e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 110,
+      "ratio": 0.25,
+      "position_error": 5.156677700401957e-07,
+      "relative_open_fan_volume_error": 3.447599845651794e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 110,
+      "ratio": 0.5,
+      "position_error": 3.1274199230324484e-07,
+      "relative_open_fan_volume_error": 2.409082821763775e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 110,
+      "ratio": 2.0,
+      "position_error": 2.9929766687253334e-07,
+      "relative_open_fan_volume_error": 4.960371041329292e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 110,
+      "ratio": 5.0,
+      "position_error": 3.964050203641989e-07,
+      "relative_open_fan_volume_error": 1.9394987134768726e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 120,
+      "ratio": 0.05,
+      "position_error": 1.2840819807458104e-06,
+      "relative_open_fan_volume_error": 8.590173230083042e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 120,
+      "ratio": 0.25,
+      "position_error": 4.6916708451583133e-07,
+      "relative_open_fan_volume_error": 1.468174475283135e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 120,
+      "ratio": 0.5,
+      "position_error": 2.8384987160734454e-07,
+      "relative_open_fan_volume_error": 3.762516915029046e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 120,
+      "ratio": 2.0,
+      "position_error": 2.8945770425004014e-07,
+      "relative_open_fan_volume_error": 2.0450333293453582e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 120,
+      "ratio": 5.0,
+      "position_error": 3.913462829352454e-07,
+      "relative_open_fan_volume_error": 4.673248224362769e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 130,
+      "ratio": 0.05,
+      "position_error": 1.1220338307360578e-06,
+      "relative_open_fan_volume_error": 6.939023711949321e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 130,
+      "ratio": 0.25,
+      "position_error": 3.220371698198221e-07,
+      "relative_open_fan_volume_error": 1.721889259953535e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 130,
+      "ratio": 0.5,
+      "position_error": 2.6120319829292526e-07,
+      "relative_open_fan_volume_error": 4.5792513463371876e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 130,
+      "ratio": 2.0,
+      "position_error": 2.6994131552271483e-07,
+      "relative_open_fan_volume_error": 4.796704767118243e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 130,
+      "ratio": 5.0,
+      "position_error": 3.4381387314930123e-07,
+      "relative_open_fan_volume_error": 9.55432999205641e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 140,
+      "ratio": 0.05,
+      "position_error": 1.033229020785953e-06,
+      "relative_open_fan_volume_error": 5.027397255796817e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 140,
+      "ratio": 0.25,
+      "position_error": 3.9378769867148833e-07,
+      "relative_open_fan_volume_error": 5.789430195912715e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 140,
+      "ratio": 0.5,
+      "position_error": 2.3386311720496877e-07,
+      "relative_open_fan_volume_error": 3.733336606415172e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 140,
+      "ratio": 2.0,
+      "position_error": 2.670928549441953e-07,
+      "relative_open_fan_volume_error": 1.1657658279817795e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 140,
+      "ratio": 5.0,
+      "position_error": 4.190760996003462e-07,
+      "relative_open_fan_volume_error": 1.8209590596396374e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 150,
+      "ratio": 0.05,
+      "position_error": 1.4733378748132964e-06,
+      "relative_open_fan_volume_error": 1.8419984534334688e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 150,
+      "ratio": 0.25,
+      "position_error": 3.9902832993377046e-07,
+      "relative_open_fan_volume_error": 4.7986973620073314e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 150,
+      "ratio": 0.5,
+      "position_error": 3.13356749659377e-07,
+      "relative_open_fan_volume_error": 2.494378087236626e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 150,
+      "ratio": 2.0,
+      "position_error": 2.986710754271371e-07,
+      "relative_open_fan_volume_error": 7.961433159808795e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 150,
+      "ratio": 5.0,
+      "position_error": 3.9879943258824824e-07,
+      "relative_open_fan_volume_error": 0.00017906570321102322
+    },
+    {
+      "pitch": 0,
+      "yaw": 160,
+      "ratio": 0.05,
+      "position_error": 1.3224729966676563e-06,
+      "relative_open_fan_volume_error": 4.780486737920864e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 160,
+      "ratio": 0.25,
+      "position_error": 5.079637490634781e-07,
+      "relative_open_fan_volume_error": 8.831096279693362e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 160,
+      "ratio": 0.5,
+      "position_error": 3.281164628887723e-07,
+      "relative_open_fan_volume_error": 1.0531184665429905e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 160,
+      "ratio": 2.0,
+      "position_error": 2.6892612603468535e-07,
+      "relative_open_fan_volume_error": 1.2401741410150713e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 160,
+      "ratio": 5.0,
+      "position_error": 6.277676352084427e-07,
+      "relative_open_fan_volume_error": 7.827020151096598e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 170,
+      "ratio": 0.05,
+      "position_error": 1.9797603975080236e-06,
+      "relative_open_fan_volume_error": 4.951759217330931e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 170,
+      "ratio": 0.25,
+      "position_error": 4.902769487058478e-07,
+      "relative_open_fan_volume_error": 6.994610501909193e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 170,
+      "ratio": 0.5,
+      "position_error": 2.818155342421136e-07,
+      "relative_open_fan_volume_error": 7.401348774305205e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 170,
+      "ratio": 2.0,
+      "position_error": 3.43534156899139e-07,
+      "relative_open_fan_volume_error": 3.7539154669086194e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 170,
+      "ratio": 5.0,
+      "position_error": 5.240057152633426e-07,
+      "relative_open_fan_volume_error": 1.875513596416578e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 180,
+      "ratio": 0.05,
+      "position_error": 7.820771723565656e-07,
+      "relative_open_fan_volume_error": 3.211733165864317e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 180,
+      "ratio": 0.25,
+      "position_error": 2.514055776892121e-07,
+      "relative_open_fan_volume_error": 3.2635772081457404e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 180,
+      "ratio": 0.5,
+      "position_error": 1.8809197244173959e-07,
+      "relative_open_fan_volume_error": 2.795536339861293e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 180,
+      "ratio": 2.0,
+      "position_error": 2.584637235347742e-07,
+      "relative_open_fan_volume_error": 2.566948531468327e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 180,
+      "ratio": 5.0,
+      "position_error": 4.3156180140613287e-07,
+      "relative_open_fan_volume_error": 2.0442607978399252e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 190,
+      "ratio": 0.05,
+      "position_error": 1.9630232950262894e-06,
+      "relative_open_fan_volume_error": 3.250064877513559e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 190,
+      "ratio": 0.25,
+      "position_error": 4.988336415046035e-07,
+      "relative_open_fan_volume_error": 9.290062291889e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 190,
+      "ratio": 0.5,
+      "position_error": 2.8727777334758287e-07,
+      "relative_open_fan_volume_error": 3.005993798654849e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 190,
+      "ratio": 2.0,
+      "position_error": 3.627903695235801e-07,
+      "relative_open_fan_volume_error": 7.754100314549817e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 190,
+      "ratio": 5.0,
+      "position_error": 5.140712171503026e-07,
+      "relative_open_fan_volume_error": 0.00013198089313370964
+    },
+    {
+      "pitch": 0,
+      "yaw": 200,
+      "ratio": 0.05,
+      "position_error": 1.3526505640015785e-06,
+      "relative_open_fan_volume_error": 5.512396501161643e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 200,
+      "ratio": 0.25,
+      "position_error": 5.090010948283208e-07,
+      "relative_open_fan_volume_error": 2.7242156300788523e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 200,
+      "ratio": 0.5,
+      "position_error": 3.1659553489937764e-07,
+      "relative_open_fan_volume_error": 1.7514948522090457e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 200,
+      "ratio": 2.0,
+      "position_error": 2.780918311184877e-07,
+      "relative_open_fan_volume_error": 2.4446144338385878e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 200,
+      "ratio": 5.0,
+      "position_error": 6.413856867837353e-07,
+      "relative_open_fan_volume_error": 9.23237084000661e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 210,
+      "ratio": 0.05,
+      "position_error": 1.5278444089883436e-06,
+      "relative_open_fan_volume_error": 7.03544895891417e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 210,
+      "ratio": 0.25,
+      "position_error": 3.896854177121156e-07,
+      "relative_open_fan_volume_error": 4.2899632350934525e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 210,
+      "ratio": 0.5,
+      "position_error": 3.0948013929332774e-07,
+      "relative_open_fan_volume_error": 1.143589894714303e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 210,
+      "ratio": 2.0,
+      "position_error": 3.195928268695525e-07,
+      "relative_open_fan_volume_error": 1.654731482891858e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 210,
+      "ratio": 5.0,
+      "position_error": 3.802544115139028e-07,
+      "relative_open_fan_volume_error": 8.058313947012508e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 220,
+      "ratio": 0.05,
+      "position_error": 9.875414141991001e-07,
+      "relative_open_fan_volume_error": 5.0266905757601066e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 220,
+      "ratio": 0.25,
+      "position_error": 4.0242589161021414e-07,
+      "relative_open_fan_volume_error": 4.5962075777561395e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 220,
+      "ratio": 0.5,
+      "position_error": 2.215900947177829e-07,
+      "relative_open_fan_volume_error": 2.6587196203520236e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 220,
+      "ratio": 2.0,
+      "position_error": 2.7740518193652974e-07,
+      "relative_open_fan_volume_error": 3.5253883367003525e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 220,
+      "ratio": 5.0,
+      "position_error": 3.7485848403129296e-07,
+      "relative_open_fan_volume_error": 9.788913902353258e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 230,
+      "ratio": 0.05,
+      "position_error": 1.1703942506269271e-06,
+      "relative_open_fan_volume_error": 9.646993174561302e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 230,
+      "ratio": 0.25,
+      "position_error": 3.3847879965520633e-07,
+      "relative_open_fan_volume_error": 1.0651244345516453e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 230,
+      "ratio": 0.5,
+      "position_error": 2.475302182114447e-07,
+      "relative_open_fan_volume_error": 2.487282767971166e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 230,
+      "ratio": 2.0,
+      "position_error": 2.8124234563442485e-07,
+      "relative_open_fan_volume_error": 1.408356004806155e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 230,
+      "ratio": 5.0,
+      "position_error": 3.25138213908005e-07,
+      "relative_open_fan_volume_error": 1.956417783155473e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 240,
+      "ratio": 0.05,
+      "position_error": 1.3530531934868861e-06,
+      "relative_open_fan_volume_error": 9.192557987902639e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 240,
+      "ratio": 0.25,
+      "position_error": 4.033465150765636e-07,
+      "relative_open_fan_volume_error": 2.8797721950635236e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 240,
+      "ratio": 0.5,
+      "position_error": 2.914120982300261e-07,
+      "relative_open_fan_volume_error": 1.8535836724176136e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 240,
+      "ratio": 2.0,
+      "position_error": 2.775389280618157e-07,
+      "relative_open_fan_volume_error": 3.998586326159348e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 240,
+      "ratio": 5.0,
+      "position_error": 3.5955971666723485e-07,
+      "relative_open_fan_volume_error": 7.816077032141155e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 250,
+      "ratio": 0.05,
+      "position_error": 1.6211300122304095e-06,
+      "relative_open_fan_volume_error": 2.088663576438332e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 250,
+      "ratio": 0.25,
+      "position_error": 4.941855022977393e-07,
+      "relative_open_fan_volume_error": 6.950699484864487e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 250,
+      "ratio": 0.5,
+      "position_error": 3.0831899211491987e-07,
+      "relative_open_fan_volume_error": 2.271282633747873e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 250,
+      "ratio": 2.0,
+      "position_error": 3.0674944162534246e-07,
+      "relative_open_fan_volume_error": 5.716847670145242e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 250,
+      "ratio": 5.0,
+      "position_error": 3.9819618358194475e-07,
+      "relative_open_fan_volume_error": 0.00012758284661318342
+    },
+    {
+      "pitch": 0,
+      "yaw": 260,
+      "ratio": 0.05,
+      "position_error": 1.7604029673989885e-06,
+      "relative_open_fan_volume_error": 3.206001958977467e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 260,
+      "ratio": 0.25,
+      "position_error": 4.990461052178929e-07,
+      "relative_open_fan_volume_error": 2.1516250968467432e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 260,
+      "ratio": 0.5,
+      "position_error": 3.222503262012566e-07,
+      "relative_open_fan_volume_error": 1.9467176540999276e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 260,
+      "ratio": 2.0,
+      "position_error": 3.1701308511600246e-07,
+      "relative_open_fan_volume_error": 1.8090436091355855e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 260,
+      "ratio": 5.0,
+      "position_error": 4.072166657209664e-07,
+      "relative_open_fan_volume_error": 0.00014555297956020397
+    },
+    {
+      "pitch": 0,
+      "yaw": 270,
+      "ratio": 0.05,
+      "position_error": 6.822380465010269e-07,
+      "relative_open_fan_volume_error": 4.401363393025104e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 270,
+      "ratio": 0.25,
+      "position_error": 2.3249680403125694e-07,
+      "relative_open_fan_volume_error": 1.693866985319481e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 270,
+      "ratio": 0.5,
+      "position_error": 1.7055041068303467e-07,
+      "relative_open_fan_volume_error": 1.2386295392907698e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 270,
+      "ratio": 2.0,
+      "position_error": 2.2115905373709666e-07,
+      "relative_open_fan_volume_error": 2.2927475036516043e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 270,
+      "ratio": 5.0,
+      "position_error": 3.325368944651075e-07,
+      "relative_open_fan_volume_error": 5.822097724506037e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 280,
+      "ratio": 0.05,
+      "position_error": 1.7771356981555186e-06,
+      "relative_open_fan_volume_error": 6.512877625186597e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 280,
+      "ratio": 0.25,
+      "position_error": 4.945801540534589e-07,
+      "relative_open_fan_volume_error": 9.66540463642751e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 280,
+      "ratio": 0.5,
+      "position_error": 3.041286573690627e-07,
+      "relative_open_fan_volume_error": 1.1645890778622103e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 280,
+      "ratio": 2.0,
+      "position_error": 3.0785338189787126e-07,
+      "relative_open_fan_volume_error": 2.5016746935113687e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 280,
+      "ratio": 5.0,
+      "position_error": 4.3164334551093475e-07,
+      "relative_open_fan_volume_error": 3.051142280419139e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 290,
+      "ratio": 0.05,
+      "position_error": 1.6152404718194902e-06,
+      "relative_open_fan_volume_error": 3.968174279134207e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 290,
+      "ratio": 0.25,
+      "position_error": 4.736720384812543e-07,
+      "relative_open_fan_volume_error": 2.840085087174593e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 290,
+      "ratio": 0.5,
+      "position_error": 2.9185201633197266e-07,
+      "relative_open_fan_volume_error": 1.0542793983381316e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 290,
+      "ratio": 2.0,
+      "position_error": 2.9675810186979845e-07,
+      "relative_open_fan_volume_error": 1.7917526209387802e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 290,
+      "ratio": 5.0,
+      "position_error": 3.875220579985239e-07,
+      "relative_open_fan_volume_error": 6.701794850072496e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 300,
+      "ratio": 0.05,
+      "position_error": 1.243390981287007e-06,
+      "relative_open_fan_volume_error": 6.649494744981332e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 300,
+      "ratio": 0.25,
+      "position_error": 3.676771673788437e-07,
+      "relative_open_fan_volume_error": 2.553274143224371e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 300,
+      "ratio": 0.5,
+      "position_error": 2.6883732595628373e-07,
+      "relative_open_fan_volume_error": 5.012273385229804e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 300,
+      "ratio": 2.0,
+      "position_error": 2.665224854148107e-07,
+      "relative_open_fan_volume_error": 5.246657353019657e-08
+    },
+    {
+      "pitch": 0,
+      "yaw": 300,
+      "ratio": 5.0,
+      "position_error": 4.614976618633193e-07,
+      "relative_open_fan_volume_error": 3.0089192435078793e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 310,
+      "ratio": 0.05,
+      "position_error": 1.0294881210848317e-06,
+      "relative_open_fan_volume_error": 6.788239671917662e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 310,
+      "ratio": 0.25,
+      "position_error": 3.300177526810444e-07,
+      "relative_open_fan_volume_error": 5.937176476455974e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 310,
+      "ratio": 0.5,
+      "position_error": 2.0415320467481735e-07,
+      "relative_open_fan_volume_error": 9.494581213465025e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 310,
+      "ratio": 2.0,
+      "position_error": 2.637275988703891e-07,
+      "relative_open_fan_volume_error": 4.022564580485888e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 310,
+      "ratio": 5.0,
+      "position_error": 3.749316597190244e-07,
+      "relative_open_fan_volume_error": 5.597727483963588e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 320,
+      "ratio": 0.05,
+      "position_error": 9.096468971403482e-07,
+      "relative_open_fan_volume_error": 9.799486725747819e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 320,
+      "ratio": 0.25,
+      "position_error": 3.0417011498418134e-07,
+      "relative_open_fan_volume_error": 8.782305104482191e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 320,
+      "ratio": 0.5,
+      "position_error": 1.779058531603539e-07,
+      "relative_open_fan_volume_error": 2.421611284919578e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 320,
+      "ratio": 2.0,
+      "position_error": 2.0151938340262632e-07,
+      "relative_open_fan_volume_error": 8.089552563372848e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 320,
+      "ratio": 5.0,
+      "position_error": 3.6481622500694755e-07,
+      "relative_open_fan_volume_error": 5.675751035250087e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 330,
+      "ratio": 0.05,
+      "position_error": 1.1590263497840425e-06,
+      "relative_open_fan_volume_error": 1.0292499821318302e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 330,
+      "ratio": 0.25,
+      "position_error": 4.0578892002152145e-07,
+      "relative_open_fan_volume_error": 2.6242752450222895e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 330,
+      "ratio": 0.5,
+      "position_error": 2.115101499500227e-07,
+      "relative_open_fan_volume_error": 2.9003587905807038e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 330,
+      "ratio": 2.0,
+      "position_error": 2.3326017783986686e-07,
+      "relative_open_fan_volume_error": 1.5168164722023647e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 330,
+      "ratio": 5.0,
+      "position_error": 3.328925710643915e-07,
+      "relative_open_fan_volume_error": 9.42541453752277e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 340,
+      "ratio": 0.05,
+      "position_error": 1.382029662488904e-06,
+      "relative_open_fan_volume_error": 3.780953012100241e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 340,
+      "ratio": 0.25,
+      "position_error": 4.0147613367125246e-07,
+      "relative_open_fan_volume_error": 4.403368905059324e-07
+    },
+    {
+      "pitch": 0,
+      "yaw": 340,
+      "ratio": 0.5,
+      "position_error": 2.5849062812444146e-07,
+      "relative_open_fan_volume_error": 8.864087241988727e-08
+    },
+    {
+      "pitch": 0,
+      "yaw": 340,
+      "ratio": 2.0,
+      "position_error": 2.7872499264169903e-07,
+      "relative_open_fan_volume_error": 3.141916429960645e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 340,
+      "ratio": 5.0,
+      "position_error": 4.6814244480941625e-07,
+      "relative_open_fan_volume_error": 4.147951545263595e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 350,
+      "ratio": 0.05,
+      "position_error": 1.524663420848782e-06,
+      "relative_open_fan_volume_error": 1.6748200763916365e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 350,
+      "ratio": 0.25,
+      "position_error": 4.5401125614574767e-07,
+      "relative_open_fan_volume_error": 2.6009105030366797e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 350,
+      "ratio": 0.5,
+      "position_error": 2.831988301643662e-07,
+      "relative_open_fan_volume_error": 1.5832877891197583e-05
+    },
+    {
+      "pitch": 0,
+      "yaw": 350,
+      "ratio": 2.0,
+      "position_error": 2.580094791149179e-07,
+      "relative_open_fan_volume_error": 8.754902362406725e-06
+    },
+    {
+      "pitch": 0,
+      "yaw": 350,
+      "ratio": 5.0,
+      "position_error": 5.099800919339259e-07,
+      "relative_open_fan_volume_error": 8.183701315145342e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 0,
+      "ratio": 0.05,
+      "position_error": 1.188753951053556e-06,
+      "relative_open_fan_volume_error": 4.293103822905486e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 0,
+      "ratio": 0.25,
+      "position_error": 3.792921370315838e-07,
+      "relative_open_fan_volume_error": 2.3516020331681986e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 0,
+      "ratio": 0.5,
+      "position_error": 2.0756241736474834e-07,
+      "relative_open_fan_volume_error": 3.783043015759269e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 0,
+      "ratio": 2.0,
+      "position_error": 2.6606003800111466e-07,
+      "relative_open_fan_volume_error": 7.435293355029238e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 0,
+      "ratio": 5.0,
+      "position_error": 4.824546144810427e-07,
+      "relative_open_fan_volume_error": 3.224550045177743e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 10,
+      "ratio": 0.05,
+      "position_error": 1.1850476089314554e-06,
+      "relative_open_fan_volume_error": 3.908341705161078e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 10,
+      "ratio": 0.25,
+      "position_error": 3.784828035424681e-07,
+      "relative_open_fan_volume_error": 9.288450198763343e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 10,
+      "ratio": 0.5,
+      "position_error": 2.3231728685235709e-07,
+      "relative_open_fan_volume_error": 5.862663106759314e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 10,
+      "ratio": 2.0,
+      "position_error": 2.6482214909862023e-07,
+      "relative_open_fan_volume_error": 3.138032747918018e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 10,
+      "ratio": 5.0,
+      "position_error": 4.375683442248146e-07,
+      "relative_open_fan_volume_error": 0.0001690593024359366
+    },
+    {
+      "pitch": 30,
+      "yaw": 20,
+      "ratio": 0.05,
+      "position_error": 1.361567218749471e-06,
+      "relative_open_fan_volume_error": 1.8249750241228213e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 20,
+      "ratio": 0.25,
+      "position_error": 3.86401737939579e-07,
+      "relative_open_fan_volume_error": 6.527985671356262e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 20,
+      "ratio": 0.5,
+      "position_error": 2.4664452102918233e-07,
+      "relative_open_fan_volume_error": 1.7124261810330665e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 20,
+      "ratio": 2.0,
+      "position_error": 2.423769354109595e-07,
+      "relative_open_fan_volume_error": 4.581815720894333e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 20,
+      "ratio": 5.0,
+      "position_error": 4.299090763382196e-07,
+      "relative_open_fan_volume_error": 7.919991878069244e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 30,
+      "ratio": 0.05,
+      "position_error": 1.0550752342908254e-06,
+      "relative_open_fan_volume_error": 6.369177065979059e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 30,
+      "ratio": 0.25,
+      "position_error": 3.479811515605391e-07,
+      "relative_open_fan_volume_error": 1.4174944642730836e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 30,
+      "ratio": 0.5,
+      "position_error": 2.045351533697115e-07,
+      "relative_open_fan_volume_error": 1.25317415520243e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 30,
+      "ratio": 2.0,
+      "position_error": 2.717336156088379e-07,
+      "relative_open_fan_volume_error": 1.0950572138623826e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 30,
+      "ratio": 5.0,
+      "position_error": 4.0495213493585425e-07,
+      "relative_open_fan_volume_error": 2.0980446064244873e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 40,
+      "ratio": 0.05,
+      "position_error": 8.370100633703359e-07,
+      "relative_open_fan_volume_error": 3.134078580346866e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 40,
+      "ratio": 0.25,
+      "position_error": 2.643779618560771e-07,
+      "relative_open_fan_volume_error": 1.401120127131339e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 40,
+      "ratio": 0.5,
+      "position_error": 1.690946196397647e-07,
+      "relative_open_fan_volume_error": 3.423512509026505e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 40,
+      "ratio": 2.0,
+      "position_error": 2.684669513364213e-07,
+      "relative_open_fan_volume_error": 6.94386311401729e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 40,
+      "ratio": 5.0,
+      "position_error": 4.0021768832332327e-07,
+      "relative_open_fan_volume_error": 0.0002161394060813393
+    },
+    {
+      "pitch": 30,
+      "yaw": 50,
+      "ratio": 0.05,
+      "position_error": 1.1022591306364404e-06,
+      "relative_open_fan_volume_error": 1.9535794857916677e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 50,
+      "ratio": 0.25,
+      "position_error": 3.2433000984877225e-07,
+      "relative_open_fan_volume_error": 3.1873214206945555e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 50,
+      "ratio": 0.5,
+      "position_error": 1.7454712952780227e-07,
+      "relative_open_fan_volume_error": 1.8476906234687895e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 50,
+      "ratio": 2.0,
+      "position_error": 2.5561044081356954e-07,
+      "relative_open_fan_volume_error": 3.17929542470452e-07
+    },
+    {
+      "pitch": 30,
+      "yaw": 50,
+      "ratio": 5.0,
+      "position_error": 4.547036445146091e-07,
+      "relative_open_fan_volume_error": 0.00012757304182198226
+    },
+    {
+      "pitch": 30,
+      "yaw": 60,
+      "ratio": 0.05,
+      "position_error": 1.2025007677385346e-06,
+      "relative_open_fan_volume_error": 2.8311693497373724e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 60,
+      "ratio": 0.25,
+      "position_error": 3.808317224907043e-07,
+      "relative_open_fan_volume_error": 8.64785084442321e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 60,
+      "ratio": 0.5,
+      "position_error": 2.336271124336875e-07,
+      "relative_open_fan_volume_error": 2.508809425649794e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 60,
+      "ratio": 2.0,
+      "position_error": 3.029734598758438e-07,
+      "relative_open_fan_volume_error": 3.1318624106768667e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 60,
+      "ratio": 5.0,
+      "position_error": 4.0833766590253617e-07,
+      "relative_open_fan_volume_error": 3.7046153957831507e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 70,
+      "ratio": 0.05,
+      "position_error": 1.2288902997426021e-06,
+      "relative_open_fan_volume_error": 8.055737371681637e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 70,
+      "ratio": 0.25,
+      "position_error": 3.773167263076971e-07,
+      "relative_open_fan_volume_error": 1.8970227714243393e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 70,
+      "ratio": 0.5,
+      "position_error": 2.4522302721763367e-07,
+      "relative_open_fan_volume_error": 2.985282866552197e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 70,
+      "ratio": 2.0,
+      "position_error": 2.613381926419578e-07,
+      "relative_open_fan_volume_error": 1.8324816472459204e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 70,
+      "ratio": 5.0,
+      "position_error": 4.2419903234502954e-07,
+      "relative_open_fan_volume_error": 2.377234760131408e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 80,
+      "ratio": 0.05,
+      "position_error": 1.68734092231837e-06,
+      "relative_open_fan_volume_error": 8.402290395004286e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 80,
+      "ratio": 0.25,
+      "position_error": 5.300659524642981e-07,
+      "relative_open_fan_volume_error": 1.7201727062099437e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 80,
+      "ratio": 0.5,
+      "position_error": 2.4301082257593976e-07,
+      "relative_open_fan_volume_error": 2.2013068984527706e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 80,
+      "ratio": 2.0,
+      "position_error": 2.430458234670141e-07,
+      "relative_open_fan_volume_error": 2.3825428796531156e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 80,
+      "ratio": 5.0,
+      "position_error": 4.869870344759164e-07,
+      "relative_open_fan_volume_error": 9.73390046450362e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 90,
+      "ratio": 0.05,
+      "position_error": 1.1347043449294603e-06,
+      "relative_open_fan_volume_error": 3.199134519782376e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 90,
+      "ratio": 0.25,
+      "position_error": 4.204873713664625e-07,
+      "relative_open_fan_volume_error": 2.541189450511183e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 90,
+      "ratio": 0.5,
+      "position_error": 2.438352104672248e-07,
+      "relative_open_fan_volume_error": 2.3855899697000638e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 90,
+      "ratio": 2.0,
+      "position_error": 2.8675786634124734e-07,
+      "relative_open_fan_volume_error": 3.6257477880496936e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 90,
+      "ratio": 5.0,
+      "position_error": 3.9431296539049754e-07,
+      "relative_open_fan_volume_error": 1.877165643504597e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 100,
+      "ratio": 0.05,
+      "position_error": 1.6214445981432846e-06,
+      "relative_open_fan_volume_error": 3.766365260315929e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 100,
+      "ratio": 0.25,
+      "position_error": 5.354813914504319e-07,
+      "relative_open_fan_volume_error": 4.277331732804868e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 100,
+      "ratio": 0.5,
+      "position_error": 3.2175165265435623e-07,
+      "relative_open_fan_volume_error": 2.241019705395697e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 100,
+      "ratio": 2.0,
+      "position_error": 2.6773794381540483e-07,
+      "relative_open_fan_volume_error": 8.619403176091112e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 100,
+      "ratio": 5.0,
+      "position_error": 6.288632303785846e-07,
+      "relative_open_fan_volume_error": 1.97839429554314e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 110,
+      "ratio": 0.05,
+      "position_error": 1.2696543312262776e-06,
+      "relative_open_fan_volume_error": 2.977940332149487e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 110,
+      "ratio": 0.25,
+      "position_error": 4.84913839082779e-07,
+      "relative_open_fan_volume_error": 9.56006301000567e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 110,
+      "ratio": 0.5,
+      "position_error": 2.983595781547166e-07,
+      "relative_open_fan_volume_error": 1.885042676708082e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 110,
+      "ratio": 2.0,
+      "position_error": 2.575963113926605e-07,
+      "relative_open_fan_volume_error": 4.68232256229939e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 110,
+      "ratio": 5.0,
+      "position_error": 5.864771948083103e-07,
+      "relative_open_fan_volume_error": 7.279112058067305e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 120,
+      "ratio": 0.05,
+      "position_error": 1.3525886481957627e-06,
+      "relative_open_fan_volume_error": 9.58315074339744e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 120,
+      "ratio": 0.25,
+      "position_error": 3.4624899636348516e-07,
+      "relative_open_fan_volume_error": 2.277102657033403e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 120,
+      "ratio": 0.5,
+      "position_error": 2.1526089633017165e-07,
+      "relative_open_fan_volume_error": 4.1714392941760714e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 120,
+      "ratio": 2.0,
+      "position_error": 3.061012496807791e-07,
+      "relative_open_fan_volume_error": 3.195797450150639e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 120,
+      "ratio": 5.0,
+      "position_error": 4.7160755789477093e-07,
+      "relative_open_fan_volume_error": 0.00016313527964972874
+    },
+    {
+      "pitch": 30,
+      "yaw": 130,
+      "ratio": 0.05,
+      "position_error": 1.066203374699981e-06,
+      "relative_open_fan_volume_error": 1.449424396005039e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 130,
+      "ratio": 0.25,
+      "position_error": 3.5347875804170314e-07,
+      "relative_open_fan_volume_error": 1.3050368723455108e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 130,
+      "ratio": 0.5,
+      "position_error": 2.1117925030900153e-07,
+      "relative_open_fan_volume_error": 1.423250049725766e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 130,
+      "ratio": 2.0,
+      "position_error": 2.6470631819819346e-07,
+      "relative_open_fan_volume_error": 2.9828305958434775e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 130,
+      "ratio": 5.0,
+      "position_error": 5.330560428618014e-07,
+      "relative_open_fan_volume_error": 1.1213503672058422e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 140,
+      "ratio": 0.05,
+      "position_error": 1.0431617171180463e-06,
+      "relative_open_fan_volume_error": 2.795395295451808e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 140,
+      "ratio": 0.25,
+      "position_error": 3.1228318619902495e-07,
+      "relative_open_fan_volume_error": 1.4307739583885315e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 140,
+      "ratio": 0.5,
+      "position_error": 2.007588946195682e-07,
+      "relative_open_fan_volume_error": 1.2574305077173165e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 140,
+      "ratio": 2.0,
+      "position_error": 2.723983509866912e-07,
+      "relative_open_fan_volume_error": 5.5456771845374675e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 140,
+      "ratio": 5.0,
+      "position_error": 4.945623910401764e-07,
+      "relative_open_fan_volume_error": 3.6202781382277394e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 150,
+      "ratio": 0.05,
+      "position_error": 1.23845069399664e-06,
+      "relative_open_fan_volume_error": 3.5772651802212785e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 150,
+      "ratio": 0.25,
+      "position_error": 3.7674369079976344e-07,
+      "relative_open_fan_volume_error": 1.4986193234589607e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 150,
+      "ratio": 0.5,
+      "position_error": 2.519248645249661e-07,
+      "relative_open_fan_volume_error": 9.228704905273055e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 150,
+      "ratio": 2.0,
+      "position_error": 3.030630582046001e-07,
+      "relative_open_fan_volume_error": 2.634757266806176e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 150,
+      "ratio": 5.0,
+      "position_error": 5.235998312702606e-07,
+      "relative_open_fan_volume_error": 0.0001373209605513015
+    },
+    {
+      "pitch": 30,
+      "yaw": 160,
+      "ratio": 0.05,
+      "position_error": 1.3583955422724614e-06,
+      "relative_open_fan_volume_error": 6.805452668912082e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 160,
+      "ratio": 0.25,
+      "position_error": 4.3576455222016364e-07,
+      "relative_open_fan_volume_error": 1.986068817538822e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 160,
+      "ratio": 0.5,
+      "position_error": 2.867028017217166e-07,
+      "relative_open_fan_volume_error": 4.4824606687310364e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 160,
+      "ratio": 2.0,
+      "position_error": 3.145755167466291e-07,
+      "relative_open_fan_volume_error": 9.837232682663455e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 160,
+      "ratio": 5.0,
+      "position_error": 5.341333424446759e-07,
+      "relative_open_fan_volume_error": 0.00025011107093964036
+    },
+    {
+      "pitch": 30,
+      "yaw": 170,
+      "ratio": 0.05,
+      "position_error": 1.5030855520237196e-06,
+      "relative_open_fan_volume_error": 3.876511529554705e-07
+    },
+    {
+      "pitch": 30,
+      "yaw": 170,
+      "ratio": 0.25,
+      "position_error": 5.488618350923957e-07,
+      "relative_open_fan_volume_error": 1.6574819633685678e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 170,
+      "ratio": 0.5,
+      "position_error": 3.0030724373908413e-07,
+      "relative_open_fan_volume_error": 4.241580443209436e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 170,
+      "ratio": 2.0,
+      "position_error": 2.898164799258751e-07,
+      "relative_open_fan_volume_error": 3.570067431568624e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 170,
+      "ratio": 5.0,
+      "position_error": 5.678873040704246e-07,
+      "relative_open_fan_volume_error": 0.00013016822612488266
+    },
+    {
+      "pitch": 30,
+      "yaw": 180,
+      "ratio": 0.05,
+      "position_error": 1.4664309171408263e-06,
+      "relative_open_fan_volume_error": 4.9134678538731436e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 180,
+      "ratio": 0.25,
+      "position_error": 4.054124846941676e-07,
+      "relative_open_fan_volume_error": 1.5840289439461586e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 180,
+      "ratio": 0.5,
+      "position_error": 2.6923976892412327e-07,
+      "relative_open_fan_volume_error": 2.3821135337831478e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 180,
+      "ratio": 2.0,
+      "position_error": 3.301150655055096e-07,
+      "relative_open_fan_volume_error": 1.5266202318842126e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 180,
+      "ratio": 5.0,
+      "position_error": 4.953457808376527e-07,
+      "relative_open_fan_volume_error": 4.479851310690286e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 190,
+      "ratio": 0.05,
+      "position_error": 1.4216760457763655e-06,
+      "relative_open_fan_volume_error": 4.59968587512849e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 190,
+      "ratio": 0.25,
+      "position_error": 5.05086078628203e-07,
+      "relative_open_fan_volume_error": 1.566702068789283e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 190,
+      "ratio": 0.5,
+      "position_error": 2.9138306056886165e-07,
+      "relative_open_fan_volume_error": 1.613058189953165e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 190,
+      "ratio": 2.0,
+      "position_error": 2.9935951406656613e-07,
+      "relative_open_fan_volume_error": 4.275958537491853e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 190,
+      "ratio": 5.0,
+      "position_error": 6.022994492038691e-07,
+      "relative_open_fan_volume_error": 1.591492683383766e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 200,
+      "ratio": 0.05,
+      "position_error": 1.3114994947827086e-06,
+      "relative_open_fan_volume_error": 5.618574586585545e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 200,
+      "ratio": 0.25,
+      "position_error": 4.5797501724287315e-07,
+      "relative_open_fan_volume_error": 2.8479745411758017e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 200,
+      "ratio": 0.5,
+      "position_error": 2.547114448248067e-07,
+      "relative_open_fan_volume_error": 2.4292923635149677e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 200,
+      "ratio": 2.0,
+      "position_error": 3.25613201956898e-07,
+      "relative_open_fan_volume_error": 4.880644604243756e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 200,
+      "ratio": 5.0,
+      "position_error": 5.994601490755258e-07,
+      "relative_open_fan_volume_error": 0.0001947724371001991
+    },
+    {
+      "pitch": 30,
+      "yaw": 210,
+      "ratio": 0.05,
+      "position_error": 1.210661730421947e-06,
+      "relative_open_fan_volume_error": 5.4642969488760684e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 210,
+      "ratio": 0.25,
+      "position_error": 3.6109867662670325e-07,
+      "relative_open_fan_volume_error": 2.097821082069906e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 210,
+      "ratio": 0.5,
+      "position_error": 2.3931567616486404e-07,
+      "relative_open_fan_volume_error": 2.098838654018831e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 210,
+      "ratio": 2.0,
+      "position_error": 3.1098594810430313e-07,
+      "relative_open_fan_volume_error": 3.076505642019001e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 210,
+      "ratio": 5.0,
+      "position_error": 5.591350682454532e-07,
+      "relative_open_fan_volume_error": 8.309895000557788e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 220,
+      "ratio": 0.05,
+      "position_error": 9.459602614558804e-07,
+      "relative_open_fan_volume_error": 8.52544474363448e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 220,
+      "ratio": 0.25,
+      "position_error": 3.2482995104832213e-07,
+      "relative_open_fan_volume_error": 4.561544455583544e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 220,
+      "ratio": 0.5,
+      "position_error": 2.0204222461739363e-07,
+      "relative_open_fan_volume_error": 3.3060790372019255e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 220,
+      "ratio": 2.0,
+      "position_error": 2.7648880340791493e-07,
+      "relative_open_fan_volume_error": 7.89843450532679e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 220,
+      "ratio": 5.0,
+      "position_error": 4.797524464361658e-07,
+      "relative_open_fan_volume_error": 0.00012949765307002092
+    },
+    {
+      "pitch": 30,
+      "yaw": 230,
+      "ratio": 0.05,
+      "position_error": 1.1379286180002168e-06,
+      "relative_open_fan_volume_error": 4.0784304239593894e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 230,
+      "ratio": 0.25,
+      "position_error": 4.4197140214308206e-07,
+      "relative_open_fan_volume_error": 1.1166426377662297e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 230,
+      "ratio": 0.5,
+      "position_error": 2.423210164748113e-07,
+      "relative_open_fan_volume_error": 1.5608449251414136e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 230,
+      "ratio": 2.0,
+      "position_error": 2.7562556415006156e-07,
+      "relative_open_fan_volume_error": 1.12311806226284e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 230,
+      "ratio": 5.0,
+      "position_error": 4.997667293338282e-07,
+      "relative_open_fan_volume_error": 5.5398586742527733e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 240,
+      "ratio": 0.05,
+      "position_error": 1.4353802730848741e-06,
+      "relative_open_fan_volume_error": 3.453546145038011e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 240,
+      "ratio": 0.25,
+      "position_error": 3.885116540702782e-07,
+      "relative_open_fan_volume_error": 4.201085867405752e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 240,
+      "ratio": 0.5,
+      "position_error": 2.2877762817508085e-07,
+      "relative_open_fan_volume_error": 6.529734677873655e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 240,
+      "ratio": 2.0,
+      "position_error": 3.2138147432192454e-07,
+      "relative_open_fan_volume_error": 1.9233161952625366e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 240,
+      "ratio": 5.0,
+      "position_error": 4.623779989998411e-07,
+      "relative_open_fan_volume_error": 8.321025399160575e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 250,
+      "ratio": 0.05,
+      "position_error": 1.4107091996784504e-06,
+      "relative_open_fan_volume_error": 2.4627091623874442e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 250,
+      "ratio": 0.25,
+      "position_error": 4.913667728256854e-07,
+      "relative_open_fan_volume_error": 6.735991730622004e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 250,
+      "ratio": 0.5,
+      "position_error": 2.782781058918715e-07,
+      "relative_open_fan_volume_error": 1.251110694222568e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 250,
+      "ratio": 2.0,
+      "position_error": 2.8201562929375257e-07,
+      "relative_open_fan_volume_error": 4.416124247685893e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 250,
+      "ratio": 5.0,
+      "position_error": 5.763158466010054e-07,
+      "relative_open_fan_volume_error": 2.7021420115458383e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 260,
+      "ratio": 0.05,
+      "position_error": 1.5228554683943685e-06,
+      "relative_open_fan_volume_error": 1.5511181112426442e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 260,
+      "ratio": 0.25,
+      "position_error": 5.752310068274369e-07,
+      "relative_open_fan_volume_error": 1.0548393760689834e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 260,
+      "ratio": 0.5,
+      "position_error": 2.633616846825504e-07,
+      "relative_open_fan_volume_error": 2.608222955147177e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 260,
+      "ratio": 2.0,
+      "position_error": 2.4752601768263105e-07,
+      "relative_open_fan_volume_error": 8.699556900637617e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 260,
+      "ratio": 5.0,
+      "position_error": 4.728175642121357e-07,
+      "relative_open_fan_volume_error": 2.5007016100087043e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 270,
+      "ratio": 0.05,
+      "position_error": 1.1797000141200442e-06,
+      "relative_open_fan_volume_error": 6.35277493896691e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 270,
+      "ratio": 0.25,
+      "position_error": 4.4777550756158746e-07,
+      "relative_open_fan_volume_error": 1.7599527478928678e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 270,
+      "ratio": 0.5,
+      "position_error": 2.600477324588013e-07,
+      "relative_open_fan_volume_error": 7.348209761781632e-07
+    },
+    {
+      "pitch": 30,
+      "yaw": 270,
+      "ratio": 2.0,
+      "position_error": 2.856204637247117e-07,
+      "relative_open_fan_volume_error": 1.903310966611116e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 270,
+      "ratio": 5.0,
+      "position_error": 3.771212480074837e-07,
+      "relative_open_fan_volume_error": 2.966191129893936e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 280,
+      "ratio": 0.05,
+      "position_error": 1.691249640556336e-06,
+      "relative_open_fan_volume_error": 5.620554719398818e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 280,
+      "ratio": 0.25,
+      "position_error": 5.729277836596935e-07,
+      "relative_open_fan_volume_error": 3.475355469229058e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 280,
+      "ratio": 0.5,
+      "position_error": 2.72036013271304e-07,
+      "relative_open_fan_volume_error": 2.9788633059579794e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 280,
+      "ratio": 2.0,
+      "position_error": 2.5998422303885604e-07,
+      "relative_open_fan_volume_error": 1.3971868901840878e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 280,
+      "ratio": 5.0,
+      "position_error": 4.7341255959842954e-07,
+      "relative_open_fan_volume_error": 3.6005405188443973e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 290,
+      "ratio": 0.05,
+      "position_error": 1.099063980269932e-06,
+      "relative_open_fan_volume_error": 5.61513802199709e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 290,
+      "ratio": 0.25,
+      "position_error": 3.7618192960664487e-07,
+      "relative_open_fan_volume_error": 7.552652709907903e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 290,
+      "ratio": 0.5,
+      "position_error": 2.5477008969154724e-07,
+      "relative_open_fan_volume_error": 1.8231514697375495e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 290,
+      "ratio": 2.0,
+      "position_error": 2.6462856883568975e-07,
+      "relative_open_fan_volume_error": 8.518186922157334e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 290,
+      "ratio": 5.0,
+      "position_error": 4.162791358286455e-07,
+      "relative_open_fan_volume_error": 2.858431262819927e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 300,
+      "ratio": 0.05,
+      "position_error": 1.2326395317785455e-06,
+      "relative_open_fan_volume_error": 2.148178546157453e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 300,
+      "ratio": 0.25,
+      "position_error": 3.7836541355584785e-07,
+      "relative_open_fan_volume_error": 2.9756210591092014e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 300,
+      "ratio": 0.5,
+      "position_error": 2.699181410603657e-07,
+      "relative_open_fan_volume_error": 7.927601751278601e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 300,
+      "ratio": 2.0,
+      "position_error": 2.900128113214606e-07,
+      "relative_open_fan_volume_error": 2.3893793743567926e-07
+    },
+    {
+      "pitch": 30,
+      "yaw": 300,
+      "ratio": 5.0,
+      "position_error": 3.809878073024464e-07,
+      "relative_open_fan_volume_error": 2.908164728443463e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 310,
+      "ratio": 0.05,
+      "position_error": 1.1221983655662626e-06,
+      "relative_open_fan_volume_error": 1.8110588128061877e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 310,
+      "ratio": 0.25,
+      "position_error": 3.7937969288304174e-07,
+      "relative_open_fan_volume_error": 1.245652983805634e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 310,
+      "ratio": 0.5,
+      "position_error": 1.9953528695992873e-07,
+      "relative_open_fan_volume_error": 2.0788129670101796e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 310,
+      "ratio": 2.0,
+      "position_error": 2.579360987020607e-07,
+      "relative_open_fan_volume_error": 1.8423710413717487e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 310,
+      "ratio": 5.0,
+      "position_error": 4.409689502438141e-07,
+      "relative_open_fan_volume_error": 3.996773491476979e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 320,
+      "ratio": 0.05,
+      "position_error": 9.481102825059651e-07,
+      "relative_open_fan_volume_error": 4.23469988628522e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 320,
+      "ratio": 0.25,
+      "position_error": 2.724976878587526e-07,
+      "relative_open_fan_volume_error": 3.337477198295247e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 320,
+      "ratio": 0.5,
+      "position_error": 1.667858664511357e-07,
+      "relative_open_fan_volume_error": 1.1687861552367451e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 320,
+      "ratio": 2.0,
+      "position_error": 2.644342016466794e-07,
+      "relative_open_fan_volume_error": 2.361387842508833e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 320,
+      "ratio": 5.0,
+      "position_error": 4.0967462089369633e-07,
+      "relative_open_fan_volume_error": 0.0001440365258777998
+    },
+    {
+      "pitch": 30,
+      "yaw": 330,
+      "ratio": 0.05,
+      "position_error": 1.0273782027336864e-06,
+      "relative_open_fan_volume_error": 2.0786079661938572e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 330,
+      "ratio": 0.25,
+      "position_error": 3.191889444975615e-07,
+      "relative_open_fan_volume_error": 2.1838592355161168e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 330,
+      "ratio": 0.5,
+      "position_error": 1.966961267196865e-07,
+      "relative_open_fan_volume_error": 2.8741039267532464e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 330,
+      "ratio": 2.0,
+      "position_error": 2.800051177587193e-07,
+      "relative_open_fan_volume_error": 5.869130658875399e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 330,
+      "ratio": 5.0,
+      "position_error": 4.4922757069798536e-07,
+      "relative_open_fan_volume_error": 5.443422606643544e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 340,
+      "ratio": 0.05,
+      "position_error": 1.3699836818314992e-06,
+      "relative_open_fan_volume_error": 2.423452441191465e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 340,
+      "ratio": 0.25,
+      "position_error": 4.2715103543145005e-07,
+      "relative_open_fan_volume_error": 2.8326314026827504e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 340,
+      "ratio": 0.5,
+      "position_error": 1.9995422917418182e-07,
+      "relative_open_fan_volume_error": 4.101854349380929e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 340,
+      "ratio": 2.0,
+      "position_error": 2.4353535854615416e-07,
+      "relative_open_fan_volume_error": 2.8861401971336242e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 340,
+      "ratio": 5.0,
+      "position_error": 4.478015638298416e-07,
+      "relative_open_fan_volume_error": 8.743234507690989e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 350,
+      "ratio": 0.05,
+      "position_error": 1.228925610607945e-06,
+      "relative_open_fan_volume_error": 5.743308823258353e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 350,
+      "ratio": 0.25,
+      "position_error": 3.5420107213912644e-07,
+      "relative_open_fan_volume_error": 1.1505846690740285e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 350,
+      "ratio": 0.5,
+      "position_error": 2.47496079408549e-07,
+      "relative_open_fan_volume_error": 6.3276432447079145e-06
+    },
+    {
+      "pitch": 30,
+      "yaw": 350,
+      "ratio": 2.0,
+      "position_error": 2.750265584161582e-07,
+      "relative_open_fan_volume_error": 7.608373038636707e-05
+    },
+    {
+      "pitch": 30,
+      "yaw": 350,
+      "ratio": 5.0,
+      "position_error": 3.832480486298806e-07,
+      "relative_open_fan_volume_error": 0.00019323594050502102
+    },
+    {
+      "pitch": 60,
+      "yaw": 0,
+      "ratio": 0.05,
+      "position_error": 1.5492851019871523e-06,
+      "relative_open_fan_volume_error": 4.7499627889635576e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 0,
+      "ratio": 0.25,
+      "position_error": 5.877845903334844e-07,
+      "relative_open_fan_volume_error": 2.4062500676880205e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 0,
+      "ratio": 0.5,
+      "position_error": 3.0529027816861287e-07,
+      "relative_open_fan_volume_error": 3.017790451287361e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 0,
+      "ratio": 2.0,
+      "position_error": 3.379754063281837e-07,
+      "relative_open_fan_volume_error": 4.1931627867919374e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 0,
+      "ratio": 5.0,
+      "position_error": 5.111813008440436e-07,
+      "relative_open_fan_volume_error": 8.602731069484726e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 10,
+      "ratio": 0.05,
+      "position_error": 1.4571995428092066e-06,
+      "relative_open_fan_volume_error": 2.2652628731245628e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 10,
+      "ratio": 0.25,
+      "position_error": 6.088021919925524e-07,
+      "relative_open_fan_volume_error": 1.722650483393373e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 10,
+      "ratio": 0.5,
+      "position_error": 3.1753691231983794e-07,
+      "relative_open_fan_volume_error": 2.4834415890628847e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 10,
+      "ratio": 2.0,
+      "position_error": 3.4872054532897323e-07,
+      "relative_open_fan_volume_error": 4.5620902839438315e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 10,
+      "ratio": 5.0,
+      "position_error": 4.768271715249739e-07,
+      "relative_open_fan_volume_error": 3.243914916128965e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 20,
+      "ratio": 0.05,
+      "position_error": 1.6411347565359335e-06,
+      "relative_open_fan_volume_error": 1.9883286366262354e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 20,
+      "ratio": 0.25,
+      "position_error": 5.914943059792677e-07,
+      "relative_open_fan_volume_error": 2.3972269077354724e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 20,
+      "ratio": 0.5,
+      "position_error": 3.2469159516601565e-07,
+      "relative_open_fan_volume_error": 7.114406359676195e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 20,
+      "ratio": 2.0,
+      "position_error": 3.2212589484714726e-07,
+      "relative_open_fan_volume_error": 7.791082439156938e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 20,
+      "ratio": 5.0,
+      "position_error": 5.267350964288653e-07,
+      "relative_open_fan_volume_error": 9.734136730599197e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 30,
+      "ratio": 0.05,
+      "position_error": 1.4721129664163612e-06,
+      "relative_open_fan_volume_error": 4.0700086123557355e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 30,
+      "ratio": 0.25,
+      "position_error": 6.03185973169218e-07,
+      "relative_open_fan_volume_error": 7.426814207622812e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 30,
+      "ratio": 0.5,
+      "position_error": 3.1726947447019427e-07,
+      "relative_open_fan_volume_error": 6.572943127447495e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 30,
+      "ratio": 2.0,
+      "position_error": 3.088834263920148e-07,
+      "relative_open_fan_volume_error": 9.053043749540635e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 30,
+      "ratio": 5.0,
+      "position_error": 4.832668092369374e-07,
+      "relative_open_fan_volume_error": 0.00014082751690636108
+    },
+    {
+      "pitch": 60,
+      "yaw": 40,
+      "ratio": 0.05,
+      "position_error": 1.709871614075098e-06,
+      "relative_open_fan_volume_error": 1.6074036904401012e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 40,
+      "ratio": 0.25,
+      "position_error": 6.013709676899737e-07,
+      "relative_open_fan_volume_error": 2.6394265691953578e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 40,
+      "ratio": 0.5,
+      "position_error": 3.9662466844170297e-07,
+      "relative_open_fan_volume_error": 1.9522675830385694e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 40,
+      "ratio": 2.0,
+      "position_error": 3.1650666798554994e-07,
+      "relative_open_fan_volume_error": 6.8126728429041e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 40,
+      "ratio": 5.0,
+      "position_error": 7.313772423245268e-07,
+      "relative_open_fan_volume_error": 7.300907663876366e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 50,
+      "ratio": 0.05,
+      "position_error": 1.5477426482668477e-06,
+      "relative_open_fan_volume_error": 2.0061337385746114e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 50,
+      "ratio": 0.25,
+      "position_error": 5.796285811321411e-07,
+      "relative_open_fan_volume_error": 2.7350024135897044e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 50,
+      "ratio": 0.5,
+      "position_error": 4.004228764120654e-07,
+      "relative_open_fan_volume_error": 2.600009839937023e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 50,
+      "ratio": 2.0,
+      "position_error": 3.3004606425635075e-07,
+      "relative_open_fan_volume_error": 5.909973246986944e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 50,
+      "ratio": 5.0,
+      "position_error": 6.708949298328548e-07,
+      "relative_open_fan_volume_error": 0.00010488205934811035
+    },
+    {
+      "pitch": 60,
+      "yaw": 60,
+      "ratio": 0.05,
+      "position_error": 1.5230528511711583e-06,
+      "relative_open_fan_volume_error": 2.8020981186482885e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 60,
+      "ratio": 0.25,
+      "position_error": 6.338984941400838e-07,
+      "relative_open_fan_volume_error": 5.6801187120703034e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 60,
+      "ratio": 0.5,
+      "position_error": 3.96729871177115e-07,
+      "relative_open_fan_volume_error": 5.371871765524894e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 60,
+      "ratio": 2.0,
+      "position_error": 3.271163464546589e-07,
+      "relative_open_fan_volume_error": 4.870211843921446e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 60,
+      "ratio": 5.0,
+      "position_error": 6.747883380953112e-07,
+      "relative_open_fan_volume_error": 8.304878841347563e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 70,
+      "ratio": 0.05,
+      "position_error": 1.496442553872157e-06,
+      "relative_open_fan_volume_error": 1.7257946245408107e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 70,
+      "ratio": 0.25,
+      "position_error": 5.900418673654428e-07,
+      "relative_open_fan_volume_error": 4.021813077237368e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 70,
+      "ratio": 0.5,
+      "position_error": 3.9849930311142145e-07,
+      "relative_open_fan_volume_error": 6.802076869538709e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 70,
+      "ratio": 2.0,
+      "position_error": 3.5033765710679177e-07,
+      "relative_open_fan_volume_error": 2.9882872333741872e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 70,
+      "ratio": 5.0,
+      "position_error": 6.807995891477958e-07,
+      "relative_open_fan_volume_error": 5.513543246893349e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 80,
+      "ratio": 0.05,
+      "position_error": 1.3846061490685457e-06,
+      "relative_open_fan_volume_error": 5.375284300024319e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 80,
+      "ratio": 0.25,
+      "position_error": 5.649394609896774e-07,
+      "relative_open_fan_volume_error": 4.59795558467313e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 80,
+      "ratio": 0.5,
+      "position_error": 3.668680998991647e-07,
+      "relative_open_fan_volume_error": 3.5125575967853706e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 80,
+      "ratio": 2.0,
+      "position_error": 3.6304731354519504e-07,
+      "relative_open_fan_volume_error": 3.012446848194017e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 80,
+      "ratio": 5.0,
+      "position_error": 6.368917571109023e-07,
+      "relative_open_fan_volume_error": 6.960447853154861e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 90,
+      "ratio": 0.05,
+      "position_error": 1.6275219159034293e-06,
+      "relative_open_fan_volume_error": 1.1856493931095002e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 90,
+      "ratio": 0.25,
+      "position_error": 7.063574012367013e-07,
+      "relative_open_fan_volume_error": 2.8381712583236407e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 90,
+      "ratio": 0.5,
+      "position_error": 3.8669970314764157e-07,
+      "relative_open_fan_volume_error": 1.2331765422590735e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 90,
+      "ratio": 2.0,
+      "position_error": 3.232711112133302e-07,
+      "relative_open_fan_volume_error": 5.26474103201835e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 90,
+      "ratio": 5.0,
+      "position_error": 6.448122369384635e-07,
+      "relative_open_fan_volume_error": 9.12604303993092e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 100,
+      "ratio": 0.05,
+      "position_error": 1.4167896207339936e-06,
+      "relative_open_fan_volume_error": 1.6070083425079318e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 100,
+      "ratio": 0.25,
+      "position_error": 5.90680378387276e-07,
+      "relative_open_fan_volume_error": 2.5558036899520076e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 100,
+      "ratio": 0.5,
+      "position_error": 3.803025165893814e-07,
+      "relative_open_fan_volume_error": 2.101143873978195e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 100,
+      "ratio": 2.0,
+      "position_error": 3.489383546551039e-07,
+      "relative_open_fan_volume_error": 2.5026876345979332e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 100,
+      "ratio": 5.0,
+      "position_error": 6.085668342592498e-07,
+      "relative_open_fan_volume_error": 1.0370782398738676e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 110,
+      "ratio": 0.05,
+      "position_error": 1.4947473889748153e-06,
+      "relative_open_fan_volume_error": 3.432586796536796e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 110,
+      "ratio": 0.25,
+      "position_error": 6.28672888636217e-07,
+      "relative_open_fan_volume_error": 3.3164505830463042e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 110,
+      "ratio": 0.5,
+      "position_error": 3.861611244104779e-07,
+      "relative_open_fan_volume_error": 3.3962870788828425e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 110,
+      "ratio": 2.0,
+      "position_error": 3.369977852329953e-07,
+      "relative_open_fan_volume_error": 2.2195018005266576e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 110,
+      "ratio": 5.0,
+      "position_error": 6.23687175682619e-07,
+      "relative_open_fan_volume_error": 1.5068347678504068e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 120,
+      "ratio": 0.05,
+      "position_error": 1.5858595980855483e-06,
+      "relative_open_fan_volume_error": 6.438645010131694e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 120,
+      "ratio": 0.25,
+      "position_error": 6.544480795067642e-07,
+      "relative_open_fan_volume_error": 2.0841644929436853e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 120,
+      "ratio": 0.5,
+      "position_error": 3.8816114411588387e-07,
+      "relative_open_fan_volume_error": 4.907623548278117e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 120,
+      "ratio": 2.0,
+      "position_error": 3.413482632108611e-07,
+      "relative_open_fan_volume_error": 3.385408741563012e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 120,
+      "ratio": 5.0,
+      "position_error": 6.759853197202403e-07,
+      "relative_open_fan_volume_error": 7.053932345901792e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 130,
+      "ratio": 0.05,
+      "position_error": 1.597086350280108e-06,
+      "relative_open_fan_volume_error": 5.150386355734504e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 130,
+      "ratio": 0.25,
+      "position_error": 6.543797907987425e-07,
+      "relative_open_fan_volume_error": 4.438245504556626e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 130,
+      "ratio": 0.5,
+      "position_error": 3.7711768419157465e-07,
+      "relative_open_fan_volume_error": 1.3566124478336938e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 130,
+      "ratio": 2.0,
+      "position_error": 3.4277648319758214e-07,
+      "relative_open_fan_volume_error": 1.1889412452892323e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 130,
+      "ratio": 5.0,
+      "position_error": 6.930747353806055e-07,
+      "relative_open_fan_volume_error": 7.302630948435862e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 140,
+      "ratio": 0.05,
+      "position_error": 1.8198348539222309e-06,
+      "relative_open_fan_volume_error": 2.3672229780724585e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 140,
+      "ratio": 0.25,
+      "position_error": 7.235974515129584e-07,
+      "relative_open_fan_volume_error": 2.0041137619219995e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 140,
+      "ratio": 0.5,
+      "position_error": 3.797862810905883e-07,
+      "relative_open_fan_volume_error": 5.216646261940738e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 140,
+      "ratio": 2.0,
+      "position_error": 3.435152011732612e-07,
+      "relative_open_fan_volume_error": 1.6118793719988034e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 140,
+      "ratio": 5.0,
+      "position_error": 6.653485953300731e-07,
+      "relative_open_fan_volume_error": 1.9077169237546876e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 150,
+      "ratio": 0.05,
+      "position_error": 1.7314781515231914e-06,
+      "relative_open_fan_volume_error": 9.799649865360749e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 150,
+      "ratio": 0.25,
+      "position_error": 5.8824466342422e-07,
+      "relative_open_fan_volume_error": 4.632937993909181e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 150,
+      "ratio": 0.5,
+      "position_error": 3.853692436273093e-07,
+      "relative_open_fan_volume_error": 2.0417936166250428e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 150,
+      "ratio": 2.0,
+      "position_error": 3.4890805089560217e-07,
+      "relative_open_fan_volume_error": 1.7081408878683035e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 150,
+      "ratio": 5.0,
+      "position_error": 6.073729403865968e-07,
+      "relative_open_fan_volume_error": 9.279913119730754e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 160,
+      "ratio": 0.05,
+      "position_error": 1.6673493319352417e-06,
+      "relative_open_fan_volume_error": 1.3526738876779021e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 160,
+      "ratio": 0.25,
+      "position_error": 6.131169778544887e-07,
+      "relative_open_fan_volume_error": 3.472303537432886e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 160,
+      "ratio": 0.5,
+      "position_error": 3.7051132961707367e-07,
+      "relative_open_fan_volume_error": 1.6506748997446863e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 160,
+      "ratio": 2.0,
+      "position_error": 3.2775126523887366e-07,
+      "relative_open_fan_volume_error": 1.771150624341189e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 160,
+      "ratio": 5.0,
+      "position_error": 6.270611407899196e-07,
+      "relative_open_fan_volume_error": 0.0001432044891696016
+    },
+    {
+      "pitch": 60,
+      "yaw": 170,
+      "ratio": 0.05,
+      "position_error": 1.6215829403698478e-06,
+      "relative_open_fan_volume_error": 4.5265177230358056e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 170,
+      "ratio": 0.25,
+      "position_error": 5.814222971967098e-07,
+      "relative_open_fan_volume_error": 1.8832209655039733e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 170,
+      "ratio": 0.5,
+      "position_error": 3.624173399163766e-07,
+      "relative_open_fan_volume_error": 1.1024541587412173e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 170,
+      "ratio": 2.0,
+      "position_error": 3.5251191299323636e-07,
+      "relative_open_fan_volume_error": 6.283521958749816e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 170,
+      "ratio": 5.0,
+      "position_error": 6.316176279774766e-07,
+      "relative_open_fan_volume_error": 6.577146555020175e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 180,
+      "ratio": 0.05,
+      "position_error": 1.6609151254343146e-06,
+      "relative_open_fan_volume_error": 8.710751274065842e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 180,
+      "ratio": 0.25,
+      "position_error": 5.851964579584035e-07,
+      "relative_open_fan_volume_error": 2.238715911384581e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 180,
+      "ratio": 0.5,
+      "position_error": 3.80054025805876e-07,
+      "relative_open_fan_volume_error": 2.6418297022656745e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 180,
+      "ratio": 2.0,
+      "position_error": 3.434587974027181e-07,
+      "relative_open_fan_volume_error": 2.8134341555130504e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 180,
+      "ratio": 5.0,
+      "position_error": 6.071688236630735e-07,
+      "relative_open_fan_volume_error": 2.517652994926678e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 190,
+      "ratio": 0.05,
+      "position_error": 1.57209006257375e-06,
+      "relative_open_fan_volume_error": 2.9945411051057746e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 190,
+      "ratio": 0.25,
+      "position_error": 6.050827072723308e-07,
+      "relative_open_fan_volume_error": 4.6093500346566785e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 190,
+      "ratio": 0.5,
+      "position_error": 3.789485925054237e-07,
+      "relative_open_fan_volume_error": 3.313865516285652e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 190,
+      "ratio": 2.0,
+      "position_error": 3.536547215077235e-07,
+      "relative_open_fan_volume_error": 6.732445377677365e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 190,
+      "ratio": 5.0,
+      "position_error": 5.920171335382918e-07,
+      "relative_open_fan_volume_error": 0.00010801533345450309
+    },
+    {
+      "pitch": 60,
+      "yaw": 200,
+      "ratio": 0.05,
+      "position_error": 1.7459896985982937e-06,
+      "relative_open_fan_volume_error": 5.355606923274081e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 200,
+      "ratio": 0.25,
+      "position_error": 6.284128355460439e-07,
+      "relative_open_fan_volume_error": 4.785441233168264e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 200,
+      "ratio": 0.5,
+      "position_error": 3.845609177766107e-07,
+      "relative_open_fan_volume_error": 3.1604044063993086e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 200,
+      "ratio": 2.0,
+      "position_error": 3.3930149578864643e-07,
+      "relative_open_fan_volume_error": 5.28341564191015e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 200,
+      "ratio": 5.0,
+      "position_error": 6.243219274892908e-07,
+      "relative_open_fan_volume_error": 2.0817483567636685e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 210,
+      "ratio": 0.05,
+      "position_error": 1.6558705850933109e-06,
+      "relative_open_fan_volume_error": 1.5139791239349165e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 210,
+      "ratio": 0.25,
+      "position_error": 5.724032645648691e-07,
+      "relative_open_fan_volume_error": 2.7195562130044593e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 210,
+      "ratio": 0.5,
+      "position_error": 3.756051967229723e-07,
+      "relative_open_fan_volume_error": 2.2319482789301404e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 210,
+      "ratio": 2.0,
+      "position_error": 3.452052406149875e-07,
+      "relative_open_fan_volume_error": 3.171392073553214e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 210,
+      "ratio": 5.0,
+      "position_error": 6.30600471396292e-07,
+      "relative_open_fan_volume_error": 0.00018500254823650142
+    },
+    {
+      "pitch": 60,
+      "yaw": 220,
+      "ratio": 0.05,
+      "position_error": 1.8196703184258922e-06,
+      "relative_open_fan_volume_error": 1.4976463362570414e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 220,
+      "ratio": 0.25,
+      "position_error": 6.916926831301851e-07,
+      "relative_open_fan_volume_error": 1.5474778571222814e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 220,
+      "ratio": 0.5,
+      "position_error": 4.100432060560877e-07,
+      "relative_open_fan_volume_error": 2.1450120987864807e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 220,
+      "ratio": 2.0,
+      "position_error": 3.2274358519046586e-07,
+      "relative_open_fan_volume_error": 1.5515795431353396e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 220,
+      "ratio": 5.0,
+      "position_error": 6.527920364263196e-07,
+      "relative_open_fan_volume_error": 8.064817628894438e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 230,
+      "ratio": 0.05,
+      "position_error": 1.621685922437166e-06,
+      "relative_open_fan_volume_error": 3.260768227408839e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 230,
+      "ratio": 0.25,
+      "position_error": 6.409066748425118e-07,
+      "relative_open_fan_volume_error": 3.783905210497096e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 230,
+      "ratio": 0.5,
+      "position_error": 3.9813728514026536e-07,
+      "relative_open_fan_volume_error": 1.0070149617069646e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 230,
+      "ratio": 2.0,
+      "position_error": 3.3440045932309204e-07,
+      "relative_open_fan_volume_error": 7.99021667163835e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 230,
+      "ratio": 5.0,
+      "position_error": 6.993590302428743e-07,
+      "relative_open_fan_volume_error": 0.00014597685787742787
+    },
+    {
+      "pitch": 60,
+      "yaw": 240,
+      "ratio": 0.05,
+      "position_error": 1.5037486336133554e-06,
+      "relative_open_fan_volume_error": 2.1893215722323944e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 240,
+      "ratio": 0.25,
+      "position_error": 6.176109261790685e-07,
+      "relative_open_fan_volume_error": 1.9951926232719686e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 240,
+      "ratio": 0.5,
+      "position_error": 3.9099543402976167e-07,
+      "relative_open_fan_volume_error": 6.607169388828105e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 240,
+      "ratio": 2.0,
+      "position_error": 3.3607803695545613e-07,
+      "relative_open_fan_volume_error": 3.392992741624301e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 240,
+      "ratio": 5.0,
+      "position_error": 6.763665023612475e-07,
+      "relative_open_fan_volume_error": 7.182010286732599e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 250,
+      "ratio": 0.05,
+      "position_error": 1.5911957231828922e-06,
+      "relative_open_fan_volume_error": 1.7555228019272562e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 250,
+      "ratio": 0.25,
+      "position_error": 6.110445505136397e-07,
+      "relative_open_fan_volume_error": 3.145460655429311e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 250,
+      "ratio": 0.5,
+      "position_error": 3.871808245126118e-07,
+      "relative_open_fan_volume_error": 2.9692204346121187e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 250,
+      "ratio": 2.0,
+      "position_error": 3.386623572687597e-07,
+      "relative_open_fan_volume_error": 3.514440944507591e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 250,
+      "ratio": 5.0,
+      "position_error": 6.517021127194766e-07,
+      "relative_open_fan_volume_error": 5.9172748463454106e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 260,
+      "ratio": 0.05,
+      "position_error": 1.418416128107225e-06,
+      "relative_open_fan_volume_error": 2.9403022561602654e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 260,
+      "ratio": 0.25,
+      "position_error": 5.792493109613162e-07,
+      "relative_open_fan_volume_error": 3.581302327493319e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 260,
+      "ratio": 0.5,
+      "position_error": 3.704357374179068e-07,
+      "relative_open_fan_volume_error": 4.8393180993144824e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 260,
+      "ratio": 2.0,
+      "position_error": 3.456030857051928e-07,
+      "relative_open_fan_volume_error": 3.001244267553105e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 260,
+      "ratio": 5.0,
+      "position_error": 6.117894959523085e-07,
+      "relative_open_fan_volume_error": 5.626683553039413e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 270,
+      "ratio": 0.05,
+      "position_error": 1.5790367391410598e-06,
+      "relative_open_fan_volume_error": 2.025445143583049e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 270,
+      "ratio": 0.25,
+      "position_error": 6.619058869894445e-07,
+      "relative_open_fan_volume_error": 2.8835755429890142e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 270,
+      "ratio": 0.5,
+      "position_error": 4.1668891004320585e-07,
+      "relative_open_fan_volume_error": 5.391644341079527e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 270,
+      "ratio": 2.0,
+      "position_error": 3.26503689862534e-07,
+      "relative_open_fan_volume_error": 4.1001815688446186e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 270,
+      "ratio": 5.0,
+      "position_error": 6.918971431346677e-07,
+      "relative_open_fan_volume_error": 6.877958744033741e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 280,
+      "ratio": 0.05,
+      "position_error": 1.3529826592417749e-06,
+      "relative_open_fan_volume_error": 4.24491077755107e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 280,
+      "ratio": 0.25,
+      "position_error": 5.633322321951795e-07,
+      "relative_open_fan_volume_error": 1.876497908637198e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 280,
+      "ratio": 0.5,
+      "position_error": 3.4724150466125536e-07,
+      "relative_open_fan_volume_error": 3.596013613482718e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 280,
+      "ratio": 2.0,
+      "position_error": 3.5301200318471615e-07,
+      "relative_open_fan_volume_error": 6.402205353084334e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 280,
+      "ratio": 5.0,
+      "position_error": 6.12884946349368e-07,
+      "relative_open_fan_volume_error": 7.973096750546471e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 290,
+      "ratio": 0.05,
+      "position_error": 1.5287020849186206e-06,
+      "relative_open_fan_volume_error": 2.3885488943831135e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 290,
+      "ratio": 0.25,
+      "position_error": 5.941020977395794e-07,
+      "relative_open_fan_volume_error": 2.3213551432643698e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 290,
+      "ratio": 0.5,
+      "position_error": 3.8863150941814695e-07,
+      "relative_open_fan_volume_error": 2.6818663629857298e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 290,
+      "ratio": 2.0,
+      "position_error": 3.4818251615220674e-07,
+      "relative_open_fan_volume_error": 1.6816380386308616e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 290,
+      "ratio": 5.0,
+      "position_error": 6.52497939679364e-07,
+      "relative_open_fan_volume_error": 6.606515083373843e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 300,
+      "ratio": 0.05,
+      "position_error": 1.5930581813705658e-06,
+      "relative_open_fan_volume_error": 2.8015491908117696e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 300,
+      "ratio": 0.25,
+      "position_error": 6.229647533384508e-07,
+      "relative_open_fan_volume_error": 4.275974947276495e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 300,
+      "ratio": 0.5,
+      "position_error": 3.814727937978546e-07,
+      "relative_open_fan_volume_error": 3.764671663764041e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 300,
+      "ratio": 2.0,
+      "position_error": 3.293711099416896e-07,
+      "relative_open_fan_volume_error": 7.648612650568154e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 300,
+      "ratio": 5.0,
+      "position_error": 6.797946157099943e-07,
+      "relative_open_fan_volume_error": 0.00011702979726857521
+    },
+    {
+      "pitch": 60,
+      "yaw": 310,
+      "ratio": 0.05,
+      "position_error": 1.5631716363539994e-06,
+      "relative_open_fan_volume_error": 2.1425438446742717e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 310,
+      "ratio": 0.25,
+      "position_error": 6.100653398011247e-07,
+      "relative_open_fan_volume_error": 2.7018930632838334e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 310,
+      "ratio": 0.5,
+      "position_error": 3.889716089222617e-07,
+      "relative_open_fan_volume_error": 1.8672766116001327e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 310,
+      "ratio": 2.0,
+      "position_error": 3.1963951441227323e-07,
+      "relative_open_fan_volume_error": 8.254529158135959e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 310,
+      "ratio": 5.0,
+      "position_error": 6.738996725097479e-07,
+      "relative_open_fan_volume_error": 2.1493295236929555e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 320,
+      "ratio": 0.05,
+      "position_error": 1.666683571599492e-06,
+      "relative_open_fan_volume_error": 6.237282806131894e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 320,
+      "ratio": 0.25,
+      "position_error": 6.906905261061524e-07,
+      "relative_open_fan_volume_error": 6.99228268707941e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 320,
+      "ratio": 0.5,
+      "position_error": 3.9327582790349425e-07,
+      "relative_open_fan_volume_error": 1.0495584272796066e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 320,
+      "ratio": 2.0,
+      "position_error": 3.220953503912938e-07,
+      "relative_open_fan_volume_error": 2.4249802938247633e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 320,
+      "ratio": 5.0,
+      "position_error": 6.720691532180467e-07,
+      "relative_open_fan_volume_error": 0.0001051914557546052
+    },
+    {
+      "pitch": 60,
+      "yaw": 330,
+      "ratio": 0.05,
+      "position_error": 1.5076331145724708e-06,
+      "relative_open_fan_volume_error": 4.751497647514924e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 330,
+      "ratio": 0.25,
+      "position_error": 5.749292464329869e-07,
+      "relative_open_fan_volume_error": 3.6732229982128217e-06
+    },
+    {
+      "pitch": 60,
+      "yaw": 330,
+      "ratio": 0.5,
+      "position_error": 3.118206302055171e-07,
+      "relative_open_fan_volume_error": 1.5492470835765104e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 330,
+      "ratio": 2.0,
+      "position_error": 3.3393877263421246e-07,
+      "relative_open_fan_volume_error": 1.717135148449067e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 330,
+      "ratio": 5.0,
+      "position_error": 5.402554004163562e-07,
+      "relative_open_fan_volume_error": 5.546027127056874e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 340,
+      "ratio": 0.05,
+      "position_error": 1.6111548437613976e-06,
+      "relative_open_fan_volume_error": 2.76498929157043e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 340,
+      "ratio": 0.25,
+      "position_error": 6.169431747693466e-07,
+      "relative_open_fan_volume_error": 2.01337137231139e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 340,
+      "ratio": 0.5,
+      "position_error": 3.04885042101688e-07,
+      "relative_open_fan_volume_error": 3.841091640799377e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 340,
+      "ratio": 2.0,
+      "position_error": 3.140591497974299e-07,
+      "relative_open_fan_volume_error": 1.630344519765181e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 340,
+      "ratio": 5.0,
+      "position_error": 5.600420154294738e-07,
+      "relative_open_fan_volume_error": 5.025083902032712e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 350,
+      "ratio": 0.05,
+      "position_error": 1.4358551727600144e-06,
+      "relative_open_fan_volume_error": 1.3000621570835591e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 350,
+      "ratio": 0.25,
+      "position_error": 5.870255226358978e-07,
+      "relative_open_fan_volume_error": 3.858803047873671e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 350,
+      "ratio": 0.5,
+      "position_error": 3.3109477515225194e-07,
+      "relative_open_fan_volume_error": 3.237134551059562e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 350,
+      "ratio": 2.0,
+      "position_error": 3.1158291391442106e-07,
+      "relative_open_fan_volume_error": 1.8968333917346314e-05
+    },
+    {
+      "pitch": 60,
+      "yaw": 350,
+      "ratio": 5.0,
+      "position_error": 4.504871684574141e-07,
+      "relative_open_fan_volume_error": 0.00015368207311106108
+    }
+  ],
+  "limitations": "Recorded pre-effect geometry with Head faces and transformed closure anchor; not the live full modifier stack, falloff or shared companion pipeline."
+}

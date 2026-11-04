@@ -1,0 +1,71 @@
+{
+  "status": "Exact 2.5mm shadow path accelerated; full-size live viewport acceptance remains open.",
+  "runtime": "Blender 5.2.2 LTS / macOS Metal",
+  "dimensions": [
+    640,
+    480
+  ],
+  "performance": [
+    {
+      "lens_mm": 8.810210227966309,
+      "before_ms": 45.700625007157214,
+      "after_ms": 28.81354150304105,
+      "speedup": 1.5860814958249356
+    },
+    {
+      "lens_mm": 2.5,
+      "before_ms": 148.60558349755593,
+      "after_ms": 57.44360398966819,
+      "speedup": 2.5869822430410903
+    },
+    {
+      "lens_mm": 50,
+      "before_ms": 51.30785400979221,
+      "after_ms": 30.769875505939126,
+      "speedup": 1.667470315240271
+    },
+    {
+      "lens_mm": 250,
+      "before_ms": 45.44822899333667,
+      "after_ms": 26.578936987789348,
+      "speedup": 1.7099340358952686
+    }
+  ],
+  "quality": {
+    "full_scene_frames": 96,
+    "pixel_differences": 0,
+    "replay_cases": 12,
+    "replay_triangles": 135334,
+    "replay_behind_camera_corners": 68458,
+    "material_cases": 162,
+    "material_samples_per_variant": 2654208
+  },
+  "changes": [
+    "Share complete light-space BVH searches across four unresolved AA samples. Skip a subtree only when every unresolved ray misses it.",
+    "Retain each ray's own leaf-bound rejection and exact scalar triangle, alpha, UV, sidedness, bias and phase arithmetic.",
+    "Consolidate existing ping-pong bounds into a compact published lookup. Reuse unused metadata lanes within the same memory cap and three generation slots.",
+    "Keep hard-shadow single-sample searches on their existing route."
+  ],
+  "preserved": [
+    "All potentially relevant offscreen casters",
+    "Accepted CamKeys geometry and camera-plane clipping",
+    "Shadow samples, resolution, bias and softness",
+    "Existing 128 MiB query budget",
+    "Windows and older Blender paths"
+  ],
+  "limits": [
+    "57 ms at 640x480 remains slower than normal lens views; this is not a claim of 60fps or a completely solved extreme-lens workload.",
+    "Timings are completed private-scene renders with diagnostic readback, not live full-size viewport FPS. Warm medians use last 16 of 24 samples per lens.",
+    "Shader changes are installed on disk for next Blender launch. The user session was not reloaded, restarted or saved.",
+    "No new approximation or screen-space-only shadow replacement was enabled. Effect Layers' screen shadow kernel was inspected; a plain mask from the light viewpoint is not counted as exact-shadow parity.",
+    "Only Metal hardware qualified for the new path; physical Windows GPU work remains separate.",
+    "No motion GIF or exhaustive scene/light/material visual acceptance. Private scene arrays are not published."
+  ],
+  "tests": [
+    "76 shadow unit tests",
+    "162 material/coverage cases against CPU oracle",
+    "12 recorded-geometry GPU replay comparisons",
+    "96 matched full-scene orbit buffers"
+  ],
+  "next": "Validate restarted full-size viewport response. Further receiver-focused light-space acceleration remains useful for the residual 2.5 mm cost; retain exact edges/cutouts and distant offscreen caster influence."
+}

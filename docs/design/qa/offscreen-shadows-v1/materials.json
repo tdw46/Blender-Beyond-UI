@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "layers": 1,
+      "offset": 0.0,
+      "cases": 54,
+      "pixel_differences": 0,
+      "samples": 884736
+    },
+    {
+      "layers": 12,
+      "offset": 0.0,
+      "cases": 54,
+      "pixel_differences": 0,
+      "samples": 884736
+    },
+    {
+      "layers": 12,
+      "offset": 100.0,
+      "cases": 54,
+      "pixel_differences": 0,
+      "samples": 884736
+    }
+  ],
+  "backend": "METAL",
+  "version": "5.2.2 LTS"
+}

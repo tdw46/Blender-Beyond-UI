@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "rows": [
+    {
+      "cycle": 0,
+      "method": "schema15",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 4.294354497687891,
+      "p95_ms": 5.439589644083753
+    },
+    {
+      "cycle": 0,
+      "method": "schema15",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 4.699896002421156,
+      "p95_ms": 6.6265748348087055
+    },
+    {
+      "cycle": 0,
+      "method": "exact",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 2.410624991171062,
+      "p95_ms": 2.9819955132552423
+    },
+    {
+      "cycle": 0,
+      "method": "exact",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 2.433770991046913,
+      "p95_ms": 3.4578981081722286
+    },
+    {
+      "cycle": 0,
+      "method": "artistic",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 2.968521002912894,
+      "p95_ms": 3.95191874995362
+    },
+    {
+      "cycle": 0,
+      "method": "artistic",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 2.4158744927262887,
+      "p95_ms": 2.9017062392085786
+    },
+    {
+      "cycle": 1,
+      "method": "artistic",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 2.643853993504308,
+      "p95_ms": 3.6482332943705833
+    },
+    {
+      "cycle": 1,
+      "method": "artistic",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 2.322896005352959,
+      "p95_ms": 3.067772401846014
+    },
+    {
+      "cycle": 1,
+      "method": "exact",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 2.490791492164135,
+      "p95_ms": 3.2039979487308297
+    },
+    {
+      "cycle": 1,
+      "method": "exact",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 2.549354001530446,
+      "p95_ms": 3.4710409920080565
+    },
+    {
+      "cycle": 1,
+      "method": "schema15",
+      "ratio": 0.5,
+      "vertices": 40962,
+      "median_ms": 4.894083002000116,
+      "p95_ms": 5.998303661181126
+    },
+    {
+      "cycle": 1,
+      "method": "schema15",
+      "ratio": 2.0,
+      "vertices": 40962,
+      "median_ms": 5.28916651092004,
+      "p95_ms": 6.9585786637617275
+    }
+  ],
+  "limits": "Isolated background full asset input update + depsgraph + coordinate readback. No viewport FPS or GPU claim."
+}

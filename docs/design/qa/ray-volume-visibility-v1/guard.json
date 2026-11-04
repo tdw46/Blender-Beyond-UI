@@ -1,0 +1,252 @@
+{
+  "passed": true,
+  "point_evaluations": 2700000,
+  "seed": 94721,
+  "rows": [
+    {
+      "ratio": 0.001,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.001,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.001,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.01,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.01,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.01,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.05,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.05,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.05,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.25,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.25,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.25,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.5,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.5,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 0.5,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 1,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 1,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 1,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 2,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 2,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 2,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 20,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 20,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 20,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 100,
+      "scale": 0.2,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 100,
+      "scale": 1.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    },
+    {
+      "ratio": 100,
+      "scale": 3.0,
+      "original_in_frame": 8472,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 20014,
+      "remaining_behind": 20014
+    }
+  ],
+  "max_boundary_crossing_displacement": 2.0000000011677344e-07,
+  "contract": "No originally in-frame vertex newly escapes; no originally front vertex moves behind; all originally behind remain behind. Frustum is perspective, symmetric, no near/far clip claim."
+}

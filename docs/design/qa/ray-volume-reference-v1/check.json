@@ -1,0 +1,291 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "vertices": 10242,
+  "triangles": 20480,
+  "rows": [
+    {
+      "distance": 3.370826,
+      "ratio": 0.05,
+      "rounded": false,
+      "scale": 8.740301607049227,
+      "guard_vertices": 1008,
+      "virtual_behind": 4311,
+      "continued_vertices": 5041,
+      "volume_ratio": 1.0000000000000004
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 0.05,
+      "rounded": true,
+      "scale": 8.74155510505621,
+      "guard_vertices": 1412,
+      "virtual_behind": 4311,
+      "continued_vertices": 5041,
+      "volume_ratio": 1.0000000000000004
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 0.1,
+      "rounded": false,
+      "scale": 5.211028491913543,
+      "guard_vertices": 3092,
+      "virtual_behind": 3466,
+      "continued_vertices": 4241,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 0.1,
+      "rounded": true,
+      "scale": 5.218653034568742,
+      "guard_vertices": 3372,
+      "virtual_behind": 3466,
+      "continued_vertices": 4241,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 0.317645,
+      "rounded": false,
+      "scale": 2.1482298239473607,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 271,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 0.317645,
+      "rounded": true,
+      "scale": 2.1482298239473607,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 271,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 1.0,
+      "rounded": false,
+      "scale": 1.0,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 1.0,
+      "rounded": true,
+      "scale": 1.0,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 1.000001,
+      "rounded": false,
+      "scale": 0.999999333333889,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0000000000000004
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 1.000001,
+      "rounded": true,
+      "scale": 0.999999333333889,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0000000000000004
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 2.0,
+      "rounded": false,
+      "scale": 0.6299605249474366,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 2.0,
+      "rounded": true,
+      "scale": 0.6299605249474366,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 4.0,
+      "rounded": false,
+      "scale": 0.39685026299204973,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 0.9999999999999986
+    },
+    {
+      "distance": 3.370826,
+      "ratio": 4.0,
+      "rounded": true,
+      "scale": 0.39685026299204973,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 0.9999999999999986
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.05,
+      "rounded": false,
+      "scale": 1.8540411513695918,
+      "guard_vertices": 0,
+      "virtual_behind": 5041,
+      "continued_vertices": 2515,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.05,
+      "rounded": true,
+      "scale": 1.8540411513695918,
+      "guard_vertices": 0,
+      "virtual_behind": 5041,
+      "continued_vertices": 2515,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.1,
+      "rounded": false,
+      "scale": 1.83675739243677,
+      "guard_vertices": 0,
+      "virtual_behind": 4881,
+      "continued_vertices": 2515,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.1,
+      "rounded": true,
+      "scale": 1.83675739243677,
+      "guard_vertices": 0,
+      "virtual_behind": 4881,
+      "continued_vertices": 2515,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.317645,
+      "rounded": false,
+      "scale": 1.653470311173628,
+      "guard_vertices": 0,
+      "virtual_behind": 4401,
+      "continued_vertices": 1875,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 0.317645,
+      "rounded": true,
+      "scale": 1.653470311173628,
+      "guard_vertices": 0,
+      "virtual_behind": 4401,
+      "continued_vertices": 1875,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 1.0,
+      "rounded": false,
+      "scale": 1.0,
+      "guard_vertices": 0,
+      "virtual_behind": 2526,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 1.0,
+      "rounded": true,
+      "scale": 1.0,
+      "guard_vertices": 0,
+      "virtual_behind": 2526,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    },
+    {
+      "distance": 0.5,
+      "ratio": 1.000001,
+      "rounded": false,
+      "scale": 0.9999993471604853,
+      "guard_vertices": 125,
+      "virtual_behind": 2526,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0000000000000004
+    },
+    {
+      "distance": 0.5,
+      "ratio": 1.000001,
+      "rounded": true,
+      "scale": 0.9999993561090437,
+      "guard_vertices": 451,
+      "virtual_behind": 2526,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0000000000000007
+    },
+    {
+      "distance": 0.5,
+      "ratio": 2.0,
+      "rounded": false,
+      "scale": 0.44095274123531597,
+      "guard_vertices": 953,
+      "virtual_behind": 1,
+      "continued_vertices": 0,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 0.5,
+      "ratio": 2.0,
+      "rounded": true,
+      "scale": 0.4418214780802716,
+      "guard_vertices": 1423,
+      "virtual_behind": 1,
+      "continued_vertices": 0,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 0.5,
+      "ratio": 4.0,
+      "rounded": false,
+      "scale": 0.1777626388189479,
+      "guard_vertices": 1678,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 0.9999999999999998
+    },
+    {
+      "distance": 0.5,
+      "ratio": 4.0,
+      "rounded": true,
+      "scale": 0.17791165516102836,
+      "guard_vertices": 2150,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0
+    }
+  ],
+  "numpy_median_ms": 2.167104001273401,
+  "numpy_p95_ms": 3.030979199684225,
+  "limitations": "NumPy research timing only; not retained Geometry Nodes, live viewport, selected-region, falloff or GPU qualification."
+}

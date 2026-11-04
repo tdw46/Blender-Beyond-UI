@@ -1,0 +1,19 @@
+{
+  "size": [
+    640,
+    418
+  ],
+  "mean_absolute_8bit_per_channel": [
+    0.0003102571770334928,
+    0.000287828947368421,
+    0.0003102571770334928
+  ],
+  "max_absolute_8bit_per_channel": [
+    5,
+    5,
+    5
+  ],
+  "different_pixels": 193,
+  "total_pixels": 267520,
+  "limits": "Diagnostic emission colors; not live material or shader equality."
+}

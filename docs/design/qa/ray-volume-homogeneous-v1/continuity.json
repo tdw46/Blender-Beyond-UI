@@ -1,0 +1,2000 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "samples": 442,
+  "failures": [],
+  "rows": [
+    {
+      "ratio": 0.017860231921,
+      "witness_displacement": 0.0006952540581739441,
+      "radial_scale_delta": 9.341705893950447e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860233784,
+      "witness_displacement": 0.0006952539347757636,
+      "radial_scale_delta": 9.341705646814802e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860284075,
+      "witness_displacement": 0.0006952506038473416,
+      "radial_scale_delta": 9.341698977038959e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.0178602878,
+      "witness_displacement": 0.0006952503571255875,
+      "radial_scale_delta": 9.341698482545624e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860358581,
+      "witness_displacement": 0.0006952456691138309,
+      "radial_scale_delta": 9.341689095387906e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860360444,
+      "witness_displacement": 0.0006952455457369666,
+      "radial_scale_delta": 9.34168884869635e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860401422,
+      "witness_displacement": 0.000695242831662668,
+      "radial_scale_delta": 9.341683413710555e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860403284,
+      "witness_displacement": 0.0006952427083550816,
+      "radial_scale_delta": 9.341683166796955e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.01786040701,
+      "witness_displacement": 0.0006952424615693786,
+      "radial_scale_delta": 9.341682672747709e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.017860408872,
+      "witness_displacement": 0.0006952423382600159,
+      "radial_scale_delta": 9.341682426056153e-06,
+      "vertex_counts": [
+        422,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018291654065,
+      "witness_displacement": 0.000667570564893083,
+      "radial_scale_delta": 9.283882691502043e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018291760236,
+      "witness_displacement": 0.0006675639648001663,
+      "radial_scale_delta": 9.283868273257667e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018291920424,
+      "witness_displacement": 0.0006675540068261654,
+      "radial_scale_delta": 9.283846505336868e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018291952088,
+      "witness_displacement": 0.0006675520384682443,
+      "radial_scale_delta": 9.283842200336068e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292004243,
+      "witness_displacement": 0.0006675487963221372,
+      "radial_scale_delta": 9.283835108009342e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292022869,
+      "witness_displacement": 0.000667547638471433,
+      "radial_scale_delta": 9.283832575146533e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292026594,
+      "witness_displacement": 0.0006675474069108844,
+      "radial_scale_delta": 9.283832068440745e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292047083,
+      "witness_displacement": 0.0006675461332399379,
+      "radial_scale_delta": 9.28382928111482e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292119727,
+      "witness_displacement": 0.0006675416174406479,
+      "radial_scale_delta": 9.283819397909454e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018292171881,
+      "witness_displacement": 0.0006675383753709241,
+      "radial_scale_delta": 9.283812300253658e-06,
+      "vertex_counts": [
+        452,
+        452
+      ]
+    },
+    {
+      "ratio": 0.018756322563,
+      "witness_displacement": 0.0006396314355061605,
+      "radial_scale_delta": 9.22030227590298e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756326288,
+      "witness_displacement": 0.0006396312189185238,
+      "radial_scale_delta": 9.220301765644479e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756335601,
+      "witness_displacement": 0.0006396306774369975,
+      "radial_scale_delta": 9.220300490442312e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756339327,
+      "witness_displacement": 0.0006396304607765302,
+      "radial_scale_delta": 9.2202999806279e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756432459,
+      "witness_displacement": 0.000639625045860015,
+      "radial_scale_delta": 9.220287230160551e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.01875644736,
+      "witness_displacement": 0.0006396241794845992,
+      "radial_scale_delta": 9.220285190236766e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756449223,
+      "witness_displacement": 0.0006396240711765699,
+      "radial_scale_delta": 9.22028493488547e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.018756462261,
+      "witness_displacement": 0.0006396233131233942,
+      "radial_scale_delta": 9.220283149868891e-06,
+      "vertex_counts": [
+        452,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258053973,
+      "witness_displacement": 0.0006114653730087127,
+      "radial_scale_delta": 9.151194618084446e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258128479,
+      "witness_displacement": 0.0006114613347349973,
+      "radial_scale_delta": 9.151184248379352e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258132204,
+      "witness_displacement": 0.0006114611328289499,
+      "radial_scale_delta": 9.151183729905199e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258167595,
+      "witness_displacement": 0.000611459214615806,
+      "radial_scale_delta": 9.151178802513371e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258191809,
+      "witness_displacement": 0.0006114579021989641,
+      "radial_scale_delta": 9.151175430766045e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.019258201122,
+      "witness_displacement": 0.0006114573974187465,
+      "radial_scale_delta": 9.151174133803508e-06,
+      "vertex_counts": [
+        462,
+        462
+      ]
+    },
+    {
+      "ratio": 0.034533049911,
+      "witness_displacement": 0.00022325478697649004,
+      "radial_scale_delta": 7.318199160000205e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034533239901,
+      "witness_displacement": 0.00022325263912925664,
+      "radial_scale_delta": 7.318179640503075e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034533333033,
+      "witness_displacement": 0.0002232515862790052,
+      "radial_scale_delta": 7.318170072601049e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034533392638,
+      "witness_displacement": 0.0002232509124588944,
+      "radial_scale_delta": 7.318163949054934e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034533396363,
+      "witness_displacement": 0.00022325087034502644,
+      "radial_scale_delta": 7.31816356647208e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034533403814,
+      "witness_displacement": 0.00022325078611817872,
+      "radial_scale_delta": 7.318162800640238e-06,
+      "vertex_counts": [
+        462,
+        492
+      ]
+    },
+    {
+      "ratio": 0.034915491939,
+      "witness_displacement": 0.00021899216046517012,
+      "radial_scale_delta": 7.278610198335755e-06,
+      "vertex_counts": [
+        492,
+        487
+      ]
+    },
+    {
+      "ratio": 0.034915857017,
+      "witness_displacement": 0.00021898814880039197,
+      "radial_scale_delta": 7.2785721234591705e-06,
+      "vertex_counts": [
+        492,
+        487
+      ]
+    },
+    {
+      "ratio": 0.034915931523,
+      "witness_displacement": 0.0002189873301015055,
+      "radial_scale_delta": 7.278564353008221e-06,
+      "vertex_counts": [
+        492,
+        487
+      ]
+    },
+    {
+      "ratio": 0.034915935248,
+      "witness_displacement": 0.0002189872891715794,
+      "radial_scale_delta": 7.278563964208118e-06,
+      "vertex_counts": [
+        492,
+        487
+      ]
+    },
+    {
+      "ratio": 0.034915994853,
+      "witness_displacement": 0.0002189866342208191,
+      "radial_scale_delta": 7.2785577478473584e-06,
+      "vertex_counts": [
+        492,
+        487
+      ]
+    },
+    {
+      "ratio": 0.036583665758,
+      "witness_displacement": 0.00020176442774744174,
+      "radial_scale_delta": 7.1058046822169985e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583669484,
+      "witness_displacement": 0.0002017643915968037,
+      "radial_scale_delta": 7.105804298523921e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583729088,
+      "witness_displacement": 0.0002017638132727484,
+      "radial_scale_delta": 7.105798166096022e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583896726,
+      "witness_displacement": 0.00020176218673029211,
+      "radial_scale_delta": 7.105780918115201e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583919078,
+      "witness_displacement": 0.00020176196986820827,
+      "radial_scale_delta": 7.105778618621272e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583933979,
+      "witness_displacement": 0.00020176182528786057,
+      "radial_scale_delta": 7.105777085403275e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.036583937705,
+      "witness_displacement": 0.0002017617891310053,
+      "radial_scale_delta": 7.105776701932243e-06,
+      "vertex_counts": [
+        487,
+        497
+      ]
+    },
+    {
+      "ratio": 0.038004446775,
+      "witness_displacement": 0.00018865585650384986,
+      "radial_scale_delta": 6.95976471765114e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004491478,
+      "witness_displacement": 0.00018865546437840663,
+      "radial_scale_delta": 6.9597601273230225e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004498929,
+      "witness_displacement": 0.00018865539902801487,
+      "radial_scale_delta": 6.9597593623793585e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004625589,
+      "witness_displacement": 0.0001886542880207287,
+      "radial_scale_delta": 6.95974635633867e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004629314,
+      "witness_displacement": 0.00018865425534109193,
+      "radial_scale_delta": 6.959745973533771e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004662842,
+      "witness_displacement": 0.00018865396124478906,
+      "radial_scale_delta": 6.959742530954216e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004666567,
+      "witness_displacement": 0.00018865392856515228,
+      "radial_scale_delta": 6.959742148593406e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004681468,
+      "witness_displacement": 0.00018865379786792147,
+      "radial_scale_delta": 6.959740618484034e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038004688919,
+      "witness_displacement": 0.0001886537325175297,
+      "radial_scale_delta": 6.959739853318325e-06,
+      "vertex_counts": [
+        497,
+        507
+      ]
+    },
+    {
+      "ratio": 0.038516115397,
+      "witness_displacement": 0.00018424368449831974,
+      "radial_scale_delta": 6.906785085414313e-06,
+      "vertex_counts": [
+        507,
+        502
+      ]
+    },
+    {
+      "ratio": 0.038516245782,
+      "witness_displacement": 0.00018424257923843612,
+      "radial_scale_delta": 6.906771473857987e-06,
+      "vertex_counts": [
+        507,
+        502
+      ]
+    },
+    {
+      "ratio": 0.038516253233,
+      "witness_displacement": 0.00018424251607829234,
+      "radial_scale_delta": 6.9067706960357356e-06,
+      "vertex_counts": [
+        507,
+        502
+      ]
+    },
+    {
+      "ratio": 0.038516353816,
+      "witness_displacement": 0.000184241663444773,
+      "radial_scale_delta": 6.906760195546369e-06,
+      "vertex_counts": [
+        507,
+        502
+      ]
+    },
+    {
+      "ratio": 0.038516357541,
+      "witness_displacement": 0.00018424163187180653,
+      "radial_scale_delta": 6.906759806524221e-06,
+      "vertex_counts": [
+        507,
+        502
+      ]
+    },
+    {
+      "ratio": 0.049188975245,
+      "witness_displacement": 0.00011884444722731757,
+      "radial_scale_delta": 5.897110063823874e-06,
+      "vertex_counts": [
+        502,
+        522
+      ]
+    },
+    {
+      "ratio": 0.049189340323,
+      "witness_displacement": 0.00011884284493568487,
+      "radial_scale_delta": 5.897078687366886e-06,
+      "vertex_counts": [
+        502,
+        522
+      ]
+    },
+    {
+      "ratio": 0.049189411104,
+      "witness_displacement": 0.00011884253426419633,
+      "radial_scale_delta": 5.897072598459729e-06,
+      "vertex_counts": [
+        502,
+        522
+      ]
+    },
+    {
+      "ratio": 0.049189437181,
+      "witness_displacement": 0.0001188424197957616,
+      "radial_scale_delta": 5.897070355143086e-06,
+      "vertex_counts": [
+        502,
+        522
+      ]
+    },
+    {
+      "ratio": 0.049189470708,
+      "witness_displacement": 0.00011884227263170288,
+      "radial_scale_delta": 5.897067470339579e-06,
+      "vertex_counts": [
+        502,
+        522
+      ]
+    },
+    {
+      "ratio": 0.052373401821,
+      "witness_displacement": 0.00010597464557093872,
+      "radial_scale_delta": 5.6264565033714575e-06,
+      "vertex_counts": [
+        522,
+        532
+      ]
+    },
+    {
+      "ratio": 0.052373614162,
+      "witness_displacement": 0.00010597385619703914,
+      "radial_scale_delta": 5.626438757122543e-06,
+      "vertex_counts": [
+        522,
+        532
+      ]
+    },
+    {
+      "ratio": 0.052373778075,
+      "witness_displacement": 0.00010597324686312248,
+      "radial_scale_delta": 5.6264250583026865e-06,
+      "vertex_counts": [
+        522,
+        532
+      ]
+    },
+    {
+      "ratio": 0.052373789251,
+      "witness_displacement": 0.00010597320531591237,
+      "radial_scale_delta": 5.626424123938989e-06,
+      "vertex_counts": [
+        522,
+        532
+      ]
+    },
+    {
+      "ratio": 0.052373796701,
+      "witness_displacement": 0.00010597317762695013,
+      "radial_scale_delta": 5.626423501770006e-06,
+      "vertex_counts": [
+        522,
+        532
+      ]
+    },
+    {
+      "ratio": 0.054875489324,
+      "witness_displacement": 9.722541321455225e-05,
+      "radial_scale_delta": 5.419168739972946e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875496775,
+      "witness_displacement": 9.722538871503872e-05,
+      "radial_scale_delta": 5.419168128018015e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.05487556383,
+      "witness_displacement": 9.7225168209647e-05,
+      "radial_scale_delta": 5.419162620645679e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875727743,
+      "witness_displacement": 9.722462919636854e-05,
+      "radial_scale_delta": 5.4191491585253715e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875731468,
+      "witness_displacement": 9.722461694394724e-05,
+      "radial_scale_delta": 5.4191488527699505e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875779897,
+      "witness_displacement": 9.722445769444477e-05,
+      "radial_scale_delta": 5.419144875062898e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875783622,
+      "witness_displacement": 9.722444544735254e-05,
+      "radial_scale_delta": 5.419144569085432e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.054875798523,
+      "witness_displacement": 9.722439644210823e-05,
+      "radial_scale_delta": 5.4191433453976146e-06,
+      "vertex_counts": [
+        532,
+        542
+      ]
+    },
+    {
+      "ratio": 0.05626892671,
+      "witness_displacement": 9.278727901040895e-05,
+      "radial_scale_delta": 5.3044774948052265e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.05626899004,
+      "witness_displacement": 9.278708355520138e-05,
+      "radial_scale_delta": 5.304472251443926e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.05626899749,
+      "witness_displacement": 9.278706055493302e-05,
+      "radial_scale_delta": 5.304471634381969e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.056269064546,
+      "witness_displacement": 9.278685358538041e-05,
+      "radial_scale_delta": 5.304466079492087e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.056269071996,
+      "witness_displacement": 9.278683059221748e-05,
+      "radial_scale_delta": 5.304465461986041e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.056269194931,
+      "witness_displacement": 9.278645111532313e-05,
+      "radial_scale_delta": 5.304455270582764e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.056269198656,
+      "witness_displacement": 9.278643961252442e-05,
+      "radial_scale_delta": 5.304454961052585e-06,
+      "vertex_counts": [
+        542,
+        542
+      ]
+    },
+    {
+      "ratio": 0.061492152512,
+      "witness_displacement": 7.845246679316631e-05,
+      "radial_scale_delta": 4.886225042133319e-06,
+      "vertex_counts": [
+        542,
+        552
+      ]
+    },
+    {
+      "ratio": 0.061492685229,
+      "witness_displacement": 7.845117008997704e-05,
+      "radial_scale_delta": 4.886184209684785e-06,
+      "vertex_counts": [
+        542,
+        552
+      ]
+    },
+    {
+      "ratio": 0.061492729932,
+      "witness_displacement": 7.845106127479795e-05,
+      "radial_scale_delta": 4.886180783092442e-06,
+      "vertex_counts": [
+        542,
+        552
+      ]
+    },
+    {
+      "ratio": 0.065585270524,
+      "witness_displacement": 6.929921748266565e-05,
+      "radial_scale_delta": 4.579696138318212e-06,
+      "vertex_counts": [
+        552,
+        562
+      ]
+    },
+    {
+      "ratio": 0.065585695207,
+      "witness_displacement": 6.929834537583446e-05,
+      "radial_scale_delta": 4.579665054071924e-06,
+      "vertex_counts": [
+        552,
+        562
+      ]
+    },
+    {
+      "ratio": 0.065585777164,
+      "witness_displacement": 6.929817707046482e-05,
+      "radial_scale_delta": 4.5796590553148775e-06,
+      "vertex_counts": [
+        552,
+        562
+      ]
+    },
+    {
+      "ratio": 0.065585806966,
+      "witness_displacement": 6.929811587763623e-05,
+      "radial_scale_delta": 4.579656874170723e-06,
+      "vertex_counts": [
+        552,
+        562
+      ]
+    },
+    {
+      "ratio": 0.06906606257,
+      "witness_displacement": 6.261457943157467e-05,
+      "radial_scale_delta": 4.328577521084398e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.069066338241,
+      "witness_displacement": 6.261408442931327e-05,
+      "radial_scale_delta": 4.328557912991471e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.069066472352,
+      "witness_displacement": 6.261384361838651e-05,
+      "radial_scale_delta": 4.328548373733199e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.069066479802,
+      "witness_displacement": 6.261383023975498e-05,
+      "radial_scale_delta": 4.328547843712727e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.069066487253,
+      "witness_displacement": 6.261381685934708e-05,
+      "radial_scale_delta": 4.328547313914299e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.069066509604,
+      "witness_displacement": 6.261377672878154e-05,
+      "radial_scale_delta": 4.3285457238528835e-06,
+      "vertex_counts": [
+        562,
+        572
+      ]
+    },
+    {
+      "ratio": 0.071440890431,
+      "witness_displacement": 5.852726525112928e-05,
+      "radial_scale_delta": 4.160170126610296e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.071440987289,
+      "witness_displacement": 5.8527105461614326e-05,
+      "radial_scale_delta": 4.160163278310591e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.071441113949,
+      "witness_displacement": 5.852689651941745e-05,
+      "radial_scale_delta": 4.160154322585541e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.071441121399,
+      "witness_displacement": 5.852688422613994e-05,
+      "radial_scale_delta": 4.160153795895738e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.071441210806,
+      "witness_displacement": 5.8526736741448815e-05,
+      "radial_scale_delta": 4.16014747450788e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.071441225708,
+      "witness_displacement": 5.852671215933469e-05,
+      "radial_scale_delta": 4.16014642090623e-06,
+      "vertex_counts": [
+        572,
+        582
+      ]
+    },
+    {
+      "ratio": 0.072288684547,
+      "witness_displacement": 5.714615114893462e-05,
+      "radial_scale_delta": 4.099638363008751e-06,
+      "vertex_counts": [
+        582,
+        577
+      ]
+    },
+    {
+      "ratio": 0.0722887218,
+      "witness_displacement": 5.714609122087211e-05,
+      "radial_scale_delta": 4.099635677379254e-06,
+      "vertex_counts": [
+        582,
+        577
+      ]
+    },
+    {
+      "ratio": 0.07228872925,
+      "witness_displacement": 5.7146079234904334e-05,
+      "radial_scale_delta": 4.099635140253355e-06,
+      "vertex_counts": [
+        582,
+        577
+      ]
+    },
+    {
+      "ratio": 0.072288930416,
+      "witness_displacement": 5.714575560400448e-05,
+      "radial_scale_delta": 4.099620638298163e-06,
+      "vertex_counts": [
+        582,
+        577
+      ]
+    },
+    {
+      "ratio": 0.075718611479,
+      "witness_displacement": 5.1958038043586896e-05,
+      "radial_scale_delta": 3.858594793682002e-06,
+      "vertex_counts": [
+        577,
+        580
+      ]
+    },
+    {
+      "ratio": 0.075719177723,
+      "witness_displacement": 5.195723294715293e-05,
+      "radial_scale_delta": 3.858555993607737e-06,
+      "vertex_counts": [
+        577,
+        582
+      ]
+    },
+    {
+      "ratio": 0.075719237328,
+      "witness_displacement": 5.195714820427355e-05,
+      "radial_scale_delta": 3.858551909763364e-06,
+      "vertex_counts": [
+        577,
+        582
+      ]
+    },
+    {
+      "ratio": 0.08062043041,
+      "witness_displacement": 4.552876007579698e-05,
+      "radial_scale_delta": 3.530695759756952e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620445311,
+      "witness_displacement": 4.552874204755142e-05,
+      "radial_scale_delta": 3.5306947860913596e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620750785,
+      "witness_displacement": 4.552837249249819e-05,
+      "radial_scale_delta": 3.5306748238372876e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620825291,
+      "witness_displacement": 4.552828235571127e-05,
+      "radial_scale_delta": 3.530669954621146e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620847642,
+      "witness_displacement": 4.5528255319560174e-05,
+      "radial_scale_delta": 3.5306684942337796e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620855093,
+      "witness_displacement": 4.552824630810193e-05,
+      "radial_scale_delta": 3.5306680075120056e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620862544,
+      "witness_displacement": 4.5528237288650075e-05,
+      "radial_scale_delta": 3.5306675203461424e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620937049,
+      "witness_displacement": 4.552814715985676e-05,
+      "radial_scale_delta": 3.530662651796135e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620974302,
+      "witness_displacement": 4.552810208746649e-05,
+      "radial_scale_delta": 3.530660217077042e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.080620989203,
+      "witness_displacement": 4.5528084067214536e-05,
+      "radial_scale_delta": 3.530659243633494e-06,
+      "vertex_counts": [
+        582,
+        592
+      ]
+    },
+    {
+      "ratio": 0.084471933544,
+      "witness_displacement": 4.113031082209062e-05,
+      "radial_scale_delta": 3.281589527448503e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084471940994,
+      "witness_displacement": 4.113030278674046e-05,
+      "radial_scale_delta": 3.2815890500526024e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472104907,
+      "witness_displacement": 4.11301260614394e-05,
+      "radial_scale_delta": 3.28157855267186e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472179413,
+      "witness_displacement": 4.1130045732806764e-05,
+      "radial_scale_delta": 3.2815737811553447e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472224116,
+      "witness_displacement": 4.112999754202207e-05,
+      "radial_scale_delta": 3.281570918556298e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472261369,
+      "witness_displacement": 4.112995737060032e-05,
+      "radial_scale_delta": 3.2815685324649735e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.08447227627,
+      "witness_displacement": 4.1129941306117246e-05,
+      "radial_scale_delta": 3.2815675781172615e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472320974,
+      "witness_displacement": 4.112989311089166e-05,
+      "radial_scale_delta": 3.2815647152961702e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472335875,
+      "witness_displacement": 4.112987704107951e-05,
+      "radial_scale_delta": 3.2815637607264136e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.084472358227,
+      "witness_displacement": 4.112985294568716e-05,
+      "radial_scale_delta": 3.281562329648935e-06,
+      "vertex_counts": [
+        592,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086616955698,
+      "witness_displacement": 3.888080045033604e-05,
+      "radial_scale_delta": 3.143438137787058e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.0866169855,
+      "witness_displacement": 3.888077000357981e-05,
+      "radial_scale_delta": 3.1434361984494785e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617000401,
+      "witness_displacement": 3.888075478553077e-05,
+      "radial_scale_delta": 3.1434352294468226e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617030203,
+      "witness_displacement": 3.888072434143908e-05,
+      "radial_scale_delta": 3.1434332898871986e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617060006,
+      "witness_displacement": 3.888069389024196e-05,
+      "radial_scale_delta": 3.1434313496614408e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.08661711961,
+      "witness_displacement": 3.8880632989624075e-05,
+      "radial_scale_delta": 3.1434274667674345e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617201567,
+      "witness_displacement": 3.888054922729367e-05,
+      "radial_scale_delta": 3.143422124818329e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617216468,
+      "witness_displacement": 3.888053399769831e-05,
+      "radial_scale_delta": 3.1434211529290934e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.086617231369,
+      "witness_displacement": 3.888051876543841e-05,
+      "radial_scale_delta": 3.1434201810398577e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.08661724627,
+      "witness_displacement": 3.888050353406669e-05,
+      "radial_scale_delta": 3.1434192089285773e-06,
+      "vertex_counts": [
+        602,
+        602
+      ]
+    },
+    {
+      "ratio": 0.090408287942,
+      "witness_displacement": 3.520193160877483e-05,
+      "radial_scale_delta": 2.8988911979777043e-06,
+      "vertex_counts": [
+        602,
+        603
+      ]
+    },
+    {
+      "ratio": 0.090408846736,
+      "witness_displacement": 3.520141896107276e-05,
+      "radial_scale_delta": 2.8988560463183433e-06,
+      "vertex_counts": [
+        602,
+        607
+      ]
+    },
+    {
+      "ratio": 0.090408891439,
+      "witness_displacement": 3.5201377958316016e-05,
+      "radial_scale_delta": 2.898853234567511e-06,
+      "vertex_counts": [
+        602,
+        607
+      ]
+    },
+    {
+      "ratio": 0.09577665478,
+      "witness_displacement": 3.0613237856691455e-05,
+      "radial_scale_delta": 2.568064225494382e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.09577666223,
+      "witness_displacement": 3.0613231920995077e-05,
+      "radial_scale_delta": 2.5680637756320124e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095776870847,
+      "witness_displacement": 3.061306571439104e-05,
+      "radial_scale_delta": 2.5680511677173e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095776945353,
+      "witness_displacement": 3.0613006361868145e-05,
+      "radial_scale_delta": 2.568046664874757e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095776952803,
+      "witness_displacement": 3.061300042350723e-05,
+      "radial_scale_delta": 2.5680462143462535e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095776960254,
+      "witness_displacement": 3.061299448958721e-05,
+      "radial_scale_delta": 2.5680457642618393e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.09577704221,
+      "witness_displacement": 3.06129291987034e-05,
+      "radial_scale_delta": 2.568040811334882e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095777116716,
+      "witness_displacement": 3.061286984085143e-05,
+      "radial_scale_delta": 2.5680363084923385e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095777146518,
+      "witness_displacement": 3.0612846093625024e-05,
+      "radial_scale_delta": 2.5680345072665034e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.095777153969,
+      "witness_displacement": 3.061284016503407e-05,
+      "radial_scale_delta": 2.5680340569600446e-06,
+      "vertex_counts": [
+        607,
+        617
+      ]
+    },
+    {
+      "ratio": 0.099496282637,
+      "witness_displacement": 2.7769719420867034e-05,
+      "radial_scale_delta": 2.3430796638468365e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496304989,
+      "witness_displacement": 2.776970301265891e-05,
+      "radial_scale_delta": 2.3430783100408803e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496372044,
+      "witness_displacement": 2.776965380046903e-05,
+      "radial_scale_delta": 2.3430742492891454e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.09949644655,
+      "witness_displacement": 2.77695991206528e-05,
+      "radial_scale_delta": 2.3430697366766395e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496468902,
+      "witness_displacement": 2.7769582717773744e-05,
+      "radial_scale_delta": 2.3430683828706833e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496498704,
+      "witness_displacement": 2.776956084549198e-05,
+      "radial_scale_delta": 2.3430665780921345e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496513605,
+      "witness_displacement": 2.7769549907574742e-05,
+      "radial_scale_delta": 2.3430656754808155e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496588111,
+      "witness_displacement": 2.7769495231311225e-05,
+      "radial_scale_delta": 2.3430611635344434e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496617913,
+      "witness_displacement": 2.776947336080582e-05,
+      "radial_scale_delta": 2.3430593583118053e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.099496632814,
+      "witness_displacement": 2.7769462420224045e-05,
+      "radial_scale_delta": 2.343058455922531e-06,
+      "vertex_counts": [
+        617,
+        627
+      ]
+    },
+    {
+      "ratio": 0.100835949183,
+      "witness_displacement": 2.6793126795432443e-05,
+      "radial_scale_delta": 2.260187106140066e-06,
+      "vertex_counts": [
+        627,
+        622
+      ]
+    },
+    {
+      "ratio": 0.100835971534,
+      "witness_displacement": 2.6793110606604387e-05,
+      "radial_scale_delta": 2.2601856939363785e-06,
+      "vertex_counts": [
+        627,
+        622
+      ]
+    },
+    {
+      "ratio": 0.100836023688,
+      "witness_displacement": 2.679307283681709e-05,
+      "radial_scale_delta": 2.2601823985723968e-06,
+      "vertex_counts": [
+        627,
+        622
+      ]
+    },
+    {
+      "ratio": 0.100836142898,
+      "witness_displacement": 2.6792986504098337e-05,
+      "radial_scale_delta": 2.260174866153264e-06,
+      "vertex_counts": [
+        627,
+        622
+      ]
+    },
+    {
+      "ratio": 0.104554891586,
+      "witness_displacement": 2.422115448563744e-05,
+      "radial_scale_delta": 2.0305081858129626e-06,
+      "vertex_counts": [
+        622,
+        623
+      ]
+    },
+    {
+      "ratio": 0.104555383325,
+      "witness_displacement": 2.4220829698329283e-05,
+      "radial_scale_delta": 2.030478490011589e-06,
+      "vertex_counts": [
+        622,
+        627
+      ]
+    },
+    {
+      "ratio": 0.104555413127,
+      "witness_displacement": 2.4220810009190075e-05,
+      "radial_scale_delta": 2.0304766907841554e-06,
+      "vertex_counts": [
+        622,
+        627
+      ]
+    },
+    {
+      "ratio": 0.109800472856,
+      "witness_displacement": 2.094237324712367e-05,
+      "radial_scale_delta": 1.7181386755549255e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800487757,
+      "witness_displacement": 2.0942364423959248e-05,
+      "radial_scale_delta": 1.7181377993669145e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800599515,
+      "witness_displacement": 2.0942298263548764e-05,
+      "radial_scale_delta": 1.7181312286229655e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.10980065912,
+      "witness_displacement": 2.094226297533197e-05,
+      "radial_scale_delta": 1.718127724092966e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800666571,
+      "witness_displacement": 2.094225856907883e-05,
+      "radial_scale_delta": 1.718127286221005e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800674021,
+      "witness_displacement": 2.0942254159272977e-05,
+      "radial_scale_delta": 1.718126847904955e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800770879,
+      "witness_displacement": 2.0942196817586023e-05,
+      "radial_scale_delta": 1.718121153349017e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800845385,
+      "witness_displacement": 2.0942152708869344e-05,
+      "radial_scale_delta": 1.718116772853051e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.109800875187,
+      "witness_displacement": 2.0942135071422285e-05,
+      "radial_scale_delta": 1.718115020477029e-06,
+      "vertex_counts": [
+        627,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737797201,
+      "witness_displacement": 1.9234828975811524e-05,
+      "radial_scale_delta": 1.5422005090748314e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737819552,
+      "witness_displacement": 1.9234816168278712e-05,
+      "radial_scale_delta": 1.5421991350628161e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737849355,
+      "witness_displacement": 1.9234799085943166e-05,
+      "radial_scale_delta": 1.5421973016405133e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737856805,
+      "witness_displacement": 1.9234794813804967e-05,
+      "radial_scale_delta": 1.5421968433404487e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737886608,
+      "witness_displacement": 1.9234777724363994e-05,
+      "radial_scale_delta": 1.5421950083638336e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737938762,
+      "witness_displacement": 1.9234747806962105e-05,
+      "radial_scale_delta": 1.5421917947122665e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737953663,
+      "witness_displacement": 1.92347392546921e-05,
+      "radial_scale_delta": 1.5421908763357806e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112737983465,
+      "witness_displacement": 1.9234722150152095e-05,
+      "radial_scale_delta": 1.5421890375844072e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112738013268,
+      "witness_displacement": 1.9234705036730304e-05,
+      "radial_scale_delta": 1.5421871975007662e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.112738028169,
+      "witness_displacement": 1.9234696478243052e-05,
+      "radial_scale_delta": 1.542186277569968e-06,
+      "vertex_counts": [
+        637,
+        637
+      ]
+    },
+    {
+      "ratio": 0.11696459353,
+      "witness_displacement": 1.6886386405623455e-05,
+      "radial_scale_delta": 1.2802524913535507e-06,
+      "vertex_counts": [
+        637,
+        642
+      ]
+    },
+    {
+      "ratio": 0.116964951158,
+      "witness_displacement": 1.6886196675613974e-05,
+      "radial_scale_delta": 1.2802309021786584e-06,
+      "vertex_counts": [
+        637,
+        642
+      ]
+    },
+    {
+      "ratio": 0.11696498096,
+      "witness_displacement": 1.6886180863373568e-05,
+      "radial_scale_delta": 1.2802291036173585e-06,
+      "vertex_counts": [
+        637,
+        642
+      ]
+    },
+    {
+      "ratio": 0.121392339468,
+      "witness_displacement": 1.4621876308851256e-05,
+      "radial_scale_delta": 1.01464850876809e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392346919,
+      "witness_displacement": 1.4621872631792598e-05,
+      "radial_scale_delta": 1.0146480640127464e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392384171,
+      "witness_displacement": 1.4621854250052024e-05,
+      "radial_scale_delta": 1.0146458411242065e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392421424,
+      "witness_displacement": 1.4621835866535093e-05,
+      "radial_scale_delta": 1.0146436184577112e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392436326,
+      "witness_displacement": 1.4621828513305957e-05,
+      "radial_scale_delta": 1.0146427293911131e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.12139249593,
+      "witness_displacement": 1.462179910038941e-05,
+      "radial_scale_delta": 1.0146391722365422e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392555535,
+      "witness_displacement": 1.4621769686584685e-05,
+      "radial_scale_delta": 1.0146356159701497e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.121392585337,
+      "witness_displacement": 1.4621754981902768e-05,
+      "radial_scale_delta": 1.0146338376149089e-06,
+      "vertex_counts": [
+        642,
+        652
+      ]
+    },
+    {
+      "ratio": 0.122983910143,
+      "witness_displacement": 1.382722462484054e-05,
+      "radial_scale_delta": 9.151603168611189e-07,
+      "vertex_counts": [
+        652,
+        647
+      ]
+    },
+    {
+      "ratio": 0.122983925045,
+      "witness_displacement": 1.3827217094863897e-05,
+      "radial_scale_delta": 9.151593429734817e-07,
+      "vertex_counts": [
+        652,
+        647
+      ]
+    },
+    {
+      "ratio": 0.1229839921,
+      "witness_displacement": 1.3827183221515327e-05,
+      "radial_scale_delta": 9.151549607011589e-07,
+      "vertex_counts": [
+        652,
+        647
+      ]
+    },
+    {
+      "ratio": 0.122984007001,
+      "witness_displacement": 1.3827175693315041e-05,
+      "radial_scale_delta": 9.151539868135217e-07,
+      "vertex_counts": [
+        652,
+        647
+      ]
+    },
+    {
+      "ratio": 0.126631051302,
+      "witness_displacement": 1.2056812515481852e-05,
+      "radial_scale_delta": 6.838312989199125e-07,
+      "vertex_counts": [
+        647,
+        652
+      ]
+    },
+    {
+      "ratio": 0.126631274819,
+      "witness_displacement": 1.2056708269092553e-05,
+      "radial_scale_delta": 6.838175401480129e-07,
+      "vertex_counts": [
+        647,
+        652
+      ]
+    },
+    {
+      "ratio": 0.126631289721,
+      "witness_displacement": 1.2056701319984597e-05,
+      "radial_scale_delta": 6.838166231037945e-07,
+      "vertex_counts": [
+        647,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691064358,
+      "witness_displacement": 1.0653020912521072e-05,
+      "radial_scale_delta": 4.944509990334467e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691079259,
+      "witness_displacement": 1.0653014115735715e-05,
+      "radial_scale_delta": 4.944500540116081e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.12969109416,
+      "witness_displacement": 1.0653007313621288e-05,
+      "radial_scale_delta": 4.944491085456804e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691109061,
+      "witness_displacement": 1.0653000512395039e-05,
+      "radial_scale_delta": 4.944481621915742e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691123962,
+      "witness_displacement": 1.0652993708060166e-05,
+      "radial_scale_delta": 4.944472151713342e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691168666,
+      "witness_displacement": 1.0652973273295174e-05,
+      "radial_scale_delta": 4.944443698917667e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    },
+    {
+      "ratio": 0.129691183567,
+      "witness_displacement": 1.0652966456525803e-05,
+      "radial_scale_delta": 4.944434197629022e-07,
+      "vertex_counts": [
+        652,
+        652
+      ]
+    }
+  ],
+  "max_witness_displacement": 0.0006952540581739441,
+  "max_radial_scale_delta": 9.341705893950447e-06,
+  "limitations": "Convex closed sphere, paired lens perturbations around vertex crossings. One unchanged vertex witnesses global normalization continuity; not a Hausdorff or rendered continuity test, not a proof for arbitrary topology."
+}

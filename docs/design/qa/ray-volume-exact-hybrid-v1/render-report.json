@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "lens": 2.5,
+      "minimum_virtual_depth": -1.3417968749999996,
+      "camera_intersects_depth_range": true,
+      "target": "target-2.5.png"
+    },
+    {
+      "lens": 12.5,
+      "minimum_virtual_depth": 0.5316406250000001,
+      "camera_intersects_depth_range": false,
+      "target": "target-12.5.png",
+      "hybrid": "hybrid-12.5.png",
+      "depth_scale": 0.8545681524004413,
+      "volume_error": 8.881784197001252e-16
+    },
+    {
+      "lens": 25,
+      "minimum_virtual_depth": 0.7658203125,
+      "camera_intersects_depth_range": false,
+      "target": "target-25.png",
+      "hybrid": "hybrid-25.png",
+      "depth_scale": 0.9735064518746431,
+      "volume_error": 4.440892098500626e-16
+    },
+    {
+      "lens": 100,
+      "minimum_virtual_depth": 0.941455078125,
+      "camera_intersects_depth_range": false,
+      "target": "target-100.png",
+      "hybrid": "hybrid-100.png",
+      "depth_scale": 1.0057713051566772,
+      "volume_error": 0.0
+    }
+  ],
+  "live_scene_untouched": true,
+  "renderer": "Cycles CPU8samples; source-face emission colors"
+}

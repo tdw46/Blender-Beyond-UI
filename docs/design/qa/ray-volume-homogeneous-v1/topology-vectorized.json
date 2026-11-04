@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "rows": [
+    {
+      "input_vertices": 642,
+      "input_faces": 1280,
+      "output_vertices": 522,
+      "output_faces": 1040,
+      "compute_median_ms": 0.22012500267010182,
+      "including_publication_median_ms": 0.44968748989049345,
+      "samples_ms": [
+        0.5898750096093863,
+        0.45008299639448524,
+        0.41795900324359536,
+        0.4199999966658652,
+        0.42866700096055865,
+        0.40787499165162444,
+        0.4758749855682254,
+        0.6376250239554793,
+        0.47166700824163854,
+        0.44929198338650167
+      ],
+      "volume_error": 1.1102230246251565e-16,
+      "cut_edges": 90,
+      "scale": 1.1208847397055735
+    },
+    {
+      "input_vertices": 10242,
+      "input_faces": 20480,
+      "output_vertices": 7257,
+      "output_faces": 14510,
+      "compute_median_ms": 1.2162920029368252,
+      "including_publication_median_ms": 3.7658540095435455,
+      "samples_ms": [
+        3.69579199468717,
+        3.7770000053569674,
+        3.688416996737942,
+        3.892917011398822,
+        3.745417023310438,
+        3.8301669992506504,
+        3.8368749956134707,
+        3.64566600183025,
+        4.119583987630904,
+        3.7547080137301236
+      ],
+      "volume_error": 1.1102230246251565e-16,
+      "cut_edges": 340,
+      "scale": 1.1213888615759486
+    },
+    {
+      "input_vertices": 40962,
+      "input_faces": 81920,
+      "output_vertices": 28372,
+      "output_faces": 56740,
+      "compute_median_ms": 3.8693750102538615,
+      "including_publication_median_ms": 13.292103991261683,
+      "samples_ms": [
+        13.359583012061194,
+        13.45225001568906,
+        13.188083015847951,
+        13.315457996213809,
+        13.13670800300315,
+        13.014124997425824,
+        12.771207984769717,
+        13.268749986309558,
+        13.407791004283354,
+        13.88045898056589
+      ],
+      "volume_error": 2.220446049250313e-16,
+      "cut_edges": 670,
+      "scale": 1.1214143955682454
+    }
+  ],
+  "limitations": "One convex cut loop; excludes evaluated input extraction, prepare(), materials, UV attribute interpolation, downstream modifiers and viewport. Not general topology support."
+}

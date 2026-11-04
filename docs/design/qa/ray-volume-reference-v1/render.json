@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "baseline_lens": 24.65804100036621,
+  "baseline_distance": 3.370826005935669,
+  "sensor_width": 72,
+  "records": [
+    {
+      "lens": 7.832540988922119,
+      "scale": 2.0840601014944795,
+      "guard_vertices": 0,
+      "virtual_behind": 0,
+      "continued_vertices": 0,
+      "volume_ratio": 1.0,
+      "min_depth": 0.4567606610182084,
+      "max_depth": 4.006175521375994,
+      "newly_outside": 0,
+      "max_target_ndc_error": 2.220446049250313e-16,
+      "original_in_frame": 507,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 0,
+      "remaining_behind": 0
+    },
+    {
+      "lens": 2.5,
+      "scale": 5.004190819254013,
+      "guard_vertices": 200,
+      "virtual_behind": 321,
+      "continued_vertices": 332,
+      "volume_ratio": 1.0000000000000004,
+      "min_depth": 0.14123924999397017,
+      "max_depth": 5.971599885973029,
+      "newly_outside": 0,
+      "max_target_ndc_error": 43.928688230391515,
+      "original_in_frame": 507,
+      "newly_escaped": 0,
+      "newly_behind": 0,
+      "originally_behind": 0,
+      "remaining_behind": 0
+    }
+  ],
+  "limitations": "2.5 mm continuation is approximate. Source Suzanne has open/nonmanifold topology: oriented volume is diagnostic, not a closed solid-volume claim. Source-facet emission colors do not test live shaders. Physical-reference camera moves only in disposable fixture; candidate camera is fixed."
+}

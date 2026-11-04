@@ -1,0 +1,30 @@
+[
+  {
+    "requested_mm": 7.832540988922119,
+    "mode": "exact",
+    "effective_mm": 7.832540505655743,
+    "vertices": 507,
+    "behind": 0
+  },
+  {
+    "requested_mm": 7.832540988922119,
+    "mode": "artistic",
+    "effective_mm": 7.873782705107146,
+    "vertices": 507,
+    "behind": 0
+  },
+  {
+    "requested_mm": 2.5,
+    "mode": "exact",
+    "effective_mm": 2.4999995139319253,
+    "vertices": 507,
+    "behind": 321
+  },
+  {
+    "requested_mm": 2.5,
+    "mode": "artistic",
+    "effective_mm": 7.709686929163695,
+    "vertices": 507,
+    "behind": 0
+  }
+]

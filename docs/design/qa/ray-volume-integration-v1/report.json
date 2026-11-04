@@ -1,11 +1,11 @@
 {
-  "status": "Development integration implemented; performance target NOT met; not installed",
-  "date": "2026-11-03",
+  "status": "Original preview restored; known popping unresolved; exact hybrid research not installed",
+  "date": "2026-11-04",
   "safe_checkpoint": {
     "camkeys": "8154167",
     "beyond_ui": "27b3a97"
   },
-  "installed_camkeys": "master 28d829a (unchanged)",
+  "installed_camkeys": "codex/ray-volume-exact-preview 60d2015",
   "scope": "Built-in Geometry Nodes only; same Python viewport handlers, changed-only input writes, falloff controls and normal/billboard pipeline",
   "performance": {
     "passed": true,
@@ -485,7 +485,24 @@
     "Extreme invalid roots leave geometry unchanged and publish an admission bit. User-facing invalid-domain diagnostics remain open.",
     "Saved reordered sockets with owner actions/NLA or drivers targeting reordered inputs fail closed for explicit migration. Matching-identifier animation is preserved.",
     "Two old tests asserting depth flattening are superseded for the new algorithm by lateral-warp falloff tests; they have not been deleted.",
-    "Actual live Uraraka scene and installed checkout remain unchanged. No new visual/GPU acceptance claimed."
+    "Installed live Uraraka on 2026-11-04. No new visual/GPU acceptance. Selected open-region no-real-root states can disable deformation; reproduced independently."
   ],
-  "candidate_commit": "60d2015"
+  "candidate_commit": "60d2015",
+  "installation": {
+    "runtime": "Blender 5.2.2 live Uraraka",
+    "schema": 15,
+    "reload": "Changed pure modules and two utils functions, preserving registered classes and active modal operators",
+    "saved_scene": false,
+    "version_bump": false,
+    "live_limit": "Some simulated Head-region poses have a negative volume-solve discriminant. Disposable Blender reproduces the live rejected state exactly; this is a domain limit, not stale evaluation or scheduling. Guard leaves geometry unchanged.",
+    "readback": "installed-readback.json",
+    "domain_evidence": "installed-domain-check.log",
+    "asset_hashes_verified": true
+  },
+  "optimization_experiment": {
+    "commit": "8105610",
+    "summary": "optimization-corner-reuse.json",
+    "decision": "Rejected: identical geometry, no measured speed improvement; not installed"
+  },
+  "follow_up": "../ray-volume-exact-hybrid-v1/index.html"
 }

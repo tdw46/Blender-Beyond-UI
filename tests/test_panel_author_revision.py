@@ -3,6 +3,7 @@ from types import SimpleNamespace as NS
 from unittest.mock import Mock
 from beyond_ui import AddonUI
 from beyond_ui.hosts.addon import Runtime
+from beyond_ui.bindings import Binding, Edit
 
 
 def ptr(n, **kw):
@@ -87,3 +88,65 @@ class AuthorRevision(unittest.TestCase):
         self.rt.canvases[self.panel].clear()
         self.assertIsNot(self.draw(), old)
         self.assertEqual(self.calls, 2)
+
+    def start_drag(self, canvas, *, valid=lambda: True):
+        self.value = .25
+        self.commits = []
+        binding = Binding(lambda: self.value, lambda value: setattr(self, 'value', value),
+                          valid=valid, commit=lambda before, after: self.commits.append((before, after)))
+        canvas.active = NS(kind='number')
+        canvas.edit = Edit(binding)
+        return canvas.edit
+
+    def test_conditional_accessory_keeps_drag_and_reserved_canvas_until_release(self):
+        canvas = self.draw()
+        edit = self.start_drag(canvas)
+        # A conditional icon is structural, unlike a literal text patch.
+        def draw(proxy, context):
+            self.calls += 1
+            proxy.layout.label(text='Falloff', icon='SPHERE' if self.value > .5 else 'NONE')
+        self.rt.draw_functions[self.panel] = draw
+        for value in (.6, .8, .3, .9):
+            edit.update(value)
+            self.revision = value
+            self.assertIs(self.draw(), canvas)
+            self.assertIs(canvas.edit, edit)
+            self.assertEqual(self.value, value)
+        self.assertEqual(self.calls, 1)
+        canvas.finish()
+        replacement = self.draw()
+        self.assertIsNot(replacement, canvas)
+        self.assertEqual(self.value, .9)
+        self.assertEqual(self.commits, [(.25, .9)])
+        self.assertEqual(self.calls, 2)
+
+    def test_drag_does_not_defer_owner_replacement_or_revoked_binding(self):
+        for revoke in (False, True):
+            with self.subTest(revoke=revoke):
+                canvas = self.draw()
+                validity = [True]
+                edit = self.start_drag(canvas, valid=lambda: validity[0])
+                edit.update(.75)
+                before = self.calls
+                self.revision = ('changed', revoke)
+                if revoke:
+                    validity[0] = False
+                else:
+                    self.context.object = ptr(99)
+                self.draw()
+                self.assertEqual(self.calls, before + 1)
+                # A removed RNA owner must never receive a rollback write.
+                if revoke:
+                    self.assertEqual(self.value, .75)
+
+    def test_cancelled_drag_restores_value_and_reauthors(self):
+        canvas = self.draw()
+        edit = self.start_drag(canvas)
+        edit.update(.7)
+        self.revision = 'during drag'
+        self.draw()
+        canvas.cancel()
+        self.assertEqual(self.value, .25)
+        self.draw()
+        self.assertEqual(self.calls, 2)
+        self.assertEqual(self.commits, [])
