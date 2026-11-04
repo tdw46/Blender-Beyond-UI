@@ -1,0 +1,491 @@
+{
+  "status": "Development integration implemented; performance target NOT met; not installed",
+  "date": "2026-11-03",
+  "safe_checkpoint": {
+    "camkeys": "8154167",
+    "beyond_ui": "27b3a97"
+  },
+  "installed_camkeys": "master 28d829a (unchanged)",
+  "scope": "Built-in Geometry Nodes only; same Python viewport handlers, changed-only input writes, falloff controls and normal/billboard pipeline",
+  "performance": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "workload": "saved Uraraka, CPU socket + depsgraph, no UI/GPU frame claim",
+    "modifiers": 7,
+    "eye": [
+      0.5891767144203186,
+      -1.1047900915145874,
+      1.995815396308899
+    ],
+    "center": [
+      0.0,
+      0.0006330106989480555,
+      1.6514045000076294
+    ],
+    "results": [
+      {
+        "label": "old",
+        "ratio": 0.5,
+        "median_ms": 7.357750495430082,
+        "p95_ms": 9.390332998009399,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {},
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "new",
+        "ratio": 0.5,
+        "median_ms": 8.679500504513271,
+        "p95_ms": 10.731208982178941,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {
+          "belt.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "body.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "NeckPlate.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "wrists.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "head_.002": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.002": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.003": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ]
+        },
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "old-repeat",
+        "ratio": 0.5,
+        "median_ms": 7.5425830000313,
+        "p95_ms": 9.054207999724895,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {},
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "new-repeat",
+        "ratio": 0.5,
+        "median_ms": 8.661499989102595,
+        "p95_ms": 11.074332986027002,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {
+          "belt.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "body.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "NeckPlate.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "wrists.001": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "head_.002": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.002": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.003": [
+            0.12852323055267334,
+            1.0,
+            1.2991182804107666
+          ]
+        },
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "old",
+        "ratio": 2.0,
+        "median_ms": 7.5160414999118075,
+        "p95_ms": 9.170499979518354,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {},
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "new",
+        "ratio": 2.0,
+        "median_ms": 8.811895488179289,
+        "p95_ms": 10.885083000175655,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {
+          "belt.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "body.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "NeckPlate.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "wrists.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "head_.002": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.002": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.003": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ]
+        },
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "old-repeat",
+        "ratio": 2.0,
+        "median_ms": 7.565958498162217,
+        "p95_ms": 9.37554199481383,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {},
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      },
+      {
+        "label": "new-repeat",
+        "ratio": 2.0,
+        "median_ms": 8.79504150361754,
+        "p95_ms": 10.56112500373274,
+        "vertices": {
+          "belt.001": 3616,
+          "body.001": 42656,
+          "NeckPlate.001": 3964,
+          "wrists.001": 2292,
+          "head_.002": 12913,
+          "Hair.002": 1367,
+          "Hair.003": 1377
+        },
+        "states": {
+          "belt.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "body.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "NeckPlate.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "wrists.001": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "head_.002": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.002": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ],
+          "Hair.003": [
+            -0.008706549182534218,
+            1.0,
+            1.2991182804107666
+          ]
+        },
+        "modifier_ms": {
+          "belt.001": 0.0,
+          "body.001": 0.0,
+          "NeckPlate.001": 0.0,
+          "wrists.001": 0.0,
+          "head_.002": 0.0,
+          "Hair.002": 0.0,
+          "Hair.003": 0.0
+        }
+      }
+    ]
+  },
+  "summary_ms": {
+    "old_median_of_block_medians": 7.529312249971554,
+    "new_median_of_block_medians": 8.737271004065406,
+    "added_ms": 1.207958754093852,
+    "relative_increase_percent": 16.04341424541684
+  },
+  "checks": [
+    {
+      "version": "42",
+      "fixture": "blender_ray_volume_edges.py",
+      "passed": true
+    },
+    {
+      "version": "42",
+      "fixture": "blender_ray_volume_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "42",
+      "fixture": "blender_asset_library.py",
+      "passed": true
+    },
+    {
+      "version": "42",
+      "fixture": "blender_forced_perspective_updates.py",
+      "passed": true
+    },
+    {
+      "version": "45",
+      "fixture": "blender_ray_volume_edges.py",
+      "passed": true
+    },
+    {
+      "version": "45",
+      "fixture": "blender_ray_volume_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "45",
+      "fixture": "blender_asset_library.py",
+      "passed": true
+    },
+    {
+      "version": "45",
+      "fixture": "blender_forced_perspective_updates.py",
+      "passed": true
+    },
+    {
+      "version": "51",
+      "fixture": "blender_ray_volume_edges.py",
+      "passed": true
+    },
+    {
+      "version": "51",
+      "fixture": "blender_ray_volume_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "51",
+      "fixture": "blender_asset_library.py",
+      "passed": true
+    },
+    {
+      "version": "51",
+      "fixture": "blender_forced_perspective_updates.py",
+      "passed": true
+    },
+    {
+      "version": "52",
+      "fixture": "blender_ray_volume_edges.py",
+      "passed": true
+    },
+    {
+      "version": "52",
+      "fixture": "blender_ray_volume_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "52",
+      "fixture": "blender_asset_library.py",
+      "passed": true
+    },
+    {
+      "version": "52",
+      "fixture": "blender_forced_perspective_updates.py",
+      "passed": true
+    },
+    {
+      "fixture": "saved_scene_migration",
+      "version": "52",
+      "passed": true
+    },
+    {
+      "fixture": "billboard",
+      "version": "52",
+      "passed": true
+    },
+    {
+      "fixture": "curve",
+      "version": "52",
+      "passed": true
+    },
+    {
+      "fixture": "dense_mesh",
+      "version": "52",
+      "passed": true
+    }
+  ],
+  "limits": [
+    "Measured CPU socket writes + depsgraph, not interactive viewport/GPU FPS.",
+    "Actual Mac runtimes 4.2.23, 4.5.15, 5.1.2 and 5.2.2; no new Windows hardware checks, nor separate 4.3/4.4/5.0 execution.",
+    "Uniform full influence preserves signed polygon-fan volume. Blended masks/falloff are not exactly volume preserving.",
+    "Open surfaces use signed virtual fan closure about the moving focus; not union volume and no added cap geometry.",
+    "Extreme invalid roots leave geometry unchanged and publish an admission bit. User-facing invalid-domain diagnostics remain open.",
+    "Saved reordered sockets with owner actions/NLA or drivers targeting reordered inputs fail closed for explicit migration. Matching-identifier animation is preserved.",
+    "Two old tests asserting depth flattening are superseded for the new algorithm by lateral-warp falloff tests; they have not been deleted.",
+    "Actual live Uraraka scene and installed checkout remain unchanged. No new visual/GPU acceptance claimed."
+  ],
+  "candidate_commit": "60d2015"
+}

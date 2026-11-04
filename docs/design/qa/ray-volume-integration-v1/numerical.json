@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "rows": [
+    {
+      "vertices": 162,
+      "ratio": 0.5,
+      "volume_error": 1.1050463544215461e-08,
+      "projection_error": 3.332000937312528e-08
+    },
+    {
+      "vertices": 162,
+      "ratio": 1.0,
+      "volume_error": 0.0,
+      "projection_error": 0.0
+    },
+    {
+      "vertices": 162,
+      "ratio": 2.0,
+      "volume_error": 2.1938842031943295e-07,
+      "projection_error": 3.332000937312528e-08
+    },
+    {
+      "vertices": 162,
+      "ratio": 4.0,
+      "volume_error": 1.0940302330730844e-07,
+      "projection_error": 3.332000937312528e-08
+    },
+    {
+      "vertices": 10242,
+      "ratio": 0.5,
+      "volume_error": 1.1344277517366663e-07,
+      "projection_error": 6.322027276634104e-08
+    },
+    {
+      "vertices": 10242,
+      "ratio": 1.0,
+      "volume_error": 0.0,
+      "projection_error": 0.0
+    },
+    {
+      "vertices": 10242,
+      "ratio": 2.0,
+      "volume_error": 3.172914009308414e-08,
+      "projection_error": 4.712160915387242e-08
+    },
+    {
+      "vertices": 10242,
+      "ratio": 4.0,
+      "volume_error": 4.7136017311544265e-08,
+      "projection_error": 5.3726900748371916e-08
+    },
+    {
+      "vertices": 163842,
+      "ratio": 0.5,
+      "volume_error": 1.0686301221696226e-07,
+      "projection_error": 6.664001874625056e-08
+    },
+    {
+      "vertices": 163842,
+      "ratio": 1.0,
+      "volume_error": 0.0,
+      "projection_error": 0.0
+    },
+    {
+      "vertices": 163842,
+      "ratio": 2.0,
+      "volume_error": 1.622919509891574e-08,
+      "projection_error": 5.963374150388733e-08
+    },
+    {
+      "vertices": 163842,
+      "ratio": 4.0,
+      "volume_error": 3.424454153577727e-08,
+      "projection_error": 5.960475846211993e-08
+    }
+  ],
+  "timings": [
+    {
+      "vertices": 162,
+      "median_ms": 0.8959580009104684,
+      "p95_ms": 1.1834999895654619
+    },
+    {
+      "vertices": 10242,
+      "median_ms": 2.300562511663884,
+      "p95_ms": 3.084083989961073
+    },
+    {
+      "vertices": 163842,
+      "median_ms": 8.204520505387336,
+      "p95_ms": 9.81158300419338
+    }
+  ]
+}
