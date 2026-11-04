@@ -1,0 +1,25 @@
+Auto_load: registering 141 classes. PropertyGroups order: ['CamKeysDollyBinding', 'CamKeysDollyOwnedValue', 'CamKeysDollyVrmBinding', 'CamKeysDollyExpression', 'CamKeysLensStop', 'CamKeysLensCompensation', 'CAMKEYS_PG_detected_shape', 'CAMKEYS_PG_setup', 'DistanceStop', 'CamKeysAddonProperties', 'AngleItem', 'CamKeysAutoAddEntry', 'CamPropVectorStop', 'CamPropTargetValue', 'CamPropItem', 'CamKeysOtherObject', 'CamKeysLatticeTargetState', 'CamKeysEffectLock', 'CamKeysBillboardGroup', 'CamKeysSteppedTurnaround', 'MeshObjectItem']
+PASS VRM0/1, nested subtree ownership, presets, rigid geometry and preserved normals
+PASS per-group yaw/tilt, legacy inheritance and pose-independent tracking publication
+Traceback (most recent call last):
+  File "/private/tmp/check-shadow-billboards.py", line 4, in <module>
+    runpy.run_path('/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_emulation.py')
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_emulation.py", line 290, in <module>
+    main()
+    ~~~~^^
+  File "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_emulation.py", line 187, in main
+    near(points(other)[0], [inverse @ matrices[max(row,key=row.get)] @ world @ vertex.co for row,vertex in zip(assignments,other.data.vertices)])
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_emulation.py", line 19, in near
+    assert len(actual) == len(expected) and error < tolerance, error
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1.9929222472360828
+
+Error: script failed, file: '/private/tmp/check-shadow-billboards.py', exiting.
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:49:19)
+
+Blender quit

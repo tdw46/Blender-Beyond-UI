@@ -1,0 +1,44 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 48248,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--no-window-focus",
+      "--enable-event-simulate",
+      "--python-expr",
+      "import os,sys; sys.stdout=open(os.environ['BEYOND_UI_TEST_LOG'],'a',buffering=1); sys.stderr=sys.stdout",
+      "--python",
+      "/private/tmp/bvt-midoriya-front-back-20261104/ordinary_fixture.py",
+      "--",
+      "-ApplePersistenceIgnoreState",
+      "YES"
+    ],
+    "launch": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 756,
+      "initial_frontmost_pid": 756,
+      "new_instance": true,
+      "pid": 48248,
+      "restore_requests": 0,
+      "seconds": 6.610579013824463,
+      "termination_evidence": "launch-services",
+      "timeout": false
+    },
+    "focus_policy": "no-window-focus",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "fixture": "validate_cast_shadow_outputs.py",
+      "ordinary_admission": true,
+      "workers_restored": 18
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/shadow-geometry/operator-outputs/blender-0.log"
+  }
+]

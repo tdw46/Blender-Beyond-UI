@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "accepted": true,
+  "scope": "Source continuity only; fresh native platform runtime tests remain required",
+  "packages": [
+    {
+      "package": "/Users/tylerwalker/Library/Application Support/Blender/5.2/extensions/.user/user_default/beyond_vrm_extension_suite/native_shader/darwin-arm64",
+      "errors": [],
+      "status": "source-compatible",
+      "platform": {
+        "system": "Darwin",
+        "machine": "arm64",
+        "backend": "METAL",
+        "blender_hash": "d13f752e3b9c"
+      },
+      "executable_checked": true,
+      "runtime_checked": false
+    }
+  ]
+}

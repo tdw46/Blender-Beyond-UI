@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-04 \u2014 shared exact shadow traversal and compact bounds reduce 2.5 mm render time 149\u219257 ms; 96 orbit buffers identical",
+  "reviewed": "2026-11-04 \u2014 accepted checkpoint published; stack-based animated shadow capture loaded and tested",
   "remaining_turns": [
     1,
     2
   ],
   "implementation_turns": [
     0,
-    1
+    0
   ],
   "integration_qa_turns": [
     1,
-    1
+    2
   ],
   "active_hours": [
     0.5,
     2
   ],
   "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Closed the dominant repeated-AA traversal cost and packed-bound memory admission gap: 2.5 mm completed scene renders improved 2.59\u00d7 with all 96 matched orbit buffers identical. Remaining work is full-size restarted viewport qualification and any additional optimization justified by its residual extreme-lens cost; 57 ms at 640\u00d7480 is not a 60fps claim.",
+  "basis": "Completed checkpoint publishing and newly requested animated modifier-boundary implementation. Remaining 1\u20132 turns are explicitly integration/hardware QA; capture implementation is complete. Measurements are bounded fixture evidence, not a full-size FPS guarantee.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
     "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
     "Camera-plane shadows: exact float-buffer comparisons and fresh-process Metal timings; no new GIF or exhaustive live motion capture. Private geometry/color snapshots remain untracked. Drag repair has actual native input evidence on 5.1.2/5.2.2.",
     "Long-lens repair: actual matched live Metal before/after PNGs and comparison. No new motion GIF, isolated full-scene FPS gain, exhaustive overlap sweep or physical Windows capture. Short-lens rendering stall remains open.",
@@ -76,8 +77,8 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Installed exact shared-AA search and compact bounds in BVT on disk. Metal 2.5 mm warm median 148.61\u219257.44 ms; 96 matched full-scene frames, 162 material cases and 12 geometry replay cases have zero pixel differences. Restart needed; live scene untouched.",
-  "estimate_review": "Reduced remaining turns 1\u20133 to 1\u20132 and active estimate 1\u20134 h to 0.5\u20132 h after completing shared-ray traversal and compact storage. Residual full-size viewport performance remains a concrete open gate; no claim of a complete extreme-lens performance solution.",
+  "latest_progress": "Published accepted checkpoint across all affected main/master branches. Replaced editable shadow source with a capture modifier; no duplicate objects/evaluation. Geometry passes 4.2.23/5.2.2; Metal output/retention passes. Uraraka 2.5mm matched 640x480 renders 96.5\u219222.9ms with animated source; 250mm 23.8\u219224.3ms. Loaded live without saving.",
+  "estimate_review": "New scope was added and implemented this turn: capture boundary, CamKeys default, billboard compatibility, translations and retention checks. Implementation budget reduced to zero for this slice; hardware/cadence and intermittent broader fixture work keep total remaining at 1\u20132 uncertain QA turns.",
   "time_summary": "Uncertain 0.5\u20132 active hours for restarted full-size viewport qualification and targeted residual optimization; measured render times are not a completion forecast.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -510,9 +511,14 @@
       "work": "Shared exact AA traversal, per-ray bound rejection and compact bounds within the existing shadow budget",
       "evidence": "docs/design/qa/offscreen-shadows-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Published accepted checkpoint and implemented animated shadow capture in modifier stacks",
+      "evidence": "docs/design/qa/shadow-capture-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Finish the extreme short-lens exact shadow-query optimization without lowering quality, then recheck motion/hitching and hardware coverage. The shadow shader update needs a real Blender restart; the BUI drag repair is already active.",
+  "remaining_work": "Physical Windows acceptance, full-size live viewport cadence, and investigation of an intermittent broad billboard affine-copy fixture (candidate and checkpoint controls pass repeats). No new core capture implementation remains.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -569,11 +575,15 @@
     {
       "batch": "Necessary-update BUI performance",
       "details": "Closed: explicit panel revisions, text-only row refresh and per-access ownership reduction implemented, installed and verified. See docs/NECESSARY_UPDATE_PERFORMANCE.md. Required rendering/scene evaluation cost remains; no claim of zero BUI overhead."
+    },
+    {
+      "batch": "Animated shadow capture",
+      "details": "Requested stack capture replaces editable proxy. Implemented, loaded, and execution-tested; one evaluation, retained shadow revision. No new GIF/visual approval; physical Windows/full-size cadence and broader intermittent fixture remain QA."
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "next motion and hardware QA checkpoint",
-  "latest_review": "../offscreen-shadows-v1/index.html",
+  "checkpoint": "Animated shadow capture hardware and full-size cadence QA",
+  "latest_review": "../shadow-capture-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -638,6 +648,10 @@
     {
       "batch": "Camera-plane shadow quality and scalar drag interruption",
       "details": "Added shadow quality requirement preserved, exact candidate optimization validated; added drag/scroll regression closed. Extreme 2.5 mm query cost remains explicitly open despite partial optimization."
+    },
+    {
+      "batch": "Animated shadow capture",
+      "details": "Requested stack capture replaces editable proxy. Implemented, loaded, and execution-tested; one evaluation, retained shadow revision. No new GIF/visual approval; physical Windows/full-size cadence and broader intermittent fixture remain QA."
     }
   ],
   "windows_wizard_click_through": {

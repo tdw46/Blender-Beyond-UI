@@ -1,0 +1,38 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 44586,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/Documents/Blender/extensions/user_default/beyond_vrm_extension_suite/tests/benchmark_shadow_capture.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "runtime": "5.2.2 LTS",
+      "vertices": 103041,
+      "scope": "Warm dependency-graph evaluation; not viewport FPS or isolated GN timing",
+      "samples_per_state": 64,
+      "attribute_bytes": 1236492,
+      "states": {
+        "False": {
+          "median_ms": 0.34279198735021055,
+          "p95_ms": 0.47324999468401074
+        },
+        "True": {
+          "median_ms": 0.4070625000167638,
+          "p95_ms": 0.587791990255937
+        }
+      }
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/shadow-geometry/capture-cost/blender-0.log"
+  }
+]

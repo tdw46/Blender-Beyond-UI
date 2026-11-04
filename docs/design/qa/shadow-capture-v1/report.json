@@ -1,0 +1,54 @@
+{
+  "status": "Implemented; loaded into live Uraraka without saving",
+  "design": "One capture boundary in the existing modifier evaluation; no editable proxy source",
+  "checkpoint": {
+    "Beyond UI": "d6cfde4",
+    "CamKeys": "c3eb50d",
+    "BVT": "6901ecf0",
+    "Beyond NPR": "a44fb74"
+  },
+  "runtime": "Blender 5.2.2 Metal",
+  "geometry_runtimes": [
+    "4.2.23 LTS",
+    "5.2.2 LTS"
+  ],
+  "live": {
+    "file": "Uraraka",
+    "saved": false,
+    "frame": 1,
+    "selected": "head_.002",
+    "affected_meshes": 7,
+    "captured_points": 68185,
+    "renderer_errors": {},
+    "input_errors": {},
+    "modals_resumed": true
+  },
+  "performance_scope": "Completed 640x480 scene renders including readback, recorded Uraraka orbit, 8 warmup + 16 measured samples; spring/eye/lipsync paused only in disposable fixture. Not live full-size FPS.",
+  "performance": [
+    {
+      "lens_mm": 2.5,
+      "visible_shadow_source_ms": 96.46566651645117,
+      "animated_shadow_source_ms": 22.906957994564436
+    },
+    {
+      "lens_mm": 250,
+      "visible_shadow_source_ms": 23.832687496906146,
+      "animated_shadow_source_ms": 24.33427149662748
+    }
+  ],
+  "capture_cost": {
+    "points": 103041,
+    "additional_attribute_bytes": 1236492,
+    "without_capture_median_ms": 0.34279198735021055,
+    "with_capture_median_ms": 0.4070625000167638,
+    "samples_per_state": 64
+  },
+  "retention": "Metal test asserts same shadow array identity and shadow revision after downstream edit; upstream expression advances revision and changes output.",
+  "limits": [
+    "No physical Windows GPU acceptance for this new authoring feature. Existing Windows paths unchanged.",
+    "Full-size live viewport cadence remains unmeasured.",
+    "One initial 5.2.2 broad billboard fixture failed in its separate affine-copy assertion after the shadow checks passed. The identical candidate then passed twice; checkpoint control passed twice. No causal diagnosis or broad flake-free suite claim.",
+    "Capture preserves positions, not arbitrary removed topology; later topology changes may alter/drop attributes.",
+    "No new screenshot/GIF or user visual acceptance claimed."
+  ]
+}

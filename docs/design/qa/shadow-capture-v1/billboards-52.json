@@ -1,0 +1,25 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 47104,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/private/tmp/check-shadow-billboards.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "separate_billboard_capture": true
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/shadow-geometry/billboards-repeat/blender-0.log"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+    "pid": 43532,
+    "command": [
+      "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_animated_source_shadows.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "cases": 24,
+      "upstream_boundary_cases": 2
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/shadow-geometry/camkeys-final/blender-0.log"
+  },
+  {
+    "blender": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/blender",
+    "pid": 43535,
+    "command": [
+      "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/blender",
+      "--factory-startup",
+      "--python-exit-code",
+      "1",
+      "--background",
+      "--python",
+      "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_animated_source_shadows.py"
+    ],
+    "launch": null,
+    "focus_policy": "headless",
+    "passed": true,
+    "returncode": 0,
+    "result": {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "cases": 24,
+      "upstream_boundary_cases": 2
+    },
+    "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/shadow-geometry/camkeys-final/blender-1.log"
+  }
+]
