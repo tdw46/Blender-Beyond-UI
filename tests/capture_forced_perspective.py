@@ -82,11 +82,10 @@ def run():
                     for c in canvas.controls.values()
                     if c.label == "Apparent Focal Length"
                 )
-                unit = next(c for c in canvas.controls.values() if c.label == "mm")
                 toggle = next(
                     c
                     for c in canvas.controls.values()
-                    if c.kind == "toggle" and not c.label
+                    if c.binding and getattr(c.binding.context,"name",None)=="auto_fov_unlock_short_lens"
                 )
                 if not os.environ.get("BEYOND_UI_BASELINE"):
                     assert focal.options.get("slider") is True, focal.options
@@ -98,13 +97,8 @@ def run():
                     explicit_ui.canvas.arrange(width)
                     assert explicit.options["slider"] is False
                     explicit_ui.canvas.park()
-                    assert unit.rect[2] >= measure(int(fonts), 11, "mm")[0] + 11, (
-                        unit.rect
-                    )
-                    assert toggle.rect[2] >= 46, toggle.rect
-                    assert toggle.motion.toggle and not toggle.options.get(
-                        "bool_button"
-                    )
+                    assert toggle.rect[2] >= 24, toggle.rect
+                    assert toggle.options.get("bool_button"), toggle.options
                     for name in (
                         "Focus FOV Around:",
                         "Camera Effect Locks",

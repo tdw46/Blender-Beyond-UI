@@ -43,6 +43,23 @@ def run():
    a,b=verts(90),verts(180)
    delta=max((x-y).length for x,y in zip(a,b));assert delta>1e-5,delta
    reset=next(c for c in layout.canvas.controls.values() if c.kind=='button' and c.options.get('icon')=='LOOP_BACK')
+   for wizard in (False,True):
+    accessories=Layout(context=bpy.context);ob.apparent_focal_controls(accessories,item,bpy.context,wizard=wizard)
+    controls=list(accessories.canvas.controls.values())
+    lock_control=next(c for c in controls if c.binding and getattr(c.binding.context,'name','')=='auto_fov_unlock_short_lens')
+    reset_control=next(c for c in controls if c.options.get('icon')=='LOOP_BACK')
+    falloff_control=next(c for c in controls if c.options.get('icon')=='NOCURVE')
+    help_control=next(c for c in controls if c.options.get('icon')=='QUESTION')
+    assert lock_control.options.get('bool_button') and lock_control.binding.context.resolve()==item
+    for width in (240,320,480):
+     accessories.canvas.panel_layout=True;accessories.canvas.arrange(width)
+     ordered=[lock_control,reset_control,falloff_control,help_control]
+     assert [c.rect[0] for c in ordered]==sorted(c.rect[0] for c in ordered)
+     centers=[c.rect[1]+c.rect[3]/2 for c in ordered]
+     assert max(centers)-min(centers)<.01,(width,centers)
+     assert help_control.rect[0]+help_control.rect[2]<=width+.01
+    accessories.canvas.park()
+   checks.append('full and wizard focal accessories are icon actions in lock/reset/falloff/help order, aligned at 240/320/480')
    other=scene.mesh_object_items.add();other.object=bpy.data.objects['Camera'];other.auto_fov_max_strength=210
    scene.mesh_object_items_index=1
    assert bpy.ops.camkeys.reset_apparent_focal_length(target_object_name=obj.name)=={'FINISHED'}

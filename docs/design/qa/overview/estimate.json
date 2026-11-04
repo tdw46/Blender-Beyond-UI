@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-03 \u2014 apparent focal length defaults unlocked in full UI and wizard",
+  "reviewed": "2026-11-03 \u2014 clarified target-ray compensation and near/far behavior",
   "remaining_turns": [
-    0,
-    1
+    2,
+    4
   ],
   "implementation_turns": [
-    0,
-    0
+    1,
+    2
   ],
   "integration_qa_turns": [
-    0,
-    1
+    1,
+    2
   ],
   "active_hours": [
-    0,
-    0.25
+    0.5,
+    1.5
   ],
-  "confidence": "Requested batch is implemented and locally execution-tested. The optional remaining turn allows user-reported corrections; it is not a forecast for cross-platform qualification.",
-  "basis": "Five newly reported wizard corrections closed. 453 BUI unit tests; Blender 5.1.2/5.2.2 transition, geometry, lock and rollback checks; 140 setup/help messages in 12 languages; three updated Uraraka-bound Metal captures.",
+  "confidence": "Low: uniform volume-preserving formula has a numerical sanity check; extreme-depth policy, weighted falloffs and full-scene performance remain unqualified.",
+  "basis": "Planning turn: derived a closed-form camera-ray volume map. Remaining 2\u20134 turns / 0.5\u20131.5 active hours are an initial uniform-mode prototype and integration forecast, not a guarantee of arbitrary-mask conservation or extreme-lens acceptance.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Focal accessories: fresh actual full-panel and wizard PNGs. No new motion behavior/GIF. Deformation prototype has numerical evidence only, no production geometry or shader visual acceptance.",
     "Short-lens default is behavior-only; actual Blender 5.2.2 binding execution verified. Existing screenshots are unchanged.",
     "Native card width: actual admitted Vulkan/OpenGL N-panel PNGs, native resize/zoom text-fit records and focus audits. No new Metal capture or full-motion video. Earlier v1 component evidence did not cover native allocation compression.",
     "Choice-card overflow: actual before/after NVIDIA offscreen card PNGs and width sweep. No new live N-panel video or Metal capture; no motion changes.",
@@ -63,9 +64,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "New Forced Perspective settings default to Unlock Short Lens in the shared RNA property, covering native/full and wizard controls. Blender 5.2.2 confirms the wizard binding accepts below-view focal lengths; explicit saved lock choices remain intact. Installed copy updated. Windows responsive-card and navigation fixes retained.",
-  "estimate_review": "Added scope: unlock the short-lens default in full UI and wizard. Closed with a shared default change and Blender execution check. Remaining implementation 0; optional review/fix turn 0\u20131. No new visual work required.",
-  "time_summary": "Implementation and local checks complete. Allow 0\u201315 active minutes only if user review identifies a small correction; no further work is assumed. Native-speaker review, physical Windows and Blender 4.2 onboarding qualification are separate, unestimated acceptance work.",
+  "latest_progress": "Planning refinement: original camera-ray movement cannot change projection. Documented target-ray compensation, opposite lateral/depth scaling for short/long lenses, and distinction between local and total volume. Production math unchanged.",
+  "estimate_review": "Discussion-only refinement; remaining 2\u20134 turn initial prototype/integration forecast unchanged. Local volume conservation can still distort shape, so compare numerical conservation with actual geometry quality before choosing production behavior.",
+  "time_summary": "Uncertain forecast: 0.5\u20131.5 active hours for the initial uniform-mode prototype/integration and local checks, excluding hardware/user waits and strict arbitrary-mask research. Not measured completion time.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -457,9 +458,14 @@
       "work": "Default Forced Perspective short-lens setting to unlocked for full UI and wizard",
       "evidence": "docs/design/qa/onboarding-recovery-v1/short-lens-default.json",
       "turns": 1
+    },
+    {
+      "work": "Shared ordered focal accessories and isolated non-flattening math investigation",
+      "evidence": "docs/design/qa/focal-accessories-v1/behavior-522.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "No known remaining implementation work in this requested batch. Optional user review of localized copy/help placement; native-speaker translation review and physical Windows/Blender 4.2 onboarding qualification remain separate. Existing live Uraraka requires a fresh launch to load the new registration/catalog.",
+  "remaining_work": "Prototype the volume-compensated ray map; qualify depth-domain behavior and weighted-mask limits; integrate versioned node assets; run equivalent production Uraraka performance and requested visual checks. Strict conservation under arbitrary masks remains separate research.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -520,7 +526,7 @@
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "Live preview and viewport-first Dolly setup",
-  "latest_review": "../onboarding-recovery-v1/index.html",
+  "latest_review": "../focal-accessories-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -557,6 +563,10 @@
     {
       "batch": "Live effect onboarding and Dolly view actions",
       "details": "Added and closed this turn: setup before configuration, live property binding, source-aware camera picker, current-view locking, 75% front framing, camera-unit codec, 12-language copy and review media. No remaining implementation budget; optional 0\u20131 user QA turn remains. Additional user correction closed: shared align_items=value centers help accessories on the editable row."
+    },
+    {
+      "batch": "Camera-ray volume planning",
+      "details": "Derived analytic unit-Jacobian uniform map. Added explicit finite-mesh error, extreme-depth policy and weighted-blending limitations; no production algorithm changed."
     }
   ],
   "windows_wizard_click_through": {

@@ -1,0 +1,790 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "records": [
+    {
+      "panel": "CAMKEYS_PT_auto_fov",
+      "slug": "auto_fov",
+      "width": 360,
+      "height": 962.45,
+      "list_content_frames": [
+        {
+          "row": 0,
+          "rim": [
+            2.0,
+            2.0,
+            290.0,
+            24
+          ],
+          "content": [
+            10.0,
+            4.0,
+            274.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 1,
+          "rim": [
+            2.0,
+            30.0,
+            290.0,
+            24
+          ],
+          "content": [
+            10.0,
+            32.0,
+            274.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        },
+        {
+          "row": 2,
+          "rim": [
+            2.0,
+            58.0,
+            290.0,
+            24
+          ],
+          "content": [
+            10.0,
+            60.0,
+            274.0,
+            20.0
+          ],
+          "padding": [
+            2,
+            8,
+            2,
+            8
+          ],
+          "align": "center"
+        }
+      ],
+      "controls": [
+        {
+          "kind": "label",
+          "label": "Forced Perspective",
+          "rect": [
+            8.0,
+            8.0,
+            344.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "",
+          "rect": [
+            12.0,
+            48.0,
+            76.0,
+            52.0
+          ],
+          "icon": "camkeys.studio:perspective"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            97.0,
+            50.0,
+            1.0,
+            48.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "label",
+          "label": "Forced Perspective",
+          "rect": [
+            107.0,
+            36.0,
+            210.0,
+            28.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Lens, depth and camera effects",
+          "rect": [
+            107.0,
+            66.0,
+            210.0,
+            46.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            328.0,
+            62.0,
+            24.0,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "button",
+          "label": "Disable Forced Perspective",
+          "rect": [
+            8.0,
+            122.0,
+            344.0,
+            26.45
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Focus FOV Around:",
+          "rect": [
+            14.0,
+            158.45,
+            332.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "enum",
+          "label": "",
+          "rect": [
+            14.0,
+            180.45,
+            332.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "pointer",
+          "label": "Focus Armature",
+          "rect": [
+            14.0,
+            206.45,
+            332.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "search",
+          "label": "Focus Bone",
+          "rect": [
+            14.0,
+            232.45,
+            332.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "label",
+          "label": "Camera Effect Locks",
+          "rect": [
+            14.0,
+            270.45,
+            332.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            292.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Dolly Zoom",
+          "rect": [
+            42.0,
+            292.45,
+            123.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Lens",
+          "rect": [
+            169.0,
+            292.45,
+            93.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            266.0,
+            292.45,
+            24.0,
+            22.0
+          ],
+          "icon": "CAMERA_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            294.0,
+            292.45,
+            24.0,
+            22.0
+          ],
+          "icon": "SHAPEKEY_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            292.45,
+            24.0,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            320.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Pincushion",
+          "rect": [
+            42.0,
+            320.45,
+            150.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Strength",
+          "rect": [
+            196.0,
+            320.45,
+            150.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            14.0,
+            346.45,
+            24.0,
+            22.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "label",
+          "label": "Tangential",
+          "rect": [
+            42.0,
+            346.45,
+            150.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Strength",
+          "rect": [
+            196.0,
+            346.45,
+            150.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Apparent Focal Length",
+          "rect": [
+            14.0,
+            384.45,
+            216.0,
+            46.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "toggle",
+          "label": "",
+          "rect": [
+            235.0,
+            406.45,
+            24.0,
+            24.0
+          ],
+          "icon": "UNLOCKED"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            264.0,
+            406.45,
+            24.0,
+            24.0
+          ],
+          "icon": "LOOP_BACK"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            293.0,
+            406.45,
+            24.0,
+            24.0
+          ],
+          "icon": "NOCURVE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            406.45,
+            24.0,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            14.0,
+            434.45,
+            332.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "number",
+          "label": "Near Dist",
+          "rect": [
+            14.0,
+            446.45,
+            144.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Far Dist",
+          "rect": [
+            168.0,
+            446.45,
+            144.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            446.45,
+            24.0,
+            22.0
+          ],
+          "icon": "SMOOTHCURVE"
+        },
+        {
+          "kind": "label",
+          "label": "Perspective Lag",
+          "rect": [
+            14.0,
+            484.45,
+            332.0,
+            18.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "number",
+          "label": "Perspective Lag",
+          "rect": [
+            14.0,
+            506.45,
+            332.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "toggle",
+          "label": "Stepped Lag",
+          "rect": [
+            14.0,
+            532.45,
+            332.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "toggle",
+          "label": "Billboard Emulation",
+          "rect": [
+            14.0,
+            558.45,
+            276.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            294.0,
+            558.45,
+            31.058823529411768,
+            22.0
+          ],
+          "icon": "PREFERENCES"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            329.05882352941177,
+            558.45,
+            16.941176470588236,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "label",
+          "label": "Multi-Object Falloff Settings: (0=infinite)",
+          "rect": [
+            14.0,
+            600.45,
+            301.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            598.45,
+            24.0,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "number",
+          "label": "Falloff Radius",
+          "rect": [
+            14.0,
+            626.45,
+            304.0,
+            22.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            626.45,
+            24.0,
+            22.0
+          ],
+          "icon": "LINCURVE"
+        },
+        {
+          "kind": "label",
+          "label": "Other Objects to Correct:",
+          "rect": [
+            14.0,
+            666.45,
+            301.0,
+            20.0
+          ],
+          "icon": "NONE"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            322.0,
+            664.45,
+            24.0,
+            24.0
+          ],
+          "icon": "QUESTION"
+        },
+        {
+          "kind": "widget",
+          "label": "",
+          "rect": [
+            14.0,
+            692.45,
+            306.0,
+            110.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            324.0,
+            692.45,
+            22.0,
+            22.0
+          ],
+          "icon": "ADD"
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            324.0,
+            718.45,
+            22.0,
+            22.0
+          ],
+          "icon": "REMOVE"
+        },
+        {
+          "kind": "separator",
+          "label": "",
+          "rect": [
+            324.0,
+            744.45,
+            22.0,
+            8.0
+          ],
+          "icon": null
+        },
+        {
+          "kind": "button",
+          "label": "",
+          "rect": [
+            324.0,
+            756.45,
+            22.0,
+            22.0
+          ],
+          "icon": "DOWNARROW_HLT"
+        },
+        {
+          "kind": "button",
+          "label": "Add All From Same Armature",
+          "rect": [
+            8.0,
+            812.45,
+            344.0,
+            23.0
+          ],
+          "icon": "ARMATURE_DATA"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Parent and Child Objects",
+          "rect": [
+            8.0,
+            839.45,
+            344.0,
+            23.0
+          ],
+          "icon": "CON_CHILDOF"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Selected Objects",
+          "rect": [
+            8.0,
+            866.45,
+            344.0,
+            23.0
+          ],
+          "icon": "RESTRICT_SELECT_OFF"
+        },
+        {
+          "kind": "button",
+          "label": "Add All Scene Objects",
+          "rect": [
+            8.0,
+            893.45,
+            344.0,
+            23.0
+          ],
+          "icon": "SCENE_DATA"
+        },
+        {
+          "kind": "toggle",
+          "label": "HOW TO",
+          "rect": [
+            14.0,
+            926.45,
+            332.0,
+            22.0
+          ],
+          "icon": "TRIA_RIGHT"
+        }
+      ]
+    }
+  ],
+  "scene_loaded": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/Uraraka Ochako/ochacouraraka_VRM_NPR-Test_camera effect locks tests.blend",
+  "paint_cpu_median_ms": 2.569458505604416,
+  "feedback_benchmarks": [],
+  "stylesheet": {
+    "name": "CamKeys Studio",
+    "colors": {
+      "accent": "#F17C67",
+      "slider_fill": "#F17C67",
+      "toggle_on": "#39BFA5C2",
+      "selected": "#34786D66",
+      "selected_text": "#F5F2EC",
+      "bg": "#20272DB8",
+      "card": "#20272DB8",
+      "bar": "#303A42B8",
+      "field": "#303A42C4",
+      "input": "#131A20C7",
+      "text": "#F5F2EC",
+      "muted": "#ADB8BE",
+      "title": "#F5F2EC",
+      "hover": "#677A854D",
+      "toggle_off": "#444D557A",
+      "menu_glass": "#20272DB8",
+      "slider_track": "#59636B99",
+      "edge": "#B9CBD552"
+    },
+    "geometry": {
+      "padding": 8,
+      "gap": 6,
+      "radius": 8,
+      "font_size": 11,
+      "field_height": 24,
+      "button_height": 22,
+      "icon_button_size": 22,
+      "list_tool_size": 22,
+      "label_band": 24,
+      "list_row_height": 28
+    },
+    "geometry_variants": {
+      "compact": {
+        "gap": 4,
+        "box_padding": 6,
+        "heading_height": 18,
+        "field_height": 22,
+        "button_height": 20,
+        "separator_height": 4,
+        "label_band": 22
+      }
+    },
+    "surfaces": {
+      "card": [
+        "#20272DB8",
+        "#20272DB8"
+      ],
+      "input": [
+        "#131A20C7",
+        "#131A20C7"
+      ],
+      "selected": [
+        "#34786D66",
+        "#34786D66"
+      ],
+      "field": [
+        "#303A42C4",
+        "#38434BC4"
+      ]
+    },
+    "opacity": 1.0,
+    "cards": true,
+    "variants": {
+      "setup_slider": {
+        "slider_fill": "#66DFB4"
+      },
+      "setup_primary": {
+        "field": "#66DFB4E8",
+        "hover": "#83F2CEE8",
+        "text": "#102A23"
+      },
+      "primary": {
+        "field": "#F06B57D9",
+        "hover": "#F17C67CC",
+        "text": "#FFF8F2"
+      },
+      "coral_action": {
+        "field": "#B1584D88",
+        "hover": "#F17C67B8",
+        "text": "#FFF8F2"
+      },
+      "mint_action": {
+        "selected": "#39BFA5B8",
+        "hover": "#39BFA566",
+        "selected_text": "#F5F2EC"
+      }
+    },
+    "operators": {},
+    "motion": {
+      "enabled": true,
+      "strength": 0.35,
+      "speed": 2.0
+    },
+    "text_effects": {},
+    "wide_numeric_motion_scale": 0.15,
+    "value_feedback": {}
+  }
+}

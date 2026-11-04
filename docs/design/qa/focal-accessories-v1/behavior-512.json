@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "version": "5.1.2",
+  "checks": [
+    "new full-panel/wizard settings default unlocked and the real focal binding accepts below-view lens values",
+    "full and wizard focal accessories are icon actions in lock/reset/falloff/help order, aligned at 240/320/480",
+    {
+      "check": "effect prepared before step, actual evaluated vertices change, Back/Next retains edits without duplication",
+      "vertex_delta": 0.7318138548851258
+    },
+    "wizard Unlink restores the original viewport lens and captured depth through the main lock callback",
+    "failed lock capture restores orthographic projection",
+    "wizard remains visible, stale prepared state recovers, exact-owner reset, Unlink action, and all three locks promote orthographic views",
+    {
+      "check": "viewport default without scene camera; 75 percent front fit; current-view lock and recapture do not jump",
+      "extent": 0.7500001590231652
+    },
+    {
+      "check": "selected camera, rotated local-front mesh, shifted portrait frame, fixed camera and real native lens codec",
+      "extent": 0.7500002384185791,
+      "lens_unit": "CAMERA"
+    },
+    "wizard Unlink restores the original camera lens",
+    "constrained camera rejected and original transform restored",
+    {
+      "check": "lattice cage front framing",
+      "extent": 0.7499998807907104
+    }
+  ]
+}
