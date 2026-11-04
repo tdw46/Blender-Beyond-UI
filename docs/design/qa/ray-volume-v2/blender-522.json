@@ -1,0 +1,221 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "checks": [
+    {
+      "lens": 25,
+      "valid": true,
+      "vertices": 162,
+      "volume_error_percent": 2.4617064320331394e-05,
+      "depth_profile_error": 2.9802322387695312e-08,
+      "projection_error": 3.0719530773294423e-08,
+      "depth_offset": -0.13308003544807434,
+      "front_width_scale": 1.122306654850642,
+      "back_width_scale": 0.8733839929103852
+    },
+    {
+      "lens": 50,
+      "valid": true,
+      "vertices": 162,
+      "volume_error_percent": 3.533476937711555e-05,
+      "depth_profile_error": 2.0782334786417778e-07,
+      "projection_error": 3.003425057343598e-08,
+      "depth_offset": 2.690138103389472e-07,
+      "front_width_scale": 1.0000000768610886,
+      "back_width_scale": 1.0000000597808467
+    },
+    {
+      "lens": 100,
+      "valid": true,
+      "vertices": 162,
+      "volume_error_percent": 9.57673870205511e-06,
+      "depth_profile_error": 1.601874828338623e-07,
+      "projection_error": 2.1073424255447017e-08,
+      "depth_offset": 0.006510656327009201,
+      "front_width_scale": 0.9350695083538691,
+      "back_width_scale": 1.0603554485475315
+    },
+    {
+      "lens": 200,
+      "valid": true,
+      "vertices": 162,
+      "volume_error_percent": 1.323451781498619e-06,
+      "depth_profile_error": 1.8998980522155762e-07,
+      "projection_error": 1.666000468656264e-08,
+      "depth_offset": -0.0041196830570697784,
+      "front_width_scale": 0.9021626624368853,
+      "back_width_scale": 1.0899103798649528
+    },
+    {
+      "lens": 25,
+      "valid": true,
+      "vertices": 2562,
+      "volume_error_percent": 3.2570105501505964e-05,
+      "depth_profile_error": 1.4901161193847656e-07,
+      "projection_error": 3.0719530773294423e-08,
+      "depth_offset": -0.1343928873538971,
+      "front_width_scale": 1.121869037548701,
+      "back_width_scale": 0.8731214225292205
+    },
+    {
+      "lens": 50,
+      "valid": true,
+      "vertices": 2562,
+      "volume_error_percent": 1.1008104361387439e-05,
+      "depth_profile_error": 1.5018198951111117e-07,
+      "projection_error": 3.003425057343598e-08,
+      "depth_offset": -1.5018198951111117e-07,
+      "front_width_scale": 0.9999999570908601,
+      "back_width_scale": 0.9999999666262246
+    },
+    {
+      "lens": 100,
+      "valid": true,
+      "vertices": 2562,
+      "volume_error_percent": 6.798417941933366e-05,
+      "depth_profile_error": 1.9604340195655823e-07,
+      "projection_error": 2.9802322387695312e-08,
+      "depth_offset": 0.006241756025701761,
+      "front_width_scale": 0.9349978016068538,
+      "back_width_scale": 1.0602921778884005
+    },
+    {
+      "lens": 200,
+      "valid": true,
+      "vertices": 2562,
+      "volume_error_percent": 1.1063122618004684e-05,
+      "depth_profile_error": 1.816079020500183e-07,
+      "projection_error": 2.9816870751943665e-08,
+      "depth_offset": -0.004722890444099903,
+      "front_width_scale": 0.9020069960144258,
+      "back_width_scale": 1.0897641477711273
+    },
+    {
+      "lens": 25,
+      "valid": true,
+      "vertices": 10242,
+      "volume_error_percent": 8.15967795553263e-06,
+      "depth_profile_error": 1.043081283569336e-07,
+      "projection_error": 3.332000937312528e-08,
+      "depth_offset": -0.13446034491062164,
+      "front_width_scale": 1.1218465516964595,
+      "back_width_scale": 0.8731079310178756
+    },
+    {
+      "lens": 50,
+      "valid": true,
+      "vertices": 10242,
+      "volume_error_percent": 1.2740622179485683e-05,
+      "depth_profile_error": 1.7914220507009304e-07,
+      "projection_error": 3.003425057343598e-08,
+      "depth_offset": 6.55979363273218e-07,
+      "front_width_scale": 1.0000001874226752,
+      "back_width_scale": 1.0000001457731917
+    },
+    {
+      "lens": 100,
+      "valid": true,
+      "vertices": 10242,
+      "volume_error_percent": 3.5403872611361464e-06,
+      "depth_profile_error": 1.578591763973236e-07,
+      "projection_error": 2.986047331594191e-08,
+      "depth_offset": 0.006226459052413702,
+      "front_width_scale": 0.9349937224139769,
+      "back_width_scale": 1.060288578600568
+    },
+    {
+      "lens": 200,
+      "valid": true,
+      "vertices": 10242,
+      "volume_error_percent": 2.000302592453096e-05,
+      "depth_profile_error": 1.3224780559539795e-07,
+      "projection_error": 2.9816870751943665e-08,
+      "depth_offset": -0.004754675552248955,
+      "front_width_scale": 0.9019987934058712,
+      "back_width_scale": 1.0897564422903638
+    },
+    {
+      "lens": 25,
+      "valid": true,
+      "vertices": 163842,
+      "volume_error_percent": 1.1801322641336043e-05,
+      "depth_profile_error": 4.470348358154297e-08,
+      "projection_error": 3.332000937312528e-08,
+      "depth_offset": -0.13448186218738556,
+      "front_width_scale": 1.1218393792708714,
+      "back_width_scale": 0.8731036275625229
+    },
+    {
+      "lens": 50,
+      "valid": true,
+      "vertices": 163842,
+      "volume_error_percent": 2.413135808954081e-05,
+      "depth_profile_error": 4.949632170792029e-08,
+      "projection_error": 3.0719530773294423e-08,
+      "depth_offset": -4.273408364952047e-07,
+      "front_width_scale": 0.9999998779026181,
+      "back_width_scale": 0.9999999050353696
+    },
+    {
+      "lens": 100,
+      "valid": true,
+      "vertices": 163842,
+      "volume_error_percent": 1.6927772406027941e-06,
+      "depth_profile_error": 1.424923539161682e-07,
+      "projection_error": 2.986047331594191e-08,
+      "depth_offset": 0.006222152151167393,
+      "front_width_scale": 0.934992573906978,
+      "back_width_scale": 1.0602875652120394
+    },
+    {
+      "lens": 200,
+      "valid": true,
+      "vertices": 163842,
+      "volume_error_percent": 4.400269497661924e-05,
+      "depth_profile_error": 7.404014468193054e-08,
+      "projection_error": 2.9816870751943665e-08,
+      "depth_offset": -0.004762575495988131,
+      "front_width_scale": 0.9019967547107127,
+      "back_width_scale": 1.0897545271524878
+    },
+    {
+      "fixture": "closed_suzanne",
+      "lens": 25,
+      "volume_error_percent": 6.249188528872907e-05,
+      "depth_offset": -0.15156786143779755
+    },
+    {
+      "fixture": "closed_suzanne",
+      "lens": 50,
+      "volume_error_percent": 1.2167190432954555e-05,
+      "depth_offset": -1.9118546390473057e-07
+    },
+    {
+      "fixture": "closed_suzanne",
+      "lens": 100,
+      "volume_error_percent": 1.492771186661912e-05,
+      "depth_offset": 0.029749007895588875
+    }
+  ],
+  "timings": [
+    {
+      "vertices": 10242,
+      "median_ms": 1.3668544997926801,
+      "p95_ms": 1.736582984449342,
+      "samples": 40
+    },
+    {
+      "vertices": 163842,
+      "median_ms": 5.3627289889846,
+      "p95_ms": 6.611459015402943,
+      "samples": 40
+    }
+  ],
+  "nodes": 111,
+  "artifact": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-sum-522/artifacts/ray-total-volume.blend",
+  "limits": [
+    "Closed consistently oriented triangulated mesh only; not installed.",
+    "Total algebraic mesh volume, not per-region volume or curvature preservation.",
+    "Global camera-depth translation moves focus/contact; arbitrary masks/rigs not yet admitted."
+  ]
+}

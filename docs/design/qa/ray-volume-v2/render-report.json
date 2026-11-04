@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "records": [
+    {
+      "method": "new",
+      "view": "front",
+      "lens": 25,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-front-25mm.png"
+    },
+    {
+      "method": "new",
+      "view": "front",
+      "lens": 50,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-front-50mm.png"
+    },
+    {
+      "method": "new",
+      "view": "front",
+      "lens": 100,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-front-100mm.png"
+    },
+    {
+      "method": "new",
+      "view": "side",
+      "lens": 25,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-side-25mm.png"
+    },
+    {
+      "method": "new",
+      "view": "side",
+      "lens": 50,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-side-50mm.png"
+    },
+    {
+      "method": "new",
+      "view": "side",
+      "lens": 100,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/new-side-100mm.png"
+    },
+    {
+      "method": "old",
+      "view": "side",
+      "lens": 25,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/old-side-25mm.png"
+    },
+    {
+      "method": "old",
+      "view": "side",
+      "lens": 50,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/old-side-50mm.png"
+    },
+    {
+      "method": "old",
+      "view": "side",
+      "lens": 100,
+      "file": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-v2-render/images/old-side-100mm.png"
+    }
+  ],
+  "note": "Same closed triangulated Suzanne fixture, materials, lights and view framing for both algorithms. No claimed shader invariance."
+}

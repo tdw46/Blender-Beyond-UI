@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-03 \u2014 first ray-volume prototype built, benchmarked and packaged",
+  "reviewed": "2026-11-03 \u2014 revised front/back total-volume prototype and comparison matrix",
   "remaining_turns": [
-    1,
-    3
+    2,
+    4
   ],
   "implementation_turns": [
-    0,
-    1
+    1,
+    2
   ],
   "integration_qa_turns": [
     1,
     2
   ],
   "active_hours": [
-    0.25,
-    1.0
+    0.5,
+    1.5
   ],
-  "confidence": "Requested first prototype complete. Low confidence for subsequent production integration: domain policy, masks, rigged scenes and cross-platform qualification remain open.",
-  "basis": "Closed the planned uniform-mode prototype and local numerical/performance pass. Remaining forecast is downstream production integration/QA, not work required to obtain this first prototype; arbitrary-mask exact conservation is separate research.",
+  "confidence": "Research/render request complete. Low confidence for production delivery: appearance constraint now matched, but exact face-volume reduction needs substantial performance work and scene integration.",
+  "basis": "v1 local-volume constraint rejected for flattening; v2 preserves total mesh volume and depth differences using a quadratic camera-ray offset solve. Numerical checks and nine same-mesh renders complete. New face-reduction cost adds an optimization batch before production.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "v2 front/back redistribution: nine actual CPU renders comparing new/previous algorithms on the same closed triangulated Suzanne fixture; editable .blend. No production Uraraka, animation recording or physical Windows evidence.",
     "Ray-volume prototype: nine actual CPU diagnostic renders and a static comparison, plus editable .blend. No animated GIF, Uraraka production comparison or physical Windows/backend qualification yet.",
     "Focal accessories: fresh actual full-panel and wizard PNGs. No new motion behavior/GIF. Deformation prototype has numerical evidence only, no production geometry or shader visual acceptance.",
     "Short-lens default is behavior-only; actual Blender 5.2.2 binding execution verified. Existing screenshots are unchanged.",
@@ -65,9 +66,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Checkpoint pushed first. Editable standalone ray-volume .blend built and tested on 5.1.2/5.2.2, with nine CPU geometry renders. Optimized guard reduced 164k-vertex median from 3.38 ms to 0.57 ms; production CamKeys math unchanged.",
-  "estimate_review": "Completed one planned implementation/prototype batch, reducing 2\u20134 turns to 1\u20133 for downstream production work. No additional time budget assigned to strict arbitrary-mask conservation; that remains separate research.",
-  "time_summary": "Uncertain downstream forecast: 0.25\u20131.0 active hours for initial integration and local QA, excluding hardware/user waits and unresolved mask research. First-prototype request is complete.",
+  "latest_progress": "v2 expands front/contracts back for short lenses and reverses for long lenses without local depth flattening. Volume error below 0.00007% in tested fixtures. Exact total-volume coefficients currently cost 4.1\u20135.4 ms at 164k vertices. Production unchanged.",
+  "estimate_review": "Requested research/render refinement added and completed this turn. Downstream forecast increases from 1\u20133 to 2\u20134 turns because the corrected total-volume constraint requires a measured 4.1\u20135.4 ms face reduction; v1 fast vertex-only result cannot satisfy the corrected appearance target.",
+  "time_summary": "Uncertain 0.5\u20131.5 active-hour downstream integration/optimization forecast; not a delivery promise. Current research/tests/render matrix request complete. Hardware/user waits and arbitrary-mask research excluded.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -471,7 +472,7 @@
       "turns": 1
     }
   ],
-  "remaining_work": "First prototype delivered. Next production gates: live camera/viewport/world-space adapter, companion/rig behavior, domain UX, mask semantics, Uraraka benchmark and version/platform qualification.",
+  "remaining_work": "Prototype matrix delivered. Before production: optimize face coefficient reduction; admit rig/companion/world-space inputs and focus/contact behavior; define mask/domain UX; validate Uraraka and supported platform/runtime matrix.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -532,7 +533,7 @@
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "Live preview and viewport-first Dolly setup",
-  "latest_review": "../ray-volume-v1/index.html",
+  "latest_review": "../ray-volume-v2/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -573,6 +574,10 @@
     {
       "batch": "Camera-ray volume planning",
       "details": "Derived analytic unit-Jacobian uniform map. Added explicit finite-mesh error, extreme-depth policy and weighted-blending limitations; no production algorithm changed."
+    },
+    {
+      "batch": "Total-volume front/back appearance correction",
+      "details": "Replaced local conservation (caused flattening) with global finite-mesh volume solve and constant camera-depth offset. Prototype delivered; new face-reduction optimization gate explicitly remains."
     }
   ],
   "windows_wizard_click_through": {
