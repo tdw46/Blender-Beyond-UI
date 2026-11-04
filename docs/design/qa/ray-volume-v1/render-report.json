@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "version": "5.2.2 LTS",
+  "renders": [
+    {
+      "mode": 0,
+      "view": "front",
+      "apparent_mm": 25,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-front-25mm.png"
+    },
+    {
+      "mode": 0,
+      "view": "front",
+      "apparent_mm": 50,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-front-50mm.png"
+    },
+    {
+      "mode": 0,
+      "view": "front",
+      "apparent_mm": 100,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-front-100mm.png"
+    },
+    {
+      "mode": 0,
+      "view": "side",
+      "apparent_mm": 25,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-side-25mm.png"
+    },
+    {
+      "mode": 0,
+      "view": "side",
+      "apparent_mm": 50,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-side-50mm.png"
+    },
+    {
+      "mode": 0,
+      "view": "side",
+      "apparent_mm": 100,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-0-side-100mm.png"
+    },
+    {
+      "mode": 1,
+      "view": "side",
+      "apparent_mm": 25,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-1-side-25mm.png"
+    },
+    {
+      "mode": 1,
+      "view": "side",
+      "apparent_mm": 50,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-1-side-50mm.png"
+    },
+    {
+      "mode": 1,
+      "view": "side",
+      "apparent_mm": 100,
+      "path": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/ray-volume-render/images/mode-1-side-100mm.png"
+    }
+  ],
+  "saved_file_readback": true,
+  "note": "CPU diagnostic renders; not viewport/backend or production scene acceptance."
+}
