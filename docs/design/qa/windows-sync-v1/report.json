@@ -1,0 +1,183 @@
+{
+  "date": "2026-11-05",
+  "status": "Merged Windows changes; scoped Mac qualification passed",
+  "revisions": {
+    "BVT": "1d6774897d8b4a330f19473f39a29f737dc00235",
+    "Beyond NPR": "b5f8c4053ab139e4bd90c35ac470685ae9516918",
+    "Normal Keys": "e13f92efe2785f34cde4d8388a699087c9e64066",
+    "CamKeys": "ad0a031e8ba778c655e97f90c222b29496cdce19"
+  },
+  "bui_parents": [
+    "22a5c63",
+    "3149dc8"
+  ],
+  "unit_tests": {
+    "bui": {
+      "tests": 471,
+      "skipped": 1
+    },
+    "bvt": {
+      "tests": 519,
+      "skipped": 1
+    },
+    "npr": {
+      "tests": 454
+    },
+    "normalkeys_history": {
+      "tests": 1
+    },
+    "bui_ruff": "passed"
+  },
+  "fixed_performance": [
+    {
+      "lens": 2.5,
+      "before": {
+        "cadence": 27.569581534034807,
+        "cpu": 99.84044722222222,
+        "cadence_range": [
+          24.61388169609148,
+          30.525281371978135
+        ]
+      },
+      "after": {
+        "cadence": 29.89691315325932,
+        "cpu": 93.97890833333332,
+        "cadence_range": [
+          29.32364603320291,
+          30.470180273315727
+        ]
+      },
+      "cadence_ratio": 1.0844166465258607,
+      "cpu_ratio": 0.9412909391737555
+    },
+    {
+      "lens": 50,
+      "before": {
+        "cadence": 28.055028561326893,
+        "cpu": 107.35229444444445,
+        "cadence_range": [
+          25.354523737638097,
+          30.755533385015685
+        ]
+      },
+      "after": {
+        "cadence": 28.89112736188477,
+        "cpu": 101.94210277777778,
+        "cadence_range": [
+          28.23675984229785,
+          29.54549488147169
+        ]
+      },
+      "cadence_ratio": 1.0298021012072829,
+      "cpu_ratio": 0.9496033904569549
+    },
+    {
+      "lens": 250,
+      "before": {
+        "cadence": 23.5860652090895,
+        "cpu": 134.9296361111111,
+        "cadence_range": [
+          21.828889661069553,
+          25.34324075710945
+        ]
+      },
+      "after": {
+        "cadence": 24.516355366438074,
+        "cpu": 127.45862499999998,
+        "cadence_range": [
+          24.058874873762342,
+          24.973835859113805
+        ]
+      },
+      "cadence_ratio": 1.0394423634930874,
+      "cpu_ratio": 0.9446303175014944
+    }
+  ],
+  "performance_caveat": "Fixed-pose ABBA averaged cadence/CPU thresholds pass. Earlier time-driven observations and all control variability are retained; no isolated speedup or tight 3% confidence interval is established on this active workstation.",
+  "pixel_comparisons": [
+    {
+      "label": "matched-2.5-0",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-2.5-1",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-2.5-2",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-50-0",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-50-1",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-50-2",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-250-0",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-250-1",
+      "max": 0.0,
+      "mean": 0.0
+    },
+    {
+      "label": "matched-250-2",
+      "max": 0.0,
+      "mean": 0.0
+    }
+  ],
+  "cases": {
+    "portable-metal": true,
+    "mixed-fit-metal": true,
+    "native-material-metal": true,
+    "native-workers-metal": true,
+    "matched-before-v2": true,
+    "matched-after-v2": true,
+    "uraraka-lifecycle-v2": true,
+    "normalkeys-v2": true,
+    "camkeys-migration": true,
+    "camkeys-migration-safety": true,
+    "camkeys-falloff": true,
+    "cadence-before-a-v3": true,
+    "cadence-after-a-v3": true,
+    "cadence-after-b-v3": true,
+    "cadence-before-b-v3": true,
+    "cadence-after-c-v3": true,
+    "cadence-before-c-v3": true,
+    "cadence-before-d-v3": true,
+    "cadence-after-d-v3": true,
+    "cadence-fixed-before-a-v3": true,
+    "cadence-fixed-before-b-v3": true,
+    "cadence-fixed-after-a-v3": true,
+    "cadence-fixed-after-b-v3": true,
+    "ordinary-admission": true,
+    "ordinary-workers": true,
+    "ordinary-uraraka": true
+  },
+  "limits": [
+    "Actual Apple M5 Pro Metal stock Blender 5.2.2 d13f752e3b9c; Windows hardware proof remains its separate unchanged record.",
+    "No visual approval claimed; raw sampled GPU buffers are compared numerically.",
+    "Performance is completed renderer publications, not display FPS; concurrently running user apps remain a source of variability.",
+    "Production native binary and worker policy unchanged.",
+    "Original scene was never saved or restarted; fresh-process evidence applies after next launch."
+  ],
+  "windows_preserved": "NPR b5f8c40 and Windows Vulkan/OpenGL qualification files unchanged; no physical Windows rerun from Mac",
+  "native_admission": "ordinary discovery passed after affected gates; same native binary and worker policy",
+  "vendor_files_verified": 248,
+  "new_gifs": 0
+}

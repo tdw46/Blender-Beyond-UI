@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-04 \u2014 automatic historical node migration tested and installed; falloff repair retained",
+  "reviewed": "2026-11-05 \u2014 Windows merges retained; Mac continuity verification",
   "remaining_turns": [
-    1,
-    2
+    0,
+    1
   ],
   "implementation_turns": [
     0,
     0
   ],
   "integration_qa_turns": [
-    1,
-    2
+    0,
+    1
   ],
   "active_hours": [
-    1,
-    3
+    0.5,
+    1.5
   ],
-  "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Closed falloff depth-order implementation: 77 lens/profile cases pass on Blender 4.0 and every release family 4.2 through 5.2; shared-companion, saved-curve/animation migration and animated-shadow checks pass. Recorded 68,185-vertex Uraraka comparison has diagnostic CPU renders and matched warm geometry timings; installed in live dirty scene without saving. Remaining budget reduced to hardware/user acceptance and full-size cadence. No claim of arbitrary-mask collision freedom. New migration scope closed in this turn with semantic input/animation and rollback evidence; original Windows debug-file replay added to the existing QA budget.",
+  "confidence": "Remaining follow-up is bounded hardware/user acceptance, not an implementation forecast.",
+  "basis": "Closed falloff depth-order implementation: 77 lens/profile cases pass on Blender 4.0 and every release family 4.2 through 5.2; shared-companion, saved-curve/animation migration and animated-shadow checks pass. Recorded 68,185-vertex Uraraka comparison has diagnostic CPU renders and matched warm geometry timings; installed in live dirty scene without saving. Remaining budget reduced to hardware/user acceptance and full-size cadence. No claim of arbitrary-mask collision freedom. New migration scope closed in this turn with semantic input/animation and rollback evidence; original Windows debug-file replay added to the existing QA budget. Windows hardware qualification and Mac merged-source continuity are now closed. The optional 0\u20131 remaining follow-up preserves original-file Windows migration replay and user acceptance without reopening implementation.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,9 +25,10 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Windows merge/Mac continuity: numerical GPU buffer comparisons and execution/focus logs, no new screenshot/GIF or physical Windows rerun from Mac. Existing Windows hardware evidence preserved separately.",
     "Node migration is behavior-only: headless version matrix and live state readback, no new screenshots/GIFs or physical Windows rerun. Existing visual comparisons remain unchanged.",
     "Falloff repair: four diagnostic CPU renders and two comparisons from recorded Uraraka geometry, not production MToon/material or motion GIF captures. Live schema/finite geometry/shadow-source/native-owner readback verified. No physical Windows GPU capture.",
-    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: Metal exercises geometric and map outputs; Windows Vulkan/OpenGL hardware checks remain open.",
+    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: actual Windows NVIDIA 5.2.2 Vulkan/OpenGL qualification is recorded separately; Mac merged-source execution and sampled-buffer checks are in windows-sync-v1.",
     "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
     "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
     "Camera-plane shadows: exact float-buffer comparisons and fresh-process Metal timings; no new GIF or exhaustive live motion capture. Private geometry/color snapshots remain untracked. Drag repair has actual native input evidence on 5.1.2/5.2.2.",
@@ -78,11 +79,13 @@
     "Text-effects-v1 contains current font comparisons. Full Studio v7 panel captures precede this lettering refinement.",
     "Current v7 images/GIFs, embedded screenshots, mobile comparisons and narrow/wide scale captures are available.",
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
-    "Minor generated-reference artwork differences remain outside the close-match acceptance target."
+    "Minor generated-reference artwork differences remain outside the close-match acceptance target.",
+    "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
+    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "Closed automatic graph-migration repair: semantic inputs, animation/NLA/drivers, nested users, linked local users and rollback/retry. 19 headless regression runs pass across supported release families; reloaded in dirty Uraraka with all 68,185 affected vertices finite. Falloff transition repair remains installed. Local commits only for these latest changes.",
-  "estimate_review": "Falloff implementation closed in the previous turn. The newly requested historical graph migration is implemented and tested this turn; no implementation budget remains for those items. Remaining 1\u20132 QA turns now also include the original Windows failing-file replay.",
-  "time_summary": "Uncertain 1\u20133 active hours for Windows original-file replay, hardware qualification and full-size viewport cadence; excludes user review waits.",
+  "latest_progress": "Windows changes merged and Mac continuity qualified: 471 BUI/519 BVT/454 NPR unit checks, Normal Keys 4.5/5.2, CamKeys 4.2/5.2, nine pixel-identical Uraraka buffers, bounded outputs/history, fixed-pose cadence and ordinary native admission. Existing Mac falloff/migration and Windows GPU guards preserved; no version bumps.",
+  "estimate_review": "Completed planned Windows hardware qualification and Mac functional continuity reduce the previous 1\u20132 integration turns to 0\u20131 optional follow-up turn. No new product implementation scope. Original Windows graph-migration replay and personal full-size interaction review remain separate from this Mac execution evidence.",
+  "time_summary": "Optional remaining follow-up: approximately 0.5\u20131.5 active hours for Windows replay of the new graph migration and user interaction review; no additional implementation is currently identified.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -524,9 +527,19 @@
       "work": "Historical/versionless/renamed graph migration with reordered inputs, animation and rollback",
       "evidence": "docs/design/qa/node-migration-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Windows focus runner fault-dialog inheritance, console crash reporting, bounded long fixtures and 14 runner tests; actual NVIDIA Vulkan/OpenGL shadow and ordinary native qualification completed in BVT.",
+      "evidence": "https://github.com/tdw46/Beyond-Vtuber-Tools/blob/main/documentation/performance/2026-11-05-windows-shadow-capture/README.md",
+      "turns": 1
+    },
+    {
+      "work": "Merge Windows changes while preserving Mac falloff and semantic node migration; Mac execution and pixel continuity checks.",
+      "evidence": "docs/design/qa/windows-sync-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Original failing Windows debug-file migration replay, physical Windows Vulkan/OpenGL shadow qualification, user acceptance of the installed falloff transition and full-size viewport cadence. No planned falloff or graph-migration implementation remains; arbitrary edited/corrupt node graphs are protected conflicts.",
+  "remaining_work": "Optional Windows replay of the newly published semantic graph migration and personal full-size interaction/falloff review. Mac merged-source native qualification and installed certificate are complete; interactive shader updates take effect after restart.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -590,12 +603,12 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Falloff and node-migration fixes installed; Windows debug-file replay pending",
-  "latest_review": "../node-migration-v1/index.html",
+  "checkpoint": "Combined Mac/Windows integration validation in progress",
+  "latest_review": "../windows-sync-v1/index.html",
   "backend_support_review": {
-    "date": "2026-11-03",
+    "date": "2026-11-05",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
-    "metal": "Current Apple M5 Pro / stock Blender 5.2.2 Metal: source-bound native certificate requalified, installed, ordinary admission/output/worker tests passed; matched Uraraka timings and actual panel/popup glass captures complete.",
+    "metal": "Merged Windows shadow source requalified on Apple M5 Pro / stock 5.2.2 Metal: unchanged native binary, ordinary admission/workers/outputs/Uraraka, nine exact pixel comparisons and repeated fixed-pose cadence. Timing variability retained; no isolated speedup claim.",
     "vulkan": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: native renderer, real viewport-backed glass, input, consumer panels and idle checks passed.",
     "opengl": "Actual NVIDIA RTX 4090 Laptop / driver 591.74 on official 5.2.2: same hardware checks passed.",
     "accounting": "4.2 minimum retained; exact Windows/macOS build packages provided, other patches and Linux/Intel native hosts remain explicit coverage gaps."
@@ -672,6 +685,10 @@
     {
       "batch": "Historical graph migration",
       "details": "New Windows-reported interface failure scope requested and implemented this turn. Added semantic replacement and transactional animation preservation; original Windows debug-file replay remains in the 1\u20132 QA-turn budget."
+    },
+    {
+      "batch": "Windows shadow qualification and native fault reporting",
+      "details": "Completed: exact OpenGL repair, bounded shadow retirement, Normal Keys main integration, source-bound Windows proofs and actual ordinary hardware/performance/pixel gates. No version bumps or Metal admission changes."
     }
   ],
   "windows_wizard_click_through": {
