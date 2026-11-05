@@ -1,0 +1,259 @@
+{
+  "date": "2026-11-05",
+  "schema": 21,
+  "installed": true,
+  "saved_scene": false,
+  "cause": "Front slab mixed affine and radial lateral scales, causing near-plane shear.",
+  "live": [
+    {
+      "object": "body.001",
+      "vertices": 42656,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "plane_crossings": 0,
+      "maximum_world_change_m": 0.015082577243447304,
+      "finger_probe_vertices": 863,
+      "finger_probe_edges": 1620,
+      "finger_max_edge_stretch_before": 1.9242746829986572,
+      "finger_max_edge_stretch_after": 1.0074774026870728
+    },
+    {
+      "object": "wrists.001",
+      "vertices": 2292,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "plane_crossings": 0,
+      "maximum_world_change_m": 0.0
+    },
+    {
+      "object": "head_.002",
+      "vertices": 12913,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "plane_crossings": 0,
+      "maximum_world_change_m": 0.0
+    }
+  ],
+  "version_checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    }
+  ],
+  "projection_test": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "cases": 168,
+    "points_per_case": 32001,
+    "crossings": 0,
+    "minimum_depth_positive": true,
+    "projection_cases": 16,
+    "maximum_projection_error": 2.486991989958387e-06,
+    "timings": {
+      "old": {
+        "median_ms": 1.8351874605286866,
+        "p95_ms": 2.778666967060417
+      },
+      "new": {
+        "median_ms": 1.7111044726334512,
+        "p95_ms": 2.098749973811209
+      },
+      "new_repeat": {
+        "median_ms": 1.7483120027463883,
+        "p95_ms": 2.209374972153455
+      },
+      "old_repeat": {
+        "median_ms": 1.7857289931271225,
+        "p95_ms": 2.28191603673622
+      }
+    }
+  },
+  "old_graph_reproduces_failure": {
+    "passed": false,
+    "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_long_plane.py\", line 83, in <module>\n    try: result=run()\n                ~~~^^\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_long_plane.py\", line 63, in run\n    assert error < 2e-5, (ti,r,artistic,float(error))\n           ^^^^^^^^^^^^\nAssertionError: (0, 1.1, False, 3.644999980926514)\n"
+  },
+  "legacy_4_0_note": "Additional exploratory 4.0.2 mirrored-object projection test fails both before and after this change, outside the supported 4.2+ BUI matrix. Not counted as qualified; legacy asset retained, no claim that this pre-existing transform issue is fixed.",
+  "legacy_4_0_baseline_failure": {
+    "passed": false,
+    "error": "Traceback (most recent call last):\n  File \"/private/tmp/ck_40_baseline.py\", line 83, in <module>\n    try: result=run()\n  File \"/private/tmp/ck_40_baseline.py\", line 63, in run\n    assert error < 2e-5, (ti,r,artistic,float(error),p[visible][:3].tolist(),world[visible][:3].tolist(),list(obj.scale),[list(x) for x in obj.matrix_world])\nAssertionError: (1, 1.1, False, 0.7050310376400161, [[0.4444255569004874, -0.5155823520941794, 0.5003026266267989], [0.4443228303950029, -0.515402427923767, 0.5005526892928494], [0.44422006855255824, -0.515222461948956, 0.5008026818825124]], [[0.15, 0.0, 0.5002499999999999], [0.15, 0.0, 0.5005000000000002], [0.15, 0.0, 0.50075]], [-1.2999999523162842, -0.800000011920929, -1.600000023841858], [[-1.051548957824707, -0.4671381115913391, 0.110170878469944, 0.4000000059604645], [-0.7194032669067383, 0.573200523853302, -0.6795565485954285, -0.699999988079071], [-0.2582700848579407, 0.3053247332572937, 1.4443217515945435, 0.25], [0.0, 0.0, 0.0, 1.0]])\n"
+  },
+  "limits": [
+    "Physical Windows Vulkan/OpenGL retesting not performed here; backend code and admission proofs unchanged.",
+    "Finite epsilon at the exact camera plane and existing near-unity lens blend retained; no universal projection, local-volume or arbitrary-mask collision claim.",
+    "Retained geometry-test timings are not full-scene FPS."
+  ]
+}

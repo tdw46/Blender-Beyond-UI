@@ -115,11 +115,23 @@ class RegisteredPanel(RegisteredMenu):
                     child._panel_rebuild = bool(hook(context, before, after))
             self.layout.commit(before, after)
 
+        def preview(data, property):
+            # Preview never pushes undo or rebuilds the captured panel. The
+            # consumer owns/coalesces dependent work; cancellation also previews
+            # the restored value through the same RNA adapter.
+            hook = getattr(self.cls, "beyond_ui_preview", None)
+            if hook:
+                with override(context, self.pointers.values()):
+                    hook(context, data, property)
+            elif self.layout.preview:
+                self.layout.preview(data, property)
+
         ui = Layout(
             child,
             context,
             resolve=self.layout.resolve,
             commit=commit,
+            preview=preview,
             state=self.layout.state,
             source=self.layout.source,
             pointer_sources=self.layout.pointer_sources,

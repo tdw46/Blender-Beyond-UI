@@ -1,0 +1,19 @@
+{
+  "mapping": {
+    "distance": "distance",
+    "camera_source": "apparent_fov"
+  },
+  "clips": {
+    "distance": {
+      "frames": 23,
+      "duration_ms": 2340,
+      "all_frames_decoded": true
+    },
+    "apparent_fov": {
+      "frames": 133,
+      "duration_ms": 13300,
+      "all_frames_decoded": true
+    }
+  },
+  "help_draws_passed": true
+}

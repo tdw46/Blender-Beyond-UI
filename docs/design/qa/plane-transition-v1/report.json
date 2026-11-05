@@ -1,0 +1,802 @@
+{
+  "date": "2026-11-05",
+  "schema": 22,
+  "policy": {
+    "start_mm": 215,
+    "full_mm": 250,
+    "local_only": true,
+    "includes_originally_behind_vertices": true,
+    "global_flattening": false
+  },
+  "installed_and_loaded": true,
+  "scene_saved": false,
+  "restored_lens_mm": 250,
+  "live_250": [
+    {
+      "object": "body.001",
+      "vertices": 42656,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 11674,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.01518017053604126,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "wrists.001",
+      "vertices": 2292,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 972,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.019107967615127563,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "head_.002",
+      "vertices": 12913,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 0,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.32968437671661377,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "Hair.002",
+      "vertices": 1367,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 0,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.3002718389034271,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "Hair.003",
+      "vertices": 1377,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 0,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.2817867398262024,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "belt.001",
+      "vertices": 3616,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 0,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.3080140948295593,
+      "max_change_away_from_plane": 0.0
+    },
+    {
+      "object": "NeckPlate.001",
+      "vertices": 3964,
+      "source_unchanged": true,
+      "view_unchanged": true,
+      "finite": true,
+      "originally_behind": 0,
+      "remaining_behind_near": 0,
+      "minimum_depth": 0.41202160716056824,
+      "max_change_away_from_plane": 0.0
+    }
+  ],
+  "blender_5_2_fixture": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "clipped_edge_cases": [
+      {
+        "ratio": 1.1,
+        "maximum_relative_clipped_ray_error": 0.18836068148491433,
+        "maximum_sweep_step": 0.0012514152331277728
+      },
+      {
+        "ratio": 2.0,
+        "maximum_relative_clipped_ray_error": 0.021462379318954762,
+        "maximum_sweep_step": 2.807036435115151e-05
+      },
+      {
+        "ratio": 5.0,
+        "maximum_relative_clipped_ray_error": 0.00546322695028306,
+        "maximum_sweep_step": 7.883389116614126e-06
+      },
+      {
+        "ratio": 10.0,
+        "maximum_relative_clipped_ray_error": 0.002482608237832929,
+        "maximum_sweep_step": 1.1648406143649481e-05
+      }
+    ],
+    "guard_cases": [
+      {
+        "lens": 214.0,
+        "profile": 0,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 0,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 0,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 0,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.997646689414978,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 0,
+        "strength": 0.5,
+        "minimum_depth": -0.49181193113327026,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 0,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.0140228271484375,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 0,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 0,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 0,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 214.0,
+        "profile": 1,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 1,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 1,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 1,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.997646689414978,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 1,
+        "strength": 0.5,
+        "minimum_depth": -0.49181193113327026,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 1,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.0140228271484375,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 1,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 1,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 1,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 214.0,
+        "profile": 6,
+        "strength": 0.0,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 6,
+        "strength": 0.0,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 6,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 6,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.9976068735122681,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 6,
+        "strength": 0.5,
+        "minimum_depth": -0.49179184436798096,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 6,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.014023184776306152,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 6,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 6,
+        "strength": 1.0,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 6,
+        "strength": 1.0,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      }
+    ],
+    "timings": {
+      "0.0": {
+        "median_ms": 1.0733960079960525,
+        "p95_ms": 1.2604580260813236
+      },
+      "1.0": {
+        "median_ms": 1.141562475822866,
+        "p95_ms": 1.2625830131582916
+      }
+    }
+  },
+  "old_graph_fails_crossing_edge_regression": true,
+  "version_checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    }
+  ],
+  "legacy_4_0_triangle_fixture": {
+    "passed": true,
+    "version": "4.0.2",
+    "clipped_edge_cases": [
+      {
+        "ratio": 1.1,
+        "maximum_relative_clipped_ray_error": 0.18836068148491433,
+        "maximum_sweep_step": 0.0012515144189819694
+      },
+      {
+        "ratio": 2.0,
+        "maximum_relative_clipped_ray_error": 0.021462103537696127,
+        "maximum_sweep_step": 2.809105717460625e-05
+      },
+      {
+        "ratio": 5.0,
+        "maximum_relative_clipped_ray_error": 0.00546322695028306,
+        "maximum_sweep_step": 7.892690518929157e-06
+      },
+      {
+        "ratio": 10.0,
+        "maximum_relative_clipped_ray_error": 0.002482608237832929,
+        "maximum_sweep_step": 1.166184028988937e-05
+      }
+    ],
+    "guard_cases": [
+      {
+        "lens": 214.0,
+        "profile": 0,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 0,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 0,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 0,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.997646689414978,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 0,
+        "strength": 0.5,
+        "minimum_depth": -0.49181193113327026,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 0,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.0140228271484375,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 0,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 0,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 0,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 214.0,
+        "profile": 1,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 1,
+        "strength": 0.0,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 1,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000888109207153,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 1,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.997646689414978,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 1,
+        "strength": 0.5,
+        "minimum_depth": -0.49181193113327026,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 1,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.0140228271484375,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 1,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 1,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 1,
+        "strength": 1.0,
+        "minimum_depth": 0.016464948654174805,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 214.0,
+        "profile": 6,
+        "strength": 0.0,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.0,
+        "profile": 6,
+        "strength": 0.0,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 215.001,
+        "profile": 6,
+        "strength": 2.4489329446298e-09,
+        "minimum_depth": -1.0000488758087158,
+        "minimum_depth_step": 9.995698928833008e-05
+      },
+      {
+        "lens": 216.0,
+        "profile": 6,
+        "strength": 0.002402332361516035,
+        "minimum_depth": -0.9976068735122681,
+        "minimum_depth_step": 9.965896606445312e-05
+      },
+      {
+        "lens": 232.5,
+        "profile": 6,
+        "strength": 0.5,
+        "minimum_depth": -0.49179184436798096,
+        "minimum_depth_step": 5.0187110900878906e-05
+      },
+      {
+        "lens": 249.0,
+        "profile": 6,
+        "strength": 0.997597667638484,
+        "minimum_depth": 0.014023184776306152,
+        "minimum_depth_step": 5.960464477539062e-07
+      },
+      {
+        "lens": 249.999,
+        "profile": 6,
+        "strength": 0.999999997551067,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 250.0,
+        "profile": 6,
+        "strength": 1.0,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      },
+      {
+        "lens": 260.0,
+        "profile": 6,
+        "strength": 1.0,
+        "minimum_depth": 0.016465187072753906,
+        "minimum_depth_step": 3.5762786865234375e-07
+      }
+    ],
+    "timings": {
+      "0.0": {
+        "median_ms": 1.0678959952201694,
+        "p95_ms": 1.545167004223913
+      },
+      "1.0": {
+        "median_ms": 1.0988330177497119,
+        "p95_ms": 1.4075419749133289
+      }
+    }
+  },
+  "limits": [
+    "Finite triangles approximate a nonlinear warp. The synthetic coarse-edge residual is measured separately; this is not exact tessellation or universal self-intersection removal.",
+    "Near-plane compression deliberately changes local volume/thickness in its small protective region. The shared volume mapping is retained elsewhere. Strict depth ordering is analytic and verified over sampled ranges, not an arbitrary topology/collision guarantee.",
+    "At intermediate 215\u2013250 mm strength, rear vertices progressively move forward; full front-plane protection is reached at 250 mm for full influence.",
+    "Zero base influence remains unaffected. Spatially varying masks do not imply global collision freedom.",
+    "Windows backend/native code and admission remain unchanged; no new physical Windows GPU qualification or full-scene FPS claim."
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "date": "2026-11-05",
+  "status": "Installed and definitions reloaded in live Uraraka",
+  "versions": [
+    {
+      "version": "4.2.23 LTS",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.573708035517484,
+        0.5635840352624655,
+        2.5885829818435013,
+        2.6063339901156723,
+        2.796832995954901,
+        2.4503329768776894,
+        2.2870409884490073,
+        2.4448339827358723,
+        0.3440839936956763,
+        2.517790999263525
+      ],
+      "focus_events": [],
+      "restore_requests": 0
+    },
+    {
+      "version": "4.3.2",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.6003750022500753,
+        0.6826250464655459,
+        3.306875005364418,
+        2.9415839817374945,
+        3.5193749936297536,
+        2.859832951799035,
+        3.245959000196308,
+        6.0099579859524965,
+        0.5413749604485929,
+        4.292916972190142
+      ],
+      "focus_events": [
+        {
+          "bundle": "com.openai.codex",
+          "kind": "activation",
+          "pid": 36495,
+          "seconds": 23.580976009368896
+        }
+      ],
+      "restore_requests": 0
+    },
+    {
+      "version": "4.4.3",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.6637499900534749,
+        0.7149589946493506,
+        3.1451659742742777,
+        3.208707959856838,
+        2.9736669966951013,
+        3.0372089822776616,
+        2.826875017490238,
+        2.997166011482477,
+        0.37949997931718826,
+        2.676083007827401
+      ],
+      "focus_events": [
+        {
+          "bundle": "com.apple.finder",
+          "kind": "activation",
+          "pid": 810,
+          "seconds": 4.362513899803162
+        }
+      ],
+      "restore_requests": 0
+    },
+    {
+      "version": "4.5.15 LTS",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.6593749858438969,
+        0.6381249986588955,
+        5.785499990452081,
+        3.40233399765566,
+        3.8129579625092447,
+        3.839584009256214,
+        4.056125006172806,
+        3.858584037516266,
+        0.40441699093207717,
+        3.17724997876212
+      ],
+      "focus_events": [
+        {
+          "bundle": "com.openai.codex",
+          "kind": "activation",
+          "pid": 36495,
+          "seconds": 2.7962650060653687
+        }
+      ],
+      "restore_requests": 0
+    },
+    {
+      "version": "5.0.1",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.7373340195044875,
+        0.9002500446513295,
+        3.731000004336238,
+        3.5330000100657344,
+        2.80599994584918,
+        3.348124970216304,
+        3.0178329907357693,
+        3.266708052251488,
+        0.3790000337176025,
+        2.9517499497160316
+      ],
+      "focus_events": [],
+      "restore_requests": 0
+    },
+    {
+      "version": "5.1.2",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.6712500471621752,
+        0.6228330312296748,
+        3.754166013095528,
+        3.0046249739825726,
+        3.2649170025251806,
+        3.1919999746605754,
+        3.4497500164434314,
+        3.2591670169495046,
+        0.3809580230154097,
+        2.9259170405566692
+      ],
+      "focus_events": [],
+      "restore_requests": 0
+    },
+    {
+      "version": "5.2.2 LTS",
+      "passed": true,
+      "checks": [
+        "20 movement events coalesce to one live GN/mesh update before release, no undo entry",
+        "Cancel previews restored curve and geometry without a commit",
+        "All six native preset operators immediately sync GN while overlay remains open",
+        "Commit flush cancels pending timer; unchanged integral retains point storage",
+        "Release flushes final curve and commits exactly once",
+        "Teardown removes pending preview task"
+      ],
+      "refresh_ms": [
+        0.7145829731598496,
+        0.6796670495532453,
+        3.259874996729195,
+        3.0865000444464386,
+        3.0099580180831254,
+        2.8128339909017086,
+        2.9995840159244835,
+        3.011499997228384,
+        0.43100002221763134,
+        2.9367089737206697
+      ],
+      "focus_events": [],
+      "restore_requests": 0
+    }
+  ],
+  "unit_tests": {
+    "run": 472,
+    "skipped": 1,
+    "failed": 0
+  },
+  "rna_points": [
+    "4.2.23",
+    "5.2.2"
+  ],
+  "live_reload": {
+    "passed": true,
+    "snapshot_preserved": true,
+    "schema": 25,
+    "lens": [
+      250.0
+    ],
+    "frame": 1,
+    "saved": false,
+    "preview_scheduled": true,
+    "custom_panels": [
+      "CAMKEYS_PT_setup",
+      "CAMKEYS_PT_auto_fov",
+      "CAMKEYS_PT_baking",
+      "CAMKEYS_PT_camkeys_linking",
+      "CAMKEYS_PT_camkeys_main",
+      "CAMKEYS_PT_camprops",
+      "CAMKEYS_PT_lattice_auto_fov_modifier"
+    ]
+  },
+  "limits": [
+    "Blender-internal widget events and actual timers/operators in disposable Mac windows; not physical trackpad input.",
+    "Evaluated geometry proved changing mid-drag on an isolated companion-object fixture; live Uraraka reload and idle task cleanup verified without editing its saved curves.",
+    "No new visual capture/GIF or physical Windows GPU run. No backend-specific code changed."
+  ]
+}

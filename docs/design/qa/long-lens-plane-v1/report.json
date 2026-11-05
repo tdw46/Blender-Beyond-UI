@@ -1,0 +1,322 @@
+{
+  "date": "2026-11-05",
+  "schema": 20,
+  "installed": true,
+  "saved_scene": false,
+  "unchanged_view": true,
+  "before_crossings": 13200,
+  "after_crossings": 0,
+  "front_vertices_moved_behind": 0,
+  "vertices": 68185,
+  "shadow_sources_unchanged": true,
+  "live_rows": [
+    {
+      "object": "belt.001",
+      "vertices": 3616,
+      "behind": 0,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "body.001",
+      "vertices": 42656,
+      "behind": 12054,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "NeckPlate.001",
+      "vertices": 3964,
+      "behind": 0,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "wrists.001",
+      "vertices": 2292,
+      "behind": 1146,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "head_.002",
+      "vertices": 12913,
+      "behind": 0,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "Hair.002",
+      "vertices": 1367,
+      "behind": 0,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    },
+    {
+      "object": "Hair.003",
+      "vertices": 1377,
+      "behind": 0,
+      "brought_forward": 0,
+      "pushed_behind": 0,
+      "source_unchanged": true,
+      "finite": true
+    }
+  ],
+  "matched_geometry_drift": [
+    {
+      "object": "belt.001",
+      "maximum_world_change_m": 0.000229577548452653
+    },
+    {
+      "object": "body.001",
+      "maximum_world_change_m": 1.5606422424316406
+    },
+    {
+      "object": "NeckPlate.001",
+      "maximum_world_change_m": 2.186768881529133e-07
+    },
+    {
+      "object": "wrists.001",
+      "maximum_world_change_m": 1.5603814125061035
+    },
+    {
+      "object": "head_.002",
+      "maximum_world_change_m": 2.602642439342162e-07
+    },
+    {
+      "object": "Hair.002",
+      "maximum_world_change_m": 5.8483648899709806e-05
+    },
+    {
+      "object": "Hair.003",
+      "maximum_world_change_m": 0.0004148074658587575
+    }
+  ],
+  "checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    }
+  ],
+  "additional_4_0_plane_fixture": {
+    "passed": true,
+    "version": "4.0.2",
+    "cases": 168,
+    "points_per_case": 32001,
+    "crossings": 0,
+    "minimum_depth_positive": true,
+    "timings": {
+      "new": {
+        "median_ms": 1.6667914751451463,
+        "p95_ms": 2.049708040431142
+      }
+    }
+  },
+  "retained_32001_point_timing": {
+    "old": {
+      "median_ms": 1.5650834830012172,
+      "p95_ms": 1.8752089818008244
+    },
+    "new": {
+      "median_ms": 1.6354999970644712,
+      "p95_ms": 1.8542080069892108
+    },
+    "new_repeat": {
+      "median_ms": 1.630687533179298,
+      "p95_ms": 1.874291046988219
+    },
+    "old_repeat": {
+      "median_ms": 1.5422079886775464,
+      "p95_ms": 1.8189999973401427
+    }
+  },
+  "limits": [
+    "Actual Windows GPU execution not rerun on this Mac; no shader, native binary, backend guard, scheduling or BVT source changes.",
+    "Full-strength closed-mesh volume and front/back redistribution tested; conditioned fan normalization is not a closed-volume guarantee for open meshes or remote focus centers.",
+    "No arbitrary spatial-mask collision guarantee; correction preserves source plane membership for long lenses, not short-lens Exact clipping semantics.",
+    "Timing is an isolated retained Geometry Nodes workload, not full-scene display FPS."
+  ]
+}

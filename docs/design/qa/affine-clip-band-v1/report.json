@@ -1,0 +1,359 @@
+{
+  "schema": 25,
+  "status": "Implemented, installed, actual live Metal before/after inspected",
+  "date": "2026-11-05",
+  "approach": "Bounded affine depth conditioning; native GPU clipping; original topology",
+  "version_checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    }
+  ],
+  "high_lens": {
+    "passed": true,
+    "schema": 25,
+    "rows": [
+      {
+        "lens": 210.0,
+        "max_coordinate_change": 0.08414268493652344,
+        "protection": 0.0
+      },
+      {
+        "lens": 215.0,
+        "max_coordinate_change": 0.08414760231971741,
+        "protection": 0.0
+      },
+      {
+        "lens": 230.0,
+        "max_coordinate_change": 0.07339155673980713,
+        "protection": 0.39358600583090375
+      },
+      {
+        "lens": 239.4186248779297,
+        "max_coordinate_change": 0.04264247417449951,
+        "protection": 0.7810640339722766
+      },
+      {
+        "lens": 245.0,
+        "max_coordinate_change": 0.008960455656051636,
+        "protection": 0.9446064139941691
+      },
+      {
+        "lens": 250.0,
+        "max_coordinate_change": 0.0,
+        "protection": 1.0
+      }
+    ],
+    "full_250_unchanged": true,
+    "shadow_sources_and_counts_unchanged": true
+  },
+  "timing_32001_points": {
+    "old": {
+      "median_ms": 1.672375510679558,
+      "p95_ms": 1.9909999682568014
+    },
+    "new": {
+      "median_ms": 1.9544164824765176,
+      "p95_ms": 2.323292021173984
+    },
+    "new_repeat": {
+      "median_ms": 1.7453540349379182,
+      "p95_ms": 2.0805420354008675
+    },
+    "old_repeat": {
+      "median_ms": 1.6965624818112701,
+      "p95_ms": 1.9262089626863599
+    }
+  },
+  "live": {
+    "passed": true,
+    "lens": 93.39556884765625,
+    "same_view": true,
+    "same_curves": true,
+    "same_counts_and_shadow_sources": true,
+    "saved_file_unchanged": true
+  },
+  "limits": [
+    "Local thickness/volume changes inside the authorized band; established deformation retained outside it.",
+    "Partial 215\u2013250 mm protection may slightly change projected positions inside the band: measured maximum 0.00013913 in the full-weight synthetic guard fixture.",
+    "Clip distances below 1e-5 retain prior deformation to avoid float32 precision loss; no teeth repair promised at those distances.",
+    "No universal overlap guarantee for arbitrary masks/topology, no full-scene FPS measurement or continuous motion capture.",
+    "Physical Windows Vulkan/OpenGL replay remains open; no renderer/backend/ABI changes."
+  ]
+}

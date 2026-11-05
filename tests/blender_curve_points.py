@@ -9,14 +9,14 @@ from beyond_ui.widgets.context import target
 from beyond_ui.widgets.metrics import CURVE
 mat=bpy.data.materials.new('Curve transaction');mat.use_nodes=True
 node=mat.node_tree.nodes.new('ShaderNodeRGBCurve');node.mapping.initialize()
-commits=[];channel=[0]
-b,mapping,curve=curve_mapping(node,'mapping',lambda a,b:commits.append((a,b)),channel)
+commits=[];previews=[];channel=[0]
+b,mapping,curve=curve_mapping(node,'mapping',lambda a,b:commits.append((a,b)),channel,preview=lambda data,prop:previews.append((data.as_pointer(),prop)))
 curve().points[0].handle_type='VECTOR';curve().points[1].handle_type='AUTO_CLAMPED';mapping.update()
 w=CurveMapping(b)
 def state():return tuple((tuple(p.location),p.handle_type) for p in curve().points)
 def e(kind,x=300,y=250,value='PRESS'):return w.event(Event(type=kind,value=value),x,y)
 original=state();e('LEFTMOUSE');assert len(curve().points)==3
-e('MOUSEMOVE',400,210);e('ESC');assert state()==original and not commits
+e('MOUSEMOVE',400,210);assert len(previews)==2 and not commits;e('ESC');assert len(previews)==3;assert state()==original and not commits
 e('LEFTMOUSE');e('LEFTMOUSE',value='RELEASE');assert len(commits)==1 and len(curve().points)==3
 assert curve().points[0].handle_type=='VECTOR' and curve().points[-1].handle_type=='AUTO_CLAMPED'
 e('LEFTMOUSE',value='DOUBLE_CLICK');e('LEFTMOUSE',value='RELEASE');assert len(curve().points)==3

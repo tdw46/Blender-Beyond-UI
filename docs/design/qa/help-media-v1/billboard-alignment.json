@@ -1,0 +1,147 @@
+{
+  "layouts": [
+    {
+      "width": 280,
+      "controls": [
+        [
+          "toggle",
+          "Stepped Lag",
+          [
+            8.0,
+            8.0,
+            264.0,
+            26.0
+          ]
+        ],
+        [
+          "toggle",
+          "Billboard Emulation",
+          [
+            8.0,
+            38.0,
+            200.0,
+            26.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            214.0,
+            39.0,
+            28.0,
+            24.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            248.0,
+            39.0,
+            24.0,
+            24.0
+          ]
+        ]
+      ]
+    },
+    {
+      "width": 360,
+      "controls": [
+        [
+          "toggle",
+          "Stepped Lag",
+          [
+            8.0,
+            8.0,
+            344.0,
+            26.0
+          ]
+        ],
+        [
+          "toggle",
+          "Billboard Emulation",
+          [
+            8.0,
+            38.0,
+            280.0,
+            26.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            294.0,
+            39.0,
+            28.0,
+            24.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            328.0,
+            39.0,
+            24.0,
+            24.0
+          ]
+        ]
+      ]
+    },
+    {
+      "width": 520,
+      "controls": [
+        [
+          "toggle",
+          "Stepped Lag",
+          [
+            8.0,
+            8.0,
+            504.0,
+            26.0
+          ]
+        ],
+        [
+          "toggle",
+          "Billboard Emulation",
+          [
+            8.0,
+            38.0,
+            440.0,
+            26.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            454.0,
+            39.0,
+            28.0,
+            24.0
+          ]
+        ],
+        [
+          "button",
+          "",
+          [
+            488.0,
+            39.0,
+            24.0,
+            24.0
+          ]
+        ]
+      ]
+    }
+  ],
+  "help_media": {
+    "falloff": "apparent_fov",
+    "camprops": "camprops",
+    "outline": "distance",
+    "camprops_comparison": "distance",
+    "billboard": "billboard"
+  },
+  "help_draws_and_media_passed": true
+}

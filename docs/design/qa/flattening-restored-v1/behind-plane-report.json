@@ -1,0 +1,66 @@
+{
+  "padding_loops": 3,
+  "behind_margin": 0.019999999552965164,
+  "objects": [
+    {
+      "object": "belt.001",
+      "triangles": 7216,
+      "kept": 7216,
+      "discarded": 0,
+      "prototype_classification_ms": 0.5617920542135835
+    },
+    {
+      "object": "body.001",
+      "triangles": 85308,
+      "kept": 62318,
+      "discarded": 22990,
+      "prototype_classification_ms": 5.2182909566909075
+    },
+    {
+      "object": "NeckPlate.001",
+      "triangles": 7928,
+      "kept": 7928,
+      "discarded": 0,
+      "prototype_classification_ms": 0.5422080284915864
+    },
+    {
+      "object": "wrists.001",
+      "triangles": 4576,
+      "kept": 3942,
+      "discarded": 634,
+      "prototype_classification_ms": 0.32400002237409353
+    },
+    {
+      "object": "head_.002",
+      "triangles": 25292,
+      "kept": 25292,
+      "discarded": 0,
+      "prototype_classification_ms": 1.6065419767983258
+    },
+    {
+      "object": "Hair.002",
+      "triangles": 2696,
+      "kept": 2696,
+      "discarded": 0,
+      "prototype_classification_ms": 0.1961250090971589
+    },
+    {
+      "object": "Hair.003",
+      "triangles": 2190,
+      "kept": 2190,
+      "discarded": 0,
+      "prototype_classification_ms": 0.162083946634084
+    }
+  ],
+  "only_draw_indices_changed": true,
+  "saved_file_unchanged": true,
+  "gpu": {
+    "passed": true,
+    "different_channels": 0,
+    "version": "5.2.2 LTS",
+    "backend": "METAL",
+    "purpose": "Compare ordinary camera clipping with draw-index pruning strictly behind the final camera plane; retain three shared-vertex face rings. Flat diagnostic colors."
+  },
+  "discarded_triangles": 23624,
+  "conclusion": "Behind-plane-only pruning is pixel-identical and cannot repair the visible outer teeth. No production pruning pass installed."
+}

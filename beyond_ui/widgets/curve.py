@@ -38,13 +38,19 @@ class CurveMapping(Widget):
         self.transaction = None
         self.capturing = False
 
+    def refresh_binding(self):
+        if (not self.capturing and hasattr(self.binding, "refresh")
+                and not self.binding.valid()):
+            try:
+                # Read-only reacquisition of point wrappers after an external
+                # preset resized CurveMap's packed array. Never redirect owners.
+                self.binding.refresh()
+            except (ReferenceError, AttributeError, RuntimeError):
+                return False
+        return self.binding.valid()
+
     def event(self, event, x, y, *, clipboard=None):
-        if (
-            not self.capturing
-            and hasattr(self.binding, "refresh")
-            and not self.binding.valid()
-        ):
-            self.binding.refresh()
+        self.refresh_binding()
         if not self.binding.valid():
             self.cancel()
             return False
@@ -164,7 +170,7 @@ class CurveMapping(Widget):
             rect, self.width, self.height, font, palette, backdrop, motion=self.motion
         )
         p.card("Curve Mapping")
-        if not self.binding.valid():
+        if not self.refresh_binding():
             p.text(self.graph, "Curve changed — move here to refresh", size=19)
             return
         points = tuple(self.binding.read())

@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-05",
+  "live_scene": "AllMight Camkeys Test.blend",
+  "finding": "Retained BUI labels and BLF dimensions remained valid, but text was absent until font/render resources were released and recreated. File-load refresh previously retained PanelHost resources.",
+  "change": "Close and replace panel hosts during load_pre; reacquire once in the existing scheduled start after load_post or capability-gated load_post_fail. Ordinary refresh retains warm resources.",
+  "versions": [
+    {
+      "version": "4.2.23 LTS",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "4.3.2",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "4.4.3",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "4.5.15 LTS",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "5.0.1",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "5.1.2",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    },
+    {
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "passed": true,
+      "checks": [
+        "File open 1: fresh host, old resources released, identical body/bold pixels",
+        "File open 2: fresh host, old resources released, identical body/bold pixels",
+        "File open 3: fresh host, old resources released, identical body/bold pixels",
+        "Ordinary refresh retains the current host/fonts",
+        "Failed-load callback restarts text resources"
+      ]
+    }
+  ],
+  "focus": {
+    "owned_test_activations": 0,
+    "restorations": 0,
+    "note": "Two observed focus changes were between the pre-existing user Blender and Codex processes, never an owned test process."
+  },
+  "unit_tests": {
+    "run": 472,
+    "skipped": 1,
+    "failures": 0
+  },
+  "limits": [
+    "Physical Windows Vulkan/OpenGL replay pending; no backend-specific production changes.",
+    "Live screenshots were taken while the user continued navigation; compare text presence, not geometry or pixel parity.",
+    "No save or reopen of the live All Might scene.",
+    "Official exact-version documentation access attempted; endpoints returned 402/403. Runtime checks on all seven exact builds verify the used lifecycle paths."
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "status": "High-lens flattening restored; lower-lens outer teeth still open",
+  "date": "2026-11-05",
+  "schema": 24,
+  "policy": {
+    "start_mm": 215,
+    "full_mm": 250,
+    "modes": [
+      "EXACT",
+      "ARTISTIC"
+    ],
+    "clipping": "ordinary renderer clipping after deformation"
+  },
+  "checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    }
+  ],
+  "live": {
+    "passed": true,
+    "lens": 250.0,
+    "mode": "EXACT",
+    "modifiers": [
+      {
+        "object": "belt.001",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "body.001",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "NeckPlate.001",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "wrists.001",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "head_.002",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "Hair.002",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      },
+      {
+        "object": "Hair.003",
+        "protection": 1.0,
+        "near": 0.009999999776482582
+      }
+    ]
+  },
+  "refinement_diagnostic": {
+    "passed": true,
+    "cases": [
+      {
+        "level": 0,
+        "evaluation_capture_ms": 28.92679098295048,
+        "vertices": 68185
+      },
+      {
+        "level": 1,
+        "evaluation_capture_ms": 308.13937494531274,
+        "vertices": 285886
+      },
+      {
+        "level": 2,
+        "evaluation_capture_ms": 910.1303750067018,
+        "vertices": 1141346
+      }
+    ],
+    "saved_lens": 142.06991577148438
+  },
+  "limitations": [
+    "All-mesh subdivision is a diagnostic only, not installed or proposed as a realtime default.",
+    "Evaluation/capture timings include topology generation and extraction; not warm viewport FPS.",
+    "No change to original saved Uraraka file, renderer backend code, or Windows admission.",
+    "Physical Windows replay and lower-lens visual repair remain open.",
+    "A pending user choice determines whether to pursue bounded refinement or allow a near-camera deformation change below 215 mm."
+  ]
+}

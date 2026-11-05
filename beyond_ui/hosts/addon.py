@@ -168,7 +168,7 @@ class Runtime:
             runtime.native_scroll.clear()
             runtime.generation += 1
             runtime.running.clear()
-            runtime.refresh()
+            runtime.reset_file_hosts()
 
         @persistent
         def after_load(*args):
@@ -180,8 +180,11 @@ class Runtime:
             ("redo_pre", before),
             ("load_pre", before_load),
             ("load_post", after_load),
+            ("load_post_fail", after_load),
         ):
-            collection = getattr(bpy.app.handlers, name)
+            collection = getattr(bpy.app.handlers, name, None)
+            if collection is None:
+                continue
             collection.append(callback)
             self.handlers.append((collection, callback))
         self.schedule_start()
@@ -493,6 +496,25 @@ class Runtime:
         self.registry.commands.clear()
         self.redraw()
         return None
+
+    def reset_file_hosts(self):
+        """Release file/context-scoped drawing resources before replacing Main.
+
+        Clearing canvases alone leaves BLF glyph/GPU state and draw handlers
+        alive across file loading. Integer font IDs can still measure correctly
+        while rendering no glyphs. Recreate hosts once through schedule_start,
+        outside painting; ordinary undo/value refreshes retain their resources.
+        """
+        self.refresh()
+        for definition, host in tuple(self.hosts.items()):
+            host.close()
+            self.hosts[definition] = PanelHost(
+                host.owner,
+                backdrop_revision=host.backdrop_revision,
+                animation=host.animation,
+                glass_enabled=host.glass_enabled,
+                panel_layout=host.panel_layout,
+            )
 
     def schedule_refresh(self):
         import bpy

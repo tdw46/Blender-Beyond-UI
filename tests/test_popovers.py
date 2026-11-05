@@ -107,6 +107,13 @@ class PopoverContracts(unittest.TestCase):
         self.assertFalse(child._moving)
         self.assertFalse(parent.advance_animations())
 
+    def test_preview_inherits_without_becoming_commit(self):
+        preview = lambda data, prop: None
+        ui = Layout(preview=preview)
+        child = ui.row().column()
+        self.assertIs(child.preview, preview)
+        self.assertIsNot(child.commit, preview)
+
     def test_layout_popover_flag_is_inherited(self):
         ui = Layout()
         self.assertFalse(ui.is_popover)

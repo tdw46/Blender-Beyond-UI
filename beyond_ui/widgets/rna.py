@@ -55,7 +55,7 @@ def color_ramp(data, property, commit):
     return Binding(get, set_value, valid, commit, context_target=context_target), ramp
 
 
-def curve_mapping(data, property, commit, channel):
+def curve_mapping(data, property, commit, channel, *, preview=None):
     owner_pointer = data.as_pointer()
     mapping = getattr(data, property)
     pointer = mapping.as_pointer()
@@ -68,6 +68,8 @@ def curve_mapping(data, property, commit, channel):
         update = getattr(owner, "update_tag", None)
         if update is not None:
             update()
+        if preview is not None:
+            preview(data, property)
 
     def current_index():
         return min(channel[0], len(mapping.curves) - 1)

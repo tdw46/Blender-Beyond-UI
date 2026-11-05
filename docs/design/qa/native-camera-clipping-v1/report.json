@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "renderer": "BLENDER_WORKBENCH",
+  "version": "5.2.2 LTS",
+  "all_vertices": 68185,
+  "all_triangles": 135206,
+  "geometry_fixed": true,
+  "no_modifiers_or_deletion": true,
+  "only_clip_start_changed": true,
+  "renders": [
+    {
+      "near": 0.001,
+      "file": "near-001.png",
+      "p00": 1.3888888359069824,
+      "p11": 2.3948898315429688
+    },
+    {
+      "near": 0.009999999776482582,
+      "file": "near-010.png",
+      "p00": 1.3888888359069824,
+      "p11": 2.3948898315429688
+    },
+    {
+      "near": 0.05,
+      "file": "near-050.png",
+      "p00": 1.3888888359069824,
+      "p11": 2.3948898315429688
+    }
+  ],
+  "changed_pixels": {
+    "near-001": 33416,
+    "near-010": 0,
+    "near-050": 61448
+  },
+  "target_projection": [
+    1.3888888359069824,
+    2.3948898315429688
+  ],
+  "live_apparent_lens_mm": 239.4186248779297,
+  "crossing_triangles": 227,
+  "behind_camera_vertices": 12209,
+  "delete_nodes": [],
+  "live_scene_mutated": false,
+  "saved_file_modified": false,
+  "focus_audit": {
+    "activates": false,
+    "error": "",
+    "events": [],
+    "final_frontmost_pid": 756,
+    "initial_frontmost_pid": 756,
+    "new_instance": true,
+    "pid": 73628,
+    "restore_requests": 0,
+    "seconds": 2.047257900238037,
+    "termination_evidence": "kernel-process-absent",
+    "timeout": false
+  }
+}

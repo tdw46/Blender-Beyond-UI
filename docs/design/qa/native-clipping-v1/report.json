@@ -1,0 +1,625 @@
+{
+  "date": "2026-11-05",
+  "schema": 23,
+  "mode_policy": {
+    "EXACT": "Native clipping at every lens; hidden-endpoint continuation only",
+    "ARTISTIC": "Existing short-lens safeguard plus local 215\u2013250 mm compression"
+  },
+  "live_lens_mm": 142.06991577148438,
+  "scene_saved": false,
+  "live": [
+    {
+      "object": "belt.001",
+      "vertices": 3616,
+      "clip_segments_before": 0,
+      "clip_segments_after": 0,
+      "contour_crossings_before": 0,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": true,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "body.001",
+      "vertices": 42656,
+      "clip_segments_before": 74,
+      "clip_segments_after": 72,
+      "contour_crossings_before": 14,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": false,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "NeckPlate.001",
+      "vertices": 3964,
+      "clip_segments_before": 0,
+      "clip_segments_after": 0,
+      "contour_crossings_before": 0,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": true,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "wrists.001",
+      "vertices": 2292,
+      "clip_segments_before": 89,
+      "clip_segments_after": 106,
+      "contour_crossings_before": 2,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": false,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "head_.002",
+      "vertices": 12913,
+      "clip_segments_before": 0,
+      "clip_segments_after": 0,
+      "contour_crossings_before": 0,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": false,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "Hair.002",
+      "vertices": 1367,
+      "clip_segments_before": 0,
+      "clip_segments_after": 0,
+      "contour_crossings_before": 0,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": false,
+      "view_identical": true,
+      "finite": true
+    },
+    {
+      "object": "Hair.003",
+      "vertices": 1377,
+      "clip_segments_before": 0,
+      "clip_segments_after": 0,
+      "contour_crossings_before": 0,
+      "contour_crossings_after": 0,
+      "maximum_visible_change": 0.0,
+      "hidden_revealed": 0,
+      "shadow_source_identical": true,
+      "render_triangulation_identical": true,
+      "view_identical": true,
+      "finite": true
+    }
+  ],
+  "version_checks": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_native_clipping.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_plane.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_long_redistribution.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_node_migration.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true
+    }
+  ],
+  "public_repair_recheck": [
+    {
+      "version": "4.2.23",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2",
+      "fixture": "blender_projection_mode_runtime.py",
+      "passed": true
+    }
+  ],
+  "synthetic_contours": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "contour_cases": [
+      {
+        "ratio": 1.0001,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.0001,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.0001,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.05,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.05,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.05,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.1,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.1,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 1.1,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 2.0,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 2.0,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 2.0,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 5.0,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 5.0,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 5.0,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 10.0,
+        "profile": 0,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 10.0,
+        "profile": 1,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      },
+      {
+        "ratio": 10.0,
+        "profile": 6,
+        "sweeps": 31,
+        "crossings": 0,
+        "maximum_clipped_segments": 50
+      }
+    ],
+    "visible_endpoint_cases": 30,
+    "near_distances": [
+      1e-06,
+      0.01,
+      0.2
+    ],
+    "topology_unchanged": true,
+    "timings": {
+      "0.0": {
+        "median_ms": 0.8935619844123721,
+        "p95_ms": 1.206790970172733
+      },
+      "0.01": {
+        "median_ms": 0.9665419929660857,
+        "p95_ms": 1.2253330205567181
+      }
+    }
+  },
+  "retained_32001_point_timings_ms": {
+    "old": {
+      "median_ms": 1.8106874777004123,
+      "p95_ms": 2.0602919976226985
+    },
+    "new": {
+      "median_ms": 1.9247920135967433,
+      "p95_ms": 2.2469580289907753
+    },
+    "new_repeat": {
+      "median_ms": 1.8439159903209656,
+      "p95_ms": 2.1431249915622175
+    },
+    "old_repeat": {
+      "median_ms": 1.7074165225494653,
+      "p95_ms": 2.056624973192811
+    }
+  },
+  "locales": 12,
+  "limits": [
+    "This is native clipping of the deformed triangles, not an exact analytic intersection of the original curved surface. Finite mesh edges remain polygonal and no cap is generated.",
+    "No face culling or one-ring removal is enabled. All crossing faces and shadow-source positions are retained; Blender can choose different render diagonals for nonplanar quads after deformation.",
+    "The contour checks cover the reported Uraraka view and the specified tube/lens/falloff sweeps. They are not a universal arbitrary-mask/self-intersection guarantee.",
+    "Physical Windows Vulkan/OpenGL replay remains open. Shared GN assets run in stock Mac Blender 4.2\u20135.2; no backend/shader/native ABI change.",
+    "No whole-scene FPS or new motion GIF claim.",
+    "The manual QA reload briefly omitted viewport-source rewiring. Existing public repair wiring was restored, final geometry reverified, and the public repair path now has tests on all seven version families."
+  ],
+  "initial_32001_point_timings_ms": {
+    "old": {
+      "median_ms": 1.910624501761049,
+      "p95_ms": 2.8656249633058906
+    },
+    "new": {
+      "median_ms": 2.1636250021401793,
+      "p95_ms": 2.877832972444594
+    },
+    "new_repeat": {
+      "median_ms": 2.320500003406778,
+      "p95_ms": 3.2523749978281558
+    },
+    "old_repeat": {
+      "median_ms": 1.9944790110457689,
+      "p95_ms": 2.3939170059747994
+    }
+  },
+  "old_graph_rejected_by_new_contour_test": true,
+  "asset_authoring_sha256": "008963aedc285ad290b20c106739957fded1fb135bd4a944c086b931169eaaa6"
+}

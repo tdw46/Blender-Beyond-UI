@@ -389,3 +389,26 @@ Developer Extras adds applicable Python reference/source actions and Copy Python
 Command for operators and registered menu/popover openers. Availability still
 depends on the exact owner, current context and admitted native capabilities;
 unavailable actions are not fabricated against an unrelated native button.
+
+## Live curve previews
+
+`Layout(..., preview=callback)` accepts `callback(data, property_name)` for
+curve-mapping mutations, independently of the final `commit(before, after)`.
+It inherits through rows/columns and runs after points/handles change, including
+rollback on cancellation. It is not an undo commit and must not rebuild the
+captured panel. Keep dependent work bounded; consumers should coalesce expensive
+updates into one finite main-thread task and flush the final state on commit.
+
+For an adopted popover panel, define:
+
+```python
+@staticmethod
+def beyond_ui_preview(context, data, property_name):
+    schedule_curve_preview(context.scene)  # consumer-owned, coalesced
+```
+
+The existing `beyond_ui_changed(context, before, after)` remains the commit hook.
+Preview has no polling loop and no RNA writes from drawing. External presets can
+resize a curve's packed point array; BUI reacquires point wrappers on redraw only
+when the same mapping/owner still exists and no edit is being captured. A stale
+owner never redirects an edit.

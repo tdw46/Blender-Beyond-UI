@@ -33,6 +33,7 @@ class Layout:
         group=None,
         resolve=None,
         commit=None,
+        preview=None,
         state=None,
         source=None,
         pointer_sources=None,
@@ -50,6 +51,7 @@ class Layout:
         self.list_identity = list_identity
         self.property_options = property_options or {}
         self.commit = commit or (lambda before, after: None)
+        self.preview = preview
         self.state = state if state is not None else {}
         self._sequence = 0
         self._text_role = "body"
@@ -263,6 +265,7 @@ class Layout:
             group=group,
             resolve=self.resolve,
             commit=self.commit,
+            preview=self.preview,
             state=self.state,
             source=self.source,
             pointer_sources=self.pointer_sources,
@@ -1512,7 +1515,7 @@ class Layout:
         if any((levels, use_negative_slope, show_tone, show_presets)):
             raise UnsupportedControl("template_curve_mapping advanced modes")
         channel = [0]
-        binding, mapping, curve = curve_mapping(data, property, self.commit, channel)
+        binding, mapping, curve = curve_mapping(data, property, self.commit, channel, preview=self.preview)
         channel_binding = Binding(
             lambda: channel[0],
             lambda value: channel.__setitem__(0, min(value, len(mapping.curves) - 1)),
