@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-04 \u2014 falloff depth-fold repair implemented, runtime-tested and installed in Uraraka",
+  "reviewed": "2026-11-04 \u2014 automatic historical node migration tested and installed; falloff repair retained",
   "remaining_turns": [
     1,
     2
@@ -17,7 +17,7 @@
     3
   ],
   "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Closed falloff depth-order implementation: 77 lens/profile cases pass on Blender 4.0 and every release family 4.2 through 5.2; shared-companion, saved-curve/animation migration and animated-shadow checks pass. Recorded 68,185-vertex Uraraka comparison has diagnostic CPU renders and matched warm geometry timings; installed in live dirty scene without saving. Remaining budget reduced to hardware/user acceptance and full-size cadence. No claim of arbitrary-mask collision freedom.",
+  "basis": "Closed falloff depth-order implementation: 77 lens/profile cases pass on Blender 4.0 and every release family 4.2 through 5.2; shared-companion, saved-curve/animation migration and animated-shadow checks pass. Recorded 68,185-vertex Uraraka comparison has diagnostic CPU renders and matched warm geometry timings; installed in live dirty scene without saving. Remaining budget reduced to hardware/user acceptance and full-size cadence. No claim of arbitrary-mask collision freedom. New migration scope closed in this turn with semantic input/animation and rollback evidence; original Windows debug-file replay added to the existing QA budget.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Node migration is behavior-only: headless version matrix and live state readback, no new screenshots/GIFs or physical Windows rerun. Existing visual comparisons remain unchanged.",
     "Falloff repair: four diagnostic CPU renders and two comparisons from recorded Uraraka geometry, not production MToon/material or motion GIF captures. Live schema/finite geometry/shadow-source/native-owner readback verified. No physical Windows GPU capture.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: Metal exercises geometric and map outputs; Windows Vulkan/OpenGL hardware checks remain open.",
     "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
@@ -79,9 +80,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Published accepted checkpoint across all affected main/master branches. Replaced editable shadow source with a capture modifier; no duplicate objects/evaluation. Geometry passes 4.2.23/5.2.2; Metal output/retention passes. Uraraka 2.5mm matched 640x480 renders 96.5\u219222.9ms with animated source; 250mm 23.8\u219224.3ms. Loaded live without saving.",
-  "estimate_review": "Checkpoint publication complete. New curve and portability fixes are execution-tested; falloff deformation and physical Windows QA remain open.",
-  "time_summary": "Uncertain 0.5\u20132 active hours for restarted full-size viewport qualification and targeted residual optimization; measured render times are not a completion forecast.",
+  "latest_progress": "Closed automatic graph-migration repair: semantic inputs, animation/NLA/drivers, nested users, linked local users and rollback/retry. 19 headless regression runs pass across supported release families; reloaded in dirty Uraraka with all 68,185 affected vertices finite. Falloff transition repair remains installed. Local commits only for these latest changes.",
+  "estimate_review": "Falloff implementation closed in the previous turn. The newly requested historical graph migration is implemented and tested this turn; no implementation budget remains for those items. Remaining 1\u20132 QA turns now also include the original Windows failing-file replay.",
+  "time_summary": "Uncertain 1\u20133 active hours for Windows original-file replay, hardware qualification and full-size viewport cadence; excludes user review waits.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -518,9 +519,14 @@
       "work": "Published accepted checkpoint and implemented animated shadow capture in modifier stacks",
       "evidence": "docs/design/qa/shadow-capture-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Historical/versionless/renamed graph migration with reordered inputs, animation and rollback",
+      "evidence": "docs/design/qa/node-migration-v1/report.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Physical Windows Vulkan/OpenGL acceptance and source-bound shadow native requalification, user review of the installed falloff transition, and full-size viewport cadence. Retain the earlier intermittent broad billboard affine-copy fixture as a QA item. No planned curve/shadow/falloff implementation remains.",
+  "remaining_work": "Original failing Windows debug-file migration replay, physical Windows Vulkan/OpenGL shadow qualification, user acceptance of the installed falloff transition and full-size viewport cadence. No planned falloff or graph-migration implementation remains; arbitrary edited/corrupt node graphs are protected conflicts.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -584,8 +590,8 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Falloff depth-order repair installed; physical Windows and live acceptance remain",
-  "latest_review": "../falloff-intersections-v1/index.html",
+  "checkpoint": "Falloff and node-migration fixes installed; Windows debug-file replay pending",
+  "latest_review": "../node-migration-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -662,6 +668,10 @@
     {
       "batch": "Falloff depth-order repair",
       "details": "Closed: integrated depth stretch removes the demonstrated falloff fold while preserving the full-strength warp, retained custom curves and scheduling. Schema migration and all asset branches validated; roughly 0.25 ms geometry cost at 68,185 vertices. General arbitrary-mask collision solving is not claimed."
+    },
+    {
+      "batch": "Historical graph migration",
+      "details": "New Windows-reported interface failure scope requested and implemented this turn. Added semantic replacement and transactional animation preservation; original Windows debug-file replay remains in the 1\u20132 QA-turn budget."
     }
   ],
   "windows_wizard_click_through": {

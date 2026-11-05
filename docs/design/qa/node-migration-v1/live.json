@@ -1,0 +1,51 @@
+{
+  "version": "5.2.2 LTS",
+  "schema": 19,
+  "scene": "Uraraka",
+  "dirty_preserved": true,
+  "settings_preserved": true,
+  "saved": false,
+  "module": "/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys/asset_library.py",
+  "meshes": [
+    {
+      "name": "belt.001",
+      "vertices": 3616,
+      "finite": true
+    },
+    {
+      "name": "body.001",
+      "vertices": 42656,
+      "finite": true
+    },
+    {
+      "name": "Hair.002",
+      "vertices": 1367,
+      "finite": true
+    },
+    {
+      "name": "Hair.003",
+      "vertices": 1377,
+      "finite": true
+    },
+    {
+      "name": "head_.002",
+      "vertices": 12913,
+      "finite": true
+    },
+    {
+      "name": "NeckPlate.001",
+      "vertices": 3964,
+      "finite": true
+    },
+    {
+      "name": "wrists.001",
+      "vertices": 2292,
+      "finite": true
+    }
+  ],
+  "modals": [
+    "BUIB3FD05C0630E920E_OT_input",
+    "BVT_OT_spring_simulation_engine",
+    "BVT_OT_shoost_canvas_input"
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-04",
+  "camkeys_commit": "ad0a031",
+  "runs": [
+    {
+      "case": "asset-42",
+      "fixture": "blender_asset_library.py",
+      "passed": true,
+      "runtime": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "6c914f9df092e31fadd8a4adb4ec833d1cb4368da545c5d6166e0ff65e23b875"
+    },
+    {
+      "case": "asset-52",
+      "fixture": "blender_asset_library.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "39546be085c9c415c3d4fa756801e7c7d027d60a2c1baa5ebaaab540dfba717d"
+    },
+    {
+      "case": "billboard-52",
+      "fixture": "blender_billboard_emulation.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "49fe153968fa00b9a3364dfc1b22bf3ede4957397c206813996ac95870af6218"
+    },
+    {
+      "case": "depth-migration-52",
+      "fixture": "blender_depth_falloff_migration.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "53819c7f2525227149506643eb66a4fb73107127b6f5b3db77b32049ef7d6aa5"
+    },
+    {
+      "case": "fov-updates-52",
+      "fixture": "blender_forced_perspective_updates.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "4f8efc98dbb3692b1960ec383f4ffb9507486427ee1d5162b425e08387466944"
+    },
+    {
+      "case": "safety-42",
+      "fixture": "blender_node_migration_safety.py",
+      "passed": true,
+      "runtime": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "2742a4d729c80c732a7de531fe631127a2dbeec2873ab42a0cec466571da2d03"
+    },
+    {
+      "case": "safety-52",
+      "fixture": "blender_node_migration_safety.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "1dc8afa90409edc71a7934c0aac0fe86895a6ae8f625761afc54290fc3a328f5"
+    },
+    {
+      "case": "semantic-40",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "/private/tmp/camkeys-blender-4.0.2/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "675cbfd84fbbd95e64175f403b208f9d1f782f8b061ab0b041376dbd448f9fa4"
+    },
+    {
+      "case": "semantic-42",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "24d607893273455835f011a18f7d5d9a0fb7b7e7342b5827a077337977834eea"
+    },
+    {
+      "case": "semantic-43",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "cc00a2a12cb7b52d02d73c58d1864e64d3e6e0594586bb902a8f46e59680f122"
+    },
+    {
+      "case": "semantic-44",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "c3970e5925022c63193204b9a683fa01da410e13b465f2e2094f20a8565131f3"
+    },
+    {
+      "case": "semantic-45",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "55bf1b87981168a4c97ba8da8107f50b1bdc7f897c8965f6c313092973c8fef3"
+    },
+    {
+      "case": "semantic-50",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "850e30dc6e9ce75edf8af22832bdeb08c298a6c96c29708cfa27d48f5da2e22a"
+    },
+    {
+      "case": "semantic-51",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "b039a742f107a188bd928c6f3be1d9db2471a465f4ebe2a61c1c6950f9969784"
+    },
+    {
+      "case": "semantic-52",
+      "fixture": "blender_node_migration.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "05f14a04ad899bd7ebd9d4f86321d4fbb468a5c84819fd5b8790073ed486d3d1"
+    },
+    {
+      "case": "tree-animation-42",
+      "fixture": "blender_node_tree_animation_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "7c2bcc2ef4f06910a145b761619b1c6b0ddd20e43ac1e132e3519efc9d8998d9"
+    },
+    {
+      "case": "tree-animation-44",
+      "fixture": "blender_node_tree_animation_migration.py",
+      "passed": true,
+      "runtime": "build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "595eac7acef90e57796a515085e6adf2340560a30825d5b98dc6f5dab5070141"
+    },
+    {
+      "case": "tree-animation-52",
+      "fixture": "blender_node_tree_animation_migration.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "0bb31a4da5610ec5213b7e1def6ba9ed9cd2ba2211c6805e056d9fd1c340c47c"
+    },
+    {
+      "case": "uraraka-52",
+      "fixture": "blender_ray_volume_migration.py",
+      "passed": true,
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "mode": "background/disposable profile",
+      "log_sha256": "fab3b848d91a4d258d061a41f33f45e9c8a2e9aeb153a1711b0333be80036ea9"
+    }
+  ],
+  "windows_failure": "ValueError: interface differs; explicit migration is required",
+  "implemented": [
+    "Semantic socket mapping for old/versionless/reordered graphs",
+    "Renamed copies use canonical asset identity",
+    "Modifier values and attribute input modes",
+    "Private owner/slot Actions, NLA, drivers, nested links/defaults",
+    "Node-internal Actions/NLA clips/drivers and custom curves",
+    "Transactional rollback including retry after complete remap",
+    "Local users of linked graphs; retained originals",
+    "No disk access for valid current graphs; bounded automatic retry"
+  ],
+  "limits": [
+    "Exact Windows debug file and physical Windows rerun remain pending",
+    "Unknown/ambiguous or removed sockets and missing animated nodes fail safely",
+    "Read-only linked owners remain untouched",
+    "No new visual acceptance or FPS claim",
+    "Scene remains unsaved"
+  ]
+}
