@@ -1,8 +1,8 @@
 {
-  "reviewed": "2026-11-04 \u2014 shadow portability and curve editing merged; live Metal reload verified; Windows handoff ready",
+  "reviewed": "2026-11-05 — Windows NVIDIA shadow qualification and shared runner completion",
   "remaining_turns": [
     2,
-    3
+    4
   ],
   "implementation_turns": [
     1,
@@ -10,14 +10,14 @@
   ],
   "integration_qa_turns": [
     1,
-    1
+    2
   ],
   "active_hours": [
-    2,
-    5
+    1,
+    3
   ],
-  "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Closed curve insertion/removal with 466 unit tests and real CurveMap tests on Blender 4.2/5.2. Closed three shared shadow-map defects, with 449 renderer unit tests, fresh Metal GPU/output/lifecycle/admission checks and matched performance gates. Merged/pushed all affected primary branches; loaded updated packages in live Uraraka, native owner active with no reported error, scene unsaved. Reduced remaining budget for completed curve/shadow work. Falloff self-intersection repair remains implementation scope; Windows hardware/native requalification and live cadence remain separate QA gates.",
+  "confidence": "Low: remaining independent falloff and broader cross-platform integration work, not a delivery guarantee.",
+  "basis": "Closed curve insertion/removal with 466 unit tests and real CurveMap tests on Blender 4.2/5.2. Closed three shared shadow-map defects, with 449 renderer unit tests, fresh Metal GPU/output/lifecycle/admission checks and matched performance gates. Merged/pushed all affected primary branches; loaded updated packages in live Uraraka, native owner active with no reported error, scene unsaved. Reduced remaining budget for completed curve/shadow work. Falloff self-intersection repair remains implementation scope; Windows hardware/native requalification and live cadence remain separate QA gates. Windows qualification now closes after actual hardware gates, normal native admission, matched images/performance and installation; no software-renderer or Metal evidence was substituted.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,9 +25,10 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: Metal exercises geometric and map outputs; Windows Vulkan/OpenGL hardware checks remain open.",
+    "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
+    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate.",
     "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
-    "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
+    "Offscreen shadow acceleration: 96 pixel-identical matched 640×480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
     "Camera-plane shadows: exact float-buffer comparisons and fresh-process Metal timings; no new GIF or exhaustive live motion capture. Private geometry/color snapshots remain untracked. Drag repair has actual native input evidence on 5.1.2/5.2.2.",
     "Long-lens repair: actual matched live Metal before/after PNGs and comparison. No new motion GIF, isolated full-scene FPS gain, exhaustive overlap sweep or physical Windows capture. Short-lens rendering stall remains open.",
     "Projection modes: four actual production-GN CPU Cycles renders and a comparison matrix; no new live Uraraka motion/GPU FPS recording or physical Windows capture. Artistic effective lens is labeled explicitly.",
@@ -78,9 +79,9 @@
     "Appearance GIF retains labeled earlier snapshots; no Appearance behavior changed in this pass.",
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
-  "latest_progress": "Published accepted checkpoint across all affected main/master branches. Replaced editable shadow source with a capture modifier; no duplicate objects/evaluation. Geometry passes 4.2.23/5.2.2; Metal output/retention passes. Uraraka 2.5mm matched 640x480 renders 96.5\u219222.9ms with animated source; 250mm 23.8\u219224.3ms. Loaded live without saving.",
-  "estimate_review": "Checkpoint publication complete. New curve and portability fixes are execution-tested; falloff deformation and physical Windows QA remain open.",
-  "time_summary": "Uncertain 0.5\u20132 active hours for restarted full-size viewport qualification and targeted residual optimization; measured render times are not a completion forecast.",
+  "latest_progress": "Windows NVIDIA Vulkan and OpenGL shadow qualification completed on official Blender 5.2.2 d13f752e3b9c / driver 591.74: fresh ordinary shader/worker admission, Uraraka 2.5/50/250 mm, keyframes, undo, output cycles, matched warm publications and matched native-on/off pixels. Observed OpenGL driver fatal exit addressed by explicitly guarded texture-row reads, retaining complete traversal, with sustained ordinary playback passing. Renewed Windows proofs installed; native policies and artifact binaries unchanged. Shared runner owns inherited OS fault-dialog suppression and capability-gated console reporting; 14 tests pass. CamKeys vendor/runtime is unchanged.",
+  "estimate_review": "Closed the Windows qualification batch, including newly discovered OpenGL driver-fault repair, source-bound proof renewal and shared fault-dialog policy. Reduced integration budget by one turn and active-hours range from 2–6 to 1–3. Remaining work is separate falloff implementation, full-size foreground cadence and Metal continuity of shared renderer retirement changes.",
+  "time_summary": "Uncertain 1–3 active hours for the remaining independent falloff and cross-platform continuity work. Windows hardware qualification is complete for the tested build; this range is not a timing measurement.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -517,9 +518,14 @@
       "work": "Published accepted checkpoint and implemented animated shadow capture in modifier stacks",
       "evidence": "docs/design/qa/shadow-capture-v1/report.json",
       "turns": 1
+    },
+    {
+      "work": "Windows focus runner fault-dialog inheritance, console crash reporting, bounded long fixtures and 14 runner tests; actual NVIDIA Vulkan/OpenGL shadow and ordinary native qualification completed in BVT.",
+      "evidence": "https://github.com/tdw46/Beyond-Vtuber-Tools/blob/main/documentation/performance/2026-11-05-windows-shadow-capture/README.md",
+      "turns": 1
     }
   ],
-  "remaining_work": "Repair and validate forced-perspective falloff self-intersection without changing the accepted full-strength transform or realtime scheduling. Run physical Windows Vulkan/OpenGL shadow capture acceptance and source-bound native requalification using the published handoff. Full-size live viewport cadence and the intermittent broad billboard affine-copy fixture remain QA. No new core capture implementation remains.",
+  "remaining_work": "Repair and validate forced-perspective falloff self-intersection without changing the accepted full-strength transform or realtime scheduling. Full-size foreground cadence, the broader intermittent billboard affine-copy fixture, and fresh Metal qualification after shared renderer retirement changes remain separate work. No Windows shadow-capture qualification or runner implementation remains for the tested official 5.2.2 build.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -567,7 +573,7 @@
     },
     {
       "batch": "Popup composition user correction",
-      "details": "Newly identified and closed this turn: early region rendering pushed popovers left, wrong backdrop source and an extra background coat flattened glass. Implementation and two-runtime execution/capture complete; existing optional 0\u20131 user QA turn remains."
+      "details": "Newly identified and closed this turn: early region rendering pushed popovers left, wrong backdrop source and an extra background coat flattened glass. Implementation and two-runtime execution/capture complete; existing optional 0–1 user QA turn remains."
     },
     {
       "batch": "Blender 4.2+ cross-platform support",
@@ -583,7 +589,7 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Shadow portability and curve editing merged; falloff repair and Windows qualification pending",
+  "checkpoint": "Windows Vulkan/OpenGL shadow qualification complete; independent falloff and Metal continuity remain",
   "latest_review": "../shadow-capture-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
@@ -620,7 +626,7 @@
     },
     {
       "batch": "Live effect onboarding and Dolly view actions",
-      "details": "Added and closed this turn: setup before configuration, live property binding, source-aware camera picker, current-view locking, 75% front framing, camera-unit codec, 12-language copy and review media. No remaining implementation budget; optional 0\u20131 user QA turn remains. Additional user correction closed: shared align_items=value centers help accessories on the editable row."
+      "details": "Added and closed this turn: setup before configuration, live property binding, source-aware camera picker, current-view locking, 75% front framing, camera-unit codec, 12-language copy and review media. No remaining implementation budget; optional 0–1 user QA turn remains. Additional user correction closed: shared align_items=value centers help accessories on the editable row."
     },
     {
       "batch": "Camera-ray volume planning",
@@ -644,7 +650,7 @@
     },
     {
       "batch": "Long-lens redistribution regression and Uraraka rendering stall",
-      "details": "Long-lens depth/position regression repaired with shared conditioned volume normalization and optimized field evaluation. Captured Head max drift54cm\u21924mm. Separately measured camera-source orbit has zero CamKeys updates and substantial Metal/surface-ink latency; live GPU isolation is concrete newly added work, not a solved speed gain."
+      "details": "Long-lens depth/position regression repaired with shared conditioned volume normalization and optimized field evaluation. Captured Head max drift54cm→4mm. Separately measured camera-source orbit has zero CamKeys updates and substantial Metal/surface-ink latency; live GPU isolation is concrete newly added work, not a solved speed gain."
     },
     {
       "batch": "Camera-plane shadow quality and scalar drag interruption",
@@ -657,6 +663,10 @@
     {
       "batch": "Portable captured-shadow follow-up and curve editing",
       "details": "Closed and merged: captured bounds in mixed GPU/CPU fits, GPU source revision invalidation, render-job framebuffer ownership, click-to-add and visible remove curve actions. Fresh Metal native proof installed after measured gates; complete live dependency reload verified. Windows prompt delivered; physical Vulkan/OpenGL and Windows native proof remain unqualified. No version bumps."
+    },
+    {
+      "batch": "Windows shadow qualification and native fault reporting",
+      "details": "Completed: exact OpenGL repair, bounded shadow retirement, Normal Keys main integration, source-bound Windows proofs and actual ordinary hardware/performance/pixel gates. No version bumps or Metal admission changes."
     }
   ],
   "windows_wizard_click_through": {

@@ -220,3 +220,29 @@ swiftc tools/launch_blender_macos.swift -o build/focus-audit/launch-blender
 ```
 
 No activation, focus restoration or extra Blender process is needed for this check.
+
+### Windows native crash reporting and long fixtures (2026-11-04)
+
+The NVIDIA OpenGL shadow-capture fixture exposed a native crash that activated
+the owned Blender window despite its normal-window/no-focus launch. That failed
+focus audit is retained; ordinary successful launches do not cover crash UI.
+The Windows runner now adds `--console-crash-handler` when the executable's help
+advertises it. Two subsequent native-crash diagnostics on official 5.2.2
+`d13f752e3b9c` reported their stacks in the log without activating Blender, as did
+the passing Vulkan/OpenGL shader, worker and shadow-output fixtures. No focus
+restoration or input into another application was used. This evidence applies
+only to the tested Windows build and launcher path; macOS launch policy is unchanged.
+The runner also gives its child inherited Windows OS fault-dialog suppression
+(the same process-local policy used by the QA harness), restoring its own prior
+error mode on success or failure. This changes no registry or global system setting.
+
+Long external GPU/scene qualification fixtures can specify `--timeout 600`.
+The default remains 90 seconds; accepted limits are 1–900 seconds. Timeout still
+kills only the owned child and fails the run. A success marker cannot override a
+traceback, nonzero exit, or stale result. Native renderer qualification remains
+the embedding host's separate source/package/pixel/performance acceptance.
+
+Use `--debug-gpu` explicitly for GPU diagnostics. It forwards Blender's GPU
+debug flag without changing the no-focus launch policy. Leave it off for matched
+performance measurements. The runner's 14 regression tests include actual Windows
+child error-mode inheritance and restoration of the parent process's prior mode.

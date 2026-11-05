@@ -8,8 +8,29 @@ import subprocess
 import sys
 import tempfile
 from functools import lru_cache
+from contextlib import contextmanager
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@contextmanager
+def windows_fault_dialog_policy():
+    """Only child processes inherit suppression; restore this runner on exit."""
+    if os.name != "nt":
+        yield
+        return
+    import ctypes
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.GetErrorMode.restype = ctypes.c_uint
+    kernel.SetErrorMode.argtypes = (ctypes.c_uint,)
+    kernel.SetErrorMode.restype = ctypes.c_uint
+    previous = kernel.GetErrorMode()
+    # SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX.
+    kernel.SetErrorMode(previous | 0x0001 | 0x0002 | 0x8000)
+    try:
+        yield
+    finally:
+        kernel.SetErrorMode(previous)
 
 
 def require_windowed_admission():
@@ -32,6 +53,7 @@ def require_no_focus(executable):
     ).stdout
     if "--no-window-focus" not in help_text:
         raise RuntimeError("Windowed testing requires Blender --no-window-focus")
+    return help_text
 
 
 def main():
@@ -39,16 +61,22 @@ def main():
     parser.add_argument("--blender", action="append", required=True)
     parser.add_argument("--windowed", action="store_true")
     parser.add_argument("--gpu-backend", choices=("metal", "opengl", "vulkan"))
+    parser.add_argument("--debug-gpu", action="store_true",
+                        help="Enable Blender GPU diagnostics; do not use for performance acceptance")
     parser.add_argument(
         "--macos-noactivate",
         action="store_true",
         help="Use nonactivating LaunchServices launch with observation-only focus audit",
     )
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--timeout", type=int, default=90,
+                        help="Bounded per-process timeout in seconds (1–900)")
     parser.add_argument(
         "--fixture", type=Path, help="Explicit disposable-profile test script"
     )
     args = parser.parse_args()
+    if not 1 <= args.timeout <= 900:
+        parser.error("--timeout must be between 1 and 900 seconds")
     if args.windowed:
         require_windowed_admission()
     output = args.output or Path(tempfile.mkdtemp(prefix="beyond-ui-tests-"))
@@ -78,15 +106,21 @@ def main():
         if not args.windowed:
             command += ["--background"]
         else:
-            require_no_focus(executable)
+            executable_help = require_no_focus(executable)
             command += ["--no-window-focus", "--enable-event-simulate"]
             if sys.platform == "win32":
+                # Native crashes must report to the retained log, not raise a
+                # foreground error dialog over the user's current application.
+                if "--console-crash-handler" in executable_help:
+                    command.append("--console-crash-handler")
                 # GHOST's maximized ShowWindow path uses SW_SHOWMAXIMIZED even
                 # with --no-window-focus. A normal window honors SW_SHOWNOACTIVATE.
                 command += ["--window-geometry", "80", "80", "1280", "900"]
         if args.gpu_backend:
             command += ["--gpu-backend", args.gpu_backend]
             env["BEYOND_UI_EXPECT_BACKEND"] = args.gpu_backend.upper()
+        if args.debug_gpu:
+            command.append("--debug-gpu")
         command += [
             "--python",
             str(
@@ -130,7 +164,7 @@ def main():
             launch_command = [str(launcher), str(config.resolve())]
         try:
             with log.open("w") as stream:
-                with subprocess.Popen(
+                with windows_fault_dialog_policy(), subprocess.Popen(
                     launch_command,
                     env=env,
                     stdout=stream,
@@ -140,7 +174,7 @@ def main():
                 ) as process:
                     pid = process.pid
                     try:
-                        code = process.wait(timeout=90)
+                        code = process.wait(timeout=args.timeout)
                     except subprocess.TimeoutExpired:
                         process.kill()
                         process.wait()
