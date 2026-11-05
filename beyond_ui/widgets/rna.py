@@ -175,6 +175,59 @@ def curve_mapping(data, property, commit, channel):
         value.set = set_handle
         return value
 
+    def state():
+        return tuple((tuple(p.location), p.handle_type) for p in tracked[current_index()])
+
+    def restore(values):
+        # Set locations and handles together before Blender sorts the packed
+        # point array. Restoring coordinates alone can attach handles to another
+        # point after insertion, crossing or deletion.
+        selected = curve()
+        while len(selected.points) > len(values):
+            selected.points.remove(selected.points[-1])
+        while len(selected.points) < len(values):
+            selected.points.new(0.5, 0.5)
+        refresh()
+        for point, (location, mode) in zip(tracked[current_index()], values):
+            point.location = location
+            point.handle_type = mode
+        changed()
+        refresh()
+
+    class CurveEdit:
+        def __init__(self):
+            self.before = state()
+            self.channel = current_index()
+            self.epoch = epoch[0]
+            self.closed = False
+
+        def valid(self):
+            return valid() and current_index() == self.channel and epoch[0] == self.epoch
+
+        def update(self, values):
+            if self.closed or not self.valid():
+                raise ReferenceError("Curve changed during edit")
+            set_value(values)
+            self.epoch = epoch[0]
+
+        def finish(self, cancel=False):
+            if self.closed:
+                return
+            self.closed = True
+            if not self.valid():
+                return
+            if cancel:
+                restore(self.before)
+            else:
+                after = state()
+                if self.before != after:
+                    try:
+                        commit(self.before, after)
+                    except Exception:
+                        if self.valid():
+                            restore(self.before)
+                        raise
+
     def remove(index):
         points = tracked[current_index()]
         if not valid() or len(points) <= 2:
@@ -190,16 +243,14 @@ def curve_mapping(data, property, commit, channel):
             commit(before, after)
         except Exception:
             if valid():
-                set_value(tuple(location for location, _ in before))
-                for point, (_, mode) in zip(tracked[current_index()], before):
-                    point.handle_type = mode
-                changed()
+                restore(before)
             raise
 
     binding.refresh = refresh
     binding.handle = handle
     binding.handle_value = lambda index: tracked[current_index()][index].handle_type
     binding.remove = remove
+    binding.begin_edit = CurveEdit
     binding.revision = lambda: (
         tuple(p.handle_type for p in tracked[current_index()]),
         mapping.extend,

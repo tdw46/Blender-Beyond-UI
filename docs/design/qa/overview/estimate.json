@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-04 \u2014 accepted checkpoint published; stack-based animated shadow capture loaded and tested",
+  "reviewed": "2026-11-04 \u2014 shadow checkpoint merged; portable shadow-map fixes and curve editing under validation",
   "remaining_turns": [
-    1,
-    2
+    2,
+    4
   ],
   "implementation_turns": [
-    0,
-    0
+    1,
+    2
   ],
   "integration_qa_turns": [
     1,
     2
   ],
   "active_hours": [
-    0.5,
-    2
+    2,
+    6
   ],
   "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Completed checkpoint publishing and newly requested animated modifier-boundary implementation. Remaining 1\u20132 turns are explicitly integration/hardware QA; capture implementation is complete. Measurements are bounded fixture evidence, not a full-size FPS guarantee.",
+  "basis": "Accepted shadow capture published to primary branches. Added scope: curve insertion/removal, self-intersection at forced-perspective falloff edges, and Windows shadow capture audit. Curve editing passes real RNA tests on 4.2/5.2. Mixed shadow-map bounds and render-context defects found and repaired; qualification in progress. Falloff mathematics remains under investigation.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: Metal exercises geometric and map outputs; Windows Vulkan/OpenGL hardware checks remain open.",
     "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
     "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
     "Camera-plane shadows: exact float-buffer comparisons and fresh-process Metal timings; no new GIF or exhaustive live motion capture. Private geometry/color snapshots remain untracked. Drag repair has actual native input evidence on 5.1.2/5.2.2.",
@@ -78,7 +79,7 @@
     "Minor generated-reference artwork differences remain outside the close-match acceptance target."
   ],
   "latest_progress": "Published accepted checkpoint across all affected main/master branches. Replaced editable shadow source with a capture modifier; no duplicate objects/evaluation. Geometry passes 4.2.23/5.2.2; Metal output/retention passes. Uraraka 2.5mm matched 640x480 renders 96.5\u219222.9ms with animated source; 250mm 23.8\u219224.3ms. Loaded live without saving.",
-  "estimate_review": "New scope was added and implemented this turn: capture boundary, CamKeys default, billboard compatibility, translations and retention checks. Implementation budget reduced to zero for this slice; hardware/cadence and intermittent broader fixture work keep total remaining at 1\u20132 uncertain QA turns.",
+  "estimate_review": "Checkpoint publication complete. New curve and portability fixes are execution-tested; falloff deformation and physical Windows QA remain open.",
   "time_summary": "Uncertain 0.5\u20132 active hours for restarted full-size viewport qualification and targeted residual optimization; measured render times are not a completion forecast.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",

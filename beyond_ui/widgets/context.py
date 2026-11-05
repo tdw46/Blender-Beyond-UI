@@ -73,11 +73,13 @@ def target(widget, key, x, y):
         channel = widget.channel.read() if widget.channel else 0
         a, b, w, h = widget.graph
         for i, (px, py) in enumerate(points):
-            if (x - (a + px * w)) ** 2 + (y - (b + (1 - py) * h)) ** 2 <= 12**2:
+            if (x - (a + px * w)) ** 2 + (y - (b + (1 - py) * h)) ** 2 <= CURVE["point_hit_radius"]**2:
                 part = ("point", channel, i)
         for i, r in enumerate(CURVE["fields"]):
             if contains(r, x, y):
                 part = ("point_field", channel, widget.selected, i)
+        if contains(CURVE["remove"], x, y):
+            part = ("point", channel, widget.selected)
         if part[0] in {"point", "point_field"}:
             valid = (
                 lambda: binding.valid()

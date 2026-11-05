@@ -6,6 +6,8 @@ runtime code. The reference document remains immutable.
 
 SIZE = (630.0, 472.0)
 CURVE = {
+    "remove": (533, 125, 48, 42),
+    "point_hit_radius": 12,
     "tabs": (
         (42, 72, 133, 42),
         (184, 72, 133, 42),

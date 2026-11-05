@@ -22,6 +22,10 @@ class CurveMapping(Widget):
         self._signature = None
         self._samples = ()
 
+    def _edit(self):
+        factory = getattr(self.binding, "begin_edit", None)
+        return factory() if factory else Edit(self.binding)
+
     def cancel(self):
         if self.transaction:
             self.transaction.finish(cancel=True)
@@ -86,7 +90,10 @@ class CurveMapping(Widget):
             elif kind == "LEFTMOUSE" and event.value == "RELEASE":
                 self._finish()
             return True
-        if kind == "DEL" and press and len(points) > 2:
+        if press and (kind in {"DEL", "BACK_SPACE"} or
+                      (kind == "LEFTMOUSE" and contains(CURVE["remove"], x, y))):
+            if len(points) <= 2:
+                return True
             values = tuple(p for i, p in enumerate(points) if i != self.selected)
             if hasattr(self.binding, "remove"):
                 self.binding.remove(self.selected)
@@ -113,24 +120,12 @@ class CurveMapping(Widget):
                 return True
         for i, r in enumerate(CURVE["fields"][:2]):
             if contains(r, x, y) and points:
-                self.transaction = Edit(self.binding)
+                self.transaction = self._edit()
                 self.field = i
                 self.text_edit = Text(points[self.selected][i])
                 self.capturing = True
                 return True
         if contains(self.graph, x, y):
-            if event.value == "DOUBLE_CLICK":
-                values = (*points, ((x - a) / w, 1 - (y - b) / h))
-                edit = Edit(self.binding)
-                edit.update(values)
-                edit.finish()
-                added = values[-1]
-                current = self.binding.read()
-                self.selected = min(
-                    range(len(current)),
-                    key=lambda i: sum((a - b) ** 2 for a, b in zip(current[i], added)),
-                )
-                return True
             if not points:
                 return False
             self.selected = min(
@@ -138,7 +133,17 @@ class CurveMapping(Widget):
                 key=lambda i: (a + points[i][0] * w - x) ** 2
                 + (b + (1 - points[i][1]) * h - y) ** 2,
             )
-            self.transaction = Edit(self.binding)
+            px, py = points[self.selected]
+            hit = (a + px * w - x) ** 2 + (b + (1 - py) * h - y) ** 2 <= CURVE["point_hit_radius"] ** 2
+            self.transaction = self._edit()
+            if not hit:
+                added = ((x - a) / w, 1 - (y - b) / h)
+                self.transaction.update((*points, added))
+                current = self.binding.read()
+                self.selected = min(range(len(current)), key=lambda i:
+                    sum((v - t) ** 2 for v, t in zip(current[i], added)))
+            # One transaction covers insertion and drag. A double-click over
+            # the just-inserted point selects it, without creating a duplicate.
             self.capturing = True
             return True
         return False
@@ -183,6 +188,9 @@ class CurveMapping(Widget):
                 size=19,
                 align="center",
             )
+        p.surface(CURVE["remove"], "button")
+        p.text(CURVE["remove"], "−", align="center", size=24,
+               role="text" if len(points) > 2 else "muted")
         p.surface(self.graph, "graph", 7, 1.4)
         a, b, w, h = self.graph
         for major in (False, True):
