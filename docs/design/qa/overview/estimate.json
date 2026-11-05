@@ -1,8 +1,8 @@
 {
-  "reviewed": "2026-11-04 \u2014 shadow checkpoint merged; portable shadow-map fixes and curve editing under validation",
+  "reviewed": "2026-11-04 \u2014 shadow portability and curve editing merged; live Metal reload verified; Windows handoff ready",
   "remaining_turns": [
     2,
-    4
+    3
   ],
   "implementation_turns": [
     1,
@@ -10,14 +10,14 @@
   ],
   "integration_qa_turns": [
     1,
-    2
+    1
   ],
   "active_hours": [
     2,
-    6
+    5
   ],
   "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Accepted shadow capture published to primary branches. Added scope: curve insertion/removal, self-intersection at forced-perspective falloff edges, and Windows shadow capture audit. Curve editing passes real RNA tests on 4.2/5.2. Mixed shadow-map bounds and render-context defects found and repaired; qualification in progress. Falloff mathematics remains under investigation.",
+  "basis": "Closed curve insertion/removal with 466 unit tests and real CurveMap tests on Blender 4.2/5.2. Closed three shared shadow-map defects, with 449 renderer unit tests, fresh Metal GPU/output/lifecycle/admission checks and matched performance gates. Merged/pushed all affected primary branches; loaded updated packages in live Uraraka, native owner active with no reported error, scene unsaved. Reduced remaining budget for completed curve/shadow work. Falloff self-intersection repair remains implementation scope; Windows hardware/native requalification and live cadence remain separate QA gates.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -519,7 +519,7 @@
       "turns": 1
     }
   ],
-  "remaining_work": "Physical Windows acceptance, full-size live viewport cadence, and investigation of an intermittent broad billboard affine-copy fixture (candidate and checkpoint controls pass repeats). No new core capture implementation remains.",
+  "remaining_work": "Repair and validate forced-perspective falloff self-intersection without changing the accepted full-strength transform or realtime scheduling. Run physical Windows Vulkan/OpenGL shadow capture acceptance and source-bound native requalification using the published handoff. Full-size live viewport cadence and the intermittent broad billboard affine-copy fixture remain QA. No new core capture implementation remains.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -583,7 +583,7 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Animated shadow capture hardware and full-size cadence QA",
+  "checkpoint": "Shadow portability and curve editing merged; falloff repair and Windows qualification pending",
   "latest_review": "../shadow-capture-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
@@ -653,6 +653,10 @@
     {
       "batch": "Animated shadow capture",
       "details": "Requested stack capture replaces editable proxy. Implemented, loaded, and execution-tested; one evaluation, retained shadow revision. No new GIF/visual approval; physical Windows/full-size cadence and broader intermittent fixture remain QA."
+    },
+    {
+      "batch": "Portable captured-shadow follow-up and curve editing",
+      "details": "Closed and merged: captured bounds in mixed GPU/CPU fits, GPU source revision invalidation, render-job framebuffer ownership, click-to-add and visible remove curve actions. Fresh Metal native proof installed after measured gates; complete live dependency reload verified. Windows prompt delivered; physical Vulkan/OpenGL and Windows native proof remain unqualified. No version bumps."
     }
   ],
   "windows_wizard_click_through": {
