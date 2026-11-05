@@ -1,0 +1,410 @@
+{
+  "passed": true,
+  "version": "4.3.2",
+  "rows": [
+    {
+      "ratio": 0.0217391304,
+      "profile": 0,
+      "minimum_depth_slope": 12.823740641267962
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 1,
+      "minimum_depth_slope": 7.492701212571475
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 2,
+      "minimum_depth_slope": 7.4958801269262105
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 3,
+      "minimum_depth_slope": 7.492701212560384
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 4,
+      "minimum_depth_slope": 7.492701212571475
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 5,
+      "minimum_depth_slope": 7.492701212560384
+    },
+    {
+      "ratio": 0.0217391304,
+      "profile": 6,
+      "minimum_depth_slope": 7.507801055903473
+    },
+    {
+      "ratio": 0.05,
+      "profile": 0,
+      "minimum_depth_slope": 7.359186808263593
+    },
+    {
+      "ratio": 0.05,
+      "profile": 1,
+      "minimum_depth_slope": 4.494984944645319
+    },
+    {
+      "ratio": 0.05,
+      "profile": 2,
+      "minimum_depth_slope": 4.491806030270608
+    },
+    {
+      "ratio": 0.05,
+      "profile": 3,
+      "minimum_depth_slope": 4.491806030257309
+    },
+    {
+      "ratio": 0.05,
+      "profile": 4,
+      "minimum_depth_slope": 4.491806030257309
+    },
+    {
+      "ratio": 0.05,
+      "profile": 5,
+      "minimum_depth_slope": 4.493395487451314
+    },
+    {
+      "ratio": 0.05,
+      "profile": 6,
+      "minimum_depth_slope": 4.499753316240655
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 0,
+      "minimum_depth_slope": 3.0295054117729765
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 1,
+      "minimum_depth_slope": 2.112388610832259
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 2,
+      "minimum_depth_slope": 2.112388610832259
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 3,
+      "minimum_depth_slope": 2.112388610832259
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 4,
+      "minimum_depth_slope": 2.112388610838513
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 5,
+      "minimum_depth_slope": 2.112388610838513
+    },
+    {
+      "ratio": 0.189302,
+      "profile": 6,
+      "minimum_depth_slope": 2.1155675252265316
+    },
+    {
+      "ratio": 0.5,
+      "profile": 0,
+      "minimum_depth_slope": 1.5862782796167
+    },
+    {
+      "ratio": 0.5,
+      "profile": 1,
+      "minimum_depth_slope": 1.3192494710239089
+    },
+    {
+      "ratio": 0.5,
+      "profile": 2,
+      "minimum_depth_slope": 1.3192494710239089
+    },
+    {
+      "ratio": 0.5,
+      "profile": 3,
+      "minimum_depth_slope": 1.3208389282179136
+    },
+    {
+      "ratio": 0.5,
+      "profile": 4,
+      "minimum_depth_slope": 1.3208389282179136
+    },
+    {
+      "ratio": 0.5,
+      "profile": 5,
+      "minimum_depth_slope": 1.3192494710239089
+    },
+    {
+      "ratio": 0.5,
+      "profile": 6,
+      "minimum_depth_slope": 1.320838928221824
+    },
+    {
+      "ratio": 0.999,
+      "profile": 0,
+      "minimum_depth_slope": 0.9981791178349576
+    },
+    {
+      "ratio": 0.999,
+      "profile": 1,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 0.999,
+      "profile": 2,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 0.999,
+      "profile": 3,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 0.999,
+      "profile": 4,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 0.999,
+      "profile": 5,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 0.999,
+      "profile": 6,
+      "minimum_depth_slope": 0.9965896606439034
+    },
+    {
+      "ratio": 1.0,
+      "profile": 0,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 1,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 2,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 3,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 4,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 5,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.0,
+      "profile": 6,
+      "minimum_depth_slope": 0.9997685750289623
+    },
+    {
+      "ratio": 1.001,
+      "profile": 0,
+      "minimum_depth_slope": 0.9965896606453787
+    },
+    {
+      "ratio": 1.001,
+      "profile": 1,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.001,
+      "profile": 2,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.001,
+      "profile": 3,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.001,
+      "profile": 4,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.001,
+      "profile": 5,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.001,
+      "profile": 6,
+      "minimum_depth_slope": 0.9965896606439034
+    },
+    {
+      "ratio": 1.05,
+      "profile": 0,
+      "minimum_depth_slope": 0.9791056315069011
+    },
+    {
+      "ratio": 1.05,
+      "profile": 1,
+      "minimum_depth_slope": 0.9775161743157904
+    },
+    {
+      "ratio": 1.05,
+      "profile": 2,
+      "minimum_depth_slope": 0.9775161743157904
+    },
+    {
+      "ratio": 1.05,
+      "profile": 3,
+      "minimum_depth_slope": 0.9775161743157904
+    },
+    {
+      "ratio": 1.05,
+      "profile": 4,
+      "minimum_depth_slope": 0.9791056315097998
+    },
+    {
+      "ratio": 1.05,
+      "profile": 5,
+      "minimum_depth_slope": 0.9775161743157904
+    },
+    {
+      "ratio": 1.05,
+      "profile": 6,
+      "minimum_depth_slope": 0.9806950887009058
+    },
+    {
+      "ratio": 1.1,
+      "profile": 0,
+      "minimum_depth_slope": 0.9973843892409081
+    },
+    {
+      "ratio": 1.1,
+      "profile": 1,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.1,
+      "profile": 2,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.1,
+      "profile": 3,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.1,
+      "profile": 4,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.1,
+      "profile": 5,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 1.1,
+      "profile": 6,
+      "minimum_depth_slope": 0.9965896606439034
+    },
+    {
+      "ratio": 2.0,
+      "profile": 0,
+      "minimum_depth_slope": 0.9965896606409529
+    },
+    {
+      "ratio": 2.0,
+      "profile": 1,
+      "minimum_depth_slope": 0.9950002034469482
+    },
+    {
+      "ratio": 2.0,
+      "profile": 2,
+      "minimum_depth_slope": 0.9950002034469482
+    },
+    {
+      "ratio": 2.0,
+      "profile": 3,
+      "minimum_depth_slope": 0.9950002034469482
+    },
+    {
+      "ratio": 2.0,
+      "profile": 4,
+      "minimum_depth_slope": 0.9950002034469482
+    },
+    {
+      "ratio": 2.0,
+      "profile": 5,
+      "minimum_depth_slope": 0.9950002034469482
+    },
+    {
+      "ratio": 2.0,
+      "profile": 6,
+      "minimum_depth_slope": 0.9965896606439034
+    },
+    {
+      "ratio": 5.0,
+      "profile": 0,
+      "minimum_depth_slope": 0.9918212890618752
+    },
+    {
+      "ratio": 5.0,
+      "profile": 1,
+      "minimum_depth_slope": 0.9902318318707974
+    },
+    {
+      "ratio": 5.0,
+      "profile": 2,
+      "minimum_depth_slope": 0.9902318318707974
+    },
+    {
+      "ratio": 5.0,
+      "profile": 3,
+      "minimum_depth_slope": 0.9902318318707974
+    },
+    {
+      "ratio": 5.0,
+      "profile": 4,
+      "minimum_depth_slope": 0.9918212890618752
+    },
+    {
+      "ratio": 5.0,
+      "profile": 5,
+      "minimum_depth_slope": 0.9918212890618752
+    },
+    {
+      "ratio": 5.0,
+      "profile": 6,
+      "minimum_depth_slope": 0.9950002034469482
+    }
+  ],
+  "old_reversed_intervals": 10929,
+  "timings": {
+    "old": {
+      "median_ms": 0.607333000516519,
+      "p95_ms": 0.9129589889198542
+    },
+    "new": {
+      "median_ms": 0.7480414933525026,
+      "p95_ms": 0.9596669988241047
+    },
+    "new_repeat": {
+      "median_ms": 0.6523120100609958,
+      "p95_ms": 1.0454169823788106
+    },
+    "old_repeat": {
+      "median_ms": 0.6204585079103708,
+      "p95_ms": 0.8316250168718398
+    }
+  }
+}

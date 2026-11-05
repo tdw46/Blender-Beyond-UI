@@ -1,0 +1,94 @@
+{
+  "recorded-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "migration42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_multi_object_absolute_falloff-42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "52-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_forced_perspective_updates-52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "5.0.1": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_asset_library-52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "existing-falloff52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "51-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_animated_source_shadows-42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "4.3.2": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_animated_source_shadows-52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_asset_library-42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "42-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "40-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_multi_object_absolute_falloff-52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "migration52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "4.4.3": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "long52": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "blender_forced_perspective_updates-42": {
+    "passed": true,
+    "focus_policy": "headless"
+  },
+  "45-final": {
+    "passed": true,
+    "focus_policy": "headless"
+  }
+}

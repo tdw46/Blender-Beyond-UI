@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-04",
+  "status": "Implemented and loaded in live Uraraka; original dirty scene not saved",
+  "code_checkpoint": "0bce158",
+  "geometry_cases_per_runtime": 77,
+  "runtime_families": [
+    "4.0.2",
+    "4.2.23",
+    "4.3.2",
+    "4.4.3",
+    "4.5.15",
+    "5.0.1",
+    "5.1.2",
+    "5.2.2"
+  ],
+  "recorded_vertices": 68185,
+  "timings": {
+    "old": {
+      "median_ms": 1.8177704914705828,
+      "p95_ms": 2.1858339896425605
+    },
+    "new": {
+      "median_ms": 2.0495214994298294,
+      "p95_ms": 2.3600409913342446
+    },
+    "new_repeat": {
+      "median_ms": 1.9817290012724698,
+      "p95_ms": 2.2276660019997507
+    },
+    "old_repeat": {
+      "median_ms": 1.7224789917236194,
+      "p95_ms": 2.031790994806215
+    }
+  },
+  "method": "Integrate positive depth-profile stretch; preserve full-strength transform and lateral weights",
+  "preserved": [
+    "Exact default and clipping",
+    "Artistic safeguard",
+    "shared companion bounds",
+    "custom curve data",
+    "animation paths",
+    "shadow source attributes",
+    "view update scheduling"
+  ],
+  "limits": [
+    "Depth-order guarantee holds for depth-only profiles with uniform base influence in the qualified affine/front radial domain, not arbitrary spatial masks.",
+    "Diagnostic BVH pairs include source overlaps and are not proof of zero self-intersections.",
+    "Gray CPU renders use recorded geometry; not production MToon captures.",
+    "Geometry cost is measured separately from live viewport FPS.",
+    "Physical Windows GPU acceptance remains separate; no renderer/native policy changed."
+  ]
+}

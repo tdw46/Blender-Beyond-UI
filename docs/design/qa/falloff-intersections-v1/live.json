@@ -1,0 +1,46 @@
+{
+  "schema": 19,
+  "settings_preserved": true,
+  "scene_saved": false,
+  "dirty_before": true,
+  "dirty_after": true,
+  "meshes": [
+    [
+      "belt.001",
+      3616
+    ],
+    [
+      "body.001",
+      42656
+    ],
+    [
+      "NeckPlate.001",
+      3964
+    ],
+    [
+      "wrists.001",
+      2292
+    ],
+    [
+      "head_.002",
+      12913
+    ],
+    [
+      "Hair.002",
+      1367
+    ],
+    [
+      "Hair.003",
+      1377
+    ]
+  ],
+  "native_owner": true,
+  "renderer_error": "",
+  "modals": [
+    [
+      "BUIB3FD05C0630E920E_OT_input",
+      "BVT_OT_spring_simulation_engine",
+      "BVT_OT_shoost_canvas_input"
+    ]
+  ]
+}

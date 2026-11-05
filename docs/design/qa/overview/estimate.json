@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-04 \u2014 shadow portability and curve editing merged; live Metal reload verified; Windows handoff ready",
+  "reviewed": "2026-11-04 \u2014 falloff depth-fold repair implemented, runtime-tested and installed in Uraraka",
   "remaining_turns": [
-    2,
-    3
-  ],
-  "implementation_turns": [
     1,
     2
   ],
+  "implementation_turns": [
+    0,
+    0
+  ],
   "integration_qa_turns": [
     1,
-    1
+    2
   ],
   "active_hours": [
-    2,
-    5
+    1,
+    3
   ],
   "confidence": "Low: remaining integration and hardware qualification estimate, not a guarantee.",
-  "basis": "Closed curve insertion/removal with 466 unit tests and real CurveMap tests on Blender 4.2/5.2. Closed three shared shadow-map defects, with 449 renderer unit tests, fresh Metal GPU/output/lifecycle/admission checks and matched performance gates. Merged/pushed all affected primary branches; loaded updated packages in live Uraraka, native owner active with no reported error, scene unsaved. Reduced remaining budget for completed curve/shadow work. Falloff self-intersection repair remains implementation scope; Windows hardware/native requalification and live cadence remain separate QA gates.",
+  "basis": "Closed falloff depth-order implementation: 77 lens/profile cases pass on Blender 4.0 and every release family 4.2 through 5.2; shared-companion, saved-curve/animation migration and animated-shadow checks pass. Recorded 68,185-vertex Uraraka comparison has diagnostic CPU renders and matched warm geometry timings; installed in live dirty scene without saving. Remaining budget reduced to hardware/user acceptance and full-size cadence. No claim of arbitrary-mask collision freedom.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Falloff repair: four diagnostic CPU renders and two comparisons from recorded Uraraka geometry, not production MToon/material or motion GIF captures. Live schema/finite geometry/shadow-source/native-owner readback verified. No physical Windows GPU capture.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: Metal exercises geometric and map outputs; Windows Vulkan/OpenGL hardware checks remain open.",
     "Animated shadow capture: geometry/runtime and completed output tests, no new UI screenshot/GIF or broad visual acceptance. Existing glass/motion is unchanged.",
     "Offscreen shadow acceleration: 96 pixel-identical matched 640\u00d7480 orbit buffers and fresh Metal timings, 12 recorded-geometry cases and 162 material cases. No full-size live viewport FPS, GIF or physical Windows qualification of the new gated path. Private scene arrays remain untracked.",
@@ -519,7 +520,7 @@
       "turns": 1
     }
   ],
-  "remaining_work": "Repair and validate forced-perspective falloff self-intersection without changing the accepted full-strength transform or realtime scheduling. Run physical Windows Vulkan/OpenGL shadow capture acceptance and source-bound native requalification using the published handoff. Full-size live viewport cadence and the intermittent broad billboard affine-copy fixture remain QA. No new core capture implementation remains.",
+  "remaining_work": "Physical Windows Vulkan/OpenGL acceptance and source-bound shadow native requalification, user review of the installed falloff transition, and full-size viewport cadence. Retain the earlier intermittent broad billboard affine-copy fixture as a QA item. No planned curve/shadow/falloff implementation remains.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -583,8 +584,8 @@
     }
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Shadow portability and curve editing merged; falloff repair and Windows qualification pending",
-  "latest_review": "../shadow-capture-v1/index.html",
+  "checkpoint": "Falloff depth-order repair installed; physical Windows and live acceptance remain",
+  "latest_review": "../falloff-intersections-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-03",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -657,6 +658,10 @@
     {
       "batch": "Portable captured-shadow follow-up and curve editing",
       "details": "Closed and merged: captured bounds in mixed GPU/CPU fits, GPU source revision invalidation, render-job framebuffer ownership, click-to-add and visible remove curve actions. Fresh Metal native proof installed after measured gates; complete live dependency reload verified. Windows prompt delivered; physical Vulkan/OpenGL and Windows native proof remain unqualified. No version bumps."
+    },
+    {
+      "batch": "Falloff depth-order repair",
+      "details": "Closed: integrated depth stretch removes the demonstrated falloff fold while preserving the full-strength warp, retained custom curves and scheduling. Schema migration and all asset branches validated; roughly 0.25 ms geometry cost at 68,185 vertices. General arbitrary-mask collision solving is not claimed."
     }
   ],
   "windows_wizard_click_through": {
