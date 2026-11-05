@@ -50,5 +50,6 @@
     "One initial 5.2.2 broad billboard fixture failed in its separate affine-copy assertion after the shadow checks passed. The identical candidate then passed twice; checkpoint control passed twice. No causal diagnosis or broad flake-free suite claim.",
     "Capture preserves positions, not arbitrary removed topology; later topology changes may alter/drop attributes.",
     "No new screenshot/GIF or user visual acceptance claimed."
-  ]
+  ],
+  "user_acceptance": "2026-11-04: accepted in live Uraraka; checkpoint before curve editing and falloff-boundary changes."
 }
