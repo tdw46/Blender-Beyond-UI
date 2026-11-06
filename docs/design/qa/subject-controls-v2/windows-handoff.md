@@ -10,8 +10,9 @@ There are no platform-specific joystick, responsive-layout or curve-owner paths.
 The native bridge sources, binaries, exact-build fingerprints, Windows signing
 admission, LF rules, Vulkan/OpenGL routing and no-focus runner are unchanged.
 
-Automated dispatch: **Subject controls compatibility** takes an exact CamKeys
-commit. It runs packaged native admission/context actions, transition curves,
+Automated dispatch in the private CamKeys repo: **Subject controls Windows
+compatibility** takes an exact public BUI test-harness commit and checks the
+current CamKeys commit with its own repository token. It runs packaged native admission/context actions, transition curves,
 responsive widths, subject geometry and asset loading on Windows Blender
 4.2.23, 4.3.2, 4.4.3, 4.5.15, 5.0.1, 5.1.2 and 5.2.2. Separate Linux software-GPU
 jobs execute the actual inset/icon/glass shaders on OpenGL and Vulkan. These
@@ -38,3 +39,8 @@ glass, both inset modes and recolored two-layer icons. 493 pure Python tests pas
 (one skipped). No extra per-frame shader/texture creation was introduced.
 Official versioned GPU/API pages could not be retrieved during this audit
 (HTTP 402/403); exact installed-runtime execution is the evidence used here.
+
+The initial public-repository consumer dispatch stopped at checkout because its
+scoped token cannot read private CamKeys. Consumer CI now lives in CamKeys; no
+new cross-repository secret or credential grant is required. The first GPU run
+passed both software backends: BUI Actions run 42256503879.
