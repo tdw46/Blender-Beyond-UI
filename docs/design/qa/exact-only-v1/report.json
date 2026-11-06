@@ -1,0 +1,1151 @@
+{
+  "camkeys_commit": "6137e9b6bb10a29727bddcaafae3e1a733512e01",
+  "version_bumps": false,
+  "schema": 34,
+  "mac": [
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "nodes_before": 1357,
+      "nodes_after": 1065,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "4.3.2",
+      "nodes_before": 1357,
+      "nodes_after": 1065,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "4.4.3",
+      "nodes_before": 1357,
+      "nodes_after": 1065,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "4.5.15 LTS",
+      "nodes_before": 1363,
+      "nodes_after": 1066,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "5.0.1",
+      "nodes_before": 1363,
+      "nodes_after": 1066,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "5.1.2",
+      "nodes_before": 1363,
+      "nodes_after": 1066,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "nodes_before": 1363,
+      "nodes_after": 1066,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 57
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    }
+  ],
+  "live": {
+    "passed": true,
+    "active_modifiers": 13,
+    "scene_state_preserved": true,
+    "saved": false
+  },
+  "windows": {
+    "run": "https://github.com/tdw46/CamShapeMatic/actions/runs/42264782191",
+    "status": "success",
+    "checks": 49,
+    "results": [
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "4.2.23 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "5.1.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "5.0.1",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "5.2.2 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "4.3.2",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "4.4.3",
+        "passed": true
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_area",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "exact-only",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_asset_library",
+        "version": "4.5.15 LTS",
+        "passed": true
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "version": "4.5.15 LTS",
+        "passed": true
+      }
+    ]
+  },
+  "limits": [
+    "No new screenshot, GIF, GPU performance or visual acceptance claim.",
+    "No native bridge or Metal/Vulkan/OpenGL shader changes.",
+    "Exact versioned API pages could not be retrieved (HTTP 402); affected APIs exercised on installed 4.2 through 5.2 runtimes.",
+    "Legacy saved inputs are inert compatibility data; fresh graphs have no Artistic inputs or evaluation nodes."
+  ],
+  "historical_depth_migration": {
+    "blender_4_2": true,
+    "blender_5_2": true,
+    "actions": "Validate remapped paths; migrated Actions may be private copies."
+  }
+}
