@@ -1,0 +1,156 @@
+{
+  "schema": 26,
+  "checkpoint": {
+    "Beyond UI": "6f4ac69",
+    "CamKeys": "3222b38831c0751ac2a5ca5f66df080b91e495a0"
+  },
+  "camera_lens_mm": 15,
+  "apparent_lens_mm": 250,
+  "live_modifiers_verified": 13,
+  "live_body_vertices": 24526,
+  "source_body_max_projection": 20.60239,
+  "revised_body_max_projection": 1.07547736,
+  "revised_body_min_depth": 0.01816010475,
+  "clip_start": 0.01,
+  "matrix": [
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    }
+  ],
+  "performance": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "cases": 14,
+    "points": 32001,
+    "maximum_projection": 0.16178542375564575,
+    "minimum_depth": 0.01370781660079956,
+    "baseline_parity_cases": 42,
+    "timings": {
+      "old": {
+        "median_ms": 2.163917029974982,
+        "p95_ms": 2.9898329521529377
+      },
+      "new": {
+        "median_ms": 2.0985415030736476,
+        "p95_ms": 2.830042038112879
+      },
+      "new_repeat": {
+        "median_ms": 2.1038755076006055,
+        "p95_ms": 2.633041003718972
+      },
+      "old_repeat": {
+        "median_ms": 2.587499504443258,
+        "p95_ms": 3.843582991976291
+      }
+    }
+  },
+  "limitations": [
+    "Physical Windows hardware replay remains open.",
+    "CPU Geometry Nodes fixture timings are not whole-scene viewport FPS.",
+    "Near-orthographic protection intentionally changes thickness and partial-falloff projection in the foreground; it is not an exact-volume guarantee there.",
+    "No scene save was issued by automation. User continued navigating, changing lens and saving after the matched captures."
+  ],
+  "media": "Matched actual Metal camera-region PNGs and comparison; no motion GIF."
+}

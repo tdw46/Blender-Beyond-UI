@@ -1,0 +1,165 @@
+{
+  "schema": 27,
+  "camera_mm": 15,
+  "apparent_mm": 250,
+  "checkpoint": {
+    "beyond_ui": "6f4ac69",
+    "camkeys": "3222b38"
+  },
+  "change": "Reciprocal-magnification falloff in the 215-250 mm protection regime; native and full optical endpoints retained.",
+  "matrix": [
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.2.23 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.3.2",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.4.3",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "4.5.15 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.0.1",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "blender_long_lens_partial.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "blender_plane_triangles.py",
+      "passed": true
+    },
+    {
+      "version": "5.2.2 LTS",
+      "fixture": "ck_asset_wrapper.py",
+      "passed": true
+    }
+  ],
+  "performance_and_endpoints": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "cases": 14,
+    "points": 32001,
+    "maximum_projection": 0.28371676802635193,
+    "minimum_depth": 0.01370781660079956,
+    "baseline_parity_cases": 36,
+    "falloff_foreground": [
+      0.6002479195594788,
+      0.3519701063632965,
+      0.24898402392864227,
+      0.19262278079986572,
+      0.15706808865070343
+    ],
+    "falloff_background": [
+      0.10004131495952606,
+      0.10853557288646698,
+      0.11860611289739609,
+      0.1307366043329239,
+      0.1456310749053955
+    ],
+    "timings": {
+      "old": {
+        "median_ms": 2.052271505817771,
+        "p95_ms": 2.5523339863866568
+      },
+      "new": {
+        "median_ms": 2.020395506406203,
+        "p95_ms": 2.457333030179143
+      },
+      "new_repeat": {
+        "median_ms": 2.130458509782329,
+        "p95_ms": 2.7691670111380517
+      },
+      "old_repeat": {
+        "median_ms": 2.180583484005183,
+        "p95_ms": 2.7576250140555203
+      }
+    }
+  },
+  "limitations": [
+    "Partial influence blends toward native perspective; it is not a guarantee of the exact 250 mm shape for every limb at every weight.",
+    "Global volume normalization remains; exact local volume is not guaranteed in falloff/protected regions.",
+    "Foreground can extend outside the camera frame as native apparent size returns.",
+    "Physical Windows GPU replay and broader user motion acceptance remain open.",
+    "No automated save or reset of the live scene."
+  ]
+}

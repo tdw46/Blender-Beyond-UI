@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-05 \u2014 file-switch rendering resources repaired",
+  "reviewed": "2026-11-05 \u2014 depth-aware high-lens falloff",
   "remaining_turns": [
     0,
     1
@@ -16,8 +16,8 @@
     0,
     2
   ],
-  "confidence": "Implementation and recorded Mac views verified; broader user motion review and physical Windows replay remain separate.",
-  "basis": "User authorized the cheaper bounded deformation correction. Schema 25 closes the demonstrated outer-teeth defect in saved and matched live Uraraka views with unchanged topology and shadow captures. 56 versioned geometry/runtime/migration checks pass. No blanket subdivision or renderer changes.",
+  "confidence": "Recorded Metal hand/foot view and execution matrix verified; broad motion review and physical Windows replay remain separate.",
+  "basis": "The original hand/foot stretch repair exposed a new user requirement: falloff must retain depth-dependent apparent size, rather than making the foreground uniformly flat. This additional scope is implemented and execution-tested as schema 27. Remaining 0\u20131 turn / 0\u20132 active hours covers targeted user-motion/Windows replay, excluding waits; no estimated hardware result is implied.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,8 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Depth-aware high-lens falloff: matched actual Metal PNGs; foreground extends beyond frame as native size returns. No dedicated motion GIF or physical Windows replay.",
+    "All Might high-lens partial falloff: matched actual Metal before/after PNGs; no dedicated motion GIF or physical Windows replay.",
     "File-load resources: live All Might before/after PNGs and repeated-file raster tests; no dedicated GIF or physical Windows replay.",
     "Live curve preview: actual internal input/timer/operator and evaluated-mesh checks across 4.2\u20135.2; no dedicated visual GIF or physical Windows replay. Live Uraraka reload preserves curves and view.",
     "Affine clipping band: matched live 93.4 mm screenshots and saved 142/239 mm Metal diagnostics. No continuous-zoom GIF, whole-scene FPS measurement or physical Windows run for this revision.",
@@ -93,7 +95,7 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "Fixed stale panel drawing resources after opening another blend file. Live All Might text restored; source/installed vendor manifests verified. Three real file opens per Blender family (4.2\u20135.2) retain identical body/bold text pixels; ordinary refresh stays cached, failed-load completion recovers, and no owned test process takes focus.",
+  "latest_progress": "Checkpoint published: BUI 6f4ac69 / CamKeys 3222b38. Schema 27 installed in All Might: high-lens falloff restores native near/far apparent size through reciprocal magnification, with separate plane protection. 21 versioned fixtures and 36 baseline cases pass; retained evaluation remains about 2.1 ms. Source/installed edits are local pending review.",
   "estimate_review": "New file-switch regression scope is implemented and Mac execution/visual recovery verified. Remaining implementation stays 0 turns; existing 0\u20131 optional user/Windows review allowance remains. No new performance or Windows hardware acceptance claimed.",
   "time_summary": "Optional remaining review/requalification: 0\u20132 active hours, excluding user wait. This is an uncertain allowance, not measured duration or a guarantee.",
   "observed_pace": {
@@ -576,7 +578,9 @@
       "work": "BUI file-load host/font resource lifecycle repair, live All Might recovery and seven-version repeat-open raster tests",
       "evidence": "docs/design/qa/file-load-resources-v1/report.json",
       "turns": 1
-    }
+    },
+    "Schema 26: finite partial-falloff near-plane projection, repaired hand and foot, 21 versioned fixtures and 42 baseline parity checks.",
+    "Schema 27: reciprocal magnification restores native near/far falloff endpoints without losing full optical influence; 21 versioned runs and 36 baseline cases pass."
   ],
   "remaining_work": "User motion acceptance and physical Windows replay for schema 25 clipping and live curve preview. No known remaining implementation task in the recorded defects; arbitrary topology/mask collision freedom is not claimed.",
   "newly_identified_work": [
@@ -651,11 +655,13 @@
     {
       "batch": "Behind-plane-only discard experiment",
       "details": "User-requested three-loop padded rear removal tested on saved Uraraka. Pixel-identical output rules it out as the teeth repair. No production geometry or renderer modification."
-    }
+    },
+    "Closed this turn: All Might 15 mm / 250 mm partial-falloff residual stretch, including foot regression from first candidate.",
+    "Closed additional user-requested scope: preserve depth-dependent apparent size under partial high-lens falloff. Exact local 250 mm appearance at arbitrary weights is not claimed."
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "Combined Mac/Windows integration validation in progress",
-  "latest_review": "../file-load-resources-v1/index.html",
+  "latest_review": "../allmight-falloff-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-05",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
