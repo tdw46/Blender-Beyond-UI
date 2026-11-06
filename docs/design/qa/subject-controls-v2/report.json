@@ -1284,6 +1284,749 @@
         ]
       }
     ],
-    "windows": "CI queued after publication; hardware validation separate"
+    "windows": "42/42 checks passed across seven Windows Blender release families; physical NVIDIA visual/performance replay remains open.",
+    "remote_gpu": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "backend": "VULKAN",
+        "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "526da34d04feb537472990eb9b47663baf3bd2e55883b14ba14858b458d6c82b",
+          "1eb2c0bc07719bd8343e1eb2236c1509e43b542324064b861ccb22f670317bae"
+        ],
+        "native_framebuffer_copy": null,
+        "host_integration": false,
+        "visual_acceptance": false,
+        "inset_materials": true,
+        "duotone_accents": true,
+        "retained_icon_textures": true,
+        "feature_hashes": [
+          "0e967e80fce625da86d25c440c359d0492daa22ca38f386593c1950075a2dc6f",
+          "5c36c2b58c458a940f3b046946cfad8474b23e41c5084635d38a03e62282e5a1"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "4.2.0",
+        "backend": "OPENGL",
+        "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "glass": true,
+        "retained_resources": true,
+        "hashes": [
+          "99abf630da87703074f2caf2a6a06c3e4127c9583233d86c0222d8c95a317513",
+          "cf42119a7ede0c08d56e51e6b2dbf247440626d0a83204a39ded8220b7116eaa"
+        ],
+        "native_framebuffer_copy": null,
+        "host_integration": false,
+        "visual_acceptance": false,
+        "inset_materials": true,
+        "duotone_accents": true,
+        "retained_icon_textures": true,
+        "feature_hashes": [
+          "0e967e80fce625da86d25c440c359d0492daa22ca38f386593c1950075a2dc6f",
+          "5c36c2b58c458a940f3b046946cfad8474b23e41c5084635d38a03e62282e5a1"
+        ]
+      }
+    ],
+    "gpu_run": "https://github.com/tdw46/Blender-Beyond-UI/actions/runs/42256503879",
+    "pure_python_run": "https://github.com/tdw46/Blender-Beyond-UI/actions/runs/42256397064",
+    "windows_consumer_run": "https://github.com/tdw46/CamShapeMatic/actions/runs/42256908454",
+    "windows_checkout_correction": "Initial public CI lacked private consumer access; relocated to owning repository without new secrets.",
+    "mac_asset_lifecycle": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "asset_lifecycle": true
+    },
+    "mac_native_admission": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "build": "d13f752e3b9c",
+      "platform": "darwin-arm64",
+      "portable": true,
+      "context_restored": true,
+      "dynamic_enum": true,
+      "property_state_abi": true,
+      "driver_clipboard": true,
+      "favorites": true,
+      "custom_property_context": true,
+      "visual_qa": false
+    },
+    "windows_results": [
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "build": "d0cbe84903e8",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 5.147299999975985,
+              "p95_ms": 5.302599999936319
+            },
+            "1": {
+              "median_ms": 5.417050000005474,
+              "p95_ms": 5.636099999946964
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "4.2.23 LTS",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "build": "32f5fdce0a0a",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 5.142249999977366,
+              "p95_ms": 5.880099999956201
+            },
+            "1": {
+              "median_ms": 5.219000000010965,
+              "p95_ms": 5.929500000036114
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "4.3.2",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "build": "802179c51ccc",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 6.061349999995969,
+              "p95_ms": 6.498099999987517
+            },
+            "1": {
+              "median_ms": 6.043449999992845,
+              "p95_ms": 6.445800000022928
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "build": "5afeabba6097",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 8.160999999972773,
+              "p95_ms": 8.870199999989836
+            },
+            "1": {
+              "median_ms": 8.060049999983221,
+              "p95_ms": 8.847000000002936
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "4.5.15 LTS",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "build": "a3db93c5b259",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 7.991750000030606,
+              "p95_ms": 10.444200000051751
+            },
+            "1": {
+              "median_ms": 6.925149999972291,
+              "p95_ms": 7.261999999968793
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "build": "ec6e62d40fa9",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 5.473249999965901,
+              "p95_ms": 5.777100000045721
+            },
+            "1": {
+              "median_ms": 5.130049999991115,
+              "p95_ms": 5.639999999971224
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "5.1.2",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      },
+      {
+        "fixture": "blender_asset_library",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "asset_lifecycle": true
+        }
+      },
+      {
+        "fixture": "blender_joystick_fit",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "resize_checks": 562,
+          "reset_header_threshold": 343,
+          "with_extra_padding": 383,
+          "states": [
+            "view_planes.compact",
+            "view_planes.header"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_portable_bridge",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "build": "d13f752e3b9c",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        }
+      },
+      {
+        "fixture": "blender_subject_area",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "radial_cases": 12,
+          "minimum_projected_slope": 0.04806518554678211,
+          "head_back_uniform_max_errors": [
+            0.0,
+            0.0
+          ],
+          "uniform_front_core_error": 3.2501220701419697e-06,
+          "outside_front_area_error": 5.6457519548303026e-06,
+          "points": 32001,
+          "timings": {
+            "0": {
+              "median_ms": 4.0561499999967054,
+              "p95_ms": 4.143900000030953
+            },
+            "1": {
+              "median_ms": 4.132249999997839,
+              "p95_ms": 4.362399999990885
+            }
+          }
+        }
+      },
+      {
+        "fixture": "blender_subject_size_ui",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "checks": [
+            "Independent sizing and fixed axis radius",
+            "Transition defaults and reusable curve panel",
+            "Three velocity pads and drag cancellation",
+            "Lens round-trip retains settings and geometry"
+          ]
+        }
+      },
+      {
+        "fixture": "blender_transition_curves",
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "directions": [
+            "front",
+            "back"
+          ],
+          "preset_graphs": 12,
+          "retained_context": true,
+          "segmented_exact_owner": true,
+          "mid_drag_custom": true,
+          "locked_endpoint": true,
+          "context_copy_readable": true,
+          "context_write_blocked": true
+        }
+      }
+    ]
   }
 }

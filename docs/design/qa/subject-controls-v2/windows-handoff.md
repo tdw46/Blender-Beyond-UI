@@ -44,3 +44,17 @@ The initial public-repository consumer dispatch stopped at checkout because its
 scoped token cannot read private CamKeys. Consumer CI now lives in CamKeys; no
 new cross-repository secret or credential grant is required. The first GPU run
 passed both software backends: BUI Actions run 42256503879.
+
+## Completed automated qualification
+
+- [Windows consumer run 42256908454](https://github.com/tdw46/CamShapeMatic/actions/runs/42256908454): **42/42 passed**, six fixtures on each of seven Blender versions.
+- [Shared renderer run 42256503879](https://github.com/tdw46/Blender-Beyond-UI/actions/runs/42256503879): OpenGL 4.2.0 and Vulkan 5.2.2 software GPU jobs **passed**; the initial private checkout jobs failed before execution and were replaced by the consumer run above.
+- [Cross-platform pure Python run 42256397064](https://github.com/tdw46/Blender-Beyond-UI/actions/runs/42256397064): Mac/Windows/Linux **passed** (493 tests, one skip).
+- Local Metal 5.2.2: native framebuffer copy, retained glass, both inset modes, duotone colors and retained textures **passed**. No focus activation in the audit.
+
+Production versions tested: BUI `1870ea0a9e81f191ab9623cf267978afe7ad96c1`,
+CamKeys `75a4997f59def987fcf58ef991329ec7943b615a` (Windows CI checkout
+`f75651d` adds only its workflow). Later publication commits update QA records.
+No package version bumps, native certificate relaxation or changes to BVT.
+Physical NVIDIA appearance, host composition and viewport performance are still
+manual acceptance items; the software renderer is not that hardware evidence.

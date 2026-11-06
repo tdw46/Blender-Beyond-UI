@@ -16,7 +16,7 @@
     0,
     1
   ],
-  "confidence": "Picker implementation and actual popup geometry updates verified; optional acceptance and physical Windows replay remain.",
+  "confidence": "Implementation and automated cross-platform qualification complete. Physical GPU acceptance remains unverified.",
   "basis": "Closed the newly requested joystick, transition curves, per-control accents, inset material and configurable compact-layout work. No additional implementation turn is budgeted for these controls; retain one optional acceptance/replay turn.",
   "excludes": [
     "user review waits",
@@ -102,8 +102,8 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "493 unit tests, lint, all-family Mac curve/layout fixtures and expanded Metal inset/icon/glass execution pass. Native Windows bridge and backend safeguards unchanged; portable Windows consumer and software Vulkan/OpenGL CI added for this checkpoint.",
-  "estimate_review": "Closed the planned 1\u20132 picker implementation turns and newly reported transition owner bug. Remaining 0\u20131 optional review/replay turn; unrelated progressive high-lens deformation request remains separate.",
+  "latest_progress": "Published the view-plane controls, themed picker, and curve-owner fix to BUI main and CamKeys master. Windows 4.2\u20135.2: 42/42 consumer/native checks; Metal plus software Vulkan/OpenGL shader checks passed; 493 unit tests on Mac/Windows/Linux. Installed CamKeys matches published master.",
+  "estimate_review": "Closed planned implementation, publication and seven-family Windows execution scope. Retain 0\u20131 optional hardware acceptance/review turn; no additional implementation budget claimed.",
   "time_summary": "0\u20131 active hour for optional review/replay, an uncertain forecast rather than measured duration.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -628,7 +628,7 @@
       "turns": 1
     }
   ],
-  "remaining_work": "Windows CI completion and optional physical NVIDIA Vulkan/OpenGL replay. Earlier progressive true-lens-to-255mm request remains separate.",
+  "remaining_work": "Optional physical Windows/NVIDIA Vulkan/OpenGL appearance, host composition and performance acceptance. Earlier progressive true-lens-to-255mm request remains separate.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
