@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<title>Forced Perspective</title>
+<g id="accent_2" data-color-role="accent_2" stroke="#EF7965"><path d="M11 9 31 36M9 28 31 15M13 38 6 47 31 53 39 58 34 43 32 22 36 20 41 34 40 57M6 47 7 52 32 60 40 57M19 44 25 47 34 43"/><circle cx="61" cy="35" r="2" fill="#EF7965"/></g>
+<g id="accent" data-color-role="accent" stroke="#2FB7A2"><ellipse cx="21" cy="22" rx="12" ry="18" transform="rotate(-36 21 22)"/><path stroke-width="1.5" d="M29 9 61 35 40 57M34 23 61 35 37 45"/></g>
+</svg>

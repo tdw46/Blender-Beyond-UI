@@ -5,6 +5,7 @@ from copy import deepcopy, copy
 from math import isfinite
 
 _LAYOUT = {
+    "responsive",
     "padding",
     "margin",
     "gap",
@@ -27,6 +28,9 @@ _LAYOUT = {
 }
 _NUMERIC = {"units", "precision", "value_width", "slider", "disabled_accent"}
 _VISUAL = {
+    "enum_style",
+    "curve_lock_start", "curve_lock_end",
+    "accent_slot",
     "colors",
     "color",
     "background",
@@ -102,10 +106,19 @@ def normalize(*presets, **options):
     if unknown:
         raise ValueError("Unsupported style properties: " + ", ".join(sorted(unknown)))
     for key, value in tuple(result.items()):
-        if key in {"padding", "margin", "button_padding", "list_row_padding"}:
+        if key == 'enum_style':
+            if value not in {'menu', 'segment'}:raise ValueError('enum_style must be menu or segment')
+        elif key in {"curve_lock_start", "curve_lock_end"}:
+            if type(value) is not bool:raise ValueError(key+" must be Boolean")
+        elif key == "responsive":
+            from .responsive import normalize_rules
+            result[key] = normalize_rules(value)
+        elif key in {"padding", "margin", "button_padding", "list_row_padding"}:
             result[key] = _edges(key, value)
             if key == "list_row_padding" and max(result[key]) > 24:
                 raise ValueError("list_row_padding edges must be at most 24")
+        elif key == "accent_slot" and (type(value) is not int or not 1 <= value <= 8):
+            raise ValueError("accent_slot must be an integer in 1..8")
         elif key == "list_row_align" and value not in {"top", "center", "bottom"}:
             raise ValueError("list_row_align must be top, center or bottom")
         elif key == "list_item_layout" and value not in {"auto", "authored"}:
@@ -267,6 +280,8 @@ def prepare_control(control, values):
 
 
 def apply_control(control, values, prepared=None):
+    if 'enum_style' in values and control.kind == 'button' and 'selected' in control.options:
+        control.options['menu_option'] = values['enum_style'] == 'menu'
     from .stylesheet import StyleSheet
 
     merged, numeric = prepared or prepare_control(control, values)
@@ -282,6 +297,10 @@ def apply_control(control, values, prepared=None):
         widget = control.options["widget"]
         if hasattr(widget, "row_height"):
             widget.style_row_height = values["list_row_height"]
+    if control.kind == "widget":
+        widget=control.options["widget"]
+        for key in ("curve_lock_start", "curve_lock_end"):
+            if key in values and hasattr(widget,key):setattr(widget,key,values[key])
     if "list_rows" in values and control.kind == "widget":
         control.options["widget"].style_visible_rows = values["list_rows"]
     if "list_item_layout" in values and control.kind == "widget":
@@ -322,6 +341,8 @@ def apply_control(control, values, prepared=None):
 
 def apply(layout, values, scope):
     from .canvas import Group
+    from .responsive import restore
+    restore(layout.canvas)
 
     if scope == "last" and not layout.group.children:
         raise ValueError("style() needs a preceding item on this layout")
@@ -361,6 +382,11 @@ def apply(layout, values, scope):
         layout.group.children[-1] = wrapper
         wrapper.children.append(target)
         target = wrapper
+    rules=geometry.pop("responsive",None)
+    if rules is not None:
+        target.options['_responsive_rules']=rules
+        if not hasattr(layout.canvas,'_responsive_targets'):layout.canvas._responsive_targets=[]
+        if target not in layout.canvas._responsive_targets:layout.canvas._responsive_targets.append(target)
     target.options.update(geometry)
     target.options["_inline_geometry"] = True
     target.options["_style_defaults"] = normalize(

@@ -1,0 +1,252 @@
+{
+  "dimensions": [
+    256,
+    1152
+  ],
+  "entries": {
+    "_bui_duotone:artistic:0": [
+      "atlas",
+      [
+        0,
+        0,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:artistic:1": [
+      "atlas",
+      [
+        128,
+        0,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:exact:0": [
+      "atlas",
+      [
+        0,
+        128,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:exact:1": [
+      "atlas",
+      [
+        128,
+        128,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:falloff:0": [
+      "atlas",
+      [
+        0,
+        256,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:forced-perspective:0": [
+      "atlas",
+      [
+        0,
+        384,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:forced-perspective:1": [
+      "atlas",
+      [
+        128,
+        384,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:help:0": [
+      "atlas",
+      [
+        0,
+        512,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:help:1": [
+      "atlas",
+      [
+        128,
+        512,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:lens:0": [
+      "atlas",
+      [
+        0,
+        640,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:lens:1": [
+      "atlas",
+      [
+        128,
+        640,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:lock:0": [
+      "atlas",
+      [
+        0,
+        768,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:lock:1": [
+      "atlas",
+      [
+        128,
+        768,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:reset:0": [
+      "atlas",
+      [
+        0,
+        896,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:subject-size:0": [
+      "atlas",
+      [
+        0,
+        1024,
+        128,
+        128
+      ],
+      true
+    ],
+    "_bui_duotone:subject-size:1": [
+      "atlas",
+      [
+        128,
+        1024,
+        128,
+        128
+      ],
+      true
+    ]
+  },
+  "layers": {
+    "BUI_ARTISTIC": [
+      [
+        "_bui_duotone:artistic:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:artistic:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_EXACT": [
+      [
+        "_bui_duotone:exact:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:exact:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_FALLOFF": [
+      [
+        "_bui_duotone:falloff:0",
+        "accent_2"
+      ]
+    ],
+    "BUI_FORCED_PERSPECTIVE": [
+      [
+        "_bui_duotone:forced-perspective:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:forced-perspective:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_HELP": [
+      [
+        "_bui_duotone:help:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:help:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_LENS": [
+      [
+        "_bui_duotone:lens:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:lens:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_LOCK": [
+      [
+        "_bui_duotone:lock:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:lock:1",
+        "accent_2"
+      ]
+    ],
+    "BUI_RESET": [
+      [
+        "_bui_duotone:reset:0",
+        "accent"
+      ]
+    ],
+    "BUI_SUBJECT_SIZE": [
+      [
+        "_bui_duotone:subject-size:0",
+        "accent"
+      ],
+      [
+        "_bui_duotone:subject-size:1",
+        "accent_2"
+      ]
+    ]
+  }
+}

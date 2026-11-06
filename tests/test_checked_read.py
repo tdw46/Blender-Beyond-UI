@@ -22,12 +22,15 @@ class CheckedRead(unittest.TestCase):
         self.assertEqual(self.binding.read(), 8)
         self.assertEqual(self.count, 2)
 
-    def test_replaced_owner_and_readonly_property_fail_closed(self):
+    def test_stale_owner_fails_and_readonly_still_displays_without_writes(self):
         self.owner.as_pointer = lambda: 456
         with self.assertRaises(ReferenceError): self.binding.read()
         self.owner.as_pointer = lambda: 123
         self.owner.bl_rna.properties['value'].is_readonly = True
-        with self.assertRaises(ReferenceError): self.binding.read()
+        self.assertEqual(self.binding.read(), 3)
+        self.assertFalse(self.binding.valid())
+        with self.assertRaises(ReferenceError): self.binding.write(7)
+        self.assertEqual(self.owner.value, 3)
         self.owner.bl_rna.properties.clear()
         with self.assertRaises(ReferenceError): self.binding.read()
 

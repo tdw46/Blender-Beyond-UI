@@ -51,7 +51,9 @@ def ensure():
     info.push_constant("VEC4", "upper")
     info.push_constant("VEC4", "params")
     info.vertex_source(
-        "void main(){uv=pos;gl_Position=mvp*vec4(rect.xy+pos*rect.zw,0.,1.);}"
+        "void main(){float pad=(params.z==6.||params.z==7.)?params.w:0.;"
+        "vec2 p=rect.xy-vec2(pad)+pos*(rect.zw+vec2(2.*pad));"
+        "uv=(p-rect.xy)/rect.zw;gl_Position=mvp*vec4(p,0.,1.);}"
     )
     info.fragment_source("""
 vec3 hue(float h) { return clamp(abs(fract(vec3(h)+vec3(0.,2./3.,1./3.))*6.-3.)-1.,0.,1.); }
@@ -68,6 +70,20 @@ void main(){
  if(params.z==4.)c.rgb+=.008*exp(-dot((uv-vec2(.35,.65))*vec2(1.5,2.),(uv-vec2(.35,.65))*vec2(1.5,2.)));
  if(params.z==5.){
   c.a*=smoothstep(-params.y-aa*.5,-params.y+aa*.5,d);
+ }
+ else if(params.z==6.||params.z==7.){
+  float scale=max(params.w/3.,.5);
+  float light=smoothstep(.05,.95,uv.y);
+  float band=exp(-max(-d,0.)/(5.*scale));
+  if(params.z==7.)c=mix(lower,upper,band*.65);
+  float edge=smoothstep(-params.y-aa*.5,-params.y+aa*.5,d);
+  float glow=exp(-pow(max(-d,0.)/(2.2*scale),2.));
+  vec3 rim=clamp(max(lower.rgb,upper.rgb)+vec3(.22+.08*light),vec3(0.),vec3(1.));
+  c.rgb=mix(c.rgb,rim,glow*.28);
+  c=mix(c,vec4(rim,.58+.20*light),edge);
+  float halo=exp(-pow(max(d,0.)/(1.5*scale),2.))*.16;
+  float opacity=c.a*coverage+halo*(1.-coverage);
+  fragColor=vec4(c.rgb,opacity);return;
  }
  else if(params.y>0.){
   float edge=smoothstep(-params.y-aa*.5,-params.y+aa*.5,d);
@@ -107,6 +123,21 @@ def draw(rect, lower, upper=None, *, radius=8.0, border=0.7, mode=0.0, hue=0.0):
 def inset_outline(rect, palette, scale=1.0, radius=6.0):
     """Theme-derived hairline; transparent center preserves the shared glass."""
     draw(rect, palette["edge"], radius=radius * scale, border=0.65 * scale, mode=5.0)
+
+
+def inset(rect, palette, *, scale=1., radius=6., backdrop=None, tint=None, well=False):
+    """Shared light inset material; same cached glass and one retained skin pass."""
+    from . import glass
+    lower = palette.get('inset_lower', palette.get('input', palette['field']))
+    upper = palette.get('inset_upper', palette['field'])
+    if tint is not None and tint != palette.get('input'):
+        # Preserve state/author tint without losing the inset optical treatment.
+        lower = tuple(a*.65+b*.35 for a,b in zip(lower[:3],tint[:3])) + (lower[3],)
+        upper = tuple(a*.65+b*.35 for a,b in zip(upper[:3],tint[:3])) + (upper[3],)
+    if backdrop is not None:
+        glass.lens(backdrop,rect,radius*scale,(0.,0.,0.,0.))
+    draw(rect,lower if well else upper,upper if well else lower,
+         radius=radius*scale,border=.75*scale,mode=7. if well else 6.,hue=3.*scale)
 
 
 def selection_outline(rect, palette, scale=1.0, radius=5.0, opacity=1.0):
@@ -203,7 +234,13 @@ def themed_roles(p):
         base = p[owner][:3] + (lower[3],)
         surfaces[role] = (base, shade(base, delta, upper[3]))
     alpha = lambda role, a: p[role][:3] + (a,)
+    base = p.get('input', p['field'])
+    field = p['field']; text = p['text']
+    lower = tuple(a*.55+b*.35+c*.10 for a,b,c in zip(base[:3],field[:3],text[:3])) + (.48,)
+    upper = tuple(a*.40+b*.36+c*.24 for a,b,c in zip(base[:3],field[:3],text[:3])) + (.54,)
     inks = {
+        "inset_lower": lower,
+        "inset_upper": upper,
         "title": p["text"],
         "edge": alpha("text", 0.55),
         "header_divider": alpha("text", 0.48),

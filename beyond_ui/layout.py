@@ -1497,6 +1497,68 @@ class Layout:
             **self._options(),
         )
 
+    def beyond_joystick(self, data, property=None, *, x=None, y=None,
+                        minimum=(-1.,-1.), maximum=(1.,1.), default=(0.,0.),
+                        size=104., gap=14., fields=True, label='', compact_below=None, compact_size=64., compact_gap=10., fit_group=None, fit_on_wrap=True, mode="POSITION", speed=.35, velocity_curve=(0.,0.), edge_speed_multiplier=1., edge_start=.7, fine_speed_scale=.25):
+        from .widgets.joystick import Joystick, pair_binding
+        from .style_api import style
+        if property:
+            meta=data.bl_rna.properties[property]
+            if meta.type!='FLOAT' or meta.array_length!=2:
+                raise ValueError('Joystick requires a size-2 FloatVectorProperty')
+            binding=self._binding(data,property)
+            axes=tuple(self._binding(data,property,index=i) for i in range(2))
+        else:
+            if any(data.bl_rna.properties[n].type!='FLOAT' or data.bl_rna.properties[n].is_array for n in (x,y)):
+                raise ValueError('Joystick requires two scalar FloatProperties')
+            axes=tuple(self._binding(data,n) for n in (x,y))
+            binding=pair_binding(*axes,self.commit)
+        widget=Joystick(binding,axes=axes,minimum=minimum,maximum=maximum,default=default,mode=mode,speed=speed,velocity_curve=velocity_curve,edge_speed_multiplier=edge_speed_multiplier,edge_start=edge_start,fine_speed_scale=fine_speed_scale)
+        from .responsive import normalize_rules
+        if fit_group is not None and (not isinstance(fit_group,str) or not fit_group or '.' in fit_group):
+            raise ValueError('fit_group must be a nonempty name without dots')
+        fit_name=(fit_group or self._key('joystick_fit')) if fit_on_wrap and label and fields else None
+        def rule(header=False, **values):
+            rules=[] if compact_below is None else [{'max_width':compact_below,'style':values}]
+            if fit_name:
+                rules.append({'when':fit_name+'.compact','style':values})
+                if header:rules.append({'when':fit_name+'.header','style':values})
+            return rules
+        # Validate breakpoints before partially authoring controls.
+        normalize_rules(rule(width=compact_size,gap=compact_gap))
+        def reset_button(column):
+            return column.group.button(column._key('joystick_reset'),'',widget.reset,icon='LOOP_BACK',width=24,height=24,emboss='NONE',context_menu=widget.entries,binding=binding)
+        if label:
+            header=self.row(align=True);style(header,scope='group',gap=4,align_items='center')
+            caption=header.column(align=True);style(caption,scope='group',flex_grow=1)
+            caption.label(text=label);style(caption,font_size=11,color_role='muted',height=18)
+            if fields and (compact_below is not None or fit_name):
+                reset=header.column(align=True)
+                style(reset,scope='group',width=24,display='none',responsive=rule(header=True,display='flex'))
+                reset_button(reset)
+        row=self.row(align=True)
+        style(row,scope='group',gap=gap,align_items='center',flex_wrap=True,responsive=rule(gap=compact_gap))
+        pad=row.column(align=True)
+        style(pad,scope='group',width=size,min_width=size,max_width=size,
+              responsive=rule(width=compact_size,min_width=compact_size,max_width=compact_size))
+        control=pad.group.widget(pad._key('joystick'),widget,context_menu=widget.entries,**pad._options())
+        control.binding=binding
+        if fields:
+            values=row.column(align=True)
+            style(values,scope='group',gap=7,min_width=80,flex_grow=1)
+            for i,axis_label in enumerate(('X','Y')):
+                values.prop(data,property or (x,y)[i],index=i if property else -1,text=axis_label,slider=False)
+                style(values,precision=2,height=26,label_width=18,label_position='left')
+            reset=row.column(align=True)
+            style(reset,scope='group',width=24,responsive=rule(header=True,display='none') if label else [])
+            reset_button(reset)
+            if fit_name:
+                if not hasattr(self.canvas,'_responsive_fit_profiles'):
+                    self.canvas._responsive_fit_profiles=[]
+                self.canvas._responsive_fit_profiles.append({'name':fit_name,'row':row.group,
+                    'parts':(pad.group,values.group,reset.group)})
+        return control
+
     def template_curve_mapping(
         self,
         data,

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<title>Artistic</title>
+<g id="accent_2" data-color-role="accent_2" stroke="#EF7965"><path d="M6 48C15 26 24 27 34 42S49 54 58 40"/></g>
+<g id="accent" data-color-role="accent" stroke="#2FB7A2"><path d="M48 5c1 9 3 11 11 13-8 2-10 4-11 12-2-8-4-10-12-12 8-2 10-4 12-13Z" fill="#2FB7A2" stroke="none"/><circle cx="6" cy="48" r="3" fill="#2FB7A2"/><circle cx="24" cy="32" r="3" fill="#2FB7A2"/><circle cx="44" cy="49" r="3" fill="#2FB7A2"/><circle cx="58" cy="40" r="3" fill="#2FB7A2"/></g>
+</svg>

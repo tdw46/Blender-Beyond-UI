@@ -15,12 +15,41 @@ class CurveMapping(Widget):
         super().__init__()
         self.binding = binding
         self.brush = brush
+        self.curve_lock_start = False
+        self.curve_lock_end = False
+        binding.point_locked = self.point_locked
+        binding.constrain_points = self.constrain_points
         self.evaluate = evaluate
         self.channel = channel
         self.selected = 0
         self.transaction = None
         self._signature = None
         self._samples = ()
+
+    def point_locked(self,index,points=None):
+        points=tuple(self.binding.read()) if points is None else points
+        if not points:return False
+        return ((self.curve_lock_start and index==min(range(len(points)),key=lambda i:points[i][0])) or
+                (self.curve_lock_end and index==max(range(len(points)),key=lambda i:points[i][0])))
+
+    def constrain_points(self,values):
+        if not (self.curve_lock_start or self.curve_lock_end):
+            return tuple(values)
+        before=tuple(self.binding.read());values=list(values)
+        if not before:return tuple(values)
+        for index,point in enumerate(before):
+            if self.point_locked(index,before) and index<len(values):values[index]=point
+        low=min(p[0] for p in before) if self.curve_lock_start else float('-inf')
+        high=max(p[0] for p in before) if self.curve_lock_end else float('inf')
+        for i,(x,y) in enumerate(values):
+            if i>=len(before) or not self.point_locked(i,before):
+                values[i]=(max(low+(1e-6 if self.curve_lock_start else 0),min(high-(1e-6 if self.curve_lock_end else 0),x)),y)
+        return tuple(values)
+
+    def _update(self,values):
+        values=self.constrain_points(values)
+        self.transaction.update(values)
+        return values
 
     def _edit(self):
         factory = getattr(self.binding, "begin_edit", None)
@@ -71,7 +100,7 @@ class CurveMapping(Widget):
                     point = list(values[self.selected])
                     point[self.field] = max(0.0, min(1.0, number(result)))
                     values[self.selected] = tuple(point)
-                    self.transaction.update(tuple(values))
+                    self._update(tuple(values))
                     self._finish()
                 except ValueError:
                     self.text_edit = Text(result)
@@ -85,8 +114,8 @@ class CurveMapping(Widget):
                     max(0.0, min(1.0, (x - a) / w)),
                     max(0.0, min(1.0, 1 - (y - b) / h)),
                 )
+                values=self._update(tuple(values))
                 moved = values[self.selected]
-                self.transaction.update(tuple(values))
                 self.selected = min(
                     range(len(values)),
                     key=lambda i: sum(
@@ -98,7 +127,7 @@ class CurveMapping(Widget):
             return True
         if press and (kind in {"DEL", "BACK_SPACE"} or
                       (kind == "LEFTMOUSE" and contains(CURVE["remove"], x, y))):
-            if len(points) <= 2:
+            if len(points) <= 2 or self.point_locked(self.selected,points):
                 return True
             values = tuple(p for i, p in enumerate(points) if i != self.selected)
             if hasattr(self.binding, "remove"):
@@ -126,6 +155,7 @@ class CurveMapping(Widget):
                 return True
         for i, r in enumerate(CURVE["fields"][:2]):
             if contains(r, x, y) and points:
+                if self.point_locked(self.selected,points):return True
                 self.transaction = self._edit()
                 self.field = i
                 self.text_edit = Text(points[self.selected][i])
@@ -141,10 +171,11 @@ class CurveMapping(Widget):
             )
             px, py = points[self.selected]
             hit = (a + px * w - x) ** 2 + (b + (1 - py) * h - y) ** 2 <= CURVE["point_hit_radius"] ** 2
+            if hit and self.point_locked(self.selected,points):return True
             self.transaction = self._edit()
             if not hit:
                 added = ((x - a) / w, 1 - (y - b) / h)
-                self.transaction.update((*points, added))
+                self._update((*points, added))
                 current = self.binding.read()
                 self.selected = min(range(len(current)), key=lambda i:
                     sum((v - t) ** 2 for v, t in zip(current[i], added)))
@@ -196,7 +227,7 @@ class CurveMapping(Widget):
             )
         p.surface(CURVE["remove"], "button")
         p.text(CURVE["remove"], "−", align="center", size=24,
-               role="text" if len(points) > 2 else "muted")
+               role="text" if len(points) > 2 and not self.point_locked(self.selected,points) else "muted")
         p.surface(self.graph, "graph", 7, 1.4)
         a, b, w, h = self.graph
         for major in (False, True):
@@ -257,6 +288,7 @@ class CurveMapping(Widget):
         if not self.brush:
             p.surface(CURVE["fields"][2])
         label = handle.replace("AUTO_CLAMPED", "Clamped").title() if handle else "Auto"
-        p.text(CURVE["fields"][2], label, inset=18)
+        if self.point_locked(self.selected,points):p.icon("LOCKED",CURVE["fields"][2],size=22,role="muted")
+        else:p.text(CURVE["fields"][2], label, inset=18)
         if not self.brush:
             p.chevron(583, 432, 14)

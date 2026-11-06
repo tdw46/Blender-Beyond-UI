@@ -100,6 +100,8 @@ def curve_mapping(data, property, commit, channel, *, preview=None):
             raise ReferenceError("Curve owner or point identities changed")
         if len(values) < 2:
             raise ValueError("A curve requires at least two points")
+        constraint=getattr(binding,"constrain_points",None)
+        if constraint:values=constraint(values)
         selected = curve()
         handles = [p.handle_type for p in tracked[current_index()]]
         # CurveMapPoint is a packed array: resize invalidates EVERY old wrapper.
@@ -139,8 +141,15 @@ def curve_mapping(data, property, commit, channel, *, preview=None):
                 commit=commit,
             )
             binding.context.update = changed
+            if component != 2 and point_locked(index):
+                # Keep readable developer/copy actions, disable writes to the anchor.
+                binding.set=lambda value: (_ for _ in ()).throw(ValueError("Curve endpoint is locked"))
+                return replace(hit,binding=binding,editable=lambda:False)
             return replace(hit, binding=binding)
         return hit
+
+    def point_locked(index):
+        return getattr(binding,"point_locked",lambda index:False)(index)
 
     binding = Binding(get, set_value, valid, commit, context_target=context_target)
 
@@ -232,7 +241,7 @@ def curve_mapping(data, property, commit, channel, *, preview=None):
 
     def remove(index):
         points = tracked[current_index()]
-        if not valid() or len(points) <= 2:
+        if not valid() or len(points) <= 2 or point_locked(index):
             return
         before = tuple((tuple(p.location), p.handle_type) for p in points)
         curve().points.remove(points[index])

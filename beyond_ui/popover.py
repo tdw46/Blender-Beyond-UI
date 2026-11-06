@@ -11,6 +11,29 @@ from itertools import count
 _open_serial = count()
 
 
+class PanelContextCapture:
+    """Remember custom RNA/string members consumed during popup preparation.
+
+    Context.copy() omits these transient members. Keep only values actually
+    read by the panel, not ordinary selection/area state or a global snapshot.
+    RegisteredPanel's ContextArguments validates their owners on later events.
+    """
+
+    def __init__(self, context):
+        self._context = context
+        self._ordinary = frozenset(dir(context))
+        self.values = {}
+
+    def __getattr__(self, name):
+        value = getattr(self._context, name)
+        if name not in self._ordinary and not name.startswith('_'):
+            if value is None or isinstance(value, str) or hasattr(value, 'as_pointer'):
+                if name not in self.values and len(self.values) >= 64:
+                    raise ValueError('Panel custom context exceeds 64 members')
+                self.values[name] = value
+        return value
+
+
 def panel_class(name):
     import bpy
 
@@ -144,9 +167,10 @@ class RegisteredPanel(RegisteredMenu):
         ui._context_pointers = dict(self.pointers.values())
         try:
             with override(context, self.pointers.values()):
+                captured_context = PanelContextCapture(context)
                 prepare = getattr(self.cls, "beyond_ui_prepare", None)
                 if prepare:
-                    prepare(context)
+                    prepare(captured_context)
                 if self.label.strip() and "HIDE_HEADER" not in getattr(
                     self.cls, "bl_options", set()
                 ):
@@ -158,7 +182,9 @@ class RegisteredPanel(RegisteredMenu):
 
                 tape = Tape(self.layout.state)
                 tape.root._values["is_popover"] = True
-                self.cls.draw(PanelProxy(self.cls, tape.root), context)
+                self.cls.draw(PanelProxy(self.cls, tape.root), captured_context)
+                self.pointers.capture({**self.pointers.values(), **captured_context.values})
+                ui._context_pointers = dict(self.pointers.values())
                 tape.initialize_lists(ui.list_identity)
                 tape.play(ui)
             self.check(context, scope)

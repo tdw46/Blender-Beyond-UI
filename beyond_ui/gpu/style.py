@@ -227,12 +227,12 @@ def _animation_palette(colors, missing=(), reference=False):
     )
 
 
-def icon(glyph, x, y, size, color):
+def icon(glyph, x, y, size, color, *, palette=None):
     """Centered vector icons, independent of a font's bearings and baseline."""
     global _icon_shader
     from . import icons
 
-    if icons.draw(glyph, x, y, size, color):
+    if icons.draw(glyph, x, y, size, color, palette=palette):
         return True
     supported = {
         "BUI_TARGET",

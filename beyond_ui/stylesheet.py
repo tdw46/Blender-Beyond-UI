@@ -27,7 +27,10 @@ _GEOMETRY = {
     "separator_height": (1, 24),
 }
 _COLORS = {
+    *("accent_" + str(i) for i in range(1, 9)),
     "accent",
+    "inset_lower",
+    "inset_upper",
     "accent_text",
     "value_change",
     "header_divider",
@@ -341,6 +344,8 @@ class StyleSheet:
             "menu_glass",
             "toggle_off",
             "toggle_on",
+            "inset_lower",
+            "inset_upper",
         ):
             p[key] = p[key][:3] + (p[key][3] * opacity,)
         p["surfaces"] = MappingProxyType(
@@ -369,3 +374,37 @@ class StyleSheet:
         result = MappingProxyType(p)
         self._cache = (base, result)
         return result
+
+
+def accent_palette(base, control):
+    """Resolve a semantic color slot once per control/palette revision.
+
+    Data colors are untouched. Native-theme fallback: slot 1 uses accent;
+    slot 2 uses toggle selection; other slots use accent until authored.
+    """
+    slot = control.options.get("_inline_style", {}).get("accent_slot")
+    if slot is None:
+        return base
+    cached = control.options.get("_accent_palette")
+    if cached and cached[0] is base and cached[1] == slot:
+        return cached[2]
+    ink = base.get("accent_" + str(slot), base.get("toggle_on", base["accent"]) if slot == 2 else base["accent"])
+    p = dict(base)
+    for role in ("accent", "accent_text", "slider_fill", "value_change", "curve", "point_selected"):
+        p[role] = ink[:3] + (1.,)
+    for role in ("toggle_on", "tab", "api", "selected", "selection_rim"):
+        if role in base:
+            p[role] = ink[:3] + (base[role][3],)
+    if "surfaces" in base:
+        surfaces = dict(base["surfaces"])
+        for role in ("selected", "tab"):
+            if role in surfaces:
+                surfaces[role] = tuple(ink[:3] + (c[3],) for c in surfaces[role])
+        p["surfaces"] = MappingProxyType(surfaces)
+    # Preserve selection through nested child styles and popup palettes.
+    explicit = dict(base.get("_color_overrides", {}))
+    explicit.update({k:p[k] for k in ("accent", "accent_text", "slider_fill", "value_change", "toggle_on", "selected") if k in p})
+    p["_color_overrides"] = MappingProxyType(explicit)
+    result = MappingProxyType(p)
+    control.options["_accent_palette"] = (base, slot, result)
+    return result

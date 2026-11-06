@@ -1,0 +1,71 @@
+name: Subject controls compatibility
+on:
+  workflow_dispatch:
+    inputs:
+      camkeys_ref:
+        description: Exact published CamKeys commit
+        required: true
+        type: string
+jobs:
+  windows:
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['4.2.23', '4.3.2', '4.4.3', '4.5.15', '5.0.1', '5.1.2', '5.2.2']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: tdw46/CamShapeMatic
+          ref: ${{ inputs.camkeys_ref }}
+          path: build/camkeys
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: |
+            build/native/runtime
+            build/native/*.zip
+          key: consumer-runtime-windows-${{ matrix.version }}
+      - run: python tools/build_portable_bridge.py --version ${{ matrix.version }} --workspace build/native --runtime-only
+      - name: Packaged native admission, curves, layouts and geometry
+        env:
+          CAMKEYS_SOURCE: ${{ github.workspace }}/build/camkeys
+        run: python tools/run_consumer_checks.py build/native/build-result.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: consumer-windows-${{ matrix.version }}
+          path: |
+            build/native/consumer/
+            build/native/*.json
+  renderer:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '4.2.0'
+            backend: opengl
+          - version: '5.2.2'
+            backend: vulkan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y xvfb libxkbcommon0 libsm6 libxxf86vm1 libxi6 libxfixes3 libxrender1 libgl1 libegl1 mesa-vulkan-drivers
+      - run: python tools/build_portable_bridge.py --version ${{ matrix.version }} --workspace build/native --runtime-only
+      - name: Shared glass, inset shader and recolored atlas execution
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a python tools/native/run_renderer.py build/native/build-result.json ${{ matrix.backend }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: consumer-renderer-${{ matrix.backend }}
+          path: |
+            build/native/renderer-*/
+            build/native/*.json

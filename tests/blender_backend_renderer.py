@@ -13,7 +13,7 @@ from mathutils import Matrix
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "tests")]
 from beyond_ui import Canvas, Theme
-from beyond_ui.gpu import glass
+from beyond_ui.gpu import glass, icons, skin
 from beyond_ui.gpu.paint import gpu_state
 from beyond_ui.gpu.typography import Fonts
 from capture_controls import make_widgets
@@ -119,6 +119,31 @@ def run():
                 glass._owners[key]["productions"],
                 glass._owners[key]["allocations"],
             )
+            # Exercise the new materials/artwork explicitly, not just legacy
+            # controls. These shaders must execute on GL, Vulkan and Metal.
+            palette = dict(field=(.12,.16,.2,.7), input=(.08,.1,.12,.5),
+                           text=(.9,.94,.97,1), accent=(.95,.35,.2,1),
+                           accent_2=(.1,.8,.65,1))
+            icons.prepare()
+            retained = tuple(id(v) for p in icons._artwork.values()
+                             for v in p['textures'].values())
+            feature_hashes = []
+            for swapped in (False, True):
+                if swapped:
+                    palette['accent'], palette['accent_2'] = palette['accent_2'], palette['accent']
+                gpu.state.active_framebuffer_get().clear(color=(.02,.03,.04,1))
+                skin.inset((20,20,200,70), palette, backdrop=key)
+                skin.inset((240,20,160,160), palette, backdrop=key, well=True)
+                for i, name in enumerate(('BUI_LENS','BUI_SUBJECT_SIZE','BUI_EXACT','BUI_ARTISTIC')):
+                    assert icons.draw(name,80+i*140,280,72,(1,1,1,1),palette=palette)
+                pixels = gpu.state.active_framebuffer_get().read_color(0,0,width,height,4,0,'UBYTE')
+                pixels.dimensions = width*height*4
+                raw = bytes(pixels)
+                assert len(set(raw)) > 32
+                feature_hashes.append(hashlib.sha256(raw).hexdigest())
+            assert feature_hashes[0] != feature_hashes[1], 'Accent roles did not affect rendered icons'
+            assert retained == tuple(id(v) for p in icons._artwork.values()
+                                     for v in p['textures'].values())
         return dict(
             passed=True,
             version=bpy.app.version_string,
@@ -130,6 +155,10 @@ def run():
             native_framebuffer_copy=native_copy,
             host_integration=False,
             visual_acceptance=False,
+            inset_materials=True,
+            duotone_accents=True,
+            retained_icon_textures=True,
+            feature_hashes=feature_hashes,
         )
     finally:
         glass.release(key)

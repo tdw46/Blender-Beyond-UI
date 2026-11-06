@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-05",
+  "defaults": {
+    "back_link": true,
+    "area": "AXIS"
+  },
+  "formula": "back=min(4,1/front); manual back retained while linked",
+  "matrix": [
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Default-on reciprocal sizing, safe cap, retained unlinked value and independent subject size",
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    }
+  ],
+  "bui_unit_tests": 31,
+  "video": {
+    "frames": 120,
+    "seconds": 15,
+    "fps": 8,
+    "size": [
+      1280,
+      1040
+    ],
+    "stages": [
+      "linked inverse front/back",
+      "unlinked front then back",
+      "independent subject/head region"
+    ],
+    "camera_axis": true,
+    "kind": "actual Blender screen captures replayed at controlled cadence, not viewport FPS proof"
+  },
+  "installed_source_match": true,
+  "scene_saved": false,
+  "limitations": [
+    "Physical Windows GPU replay pending",
+    "Reciprocal back size capped at supported 4x",
+    "No general coarse-triangle collision guarantee"
+  ]
+}

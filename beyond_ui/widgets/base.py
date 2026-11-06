@@ -77,6 +77,12 @@ class Painter:
             and role in {"field", "input", "button", "tab", "selected", "thumb"}
         ):
             motion_key = tuple(r)
+        if role in {'input', 'well'}:
+            with self.motion.deform(motion_key,self.map(r)) if self.motion is not None and motion_key is not False else nullcontext():
+                if self.motion is not None and motion_key is not False and self.interactive:
+                    self.motion.region(motion_key,r)
+                skin.inset(self.map(r),self.palette,scale=self.scale,radius=radius,backdrop=self.backdrop,well=role=='well')
+            return
         if (
             self.motion is not None
             and motion_key is not None

@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "states": [
+    {
+      "name": "equal",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.0,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0,
+        "auto_fov_size_area": "WHOLE",
+        "auto_fov_size_target": "All Might_rig",
+        "auto_fov_size_bone": "hand.l",
+        "auto_fov_size_radius": 0.75,
+        "auto_fov_size_softness": 0.0
+      },
+      "frame": 158,
+      "camera_mm": 15.0
+    },
+    {
+      "name": "whole",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.7,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0,
+        "auto_fov_size_area": "WHOLE",
+        "auto_fov_size_target": "All Might_rig",
+        "auto_fov_size_bone": "hand.l",
+        "auto_fov_size_radius": 0.75,
+        "auto_fov_size_softness": 0.0
+      },
+      "frame": 158,
+      "camera_mm": 15.0
+    },
+    {
+      "name": "axis",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.7,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0,
+        "auto_fov_size_area": "AXIS",
+        "auto_fov_size_target": "All Might_rig",
+        "auto_fov_size_bone": "hand.l",
+        "auto_fov_size_radius": 0.75,
+        "auto_fov_size_softness": 0.0
+      },
+      "frame": 158,
+      "camera_mm": 15.0
+    },
+    {
+      "name": "hand",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.7,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0,
+        "auto_fov_size_area": "TARGET",
+        "auto_fov_size_target": "All Might_rig",
+        "auto_fov_size_bone": "hand.l",
+        "auto_fov_size_radius": 0.75,
+        "auto_fov_size_softness": 0.0
+      },
+      "frame": 158,
+      "camera_mm": 15.0
+    }
+  ],
+  "restored": true
+}

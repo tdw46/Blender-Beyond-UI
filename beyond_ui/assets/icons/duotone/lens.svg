@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<title>Lens</title>
+<!-- Both layers share (32,32). Original shutter artwork is uniformly inset inside the ring's inner rim. -->
+<g id="accent_2" data-color-role="accent_2" stroke="#EF7965" transform="translate(32 32) scale(0.84) translate(-32 -32)"><path d="M25 20h14l7 12-7 12H25L18 32ZM25 20 33 7M39 20h16M46 32 54 46M39 44 31 57M25 44H9M18 32 10 18"/></g>
+<g id="accent" data-color-role="accent" stroke="#2FB7A2"><circle cx="32" cy="32" r="25"/></g>
+</svg>

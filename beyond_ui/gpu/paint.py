@@ -173,6 +173,7 @@ def paint(
                     b + d / 2,
                     icon_size * scale,
                     ink,
+                    palette=palette,
                 )
             left = group_left + gutter
         origin = group_left + gutter
@@ -200,6 +201,7 @@ def paint(
                         b + d / 2,
                         icon_size * scale,
                         ink,
+                        palette=palette,
                     )
                 # Leave room for hinted glyph ink beyond its advance width.
                 # Clipping exactly at the measured advance can drop the final
@@ -245,6 +247,9 @@ def paint(
 
     def surface(r, ink, radius=None, flat=False):
         radius = current_style.get("radius", t.radius if radius is None else radius)
+        if flat:
+            skin.inset(r,palette,scale=scale,radius=radius,backdrop=backdrop,tint=ink)
+            return
         if backdrop is None or not glass.lens(backdrop, r, radius * scale, ink):
             skin.draw(
                 r,
@@ -320,6 +325,8 @@ def paint(
             inline_sheet = control.options.get("_inline_sheet")
             if inline_sheet is not None:
                 palette = inline_sheet.palette(palette)
+            from ..stylesheet import accent_palette
+            palette = accent_palette(palette, control)
             kind = control.kind
             slider = kind == "number" and control.options.get("slider", True)
             external_label = (
@@ -467,7 +474,7 @@ def paint(
                     and not control.options.get("search_bar")
                     and not control.options.get("choice_card")
                 ):
-                    inset = kind in {"text", "number", "event", "search"}
+                    inset = kind in {"text", "number", "event", "search", "pointer", "enum"}
                     surface(
                         menu_metrics.highlight(r, scale) if menu_option else r,
                         (

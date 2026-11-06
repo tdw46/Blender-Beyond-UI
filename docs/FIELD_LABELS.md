@@ -79,3 +79,31 @@ field-sized cells. Untitled registered popovers do not allocate a title row.
 The retained vector renderer also supports `SMOOTHCURVE`, `SPHERECURVE`,
 `ROOTCURVE`, `SHARPCURVE`, `LINCURVE` and `NOCURVE`. Geometry is built once per
 glyph; theme tint, opening motion and context ownership remain shared.
+
+
+## Themed segmented choices and duotone artwork
+
+Retain native enum ownership while styling a choice as a segmented button:
+
+```python
+row.prop_enum(settings, "mode", "LENS")
+bui.style(row, enum_style="segment", icon="BUI_LENS",
+          font_weight="bold", icon_size=24, height=38,
+          radius=10, text_align="center", button_padding=(7, 10))
+```
+
+`enum_style="menu"` restores the ordinary menu-option presentation. Selection,
+actions, property context menus and bindings remain the original control's.
+Use ordinary responsive style rules for compact widths.
+
+Bundled transparent two-color icons: `BUI_LENS`, `BUI_SUBJECT_SIZE`,
+`BUI_EXACT`, `BUI_ARTISTIC`, `BUI_FORCED_PERSPECTIVE`, `BUI_FALLOFF`,
+`BUI_HELP`, `BUI_LOCK`, `BUI_RESET`. Use `bui.Artwork(name, native_fallback)`
+for headers that also draw in native Blender. Layers use the resolved primary
+and secondary accents; native secondary falls back to the toggle color when
+no secondary override is configured. Consumer color overrides remain respected.
+
+SVG sources live in `beyond_ui/assets/icons/duotone`. Build their shared retained
+atlas offline with `uv run --with resvg-py --with pillow python tools/build_duotone_icons.py`.
+No SVG parsing or texture allocation occurs during steady-state painting.
+Both layers retain the same artboard, preserving their mutual alignment.

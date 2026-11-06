@@ -377,6 +377,15 @@ class Canvas(Group):
             child_active = widget.advance(local_clip) or child_active
         if self.overlay and hasattr(self.overlay.get("widget"), "advance"):
             child_active = self.overlay["widget"].advance() or child_active
+        captured = self.widget_capture
+        if captured is not None and hasattr(captured.options['widget'], 'advance'):
+            widget = captured.options['widget']
+            if not self.visible or not captured.enabled:
+                widget.cancel();self.widget_capture=None
+            elif clip is not None and not any(c is captured for c in self.visible_controls(clip)):
+                widget.cancel();self.widget_capture=None
+            else:
+                temporal = widget.advance() or temporal
         feedback_active = self.value_feedback.advance(clip)
         return bool(self._moving) or child_active or temporal or feedback_active
 
@@ -515,6 +524,8 @@ class Canvas(Group):
         width = max(1.0, float(width))
         if not self._dirty and width == self._width:
             return self.height
+        from .responsive import resolve
+        if resolve(self,width,fit_states={}):self._dirty=True
         from .flow import Plan, compact_paragraphs
 
         self.refresh_status()
@@ -534,6 +545,15 @@ class Canvas(Group):
         inner = max(0.0, width - 2 * t.padding)
         plan.panel_label_column = max(0, inner - 2 * t.padding) * 0.36
         plan.place(self, t.padding, t.padding, inner)
+        from .responsive import fit_states
+        states = fit_states(self, plan)
+        if states and resolve(self, width, fit_states=states):
+            # At most one retained reflow: all fit states were measured against
+            # the original wide layout, so compact padding cannot oscillate.
+            plan = Plan(t, self.text_measure, self if self._sized_groups else None,
+                        panel_layout=panel_layout)
+            plan.panel_label_column = max(0, inner - 2*t.padding) * 0.36
+            plan.place(self, t.padding, t.padding, inner)
         if panel_layout:
             from .panel_metrics import span_labels
 

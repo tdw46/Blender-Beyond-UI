@@ -11,6 +11,7 @@ _entries = {}
 _ink_bounds = {}
 _dimensions = (1, 1)
 _artwork = {}
+_duotone = {}
 
 
 def register_artwork(owner, sources, entries):
@@ -101,10 +102,32 @@ def prepare():
     _ink_bounds = spec.get("ink_bounds", {})
     _dimensions = (width, height)
     _texture, _shader, _batch = texture, shader, batch
+    # One bundled atlas, loaded with other icons before painting. Two retained
+    # alpha layers per glyph inherit the current host's semantic accents.
+    duo = root / 'duotone'
+    spec = json.loads((duo / 'atlas.json').read_text())
+    dw, dh = spec['dimensions']
+    raw = zlib.decompress((duo / 'atlas.rgba.zlib').read_bytes())
+    if len(raw) != dw * dh * 4:
+        raise ValueError('Duotone atlas size mismatch')
+    _duotone.update(spec['layers'])
+    _artwork['_bui_duotone'] = dict(sources={'atlas': (dw, dh, raw)},
+                                   entries=spec['entries'], textures={})
     _prepare_artwork()
 
 
-def draw(name, x, y, size, color):
+def layer_color(palette, role, color):
+    palette = palette or {}
+    fallback = palette.get('toggle_on', color) if role == 'accent_2' else color
+    tint = palette.get(role, fallback)
+    return (*tint[:3], color[3])
+
+
+def draw(name, x, y, size, color, *, palette=None):
+    if name in _duotone:
+        for token, role in _duotone[name]:
+            draw(token, x, y, size, layer_color(palette, role, color))
+        return True
     if isinstance(name, str) and ':' in name:
         pack = _artwork.get(name.split(':', 1)[0])
         if pack is not None and name in pack['entries']:
@@ -157,5 +180,6 @@ def clear():
     _texture = _shader = _batch = None
     _entries.clear()
     _ink_bounds.clear()
+    _duotone.clear()
     for pack in _artwork.values():
         pack['textures'].clear()

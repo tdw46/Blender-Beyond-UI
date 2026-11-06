@@ -78,6 +78,39 @@ class Widgets(unittest.TestCase):
         widget.event(event("BACK_SPACE"), 550, 145)
         self.assertEqual(len(state[0]), 2)
 
+    def test_curve_endpoint_lock_is_optional_and_preserves_middle_edits(self):
+        from beyond_ui import style
+        from beyond_ui.widgets.metrics import CURVE
+        state,commits,binding=self.binding(((0.,1.),(.5,.5),(1.,0.)))
+        widget=CurveMapping(binding);ui=Layout()
+        ui.group.widget('curve',widget);style(ui,curve_lock_end=True)
+        a,b,w,h=widget.graph
+        widget.event(event('LEFTMOUSE'),a+w-.1,b+h-.1)
+        self.assertFalse(widget.capturing)
+        widget.event(event('DEL'),a+w-.1,b+h-.1)
+        self.assertEqual(len(state[0]),3)
+        x,y,_,_=CURVE['fields'][0]
+        widget.event(event('LEFTMOUSE'),x+10,y+10)
+        self.assertFalse(widget.capturing)
+        widget.event(event('LEFTMOUSE'),a+w*.5,b+h*.5)
+        widget.event(event('MOUSEMOVE'),a+w*.6,b+h*.3)
+        widget.event(event('LEFTMOUSE','RELEASE'),a+w*.6,b+h*.3)
+        self.assertEqual(state[0][-1],(1.,0.));self.assertNotEqual(state[0][1],(.5,.5))
+        widget.event(event('DEL'),a+w*.6,b+h*.3)
+        self.assertEqual(len(state[0]),2)
+        style(ui,curve_lock_end=False)
+        widget.event(event('LEFTMOUSE'),a+w-.1,b+h-.1)
+        self.assertTrue(widget.capturing)
+        widget.cancel()
+
+    def test_curve_unlocked_coordinates_are_not_constrained(self):
+        _,_,binding=self.binding(((-2.,1.),(0.,.5),(3.,0.)))
+        widget=CurveMapping(binding)
+        values=((-3.,1.),(1.,.5),(4.,0.))
+        self.assertEqual(widget.constrain_points(values),values)
+        widget.curve_lock_end=True
+        self.assertEqual(widget.constrain_points(values),((-3.,1.),(1.,.5),(3.,0.)))
+
     def test_ramp_interpolation_and_drag_cancel(self):
         points = ((0.0, (0.0, 0.0, 0.0, 1.0)), (1.0, (1.0, 1.0, 1.0, 1.0)))
         state, commits, binding = self.binding(points)

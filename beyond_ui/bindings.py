@@ -121,9 +121,10 @@ def rna_binding(
     def checked_read():
         # Validate and read the same resolved owner in one synchronous access.
         # Nothing is cached across fields, callbacks, edits or paint passes.
+        # Read-only RNA remains readable. valid()/write() still reject edits.
         try:
             obj = current()
-            allowed = property_name in obj.bl_rna.properties and not readonly(obj, property_name)
+            allowed = property_name in obj.bl_rna.properties
         except (ReferenceError, AttributeError, RuntimeError):
             allowed = False
         if not allowed:

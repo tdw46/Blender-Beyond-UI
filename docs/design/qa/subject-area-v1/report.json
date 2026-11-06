@@ -1,0 +1,839 @@
+{
+  "date": "2026-11-05",
+  "schema": 29,
+  "passed_fixtures": 28,
+  "runtime_matrix": [
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.297708018682897,
+            "p95_ms": 1.4335000305436552
+          },
+          "subject": {
+            "median_ms": 1.1063339770771563,
+            "p95_ms": 1.248708984348923
+          },
+          "subject_repeat": {
+            "median_ms": 1.1519999825395644,
+            "p95_ms": 1.3297080295160413
+          },
+          "lens_repeat": {
+            "median_ms": 1.3308749767020345,
+            "p95_ms": 1.482625026255846
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.2078749714419246,
+            "p95_ms": 1.4054590137675405
+          },
+          "subject": {
+            "median_ms": 1.1092910426668823,
+            "p95_ms": 1.3155000051483512
+          },
+          "subject_repeat": {
+            "median_ms": 1.1123750009573996,
+            "p95_ms": 1.2977499864064157
+          },
+          "lens_repeat": {
+            "median_ms": 1.2165840016677976,
+            "p95_ms": 1.418458006810397
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.1211250093765557,
+            "p95_ms": 1.3058750191703439
+          },
+          "subject": {
+            "median_ms": 0.9650420397520065,
+            "p95_ms": 1.0715830139815807
+          },
+          "subject_repeat": {
+            "median_ms": 0.9293340262956917,
+            "p95_ms": 1.1575830285437405
+          },
+          "lens_repeat": {
+            "median_ms": 1.0636660153977573,
+            "p95_ms": 1.223500003106892
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.5487080090679228,
+            "p95_ms": 1.7519999528303742
+          },
+          "subject": {
+            "median_ms": 1.431416952982545,
+            "p95_ms": 1.7230829689651728
+          },
+          "subject_repeat": {
+            "median_ms": 1.3654999784193933,
+            "p95_ms": 1.5943750040605664
+          },
+          "lens_repeat": {
+            "median_ms": 1.556415983941406,
+            "p95_ms": 2.069332986138761
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3666669838130474,
+            "p95_ms": 1.6048329998739064
+          },
+          "subject": {
+            "median_ms": 1.0929999989457428,
+            "p95_ms": 1.2531669926829636
+          },
+          "subject_repeat": {
+            "median_ms": 1.0327919735573232,
+            "p95_ms": 1.2249170104041696
+          },
+          "lens_repeat": {
+            "median_ms": 1.3187919976189733,
+            "p95_ms": 1.465874956920743
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.4356670435518026,
+            "p95_ms": 1.6524579841643572
+          },
+          "subject": {
+            "median_ms": 1.1300420155748725,
+            "p95_ms": 1.3639579992741346
+          },
+          "subject_repeat": {
+            "median_ms": 1.0922499932348728,
+            "p95_ms": 1.2546670041047037
+          },
+          "lens_repeat": {
+            "median_ms": 1.354083011392504,
+            "p95_ms": 1.5988749801181257
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.4586250181309879,
+            "p95_ms": 1.6590829472988844
+          },
+          "subject": {
+            "median_ms": 1.1456250213086605,
+            "p95_ms": 1.3589590089395642
+          },
+          "subject_repeat": {
+            "median_ms": 1.148457988165319,
+            "p95_ms": 1.3341670273803174
+          },
+          "lens_repeat": {
+            "median_ms": 1.4297079760581255,
+            "p95_ms": 1.8078749999403954
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.30000001192092896,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.5,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.5
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.5
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.0639999818522483,
+            "p95_ms": 1.2939170119352639
+          },
+          "1": {
+            "median_ms": 0.990333006484434,
+            "p95_ms": 1.1269169626757503
+          },
+          "2": {
+            "median_ms": 1.0404999775346369,
+            "p95_ms": 1.3131669838912785
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.30000001192092896,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.5,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.5
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.5
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.1612499656621367,
+            "p95_ms": 1.3797080027870834
+          },
+          "1": {
+            "median_ms": 1.1605210020206869,
+            "p95_ms": 1.463000022340566
+          },
+          "2": {
+            "median_ms": 1.103083515772596,
+            "p95_ms": 1.2622089707292616
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.30000001192092896,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.5,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.5
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.5
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 0.9995625296141952,
+            "p95_ms": 1.1755420127883554
+          },
+          "1": {
+            "median_ms": 0.9816039819270372,
+            "p95_ms": 1.3168330187909305
+          },
+          "2": {
+            "median_ms": 0.9067080391105264,
+            "p95_ms": 1.1829580180346966
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.30000001192092896,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.5,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.5
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.5
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.509354478912428,
+            "p95_ms": 1.8502919701859355
+          },
+          "1": {
+            "median_ms": 1.3199994864407927,
+            "p95_ms": 1.61145901074633
+          },
+          "2": {
+            "median_ms": 1.3486040115822107,
+            "p95_ms": 1.601291005499661
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.29999998211860657,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.4999999403953552,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.4999999403953552
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.4999999403953552
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.091541489586234,
+            "p95_ms": 1.303124998230487
+          },
+          "1": {
+            "median_ms": 1.087374985218048,
+            "p95_ms": 1.1912499903701246
+          },
+          "2": {
+            "median_ms": 1.1433750332798809,
+            "p95_ms": 1.5452090301550925
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.29999998211860657,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.4999999403953552,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.4999999403953552
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.4999999403953552
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.0742915037553757,
+            "p95_ms": 1.2879589921794832
+          },
+          "1": {
+            "median_ms": 1.1042499972973019,
+            "p95_ms": 1.2005839962512255
+          },
+          "2": {
+            "median_ms": 1.0428960085846484,
+            "p95_ms": 1.2027089833281934
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04990895589192519,
+        "hand_influence": 0.9411764705882353,
+        "leg_influence": 0.02702702702702704,
+        "pose_before": [
+          0.29999998211860657,
+          0.0,
+          0.4000000059604645
+        ],
+        "pose_after": [
+          0.4999999403953552,
+          0.0,
+          0.4000000059604645
+        ],
+        "object_before": [
+          0.20000000298023224,
+          0.10000000149011612,
+          0.4999999403953552
+        ],
+        "object_after": [
+          0.20000000298023224,
+          0.4000000059604645,
+          0.4999999403953552
+        ],
+        "coexisting_driver_channels": 6,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.116312516387552,
+            "p95_ms": 1.252666988875717
+          },
+          "1": {
+            "median_ms": 1.1699374881573021,
+            "p95_ms": 1.2690830044448376
+          },
+          "2": {
+            "median_ms": 1.1451250175014138,
+            "p95_ms": 1.2664159876294434
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "/tmp/subject_area_bone_lifecycle.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": "Bone focus existing lifecycle, bake, save/reopen and unrelated-driver preservation"
+      }
+    }
+  ],
+  "installed_matches_source": {
+    "bone_focus.py": "8eb9acc83f3169da74df365599f2f86c0a0d6ddafc6d844135536718ef9eb22e",
+    "subject_size.py": "c214922d84625cc2cc50e359adc89f46862c5ea5d33b84527baecb51bb7da258",
+    "utils.py": "937a30b62ebdf067b73ceb323491012cfb55627175a69c0ec61f9682dae84ecc",
+    "node_contract.py": "0d64e978db32479a3fb2136d696b63ca8752d1205de7524ff6d5f85975541746",
+    "camkeys_translations.json": "e738f07055aeee6728421ed8ae6c6780ef8ab59efaad0bbc6913e86639b058e0",
+    "_authoring/geometry/forced_perspective.py": "0b3381cae6430e27be0d1f9c2e098f98764e2c0b19e2d1af4bf3c8c7ee224fbc",
+    "_authoring/geometry/ray_volume.py": "762ef8e3bb9d3f19749c0e5c83177e12d71168dc41137320d1d3018c0433d94d",
+    "_authoring/geometry/subject_size.py": "c48c031bc9fce045493d507c3f6e598cf80674dd5661478d597e2b2fcd8dd7c5",
+    "assets/geometry/manifest.json": "e3649eab04a19b608f77f464ce85aeec0d0fb977986d19d30daf958326132092",
+    "assets/geometry/legacy_4_0.blend": "293597032a3d4e92d2fc9b549013b7167f2bd8ff9881b3b86cb009d73f003b20",
+    "assets/geometry/legacy_4_2.blend": "a15f1aa5534086fa02245f447313e14d7e59762949f8888ffa1b9143f708c90b",
+    "assets/geometry/native_4_5.blend": "08cedcd65c7d7a3469e0172a16b3e570403259f3b78b958bbbaa41b001ab9983",
+    "assets/geometry/native_5_1.blend": "74240ac239a291ce89c0467c2716ff8cb287ac6955cfffac95790b7d84047a74"
+  },
+  "capture": {
+    "complete": true,
+    "states": [
+      {
+        "name": "equal",
+        "settings": {
+          "auto_fov_control_mode": "SUBJECT_SIZE",
+          "auto_fov_size_front": 1.0,
+          "auto_fov_size_subject": 1.0,
+          "auto_fov_size_back": 1.0,
+          "auto_fov_transition_front": 1.0,
+          "auto_fov_transition_back": 1.0,
+          "auto_fov_size_area": "WHOLE",
+          "auto_fov_size_target": "All Might_rig",
+          "auto_fov_size_bone": "hand.l",
+          "auto_fov_size_radius": 0.75,
+          "auto_fov_size_softness": 0.0
+        },
+        "frame": 158,
+        "camera_mm": 15.0
+      },
+      {
+        "name": "whole",
+        "settings": {
+          "auto_fov_control_mode": "SUBJECT_SIZE",
+          "auto_fov_size_front": 1.7,
+          "auto_fov_size_subject": 1.0,
+          "auto_fov_size_back": 1.0,
+          "auto_fov_transition_front": 1.0,
+          "auto_fov_transition_back": 1.0,
+          "auto_fov_size_area": "WHOLE",
+          "auto_fov_size_target": "All Might_rig",
+          "auto_fov_size_bone": "hand.l",
+          "auto_fov_size_radius": 0.75,
+          "auto_fov_size_softness": 0.0
+        },
+        "frame": 158,
+        "camera_mm": 15.0
+      },
+      {
+        "name": "axis",
+        "settings": {
+          "auto_fov_control_mode": "SUBJECT_SIZE",
+          "auto_fov_size_front": 1.7,
+          "auto_fov_size_subject": 1.0,
+          "auto_fov_size_back": 1.0,
+          "auto_fov_transition_front": 1.0,
+          "auto_fov_transition_back": 1.0,
+          "auto_fov_size_area": "AXIS",
+          "auto_fov_size_target": "All Might_rig",
+          "auto_fov_size_bone": "hand.l",
+          "auto_fov_size_radius": 0.75,
+          "auto_fov_size_softness": 0.0
+        },
+        "frame": 158,
+        "camera_mm": 15.0
+      },
+      {
+        "name": "hand",
+        "settings": {
+          "auto_fov_control_mode": "SUBJECT_SIZE",
+          "auto_fov_size_front": 1.7,
+          "auto_fov_size_subject": 1.0,
+          "auto_fov_size_back": 1.0,
+          "auto_fov_transition_front": 1.0,
+          "auto_fov_transition_back": 1.0,
+          "auto_fov_size_area": "TARGET",
+          "auto_fov_size_target": "All Might_rig",
+          "auto_fov_size_bone": "hand.l",
+          "auto_fov_size_radius": 0.75,
+          "auto_fov_size_softness": 0.0
+        },
+        "frame": 158,
+        "camera_mm": 15.0
+      }
+    ],
+    "restored": true
+  },
+  "limitations": [
+    "Headless fixture timing is not full scene FPS.",
+    "Physical Windows Vulkan/OpenGL replay remains pending.",
+    "Continuous injectivity does not prove arbitrary coarse-triangle collision freedom.",
+    "Smooth target tails are nonzero.",
+    "Official versioned documentation endpoints unavailable; exact runtime execution used."
+  ],
+  "corrected_harness_issues": [
+    "Seven initial bone-lifecycle invocations lacked import/result harness; all seven corrected executions pass.",
+    "Live-only property registration omitted annotations; restored annotation metadata and recaptured working BUI. Fresh registration fixtures passed."
+  ]
+}

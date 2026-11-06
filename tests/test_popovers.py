@@ -10,6 +10,22 @@ def event(kind, value="PRESS"):
 
 
 class PopoverContracts(unittest.TestCase):
+    def test_custom_context_capture_is_bounded_and_excludes_ordinary_state(self):
+        from beyond_ui.popover import PanelContextCapture
+        owner=NS(as_pointer=lambda:123)
+        class Context:
+            scene=owner
+            def __getattr__(self,name):
+                if name=='missing':raise AttributeError(name)
+                return owner
+        captured=PanelContextCapture(Context())
+        self.assertIs(captured.scene,owner)
+        self.assertIs(captured.transition_owner,owner)
+        self.assertIsNone(getattr(captured,'missing',None))
+        self.assertEqual(captured.values,{'transition_owner':owner})
+        for n in range(63):getattr(captured,'owner_'+str(n))
+        with self.assertRaises(ValueError):getattr(captured,'overflow')
+
     def fixture(self, count=30):
         parent = Canvas()
         owner = parent.button("open", "Open", lambda: None)

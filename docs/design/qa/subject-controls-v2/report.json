@@ -1,0 +1,1289 @@
+{
+  "date": "2026-11-06",
+  "unit_tests": {
+    "run": 493,
+    "skipped": 1,
+    "failures": 0
+  },
+  "ui_runtime_matrix": [
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    }
+  ],
+  "geometry_runtime_matrix": [
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.662333495914936,
+            "p95_ms": 2.347624977119267
+          },
+          "1": {
+            "median_ms": 1.3920630153734237,
+            "p95_ms": 1.7303330241702497
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.436249993275851,
+            "p95_ms": 1.6362500027753413
+          },
+          "subject": {
+            "median_ms": 1.700541004538536,
+            "p95_ms": 1.9332500523887575
+          },
+          "subject_repeat": {
+            "median_ms": 1.4289169921539724,
+            "p95_ms": 1.6884999931789935
+          },
+          "lens_repeat": {
+            "median_ms": 1.4542919816449285,
+            "p95_ms": 1.5550419921055436
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.2818335089832544,
+            "p95_ms": 1.5217919717542827
+          },
+          "1": {
+            "median_ms": 1.3229375181254,
+            "p95_ms": 1.6027080127969384
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3152500032447278,
+            "p95_ms": 1.4512909692712128
+          },
+          "subject": {
+            "median_ms": 1.161541964393109,
+            "p95_ms": 1.388167031109333
+          },
+          "subject_repeat": {
+            "median_ms": 1.1792919831350446,
+            "p95_ms": 1.4317500172182918
+          },
+          "lens_repeat": {
+            "median_ms": 1.3098750496283174,
+            "p95_ms": 1.5218750340864062
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.2132709962315857,
+            "p95_ms": 1.352290972135961
+          },
+          "1": {
+            "median_ms": 1.1740204936359078,
+            "p95_ms": 1.4021249953657389
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3107919949106872,
+            "p95_ms": 1.6233749920502305
+          },
+          "subject": {
+            "median_ms": 1.2207499821670353,
+            "p95_ms": 1.462208980228752
+          },
+          "subject_repeat": {
+            "median_ms": 1.2637909967452288,
+            "p95_ms": 1.5910420333966613
+          },
+          "lens_repeat": {
+            "median_ms": 1.153916004113853,
+            "p95_ms": 1.4613330131396651
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.7265829956158996,
+            "p95_ms": 2.1627090172842145
+          },
+          "1": {
+            "median_ms": 1.8160624895244837,
+            "p95_ms": 2.549625001847744
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.8007499747909606,
+            "p95_ms": 2.295416023116559
+          },
+          "subject": {
+            "median_ms": 1.8488329951651394,
+            "p95_ms": 2.645375032443553
+          },
+          "subject_repeat": {
+            "median_ms": 1.8908329657278955,
+            "p95_ms": 2.507292025256902
+          },
+          "lens_repeat": {
+            "median_ms": 1.6700419946573675,
+            "p95_ms": 1.9474999862723053
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.3225415023043752,
+            "p95_ms": 1.6177500365301967
+          },
+          "1": {
+            "median_ms": 1.3340830046217889,
+            "p95_ms": 1.476457982789725
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.49891700129956,
+            "p95_ms": 1.7469159793108702
+          },
+          "subject": {
+            "median_ms": 1.366040960419923,
+            "p95_ms": 1.6093750018626451
+          },
+          "subject_repeat": {
+            "median_ms": 1.3995830086059868,
+            "p95_ms": 1.6213749768212438
+          },
+          "lens_repeat": {
+            "median_ms": 1.4060829998925328,
+            "p95_ms": 1.625582983251661
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.274020498385653,
+            "p95_ms": 1.4103329740464687
+          },
+          "1": {
+            "median_ms": 1.2190415000077337,
+            "p95_ms": 1.4550830237567425
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3093340094201267,
+            "p95_ms": 1.4133329968899488
+          },
+          "subject": {
+            "median_ms": 1.226291002240032,
+            "p95_ms": 1.428666990250349
+          },
+          "subject_repeat": {
+            "median_ms": 1.2360410182736814,
+            "p95_ms": 1.3975839829072356
+          },
+          "lens_repeat": {
+            "median_ms": 1.4187499764375389,
+            "p95_ms": 1.5585829969495535
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_area.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "radial_cases": 12,
+        "minimum_projected_slope": 0.04806518554678211,
+        "head_back_uniform_max_errors": [
+          0.0,
+          0.0
+        ],
+        "uniform_front_core_error": 3.2501220701419697e-06,
+        "outside_front_area_error": 5.6457519548303026e-06,
+        "points": 32001,
+        "timings": {
+          "0": {
+            "median_ms": 1.3146460114512593,
+            "p95_ms": 1.5364169958047569
+          },
+          "1": {
+            "median_ms": 1.2858539703302085,
+            "p95_ms": 1.4144580345600843
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.5603330102749169,
+            "p95_ms": 1.856833987403661
+          },
+          "subject": {
+            "median_ms": 1.4111670316196978,
+            "p95_ms": 1.6153330216184258
+          },
+          "subject_repeat": {
+            "median_ms": 1.3731250073760748,
+            "p95_ms": 1.575874979607761
+          },
+          "lens_repeat": {
+            "median_ms": 1.6040420159697533,
+            "p95_ms": 2.277792023960501
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Independent sizing and fixed axis radius",
+          "Transition defaults and reusable curve panel",
+          "Three velocity pads and drag cancellation",
+          "Lens round-trip retains settings and geometry"
+        ]
+      }
+    }
+  ],
+  "live_reload": {
+    "passed": true,
+    "scene_preserved": true,
+    "saved": false,
+    "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+    "responsive_targets": 20,
+    "controls": 40
+  },
+  "limits": [
+    "Physical Windows Vulkan/OpenGL replay not performed in this Mac run.",
+    "Generated reference is a design target; compact labels stack at host size rather than matching artboard pixels.",
+    "Submission timing excludes full viewport/GPU completion and is not FPS.",
+    "Earlier requested progressive true-lens-to-255mm flattening is separate and not implemented by this control work."
+  ],
+  "captures": {
+    "-narrow-1x": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 264,
+      "height": 901,
+      "warm_submit_ms": [
+        1.0214579524472356,
+        1.0259590344503522,
+        0.9804170113056898,
+        0.960625009611249,
+        1.039916998706758,
+        1.0157499928027391,
+        0.994333007838577,
+        1.0386250214651227,
+        1.0605829884298146,
+        1.0375409619882703
+      ],
+      "glass": true,
+      "controls": 40
+    },
+    "-narrow-1_5x": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 396,
+      "height": 1352,
+      "warm_submit_ms": [
+        1.0483330115675926,
+        1.0071659926325083,
+        0.9929160005412996,
+        0.9712909813970327,
+        0.9794170036911964,
+        1.0081250220537186,
+        0.9857079712674022,
+        0.9716670028865337,
+        1.031957974191755,
+        1.0848750243894756
+      ],
+      "glass": true,
+      "controls": 40
+    },
+    "-narrow-2x": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 528,
+      "height": 1803,
+      "warm_submit_ms": [
+        0.999749987386167,
+        1.0086669935844839,
+        1.0172919719479978,
+        1.1945409933105111,
+        1.0365420021116734,
+        1.0019579785875976,
+        0.9930000524036586,
+        1.017124974168837,
+        1.0636250372044742,
+        1.0079999919980764
+      ],
+      "glass": true,
+      "controls": 40
+    },
+    "wide": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 808,
+      "height": 1678,
+      "warm_submit_ms": [
+        1.0661669657565653,
+        1.0401670006103814,
+        0.9775839862413704,
+        0.9720840025693178,
+        0.9747080039232969,
+        0.9704160038381815,
+        0.9824169683270156,
+        1.1482500121928751,
+        1.0700409766286612,
+        1.0381670435890555
+      ],
+      "glass": true,
+      "controls": 40
+    },
+    "intermediate": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 688,
+      "height": 1714,
+      "warm_submit_ms": [
+        1.0345830232836306,
+        1.003707991912961,
+        0.9863750310614705,
+        1.0064999805763364,
+        1.0185420396737754,
+        0.9840419515967369,
+        1.0502500226721168,
+        1.0089999996125698,
+        1.0089589632116258,
+        1.0146250133402646
+      ],
+      "glass": true,
+      "controls": 40
+    }
+  },
+  "focus_audits": {
+    "capture-final-wide": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 58380,
+      "restore_requests": 0,
+      "seconds": 2.938841938972473,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "capture-final-1x": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 58558,
+      "restore_requests": 0,
+      "seconds": 2.898737072944641,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "capture-final-1_5x": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 58588,
+      "restore_requests": 0,
+      "seconds": 2.875744938850403,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "capture-final-2x": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 36495,
+      "initial_frontmost_pid": 36495,
+      "new_instance": true,
+      "pid": 57986,
+      "restore_requests": 0,
+      "seconds": 2.9002020359039307,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    },
+    "intermediate": {
+      "activates": false,
+      "error": "",
+      "events": [],
+      "final_frontmost_pid": 30601,
+      "initial_frontmost_pid": 30601,
+      "new_instance": true,
+      "pid": 63609,
+      "restore_requests": 0,
+      "seconds": 3.2749149799346924,
+      "termination_evidence": "kernel-process-absent",
+      "timeout": false
+    }
+  },
+  "fit_sweeps": [
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "resize_checks": 562,
+      "reset_header_threshold": 343,
+      "with_extra_padding": 383,
+      "states": [
+        "view_planes.compact",
+        "view_planes.header"
+      ]
+    },
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "resize_checks": 562,
+      "reset_header_threshold": 343,
+      "with_extra_padding": 383,
+      "states": [
+        "view_planes.compact",
+        "view_planes.header"
+      ]
+    }
+  ],
+  "live_fit_reload": {
+    "passed": true,
+    "scene_preserved": true,
+    "saved": false,
+    "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+    "responsive_targets": 20,
+    "controls": 40
+  },
+  "edge_boost": {
+    "unit_tests": {
+      "run": 8,
+      "passed": 8
+    },
+    "runtime": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Independent sizing and fixed axis radius",
+        "Transition defaults and reusable curve panel",
+        "Three velocity pads and drag cancellation",
+        "Lens round-trip retains settings and geometry"
+      ]
+    },
+    "live": {
+      "passed": true,
+      "scene_preserved": true,
+      "saved": false,
+      "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+      "responsive_targets": 20,
+      "controls": 40
+    },
+    "multiplier": 4,
+    "start": 0.7,
+    "superseded_by": "Uniform 4x speed with Shift precision"
+  },
+  "shift_speed": {
+    "speed": 1.4,
+    "fine_speed_scale": 0.25,
+    "edge_speed_multiplier": 1,
+    "unit_tests": 9,
+    "runtime": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "checks": [
+        "Independent sizing and fixed axis radius",
+        "Transition defaults and reusable curve panel",
+        "Three velocity pads and drag cancellation",
+        "Lens round-trip retains settings and geometry"
+      ]
+    },
+    "live": {
+      "passed": true,
+      "scene_preserved": true,
+      "saved": false,
+      "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+      "responsive_targets": 20,
+      "controls": 40
+    }
+  },
+  "transition_curves": {
+    "runtime_results": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      }
+    ],
+    "custom_popup_route": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "custom_curve_routed": true,
+      "fallbacks": [
+        {
+          "route": "macro-step:camkeys.finish_dolly_navigation",
+          "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+          "custom": false
+        },
+        {
+          "route": "macro-step:camkeys.begin_dolly_navigation",
+          "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+          "custom": false
+        }
+      ],
+      "velocity_scheduled": true,
+      "offscreen_cancelled": true
+    },
+    "live_reload": {
+      "passed": true,
+      "scene_preserved": true,
+      "saved": false,
+      "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+      "responsive_targets": 20,
+      "controls": 40
+    },
+    "capture": "actual-transition-curve.png",
+    "limits": "Nonlinear preset graphs are editable sampled seeds; physical Windows replay remains open. No dedicated motion GIF.",
+    "actual_popup_geometry": [
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "custom_curve_routed": true,
+        "geometry_changed_mid_drag": true,
+        "owner_retained": true,
+        "fallbacks": [
+          {
+            "route": "macro-step:camkeys.begin_dolly_navigation",
+            "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+            "custom": false
+          },
+          {
+            "route": "macro-step:camkeys.finish_dolly_navigation",
+            "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+            "custom": false
+          }
+        ],
+        "velocity_scheduled": true,
+        "offscreen_cancelled": true
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "custom_curve_routed": true,
+        "geometry_changed_mid_drag": true,
+        "owner_retained": true,
+        "direction": "BACK",
+        "fallbacks": [
+          {
+            "route": "macro-step:camkeys.finish_dolly_navigation",
+            "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+            "custom": false
+          },
+          {
+            "route": "macro-step:camkeys.begin_dolly_navigation",
+            "reason": "Preserved registered macro child RNA; its own popup callbacks keep native routing",
+            "custom": false
+          }
+        ],
+        "velocity_scheduled": true,
+        "offscreen_cancelled": true
+      }
+    ]
+  },
+  "picker": {
+    "runtime": [
+      {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      }
+    ],
+    "live": {
+      "passed": true,
+      "scene_preserved": true,
+      "saved": false,
+      "file": "/Users/tylerwalker/Library/CloudStorage/GoogleDrive-tylerdillonwalker@gmail.com/My Drive/Beyond Studios/MHA Beyond/_3D Assets/Character Models/AllMight/Archive/AllMight Camkeys Test.blend",
+      "responsive_targets": 20,
+      "controls": 40
+    },
+    "capture": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 808,
+      "height": 512,
+      "warm_submit_ms": [
+        0.3838749835267663,
+        0.37237501237541437,
+        0.4211670020595193,
+        0.39729097625240684,
+        0.3682920360006392,
+        0.3780000261031091,
+        0.36866700975224376,
+        0.3582919598557055,
+        0.3956250147894025,
+        0.3902919706888497
+      ],
+      "glass": true,
+      "controls": 12
+    },
+    "lens_revision": "Original shutter restored with uniform 0.84 inset about shared center; rejected rotational redesign removed.",
+    "limits": "Warm submission timings are not viewport FPS; no physical Windows validation or dedicated motion GIF.",
+    "narrow_capture": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "width": 528,
+      "height": 500,
+      "warm_submit_ms": [
+        0.4610840114764869,
+        0.5835830233991146,
+        0.4520420334301889,
+        0.38341700565069914,
+        0.3806670429185033,
+        0.5330420099198818,
+        0.5366670084185898,
+        0.4056670004501939,
+        0.39308296982198954,
+        0.40008401265367866
+      ],
+      "glass": true,
+      "controls": 12
+    }
+  },
+  "publication_audit": {
+    "unit_tests": 493,
+    "skipped": 1,
+    "lint": "passed",
+    "native_files_unchanged": true,
+    "versions_unchanged": true,
+    "metal": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "backend": "METAL",
+      "renderer": "Metal API",
+      "glass": true,
+      "retained_resources": true,
+      "hashes": [
+        "851af9f20622ed9901d76e64039af91ff43541216213a62cf85384f0f2a6f444",
+        "eaca56b3a8b0e39f1d3af8db7eaa647016d747f12063e2abf5a3c4965df00992"
+      ],
+      "native_framebuffer_copy": true,
+      "host_integration": false,
+      "visual_acceptance": false,
+      "inset_materials": true,
+      "duotone_accents": true,
+      "retained_icon_textures": true,
+      "feature_hashes": [
+        "4c6b00e89e8c5cee831e1d6ec757259413a12800e8b5b425c9740be46c5d688b",
+        "fd4f2e7ef5d24a304c77cb9627bd7c8f553aed53a9db90c978ac5ccd4c090c38"
+      ]
+    },
+    "runtime_matrix": [
+      {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "5.1.2",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.0.1",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "5.0.1",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "4.3.2",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "4.3.2",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "4.4.3",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "4.4.3",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "directions": [
+          "front",
+          "back"
+        ],
+        "preset_graphs": 12,
+        "retained_context": true,
+        "segmented_exact_owner": true,
+        "mid_drag_custom": true,
+        "locked_endpoint": true,
+        "context_copy_readable": true,
+        "context_write_blocked": true
+      },
+      {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      }
+    ],
+    "windows": "CI queued after publication; hardware validation separate"
+  }
+}
