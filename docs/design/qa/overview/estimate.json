@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-06 \u2014 Exact-only simplification",
+  "reviewed": "2026-11-06 \u2014 Windows subject controls and heading metrics",
   "remaining_turns": [
     0,
     1
@@ -16,8 +16,8 @@
     0,
     1
   ],
-  "confidence": "Implementation and automated cross-platform qualification complete. Physical GPU acceptance remains unverified.",
-  "basis": "Closed the newly requested joystick, transition curves, per-control accents, inset material and configurable compact-layout work. No additional implementation turn is budgeted for these controls; retain one optional acceptance/replay turn.",
+  "confidence": "Targeted physical Windows UI execution and visual captures complete; new shared heading change has not yet been replayed on Metal.",
+  "basis": "Closed the planned Windows hardware replay and newly added consumer reset/default work; fixed the heading measurement defect exposed by compact captures. Retain one optional Mac/user review turn for the new shared change.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Windows subject-controls follow-up: actual NVIDIA Vulkan/OpenGL component PNGs at narrow/wide bounds and 1x/1.5x/2x, plus native Uraraka-copy screenshots and event traces. No new continuous movie, Metal replay of the heading fix or long resource soak.",
     "Exact-only simplification: numerical and retained UI execution coverage; no new screenshots/GIFs or GPU performance claim.",
     "View-plane controls: generated wide/compact references and actual Metal PNGs; no dedicated new motion GIF or physical Windows capture. Compact labels deliberately stack at host scale.",
     "Uniform front core: actual matched Metal PNG comparison at two Subject sizes; no new video or Windows capture. Earlier linked-size video uses the superseded radial mask.",
@@ -103,8 +104,8 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "Removed Artistic UI/RNA/calculation branches; regenerated four asset variants; preserved historical animation through inert migration inputs. Lens/Subject Size wizard and approved icon verified. Seven-family Mac parity: 147 zero-difference cases. Installed/live All Might updated without saving. Windows seven-family rerun passed: 49/49 consumer and Exact-only checks; 147 additional matched geometry cases.",
-  "estimate_review": "Closed newly requested Exact-only simplification and wizard scope in this turn. Retain 0\u20131 optional hardware acceptance/review turn; no additional implementation budget.",
+  "latest_progress": "Physical NVIDIA Vulkan/OpenGL targeted subject-control replay completed. 494 unit tests. New consumer title resets/defaults and compact bold subheadings validated. Corrected shared bold heading measurement; native mouse input verifies wizard routes, live joystick geometry, cancel/release and reset hits. New source reload regression protects live callbacks.",
+  "estimate_review": "Completed planned Windows subject-control replay and new reset/heading scope. No remaining Windows implementation batch; 0\u20131 optional Mac/user review turn remains.",
   "time_summary": "0\u20131 active hour for optional review/replay, an uncertain forecast rather than measured duration.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -631,6 +632,11 @@
     {
       "work": "Exact-only graph and wizard simplification",
       "evidence": "docs/design/qa/exact-only-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Physical Windows subject-control replay, bold heading font metrics and consumer neutral title resets/defaults",
+      "evidence": "docs/design/qa/subject-controls-windows-v1/README.md",
       "turns": 1
     }
   ],
