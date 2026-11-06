@@ -347,13 +347,17 @@ class Plan:
             return 0
         icon = node.options.get("icon") not in {None, "", "NONE", 0}
         limit = max(1, available - (20 if icon else 0) - 12)
-        measure = lambda text: (
-            self.measure(text, "body")
-            * node.options.get("font_size", self.theme.font_size)
-            / self.theme.font_size
-            if self.measure
-            else len(text) * node.options.get("font_size", self.theme.font_size) * 0.58
-        )
+        # Wrapped labels paint as body text with an optional bold face override.
+        # Use that same face and exact host-scaled size, including font hinting.
+        size = node.options.get("font_size", self.theme.font_size)
+        role = "title" if node.options.get("font_weight") == "bold" else "body"
+        sized = getattr(self.measure, "at_size", None)
+        def measure(text):
+            if sized is not None:
+                return sized(text, role, size)
+            if self.measure:
+                return self.measure(text, role) * size / self.theme.font_size
+            return len(text) * size * 0.58
         lines = []
         for paragraph in node.label.split("\n"):
             line = ""

@@ -196,6 +196,27 @@ class StylesheetTests(unittest.TestCase):
         ui.canvas.arrange(500)
         self.assertLess(control.rect[3], narrow)
 
+    def test_wrapped_bold_heading_uses_exact_face_and_size(self):
+        from beyond_ui import Layout, heading
+        ui = Layout()
+        heading(ui, 'Back View Plane', font_size=15, line_height=21, wrap=True)
+        calls = []
+        def measured(text, role):
+            raise AssertionError('Sized glyph metrics are available')
+        def at_size(text, role, size):
+            calls.append((role, size))
+            return len(text) * (8 if role == 'title' else 4)
+        measured.at_size = at_size
+        ui.canvas.set_text_measure(measured, 'heading-regression')
+        for width in (120, 160, 220):
+            ui.canvas.arrange(width)
+            control = next(c for c in ui.canvas.controls.values() if c.label == 'Back View Plane')
+            lines = control.options['_wrapped_lines']
+            self.assertEqual(' '.join(lines), 'Back View Plane')
+            self.assertTrue(all(len(line) * 8 <= control.rect[2] - 12 for line in lines))
+        self.assertTrue(calls)
+        self.assertEqual(set(calls), {('title', 15)})
+
     def test_preset_factory_resolves_after_consumer_registration(self):
         from beyond_ui import AddonUI
 
