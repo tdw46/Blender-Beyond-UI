@@ -1,23 +1,23 @@
 {
-  "reviewed": "2026-11-05 \u2014 depth-aware high-lens falloff",
+  "reviewed": "2026-11-05 \u2014 subject-size experiment after accepted checkpoint",
   "remaining_turns": [
-    0,
-    1
+    1,
+    2
   ],
   "implementation_turns": [
     0,
-    0
+    1
   ],
   "integration_qa_turns": [
-    0,
+    1,
     1
   ],
   "active_hours": [
-    0,
-    2
+    1,
+    4
   ],
-  "confidence": "Recorded Metal hand/foot view and execution matrix verified; broad motion review and physical Windows replay remain separate.",
-  "basis": "The original hand/foot stretch repair exposed a new user requirement: falloff must retain depth-dependent apparent size, rather than making the foreground uniformly flat. This additional scope is implemented and execution-tested as schema 27. Remaining 0\u20131 turn / 0\u20132 active hours covers targeted user-motion/Windows replay, excluding waits; no estimated hardware result is implied.",
+  "confidence": "Working opt-in prototype with actual Metal comparisons and a seven-family execution matrix; arbitrary-topology collision guarantees remain unproven.",
+  "basis": "Accepted high-lens falloff work closed and was pushed to main/master. New requested scope is a separate subject-size mode. The first prototype is implemented and tested in this turn. Remaining 1\u20132 turns / 1\u20134 active hours cover control/bounds feedback, coarse-topology intersection hardening if required, and targeted Windows replay; uncertain planning allowance, not measured throughput.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Subject Size: four actual fixed-camera All Might Metal screenshots and controls capture; no motion GIF, bounds gizmo, or physical Windows capture. Continuous injectivity is not arbitrary triangulated-mesh collision proof.",
     "Depth-aware high-lens falloff: matched actual Metal PNGs; foreground extends beyond frame as native size returns. No dedicated motion GIF or physical Windows replay.",
     "All Might high-lens partial falloff: matched actual Metal before/after PNGs; no dedicated motion GIF or physical Windows replay.",
     "File-load resources: live All Might before/after PNGs and repeated-file raster tests; no dedicated GIF or physical Windows replay.",
@@ -95,9 +96,9 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "Checkpoint published: BUI 6f4ac69 / CamKeys 3222b38. Schema 27 installed in All Might: high-lens falloff restores native near/far apparent size through reciprocal magnification, with separate plane protection. 21 versioned fixtures and 36 baseline cases pass; retained evaluation remains about 2.1 ms. Source/installed edits are local pending review.",
-  "estimate_review": "New file-switch regression scope is implemented and Mac execution/visual recovery verified. Remaining implementation stays 0 turns; existing 0\u20131 optional user/Windows review allowance remains. No new performance or Windows hardware acceptance claimed.",
-  "time_summary": "Optional remaining review/requalification: 0\u20132 active hours, excluding user wait. This is an uncertain allowance, not measured duration or a guarantee.",
+  "latest_progress": "Published accepted checkpoint BUI f03c584 / CamKeys c40ed1d. Added opt-in Subject Size prototype with shared evaluated head bounds, three size sliders and front/back transition widths. Four real All Might Metal comparisons, 14 versioned fixtures, 12 old-mode parity cases and five nested-surface checks. No version bump.",
+  "estimate_review": "Prior accepted fix has no remaining implementation budget. New experiment implemented; specific remaining work is bounds/control feedback and discrete-mesh collision limits, plus physical Windows replay. No general collision or volume-preservation claim.",
+  "time_summary": "New experiment hardening/review allowance: 1\u20134 active hours, excluding waits. This is uncertain, not measured completion time.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -580,9 +581,14 @@
       "turns": 1
     },
     "Schema 26: finite partial-falloff near-plane projection, repaired hand and foot, 21 versioned fixtures and 42 baseline parity checks.",
-    "Schema 27: reciprocal magnification restores native near/far falloff endpoints without losing full optical influence; 21 versioned runs and 36 baseline cases pass."
+    "Schema 27: reciprocal magnification restores native near/far falloff endpoints without losing full optical influence; 21 versioned runs and 36 baseline cases pass.",
+    {
+      "work": "Published accepted schema 27 checkpoint and built a separate subject-size schema 28 prototype with shared bounds, five native/BUI sliders and 12-language copy.",
+      "evidence": "docs/design/qa/subject-size-v1/report.json",
+      "turns": 1
+    }
   ],
-  "remaining_work": "User motion acceptance and physical Windows replay for schema 25 clipping and live curve preview. No known remaining implementation task in the recorded defects; arbitrary topology/mask collision freedom is not claimed.",
+  "remaining_work": "Review the new subject-size behavior and bounds affordance; investigate coarse-mesh/inter-object collision limits before production promotion; physical Windows Vulkan/OpenGL replay. Accepted Lens mode remains unchanged.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -660,8 +666,8 @@
     "Closed additional user-requested scope: preserve depth-dependent apparent size under partial high-lens falloff. Exact local 250 mm appearance at arbitrary weights is not claimed."
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
-  "checkpoint": "Combined Mac/Windows integration validation in progress",
-  "latest_review": "../allmight-falloff-v1/index.html",
+  "checkpoint": "Subject Size experiment review; accepted Lens checkpoint already published",
+  "latest_review": "../subject-size-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-05",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",
@@ -770,6 +776,10 @@
     {
       "batch": "Live falloff curve editing",
       "details": "New user request completed in this turn. Generic preview separated from undo; CamKeys dependent updates and presets fixed without idle polling or GPU/backend changes."
+    },
+    {
+      "date": "2026-11-05",
+      "details": "Explicit new experiment: independently control front/subject/back apparent size using evaluated subject bounds and two relative transition sliders. Prototype complete; arbitrary-topology non-intersection and bounds affordance remain review/hardening scope."
     }
   ],
   "windows_wizard_click_through": {

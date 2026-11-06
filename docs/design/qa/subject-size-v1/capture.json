@@ -1,0 +1,65 @@
+{
+  "complete": true,
+  "states": [
+    {
+      "name": "lens",
+      "settings": {
+        "auto_fov_control_mode": "LENS",
+        "auto_fov_size_front": 1.0,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0
+      },
+      "frame": 158,
+      "lens": 15.0
+    },
+    {
+      "name": "equal",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.0,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.0,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0
+      },
+      "frame": 158,
+      "lens": 15.0
+    },
+    {
+      "name": "front",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 1.7,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 0.65,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0
+      },
+      "frame": 158,
+      "lens": 15.0
+    },
+    {
+      "name": "back",
+      "settings": {
+        "auto_fov_control_mode": "SUBJECT_SIZE",
+        "auto_fov_size_front": 0.65,
+        "auto_fov_size_subject": 1.0,
+        "auto_fov_size_back": 1.5,
+        "auto_fov_transition_front": 1.0,
+        "auto_fov_transition_back": 1.0
+      },
+      "frame": 158,
+      "lens": 15.0
+    }
+  ],
+  "restored": {
+    "auto_fov_control_mode": "LENS",
+    "auto_fov_size_front": 1.0,
+    "auto_fov_size_subject": 1.0,
+    "auto_fov_size_back": 1.0,
+    "auto_fov_transition_front": 1.0,
+    "auto_fov_transition_back": 1.0
+  }
+}

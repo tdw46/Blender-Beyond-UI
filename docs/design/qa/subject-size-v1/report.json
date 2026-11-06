@@ -1,0 +1,441 @@
+{
+  "checkpoint": {
+    "beyond_ui": "f03c584",
+    "camkeys": "c40ed1d"
+  },
+  "schema": 28,
+  "status": "Opt-in subject-size prototype; Lens remains default",
+  "runtime_matrix": [
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.2030829675495625,
+            "p95_ms": 1.394250022713095
+          },
+          "subject": {
+            "median_ms": 1.0087089613080025,
+            "p95_ms": 1.1729170219041407
+          },
+          "subject_repeat": {
+            "median_ms": 1.0495419846847653,
+            "p95_ms": 1.1718329624272883
+          },
+          "lens_repeat": {
+            "median_ms": 1.146750000771135,
+            "p95_ms": 1.3266669702716172
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3399579911492765,
+            "p95_ms": 1.642583985812962
+          },
+          "subject": {
+            "median_ms": 1.1306660016998649,
+            "p95_ms": 1.3148330035619438
+          },
+          "subject_repeat": {
+            "median_ms": 1.1580410064198077,
+            "p95_ms": 1.3425829820334911
+          },
+          "lens_repeat": {
+            "median_ms": 1.3532079756259918,
+            "p95_ms": 1.4703330234624445
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.0969580034725368,
+            "p95_ms": 1.3386249775066972
+          },
+          "subject": {
+            "median_ms": 0.9572080452926457,
+            "p95_ms": 1.0935409809462726
+          },
+          "subject_repeat": {
+            "median_ms": 0.9915830451063812,
+            "p95_ms": 1.145874965004623
+          },
+          "lens_repeat": {
+            "median_ms": 1.0820000316016376,
+            "p95_ms": 1.2988749658688903
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.5563340275548398,
+            "p95_ms": 1.8365419819019735
+          },
+          "subject": {
+            "median_ms": 1.300875039305538,
+            "p95_ms": 1.6412920085713267
+          },
+          "subject_repeat": {
+            "median_ms": 1.3470409903675318,
+            "p95_ms": 1.5728749567642808
+          },
+          "lens_repeat": {
+            "median_ms": 1.5259580104611814,
+            "p95_ms": 1.7128749750554562
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.3305830070748925,
+            "p95_ms": 1.617249974515289
+          },
+          "subject": {
+            "median_ms": 1.044583972543478,
+            "p95_ms": 1.2392080388963223
+          },
+          "subject_repeat": {
+            "median_ms": 1.0440839687362313,
+            "p95_ms": 1.2503750040195882
+          },
+          "lens_repeat": {
+            "median_ms": 1.2633750448003411,
+            "p95_ms": 1.5142500051297247
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.4187499764375389,
+            "p95_ms": 1.6775830299593508
+          },
+          "subject": {
+            "median_ms": 1.0531659936532378,
+            "p95_ms": 1.202416024170816
+          },
+          "subject_repeat": {
+            "median_ms": 1.0832500411197543,
+            "p95_ms": 1.3487910036928952
+          },
+          "lens_repeat": {
+            "median_ms": 1.3752079685218632,
+            "p95_ms": 1.6234589857049286
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "points": 32001,
+        "size_cases": 12,
+        "projection_error": 2.4481225042727317e-06,
+        "companion_error": 0.0,
+        "transform_error": 4.5205925935931646e-07,
+        "old_mode_parity_cases": 0,
+        "timings": {
+          "lens": {
+            "median_ms": 1.46041699917987,
+            "p95_ms": 1.706250011920929
+          },
+          "subject": {
+            "median_ms": 1.1114579974673688,
+            "p95_ms": 1.2305830023251474
+          },
+          "subject_repeat": {
+            "median_ms": 1.0820410097949207,
+            "p95_ms": 1.3147499994374812
+          },
+          "lens_repeat": {
+            "median_ms": 1.3977499911561608,
+            "p95_ms": 1.6662919661030173
+          }
+        }
+      }
+    },
+    {
+      "runtime": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "fixture": "blender_subject_size_ui.py",
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          "Native registration and default Lens",
+          "Subject controls update existing graph",
+          "Five BUI sliders authored and arranged",
+          "Lens round-trip retains settings and geometry",
+          "14 new strings in 12 locale catalogs"
+        ]
+      }
+    }
+  ],
+  "parity_and_timings": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "points": 32001,
+    "size_cases": 12,
+    "projection_error": 2.4481225042727317e-06,
+    "companion_error": 0.0,
+    "transform_error": 4.5205925935931646e-07,
+    "old_mode_parity_cases": 12,
+    "timings": {
+      "lens": {
+        "median_ms": 1.778207952156663,
+        "p95_ms": 2.01329099945724
+      },
+      "subject": {
+        "median_ms": 1.1609999928623438,
+        "p95_ms": 1.4272920088842511
+      },
+      "subject_repeat": {
+        "median_ms": 1.1166249751113355,
+        "p95_ms": 1.2681669904850423
+      },
+      "lens_repeat": {
+        "median_ms": 1.6605829587206244,
+        "p95_ms": 2.1851250203326344
+      }
+    }
+  },
+  "surfaces": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "cases": [
+      {
+        "sizes": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "transition": 1.0,
+        "intersections": 0,
+        "minimum_triangle_area": 3.7226732274575625e-07
+      },
+      {
+        "sizes": [
+          1.7,
+          1.0,
+          0.65
+        ],
+        "transition": 1.0,
+        "intersections": 0,
+        "minimum_triangle_area": 6.511829155897431e-07
+      },
+      {
+        "sizes": [
+          0.65,
+          1.0,
+          1.5
+        ],
+        "transition": 1.0,
+        "intersections": 0,
+        "minimum_triangle_area": 2.39791546619017e-07
+      },
+      {
+        "sizes": [
+          4.0,
+          0.05,
+          4.0
+        ],
+        "transition": 0.1,
+        "intersections": 0,
+        "minimum_triangle_area": 1.803167265279626e-06
+      },
+      {
+        "sizes": [
+          0.05,
+          4.0,
+          0.05
+        ],
+        "transition": 0.1,
+        "intersections": 0,
+        "minimum_triangle_area": 1.8322440453744093e-08
+      }
+    ],
+    "vertices_per_surface": 3872,
+    "limitation": "Aligned nested tube sampling; not an arbitrary-topology collision guarantee."
+  },
+  "limits": [
+    "No arbitrary triangulated-mesh collision guarantee; continuous map is injective.",
+    "Existing intersections and unaffected geometry are not repaired.",
+    "Artistic apparent sizing does not preserve volume or curvature exactly.",
+    "No interactive subject-bounds viewport gizmo yet.",
+    "No physical Windows Vulkan/OpenGL requalification or continuous-motion GIF."
+  ],
+  "visual": "Four actual Metal screen captures at fixed 15 mm camera, frame 158; original Lens mode restored; no scene save.",
+  "asset_lifecycle": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "checks": "asset load, mode identity, curve edits, modifier animation, staged repair, failure latch, embedded reopen"
+  },
+  "prototype_commit": "9eb5698",
+  "prototype_branch": "codex/subject-size-prototype",
+  "installed_preview_branch": "codex/subject-size-preview"
+}
