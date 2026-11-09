@@ -26,6 +26,26 @@ def binding(value):
 
 
 class ContextMenus(unittest.TestCase):
+    def test_context_request_keeps_visible_pages_and_opening_motion(self):
+        child = Entry("leaf", "Leaf")
+        row = Entry("parent", "Parent", context=lambda t, c: (child,))
+        menu = Menu(Target("owner"), [row], (50, 50), (0, 0, 640, 480))
+        _, rect, _ = next(menu.visible_rows())
+        self.assertTrue(menu.event(event("RIGHTMOUSE"), rect[0]+3, rect[1]+3))
+        parent, page = menu.parents[0], menu.page
+        self.assertIn("reveal", menu.motion.tracks)
+        for point in ((page.rect[0]+1, page.rect[1]+1),
+                      (parent.rect[0]+1, parent.rect[1]+1)):
+            for value in ("RELEASE", "PRESS"):
+                self.assertTrue(menu.event(event("RIGHTMOUSE", value), *point))
+                self.assertIs(menu.page, page)
+                self.assertFalse(menu.closed)
+                self.assertIn("reveal", menu.motion.tracks)
+        menu.event(event("ESC"), *point)
+        self.assertIs(menu.page, parent)
+        menu.event(event("ESC"), *point)
+        self.assertTrue(menu.closed)
+
     def test_key_capture_cancellation_conflict_and_acceptance(self):
         calls = []
 

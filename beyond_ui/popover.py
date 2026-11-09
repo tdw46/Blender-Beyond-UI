@@ -432,7 +432,7 @@ class PanelPopover(Widget):
             child._panel_rebuild = False
             self.parent.open_panel(self.owner, self.parent._event_clip, context)
         # Hover redraws must reach the owning host even when no spring is active.
-        return used or contained and event.type == "MOUSEMOVE"
+        return used or contained and event.type in {"MOUSEMOVE", "RIGHTMOUSE"}
 
     def paint(self, rect, font, palette, *, backdrop=None):
         from .gpu import glass, skin

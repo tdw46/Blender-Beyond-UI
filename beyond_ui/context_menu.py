@@ -508,6 +508,9 @@ class Menu:
             yield i, (a + self.padding, top, w - 2 * self.padding, height), p.rows[i]
             top += height
 
+    def contains_page(self, x, y):
+        return inside(self.page.rect, x, y) or any(inside(page.rect, x, y) for page in self.parents)
+
     def surfaces(self, page):
         """Logical glass surfaces; a pie reuses the painter with separate petals."""
         return (page.rect,)
@@ -815,7 +818,8 @@ class Menu:
             self.motion.pulse("reveal", 0.12)
             return True
         except Exception as error:
-            self.close()
+            if not self.valid(context):
+                self.close()
             self._error(error)
             return True
 
@@ -834,11 +838,18 @@ class Menu:
         if kind == "WINDOW_DEACTIVATE":
             self.close()
             return False
-        self.motion.input(event, x, y)
+        # Right-click requests row actions. Its release can arrive on a newly opened menu.
+        if kind != "RIGHTMOUSE":
+            self.motion.input(event, x, y)
+        if kind == "RIGHTMOUSE" and event.value == "RELEASE":
+            self.held_keys.discard(kind)
+            return self.contains_page(x, y)
         if self.pending_click is not None:
             page, index, row = self.pending_click
             if press and kind in {"ESC", "RIGHTMOUSE"}:
                 self.pending_click = None
+                if kind == "RIGHTMOUSE" and self.contains_page(x, y):
+                    return True
                 self.close()
                 return inside(self.clip, x, y) if kind == "RIGHTMOUSE" else True
             if kind == "LEFTMOUSE" and event.value == "RELEASE":
@@ -983,6 +994,8 @@ class Menu:
                 else self.page.highlight
             )
             if self.open_row_context(index, context):
+                return True
+            if kind == "RIGHTMOUSE" and self.contains_page(x, y):
                 return True
         if press and kind in {"ESC", "LEFT_ARROW"} and self.back(context):
             self.refresh(context)

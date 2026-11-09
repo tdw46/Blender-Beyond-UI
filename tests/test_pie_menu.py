@@ -47,7 +47,7 @@ class Release(unittest.TestCase):
                 menu.page.rows = (replace(menu.page.rows[0], label="New owner"),)
             elif mode != "outside":
                 menu.event(event(mode), *p)
-                self.assertTrue(menu.closed)
+                self.assertEqual(menu.closed, mode != "RIGHTMOUSE")
             if not menu.closed:
                 menu.event(
                     event("LEFTMOUSE", "RELEASE"),

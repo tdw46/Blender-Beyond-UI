@@ -1327,7 +1327,7 @@ class Canvas(Group):
                     px, py = self.overlay.get("context_point", (0.5, 0.5))
                     x, y = a + w * px, b + h * py
                 if inside(self.overlay["rect"], x, y):
-                    return self.open_context(
+                    opened = self.open_context(
                         owner,
                         x,
                         y,
@@ -1336,6 +1336,7 @@ class Canvas(Group):
                         measure=menu_measure,
                         overlay=self.overlay,
                     )
+                    return opened or event.type == "RIGHTMOUSE"
         if invocation and not (self.edit or self.overlay or self.widget_capture):
             control = self.hit(x, y, clip, include_disabled=True)
             if event.type != "RIGHTMOUSE" and self.context_focus is not None:
@@ -1477,8 +1478,12 @@ class Canvas(Group):
             self.cancel()
             return consumed
         if kind in {"ESC", "RIGHTMOUSE"} and press and (self.edit or self.overlay):
-            self.cancel()
-            return True
+            from .context_menu import inside
+
+            # Let the widget cancel its own gesture when the click is inside its popup.
+            if kind == "ESC" or self.overlay is None or not inside(self.overlay["rect"], x, y):
+                self.cancel()
+                return True
         if self.edit is not None and not self.edit.binding.valid():
             self.cancel()
             self.menu_error = "The edited owner or selection changed"
