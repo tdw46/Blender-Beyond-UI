@@ -8,6 +8,7 @@ from pathlib import Path
 from contextlib import contextmanager
 
 _owners = 0
+_immediate_faces = set()
 
 ASSETS = Path(__file__).resolve().parents[1] / "assets/fonts"
 
@@ -92,7 +93,9 @@ def motion_text(font, motion, *, force=False):
 
     moving = (bool(motion.tracks) or force) and bool(motion.strength)
     fonts = {face(font), face(font, "title")} if moving else ()
+    fonts = set(fonts).difference(_immediate_faces) if fonts else ()
     for handle in fonts:
+        _immediate_faces.add(handle)
         blf.rotation(handle, 0.0)
         blf.enable(handle, blf.ROTATION)
         blf.position(handle, 0, 0, 0)
@@ -101,6 +104,7 @@ def motion_text(font, motion, *, force=False):
         yield
     finally:
         for handle in fonts:
+            _immediate_faces.discard(handle)
             blf.disable(handle, blf.ROTATION)
 
 
@@ -121,7 +125,8 @@ def flush_text(font):
                 blf.position(handle, 0, 0, 0)
                 blf.draw(handle, " ")
             finally:
-                blf.disable(handle, blf.ROTATION)
+                if handle not in _immediate_faces:
+                    blf.disable(handle, blf.ROTATION)
     finally:
         gpu.state.blend_set(blend)
 

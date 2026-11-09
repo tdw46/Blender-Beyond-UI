@@ -1,0 +1,1112 @@
+{
+  "pulled": {
+    "CamKeys": "d329ca0",
+    "Beyond UI": "369f521"
+  },
+  "tests": {
+    "export51": {
+      "passed": true
+    },
+    "test4.3.2": {
+      "passed": true,
+      "version": "4.3.2",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true
+    },
+    "test4.4.3": {
+      "passed": true,
+      "version": "4.4.3",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true
+    },
+    "test4.5.15": {
+      "passed": true,
+      "version": "4.5.15 LTS",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true
+    },
+    "export45": {
+      "passed": true
+    },
+    "export42": {
+      "passed": true
+    },
+    "test5.1.2": {
+      "passed": true,
+      "version": "5.1.2",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true
+    },
+    "test4.2.23": {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true,
+      "controls_and_runtime_binding_checked": true,
+      "all_12_locale_entries_present": true,
+      "custom_curve_changes_geometry": true
+    },
+    "migration52": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "nodes_before": 1363,
+      "nodes_after": 1071,
+      "parity": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "wizard": [
+        {
+          "mode": "LENS",
+          "controls": 22
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "controls": 61
+        }
+      ],
+      "retired_input_animation_preserved": true,
+      "retired_input_inert": true
+    },
+    "test5.0.1": {
+      "passed": true,
+      "version": "5.0.1",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true
+    },
+    "export40": {
+      "passed": true
+    },
+    "test52": {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "default_exact_parity_cases": [
+        {
+          "ratio": 0.05,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.05,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.156,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 0.5,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 1.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 2.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 5.0,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.0,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 0.5,
+          "maximum_error": 0.0
+        },
+        {
+          "ratio": 16.666666666666668,
+          "protection": 1.0,
+          "maximum_error": 0.0
+        }
+      ],
+      "expanded_samples": 142,
+      "source_distance_invariant": true,
+      "core_unchanged": true,
+      "short_and_subject_unchanged": true,
+      "controls_and_runtime_binding_checked": true,
+      "all_12_locale_entries_present": true,
+      "custom_curve_changes_geometry": true
+    }
+  },
+  "live": {
+    "passed": true,
+    "state_preserved_except_new_ranges": true,
+    "saved": false,
+    "active_graphs": [
+      [
+        "AllMight_Head",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Iris",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Hair",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "AllMight_Head.Normals",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Modern_Suit",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "AllMight_SilverAge.Cape",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "SilverAge_Suit.001",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "SilverAge_Suit.002",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Tie Body",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "CasualOutfit",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Belt",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Shoes.001",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      [
+        "Pants.001",
+        "CamKeys_AutoFOV",
+        1071,
+        [
+          1.0,
+          1.0
+        ]
+      ]
+    ],
+    "labels": [
+      "Long Lens",
+      "Short Lens",
+      "",
+      "Long Lens Falloff: Controls how the effect fades near the long lens limit.",
+      "Left side = High effect",
+      "Right side = Low effect",
+      "",
+      "Constant",
+      "Linear",
+      "Smooth",
+      "Sphere",
+      "Root",
+      "Sharp",
+      "Custom",
+      "Front falloff distance",
+      "Back falloff distance",
+      "0 = automatic. Distances use the mesh before forced perspective.",
+      "Custom curve creates fake depth illusion",
+      "",
+      "",
+      "Clip",
+      "Extend",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Export",
+      "Import"
+    ]
+  }
+}

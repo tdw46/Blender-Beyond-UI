@@ -6,6 +6,9 @@ No pixel readback, scene capture, redraw timer or native framebuffer retention.
 """
 
 import sys
+from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass
 import ctypes
 import math
 
@@ -16,6 +19,68 @@ _lens_error = ""
 _owners = {}
 _views = {}
 error = ""
+_popup_pass = ContextVar("bui_popup_pass", default=None)
+POPUP_BLUR = 0.90
+
+
+@dataclass
+class _PopupPass:
+    host: object
+    key: object
+    record: dict
+    revision: object
+    fallback: object
+    layer: int = 0
+
+
+@contextmanager
+def popup_pass(host, key, record, revision=None, fallback=None):
+    """A borrowed draw context; no handler, capture or redraw on scope entry."""
+    token = _popup_pass.set(_PopupPass(host, key, record, revision, fallback))
+    try:
+        yield
+    finally:
+        _popup_pass.reset(token)
+
+
+def backdrop_signature(key):
+    return _owners.get(key, {}).get("signature")
+
+
+def popup_blur(key, default):
+    return POPUP_BLUR if _owners.get(key, {}).get("popup") else default
+
+
+def popup_backdrop(previous, rect, scale, *, font=None, underlay=None):
+    """Sample the composed area before drawing a sheet, including lower menus."""
+    state = _popup_pass.get()
+    if state is None:
+        return previous
+    first = state.layer == 0
+    key = (id(state.host), state.key, "popup", state.layer)
+    state.layer += 1
+    # The host can certify the native source revision. A submenu can certify
+    # the already painted parent pages too. Other widget content may be live.
+    revision = state.revision(rect) if callable(state.revision) else state.revision
+    if revision is not None and (first or underlay is not None):
+        stamp = (revision, underlay)
+    else:
+        stamp = object()
+    if font is not None:
+        from .typography import flush_text
+        flush_text(font)
+    if draw(key, stamp, rect, 0, state.host.bridge.library, scale=scale,
+            prepare_only=True, popup=True, scratch=state.record):
+        if first:
+            state.record.update(popup_source="COMPOSITE", popup_backdrop=key)
+        return key
+    if previous is None and state.fallback is not None:
+        previous = state.fallback(rect)
+    if first:
+        state.record.update(popup_source="VIEWPORT_FALLBACK" if previous else "UNAVAILABLE",
+                            popup_backdrop=previous)
+    return previous
+
 
 # Exact rounded SDF owns coverage; smooth normals own rim light, and a
 # monotone rational field owns refraction without nearest-edge reversals.
@@ -222,11 +287,12 @@ def draw(
     capture_rect=None,
     viewport_present=None,
     prepare_only=False,
+    popup=False,
+    scratch=None,
 ):
     """Sample a retained blurred crop; only changed underlays run its producer."""
     global error
-    # Overlays borrow the same underlying glass levels, never recursively blur
-    # an already-glassy control. Only borrow when the retained crop covers it.
+    # Sibling controls may borrow blur levels when the source crop covers them.
     import gpu
     from mathutils import Matrix
 
@@ -251,7 +317,7 @@ def draw(
         return False
     fw, fh = framebuffer_size or (vw, vh)
     x, y, w, h = capture_rect or rect
-    pad = math.ceil(12 * scale)
+    pad = math.ceil((20 if popup else 12) * scale)
     left = max(0, math.floor(x) - pad)
     bottom = max(0, math.floor(y) - pad)
     right = min(vw, math.ceil(x + w) + pad)
@@ -285,6 +351,7 @@ def draw(
             ring=[None] * 3, slot=-1, signature=None, productions=0, allocations=0
         )
         _owners[key] = owner
+    owner["popup"] = popup
     if owner.get("failed") == signature:
         return False
     blend = gpu.state.blend_get()
@@ -304,17 +371,20 @@ def draw(
             slot = (owner["slot"] + 1) % 3
             targets = owner["ring"][slot]
             copy_w, copy_h = (cw, ch) if cropped else (fw, fh)
-            dimensions = (copy_w, copy_h, bw, bh, viewport_source is not None)
+            # OpenGL and older bridges blit a full framebuffer. All popup depths
+            # share one transient copy target; only their blurred crops survive.
+            shared_copy = scratch is not None and not cropped and not viewport_source
+            dimensions = (copy_w, copy_h, bw, bh, viewport_source is not None, shared_copy)
             if targets is None or targets[0] != dimensions:
                 # Allocate transactionally; leave prior published slots intact.
                 targets = (
                     dimensions,
-                    None if viewport_source else _target(copy_w, copy_h),
+                    None if viewport_source or shared_copy else _target(copy_w, copy_h),
                     _target(bw, bh),
                     _target(bw, bh),
                     _target(bw, bh),
                 )
-                owner["allocations"] += 3 if viewport_source else 4
+                owner["allocations"] += 3 if viewport_source or shared_copy else 4
                 owner["ring"][slot] = (
                     targets  # Scratch ownership; published slot is unchanged until success.
                 )
@@ -356,7 +426,13 @@ def draw(
                     ):
                         return False
             else:
-                with targets[1][1].bind():
+                copy = targets[1]
+                if shared_copy:
+                    copy = scratch.get("_popup_copy")
+                    if copy is None or (copy[0].width, copy[0].height) != (copy_w, copy_h):
+                        copy = scratch["_popup_copy"] = _target(copy_w, copy_h)
+                        owner["allocations"] += 1
+                with copy[1].bind():
                     if cropped:
                         bridge.bvt_probe_crop_framebuffer.argtypes = (
                             ctypes.c_void_p,
@@ -381,7 +457,7 @@ def draw(
                 else [
                     (
                         targets[2],
-                        targets[1][0],
+                        copy[0],
                         crop,
                         (cw / bw / copy_w * 0.25, ch / bh / copy_h * 0.25, 2.0, 0.0),
                     )
@@ -581,8 +657,9 @@ def _strong_blur(owner):
             owner["ring"][slot] = targets
             owner["allocations"] += 2
         # Baseline sigma is the existing tab blur. Variances add; this extra
-        # radius raises the shared level from 30 to 70 without changing 30.
-        step = math.sqrt((0.7 / 0.3) ** 2 - 1.0)
+        # radius produces the requested strong level without a third blur pass.
+        strong = POPUP_BLUR if owner.get("popup") else 0.7
+        step = math.sqrt((strong / 0.3) ** 2 - 1.0)
         gpu.state.depth_test_set("NONE")
         gpu.state.depth_mask_set(False)
         gpu.state.blend_set("NONE")
@@ -681,21 +758,23 @@ void main(){
         backdrop=texture(source,coord).rgb;
         if(blurMix>0.0) backdrop=mix(backdrop,texture(softSource,coord).rgb,blurMix);
     }
-    vec3 color=mix(backdrop,tint.rgb,clamp(tint.a,0.0,0.78));
+    float sheet=step(1.5,blurMix);
+    vec3 color=mix(backdrop,tint.rgb,clamp(tint.a,0.0,0.78)*mix(1.0,0.68,sheet));
     float rim=1.0-smoothstep(0.0,1.6,max(0.0,-d));
     float light=max(0.0,dot(n,vec2(-0.447214,0.894427)));
     color=mix(color,vec3(1.0),rim*(0.12+0.35*light*light));
     // Rim-led flare, evaluated locally in this draw (no bloom target/pass).
     float halo=1.0-smoothstep(0.0,5.0,max(0.0,-d));
+    color=mix(color,vec3(1.0),sheet*(0.13*rim+0.09*halo*halo)*(0.45+0.55*light));
     color+=vec3(sweep*(0.03+0.575*rim+0.09*halo*halo));
     float aa=max(fwidth(d),0.7);
     fragColor=vec4(color,1.0-smoothstep(-aa,aa,d));
 }"""
     )
     _lens_shader = gpu.shader.create_from_info(info)
-    # Three tiny immutable quads carry the mix without exceeding the 128-byte
+    # Immutable quads carry blur and rim selection without exceeding the 128-byte
     # push-constant budget or allocating/updating a buffer per widget.
-    for level, mix in ((0.3, 0.0), (0.4, 0.175), (0.7, 1.0)):
+    for level, mix in ((0.3, 0.0), (0.4, 0.175), (0.7, 1.0), (POPUP_BLUR, 2.0)):
         _lens_batches[level] = batch_for_shader(
             _lens_shader,
             "TRIS",
@@ -723,6 +802,8 @@ def lens(key, rect, radius, tint, *, phase=1.0, stretch=0.0, angle=0.0, blur=0.4
         _lens_error = str(exc)
         return False
     level = 0.7 if blur >= 0.7 else 0.4 if blur > 0.3 else 0.3
+    if blur >= POPUP_BLUR:
+        level = POPUP_BLUR
     if level > 0.3 and not _strong_blur(owner):
         level = 0.3
     targets = owner["ring"][owner["slot"]]

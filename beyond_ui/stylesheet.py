@@ -330,6 +330,7 @@ class StyleSheet:
         for role, pair in self._data["surfaces"].items():
             surfaces[role] = tuple(color(c) for c in pair)
         opacity = self._data["opacity"]
+        p["_surface_opacity"] = opacity
         # Text/data colors remain fully legible; only chrome opacity changes.
         for key in (
             "bg",

@@ -49,6 +49,8 @@ _VISUAL = {
     "text_align",
     "icon",
     "trailing_icon",
+    "trailing_icon_align",
+    "highlight_expanded",
     "motion",
     "variant",
     "wrap",
@@ -108,7 +110,9 @@ def normalize(*presets, **options):
     for key, value in tuple(result.items()):
         if key == 'enum_style':
             if value not in {'menu', 'segment'}:raise ValueError('enum_style must be menu or segment')
-        elif key in {"curve_lock_start", "curve_lock_end"}:
+        elif key == "trailing_icon_align" and value not in {"text", "end"}:
+            raise ValueError("trailing_icon_align must be text or end")
+        elif key in {"curve_lock_start", "curve_lock_end", "highlight_expanded"}:
             if type(value) is not bool:raise ValueError(key+" must be Boolean")
         elif key == "responsive":
             from .responsive import normalize_rules
@@ -280,6 +284,8 @@ def prepare_control(control, values):
 
 
 def apply_control(control, values, prepared=None):
+    if "highlight_expanded" in values and control.kind == "toggle" and "disclosure_open" in control.options:
+        control.options.update(bool_button=True, icon="TRIA_DOWN" if control.options["disclosure_open"] else "TRIA_RIGHT")
     if 'enum_style' in values and control.kind == 'button' and 'selected' in control.options:
         control.options['menu_option'] = values['enum_style'] == 'menu'
     from .stylesheet import StyleSheet

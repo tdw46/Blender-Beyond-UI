@@ -264,7 +264,7 @@ class DataPicker(Widget):
             rect,
             16 * p.scale,
             palette.get("menu_glass", (0, 0, 0, 0)),
-            blur=0.7,
+            blur=glass.POPUP_BLUR,
         ):
             p.surface((0, 0, self.width, self.height), "card", 16, motion_key=False)
         p.text(

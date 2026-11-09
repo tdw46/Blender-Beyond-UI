@@ -1,0 +1,2940 @@
+{
+  "before": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68565,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/private/tmp/reproduce_reenable.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": false,
+      "returncode": 0,
+      "result": {
+        "passed": false,
+        "changes": [
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 419.498046875,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.33944088220596313,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.526073694229126,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.2394852638244629,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 2.5826263427734375,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 1.3735020160675049,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 1.8308061361312866,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 4.58843994140625,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 8.688072204589844,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 419.498046875,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.33944088220596313,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.526073694229126,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.2394852638244629,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 2.5826263427734375,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 1.3735020160675049,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 1.8308061361312866,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 4.58843994140625,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 8.688072204589844,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 419.498046875,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.33944088220596313,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.526073694229126,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.2394852638244629,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 2.5826263427734375,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 1.3735020160675049,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 1.8308061361312866,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 4.682194709777832,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 4.58843994140625,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 8.688072204589844,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          }
+        ],
+        "states": [
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667189568
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667225696
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667260960
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667279808
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667300672
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667666496
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667702624
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667737888
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667757856
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667810592
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667829888
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667865120
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667889824
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667189568
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667225696
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667260960
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667279808
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667300672
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667666496
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667702624
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667737888
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667757856
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667810592
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667829888
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667865120
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667889824
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516543653736
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667894280
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667852552
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667817064
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667765000
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667744360
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667691176
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667309160
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667288296
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667269448
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667217160
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516537452072
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667881704
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516543653736
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667894280
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667852552
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667817064
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667765000
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667744360
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667691176
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667309160
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667288296
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667269448
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667217160
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516537452072
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667881704
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516537191944
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667212904
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667265192
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667284040
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667304904
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667686920
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667740104
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667760744
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667812808
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667832328
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667883528
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667941192
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516543451528
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516537191944
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667212904
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667265192
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667284040
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667304904
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667686920
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667740104
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667760744
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667812808
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667832328
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667883528
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516667941192
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                516543451528
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667723720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667877224
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516543463176
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667935368
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667861064
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667825384
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667805864
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667752456
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667699912
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667333864
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667296392
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667277544
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                516667226568
+              ]
+            ]
+          }
+        ],
+        "source": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/before/blender-0.log"
+    }
+  ],
+  "retained": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 68818,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/private/tmp/reproduce_reenable.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "changes": [
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          }
+        ],
+        "states": [
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                528971467424
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970406720
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970459232
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970478080
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970496928
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528970517824
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971211328
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971280224
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971299072
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971351840
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971388192
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971407488
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971426336
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                528971467424
+              ]
+            ]
+          }
+        ],
+        "source": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/retained/blender-0.log"
+    }
+  ],
+  "matrix3": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 69312,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_auto_fov_reenable.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          {
+            "viewport": false,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          }
+        ],
+        "missing_companion_repaired": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/matrix3/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 69319,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_auto_fov_reenable.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          {
+            "viewport": false,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          }
+        ],
+        "missing_companion_repaired": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/matrix3/blender-1.log"
+    },
+    {
+      "blender": "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 69325,
+      "command": [
+        "build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_auto_fov_reenable.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          {
+            "viewport": false,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": false,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "property",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "operator",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "modifier",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          },
+          {
+            "viewport": true,
+            "route": "global",
+            "cycles": 3,
+            "maximum_delta": 0.0
+          }
+        ],
+        "missing_companion_repaired": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/matrix3/blender-2.log"
+    }
+  ],
+  "recovery": [
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 69915,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/private/tmp/test_reenable_recovery.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "changes": [
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          },
+          {
+            "AllMight_Head": {
+              "max_delta": 0.0,
+              "off_delta": 0.04602545499801636,
+              "finite": true
+            },
+            "AllMight_Head.Normals": {
+              "max_delta": 0.0,
+              "off_delta": 0.0,
+              "finite": true
+            },
+            "AllMight_SilverAge.Cape": {
+              "max_delta": 0.0,
+              "off_delta": 419.498046875,
+              "finite": true
+            },
+            "Belt": {
+              "max_delta": 0.0,
+              "off_delta": 0.33944088220596313,
+              "finite": true
+            },
+            "CasualOutfit": {
+              "max_delta": 0.0,
+              "off_delta": 0.526073694229126,
+              "finite": true
+            },
+            "Hair": {
+              "max_delta": 0.0,
+              "off_delta": 0.2394852638244629,
+              "finite": true
+            },
+            "Iris": {
+              "max_delta": 0.0,
+              "off_delta": 2.5826263427734375,
+              "finite": true
+            },
+            "Modern_Suit": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "Pants.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.3735020160675049,
+              "finite": true
+            },
+            "Shoes.001": {
+              "max_delta": 0.0,
+              "off_delta": 1.8308061361312866,
+              "finite": true
+            },
+            "SilverAge_Suit.001": {
+              "max_delta": 0.0,
+              "off_delta": 4.682194709777832,
+              "finite": true
+            },
+            "SilverAge_Suit.002": {
+              "max_delta": 0.0,
+              "off_delta": 4.58843994140625,
+              "finite": true
+            },
+            "Tie Body": {
+              "max_delta": 0.0,
+              "off_delta": 8.688072204589844,
+              "finite": true
+            }
+          }
+        ],
+        "states": [
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                false,
+                500654217600
+              ]
+            ]
+          },
+          {
+            "AllMight_Head": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653632032
+              ]
+            ],
+            "AllMight_Head.Normals": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653651776
+              ]
+            ],
+            "AllMight_SilverAge.Cape": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653687040
+              ]
+            ],
+            "Belt": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653705888
+              ]
+            ],
+            "CasualOutfit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500653726752
+              ]
+            ],
+            "Hair": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654043424
+              ]
+            ],
+            "Iris": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654063168
+              ]
+            ],
+            "Modern_Suit": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654082048
+              ]
+            ],
+            "Pants.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654102016
+              ]
+            ],
+            "Shoes.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654121984
+              ]
+            ],
+            "SilverAge_Suit.001": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654141280
+              ]
+            ],
+            "SilverAge_Suit.002": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654192896
+              ]
+            ],
+            "Tie Body": [
+              [
+                "CamKeys AutoFOV",
+                true,
+                500654217600
+              ]
+            ]
+          }
+        ],
+        "source": false
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/reenable/recovery/blender-0.log"
+    }
+  ],
+  "live": {
+    "passed": true,
+    "preserved": true,
+    "targets": {
+      "AllMight_Head": {
+        "viewport": true,
+        "render": true,
+        "vertices": 6486
+      },
+      "AllMight_Head.Normals": {
+        "viewport": true,
+        "render": true,
+        "vertices": 6486
+      },
+      "AllMight_SilverAge.Cape": {
+        "viewport": true,
+        "render": true,
+        "vertices": 2039
+      },
+      "Belt": {
+        "viewport": true,
+        "render": true,
+        "vertices": 5336
+      },
+      "CasualOutfit": {
+        "viewport": true,
+        "render": true,
+        "vertices": 10682
+      },
+      "Hair": {
+        "viewport": true,
+        "render": true,
+        "vertices": 5182
+      },
+      "Iris": {
+        "viewport": true,
+        "render": true,
+        "vertices": 192
+      },
+      "Modern_Suit": {
+        "viewport": true,
+        "render": true,
+        "vertices": 24526
+      },
+      "Pants.001": {
+        "viewport": true,
+        "render": true,
+        "vertices": 3248
+      },
+      "Shoes.001": {
+        "viewport": true,
+        "render": true,
+        "vertices": 2552
+      },
+      "SilverAge_Suit.001": {
+        "viewport": true,
+        "render": true,
+        "vertices": 22168
+      },
+      "SilverAge_Suit.002": {
+        "viewport": true,
+        "render": true,
+        "vertices": 2676
+      },
+      "Tie Body": {
+        "viewport": true,
+        "render": true,
+        "vertices": 1896
+      }
+    },
+    "saved": false
+  },
+  "limits": [
+    "Headless CPU/evaluated-geometry checks on Mac, no new Windows hardware replay.",
+    "Existing All Might rig dependency-cycle and DataTransfer topology warnings are present before and after; not modified in this repair.",
+    "Cold-load and live scene geometry may differ with rig evaluation state; parity claims concern paired toggle cycles within the same disposable process."
+  ]
+}

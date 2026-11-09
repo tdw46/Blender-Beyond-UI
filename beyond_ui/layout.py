@@ -1444,14 +1444,16 @@ class Layout:
             # Host rebuilds schema on explicit state changes; no draw-time writes.
             self.canvas.schema_revision += 1
 
-        header.group.button(self._key("disclosure"), "▾" if expanded else "▸", toggle)
+        header.group.button(self._key("disclosure"), "▾" if expanded else "▸", toggle, disclosure_open=expanded)
         return header, self.column() if expanded else None
 
     def panel_prop(self, data, property):
         header = self.row()
         header._text_role = "title"
-        header.prop(data, property)
-        return header, self.column() if getattr(data, property) else None
+        expanded = bool(getattr(data, property))
+        control = header.prop(data, property)
+        control.options["disclosure_open"] = expanded
+        return header, self.column() if expanded else None
 
     def supports(self, name):
         return (
@@ -1499,7 +1501,7 @@ class Layout:
 
     def beyond_joystick(self, data, property=None, *, x=None, y=None,
                         minimum=(-1.,-1.), maximum=(1.,1.), default=(0.,0.),
-                        size=104., gap=14., fields=True, label='', compact_below=None, compact_size=64., compact_gap=10., fit_group=None, fit_on_wrap=True, mode="POSITION", speed=.35, velocity_curve=(0.,0.), edge_speed_multiplier=1., edge_start=.7, fine_speed_scale=.25):
+                        size=104., gap=14., fields=True, label='', compact_below=None, compact_size=64., compact_gap=10., fit_group=None, fit_on_wrap=True, mode="POSITION", speed=.35, velocity_curve=(0.,0.), edge_speed_multiplier=1., edge_start=.7, fine_speed_scale=.25,handle_radius=9.,base_radius=11.,stem_width=4.,show_stem=True):
         from .widgets.joystick import Joystick, pair_binding
         from .style_api import style
         if property:
@@ -1513,7 +1515,7 @@ class Layout:
                 raise ValueError('Joystick requires two scalar FloatProperties')
             axes=tuple(self._binding(data,n) for n in (x,y))
             binding=pair_binding(*axes,self.commit)
-        widget=Joystick(binding,axes=axes,minimum=minimum,maximum=maximum,default=default,mode=mode,speed=speed,velocity_curve=velocity_curve,edge_speed_multiplier=edge_speed_multiplier,edge_start=edge_start,fine_speed_scale=fine_speed_scale)
+        widget=Joystick(binding,axes=axes,minimum=minimum,maximum=maximum,default=default,mode=mode,speed=speed,velocity_curve=velocity_curve,edge_speed_multiplier=edge_speed_multiplier,edge_start=edge_start,fine_speed_scale=fine_speed_scale,handle_radius=handle_radius,base_radius=base_radius,stem_width=stem_width,show_stem=show_stem)
         from .responsive import normalize_rules
         if fit_group is not None and (not isinstance(fit_group,str) or not fit_group or '.' in fit_group):
             raise ValueError('fit_group must be a nonempty name without dots')

@@ -120,7 +120,7 @@ class Painter:
             self.map(r),
             14 * self.scale,
             self.palette["surfaces"]["card"][0],
-            blur=blur,
+            blur=glass.popup_blur(self.backdrop, blur),
         ):
             self.surface(r, "card", 14, 1)
         self.surface((1, 1, self.width - 2, 59), "header", 13, 0)

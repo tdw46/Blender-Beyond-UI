@@ -148,7 +148,7 @@ framebuffer pixels (not Window RNA points on Retina), explicit projection and
 scissor scope. Teardown removes only the owned callback and scene invalidation
 handler. Missing native capability still raises the existing explicit fallback.
 
-Floating 3D View surfaces now sample the completed viewport's color/overlay
+At that checkpoint, floating 3D View surfaces sampled the completed viewport's color/overlay
 textures through the same retained Gaussian/lens pipeline as embedded panels.
 Scene/view changes invalidate the source; popup hover animation reuses it.
 Properties editors and non-overlapping layouts use the completed composed
@@ -172,3 +172,41 @@ binary fingerprints, admission list and minimum supported version are unchanged.
 Capture note: `screen.screenshot` recomposites region buffers and omits custom
 window callbacks. The new fixture reads the actual framebuffer once after the
 owned popup paints; this readback exists only in the test, never production.
+
+
+## Popup glass over composed UI — 2026-11-09
+
+A floating popup reads the composed window immediately before its sheet is drawn.
+An embedded popup reads its host after the controls below it are painted. For a
+nested menu, the parent’s artwork and queued text are submitted first, so a
+child can refract the parent. Native floating menus drawn later by Blender stay
+on top. Each sheet uses a padded, reduced-resolution Gaussian blur and a
+brighter directional rim. The rim needs no additional render target.
+
+The admitted Metal and Windows Vulkan bridges can copy the relevant rectangle.
+OpenGL and older bridges use the existing framebuffer blit with one reusable
+full-size scratch target per host. A stable underlay reuses its blurred crop;
+uncertain or animated lower content refreshes on host redraw. No CPU pixel read
+is used in production. The existing viewport fallback is distinguishable from a
+composited capture. The optional add-on-wide `popup_tint` remains independent of
+sampling, blur and refraction.
+
+[Matched captures and test results](design/qa/popup-composition-v1/index.html).
+To replay the pixels on a Windows machine with an admitted Blender build, run
+from the BUI checkout in PowerShell:
+
+```powershell
+foreach ($backend in 'vulkan', 'opengl') {
+    python tools/run_blender_tests.py --windowed --blender 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe' --gpu-backend $backend --fixture tests/blender_popup_glass_composition.py --output "build/popup-glass-$backend"
+    if ($LASTEXITCODE -ne 0) { throw "$backend popup glass failed" }
+}
+```
+
+
+Embedded Canvas popups also use the admitted window compositor. The opener's
+scroll clip still determines which controls are interactive; only transient
+sheets use the wider window bounds. The popup retains its invoking Blender
+context even when the pointer moves over another editor. A lower region that
+redraws behind the popup invalidates its glass; closing the popup removes its
+draw callbacks. A nested text flush preserves the enclosing font motion state,
+so labels follow the opening sheet. [Window-level input and motion checks](design/qa/window-menu-motion-v1/index.html).

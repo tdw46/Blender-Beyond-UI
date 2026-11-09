@@ -33,7 +33,11 @@ class Theme:
     box_padding: float | None = None
     separator_height: float = 8.0
 
+    popup_tint: float = 0.15
+
     def __post_init__(self):
+        if type(self.popup_tint) not in (int, float) or not 0 <= self.popup_tint <= 1:
+            raise ValueError("popup_tint must be a number in [0, 1]")
         if self.palette not in {"BLENDER", "REFERENCE"}:
             raise ValueError("palette must be BLENDER or REFERENCE")
 
@@ -266,6 +270,7 @@ class Canvas(Group):
         self.active = None
         self.overlay = None
         self._event_clip = None
+        self._popup_clip = None
         self._event_point = None
         self.context_menu = None
         self.context_provider = context_provider
@@ -391,7 +396,7 @@ class Canvas(Group):
 
     def open_widget(self, widget, owner, clip=None):
         """One host-relative scale and clip policy for every compound popover."""
-        clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
+        clip = self._popup_clip or clip or self._event_clip or (0, 0, self._width or 1, self.height)
         previous = self.overlay
         # Nested list guards require an attached owner during initial layout.
         # Publish ownership transactionally before dimensions invokes callbacks.
@@ -406,6 +411,9 @@ class Canvas(Group):
         rect = (clip[0] + (clip[2] - w) / 2, clip[1] + (clip[3] - h) / 2, w, h)
         if owner is not None and hasattr(widget, "anchor"):
             rect = widget.anchor(owner.rect, clip)
+        elif owner is not None and self._popup_clip:
+            from .popover import panel_position
+            rect = panel_position(owner.rect, clip, (w, h), "VERTICAL")
         self.overlay = {
             "widget": widget,
             "owner": owner,
@@ -430,7 +438,7 @@ class Canvas(Group):
     def open_panel(self, control, clip, context=None):
         model = control.options["panel_model"]
         context = context or model.context
-        clip = clip or self._event_clip or (0, 0, self._width or 1, self.height)
+        clip = self._popup_clip or clip or self._event_clip or (0, 0, self._width or 1, self.height)
         widget = None
         try:
             model.refresh_poll(context)
@@ -770,7 +778,7 @@ class Canvas(Group):
                 target,
                 rows,
                 (control.rect[0], control.rect[1] + control.rect[3]),
-                clip,
+                self._popup_clip or clip,
                 context=context,
                 row_limit=len(rows),
                 search_threshold=self.menu_search_threshold,
@@ -844,7 +852,7 @@ class Canvas(Group):
                     if menu_type is PieMenu
                     else (control.rect[0], control.rect[1] + control.rect[3])
                 ),
-                clip,
+                self._popup_clip or clip,
                 context=context,
                 row_limit=(
                     4096
@@ -910,7 +918,7 @@ class Canvas(Group):
                 target,
                 rows,
                 anchor,
-                clip,
+                self._popup_clip or clip,
                 context=context,
                 trigger=trigger,
                 dead_zone=dead_zone,
@@ -1120,7 +1128,7 @@ class Canvas(Group):
                 target,
                 rows,
                 (x, y),
-                clip,
+                self._popup_clip or clip,
                 context=context,
                 measure=measure,
                 scope=scope,
@@ -1219,7 +1227,7 @@ class Canvas(Group):
                     event.type != "RIGHTMOUSE" or inside(clip, x, y)
                 )
         if self.overlay and "widget" in self.overlay and "clip" in self.overlay:
-            if tuple(clip) != self.overlay["clip"]:
+            if tuple(self._popup_clip or clip) != self.overlay["clip"]:
                 self.open_widget(
                     self.overlay["widget"], self.overlay.get("owner"), clip
                 )
@@ -1246,7 +1254,7 @@ class Canvas(Group):
                 model.refresh_poll(context)
         if self.context_menu is not None:
             menu = self.context_menu
-            if tuple(clip) != tuple(menu.clip):
+            if tuple(self._popup_clip or clip) != tuple(menu.clip):
                 self.close_context()
                 return False
             menu.on_navigate = self._navigate_menu
@@ -1782,9 +1790,9 @@ class Canvas(Group):
         if self.edit.binding.read() != value:
             self.edit.update(value)
 
-    def paint(self, rect, clip, *, preferences=None, font=0, backdrop=None):
+    def paint(self, rect, clip, *, preferences=None, font=0, backdrop=None, overlays=True):
         from .gpu.paint import paint
 
         return paint(
-            self, rect, clip, preferences=preferences, font=font, backdrop=backdrop
+            self, rect, clip, preferences=preferences, font=font, backdrop=backdrop, overlays=overlays
         )

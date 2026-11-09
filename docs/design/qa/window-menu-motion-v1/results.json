@@ -1,0 +1,100 @@
+{
+  "sidebar": [
+    {
+      "passed": true,
+      "error": "",
+      "version": "4.2.23 LTS",
+      "checks": [
+        "production default uses shared BVT liquid glass and strong blur",
+        "Nested action extends past the N-panel into the neighboring native editor",
+        "right-click owner, nested/back navigation and current shortcut execution",
+        "Shift F10 and right-click cancel edit before opening",
+        "outside click dismisses and clears keyboard context focus",
+        "delayed description reveals once and tooltip timer stops",
+        "host animation disable, invalidation, finite idle and clean teardown",
+        "real window keyboard mode selection and capture persist a working shortcut, invokes outside canvas, and removes it",
+        "actual F18 window event reopens custom enum popup and keyboard selection commits"
+      ],
+      "called": [
+        "value"
+      ]
+    },
+    {
+      "passed": true,
+      "error": "",
+      "version": "5.2.2 LTS",
+      "checks": [
+        "production default uses shared BVT liquid glass and strong blur",
+        "Nested action extends past the N-panel into the neighboring native editor",
+        "right-click owner, nested/back navigation and current shortcut execution",
+        "Shift F10 and right-click cancel edit before opening",
+        "outside click dismisses and clears keyboard context focus",
+        "delayed description reveals once and tooltip timer stops",
+        "host animation disable, invalidation, finite idle and clean teardown",
+        "real window keyboard mode selection and capture persist a working shortcut, invokes outside canvas, and removes it",
+        "actual F18 window event reopens custom enum popup and keyboard selection commits"
+      ],
+      "called": [
+        "value"
+      ]
+    }
+  ],
+  "animated_glyphs": {
+    "5.2.2": {
+      "passed": true,
+      "phases": [
+        {
+          "stretch": 0.86,
+          "ink_pixels": 948,
+          "overlap": 1.0
+        },
+        {
+          "stretch": 1.14,
+          "ink_pixels": 960,
+          "overlap": 1.0
+        },
+        {
+          "stretch": 1.0,
+          "ink_pixels": 953,
+          "overlap": 1.0
+        }
+      ]
+    },
+    "5.1.2": {
+      "passed": true,
+      "phases": [
+        {
+          "stretch": 0.86,
+          "ink_pixels": 948,
+          "overlap": 1.0
+        },
+        {
+          "stretch": 1.14,
+          "ink_pixels": 960,
+          "overlap": 1.0
+        },
+        {
+          "stretch": 1.0,
+          "ink_pixels": 953,
+          "overlap": 1.0
+        }
+      ]
+    }
+  },
+  "before": "AssertionError: (0.86, 0.41094890510948906)",
+  "uraraka_cases": 11,
+  "uraraka_hover_recaptures": 0,
+  "all_might": {
+    "left": 1552.5,
+    "n_panel_left": 1867,
+    "right": 2232.5,
+    "source": "COMPOSITE",
+    "saved": false
+  },
+  "focus_events": {
+    "window-popup-matrix": 0,
+    "window-popup-text": 1,
+    "window-popup-uraraka-final": 1,
+    "window-popup-overhang-final": 0
+  }
+}

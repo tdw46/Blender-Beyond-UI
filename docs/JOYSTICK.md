@@ -86,3 +86,17 @@ The library default multiplier is `1.0` for existing integrations. CamKeys uses 
 Velocity joysticks accept `fine_speed_scale=0.25`. Holding Shift multiplies their speed by this factor; modifier press/release updates during an existing drag without requiring mouse movement. It also works when Shift is held before pressing the pad. The original response curve, range clamps and single commit per drag are retained. The scale must be finite in `(0, 1]`.
 
 CamKeys uses `speed=1.4, fine_speed_scale=0.25`: four times its original velocity at every deflection, with the original velocity restored while Shift is held. There is no additional edge-only boost.
+
+## Controller-style handle
+
+The default handle is now a 9-unit circular cap. Moving it reveals an 11-unit
+base at the center and a 4-unit stem. These use existing retained theme-aware
+GPU primitives, with the same handle motion and shared inset/glass material.
+No SVG loading, extra blur capture, or idle timer is involved.
+
+`bui.joystick(..., handle_radius=9, base_radius=11, stem_width=4, show_stem=True)`
+configures each control. Set `handle_radius=5, show_stem=False` for the earlier
+dot presentation. Handle radius must be in `(0, 10]` to fit the full travel,
+base radius in `(0, 42]`, and stem width positive; dimensions must be finite.
+Logical hit coordinates, X/Y ranges, speed, precision mode and context menus
+are unchanged. Dimensions scale with the control's host logical units.

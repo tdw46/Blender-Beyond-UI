@@ -55,7 +55,7 @@ def build(key):
     canvas.number(
         "value",
         "Resolution",
-        rna_binding(lambda: bpy.context.scene.render, "resolution_percentage"),
+        rna_binding(lambda: bpy.context.scene.render, "resolution_percentage"), integer=True,
     )
     canvas.enum(
         "rotation",
@@ -143,22 +143,63 @@ def tick():
             assert canvas.context_menu.glass_ready
             from beyond_ui.gpu import glass
 
-            owner = glass._owners[record["backdrop"]]
+            assert record.get("popup_window") == window and record.get("popup_source") == "COMPOSITE", record
+            assert canvas.context_menu.clip[2] > canvas._width * 2
+            owner = glass._owners[record["popup_backdrop"]]
             assert owner["productions"] > 0 and owner["strong_productions"] > 0
             state["checks"].append(
                 "production default uses shared BVT liquid glass and strong blur"
             )
+            if os.environ.get("BEYOND_UI_CAPTURE_MENU_CROSSING"):
+                # Capture the actual WM buffer after the menu, not the underlying
+                # region screenshot. This readback exists only in the fixture.
+                owners = demo._host.bridge.window_overlays[window.as_pointer()]["owners"]
+                key = next(k for k in owners if k[0] == id(demo._host))
+                original = owners[key]
+
+                def capture():
+                    original()
+                    menu = canvas.context_menu
+                    if not menu or not menu.parents:
+                        return
+                    import gpu
+                    sys.path.insert(0, str(ROOT / "tests"))
+                    from capture_controls import png
+                    rx,ry,rw,rh = record["rect"]
+                    sx,sy = rw/canvas._width, rh/canvas.height
+                    pages = [p.rect for p in (*menu.parents,menu.page)]
+                    left = max(0,int(region.x + rx + min(p[0] for p in pages)*sx)-36)
+                    right = min(gpu.state.viewport_get()[2],int(region.x + rx + max(p[0]+p[2] for p in pages)*sx)+36)
+                    top = min(gpu.state.viewport_get()[3],int(region.y + ry + rh - min(p[1] for p in pages)*sy)+32)
+                    bottom = max(0,int(region.y + ry + rh - max(p[1]+p[3] for p in pages)*sy)-32)
+                    width,height=right-left,top-bottom
+                    pixels=gpu.state.active_framebuffer_get().read_color(left,bottom,width,height,4,0,"UBYTE")
+                    pixels.dimensions=width*height*4
+                    png(Path(os.environ["BEYOND_UI_CAPTURE_MENU_CROSSING"]),width,height,bytes(pixels))
+                    owners[key]=original
+
+                owners[key] = capture
             emit("HOME")
             emit("RIGHT_ARROW")
         elif stage == 3:
             _, canvas = current()
             assert len(canvas.context_menu.parents) == 1, canvas.menu_error
+            row = next(r for _,r,entry in canvas.context_menu.visible_rows() if entry.key == "action")
+            record, _ = current()
+            px = row[0] + row[2] - 3
+            rx, _, rw, _ = record["rect"]
+            assert rx + px * rw / canvas._width > region.width, (row, region.width)
+            state["outside_action"] = (px, row[1]+row[3]/2)
+            state["checks"].append("Nested action extends past the N-panel into the neighboring native editor")
+
             emit("LEFT_ARROW")
         elif stage == 4:
             _, canvas = current()
             assert not canvas.context_menu.parents
             emit("RIGHT_ARROW")
-            emit("C", ctrl=True)
+            # Click the part of the action that physically overhangs the sidebar.
+            emit("LEFTMOUSE", logical=state["outside_action"])
+            emit("LEFTMOUSE","RELEASE",logical=state["outside_action"])
         elif stage == 5:
             _, canvas = current()
             assert called == ["value"], called

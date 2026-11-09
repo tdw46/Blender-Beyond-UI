@@ -89,7 +89,7 @@ def run():
                     (0.1, 0.12, 0.15, 0.12),
                     phase=phase,
                     stretch=0.03,
-                    blur=0.7,
+                    blur=glass.POPUP_BLUR,
                 ), glass._lens_error
                 for i, canvas in enumerate(canvases):
                     x = (i % 2) * width / 2

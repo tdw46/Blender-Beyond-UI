@@ -51,6 +51,7 @@ def paint(
     background=True,
     controls=True,
     overlays=True,
+    composite_overlays=False,
 ):
     """rect/clip use bottom-left region pixels; logical layout is top-down.
 
@@ -134,6 +135,10 @@ def paint(
         gutter = (icon_size + 6 if value else icon_size) * scale if has_icon else 0
         tail = trailing_icon not in {None, "", "NONE", 0}
         tail_gutter = (icon_size + 6) * scale if tail else 0
+        end_icon = tail and current_style.get("trailing_icon_align") == "end"
+        if end_icon:
+            right -= tail_gutter
+            tail_gutter = 0
         group_left = (
             max(
                 left,
@@ -178,7 +183,7 @@ def paint(
             left = group_left + gutter
         origin = group_left + gutter
         if tail:
-            tail_x = min(
+            tail_x = right + 6 * scale if end_icon else min(
                 right - icon_size * scale,
                 origin + measure(active_font, size, str(value))[0] + 6 * scale,
             )
@@ -285,6 +290,13 @@ def paint(
     animation_colors = None
     status_colors = None
     base_palette = palette
+    tip = getattr(canvas, "_control_tip", None)
+    has_popup = bool(canvas.overlay or canvas.context_menu or (tip and tip.tooltip))
+    # Reuse a static panel behind a popup. Record only scalar inputs already
+    # read for visible controls. Custom widgets and active edits can paint
+    # additional content, so their covered crop refreshes on host redraw.
+    underlay = object() if controls else None
+    samples = [] if controls and has_popup and not (canvas.edit or canvas._moving or canvas._composites) else None
     numeric_states = (
         {}
     )  # Resolve shared scene/view settings once per visible host paint.
@@ -383,6 +395,14 @@ def paint(
             ink = palette.get(ink_role, palette[role]) if enabled else palette["muted"]
             selected = control.options.get("selected", False)
             selected = selected() if callable(selected) else selected
+            if "disclosure_open" in control.options and "highlight_expanded" in current_style:
+                selected = control.options["disclosure_open"] and current_style["highlight_expanded"]
+            if samples is not None:
+                if kind in {"widget", "image"} or type(value) not in (str, int, float, bool, type(None)):
+                    samples = None
+                else:
+                    samples.append((control.key, control.label, control.rect, value, enabled,
+                                    alert, status, selected, control.options.get("icon")))
             menu_option = control.options.get("menu_option", False)
             if menu_option and not selected and canvas.hover != control.key:
                 chrome = False
@@ -513,7 +533,8 @@ def paint(
                         else:
                             style.draw(a, b + (d-thickness)/2, c, thickness, tint, radius=0)
                 elif kind == "toggle" and control.options.get("bool_button"):
-                    if control.options.get("section_disclosure"):
+                    highlight = current_style.get("highlight_expanded")
+                    if control.options.get("section_disclosure") and highlight is None:
                         surface(
                             mapped(control.options.get("_section_rect", control.rect)),
                             (
@@ -522,8 +543,8 @@ def paint(
                                 else palette["bar"]
                             ),
                         )
-                    elif value or canvas.hover == control.key:
-                        surface(r, palette["selected"] if value else palette["hover"])
+                    elif (value and highlight is not False) or canvas.hover == control.key:
+                        surface(r, palette["selected"] if value and highlight is not False else palette["hover"])
                     alignment = control.options.get("text_alignment", "EXPAND")
                     text(
                         control.label,
@@ -935,7 +956,7 @@ def paint(
         current_style = {}
         if not overlays:
             return count
-        if controls:
+        if controls or composite_overlays:
             for control in canvas.visible_controls(logical, composites=True):
                 widget = control.options.get("widget")
                 if hasattr(widget, "paint_overlays"):
@@ -948,24 +969,36 @@ def paint(
                     )
         if canvas.overlay or canvas.context_menu is not None:
             typography.flush_text(font)
+        # Resolve only surface colors and reuse them across popup frames.
+        if samples is not None and not canvas.value_feedback.active:
+            underlay = (id(canvas), canvas.schema_revision, rect, clip, canvas.hover,
+                        id(base_palette), glass.backdrop_signature(backdrop), tuple(samples))
+        if has_popup:
+            from .popup_palette import for_canvas
+            palette = for_canvas(canvas, palette)
         if canvas.overlay and "widget" in canvas.overlay:
             r = mapped(canvas.overlay["rect"])
+            backdrop = glass.popup_backdrop(backdrop, r, scale, underlay=underlay)
             widget = canvas.overlay["widget"]
             with (
                 typography.motion_text(font, widget.motion),
                 widget.motion.deform("reveal", r),
             ):
-                surface(r, palette["overlay"])
+                if not glass.lens(backdrop, r, t.radius * scale, palette["menu_glass"], blur=glass.POPUP_BLUR):
+                    surface(r, palette["overlay"])
                 widget.paint(r, font, palette, backdrop=backdrop)
         elif canvas.overlay:
+            backdrop = glass.popup_backdrop(backdrop, mapped(canvas.overlay["rect"]), scale, underlay=underlay)
             motion = canvas.active.motion
-            with motion.deform("menu-reveal", mapped(canvas.overlay["rect"])):
+            sheet = mapped(canvas.overlay["rect"])
+            with typography.motion_text(font, motion), motion.deform("menu-reveal", sheet):
+                if not glass.lens(backdrop, sheet, t.radius * scale, palette["menu_glass"], blur=glass.POPUP_BLUR):
+                    surface(sheet, palette["overlay"])
                 for r, value, label in canvas.overlay["items"]:
                     target = mapped(r)
                     key = ("menu", value)
                     motion.region(key, r)
                     with motion.deform(key, target):
-                        surface(target, palette["overlay"])
                         text(label, target, palette["text"])
         if canvas.context_menu is not None and not canvas.context_menu.closed:
             if canvas.overlay:
@@ -973,12 +1006,13 @@ def paint(
             from .menus import context_menu
 
             context_menu(
-                canvas.context_menu, mapped, scale, font, palette, backdrop, clip
+                canvas.context_menu, mapped, scale, font, palette, backdrop, clip,
+                underlay=None if canvas.overlay else underlay,
             )
-        tip = getattr(canvas, "_control_tip", None)
         if tip is not None and tip.tooltip:
             from .menus import tooltip
             typography.flush_text(font)
             with typography.motion_text(font, tip.motion):
-                tooltip(tip, mapped, scale, font, palette, backdrop, clip)
+                tooltip(tip, mapped, scale, font, palette, backdrop, clip,
+                        underlay=None if canvas.overlay or canvas.context_menu else underlay)
     return count

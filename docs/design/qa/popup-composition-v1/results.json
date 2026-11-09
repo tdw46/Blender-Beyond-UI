@@ -1,0 +1,307 @@
+{
+  "comparison": {
+    "scene": "Saved Uraraka camera effect locks scene",
+    "backend": "Metal",
+    "left": "Previous viewport-only source",
+    "right": "Composited popup backdrop",
+    "same_fixture_before": true
+  },
+  "nested_pixels": [
+    {
+      "passed": true,
+      "backend": "METAL",
+      "version": "4.2.23 LTS",
+      "baseline_edge": [
+        231,
+        24,
+        0
+      ],
+      "popup_edge": [
+        166,
+        89,
+        0
+      ],
+      "underlying_control": [
+        15,
+        18,
+        222
+      ],
+      "captures_for_two_paints": 2,
+      "shared_blit_scratch": true
+    },
+    {
+      "passed": true,
+      "backend": "METAL",
+      "version": "5.1.2",
+      "baseline_edge": [
+        231,
+        24,
+        0
+      ],
+      "popup_edge": [
+        166,
+        89,
+        0
+      ],
+      "underlying_control": [
+        15,
+        18,
+        222
+      ],
+      "captures_for_two_paints": 2,
+      "shared_blit_scratch": true
+    },
+    {
+      "passed": true,
+      "backend": "METAL",
+      "version": "5.2.2 LTS",
+      "baseline_edge": [
+        231,
+        24,
+        0
+      ],
+      "popup_edge": [
+        166,
+        89,
+        0
+      ],
+      "underlying_control": [
+        15,
+        18,
+        222
+      ],
+      "captures_for_two_paints": 2,
+      "shared_blit_scratch": true
+    }
+  ],
+  "shared_blit_on_metal": {
+    "passed": true,
+    "backend": "METAL",
+    "version": "5.2.2 LTS",
+    "baseline_edge": [
+      231,
+      24,
+      0
+    ],
+    "popup_edge": [
+      166,
+      89,
+      0
+    ],
+    "underlying_control": [
+      15,
+      18,
+      222
+    ],
+    "captures_for_two_paints": 2,
+    "shared_blit_scratch": true
+  },
+  "uraraka": {
+    "passed": true,
+    "error": null,
+    "version": "5.2.2 LTS",
+    "checks": [
+      {
+        "panel": "CAMKEYS_PT_lens_compensation",
+        "owner_type": "MeshObjectItem",
+        "controls": 17,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_dolly_expressions",
+        "owner_type": "MeshObjectItem",
+        "controls": 12,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_billboard_settings",
+        "owner_type": "MeshObjectItem",
+        "controls": 9,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_falloff_popover",
+        "owner_type": "MeshObjectItem",
+        "controls": 19,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_distance_falloff_popover",
+        "owner_type": "MeshObjectItem",
+        "controls": 19,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_flatten_falloff_popover",
+        "owner_type": "MeshObjectItem",
+        "controls": 30,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "flatten-operator",
+        "owner_type": "MeshObjectItem",
+        "controls": 30,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "appearance-dialog",
+        "owner_type": "MeshObjectItem",
+        "controls": 12,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "appearance-dialog",
+        "blender_theme": true,
+        "accent_override": true,
+        "motion_strength_speed": true,
+        "cancel_restores": true
+      },
+      {
+        "panel": "billboard-dialog",
+        "owner_type": "MeshObjectItem",
+        "controls": 5,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "dolly-shapes",
+        "owner_type": "MeshObjectItem",
+        "controls": 12,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      },
+      {
+        "panel": "CAMKEYS_PT_falloff_popover",
+        "owner_type": "AngleItem",
+        "controls": 19,
+        "painted": true,
+        "glass": true,
+        "composited_source": true,
+        "window_overlay": true,
+        "captures_during_input": 0,
+        "source_changes": 0,
+        "survived_mousemove": true
+      }
+    ],
+    "saved": false
+  },
+  "embedded_panel": {
+    "passed": true,
+    "error": "",
+    "version": "5.2.2 LTS",
+    "checks": [
+      "Actual no-focus N-panel input opens a preselected text/numeric edit without clicking the field",
+      "Typing replaces the selection; Return commits before a second Return invokes the exact default operator",
+      "Right-click retains exact owner actions; keypad Return, native local-flag probes and timer teardown pass"
+    ],
+    "native_probes": {
+      "defaults": [
+        false,
+        false
+      ],
+      "setters": [
+        true,
+        true
+      ],
+      "children": [
+        false,
+        false
+      ]
+    }
+  },
+  "backend_renderer": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "backend": "METAL",
+    "renderer": "Metal API",
+    "glass": true,
+    "retained_resources": true,
+    "hashes": [
+      "1bcdd85da1ee7a039a62b8748bed7a12f6b8c6b48adc51a30de2595b6b8077a3",
+      "e9547303c4a28098a6713e85ad0386ef860edb597f6d01caed75868f7afa6159"
+    ],
+    "native_framebuffer_copy": true,
+    "host_integration": false,
+    "visual_acceptance": false,
+    "inset_materials": true,
+    "duotone_accents": true,
+    "retained_icon_textures": true,
+    "feature_hashes": [
+      "4c6b00e89e8c5cee831e1d6ec757259413a12800e8b5b425c9740be46c5d688b",
+      "fd4f2e7ef5d24a304c77cb9627bd7c8f553aed53a9db90c978ac5ccd4c090c38"
+    ]
+  },
+  "focus_events": {
+    "popup-composited-before": 0,
+    "popup-composited-final": 0,
+    "popup-composited-embedded-final": 0,
+    "popup-composited-backend": 0,
+    "popup-glass-blit": 0,
+    "metal_matrix": 0
+  },
+  "live_all_might": {
+    "installed_popup_source": "COMPOSITE",
+    "record_valid": true,
+    "draw_errors": {},
+    "scene_saved": false
+  },
+  "limits": "No physical Windows Vulkan/OpenGL run or frame-time benchmark for this revision."
+}

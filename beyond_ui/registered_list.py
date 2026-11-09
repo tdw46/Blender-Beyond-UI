@@ -1010,6 +1010,13 @@ class RegisteredList(CollectionList):
                 self.parent.blur_focus()
                 self.parent.keyboard_focus = self.owner
             local_clip = (clip[0] - rect[0], clip[1] - rect[1], clip[2], clip[3])
+            popup = self.parent._popup_clip
+            if popup:
+                a,b,w,h = self.owner.rect
+                sx, sy = self.width/max(1,w), self.height/max(1,h)
+                canvas._popup_clip = ((popup[0]-a)*sx-rect[0], (popup[1]-b)*sy-rect[1], popup[2]*sx, popup[3]*sy)
+            else:
+                canvas._popup_clip = None
             prior_menu = canvas.active_menu()
             used = canvas.event(
                 event,

@@ -21,7 +21,8 @@ def tick():
         router=addon.__beyond_ui_integration__.router
         config=addon.__beyond_ui_integration__.ui
         window=bpy.context.window or bpy.context.window_manager.windows[0];area=next(a for a in window.screen.areas if a.type=='VIEW_3D')
-        area.spaces.active.show_region_ui=True
+        if not area.spaces.active.show_region_ui:
+            area.spaces.active.show_region_ui=True
         region=next(r for r in area.regions if r.type=='UI')
         item=bpy.context.scene.mesh_object_items[bpy.context.scene.mesh_object_items_index]
         cases=[('CAMKEYS_PT_lens_compensation',item),('CAMKEYS_PT_dolly_expressions',item),
@@ -85,8 +86,9 @@ def tick():
             assert host.canvas.overlay is not None,(name,host.canvas.menu_error)
             assert host.records[host.key]['valid'] and not host.reason,(name,host.reason)
             assert host.records[host.key].get('backdrop'),(name,host.records[host.key].get('glass_error'))
-            assert host.records[host.key].get('viewport_source'),(name,'not viewport-backed glass')
+            assert host.records[host.key].get('popup_source') == 'COMPOSITE',(name,host.records[host.key].get('popup_source'))
             from camkeys_qa._vendor.beyond_ui.gpu import glass
+            state['source_revision']=host._source_revision
             state['productions']=glass._owners[host.records[host.key]['backdrop']]['productions']
             if name.startswith('CAMKEYS_PT_') or name=='dolly-shapes':
                 ox,oy,ow,oh=host.canvas.overlay['rect']
@@ -100,7 +102,10 @@ def tick():
             assert host.canvas.overlay is not None,(name,host.canvas.menu_error)
             from camkeys_qa._vendor.beyond_ui.gpu import glass
             productions=glass._owners[host.records[host.key]['backdrop']]['productions']
-            assert productions==state['productions'],(name,'animation recaptured backdrop',productions,state['productions'])
+            # A real sidebar redraw is now part of the source. Synthetic motion
+            # itself must not cause extra captures beyond those invalidations.
+            source_changes=host._source_revision-state['source_revision']
+            assert 0 <= productions-state['productions'] <= source_changes,(name,productions,state['productions'],source_changes)
             if name in {'CAMKEYS_PT_flatten_falloff_popover','appearance-dialog','CAMKEYS_PT_billboard_settings'}:
                 # screen.screenshot re-composites regions and omits WM callbacks.
                 # Read the actual late window framebuffer in our owned test callback.
@@ -108,7 +113,7 @@ def tick():
                 window.as_pointer()
                 host.region.tag_redraw()
 
-            checks.append(dict(panel=name,owner_type=owner.bl_rna.identifier,controls=state['count'],painted=True,glass=True,viewport_source=True,window_overlay=True,backdrop_reused=True,survived_mousemove=True))
+            checks.append(dict(panel=name,owner_type=owner.bl_rna.identifier,controls=state['count'],painted=True,glass=True,composited_source=True,window_overlay=True,captures_during_input=productions-state['productions'],source_changes=source_changes,survived_mousemove=True))
         elif phase==3:
             if name=='appearance-dialog':
                 from camkeys_qa.ui_theme import STUDIO

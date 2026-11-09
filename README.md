@@ -20,7 +20,27 @@ Unspecified colors still follow Blender. Keep ordinary panel code and owner menu
 from ._vendor.beyond_ui import integrate, StyleSheet
 studio = StyleSheet(colors={"accent": "#F17C67"},
                     motion={"enabled": True, "strength": 0.7, "speed": 1.0})
-integrate(globals(), stylesheet=studio)
+integrate(globals(), stylesheet=studio, popup_tint=0.15)
+```
+
+`popup_tint` is an optional add-on-wide setting. Right-click menus, dropdowns,
+help popovers and dialogs blend the resolved accent color into their glass
+background at 15% by default. The accent follows Blender’s theme or your
+stylesheet override. Set `popup_tint=0` for the original glass color, or choose
+a value up to `1` for a stronger tint. Tint changes the color of the sheet;
+the glass still refracts and blurs the viewport, Blender sidebar and lower BUI
+menus behind it. Popup shells use stronger blur and a brighter rim than panels.
+[Compare the popup glass in Blender](docs/design/qa/popup-composition-v1/index.html).
+
+For an expandable section, style its disclosure immediately after drawing it.
+`highlight_expanded=False` keeps the resting header plain when open. The entire
+button, including its trailing icon, toggles the section.
+
+```python
+row.prop(settings, "expanded", text="Baking", emboss=False,
+         icon="TRIA_DOWN" if settings.expanded else "TRIA_RIGHT")
+bui.style(row, highlight_expanded=False, text_align="left",
+          trailing_icon="SHAPEKEY_DATA", trailing_icon_align="end")
 ```
 
 [Styling guide](docs/STYLING.md) · [Copy-ready presets](examples/theme_presets.py) ·

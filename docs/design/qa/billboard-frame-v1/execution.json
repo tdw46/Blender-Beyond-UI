@@ -1,0 +1,873 @@
+{
+  "matrix-final": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "held_error": 0.0003439188003540039
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "held_error": 0.00034177303314208984
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "held_error": 0.00025904178619384766
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "held_error": 0.00044798851013183594
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "held_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "held_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "held_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "held_error": 9.5367431640625e-07
+          }
+        ],
+        "frame_parameter_ms": 0.004436250019352883,
+        "stop_changes": true,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_frame_and_dolly": true
+      },
+      "focus_policy": "headless"
+    },
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "held_error": 0.0003439188003540039
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "held_error": 0.00034177303314208984
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "held_error": 0.00025904178619384766
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "held_error": 0.00044798851013183594
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "held_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "held_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "held_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "held_error": 9.5367431640625e-07
+          }
+        ],
+        "frame_parameter_ms": 0.010740957979578525,
+        "stop_changes": true,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_frame_and_dolly": true
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "disabled-parity": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "checks": [
+          {
+            "mode": "LENS",
+            "maximum_delta": 0.0
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "maximum_delta": 0.0
+          }
+        ]
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "allmight": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "checks": [
+          {
+            "mode": "SUBJECT_SIZE",
+            "degrees": 0,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "degrees": 1,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "degrees": 2,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "degrees": -1,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "degrees": 0,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "LENS",
+            "degrees": 0,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "LENS",
+            "degrees": 1,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "LENS",
+            "degrees": 2,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "LENS",
+            "degrees": -1,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          },
+          {
+            "mode": "LENS",
+            "degrees": 0,
+            "objects": {
+              "AllMight_Head": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_Head.Normals": {
+                "verts": 6486,
+                "finite": true
+              },
+              "AllMight_SilverAge.Cape": {
+                "verts": 2039,
+                "finite": true
+              },
+              "Belt": {
+                "verts": 5336,
+                "finite": true
+              },
+              "CasualOutfit": {
+                "verts": 10682,
+                "finite": true
+              },
+              "Hair": {
+                "verts": 5182,
+                "finite": true
+              },
+              "Iris": {
+                "verts": 192,
+                "finite": true
+              },
+              "Modern_Suit": {
+                "verts": 24526,
+                "finite": true
+              },
+              "Pants.001": {
+                "verts": 3248,
+                "finite": true
+              },
+              "Shoes.001": {
+                "verts": 2552,
+                "finite": true
+              },
+              "SilverAge_Suit.001": {
+                "verts": 22168,
+                "finite": true
+              },
+              "SilverAge_Suit.002": {
+                "verts": 2676,
+                "finite": true
+              },
+              "Tie Body": {
+                "verts": 1896,
+                "finite": true
+              }
+            }
+          }
+        ],
+        "groups": {
+          "CamKeys_AutoFOV": 36
+        },
+        "target_count": 13,
+        "held_frames": 1,
+        "saved": false
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "groups-final": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "shadows-final": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "joystick-fit": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "resize_checks": 562,
+        "reset_header_threshold": 343,
+        "with_extra_padding": 383,
+        "states": [
+          "view_planes.compact",
+          "view_planes.header"
+        ]
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "live": {
+    "passed": true,
+    "preserved_state": true,
+    "graphs": [
+      [
+        "AllMight_Head",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "AllMight_Head.Normals",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "AllMight_SilverAge.Cape",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Belt",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "CasualOutfit",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Hair",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Iris",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Modern_Suit",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Pants.001",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Shoes.001",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "SilverAge_Suit.001",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "SilverAge_Suit.002",
+        "CamKeys_AutoFOV"
+      ],
+      [
+        "Tie Body",
+        "CamKeys_AutoFOV"
+      ]
+    ],
+    "held_frames": 1,
+    "handle_radii": [
+      9.0,
+      9.0,
+      9.0
+    ],
+    "saved": false,
+    "controller_artwork": [
+      [
+        9.0,
+        11.0,
+        true
+      ],
+      [
+        9.0,
+        11.0,
+        true
+      ],
+      [
+        9.0,
+        11.0,
+        true
+      ]
+    ]
+  },
+  "joystick_unit_tests": {
+    "passed": true,
+    "count": 10
+  },
+  "limits": [
+    "No new visual inspection or capture",
+    "Physical Windows replay unverified",
+    "Lens residual <= 0.000448 scene units; cause unclassified",
+    "No whole-scene FPS measurement"
+  ]
+}

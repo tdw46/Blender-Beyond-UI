@@ -1,0 +1,577 @@
+{
+  "before": [
+    {
+      "passed": false,
+      "result": {
+        "passed": false,
+        "error": "Traceback (most recent call last):\n  File \"/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_projection.py\", line 60, in <module>\n    actual=sample(True)\nAssertionError: ('LENS', 6, 3, 0.5235387551301527, 0.05235409853219012)\n"
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "oracle": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 0.00034356117248535156
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3514450087525505e-07,
+            "oracle_error": 0.0003688335418701172
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 0.00021666288375854492
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 0.0005924701690673828
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.6226043701171875e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 1.6689300537109375e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 6.143906154658885e-08,
+            "oracle_error": 0.00032639503479003906
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 0.00020825862884521484
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3519262754637043e-07,
+            "oracle_error": 1.1920928955078125e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 1.0132789611816406e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 1.0728836059570312e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 8.560065398421926e-08,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 1.1920928955078125e-06
+          }
+        ],
+        "frame_parameter_ms": 0.0022682499838992953,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_pan_dolly": true
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "matrix": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 0.00034356117248535156
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3514450087525505e-07,
+            "oracle_error": 0.0003688335418701172
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 0.00021654367446899414
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 0.0005924105644226074
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.6226043701171875e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "LENS",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 6.143906154658885e-08,
+            "oracle_error": 0.0003261566162109375
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 0.00020825862884521484
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3519262754637043e-07,
+            "oracle_error": 1.1920928955078125e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 1.0132789611816406e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 1.0728836059570312e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 8.560065398421926e-08,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 1.1920928955078125e-06
+          }
+        ],
+        "frame_parameter_ms": 0.0023102910490706563,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_pan_dolly": true
+      },
+      "focus_policy": "headless"
+    },
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 0.00034356117248535156
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3514450087525505e-07,
+            "oracle_error": 0.0003688335418701172
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 0.00021654367446899414
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 0.0005924701690673828
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.1457672119140625e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "LENS",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 6.143906154658885e-08,
+            "oracle_error": 0.00032639503479003906
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 0.00020825862884521484
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 7.152557373046875e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3519262754637043e-07,
+            "oracle_error": 1.1920928955078125e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 1.0132789611816406e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 1.0728836059570312e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 8.560065398421926e-08,
+            "oracle_error": 9.5367431640625e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 1.1920928955078125e-06
+          }
+        ],
+        "frame_parameter_ms": 0.0030200000037439167,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_pan_dolly": true
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "allmight": [
+    {
+      "passed": true,
+      "result": {
+        "passed": true,
+        "checks": [
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 0,
+            "pitch": 0,
+            "camera_origin_error": 0.0,
+            "max_world_oracle_error": 1.6771433978268746e-06,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 5,
+            "pitch": 0,
+            "camera_origin_error": 2.4620758953479386e-07,
+            "max_world_oracle_error": 1.2539605868111536e-06,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 45,
+            "pitch": 30,
+            "camera_origin_error": 2.1490760299348766e-07,
+            "max_world_oracle_error": 1.9387428111805605e-06,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": -45,
+            "camera_origin_error": 1.3657139822709083e-07,
+            "max_world_oracle_error": 1.1649310013961411e-05,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": 15,
+            "camera_origin_error": 2.7314279645418166e-07,
+            "max_world_oracle_error": 1.7247517962726278e-06,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 270,
+            "pitch": 60,
+            "camera_origin_error": 6.143906154658885e-08,
+            "max_world_oracle_error": 1.9221474696351493e-06,
+            "targets": 13
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -10,
+            "camera_origin_error": 7.450580596923828e-09,
+            "max_world_oracle_error": 1.3171898363140144e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 0,
+            "pitch": 0,
+            "camera_origin_error": 0.0,
+            "max_world_oracle_error": 6.453084226309969e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 5,
+            "pitch": 0,
+            "camera_origin_error": 2.4620758953479386e-07,
+            "max_world_oracle_error": 1.3430773699862897e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 45,
+            "pitch": 30,
+            "camera_origin_error": 2.1490760299348766e-07,
+            "max_world_oracle_error": 7.30786703140307e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": -45,
+            "camera_origin_error": 1.3657139822709083e-07,
+            "max_world_oracle_error": 1.5399205786081893e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": 15,
+            "camera_origin_error": 2.7314279645418166e-07,
+            "max_world_oracle_error": 2.836356390867323e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 270,
+            "pitch": 60,
+            "camera_origin_error": 6.143906154658885e-08,
+            "max_world_oracle_error": 1.5449576252768438e-06,
+            "targets": 13
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -10,
+            "camera_origin_error": 7.450580596923828e-09,
+            "max_world_oracle_error": 2.5608582010505643e-06,
+            "targets": 13
+          }
+        ],
+        "saved": false
+      },
+      "focus_policy": "headless"
+    }
+  ],
+  "live": {
+    "passed": true,
+    "state_preserved": true,
+    "saved": false
+  },
+  "before_is_expected_failure": true,
+  "limits": [
+    "Physical Windows GPU replay unverified",
+    "No full-scene FPS measurement",
+    "Separate per-bone billboard visual coverage remains open"
+  ]
+}

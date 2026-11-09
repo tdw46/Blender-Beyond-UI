@@ -135,32 +135,7 @@ def enum_option(
     )
 
 
-def uncovered(rect, covers):
-    """BVT _custom_ui_components: exclude panels above a deferred text run."""
-    regions = (rect,)
-    for a, b, c, d in covers:
-        result = []
-        for x0, y0, x1, y1 in regions:
-            left, right = max(x0, a), min(x1, c)
-            bottom, top = max(y0, b), min(y1, d)
-            if left >= right or bottom >= top:
-                result.append((x0, y0, x1, y1))
-                continue
-            result.extend(
-                r
-                for r in (
-                    (x0, y0, x1, bottom),
-                    (x0, top, x1, y1),
-                    (x0, bottom, left, top),
-                    (right, bottom, x1, top),
-                )
-                if r[0] < r[2] and r[1] < r[3]
-            )
-        regions = tuple(result)
-    return regions
-
-
-def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
+def context_menu(menu, mapped, scale, font, palette, backdrop, clip, *, underlay=None):
     """Keep every label/shortcut in the same transform as its menu geometry."""
     from . import typography
 
@@ -169,10 +144,10 @@ def context_menu(menu, mapped, scale, font, palette, backdrop, clip):
         font, menu.motion, force=getattr(menu, "presentation_active", False)
     ):
         with menu.presentation(mapped):
-            _context_menu(menu, mapped, scale, font, palette, backdrop, clip)
+            _context_menu(menu, mapped, scale, font, palette, backdrop, clip, underlay)
 
 
-def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
+def _context_menu(menu, mapped, scale, font, palette, backdrop, clip, underlay):
     """Source row painter, shared host backdrop, retained bounded menu motion."""
     from . import style, glass, skin, typography
     from .paint import measure
@@ -201,24 +176,24 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
             )
     pages = (*menu.parents, menu.page)
     status_colors = None
+    lower_pages = []
     for page_index, page in enumerate(pages):
         active = page is menu.page
         panel = mapped(page.rect)
-        covers = []
-        if menu.tooltip:
-            a, b, w, h = mapped(menu.tooltip[0])
-            covers.append((a, b, a + w, b + h))
-        for later in pages[page_index + 1 :]:
-            a, b, w, h = mapped(later.rect)
-            covers.append((a, b, a + w, b + h))
+        parent_state = underlay if not lower_pages else None
+        if lower_pages and not getattr(menu, "presentation_active", False):
+            # Child hover cannot change a settled parent. Include its actual
+            # texture revision in case it is itself sitting on a live widget.
+            parent_state = (glass.backdrop_signature(backdrop), tuple(lower_pages))
+        backdrop = glass.popup_backdrop(backdrop, panel, scale, font=fonts, underlay=parent_state)
+        menu.glass_ready = backdrop is not None
+        # Lower labels must be submitted before an overlapping child samples them.
         from contextlib import nullcontext
 
         def text_clip(bounds):
             a, b, c, d = bounds
             x, y, w, h = clip
-            return uncovered(
-                (max(a, x), max(b, y), min(c, x + w), min(d, y + h)), covers
-            )
+            return ((max(a, x), max(b, y), min(c, x + w), min(d, y + h)),)
 
         with menu.motion.deform("reveal", panel) if active else nullcontext():
             for surface in menu.surfaces(page):
@@ -226,7 +201,7 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                     tint = menu.surface_tint(page, surface, palette)
                     surface = mapped(surface)
                     if backdrop is None or not glass.lens(
-                        backdrop, surface, 10 * scale, tint, blur=0.7
+                        backdrop, surface, 10 * scale, tint, blur=glass.POPUP_BLUR
                     ):
                         menu.glass_ready = False
                         skin.draw(
@@ -401,22 +376,27 @@ def _context_menu(menu, mapped, scale, font, palette, backdrop, clip):
                             ),
                         )
 
+        lower_pages.append((id(page), page.rect, page.highlight, page.offset, page.checked,
+                            page.available, page.values, page.statuses,
+                            page.search.text.text if page.search else None))
+
     tooltip(menu, mapped, scale, font, palette, backdrop, clip)
 
 
-def tooltip(menu, mapped, scale, font, palette, backdrop, clip):
+def tooltip(menu, mapped, scale, font, palette, backdrop, clip, *, underlay=None):
     from . import glass, skin, typography
     from .paint import measure
     if menu.tooltip:
         rect, lines = menu.tooltip
         panel = mapped(rect)
+        backdrop = glass.popup_backdrop(backdrop, panel, scale, font=font, underlay=underlay)
         with menu.motion.deform("tooltip", panel):
             if backdrop is None or not glass.lens(
                 backdrop,
                 panel,
                 10 * scale,
                 palette.get("menu_glass", (0, 0, 0, 0)),
-                blur=0.7,
+                blur=glass.POPUP_BLUR,
             ):
                 menu.glass_ready = False
                 skin.draw(panel, palette["overlay"], radius=10 * scale, border=scale)

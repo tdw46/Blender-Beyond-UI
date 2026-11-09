@@ -164,6 +164,8 @@ class PanelHost:
             record["canvas"] is not canvas
             or record["scene"] != context.scene.as_pointer()
         ):
+            from . import popup_layer
+            popup_layer.detach(self, key, record)
             record["canvas"].park()
             record["canvas"] = canvas
             record["scene"] = context.scene.as_pointer()
@@ -270,13 +272,18 @@ class PanelHost:
             if backdrop is not None
             else (glass.error if self.glass_enabled else "Glass explicitly disabled")
         )
-        canvas.paint(
-            record["rect"],
-            record["clip"],
-            preferences=context.preferences,
-            font=self.font,
-            backdrop=backdrop,
-        )
+        from contextlib import nullcontext
+        layer_pass = glass.popup_pass(self, key, record, revision) if self.glass_enabled else nullcontext()
+        from . import popup_layer
+        promoted = popup_layer.sync(self, context, key, record)
+        with layer_pass:
+            canvas.paint(
+                record["rect"],
+                record["clip"],
+                preferences=context.preferences,
+                font=self.font,
+                backdrop=backdrop, overlays=not promoted,
+            )
 
     def _request_resume(self, key):
         """One deferred redraw: a tag set during paint is cleared by Blender."""
@@ -316,9 +323,13 @@ class PanelHost:
             return
         record = self.records.get(self._key(context))
         if record:
+            if record.get("popup_window"):
+                record["popup_native_revision"] = record.get("popup_native_revision", 0) + 1
             record["valid"] = record["painted"]
             record["painted"] = False
             if not record["valid"] and record["canvas"].visible:
+                from . import popup_layer
+                popup_layer.detach(self, self._key(context), record)
                 record["canvas"].park()
 
     def event(self, context, event):
@@ -395,6 +406,10 @@ class PanelHost:
             sx = w / max(1.0, canvas._width)
             sy = h / max(1.0, canvas.height)
             clip = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
+            if ("context_region" not in record and not record.get("popup_window_error")
+                    and hasattr(self.bridge.library, "bvt_probe_window_add")):
+                from . import popup_layer
+                canvas._popup_clip = popup_layer.logical((region.x+x, region.y+y, w, h), popup_layer.bounds(window), canvas)
             old_hover = canvas.hover
             from ..gpu.paint import measure
             from ..gpu.typography import face
@@ -563,7 +578,9 @@ class PanelHost:
 
     def invalidate(self):
         """Call from undo_pre/load_pre; never retain old RNA transactions."""
-        for record in self.records.values():
+        from . import popup_layer
+        for key, record in self.records.items():
+            popup_layer.detach(self, key, record)
             record["canvas"].park()
             record["canvas"].set_text_measure(None, None)
             if self.bridge:

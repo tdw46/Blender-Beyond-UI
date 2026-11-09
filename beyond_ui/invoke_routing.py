@@ -477,6 +477,7 @@ class Router:
             animation=self.config.animation,
             registry=self.registry,
             stylesheet=self.config.stylesheet,
+            theme=self.config.theme,
         )
 
     def owns_menu(self, name):

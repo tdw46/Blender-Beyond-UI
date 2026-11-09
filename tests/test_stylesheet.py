@@ -4,6 +4,34 @@ from beyond_ui.gpu.style import theme_palette
 
 
 class StylesheetTests(unittest.TestCase):
+    def test_popup_tint_configuration_and_nested_surfaces(self):
+        from beyond_ui import integrate
+        from beyond_ui.gpu.popup_palette import for_canvas
+        from beyond_ui.menu_metrics import Metrics
+        from beyond_ui.canvas import Theme
+
+        native = theme_palette()
+        canvas = Canvas()
+        tinted = for_canvas(canvas, native)
+        self.assertEqual(tinted["menu_glass"], (*native["accent"][:3], 0.15))
+        self.assertIs(for_canvas(canvas, tinted), tinted)
+        self.assertIs(tinted["text"], native["text"])
+        self.assertIs(tinted["selected"], native["selected"])
+
+        namespace = dict(__name__="studio", register=lambda: None, unregister=lambda: None)
+        integration = integrate(namespace, popup_tint=0.4)
+        canvas.theme = Theme(**integration.options)
+        nested = Canvas(Metrics.theme(canvas.theme))
+        sheet = StyleSheet(colors={"accent": "#FF0000"}, opacity=0.5)
+        branded = sheet.palette(native)
+        self.assertEqual(for_canvas(nested, branded)["menu_glass"], (1., 0., 0., 0.2))
+        sheet.update(colors={"accent": "#00FF00"})
+        self.assertEqual(for_canvas(nested, sheet.palette(native))["menu_glass"], (0., 1., 0., 0.2))
+        self.assertIs(for_canvas(Canvas(Theme(popup_tint=0)), tinted), native)
+        for value in (-0.01, 1.01, float("nan"), True):
+            with self.assertRaises(ValueError):
+                Theme(popup_tint=value)
+
     def test_nested_palette_reuses_surface_opacity_and_invalidates_on_edit(self):
         base = theme_palette()
         sheet = StyleSheet(opacity=0.5)

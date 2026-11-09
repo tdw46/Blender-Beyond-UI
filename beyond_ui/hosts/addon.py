@@ -208,7 +208,13 @@ class Runtime:
         ):
             # Explicit actions can open a popup/start an edit immediately.
             self.native_scroll.clear(window.as_pointer())
-        for definition, host in self.hosts.items():
+        hosts = self.hosts.items()
+        from .popup_layer import _active
+        active = _active.get(window.as_pointer()) if window else None
+        if active:
+            order = {host:i for i,host in enumerate(active.values())}
+            hosts = sorted(hosts, key=lambda item: order.get(item[1], -1), reverse=True)
+        for definition, host in hosts:
             try:
                 if host.event(context, event):
                     return {"RUNNING_MODAL"}
@@ -366,7 +372,7 @@ class Runtime:
         if cached is None or cached[0] != fingerprint:
             if cached is not None:
                 cached[1].park()
-            canvas = Canvas(shortcut_registry=self.registry)
+            canvas = Canvas(self.config.theme, shortcut_registry=self.registry)
             if self.config.stylesheet is not None:
                 self.config.stylesheet.apply(
                     canvas, variant=getattr(definition, "beyond_ui_style", "")

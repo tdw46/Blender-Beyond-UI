@@ -1,0 +1,104 @@
+{
+  "runtime": [
+    {
+      "runtime_locales": [
+        "ja",
+        "ko",
+        "es",
+        "zh_HANS",
+        "zh_HANT",
+        "pt_BR",
+        "pt_PT",
+        "fr",
+        "de",
+        "ru",
+        "it"
+      ],
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "translation_locales": 11
+    },
+    {
+      "runtime_locales": [
+        "ja",
+        "ko",
+        "es",
+        "zh_HANS",
+        "zh_HANT",
+        "pt_BR",
+        "pt_PT",
+        "fr",
+        "de",
+        "ru",
+        "it"
+      ],
+      "passed": true,
+      "version": "4.5.15 LTS",
+      "translation_locales": 11
+    },
+    {
+      "runtime_locales": [
+        "ja",
+        "ko",
+        "es",
+        "zh_HANS",
+        "zh_HANT",
+        "pt_BR",
+        "pt_PT",
+        "fr",
+        "de",
+        "ru",
+        "it"
+      ],
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "translation_locales": 11
+    }
+  ],
+  "fixture": "CamKeys/tests/blender_effect_strength.py",
+  "checks": [
+    "Lens and Subject Size evaluated geometry at 0%, 50%, 100%",
+    "Registered section headings, slider order and Baking disclosure styles and icon sizes",
+    "11 non-English locale lookups plus English panel structure"
+  ],
+  "live": {
+    "scene": "AllMight Camkeys Test.blend",
+    "migrated_modifiers": 13,
+    "strength_percent": 100,
+    "maximum_coordinate_delta": 0.0,
+    "scene_saved": false
+  },
+  "limits": [
+    "No new visual captures",
+    "No physical Windows hardware run"
+  ],
+  "popup_and_header_checks": {
+    "macos_blender": [
+      "4.2.23 LTS",
+      "4.5.15 LTS",
+      "5.2.2 LTS"
+    ],
+    "panel_widths": [
+      280,
+      325,
+      460
+    ],
+    "baking": [
+      "Three collapsed defaults",
+      "Both disclosure states",
+      "Title and trailing icon resolve to the same property control"
+    ],
+    "live_session": {
+      "addon_registered": true,
+      "popup_tint": 0.15,
+      "draw_errors": 0,
+      "input_errors": 0,
+      "scene_saved": false
+    },
+    "unit_suite": {
+      "run": 496,
+      "skipped": 1,
+      "failed": 0
+    }
+  }
+}

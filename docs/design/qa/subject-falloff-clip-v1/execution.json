@@ -1,0 +1,869 @@
+{
+  "scope": "Subject Size whole-effect fade must preserve near-plane continuation",
+  "schema": 39,
+  "before": {
+    "passed": true,
+    "billboard": false,
+    "mode": "SUBJECT_SIZE",
+    "measurements": {
+      "current": [
+        {
+          "object": "AllMight_Head",
+          "min_depth": 0.40240371227264404,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_Head.Normals",
+          "min_depth": 0.4030751585960388,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_SilverAge.Cape",
+          "min_depth": 0.20205655694007874,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Belt",
+          "min_depth": 0.018224025145173073,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "CasualOutfit",
+          "min_depth": 0.0014187507331371307,
+          "behind": 0,
+          "clipped": 1828
+        },
+        {
+          "object": "Hair",
+          "min_depth": 0.38794636726379395,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Iris",
+          "min_depth": 0.4345995783805847,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Modern_Suit",
+          "min_depth": -0.002747751772403717,
+          "behind": 148,
+          "clipped": 2586
+        },
+        {
+          "object": "Pants.001",
+          "min_depth": 0.005385169759392738,
+          "behind": 0,
+          "clipped": 213
+        },
+        {
+          "object": "Shoes.001",
+          "min_depth": -0.00354713574051857,
+          "behind": 278,
+          "clipped": 1012
+        },
+        {
+          "object": "SilverAge_Suit.001",
+          "min_depth": -0.002747751772403717,
+          "behind": 64,
+          "clipped": 2150
+        },
+        {
+          "object": "SilverAge_Suit.002",
+          "min_depth": -0.002469632774591446,
+          "behind": 84,
+          "clipped": 435
+        },
+        {
+          "object": "Tie Body",
+          "min_depth": 0.5066487789154053,
+          "behind": 0,
+          "clipped": 0
+        }
+      ],
+      "without_outer_fade": [
+        {
+          "object": "AllMight_Head",
+          "min_depth": 0.40240371227264404,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_Head.Normals",
+          "min_depth": 0.40307512879371643,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_SilverAge.Cape",
+          "min_depth": 0.20205654203891754,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Belt",
+          "min_depth": 0.02079034596681595,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "CasualOutfit",
+          "min_depth": 0.013997267931699753,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Hair",
+          "min_depth": 0.38794633746147156,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Iris",
+          "min_depth": 0.4345995783805847,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Modern_Suit",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Pants.001",
+          "min_depth": 0.014895427972078323,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Shoes.001",
+          "min_depth": 0.013445597141981125,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.001",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.002",
+          "min_depth": 0.013563180342316628,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Tie Body",
+          "min_depth": 0.5066487789154053,
+          "behind": 0,
+          "clipped": 0
+        }
+      ]
+    }
+  },
+  "after": {
+    "passed": true,
+    "billboard": false,
+    "mode": "SUBJECT_SIZE",
+    "measurements": {
+      "current": [
+        {
+          "object": "AllMight_Head",
+          "min_depth": 0.40240371227264404,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_Head.Normals",
+          "min_depth": 0.4030751585960388,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_SilverAge.Cape",
+          "min_depth": 0.20205654203891754,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Belt",
+          "min_depth": 0.02079034596681595,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "CasualOutfit",
+          "min_depth": 0.013997267931699753,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Hair",
+          "min_depth": 0.38794636726379395,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Iris",
+          "min_depth": 0.4345995783805847,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Modern_Suit",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Pants.001",
+          "min_depth": 0.014895427972078323,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Shoes.001",
+          "min_depth": 0.013445597141981125,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.001",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.002",
+          "min_depth": 0.013563180342316628,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Tie Body",
+          "min_depth": 0.5066487789154053,
+          "behind": 0,
+          "clipped": 0
+        }
+      ],
+      "without_outer_fade": [
+        {
+          "object": "AllMight_Head",
+          "min_depth": 0.40240371227264404,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_Head.Normals",
+          "min_depth": 0.40307512879371643,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "AllMight_SilverAge.Cape",
+          "min_depth": 0.20205654203891754,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Belt",
+          "min_depth": 0.02079034596681595,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "CasualOutfit",
+          "min_depth": 0.013997267931699753,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Hair",
+          "min_depth": 0.38794633746147156,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Iris",
+          "min_depth": 0.4345995783805847,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Modern_Suit",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Pants.001",
+          "min_depth": 0.014895427972078323,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Shoes.001",
+          "min_depth": 0.013445597141981125,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.001",
+          "min_depth": 0.013534847646951675,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "SilverAge_Suit.002",
+          "min_depth": 0.013563180342316628,
+          "behind": 0,
+          "clipped": 0
+        },
+        {
+          "object": "Tie Body",
+          "min_depth": 0.5066487789154053,
+          "behind": 0,
+          "clipped": 0
+        }
+      ]
+    }
+  },
+  "matrix": [
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "records": [
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        }
+      ],
+      "depth_order_preserved": true,
+      "endpoint_independent_depth": true,
+      "native_away_from_guard": true
+    },
+    {
+      "passed": true,
+      "version": "5.1.2",
+      "records": [
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        }
+      ],
+      "depth_order_preserved": true,
+      "endpoint_independent_depth": true,
+      "native_away_from_guard": true
+    },
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "records": [
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": false,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.01,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 0.1,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 3.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 0.0,
+          "minimum_depth": 0.011314280331134796
+        },
+        {
+          "billboard": true,
+          "radius": 10.0,
+          "endpoint": 1.0,
+          "minimum_depth": 0.011314280331134796
+        }
+      ],
+      "depth_order_preserved": true,
+      "endpoint_independent_depth": true,
+      "native_away_from_guard": true
+    }
+  ],
+  "whole_falloff": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "defaults": [
+      3,
+      20
+    ],
+    "legacy_value": 0.4,
+    "legacy_units_scale": 10,
+    "results": [
+      {
+        "mode": "LENS",
+        "zero_error": 0.0,
+        "full_displacement": 0.42718264387174415,
+        "profile_change": 0.0600554130746721
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "zero_error": 0.0,
+        "full_displacement": 2.193101088142656,
+        "profile_change": 0.4231335837063694
+      }
+    ],
+    "upstream_bounds": true
+  },
+  "projection": {
+    "passed": true,
+    "version": "5.2.2 LTS"
+  },
+  "timing_before": {
+    "passed": true,
+    "timing": {
+      "SUBJECT_SIZE": {
+        "median_ms": 25.64643748337403,
+        "p95_ms": 26.603624981362373,
+        "samples": 40
+      }
+    }
+  },
+  "timing_after": {
+    "passed": true,
+    "timing": {
+      "SUBJECT_SIZE": {
+        "median_ms": 25.684624502900988,
+        "p95_ms": 26.52108302572742,
+        "samples": 40
+      }
+    }
+  },
+  "live": {
+    "passed": true,
+    "schema": 39,
+    "state_preserved": true,
+    "saved": false,
+    "near": 0.009999990463256836,
+    "measurements": [
+      {
+        "object": "AllMight_Head",
+        "minimum_depth": 0.4127570688724518,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "AllMight_Head.Normals",
+        "minimum_depth": 0.41342848539352417,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "AllMight_SilverAge.Cape",
+        "minimum_depth": 0.21240992844104767,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Belt",
+        "minimum_depth": 0.021452561020851135,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "CasualOutfit",
+        "minimum_depth": 0.014056570827960968,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Hair",
+        "minimum_depth": 0.39829978346824646,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Iris",
+        "minimum_depth": 0.44495296478271484,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Modern_Suit",
+        "minimum_depth": 0.013577122241258621,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Pants.001",
+        "minimum_depth": 0.014996197074651718,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Shoes.001",
+        "minimum_depth": 0.01348491944372654,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "SilverAge_Suit.001",
+        "minimum_depth": 0.013577122241258621,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "SilverAge_Suit.002",
+        "minimum_depth": 0.01360640861093998,
+        "behind": 0,
+        "clipped": 0
+      },
+      {
+        "object": "Tie Body",
+        "minimum_depth": 0.5170021057128906,
+        "behind": 0,
+        "clipped": 0
+      }
+    ]
+  },
+  "limits": [
+    "Numerical evaluated-geometry checks, no new visual capture or physical Windows GPU replay.",
+    "Timing is headless warm CPU/depsgraph update cost, not viewport FPS.",
+    "Near-plane protection deliberately overrides whole-effect fading within its narrow guard band; native zero-influence output remains unchanged away from that band.",
+    "Arbitrary triangle-intersection freedom is not proven."
+  ]
+}

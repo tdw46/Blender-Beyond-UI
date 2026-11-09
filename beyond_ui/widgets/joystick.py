@@ -26,14 +26,17 @@ class Joystick(Widget):
     width=height=104.
     design_font_size=11.
 
-    def __init__(self,binding,*,axes=(),minimum=(-1.,-1.),maximum=(1.,1.),default=(0.,0.),radius=12.,handle_radius=5.,mode="POSITION",speed=.35,velocity_curve=(0.,0.),edge_speed_multiplier=1.,edge_start=.7,fine_speed_scale=.25,clock=monotonic):
+    def __init__(self,binding,*,axes=(),minimum=(-1.,-1.),maximum=(1.,1.),default=(0.,0.),radius=12.,handle_radius=9.,base_radius=11.,stem_width=4.,show_stem=True,mode="POSITION",speed=.35,velocity_curve=(0.,0.),edge_speed_multiplier=1.,edge_start=.7,fine_speed_scale=.25,clock=monotonic):
         super().__init__()
         self.binding=binding;self.axes=axes;self.minimum=tuple(minimum);self.maximum=tuple(maximum);self.default=tuple(default)
         if any(len(v)!=2 for v in (self.minimum,self.maximum,self.default)) or not all(math.isfinite(v) for v in (*self.minimum,*self.maximum,*self.default,radius,handle_radius)) or any(a>=b for a,b in zip(self.minimum,self.maximum)):
             raise ValueError('Joystick ranges must be finite and increasing')
         if radius < 0 or handle_radius <= 0 or any(not a <= v <= b for a,b,v in zip(self.minimum,self.maximum,self.default)):
             raise ValueError('Joystick default must lie within its range')
+        if not all(math.isfinite(v) for v in (base_radius, stem_width)) or not 0 < handle_radius <= 10 or not 0 < base_radius <= 42 or stem_width <= 0:
+            raise ValueError('Joystick artwork must fit its pad and use positive finite dimensions')
         self.radius=radius;self.handle_radius=handle_radius;self.transaction=None
+        self.base_radius=base_radius;self.stem_width=stem_width;self.show_stem=bool(show_stem)
         if mode not in {'POSITION','VELOCITY'} or not math.isfinite(speed) or speed<0 or len(velocity_curve)!=2 or not 0<=velocity_curve[0]<=velocity_curve[1]<=1:
             raise ValueError('Invalid joystick motion configuration')
         if (not math.isfinite(edge_speed_multiplier) or edge_speed_multiplier < 1 or
@@ -126,4 +129,11 @@ class Joystick(Widget):
         try:values=self.binding.read()
         except ReferenceError:return
         u,v=tuple((v+1)/2 for v in self.deflection) if self.mode=='VELOCITY' else tuple((n-a)/(b-a) for a,b,n in zip(self.minimum,self.maximum,values))
-        p.circle((10+84*max(0,min(1,u)),94-84*max(0,min(1,v))),self.handle_radius,palette['accent'],motion_key='handle')
+        center=(10+84*max(0,min(1,u)),94-84*max(0,min(1,v)))
+        # Retained shared vector primitives: no SVG loading or new GPU resources.
+        # Keep the full logical travel and hit map unchanged at the pad edges.
+        if self.show_stem and math.hypot(center[0]-52,center[1]-52) > .01:
+            p.circle((52,52),self.base_radius,palette['muted'],border=1)
+            p.circle((52,52),self.base_radius*.8,palette['field'])
+            p.line(((52,52),center),palette['muted'],self.stem_width*p.scale)
+        p.circle(center,self.handle_radius,palette['accent'],border=1,motion_key='handle')

@@ -81,8 +81,27 @@ class JoystickTests(unittest.TestCase):
     def test_position_and_exact_axes(self):
         w,s,c=self.make();w.event(event('LEFTMOUSE'),94,10);w.event(event('LEFTMOUSE','RELEASE'),94,10)
         self.assertEqual(s[0],(1.,1.));self.assertEqual(len(c),1)
+    def test_handle_and_revealed_base(self):
+        from unittest.mock import patch
+        widget,state,_=self.make(mode='VELOCITY')
+        palette={key:(.5,.5,.5,1.) for key in ('muted','text','field','accent')}
+        with patch('beyond_ui.widgets.joystick.Painter') as painter:
+            p=painter.return_value;p.scale=1.
+            widget.paint((0,0,104,104),0,palette)
+            self.assertEqual(p.circle.call_count,1)
+            self.assertEqual(p.circle.call_args.args[:2],((52.,52.),9.))
+            p.reset_mock();widget.event(event('LEFTMOUSE'),94,52)
+            widget.paint((0,0,104,104),0,palette)
+            self.assertEqual(p.circle.call_count,3)
+            self.assertEqual(p.circle.call_args.args[:2],((94.,52.),9.))
+            self.assertEqual(p.line.call_args.args[0],((52,52),(94.,52.)))
+            widget.show_stem=False;p.reset_mock()
+            widget.paint((0,0,104,104),0,palette)
+            self.assertEqual(p.circle.call_count,1)
+        self.assertEqual(state[0],(0.,0.))  # Painting never edits values.
+
     def test_bad_configuration(self):
-        for kw in ({'speed':float('nan')},{'velocity_curve':(.8,.2)},{'minimum':(1.,1.)},{'edge_speed_multiplier':float('nan')},{'edge_speed_multiplier':.9},{'edge_start':1},{'edge_start':-.1},{'fine_speed_scale':0},{'fine_speed_scale':1.1},{'fine_speed_scale':float('nan')}):
+        for kw in ({'handle_radius':11},{'base_radius':float('nan')},{'stem_width':0},{'speed':float('nan')},{'velocity_curve':(.8,.2)},{'minimum':(1.,1.)},{'edge_speed_multiplier':float('nan')},{'edge_speed_multiplier':.9},{'edge_start':1},{'edge_start':-.1},{'fine_speed_scale':0},{'fine_speed_scale':1.1},{'fine_speed_scale':float('nan')}):
             with self.assertRaises(ValueError):self.make(**kw)
 
 if __name__=='__main__':unittest.main()

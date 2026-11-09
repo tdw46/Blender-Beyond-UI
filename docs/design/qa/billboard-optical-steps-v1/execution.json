@@ -1,0 +1,207 @@
+{
+  "scope": "Optical stop grid and shared whole-effect falloff; schema 38",
+  "recorded_orbit": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "scans": [
+      {
+        "viewport": false,
+        "crossings": [
+          -85,
+          -63,
+          -40,
+          -18,
+          5,
+          27,
+          50,
+          72
+        ],
+        "max_heading_error_degrees": 2.1656759906951706e-05
+      },
+      {
+        "viewport": true,
+        "crossings": [
+          -85,
+          -63,
+          -40,
+          -18,
+          5,
+          27,
+          50,
+          72
+        ],
+        "max_heading_error_degrees": 3.531713824700411e-05
+      }
+    ],
+    "bidirectional": true
+  },
+  "falloff_matrix": [
+    {
+      "passed": true,
+      "version": "5.2.2 LTS",
+      "defaults": [
+        3,
+        20
+      ],
+      "legacy_value": 0.4,
+      "legacy_units_scale": 10,
+      "results": [
+        {
+          "mode": "LENS",
+          "zero_error": 0.0,
+          "full_displacement": 0.42718264387174415,
+          "profile_change": 0.0600554130746721
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "zero_error": 0.0,
+          "full_displacement": 2.193101088142656,
+          "profile_change": 0.4231335837063694
+        }
+      ],
+      "upstream_bounds": true
+    },
+    {
+      "passed": true,
+      "version": "5.1.2",
+      "defaults": [
+        3,
+        20
+      ],
+      "legacy_value": 0.4,
+      "legacy_units_scale": 10,
+      "results": [
+        {
+          "mode": "LENS",
+          "zero_error": 0.0,
+          "full_displacement": 0.42718264387174415,
+          "profile_change": 0.0600554130746721
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "zero_error": 0.0,
+          "full_displacement": 2.193101088142656,
+          "profile_change": 0.4231335837063694
+        }
+      ],
+      "upstream_bounds": true
+    },
+    {
+      "passed": true,
+      "version": "4.2.23 LTS",
+      "defaults": [
+        3,
+        20
+      ],
+      "legacy_value": 0.4,
+      "legacy_units_scale": 10,
+      "results": [
+        {
+          "mode": "LENS",
+          "zero_error": 0.0,
+          "full_displacement": 0.42718264387174415,
+          "profile_change": 0.0600554130746721
+        },
+        {
+          "mode": "SUBJECT_SIZE",
+          "zero_error": 0.0,
+          "full_displacement": 2.193101088142656,
+          "profile_change": 0.4231335837063694
+        }
+      ],
+      "upstream_bounds": true
+    }
+  ],
+  "projection_matrix": [
+    {
+      "version": "5.2.2 LTS",
+      "passed": true
+    },
+    {
+      "version": "5.1.2",
+      "passed": true
+    },
+    {
+      "version": "4.2.23 LTS",
+      "passed": true
+    }
+  ],
+  "legacy_geometry": {
+    "passed": true,
+    "errors": {
+      "AllMight_Head": 0.0,
+      "AllMight_Head.Normals": 0.0,
+      "AllMight_SilverAge.Cape": 0.0,
+      "Belt": 0.0,
+      "CasualOutfit": 0.0,
+      "Hair": 0.0,
+      "Iris": 0.0,
+      "Modern_Suit": 0.0,
+      "Pants.001": 0.0,
+      "Shoes.001": 0.0,
+      "SilverAge_Suit.001": 0.0,
+      "SilverAge_Suit.002": 0.0,
+      "Tie Body": 0.0
+    }
+  },
+  "live": {
+    "passed": true,
+    "schema": 38,
+    "targets": [
+      "AllMight_Head",
+      "AllMight_Head.Normals",
+      "AllMight_SilverAge.Cape",
+      "Belt",
+      "CasualOutfit",
+      "Hair",
+      "Iris",
+      "Modern_Suit",
+      "Pants.001",
+      "Shoes.001",
+      "SilverAge_Suit.001",
+      "SilverAge_Suit.002",
+      "Tie Body"
+    ],
+    "state_preserved": true,
+    "saved": false,
+    "radius_default": 3,
+    "legacy_range_preserved": true
+  },
+  "warm_update_before": {
+    "passed": true,
+    "timing": {
+      "LENS": {
+        "median_ms": 34.85672897659242,
+        "p95_ms": 39.711624966003,
+        "samples": 40
+      },
+      "SUBJECT_SIZE": {
+        "median_ms": 29.74516703397967,
+        "p95_ms": 31.55574999982491,
+        "samples": 40
+      }
+    }
+  },
+  "warm_update_after": {
+    "passed": true,
+    "timing": {
+      "LENS": {
+        "median_ms": 32.56085401517339,
+        "p95_ms": 34.75533303571865,
+        "samples": 40
+      },
+      "SUBJECT_SIZE": {
+        "median_ms": 27.200895972782746,
+        "p95_ms": 28.55891699437052,
+        "samples": 40
+      }
+    }
+  },
+  "limits": [
+    "Headless warm update timings, not viewport GPU FPS or isolated speedup proof.",
+    "Two older turnaround-only fixtures fail equally on the preceding installed implementation and this revision (errors 0.0140549 and 0.00978843); their historical zero-strength assumption predates the lens/subject-plane projection work. No claim that the entire suite passes.",
+    "No new visual capture or physical Windows GPU replay.",
+    "Combined upstream world-Z height initializes a new authored default once; later animation and artist edits do not resize it.",
+    "Arbitrary custom falloff fields do not prove global mesh collision freedom."
+  ]
+}

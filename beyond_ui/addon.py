@@ -20,9 +20,13 @@ class AddonUI:
         stylesheet=None,
         layout_options=None,
         native_fallback=False,
+        popup_tint=0.15,
     ):
         if not isinstance(owner, str) or not owner:
             raise ValueError("Use your extension's unique __package__ as owner")
+        from .canvas import Theme
+
+        self.theme = Theme(popup_tint=popup_tint)
         self.owner = owner
         self.native_fallback = bool(native_fallback)
         self.commit = commit

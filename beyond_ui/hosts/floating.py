@@ -34,7 +34,7 @@ def visible_region_rect(area, region):
 
 class FloatingHost(PanelHost):
     def __init__(
-        self, owner, context, *, animation=None, registry=None, stylesheet=None
+        self, owner, context, *, animation=None, registry=None, stylesheet=None, theme=None
     ):
         super().__init__(owner, animation=animation)
         self.window, self.area = context.window, context.area
@@ -57,7 +57,7 @@ class FloatingHost(PanelHost):
         except (RuntimeError, OSError, ValueError) as error:
             self.menu_context_reason = str(error)
         self.font = Fonts()
-        self.canvas = Canvas(shortcut_registry=registry)
+        self.canvas = Canvas(theme, shortcut_registry=registry)
         if stylesheet is not None:
             stylesheet.apply(self.canvas)
         self.key = (
@@ -104,13 +104,34 @@ class FloatingHost(PanelHost):
         # Track completed viewport revisions, not popup animation frames.
         handle = self.space.draw_handler_add(self._source_draw, (), "WINDOW", "POST_PIXEL")
         self.handlers.append((self.space, handle, "WINDOW"))
+        for region_type in {self.origin_region.type, "UI"} - {"WINDOW"}:
+            if any(region.type == region_type for region in self.area.regions):
+                handle = self.space.draw_handler_add(self._ui_draw, (), region_type, "POST_PIXEL")
+                self.handlers.append((self.space, handle, region_type))
         import bpy
         bpy.app.handlers.depsgraph_update_post.append(self._scene_callback)
+        from .popup_layer import Sources
+        watched = {entry[2] for entry in self.handlers}
+        try:
+            self.popup_sources = Sources(self.window, self._neighbor_changed,
+                                        lambda area,r: area == self.area and r.type in watched)
+        except Exception:
+            self.close()
+            raise
         self.region.tag_redraw()
+
+    def _neighbor_changed(self):
+        self._source_revision += 1
 
     def _changed(self, scene, *_args):
         if scene.as_pointer() == self.scene:
             self._scene_changed = True
+
+    def _ui_draw(self):
+        import bpy
+        context = bpy.context
+        if context.area == self.area and context.window == self.window:
+            self._source_revision += 1
 
     def _source_draw(self):
         import bpy
@@ -133,6 +154,9 @@ class FloatingHost(PanelHost):
         self.canvas._width = self.rect[2] / self.scale
         self.canvas.height = self.rect[3] / self.scale
         self.clip = (0, 0, self.canvas._width, self.canvas.height)
+        from . import popup_layer
+        x, y, w, h = self.rect
+        self.canvas._popup_clip = popup_layer.logical((self.region.x+x,self.region.y+y,w,h), popup_layer.bounds(self.window), self.canvas)
         self.canvas._event_clip = self.clip
 
     def anchor(self, event):
@@ -145,11 +169,8 @@ class FloatingHost(PanelHost):
 
     def _draw(self):
         import bpy
-        import gpu
-        from mathutils import Matrix
         from ..gpu import glass
-        from ..gpu.paint import gpu_state
-        from .window_overlay import scissor_scope
+        from . import popup_layer
 
         context = bpy.context
         if self.closed or not self.alive(context) or not getattr(self, "_source_ready", False):
@@ -167,31 +188,31 @@ class FloatingHost(PanelHost):
                     and getattr(context.preferences.system, "use_region_overlap", False)):
                 source = (self.region.as_pointer(), self.region.x, self.region.y,
                           self._source_revision, self.region.width, self.region.height)
-            with gpu_state(), scissor_scope(), gpu.matrix.push_pop(), gpu.matrix.push_pop_projection():
-                # Window RNA dimensions are logical points on Retina; the current
-                # compositor viewport and ARegion bounds are framebuffer pixels.
-                _, _, ww, wh = gpu.state.viewport_get()
-                gpu.state.viewport_set(0, 0, ww, wh)
-                gpu.state.scissor_set(0, 0, ww, wh)
-                gpu.matrix.load_matrix(Matrix.Identity(4))
-                gpu.matrix.load_projection_matrix(Matrix((
-                    (2 / ww, 0, 0, -1), (0, 2 / wh, 0, -1),
-                    (0, 0, 1, 0), (0, 0, 0, 1))))
-                ready = glass.draw(
-                    backdrop, (self.scene, self.canvas.backdrop_revision, self._source_revision),
-                    rect, self.canvas.theme.radius, self.bridge.library,
-                    scale=self.scale, viewport_source=source,
-                    framebuffer_size=(ww, wh), prepare_only=True,
-                )
-                record["backdrop"] = backdrop if ready else None
-                record["glass_error"] = "" if ready else glass.error
-                record["viewport_source"] = source
+            with popup_layer.pixels() as window_clip:
+                _, _, ww, wh = window_clip
+                revision = (self.scene, self.canvas.backdrop_revision, self._source_revision)
+                owners = self.bridge.window_overlays[self.window.as_pointer()]["owners"]
+                # Another floating host earlier in z-order can change on this paint.
+                self.popup_sources.crops.clear()
+                def retained(sheet):
+                    stamp = revision if next(iter(owners)) == id(self) else None
+                    return self.popup_sources.sample(sheet, 20*self.scale, stamp)
+
+                def viewport_fallback(bounds):
+                    if source and glass.draw(backdrop, revision, bounds, 0, self.bridge.library,
+                                             scale=self.scale, viewport_source=source,
+                                             framebuffer_size=(ww, wh), prepare_only=True):
+                        return backdrop
+                    return None
+
                 record["window_rect"] = rect
-                with context.temp_override(window=self.window, area=self.area,
-                                           region=self.origin_region):
-                    paint(self.canvas, rect, rect, preferences=context.preferences,
-                          font=self.font, backdrop=record["backdrop"],
-                          background=False, controls=False)
+                with glass.popup_pass(self, self.key, record, retained, viewport_fallback), context.temp_override(
+                    window=self.window, area=self.area, region=self.origin_region
+                ):
+                    paint(self.canvas, rect, window_clip, preferences=context.preferences,
+                          font=self.font, background=False, controls=False)
+                record["backdrop"] = record.get("popup_backdrop")
+                record["glass_error"] = "" if record["backdrop"] else glass.error
             record["valid"] = True
             self.reason = ""
         except Exception as error:
@@ -215,6 +236,8 @@ class FloatingHost(PanelHost):
             return
         from . import window_overlay
         import bpy
+        if getattr(self, "popup_sources", None):
+            self.popup_sources.close()
         window_overlay.detach(self.bridge, self.window, id(self))
         callback = getattr(self, "_scene_callback", None)
         if callback in bpy.app.handlers.depsgraph_update_post:

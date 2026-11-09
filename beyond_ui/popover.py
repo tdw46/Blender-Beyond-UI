@@ -310,6 +310,12 @@ class PanelPopover(Widget):
             self.parent.menu_error = "Popover owner, registration or context changed"
             return inside((0, 0, self.width, self.height), x, y)
         child = self.canvas
+        outer = self.parent._popup_clip
+        if outer and self.parent.overlay:
+            left,top,_,_ = self.parent.overlay["rect"]
+            child._popup_clip = (outer[0]-left, outer[1]-top+self.scroll, outer[2],outer[3])
+        else:
+            child._popup_clip = None
         if child.active is not None and (
             child.controls.get(child.active.key) is not child.active
             or not child.active.enabled
@@ -369,7 +375,7 @@ class PanelPopover(Widget):
                         ),
                     ),
                     (x, y + self.scroll),
-                    self.clip,
+                    child._popup_clip or self.clip,
                     context=context,
                     on_tip=child._tooltip_wake,
                 )
@@ -442,7 +448,7 @@ class PanelPopover(Widget):
             rect,
             self.canvas.theme.radius * scale,
             palette["surfaces"]["card"][0],
-            blur=0.7,
+            blur=glass.POPUP_BLUR,
         ):
             skin.draw(
                 rect,
@@ -450,22 +456,13 @@ class PanelPopover(Widget):
                 radius=self.canvas.theme.radius * scale,
             )
         content_height = self.canvas.height * scale
-        paint(
-            self.canvas,
-            (
-                x,
-                y + height - content_height + self.scroll * scale,
-                width,
-                content_height,
-            ),
-            rect,
-            font=font,
-            backdrop=backdrop,
-            palette=palette,
-            # The lens above owns the sheet. Painting the child canvas's
-            # background again flattens the glass into an almost opaque card.
-            background=False,
-        )
+        content_rect = (x, y + height - content_height + self.scroll * scale,
+                        width, content_height)
+        from .hosts import popup_layer
+        promoted = self.canvas._popup_clip is not None and popup_layer.visible(self.canvas)
+        paint(self.canvas, content_rect, rect, font=font, backdrop=backdrop,
+              palette=palette.get("_popup_content_palette", palette),
+              background=False, overlays=not promoted)
         flush_text(font)
         thumb, track, _, limit = self.scrollbar()
         if limit:
@@ -483,6 +480,13 @@ class PanelPopover(Widget):
             painter.surface(track, "track", 2, 0, motion_key=False)
             painter.surface(thumb, "thumb", 2, 0.6, motion_key="scroll")
             self.motion.region("scroll", (self.width - 12, 0, 12, self.height))
+
+        if promoted:
+            a,b,w,h = self.canvas._popup_clip
+            clip = (x+a*scale, y+height+(self.scroll-b-h)*scale, w*scale, h*scale)
+            paint(self.canvas, content_rect, clip, font=font, backdrop=backdrop,
+                  palette=palette.get("_popup_content_palette", palette),
+                  background=False, controls=False, composite_overlays=True)
 
 
 def panel_group(layout, space_type, region_type, context, category):

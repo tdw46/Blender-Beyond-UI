@@ -130,6 +130,7 @@ def hover(canvas, event, x, y, clip, context, measure):
     if control is None or control.kind in {'label', 'title', 'separator'}:
         hide(canvas)
         return
+    clip = canvas._popup_clip or clip
     if (tip is not None and tip.control is control and tip.clip == clip
             and tip.developer_details == developer_details(context)):
         tip.hover_tip(0, x, y, context)
