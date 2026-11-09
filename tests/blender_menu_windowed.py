@@ -197,6 +197,9 @@ def tick():
             _, canvas = current()
             assert not canvas.context_menu.parents
             emit("RIGHT_ARROW")
+            # A leaf with no deeper context actions must retain its open page.
+            emit("RIGHTMOUSE", logical=state["outside_action"])
+            emit("RIGHTMOUSE", "RELEASE", logical=state["outside_action"])
             # Click the part of the action that physically overhangs the sidebar.
             emit("LEFTMOUSE", logical=state["outside_action"])
             emit("LEFTMOUSE","RELEASE",logical=state["outside_action"])

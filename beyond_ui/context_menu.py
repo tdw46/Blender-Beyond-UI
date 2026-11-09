@@ -841,9 +841,6 @@ class Menu:
         # Right-click requests row actions. Its release can arrive on a newly opened menu.
         if kind != "RIGHTMOUSE":
             self.motion.input(event, x, y)
-        if kind == "RIGHTMOUSE" and event.value == "RELEASE":
-            self.held_keys.discard(kind)
-            return self.contains_page(x, y)
         if self.pending_click is not None:
             page, index, row = self.pending_click
             if press and kind in {"ESC", "RIGHTMOUSE"}:
@@ -1068,6 +1065,8 @@ class Menu:
             if hit is not None:
                 self.page.highlight = hit
             return over
+        if kind == "RIGHTMOUSE" and event.value == "RELEASE":
+            return self.contains_page(x, y)
         return over
 
 
