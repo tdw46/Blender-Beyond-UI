@@ -1,8 +1,8 @@
 {
-  "reviewed": "2026-11-10 \u2014 Depth-mode publication and paired Windows SSH verification",
+  "reviewed": "2026-11-10 \u2014 Windows NVIDIA Volume/Flatten visual check complete",
   "remaining_turns": [
     0,
-    1
+    0
   ],
   "implementation_turns": [
     0,
@@ -10,14 +10,14 @@
   ],
   "integration_qa_turns": [
     0,
-    1
+    0
   ],
   "active_hours": [
     0,
-    1
+    0
   ],
-  "confidence": "Mac execution/Metal UI and Windows headless native runtime checks verified. Physical Windows Vulkan/OpenGL windowed replay remains open.",
-  "basis": "Depth-mode implementation and SSH native Windows execution completed. Remaining 0\u20131 QA turn is specifically signed-in Windows GPU visual/input replay, unavailable from the restricted headless SSH session.",
+  "confidence": "Mac Metal and native Windows NVIDIA Vulkan/OpenGL picker captures inspected. Minimal picker appearance check complete; desktop input and broader popup replay remain separately unqualified.",
+  "basis": "Four isolated GPU captures over paired SSH completed on Blender 5.2.2 / RTX 4090 Laptop. Wide Volume and narrow Flatten images are byte-identical between Vulkan and OpenGL. No Windows Codex connection was needed for GPUOffScreen captures.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,7 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
-    "Depth modes: actual Metal controls and pixel-identical diagnostic emission front/side renders; Windows SSH native execution complete. No new GIF, whole-scene FPS or Windows windowed GPU replay.",
+    "Depth modes: actual Metal and Windows NVIDIA Vulkan/OpenGL controls, plus pixel-identical diagnostic emission front/side renders. No new GIF, whole-scene FPS or desktop-interaction replay.",
     "Window-level panel menus: captured Metal submenu overhanging a native editor, plus numerical opening-frame glyph comparisons. No new GIF or physical Windows capture.",
     "Composited popup glass: three matched Uraraka before/after stills; no motion GIF, frame-rate benchmark or physical Windows capture for this revision.",
     "Baking disclosure and popup tint updates have layout, hit-test and palette evidence. No dedicated capture or physical Windows replay.",
@@ -119,8 +119,8 @@
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
   "latest_progress": "Added opt-in Flatten depth treatment in both CamKeys Lens and Subject Size, with generated-to-SVG two-accent icons. Native controls, migration, 12-language catalogs and eight macOS runtime builds verified. Volume remains unchanged and short lenses bypass flattening. Installed live: 13 schema-43 graphs; default Volume retains all 93,469 evaluated vertex coordinates exactly. Scene not saved.",
-  "estimate_review": "Closed native Windows geometry, migration, billboard and bridge checks through the paired runner; the test oracle is isolated to avoid a 4.1 modifier-downgrade crash. Product runtime remains unchanged. Remaining budget is only the previously open desktop Vulkan/OpenGL visual/input replay; no planned implementation remains. Pre-existing 4.1 loader contract limitation documented separately.",
-  "time_summary": "0\u20131 active hour for optional review/replay, an uncertain forecast rather than measured duration.",
+  "estimate_review": "Completed the remaining minimal picker visual QA: four captures, actual backend/renderer readback, manual image inspection and matching backend image hashes. Reduced scoped remaining QA from 0\u20131 turns to zero. No implementation change required. Session-0 GPU rendering does not establish signed-in desktop input/focus behavior; broader historical popup work is outside this minimal check.",
+  "time_summary": "Requested minimal picker check complete; no remaining implementation or capture estimate for this scope. Broader desktop popup/input requalification remains separate and is not estimated here.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
     "sample_turns": 2,
@@ -728,9 +728,14 @@
       "work": "Paired Windows SSH depth-mode verification",
       "evidence": "docs/design/qa/depth-modes-v1/windows-ssh.json",
       "turns": 1
+    },
+    {
+      "work": "Minimal NVIDIA Vulkan/OpenGL Volume/Flatten picker appearance",
+      "evidence": "docs/design/qa/depth-modes-v1/windows-visual.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Signed-in Windows NVIDIA Vulkan/OpenGL visual/input replay: popup glass over native UI, outside-sidebar clicks, opening text/bounce, and new Volume/Flatten picker. Headless geometry and native-control checks completed over SSH. Legacy Blender 4.1 public asset loading has a pre-existing contract rejection; BUI target remains 4.2+.",
+  "remaining_work": "None for the requested minimal Volume/Flatten appearance check. Separately unqualified: signed-in desktop popup glass over native UI, outside-sidebar clicks and opening text/bounce replay. Legacy Blender 4.1 public asset loading retains its pre-existing contract rejection; BUI target remains 4.2+.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",

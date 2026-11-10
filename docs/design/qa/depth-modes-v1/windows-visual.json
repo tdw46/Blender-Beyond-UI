@@ -1,0 +1,236 @@
+{
+  "date": "2026-11-10",
+  "scope": "Minimal rendered Volume/Flatten picker appearance; no desktop clicks or popup interaction replay",
+  "bui_commit": "46b9769edf978aa9546638809e2689b2159418bb",
+  "camkeys_commit": "e500cdb90c4b204e203ecfe16e0072fb3a4084ca",
+  "route": "Paired SSH, beyondrunner session 0; Blender GPUOffScreen fixture, isolated profiles, --no-window-focus and normal window geometry. No desktop-session attachment or input injection.",
+  "focus_limit": "Runner session 0 recorded. Signed-in desktop foreground PID was not observable from this session; no desktop-focus qualification claimed.",
+  "runner_session": {
+    "Id": 8460,
+    "SessionId": 0
+  },
+  "visual_review": "Both states inspected: centered two-accent icons, bold readable labels, selected tint, glass and narrow layout intact. Vulkan and OpenGL PNGs byte-identical for each state.",
+  "fixture_note": "Existing capture_subject_planes.py with renderer_get/vendor_get diagnostic metadata only; no product modifications.",
+  "records": [
+    {
+      "tag": "vulkan-volume",
+      "image": "windows-vulkan-volume.png",
+      "sha256": "80e30d12fb1047448bba89e9d8ce30b69c75a4dc8f8abb0880273cc001021f52",
+      "execution": {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 40868,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--console-crash-handler",
+          "--window-geometry",
+          "80",
+          "80",
+          "1280",
+          "900",
+          "--gpu-backend",
+          "vulkan",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\bui\\tests\\capture_subject_planes.py"
+        ],
+        "launch": null,
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "backend": "VULKAN",
+          "renderer": "NVIDIA GeForce RTX 4090 Laptop GPU",
+          "vendor": "NVIDIA Corporation",
+          "width": 606,
+          "height": 384,
+          "warm_submit_ms": [
+            5.04630000796169,
+            4.72329999320209,
+            3.8273000391200185,
+            3.9886999875307083,
+            3.638399997726083,
+            3.3650000113993883,
+            4.1745000053197145,
+            3.2264000037685037,
+            4.207400023005903,
+            4.0623999666422606
+          ],
+          "glass": true,
+          "controls": 12
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\visual\\vulkan-volume\\blender-0.log"
+      }
+    },
+    {
+      "tag": "vulkan-flatten",
+      "image": "windows-vulkan-flatten.png",
+      "sha256": "5bd92635dc642e515da76a1a89661c2f0fe4d6dba83163d4a429c30de94b73bb",
+      "execution": {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 45516,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--console-crash-handler",
+          "--window-geometry",
+          "80",
+          "80",
+          "1280",
+          "900",
+          "--gpu-backend",
+          "vulkan",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\bui\\tests\\capture_subject_planes.py"
+        ],
+        "launch": null,
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "backend": "VULKAN",
+          "renderer": "NVIDIA GeForce RTX 4090 Laptop GPU",
+          "vendor": "NVIDIA Corporation",
+          "width": 426,
+          "height": 375,
+          "warm_submit_ms": [
+            4.209000035189092,
+            4.365699947811663,
+            4.719100019428879,
+            5.051799991633743,
+            5.093499959912151,
+            3.647100005764514,
+            3.9533000090159476,
+            4.010700038634241,
+            3.28180001815781,
+            3.869200008921325
+          ],
+          "glass": true,
+          "controls": 12
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\visual\\vulkan-flatten\\blender-0.log"
+      }
+    },
+    {
+      "tag": "opengl-volume",
+      "image": "windows-opengl-volume.png",
+      "sha256": "80e30d12fb1047448bba89e9d8ce30b69c75a4dc8f8abb0880273cc001021f52",
+      "execution": {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 46968,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--console-crash-handler",
+          "--window-geometry",
+          "80",
+          "80",
+          "1280",
+          "900",
+          "--gpu-backend",
+          "opengl",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\bui\\tests\\capture_subject_planes.py"
+        ],
+        "launch": null,
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "backend": "OPENGL",
+          "renderer": "NVIDIA GeForce RTX 4090 Laptop GPU/PCIe/SSE2",
+          "vendor": "NVIDIA Corporation",
+          "width": 606,
+          "height": 384,
+          "warm_submit_ms": [
+            2.625599969178438,
+            7.724299968685955,
+            2.410300017800182,
+            2.184899989515543,
+            2.1572000114247203,
+            2.4702000082470477,
+            2.1078999852761626,
+            2.0759999752044678,
+            2.183700038585812,
+            2.9556999797932804
+          ],
+          "glass": true,
+          "controls": 12
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\visual\\opengl-volume\\blender-0.log"
+      }
+    },
+    {
+      "tag": "opengl-flatten",
+      "image": "windows-opengl-flatten.png",
+      "sha256": "5bd92635dc642e515da76a1a89661c2f0fe4d6dba83163d4a429c30de94b73bb",
+      "execution": {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 39620,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--no-window-focus",
+          "--enable-event-simulate",
+          "--console-crash-handler",
+          "--window-geometry",
+          "80",
+          "80",
+          "1280",
+          "900",
+          "--gpu-backend",
+          "opengl",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\bui\\tests\\capture_subject_planes.py"
+        ],
+        "launch": null,
+        "focus_policy": "no-window-focus",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "backend": "OPENGL",
+          "renderer": "NVIDIA GeForce RTX 4090 Laptop GPU/PCIe/SSE2",
+          "vendor": "NVIDIA Corporation",
+          "width": 426,
+          "height": 375,
+          "warm_submit_ms": [
+            2.499900001566857,
+            2.478900016285479,
+            2.133100002538413,
+            2.1309000439941883,
+            2.0896000205539167,
+            2.326599962543696,
+            2.1949000074528158,
+            2.1966000203974545,
+            2.1352999610826373,
+            2.175499976146966
+          ],
+          "glass": true,
+          "controls": 12
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\visual\\opengl-flatten\\blender-0.log"
+      }
+    }
+  ]
+}
