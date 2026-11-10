@@ -1,5 +1,5 @@
 {
-  "reviewed": "2026-11-09 \u2014 Window-level panel menus and opening text",
+  "reviewed": "2026-11-10 \u2014 Depth-mode publication and paired Windows SSH verification",
   "remaining_turns": [
     0,
     1
@@ -16,8 +16,8 @@
     0,
     1
   ],
-  "confidence": "Matched Uraraka captures, stable-source reuse and nested GPU pixels verified on Metal. Physical Windows replay remains open.",
-  "basis": "Window presentation and text repairs are implemented and replayed on Metal. The remaining 0\u20131 QA turn is reserved for Windows hardware.",
+  "confidence": "Mac execution/Metal UI and Windows headless native runtime checks verified. Physical Windows Vulkan/OpenGL windowed replay remains open.",
+  "basis": "Depth-mode implementation and SSH native Windows execution completed. Remaining 0\u20131 QA turn is specifically signed-in Windows GPU visual/input replay, unavailable from the restricted headless SSH session.",
   "excludes": [
     "user review waits",
     "new multiline/preview/advanced-curve features",
@@ -25,6 +25,7 @@
   ],
   "update_policy": "Record completed work and added scope every turn. Reduce remaining budget when planned work closes; retaining or increasing it requires specific newly identified work or revised workload evidence. Do not cite generic QA uncertainty alone to erase progress. No countdown for discussion-only turns.",
   "media_gaps": [
+    "Depth modes: actual Metal controls and pixel-identical diagnostic emission front/side renders; Windows SSH native execution complete. No new GIF, whole-scene FPS or Windows windowed GPU replay.",
     "Window-level panel menus: captured Metal submenu overhanging a native editor, plus numerical opening-frame glyph comparisons. No new GIF or physical Windows capture.",
     "Composited popup glass: three matched Uraraka before/after stills; no motion GIF, frame-rate benchmark or physical Windows capture for this revision.",
     "Baking disclosure and popup tint updates have layout, hit-test and palette evidence. No dedicated capture or physical Windows replay.",
@@ -117,8 +118,8 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "N-panel popups now draw across native editor boundaries while keeping their original input owner. Nested font flushes preserve the opening transform.",
-  "estimate_review": "Real clicks outside the sidebar passed on Blender 4.2.23 and 5.2.2. Font pixel comparison passed at three bounce positions on 5.1.2 and 5.2.2. The installed All Might popover crossed the sidebar with composited glass.",
+  "latest_progress": "Added opt-in Flatten depth treatment in both CamKeys Lens and Subject Size, with generated-to-SVG two-accent icons. Native controls, migration, 12-language catalogs and eight macOS runtime builds verified. Volume remains unchanged and short lenses bypass flattening. Installed live: 13 schema-43 graphs; default Volume retains all 93,469 evaluated vertex coordinates exactly. Scene not saved.",
+  "estimate_review": "Closed native Windows geometry, migration, billboard and bridge checks through the paired runner; the test oracle is isolated to avoid a 4.1 modifier-downgrade crash. Product runtime remains unchanged. Remaining budget is only the previously open desktop Vulkan/OpenGL visual/input replay; no planned implementation remains. Pre-existing 4.1 loader contract limitation documented separately.",
   "time_summary": "0\u20131 active hour for optional review/replay, an uncertain forecast rather than measured duration.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -717,9 +718,19 @@
       "work": "N-panel popup overhang, input routing and animated font-state ownership",
       "evidence": "docs/design/qa/window-menu-motion-v1/results.json",
       "turns": 1
+    },
+    {
+      "work": "Optional depth modes, SVG icons, native/localized selector and migration",
+      "evidence": "docs/design/qa/depth-modes-v1/report.json",
+      "turns": 1
+    },
+    {
+      "work": "Paired Windows SSH depth-mode verification",
+      "evidence": "docs/design/qa/depth-modes-v1/windows-ssh.json",
+      "turns": 1
     }
   ],
-  "remaining_work": "Replay both published branches on physical Windows NVIDIA with Vulkan and OpenGL. Check composited glass over native UI, clicks on submenu rows beyond the sidebar, and text throughout the opening bounce.",
+  "remaining_work": "Signed-in Windows NVIDIA Vulkan/OpenGL visual/input replay: popup glass over native UI, outside-sidebar clicks, opening text/bounce, and new Volume/Flatten picker. Headless geometry and native-control checks completed over SSH. Legacy Blender 4.1 public asset loading has a pre-existing contract rejection; BUI target remains 4.2+.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -826,7 +837,7 @@
   ],
   "consumer_migration_audit": "docs/CAMKEYS_MIGRATION.md",
   "checkpoint": "Window-level popup review",
-  "latest_review": "../window-menu-motion-v1/index.html",
+  "latest_review": "../depth-modes-v1/index.html",
   "backend_support_review": {
     "date": "2026-11-05",
     "renderer": "Shared GPU API, shader/glass/resource checks passed.",

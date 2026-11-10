@@ -1,0 +1,1042 @@
+{
+  "date": "2026-11-10",
+  "matrix": [
+    {
+      "blender": "/tmp/camkeys-blender-4.0.2/Blender.app/Contents/MacOS/Blender",
+      "pid": 33804,
+      "command": [
+        "/tmp/camkeys-blender-4.0.2/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.0.2",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.9871460497379303,
+            "p95_ms": 1.1995434877462685
+          },
+          "flatten": {
+            "median_ms": 1.4284580247476697,
+            "p95_ms": 1.7184984229970723
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-0.log"
+    },
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33816,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 1.0698754922486842,
+            "p95_ms": 1.6986312170047309
+          },
+          "flatten": {
+            "median_ms": 1.6908749239519238,
+            "p95_ms": 2.52011862467043
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-1.log"
+    },
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33825,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.3.2/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.3.2",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.9085005149245262,
+            "p95_ms": 1.1172143742442129
+          },
+          "flatten": {
+            "median_ms": 1.3087079860270023,
+            "p95_ms": 1.4784667175263166
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-2.log"
+    },
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33838,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.4.3/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.4.3",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.9002289734780788,
+            "p95_ms": 1.2836125795729458
+          },
+          "flatten": {
+            "median_ms": 0.9180624620057642,
+            "p95_ms": 1.1672248307149857
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-3.log"
+    },
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33845,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.5.15/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.5.15 LTS",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 1.6432295087724924,
+            "p95_ms": 2.4571850488428026
+          },
+          "flatten": {
+            "median_ms": 1.5581040061078966,
+            "p95_ms": 2.3622331209480754
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-4.log"
+    },
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33853,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-5.0.1/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.0.1",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.7551669841632247,
+            "p95_ms": 0.9755601291544733
+          },
+          "flatten": {
+            "median_ms": 0.842229463160038,
+            "p95_ms": 0.9768394287675619
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-5.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+      "pid": 33861,
+      "command": [
+        "/Applications/Blender 5.1.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.1.2",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.7685415330342948,
+            "p95_ms": 0.9419483889359981
+          },
+          "flatten": {
+            "median_ms": 0.8194789406843483,
+            "p95_ms": 1.0004768788348883
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-6.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 33864,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_depth.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "cases": 168,
+        "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+        "world_transform_error": 1.1138192972381944e-06,
+        "default_parity": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timings_5001_vertices": {
+          "volume": {
+            "median_ms": 0.9569994872435927,
+            "p95_ms": 1.1275143886450678
+          },
+          "flatten": {
+            "median_ms": 1.057979417964816,
+            "p95_ms": 1.2550830899272114
+          }
+        }
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-matrix/blender-7.log"
+    }
+  ],
+  "integration": [
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 31583,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_integration.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "modes": [
+          {
+            "mode": "LENS",
+            "volume_depth_span": 2.016819953918457,
+            "flat_depth_span": 0.11843013763427734
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "volume_depth_span": 1.96875,
+            "flat_depth_span": 0.10101556777954102
+          }
+        ],
+        "locales": 11,
+        "schema_42_migration": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-integration/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 31598,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_flatten_integration.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "modes": [
+          {
+            "mode": "LENS",
+            "volume_depth_span": 2.016819953918457,
+            "flat_depth_span": 0.11843013763427734
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "volume_depth_span": 1.96875,
+            "flat_depth_span": 0.10101556777954102
+          }
+        ],
+        "locales": 11,
+        "schema_42_migration": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/release-integration/blender-1.log"
+    }
+  ],
+  "all_might": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "objects": 13,
+    "cases": [
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 0,
+        "pitch": 0,
+        "max_projected_error": 1.1727364911617855e-05
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 5,
+        "pitch": 0,
+        "max_projected_error": 7.918104985904506e-06
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 45,
+        "pitch": 30,
+        "max_projected_error": 2.8994813165539313e-05
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 90,
+        "pitch": -45,
+        "max_projected_error": 9.048418037060912e-07
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 180,
+        "pitch": 15,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 270,
+        "pitch": 60,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "LENS",
+        "billboard": false,
+        "yaw": 355,
+        "pitch": -10,
+        "max_projected_error": 4.115370115742589e-06
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 0,
+        "pitch": 0,
+        "max_projected_error": 1.1422749465417326e-05
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 5,
+        "pitch": 0,
+        "max_projected_error": 8.01871977440527e-06
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 45,
+        "pitch": 30,
+        "max_projected_error": 3.284009486037576e-05
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 90,
+        "pitch": -45,
+        "max_projected_error": 9.742611339902396e-07
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 180,
+        "pitch": 15,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 270,
+        "pitch": 60,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "LENS",
+        "billboard": true,
+        "yaw": 355,
+        "pitch": -10,
+        "max_projected_error": 4.240495909468844e-06
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 0,
+        "pitch": 0,
+        "max_projected_error": 1.3075984433008614e-05
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 5,
+        "pitch": 0,
+        "max_projected_error": 8.550831926967817e-06
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 45,
+        "pitch": 30,
+        "max_projected_error": 4.381739004877261e-05
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 90,
+        "pitch": -45,
+        "max_projected_error": 9.242764682504401e-07
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 180,
+        "pitch": 15,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 270,
+        "pitch": 60,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": false,
+        "yaw": 355,
+        "pitch": -10,
+        "max_projected_error": 2.200646717520627e-06
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 0,
+        "pitch": 0,
+        "max_projected_error": 1.327841856824108e-05
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 5,
+        "pitch": 0,
+        "max_projected_error": 8.148729919277287e-06
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 45,
+        "pitch": 30,
+        "max_projected_error": 5.1632685725166994e-05
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 90,
+        "pitch": -45,
+        "max_projected_error": 1.0457806571828598e-06
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 180,
+        "pitch": 15,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 270,
+        "pitch": 60,
+        "max_projected_error": 0.0
+      },
+      {
+        "mode": "SUBJECT_SIZE",
+        "billboard": true,
+        "yaw": 355,
+        "pitch": -10,
+        "max_projected_error": 2.411548822744969e-06
+      }
+    ],
+    "saved": false
+  },
+  "render": {
+    "passed": true,
+    "comparisons": [
+      {
+        "mode": "lens",
+        "different_silhouette_pixels": 0,
+        "mean_channel_difference": 0.0,
+        "max_channel_difference": 0.0
+      },
+      {
+        "mode": "subject",
+        "different_silhouette_pixels": 0,
+        "mean_channel_difference": 0.0,
+        "max_channel_difference": 0.0
+      }
+    ],
+    "renderer": "Cycles CPU, 8 samples, diagnostic emission",
+    "width": 512,
+    "height": 512
+  },
+  "limits": [
+    "Physical Windows hardware replay pending",
+    "No full-scene FPS or general shaded-pixel identity claim",
+    "No new motion GIF",
+    "Native exact-version API/Manual fetches were blocked by documentation gateway; API branches verified against stock runtimes"
+  ],
+  "billboard": [
+    {
+      "blender": "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+      "pid": 33718,
+      "command": [
+        "../Blender-Beyond-UI/build/portable-4.2.23/runtime/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_projection.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "4.2.23 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 1.9073485859610884e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 1.1920928955078125e-07,
+            "basis_error": 1.78972836168944e-07,
+            "oracle_error": 2.859280038208789e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 2.853623613491285e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 2.8614818256000873e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.4135191480922913e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.384185791015625e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 6.143906154658885e-08,
+            "oracle_error": 2.638242921904066e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 3.81606086083397e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 4.768371271168803e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3519262754637043e-07,
+            "oracle_error": 2.8819844957450602e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 1.9301713830716105e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 2.8912824843185803e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 1.9967556000866082e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 1.465700475211662e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 8.560065398421926e-08,
+            "oracle_error": 3.1879574760029783e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 3.0964689585744054e-06
+          }
+        ],
+        "frame_parameter_ms": 0.0027574170380830765,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_pan_dolly": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/final-billboard/blender-0.log"
+    },
+    {
+      "blender": "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+      "pid": 33723,
+      "command": [
+        "/Applications/Blender 5.2.2.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--background",
+        "--python",
+        "/Users/tylerwalker/dev/CamKeys-beyond-ui/tests/blender_billboard_projection.py"
+      ],
+      "launch": null,
+      "focus_policy": "headless",
+      "passed": true,
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "version": "5.2.2 LTS",
+        "checks": [
+          {
+            "mode": "LENS",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 2.1159648502799833e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 1.1920928955078125e-07,
+            "basis_error": 1.78972836168944e-07,
+            "oracle_error": 2.650663793596353e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 2.7274990079817485e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 2.741317865151416e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 3.0298604833389753e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 1.9073486328125e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 6.143906154658885e-08,
+            "oracle_error": 2.6236558232639595e-06
+          },
+          {
+            "mode": "LENS",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 2.919209150076263e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 3,
+            "pitch": 0,
+            "camera_origin_error": 5.960464477539063e-08,
+            "basis_error": 6.015127407708088e-08,
+            "oracle_error": 2.5592744177706933e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 6,
+            "pitch": 3,
+            "camera_origin_error": 9.610960183499514e-07,
+            "basis_error": 1.3519262754637043e-07,
+            "oracle_error": 2.6616244212379625e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 9,
+            "pitch": -6,
+            "camera_origin_error": 0.0,
+            "basis_error": 1.8863363416749483e-07,
+            "oracle_error": 2.940559436392931e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 4,
+            "pitch": 9,
+            "camera_origin_error": 9.555351461101412e-07,
+            "basis_error": 7.455817445973096e-08,
+            "oracle_error": 3.1277290185593998e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 90,
+            "pitch": 35,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 2.920627593328007e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 180,
+            "pitch": -50,
+            "camera_origin_error": 0.0,
+            "basis_error": 0.0,
+            "oracle_error": 9.909789190909457e-07
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 275,
+            "pitch": 60,
+            "camera_origin_error": 4.76837158203125e-07,
+            "basis_error": 8.560065398421926e-08,
+            "oracle_error": 2.3928141392737245e-06
+          },
+          {
+            "mode": "SUBJECT_SIZE",
+            "yaw": 355,
+            "pitch": -5,
+            "camera_origin_error": 1.9369216929998304e-06,
+            "basis_error": 3.1610136383170525e-07,
+            "oracle_error": 2.9775092760808697e-06
+          }
+        ],
+        "frame_parameter_ms": 0.0027353749610483646,
+        "animated_source_live": true,
+        "disabled_roundtrip": true,
+        "viewport_pan_dolly": true
+      },
+      "log": "/Users/tylerwalker/dev/Blender-Beyond-UI/build/flatten-depth-v1/final-billboard/blender-1.log"
+    }
+  ],
+  "live": {
+    "default": "VOLUME",
+    "objects": 13,
+    "maximum_coordinate_change": 0.0,
+    "schemas": {
+      "AllMight_Head": [
+        43
+      ],
+      "AllMight_Head.Normals": [
+        43
+      ],
+      "AllMight_SilverAge.Cape": [
+        43
+      ],
+      "Belt": [
+        43
+      ],
+      "CasualOutfit": [
+        43
+      ],
+      "Hair": [
+        43
+      ],
+      "Iris": [
+        43
+      ],
+      "Modern_Suit": [
+        43
+      ],
+      "Pants.001": [
+        43
+      ],
+      "Shoes.001": [
+        43
+      ],
+      "SilverAge_Suit.001": [
+        43
+      ],
+      "SilverAge_Suit.002": [
+        43
+      ],
+      "Tie Body": [
+        43
+      ]
+    },
+    "file_unchanged": true,
+    "dirty_before": true,
+    "dirty_after": true,
+    "saved": false,
+    "ui_errors": "{'state': 'registered', 'panels': ['CAMKEYS_PT_setup', 'CAMKEYS_PT_auto_fov', 'CAMKEYS_PT_baking', 'CAMKEYS_PT_camkeys_linking', 'CAMKEYS_PT_camkeys_main', 'CAMKEYS_PT_camprops', 'CAMKEYS_PT_lattice_auto_fov_modifier'], 'other_panels': ['CAMKEYS_PT_billboard_settings', 'CAMKEYS_PT_dolly_expressions', 'CAMKEYS_PT_lens_compensation', 'CAMKEYS_PT_distance_falloff_popover', 'CAMKEYS_PT_falloff_popover', 'CAMKEYS_PT_flatten_falloff_popover'], 'limits': ['Routing covers owned invoke/execute callbacks and existing owned-menu keymaps; native panel headers, redo popups, auto-keymap hints and indirect helper calls remain explicit limits.', 'Only supported Layout calls/modes are converted; draw errors appear in status.', 'Exact-build embedded adapters are required for custom rendering.'], 'native_routes': [{'class': 'CAMKEYS_OT_billboard_groups', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_show_example', 'callback': 'invoke', 'routes': ['invoke_popup']}, {'class': 'CAMKEYS_OT_auto_add_directional_shapekeys', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_edit_angle_falloff_curve', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_edit_camprop_falloff_curve', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_edit_distance_stop_vector', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_configure_camprop_values', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_export_curve', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_open_flatten_falloff_popover', 'callback': 'invoke', 'routes': ['call_panel']}, {'class': 'CAMKEYS_OT_edit_vector_stop', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}, {'class': 'CAMKEYS_OT_open_subject_transition', 'callback': 'invoke', 'routes': ['call_panel']}, {'class': 'CAMKEYS_OT_ui_appearance', 'callback': 'invoke', 'routes': ['invoke_props_dialog']}], 'routed_routes': ['invoke_props_dialog', 'invoke_popup', 'invoke_confirm', 'invoke_search_popup', 'popup_menu', 'popup_menu_pie', 'call_menu', 'call_menu_pie', 'call_panel'], 'host': {'registered': True, 'draw_errors': {}, 'input_errors': {}, 'native_fallbacks': {}, 'popup_fallbacks': [], 'panels': {'CAMKEYS_PT_setup': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_auto_fov': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_baking': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_camkeys_linking': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_camkeys_main': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_camprops': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}, 'CAMKEYS_PT_lattice_auto_fov_modifier': {'available': True, 'reason': '', 'menus': '', 'property_contributions': ''}}}, 'list_identity': {'pending': 0, 'errors': []}, 'popups': {'dialogs': 0, 'menus': 0, 'error': None, 'native_fallbacks': [{'route': 'macro-step:camkeys.finish_dolly_navigation', 'reason': 'Preserved registered macro child RNA; its own popup callbacks keep native routing', 'custom': False}, {'route': 'macro-step:camkeys.begin_dolly_navigation', 'reason': 'Preserved registered macro child RNA; its own popup callbacks keep native routing', 'custom': False}], 'preserved_macro_dependencies': [{'macro': 'camkeys.pan_navigation', 'operator': 'camkeys.begin_dolly_navigation'}, {'macro': 'camkeys.pan_navigation', 'operator': 'camkeys.finish_dolly_navigation'}, {'macro': 'camkeys.orbit_navigation', 'operator': 'camkeys.begin_dolly_navigation'}, {'macro': 'camkeys.orbit_navigation', 'operator': 'camkeys.finish_dolly_navigation'}, {'macro': 'camkeys.dolly_navigation', 'operator': 'camkeys.begin_dolly_navigation'}, {'macro': 'camkeys.dolly_navigation', 'operator': 'camkeys.finish_dolly_navigation'}], 'keymap_routes': 0}}"
+  },
+  "live_toggle": {
+    "live_flatten_finite": true,
+    "maximum_change_when_enabled": 357.35931396484375,
+    "restored": "VOLUME",
+    "restore_maximum_error": 0.0,
+    "objects": 13,
+    "saved": false
+  }
+}

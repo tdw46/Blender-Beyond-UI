@@ -7,7 +7,7 @@ from capture_controls import png
 source=Path(os.environ.get('CAMKEYS_SOURCE', str(Path(__file__).resolve().parents[2]/'CamKeys-beyond-ui')))
 spec=importlib.util.spec_from_file_location('camkeys_qa',source/'__init__.py',submodule_search_locations=[str(source)])
 addon=importlib.util.module_from_spec(spec);sys.modules[spec.name]=addon;spec.loader.exec_module(addon)
-OUT=ROOT/'docs/design/qa/subject-controls-v2';OUT.mkdir(parents=True,exist_ok=True)
+OUT=Path(os.environ.get('BUI_CAPTURE_OUTPUT', str(ROOT/'docs/design/qa/subject-controls-v2')));OUT.mkdir(parents=True,exist_ok=True)
 def run():
  fonts=None;canvas=None
  try:
@@ -21,7 +21,8 @@ def run():
   if os.environ.get('BUI_CAPTURE_PICKER'):
    from camkeys_qa import onboarding
    from camkeys_qa._vendor import beyond_ui as bui
-   item.auto_fov_control_mode='LENS'
+   item.auto_fov_control_mode=os.environ.get('BUI_CAPTURE_MODE','LENS')
+   item.auto_fov_depth_mode=os.environ.get('BUI_CAPTURE_DEPTH_MODE','VOLUME')
    bui.header(layout,'Forced Perspective',icon=bui.Artwork('BUI_FORCED_PERSPECTIVE','VIEW_CAMERA'),size=42,divider=True,title_style={'font_size':18})
    onboarding.apparent_focal_controls(layout,item,bpy.context,wizard=True)
   elif os.environ.get('BUI_CAPTURE_CURVE'):

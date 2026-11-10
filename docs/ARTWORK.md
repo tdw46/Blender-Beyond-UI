@@ -95,3 +95,22 @@ shader compilation or new redraw timer is added to steady-state painting.
 Current execution evidence: Blender 5.1.2/5.2.2 naming/lifecycle; Metal GPU artwork
 and multi-scale Uraraka captures on 5.2.2. Other GPU backends were not visually
 qualified in this batch. See the [current header review](design/qa/camkeys-headers-v2/index.html).
+
+
+## Reusable two-accent depth icons
+
+`BUI_VOLUME` and `BUI_FLATTEN` are transparent SVG-derived icons in the shared
+library. Their two layers follow the host primary/secondary accent roles; they
+also work with Blender-theme-derived colors. Use them without replacing native
+property ownership:
+
+```python
+row.prop_enum(item, "depth_mode", "VOLUME")
+bui.style(row, icon="BUI_VOLUME", icon_size=24, font_weight="bold")
+row.prop_enum(item, "depth_mode", "FLATTEN")
+bui.style(row, icon="BUI_FLATTEN", icon_size=24, font_weight="bold")
+```
+
+Sources live under `beyond_ui/assets/icons/duotone/`. The existing offline atlas
+builder packages both color masks; no SVG parsing or rasterization runs in paint.
+See the [generated reference and Metal captures](design/qa/depth-modes-v1/index.html).

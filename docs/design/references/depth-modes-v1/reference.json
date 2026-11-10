@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-10",
+  "reference": "generated-icons.png",
+  "dimensions": [
+    1920,
+    832
+  ],
+  "background": "transparent",
+  "prompt": "Two minimalist macOS monoline icons: mint cube with coral inner Y edges for Volume; mint upright thin slab with coral internal edges and inward arrows for Flatten. No text, shadows or gradients. Matching optical sizes and square-compatible silhouettes. CamKeys coral and mint accents.",
+  "implementation": "Manually traced reusable SVG paths in beyond_ui/assets/icons/duotone; two semantic accent layers, rasterized offline with existing atlas pipeline."
+}

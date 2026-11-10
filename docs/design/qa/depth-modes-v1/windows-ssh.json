@@ -1,0 +1,799 @@
+{
+  "date": "2026-11-10",
+  "host": "Tyler-Laptop",
+  "account": "beyondrunner",
+  "adapter_inventory": "NVIDIA GeForce RTX 4090 Laptop GPU",
+  "transport": "Paired private-LAN SSH; isolated runner-work/camkeys-depth-20261110",
+  "execution": "Stock Windows Blender, factory startup, headless, disposable profiles. No desktop input or live scene access.",
+  "gpu_validation": "No Vulkan/OpenGL windowed rendering exercised; adapter inventory is not GPU acceptance.",
+  "source_bases": {
+    "bui": "0bba4f03168fb48112651b25b73e70d379a4f48c",
+    "camkeys": "eea444bba0c9c8d1e139d8c7ae1d858b61dec4dd"
+  },
+  "checks": {
+    "depth-4.3": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.3\\blender.exe",
+        "pid": 43044,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.3\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.3.0",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 8.206250000512227,
+              "p95_ms": 9.53529000398703
+            },
+            "flatten": {
+              "median_ms": 11.258950020419434,
+              "p95_ms": 12.208264981745742
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\depth-4.3\\blender-0.log"
+      }
+    ],
+    "depth-4.4": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+        "pid": 45728,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 8.710449998034164,
+              "p95_ms": 9.976160028600134
+            },
+            "flatten": {
+              "median_ms": 9.89399998798035,
+              "p95_ms": 11.382975018932484
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\depth-4.4\\blender-0.log"
+      }
+    ],
+    "depth-4.5": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.5\\blender.exe",
+        "pid": 38708,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.5\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.5.4 LTS",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 10.738449986092746,
+              "p95_ms": 12.631060020066798
+            },
+            "flatten": {
+              "median_ms": 11.941950011532754,
+              "p95_ms": 13.328000035835428
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\depth-4.5\\blender-0.log"
+      }
+    ],
+    "depth-5.0": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.0\\blender.exe",
+        "pid": 42004,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.0\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.0.1",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 8.278749999590218,
+              "p95_ms": 9.374805021798238
+            },
+            "flatten": {
+              "median_ms": 9.776750026503578,
+              "p95_ms": 10.98477499326691
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\depth-5.0\\blender-0.log"
+      }
+    ],
+    "isolated-oracle": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.1\\blender.exe",
+        "pid": 41220,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.1\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.1.1",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 8.530749997589737,
+              "p95_ms": 9.382194990757853
+            },
+            "flatten": {
+              "median_ms": 11.53054999304004,
+              "p95_ms": 12.858320030500181
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\isolated-oracle\\blender-0.log"
+      },
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 41460,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_depth.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "cases": 168,
+          "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+          "world_transform_error": 1.1138192972381944e-06,
+          "default_parity": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timings_5001_vertices": {
+            "volume": {
+              "median_ms": 8.12820001738146,
+              "p95_ms": 9.808510000584645
+            },
+            "flatten": {
+              "median_ms": 8.548700017854571,
+              "p95_ms": 9.487085000728257
+            }
+          }
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\isolated-oracle\\blender-1.log"
+      }
+    ],
+    "integration-4.4": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+        "pid": 42304,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_integration.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "modes": [
+            {
+              "mode": "LENS",
+              "volume_depth_span": 2.016819953918457,
+              "flat_depth_span": 0.11843013763427734
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "volume_depth_span": 1.96875,
+              "flat_depth_span": 0.10101556777954102
+            }
+          ],
+          "locales": 11,
+          "schema_42_migration": true
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\integration-4.4\\blender-0.log"
+      }
+    ],
+    "integration-5.2": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 42912,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_flatten_integration.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "modes": [
+            {
+              "mode": "LENS",
+              "volume_depth_span": 2.016819953918457,
+              "flat_depth_span": 0.11843013763427734
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "volume_depth_span": 1.96875,
+              "flat_depth_span": 0.10101556777954102
+            }
+          ],
+          "locales": 11,
+          "schema_42_migration": true
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\integration-5.2\\blender-0.log"
+      }
+    ],
+    "billboard-4.4": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+        "pid": 43392,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 4.4\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_billboard_projection.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "4.4.3",
+          "checks": [
+            {
+              "mode": "LENS",
+              "yaw": 3,
+              "pitch": 0,
+              "camera_origin_error": 5.960464477539063e-08,
+              "basis_error": 6.015127407708088e-08,
+              "oracle_error": 1.9073485859610884e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 6,
+              "pitch": 3,
+              "camera_origin_error": 1.1920928955078125e-07,
+              "basis_error": 1.78972836168944e-07,
+              "oracle_error": 3.0985626007229428e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 9,
+              "pitch": -6,
+              "camera_origin_error": 0.0,
+              "basis_error": 1.8863363416749483e-07,
+              "oracle_error": 2.853623613491285e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 4,
+              "pitch": 9,
+              "camera_origin_error": 9.555351461101412e-07,
+              "basis_error": 7.455817445973096e-08,
+              "oracle_error": 3.039341087585079e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 90,
+              "pitch": 35,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 2.4135191480922913e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 180,
+              "pitch": -50,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 1.9073486328125e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 275,
+              "pitch": 60,
+              "camera_origin_error": 4.76837158203125e-07,
+              "basis_error": 6.143906154658885e-08,
+              "oracle_error": 2.975085680145817e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 355,
+              "pitch": -5,
+              "camera_origin_error": 1.9369216929998304e-06,
+              "basis_error": 3.1610136383170525e-07,
+              "oracle_error": 3.81606086083397e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 3,
+              "pitch": 0,
+              "camera_origin_error": 5.960464477539063e-08,
+              "basis_error": 6.015127407708088e-08,
+              "oracle_error": 4.768371271168803e-07
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 6,
+              "pitch": 3,
+              "camera_origin_error": 9.610960183499514e-07,
+              "basis_error": 1.3519262754637043e-07,
+              "oracle_error": 2.8819844957450602e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 9,
+              "pitch": -6,
+              "camera_origin_error": 0.0,
+              "basis_error": 1.8863363416749483e-07,
+              "oracle_error": 1.9301713830716105e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 4,
+              "pitch": 9,
+              "camera_origin_error": 9.555351461101412e-07,
+              "basis_error": 7.455817445973096e-08,
+              "oracle_error": 2.8912824843185803e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 90,
+              "pitch": 35,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 1.9967556000866082e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 180,
+              "pitch": -50,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 1.465700475211662e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 275,
+              "pitch": 60,
+              "camera_origin_error": 4.76837158203125e-07,
+              "basis_error": 8.560065398421926e-08,
+              "oracle_error": 3.1879574760029783e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 355,
+              "pitch": -5,
+              "camera_origin_error": 1.9369216929998304e-06,
+              "basis_error": 3.1610136383170525e-07,
+              "oracle_error": 3.0964689585744054e-06
+            }
+          ],
+          "frame_parameter_ms": 0.037470699986442924,
+          "animated_source_live": true,
+          "disabled_roundtrip": true,
+          "viewport_pan_dolly": true
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\billboard-4.4\\blender-0.log"
+      }
+    ],
+    "billboard-5.2": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 44280,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\camkeys\\tests\\blender_billboard_projection.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "checks": [
+            {
+              "mode": "LENS",
+              "yaw": 3,
+              "pitch": 0,
+              "camera_origin_error": 5.960464477539063e-08,
+              "basis_error": 6.015127407708088e-08,
+              "oracle_error": 2.1159648502799833e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 6,
+              "pitch": 3,
+              "camera_origin_error": 1.1920928955078125e-07,
+              "basis_error": 1.78972836168944e-07,
+              "oracle_error": 2.650663794317998e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 9,
+              "pitch": -6,
+              "camera_origin_error": 0.0,
+              "basis_error": 1.8863363416749483e-07,
+              "oracle_error": 2.7274990079817485e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 4,
+              "pitch": 9,
+              "camera_origin_error": 9.555351461101412e-07,
+              "basis_error": 7.455817445973096e-08,
+              "oracle_error": 2.741317865151416e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 90,
+              "pitch": 35,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 2.1502554055086165e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 180,
+              "pitch": -50,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 2.384185791015625e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 275,
+              "pitch": 60,
+              "camera_origin_error": 4.76837158203125e-07,
+              "basis_error": 6.143906154658885e-08,
+              "oracle_error": 3.2234659959051726e-06
+            },
+            {
+              "mode": "LENS",
+              "yaw": 355,
+              "pitch": -5,
+              "camera_origin_error": 1.9369216929998304e-06,
+              "basis_error": 3.1610136383170525e-07,
+              "oracle_error": 2.474651205730538e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 3,
+              "pitch": 0,
+              "camera_origin_error": 5.960464477539063e-08,
+              "basis_error": 6.015127407708088e-08,
+              "oracle_error": 2.5592744177706933e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 6,
+              "pitch": 3,
+              "camera_origin_error": 9.610960183499514e-07,
+              "basis_error": 1.3519262754637043e-07,
+              "oracle_error": 2.6616244212379625e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 9,
+              "pitch": -6,
+              "camera_origin_error": 0.0,
+              "basis_error": 1.8863363416749483e-07,
+              "oracle_error": 2.940559436392931e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 4,
+              "pitch": 9,
+              "camera_origin_error": 9.555351461101412e-07,
+              "basis_error": 7.455817445973096e-08,
+              "oracle_error": 3.1277290185593998e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 90,
+              "pitch": 35,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 2.920627593328007e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 180,
+              "pitch": -50,
+              "camera_origin_error": 0.0,
+              "basis_error": 0.0,
+              "oracle_error": 9.909789190909457e-07
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 275,
+              "pitch": 60,
+              "camera_origin_error": 4.76837158203125e-07,
+              "basis_error": 8.560065398421926e-08,
+              "oracle_error": 2.3928141392737245e-06
+            },
+            {
+              "mode": "SUBJECT_SIZE",
+              "yaw": 355,
+              "pitch": -5,
+              "camera_origin_error": 1.9369216929998304e-06,
+              "basis_error": 3.1610136383170525e-07,
+              "oracle_error": 2.9775092760808697e-06
+            }
+          ],
+          "frame_parameter_ms": 0.03426510002464056,
+          "animated_source_live": true,
+          "disabled_roundtrip": true,
+          "viewport_pan_dolly": true
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\billboard-5.2\\blender-0.log"
+      }
+    ],
+    "bridge-5.2": [
+      {
+        "blender": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+        "pid": 24944,
+        "command": [
+          "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+          "--factory-startup",
+          "--python-exit-code",
+          "1",
+          "--background",
+          "--python",
+          "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\bui\\tests\\blender_portable_bridge.py"
+        ],
+        "launch": null,
+        "focus_policy": "headless",
+        "passed": true,
+        "returncode": 0,
+        "result": {
+          "passed": true,
+          "version": "5.2.2 LTS",
+          "build": "d13f752e3b9c",
+          "platform": "windows-x86_64",
+          "portable": true,
+          "context_restored": true,
+          "dynamic_enum": true,
+          "property_state_abi": true,
+          "driver_clipboard": true,
+          "favorites": true,
+          "custom_property_context": true,
+          "visual_qa": false
+        },
+        "log": "C:\\Users\\beyondrunner\\runner-work\\camkeys-depth-20261110\\results\\bridge-5.2\\blender-0.log"
+      }
+    ]
+  },
+  "limits": [
+    "4.2 and 5.1 were not installed on this runner; their Mac coverage is in report.json.",
+    "4.1 numerical graph execution passes, but public asset loading remains rejected: Blender inserts three Vector Math nodes into both the checkpoint schema-42 asset and schema-43 asset. This is a reproduced pre-existing legacy contract limitation, outside the BUI 4.2+ target; admission was not weakened.",
+    "Physical Windows Vulkan/OpenGL popup glass, bounce and picker appearance still require signed-in desktop validation. Headless SSH is not GUI acceptance."
+  ],
+  "fixture_correction": {
+    "cause": "A single fixture modifier was repeatedly downgraded from schema 43 to 42; Windows 4.1.1 crashed in IDProperty copying.",
+    "resolution": "Use a separate schema-42 oracle modifier; all 168 numerical cases and eight parity checks now pass on 4.1.1 and 5.2.2, with Mac 5.2.2 recheck. Product code did not change.",
+    "sha256": "216beeaa6d77dd877e4cde450cda56806ee2a74b0d604a0066b57bdd95932a63"
+  },
+  "legacy_4_1_loader": {
+    "passed": true,
+    "rows": [
+      {
+        "source": "baseline",
+        "extra": [
+          [
+            "Vector Math.164",
+            "ShaderNodeVectorMath"
+          ],
+          [
+            "Vector Math.165",
+            "ShaderNodeVectorMath"
+          ],
+          [
+            "Vector Math.166",
+            "ShaderNodeVectorMath"
+          ]
+        ],
+        "missing": []
+      },
+      {
+        "source": "camkeys/assets/geometry",
+        "extra": [
+          [
+            "Vector Math.176",
+            "ShaderNodeVectorMath"
+          ],
+          [
+            "Vector Math.177",
+            "ShaderNodeVectorMath"
+          ],
+          [
+            "Vector Math.178",
+            "ShaderNodeVectorMath"
+          ]
+        ],
+        "missing": []
+      }
+    ]
+  },
+  "mac_fixture_recheck": {
+    "passed": true,
+    "version": "5.2.2 LTS",
+    "cases": 168,
+    "max_projected_pixel_error_1000px_focal": 0.00095367431640625,
+    "world_transform_error": 1.1138192972381944e-06,
+    "default_parity": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "timings_5001_vertices": {
+      "volume": {
+        "median_ms": 1.1591044603846967,
+        "p95_ms": 2.229658473515882
+      },
+      "flatten": {
+        "median_ms": 1.2862920411862433,
+        "p95_ms": 1.7842267698142673
+      }
+    }
+  }
+}
