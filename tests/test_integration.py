@@ -24,6 +24,20 @@ class IntegrationTests(unittest.TestCase):
         namespace["unregister"]()
         self.assertEqual(calls, ["register", "adopt", "unregister"])
 
+    def test_panel_selection(self):
+        named = type("PanelClass", (), {"bl_idname": "TEST_PT_custom"})
+        unnamed = type("TEST_PT_other", (), {})
+        for options, expected in [
+            ({}, (True, True)),
+            ({"include_panels": "TEST_PT_custom"}, (True, False)),
+            ({"include_panels": []}, (False, False)),
+            ({"exclude_panels": ["TEST_PT_custom"]}, (False, True)),
+            ({"include_panels": ["TEST_PT_custom"], "exclude_panels": ["TEST_PT_custom"]}, (False, False)),
+        ]:
+            ns = dict(__name__="consumer", register=lambda: None, unregister=lambda: None)
+            controller = integrate(ns, **options)
+            self.assertEqual(tuple(controller.selects_panel(c) for c in (named, unnamed)), expected)
+
     def test_owner_discovery_excludes_prefix_collisions_and_unregistered(self):
         class Base:
             pass

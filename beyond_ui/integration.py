@@ -59,7 +59,9 @@ def _owned_classes(base, owner):
 
 
 class Integration:
-    def __init__(self, namespace, options):
+    def __init__(self, namespace, options, include_panels, exclude_panels):
+        self.include_panels = include_panels
+        self.exclude_panels = exclude_panels
         self.namespace = namespace
         self.owner = namespace.get("__package__") or namespace["__name__"]
         self.original_register = namespace["register"]
@@ -111,26 +113,34 @@ class Integration:
         self.namespace["unregister"] = unregister
         self.register_wrapper, self.unregister_wrapper = register, unregister
 
+    def selects_panel(self, cls):
+        identifier = getattr(cls, "bl_idname", "") or cls.__name__
+        return (self.include_panels is None or identifier in self.include_panels) and identifier not in self.exclude_panels
+
     def adopt(self):
         import bpy
         from .addon import AddonUI
         from .hosts.addon import Runtime
 
         panels = _owned_classes(bpy.types.Panel, self.owner)
-        operators = _owned_classes(bpy.types.Operator, self.owner)
-        menus = _owned_classes(bpy.types.Menu, self.owner)
+        # Package-wide callback and keymap rewriting would also intercept
+        # operators launched from panels intentionally left native.
+        scoped = self.include_panels is not None or bool(self.exclude_panels)
+        operators = [] if scoped else _owned_classes(bpy.types.Operator, self.owner)
+        menus = [] if scoped else _owned_classes(bpy.types.Menu, self.owner)
         embedded = [
             cls
             for cls in panels
             if (cls.bl_space_type, cls.bl_region_type)
             in {("VIEW_3D", "UI"), ("PROPERTIES", "WINDOW")}
+            and self.selects_panel(cls)
         ]
         self.report.update(
             state="registered",
             panels=[c.__name__ for c in embedded],
             other_panels=[c.__name__ for c in panels if c not in embedded],
-            native_routes=_native_routes(panels + operators),
-            routed_routes=[
+            native_routes=_native_routes(embedded + operators),
+            routed_routes=[] if scoped else [
                 "invoke_props_dialog",
                 "invoke_popup",
                 "invoke_confirm",
@@ -213,8 +223,23 @@ class Integration:
         }
 
 
-def integrate(namespace, **options):
+def _panel_ids(value):
+    if isinstance(value, str):
+        value = (value,)
+    ids = frozenset(value)
+    if not all(isinstance(identifier, str) and identifier for identifier in ids):
+        raise ValueError("Panel filters require Blender panel identifiers")
+    return ids
+
+
+def integrate(namespace, *, include_panels=None, exclude_panels=(), **options):
     """Call once at the end of the add-on entry module: ``integrate(globals())``.
+
+    By default all eligible panels are adopted. Use include_panels for an
+    allowlist (an empty list selects none), or exclude_panels for exceptions.
+    Filters use bl_idname, with the class name as Blender's default. When both
+    are supplied, exclusions win. Filtered integrations leave package-wide
+    operator callbacks and keymaps native.
 
     Wraps that module's functions; never patches bpy.utils, sys.path or other
     packages. No Blender classes/timers are registered until its register runs.
@@ -239,7 +264,7 @@ def integrate(namespace, **options):
 
     owner = namespace.get("__package__") or namespace.get("__name__")
     AddonUI(owner, **options)
-    integration = Integration(namespace, options)
+    integration = Integration(namespace, options, None if include_panels is None else _panel_ids(include_panels), _panel_ids(exclude_panels))
     integration.install()
     namespace["__beyond_ui_integration__"] = integration
     return integration
