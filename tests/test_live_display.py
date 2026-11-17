@@ -5,6 +5,23 @@ from beyond_ui.layout_recording import Tape
 from beyond_ui.hosts.floating import visible_region_rect
 
 class LiveDisplay(unittest.TestCase):
+    def test_component_replays_only_with_its_declared_inputs(self):
+        calls = []
+        def caption(layout, title):
+            calls.append(title)
+            layout.label(text=title, translate=False)
+        def record(title):
+            tape = Tape()
+            tape.root.beyond_component(caption, title)
+            return tape
+        old = record("first")
+        ui = Layout()
+        old.play(ui)
+        self.assertTrue(old.patch_display(record("first")))
+        self.assertFalse(old.patch_display(record("second")))
+        self.assertEqual(calls, ["first"])
+        self.assertEqual(next(iter(ui.canvas.controls.values())).label, "first")
+
     def test_retained_text_refresh_matches_full_recording_without_authoring(self):
         ui = Layout()
         old = self.tape('0.000')

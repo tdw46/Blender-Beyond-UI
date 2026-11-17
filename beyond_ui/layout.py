@@ -73,6 +73,13 @@ class Layout:
         self._is_popover = False
         self._panel_stack = ()
 
+    def beyond_component(self, draw, *args):
+        """Build a retained layout subtree on replay. Pass every authored input
+        explicitly. Live bindings belong to its controls. Keep nested popup
+        openers and list/disclosure authoring on the enclosing recording tape.
+        """
+        draw(self, *args)
+
     def beyond_widget(self, factory, *args):
         """Create a retained consumer widget during replay, with this canvas as owner."""
         widget = factory(self.canvas, *args)
