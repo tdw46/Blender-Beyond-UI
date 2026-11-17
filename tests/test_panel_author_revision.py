@@ -76,6 +76,18 @@ class AuthorRevision(unittest.TestCase):
             self.draw()
             self.assertEqual(self.calls, before + 1)
 
+    def test_dynamic_section_can_decline_the_previous_static_revision(self):
+        self.draw()
+        self.draw()
+        self.revision = NotImplemented
+        self.rt.draw_functions[self.panel] = lambda proxy, ctx: setattr(self, "calls", self.calls + 1)
+        self.draw()
+        self.draw()
+        self.revision = "first"
+        self.draw()
+        self.draw()
+        self.assertEqual(self.calls, 4)
+
     def test_default_panels_still_author_each_redraw(self):
         del self.panel.beyond_ui_draw_cache_key
         self.draw()

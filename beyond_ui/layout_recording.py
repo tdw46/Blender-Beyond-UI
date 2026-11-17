@@ -36,15 +36,19 @@ class Tape:
         self.next_id = 1
         self.root = Node(self, 0)
 
-    def record(self, command):
+    def record(self, command, *, frozen_arguments=None):
         if len(self.commands) >= 4096:
             raise ValueError("UI draw exceeds 4096 recorded commands")
         self.commands.append(command)
-        snapshot = freeze(command)
+        kind, target, name, args, kwargs, output = command
+        # The opcode, node IDs and output slots are already immutable. Only
+        # user arguments can contain mutable containers or live RNA owners.
+        if frozen_arguments is None:
+            frozen_arguments = (freeze(args) if args else (), freeze(kwargs) if kwargs else ())
+        snapshot = (kind, target, name, *frozen_arguments, output)
         self.command_offsets.append(len(self.signature))
         self.signature.append(snapshot)
         self.command_signatures.append(snapshot)
-        kind, _, name, args, kwargs, _ = command
         if kind == "call" and name == "template_list":
             from .list_identity import KEY
 

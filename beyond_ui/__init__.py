@@ -10,7 +10,7 @@ from .artwork import Artwork, ArtworkLibrary, header, heading
 from .integration import integrate
 from .addon import AddonUI
 from .stylesheet import StyleSheet
-from .style_api import style, prop
+from .style_api import style, prop, prepare_style
 from .pointer import PointerItems
 from .id_template import IDAction
 from .animation import AnimationSettings, animation_defaults
@@ -29,7 +29,7 @@ __all__ = [
     "Artwork", "ArtworkLibrary", "header", "heading",
     "AddonUI",
     "StyleSheet",
-    "style",
+    "style", "prepare_style",
     "prop",
     "integrate",
     "AnimationSettings",

@@ -236,6 +236,38 @@ def normalize(*presets, **options):
     return result
 
 
+def prepare_style(*presets, scope="last", **options):
+    """Compile a reusable static style. Apply the result to any target layout.
+
+    The declarations are copied and validated once. Each application still uses
+    the target layout's normal geometry, composition and control validation.
+    """
+    from .layout import Layout
+    from .layout_recording import Node, freeze
+
+    values = normalize(*presets, **options)
+    _validate_scope(scope, values)
+    args, kwargs = (values,), {"scope": scope}
+    signature = (freeze(args), freeze(kwargs))
+
+    def apply_to(layout):
+        if isinstance(layout, Node):
+            command = ("call", layout._key, "style_item", args, kwargs, None)
+            layout._tape.record(command, frozen_arguments=signature)
+        elif isinstance(layout, Layout):
+            layout.style_item(values, scope=scope)
+        return layout
+
+    return apply_to
+
+
+def _validate_scope(scope, values):
+    if scope not in {"last", "group"}:
+        raise ValueError("scope must be last or group")
+    if scope == "group" and values.keys() & _NUMERIC:
+        raise ValueError("Numeric formatting belongs to scope=last")
+
+
 def style(layout, *presets, scope="last", **options):
     """Style the preceding item on this exact layout; native UILayout is a no-op.
 
@@ -246,10 +278,7 @@ def style(layout, *presets, scope="last", **options):
     from .layout_recording import Node
 
     values = normalize(*presets, **options)
-    if scope not in {"last", "group"}:
-        raise ValueError("scope must be last or group")
-    if scope == "group" and values.keys() & _NUMERIC:
-        raise ValueError("Numeric formatting belongs to scope=last")
+    _validate_scope(scope, values)
     if isinstance(layout, (Layout, Node)):
         layout.style_item(values, scope=scope)
     return layout

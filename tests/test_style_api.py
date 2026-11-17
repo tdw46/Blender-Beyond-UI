@@ -8,6 +8,25 @@ from test_numeric import codec
 
 
 class InlineStyleTests(unittest.TestCase):
+    def test_prepared_style_owns_input_and_matches_recorded_and_immediate_layout(self):
+        from beyond_ui import prepare_style
+        options = {"padding": [2, 4], "text_effects": {"shadow": False}}
+        compiled = prepare_style(scope="group", **options)
+        previous, current = Tape(), Tape()
+        style(previous.root, scope="group", **options)
+        options["padding"][0] = 50
+        options["text_effects"]["shadow"] = True
+        compiled(current.root)
+        self.assertEqual(previous.signature, current.signature)
+        self.assertTrue(previous.patch_display(current))
+        replay, direct = Layout(), Layout()
+        current.play(replay)
+        compiled(direct)
+        self.assertEqual(replay.group.options, direct.group.options)
+        self.assertEqual(direct.group.options["padding"], (2, 4, 2, 4))
+        with self.assertRaises(ValueError):
+            prepare_style(scope="group", precision=2)
+
     def test_help_accessory_centers_on_stacked_value_instead_of_whole_field(self):
         from beyond_ui.scalar_geometry import slider_parts
         for width in (240, 320, 480):

@@ -343,12 +343,13 @@ class Runtime:
 
             try:
                 revision_key = getattr(definition, "beyond_ui_draw_cache_key", None)
-                if revision_key is not None:
+                revision = revision_key(context) if revision_key is not None else NotImplemented
+                if revision is not NotImplemented:
                     # Explicit consumer contract: all authored branches/text and
                     # captured owners must be represented. Bound values and live
                     # lists still refresh below; backdrop changes do not author.
                     author_revision = (
-                        freeze(revision_key(context)), freeze(state),
+                        freeze(revision), freeze(state),
                         context.space_data.as_pointer(), context.mode,
                         context.region.width, context.preferences.system.ui_scale,
                         context.preferences.view.language,
