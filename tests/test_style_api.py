@@ -27,6 +27,18 @@ class InlineStyleTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             prepare_style(scope="group", precision=2)
 
+    def test_recorded_style_cache_checks_types_and_nested_mutations(self):
+        tape = Tape()
+        style(tape.root, width=1)
+        with self.assertRaises(ValueError):
+            style(tape.root, width=True)
+        opts = {"shadow": False}
+        style(tape.root, text_effects=opts)
+        opts["shadow"] = True
+        style(tape.root, text_effects=opts)
+        self.assertFalse(tape.commands[-2][3][0]["text_effects"]["shadow"])
+        self.assertTrue(tape.commands[-1][3][0]["text_effects"]["shadow"])
+
     def test_help_accessory_centers_on_stacked_value_instead_of_whole_field(self):
         from beyond_ui.scalar_geometry import slider_parts
         for width in (240, 320, 480):

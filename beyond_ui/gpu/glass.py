@@ -129,9 +129,13 @@ def viewport_changed(context, records):
     if context.area.type != "VIEW_3D" or context.region.type != "WINDOW":
         return
     key = (context.window.as_pointer(), context.area.as_pointer())
+    if not getattr(context.preferences.system, "use_region_overlap", False):
+        return
+    viewport = context.region
     for region in context.area.regions:
         record = records.get((*key, region.as_pointer()))
-        if region.type == "UI" and record and record.get("valid"):
+        if (region.type == "UI" and record and record.get("valid")
+                and _overlaps(viewport, region)):
             _views[key] = _views.get(key, 0) + 1
             if len(_views) > 8:
                 _views.pop(next(iter(_views)))
@@ -140,6 +144,11 @@ def viewport_changed(context, records):
             if not record.get("late"):
                 region.tag_redraw()
             break
+
+
+def _overlaps(viewport, sidebar):
+    return (viewport.x < sidebar.x + sidebar.width and sidebar.x < viewport.x + viewport.width
+            and viewport.y < sidebar.y + sidebar.height and sidebar.y < viewport.y + viewport.height)
 
 
 def viewport_source(context):
@@ -152,7 +161,7 @@ def viewport_source(context):
     if region is None:
         return None
     ui = context.region
-    if region.x + region.width <= ui.x or region.y + region.height <= ui.y:
+    if not _overlaps(region, ui):
         return None
     return (
         region.as_pointer(),

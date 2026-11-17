@@ -268,6 +268,22 @@ def _validate_scope(scope, values):
         raise ValueError("Numeric formatting belongs to scope=last")
 
 
+# Recording is frequent during viewport motion. Only pure declarations can share
+# a compiled command. Typed keys keep invalid Boolean sizes distinct from 0/1.
+_recorded_styles = {}
+
+
+def _style_token(value):
+    kind = type(value)
+    if kind in (str, int, float, bool, type(None)):
+        return kind, value
+    if kind in (list, tuple):
+        return kind, tuple(_style_token(item) for item in value)
+    if kind is dict:
+        return kind, tuple((key, _style_token(item)) for key, item in value.items())
+    raise TypeError
+
+
 def style(layout, *presets, scope="last", **options):
     """Style the preceding item on this exact layout; native UILayout is a no-op.
 
@@ -277,6 +293,19 @@ def style(layout, *presets, scope="last", **options):
     from .layout import Layout
     from .layout_recording import Node
 
+    if isinstance(layout, Node):
+        try:
+            key = (scope, _style_token(presets), _style_token(options))
+        except TypeError:
+            pass  # Custom mappings still follow their ordinary validation path.
+        else:
+            compiled = _recorded_styles.get(key)
+            if compiled is None:
+                compiled = prepare_style(*presets, scope=scope, **options)
+                if len(_recorded_styles) >= 512:
+                    _recorded_styles.pop(next(iter(_recorded_styles)))
+                _recorded_styles[key] = compiled
+            return compiled(layout)
     values = normalize(*presets, **options)
     _validate_scope(scope, values)
     if isinstance(layout, (Layout, Node)):

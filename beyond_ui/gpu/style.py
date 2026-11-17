@@ -1145,7 +1145,7 @@ def clear():
     _preview_shader = _preview_batch = None
 
 
-def preview(texture, x, y, w, h, radius=6.0, *, display_space=False):
+def preview(texture, x, y, w, h, radius=6.0, *, display_space=False, premultiplied=False):
     """One retained texture draw with rounded coverage; no mask render target."""
     global _preview_shader, _preview_batch
     import gpu
@@ -1185,7 +1185,7 @@ void main(){
             indices=((0, 1, 2), (2, 1, 3)),
         )
     # BLF/native batching may change blending between controls. Own rounded alpha.
-    gpu.state.blend_set("ALPHA")
+    gpu.state.blend_set("ALPHA_PREMULT" if premultiplied else "ALPHA")
     _preview_shader.bind()
     _preview_shader.uniform_sampler("image", texture)
     _preview_shader.uniform_float(
@@ -1195,6 +1195,8 @@ void main(){
     _preview_shader.uniform_float("radius", radius)
     _preview_shader.uniform_bool("display_space", display_space)
     _preview_batch.draw(_preview_shader)
+    if premultiplied:
+        gpu.state.blend_set("ALPHA")
 
 
 def menu_status_palette(preferences, *, reference=False):

@@ -184,8 +184,12 @@ class PanelHost:
         record["layout_pixel_scale"] = paint_scale
         if not deferred:
             canvas.visible = True
-            canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
-            canvas._tooltip_wake = lambda delay: self._schedule_tooltip(key, delay)
+            if (record.get("motion_canvas") is not canvas
+                    or len(canvas._animation_parents) != 1
+                    or canvas._animation_parents[0] is not self.animation):
+                canvas.bind_animation((self.animation,), lambda: self._wake_animation(key))
+                canvas._tooltip_wake = lambda delay: self._schedule_tooltip(key, delay)
+                record["motion_canvas"] = canvas
         raw = getattr(layout, "raw", layout)
         return bool(
             self.bridge.library.bvt_probe_reserve(
