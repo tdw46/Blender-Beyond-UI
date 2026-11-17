@@ -208,11 +208,35 @@ def run():
             "Group filtering/order, poll reactivation, guarded deferred actions, outside right-click and atomic body/header rejection pass"
         )
         canvas.open_panel(opener, clip, ctx)
+        name = fixture.BUI_PT_popover.bl_rna.identifier
         bpy.utils.unregister_class(fixture.BUI_PT_popover)
         canvas.overlay["widget"].dispatch(
             NS(type="LEFTMOUSE", value="PRESS"), 20, 20, context=ctx
         )
         assert canvas.overlay is None
+        from beyond_ui.popover import panel_class
+
+        class BUI_PT_replacement(bpy.types.Panel):
+            bl_idname = name
+            bl_label = "Replacement"
+            bl_space_type = "VIEW_3D"
+            bl_region_type = "UI"
+
+            def draw(self, context):
+                self.layout.label(text=self.bl_label)
+
+        bpy.utils.register_class(BUI_PT_replacement)
+        try:
+            assert panel_class(name) is BUI_PT_replacement
+        finally:
+            bpy.utils.unregister_class(BUI_PT_replacement)
+        try:
+            panel_class(name)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Unregistered popover was still available")
+        checks.append("Panel lookup follows replacement and removal under the same identifier")
         result = dict(passed=True, version=bpy.app.version_string, checks=checks)
     except Exception:
         result = dict(passed=False, error=traceback.format_exc(), checks=checks)

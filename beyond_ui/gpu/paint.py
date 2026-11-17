@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager, nullcontext
 from functools import lru_cache
-from . import style, glass, typography, skin
+from . import style, glass, typography, skin, is_windows_vulkan
 from ..editing import display_number
 from ..menu_metrics import Metrics as menu_metrics
 
@@ -65,6 +65,7 @@ def paint(
     cx, cy, cw, ch = clip
     if not canvas.visible or w <= 0 or h <= 0 or cw <= 0 or ch <= 0:
         return 0
+    retained_widgets = is_windows_vulkan()
     sx = w / max(1.0, canvas._width)
     sy = h / max(1.0, canvas.height)
     scale = min(sx, sy)
@@ -378,6 +379,19 @@ def paint(
             from ..stylesheet import accent_palette
             palette = accent_palette(palette, control)
             kind = control.kind
+            if (retained_widgets and kind == "widget" and not control.motion.tracks
+                    and control.binding is None and not control.options.get("value_feedback")
+                    and not control.options.get("alert") and samples is None
+                    and control.options.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"}):
+                present = getattr(control.options["widget"], "paint_retained_ink", None)
+                if present:
+                    # Previous ordinary controls drain BLF before restoring
+                    # their transforms. A retained ink hit submits only a quad.
+                    if count == 0:
+                        typography.flush_text(font)
+                    if present(r, font, palette):
+                        count += 1
+                        continue
             slider = kind == "number" and control.options.get("slider", True)
             external_label = (
                 bool(control.label)

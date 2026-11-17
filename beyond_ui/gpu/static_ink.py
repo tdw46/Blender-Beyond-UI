@@ -11,6 +11,21 @@ class StaticInk:
         self.key = self.palette = self.texture = None
         self.unavailable = False
 
+    def draw_existing(self, rect, font, palette, revision):
+        """Submit only an already rendered, pixel-aligned tile. No BLF writes."""
+        if self.texture is None or self.palette is not palette:
+            return False
+        from . import style
+
+        x, y, w, h = rect
+        left, bottom = floor(x), floor(y)
+        width, height = ceil(x + w) - left, ceil(y + h) - bottom
+        if self.key != ((x-left, y-bottom, w, h), font, revision, width, height):
+            return False
+        style.preview(self.texture, left, bottom, width, height, 0,
+                      display_space=True, premultiplied=True)
+        return True
+
     def draw(self, rect, font, palette, revision, draw):
         import gpu
         from mathutils import Matrix
