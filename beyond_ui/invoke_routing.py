@@ -258,7 +258,7 @@ class Router:
                 refresh()
         return result
 
-    def register(self):
+    def register(self, *, route_keymaps=True):
         import bpy
 
         from .macro_safety import protected_operators
@@ -452,8 +452,9 @@ class Router:
         bpy.utils.register_class(self.driver)
         from .invoke_keymaps import KeymapRoutes
 
-        self.keymaps = KeymapRoutes(self)
-        self.keymaps.refresh(bpy.context.window_manager)
+        if route_keymaps:
+            self.keymaps = KeymapRoutes(self)
+            self.keymaps.refresh(bpy.context.window_manager)
         from bpy.app.handlers import persistent
 
         @persistent

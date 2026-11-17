@@ -123,6 +123,27 @@ def layer_color(palette, role, color):
     return (*tint[:3], color[3])
 
 
+def artwork_surface(token, rect, radius, *, contain=False):
+    """Stretch a whole, previously uploaded artwork source over a real button."""
+    pack = _artwork.get(token.partition(':')[0])
+    entry = pack['entries'].get(token) if pack else None
+    if not entry:
+        return False
+    key, bounds, _ = entry
+    width, height, _ = pack['sources'][key]
+    texture = pack['textures'].get(key)
+    if texture is None or tuple(bounds) != (0, 0, width, height):
+        return False
+    if contain:
+        x, y, w, h = rect
+        scale = min(w / width, h / height)
+        dw, dh = width * scale, height * scale
+        rect = (x + (w-dw)/2, y + (h-dh)/2, dw, dh)
+    from . import style
+    style.preview(texture, *rect, radius, display_space=True)
+    return True
+
+
 def draw(name, x, y, size, color, *, palette=None):
     if name in _duotone:
         for token, role in _duotone[name]:

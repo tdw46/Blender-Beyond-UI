@@ -110,7 +110,7 @@ class Dialog:
         }
         ui = Layout(self.canvas, context, **options)
         ui._is_popover = True
-        ui.title(text=title or operator.bl_label, icon=self.icon, translate=False)
+        ui.draw_popup_header(text=title or operator.bl_label, icon=self.icon, translate=False)
         draw = getattr(type(operator), "draw", None)
         if self.mode == "CONFIRM":
             for line in self.message.splitlines():

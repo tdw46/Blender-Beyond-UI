@@ -47,6 +47,7 @@ class Runtime:
         self.input_errors = {}
         self.fallbacks = {}
         self.hosts, self.canvases, self.classes = {}, {}, []
+        self.preview_banks = {}
         self.running = set()
         self.active = False
         self.generation = 0
@@ -168,6 +169,8 @@ class Runtime:
             runtime.native_scroll.clear()
             runtime.generation += 1
             runtime.running.clear()
+            from .. import typed_pick
+            typed_pick.clear()
             runtime.reset_file_hosts()
 
         @persistent
@@ -191,6 +194,10 @@ class Runtime:
 
     def dispatch_event(self, operator, context, event):
         """An owned action failure must never terminate the window input service."""
+        from .. import typed_pick
+        status = typed_pick.dispatch(self, context, event)
+        if status is not None:
+            return status
         scroll_key = None
         window = getattr(context, "window", None)
         if event.type in SCROLL_EVENTS:
@@ -369,10 +376,30 @@ class Runtime:
                 and cached[1]._author_tape.patch_display(tape)):
             self.canvases[definition][key] = fingerprint, cached[1]
             cached = self.canvases[definition][key]
+        if (cached is not None and tape is not None and cached[0] != fingerprint
+                and cached[0][:-1] == fingerprint[:-1]
+                and cached[1]._author_context == interaction_context):
+            canvas = cached[1]
+            owner = canvas.settings_popup_owner(context)
+            if owner is not None and canvas._author_tape.keeps_popup_owner(tape, owner):
+                # Keep the exact child, bindings, pointer capture and anchor
+                # through successive edits. Do not acknowledge the new tape:
+                # the first redraw after dismissal must apply the queued layout.
+                canvas.visible = True
+                if not host.draw(native, context, canvas):
+                    native.label(text="Custom panel unavailable: " + host.reason, icon="INFO")
+                return
         if cached is None or cached[0] != fingerprint:
             if cached is not None:
                 cached[1].park()
             canvas = Canvas(self.config.theme, shortcut_registry=self.registry)
+            provider = getattr(definition, 'beyond_ui_preview_collections', None)
+            if provider is not None:
+                from ..widgets.preview_icon import PreviewIcons
+                if definition not in self.preview_banks:
+                    self.preview_banks[definition] = PreviewIcons(provider)
+                canvas.preview_icons = self.preview_banks[definition]
+                canvas.icon_renderer = canvas.preview_icons.draw_icon
             if self.config.stylesheet is not None:
                 self.config.stylesheet.apply(
                     canvas, variant=getattr(definition, "beyond_ui_style", "")
@@ -504,6 +531,7 @@ class Runtime:
         return None
 
     def reset_file_hosts(self):
+        self.preview_banks.clear()
         """Release file/context-scoped drawing resources before replacing Main.
 
         Clearing canvases alone leaves BLF glyph/GPU state and draw handlers
@@ -532,6 +560,8 @@ class Runtime:
         import bpy
 
         self.active = False
+        from .. import typed_pick
+        typed_pick.clear()
         self.native_scroll.clear()
         for callback in (self.start_callback, self.refresh_callback):
             if bpy.app.timers.is_registered(callback):
@@ -552,6 +582,7 @@ class Runtime:
                     definition.draw = original
         self.draw_patches.clear()
         self.canvases.clear()
+        self.preview_banks.clear()
         self.running.clear()
         for cls in reversed(self.classes):
             if cls.is_registered:

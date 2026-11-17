@@ -126,6 +126,9 @@ class PanelHost:
             ),
         )
         record = self.records.get(key)
+        # Reserve, measure and paint the same design units. Blender still owns
+        # the View2D zoom and the native tab and scrollbar widths.
+        scale *= canvas.theme.panel_scale
         paint_scale = panel_geometry.pixel_scale(context.region, scale)
         gutter = record.get("native_gutter", 20) if record else 20
         width = panel_geometry.available_width(context.region.width, paint_scale, gutter)
@@ -411,6 +414,7 @@ class PanelHost:
                 from . import popup_layer
                 canvas._popup_clip = popup_layer.logical((region.x+x, region.y+y, w, h), popup_layer.bounds(window), canvas)
             old_hover = canvas.hover
+            old_overlay = canvas.overlay
             from ..gpu.paint import measure
             from ..gpu.typography import face
 
@@ -428,7 +432,7 @@ class PanelHost:
                         face(self.font, "body"), size, text
                     )[0],
                 )
-            if consumed or old_hover != canvas.hover:
+            if consumed or old_hover != canvas.hover or old_overlay is not canvas.overlay:
                 region.tag_redraw()
             if consumed:
                 if (

@@ -23,12 +23,15 @@ _LAYOUT = {
     "template",
     "surface",
     "surface_region",
+    "align_card_header",
     "surface_radius",
     "surface_color",
 }
 _NUMERIC = {"units", "precision", "value_width", "slider", "disabled_accent"}
 _VISUAL = {
     "enum_style",
+    "button_artwork",
+    "label_artwork",
     "curve_lock_start", "curve_lock_end",
     "accent_slot",
     "colors",
@@ -108,11 +111,14 @@ def normalize(*presets, **options):
     if unknown:
         raise ValueError("Unsupported style properties: " + ", ".join(sorted(unknown)))
     for key, value in tuple(result.items()):
+        if key in {'button_artwork', 'label_artwork'} and (not isinstance(value, str) or ':' not in value):
+            raise ValueError(f'{key} requires a namespaced artwork token')
         if key == 'enum_style':
-            if value not in {'menu', 'segment'}:raise ValueError('enum_style must be menu or segment')
+            if value not in {'menu', 'segment', 'track'}:
+                raise ValueError('enum_style must be menu, segment or track')
         elif key == "trailing_icon_align" and value not in {"text", "end"}:
             raise ValueError("trailing_icon_align must be text or end")
-        elif key in {"curve_lock_start", "curve_lock_end", "highlight_expanded"}:
+        elif key in {"curve_lock_start", "curve_lock_end", "highlight_expanded", "align_card_header"}:
             if type(value) is not bool:raise ValueError(key+" must be Boolean")
         elif key == "responsive":
             from .responsive import normalize_rules

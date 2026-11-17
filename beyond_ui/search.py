@@ -37,7 +37,8 @@ def field_rect(control):
 
 def clear_rect(rect):
     x, y, w, h = rect
-    return x + max(0, w - 22), y, min(22, w), h
+    drop = min(20., w*.30)
+    return x + max(0, w-drop-22), y, min(22,w-drop), h
 
 
 class CollectionSearch:

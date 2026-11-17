@@ -1,5 +1,20 @@
 # Beyond UI project instructions
 
+## Canonical CamKeys checkout and builds on this Mac
+
+Use `/Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys` for
+all CamKeys development, Git updates, and builds. Do not develop or build in
+`/Users/tylerwalker/dev/CamKeys-beyond-ui`. The installed checkout is the source
+of truth; verify it against `origin/master` and preserve unrelated local edits.
+
+Run CamKeys packaging from that canonical checkout. Keep isolated build staging
+and validation profiles beneath its excluded `legal/local-builds/` directory,
+and place final ZIPs in the canonical checkout root (for example,
+`camkeys_4_0_0.zip`). Build published releases from a clean export of the verified
+commit without including private files or unrelated uncommitted work. Do not
+change versions unless requested. This location rule does not authorize deleting
+the old checkout or changing an unrelated live Blender scene.
+
 ## Scope
 
 Build a product-independent, vendorable Blender custom UI library from the

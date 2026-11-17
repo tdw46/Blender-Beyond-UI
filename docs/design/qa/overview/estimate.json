@@ -1,20 +1,20 @@
 {
-  "reviewed": "2026-11-10 \u2014 Windows NVIDIA Volume/Flatten visual check complete",
+  "reviewed": "2026-11-17 \u2014 BVT workflow publication and Windows qualification",
   "remaining_turns": [
-    0,
-    0
+    1,
+    2
   ],
   "implementation_turns": [
     0,
     0
   ],
   "integration_qa_turns": [
-    0,
-    0
+    1,
+    2
   ],
   "active_hours": [
-    0,
-    0
+    1,
+    3
   ],
   "confidence": "Mac Metal and native Windows NVIDIA Vulkan/OpenGL picker captures inspected. Minimal picker appearance check complete; desktop input and broader popup replay remain separately unqualified.",
   "basis": "Four isolated GPU captures over paired SSH completed on Blender 5.2.2 / RTX 4090 Laptop. Wide Volume and narrow Flatten images are byte-identical between Vulkan and OpenGL. No Windows Codex connection was needed for GPUOffScreen captures.",
@@ -118,8 +118,8 @@
     "Actual Windows Vulkan/OpenGL Uraraka 2.5/50/250 mm buffers/PNGs and matched native-on/off comparisons are retained locally, alongside repeated pixel-identical OpenGL guarded-query comparisons. These are actual GPU samples, not continuous display recordings. No new Metal captures or full-size foreground FPS claim.",
     "Curve point editing: real RNA insertion/cancel/remove tests on 4.2/5.2; no dedicated interaction GIF yet. Shadow portability: physical NVIDIA Vulkan/OpenGL qualification is complete for 5.2.2 d13f752e3b9c; foreign builds remain separate."
   ],
-  "latest_progress": "Added opt-in Flatten depth treatment in both CamKeys Lens and Subject Size, with generated-to-SVG two-accent icons. Native controls, migration, 12-language catalogs and eight macOS runtime builds verified. Volume remains unchanged and short lenses bypass flattening. Installed live: 13 schema-43 graphs; default Volume retains all 93,469 evaluated vertex coordinates exactly. Scene not saved.",
-  "estimate_review": "Completed the remaining minimal picker visual QA: four captures, actual backend/renderer readback, manual image inspection and matching backend image hashes. Reduced scoped remaining QA from 0\u20131 turns to zero. No implementation change required. Session-0 GPU rendering does not establish signed-in desktop input/focus behavior; broader historical popup work is outside this minimal check.",
+  "latest_progress": "Completed shared wrapping, segmented pills, gallery previews, reorder headers, typed picking and popover interaction. Publication audit fixed pie menu icon metrics and avoided inactive eyedropper dispatch work. 505 unit tests passed, one skipped. Windows Vulkan/OpenGL replay pending runner access.",
+  "estimate_review": "Implementation is ready for publication. This requested Windows BVT integration and performance comparison adds hardware QA scope. Runtime cannot be estimated while paired SSH times out.",
   "time_summary": "Requested minimal picker check complete; no remaining implementation or capture estimate for this scope. Broader desktop popup/input requalification remains separate and is not estimated here.",
   "observed_pace": {
     "source": "Tyler reported the last two implementation turns each took around one minute",
@@ -733,9 +733,10 @@
       "work": "Minimal NVIDIA Vulkan/OpenGL Volume/Flatten picker appearance",
       "evidence": "docs/design/qa/depth-modes-v1/windows-visual.json",
       "turns": 1
-    }
+    },
+    "Settings popovers retain validated openers and active drags across adopted-panel reflow. Gallery controls, nested dismissal and typed input exercised with Blender 5.2.2 window events."
   ],
-  "remaining_work": "None for the requested minimal Volume/Flatten appearance check. Separately unqualified: signed-in desktop popup glass over native UI, outside-sidebar clicks and opening text/bounce replay. Legacy Blender 4.1 public asset loading retains its pre-existing contract rejection; BUI target remains 4.2+.",
+  "remaining_work": "Matched Windows Vulkan/OpenGL BVT bundled-panel interaction, rendering and warmed performance comparison. Paired 192.168.4.54:2222 timed out on two attempts.",
   "newly_identified_work": [
     {
       "batch": "Requested reference fidelity",
@@ -998,5 +999,6 @@
     "cause": "DOUBLE_CLICK activated the replacement page Open full controls button",
     "validation": "462 unit tests; all three workflow button routes; Uraraka copy native BUI Vulkan/OpenGL reproductions, no focus activation",
     "limits": "First click uses native event simulation; subsequent DOUBLE_CLICK uses runtime event dispatch. Metal not executed on Windows."
-  }
+  },
+  "workflow_review": "2026-11-10: CamKeys development and packaging restored to /Users/tylerwalker/Documents/Blender/extensions/user_default/CamKeys. Installed HEAD verified equal to origin/master e500cdb; existing local documentation/security exclusions preserved. Canonical v4.0.0 ZIP rebuilt and package registration verified. No change to the completed picker QA estimate."
 }

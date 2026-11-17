@@ -50,6 +50,8 @@ class AddonUI:
             "pointer_sources",
             "id_actions",
             "list_identity",
+            "popup_header",
+            "disclosure_style",
         }:
             raise ValueError("Unknown Layout integration option")
         self._runtime = None

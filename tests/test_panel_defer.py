@@ -17,7 +17,7 @@ class PanelDefer(unittest.TestCase):
         self.context.region.tag_redraw = Mock()
         self.host = PanelHost('test')
         self.host._request_resume = Mock()
-        self.canvas = NS(visible=False, height=240, park=Mock())
+        self.canvas = NS(theme=NS(panel_scale=1.0), visible=False, height=240, park=Mock())
         self.record = dict(canvas=self.canvas, scene=4, valid=False, painted=False, deferred=True)
         self.key = (1, 2, 3)
         self.host.records[self.key] = self.record

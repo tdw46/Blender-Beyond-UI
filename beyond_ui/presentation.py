@@ -15,10 +15,12 @@ def property_options(data, name, overrides=None):
             if not isinstance(entry, Mapping):
                 raise ValueError("Property presentation hints must be a mapping")
             result.update(entry)
-    allowed = {"precision", "suffix", "value_width", "width", "slider", "trailing_icon", "disabled_accent"}
+    allowed = {"precision", "suffix", "value_width", "width", "slider", "trailing_icon", "disabled_accent", "eyedropper_items"}
     if set(result) - allowed:
         raise ValueError("Unknown Beyond UI property presentation hint")
     for key, value in result.items():
+        if key == "eyedropper_items" and not callable(value):
+            raise ValueError("eyedropper_items must resolve RNA items to enum identifiers")
         if key == "precision" and (type(value) is not int or not 0 <= value <= 6):
             raise ValueError("precision must be an integer from 0 through 6")
         if key in {"width", "value_width"} and (

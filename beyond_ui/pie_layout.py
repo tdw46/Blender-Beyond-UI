@@ -147,7 +147,7 @@ class Slots:
         if not self.rows:
             raise ValueError("Pie has no drawable contents")
         self.rows = tuple(self.rows)
-        theme = SimpleNamespace(row_height=row_height, padding=4, gap=4, font_size=11)
+        theme = SimpleNamespace(row_height=row_height, padding=4, gap=4, font_size=11, icon_size=14)
         for root in self.roots:
             plan = MenuPlan(theme, root=self.nodes[root])
             self.plans[root] = plan

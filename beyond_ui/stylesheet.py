@@ -8,6 +8,7 @@ from weakref import WeakSet, WeakKeyDictionary
 from .animation import AnimationSettings
 
 _GEOMETRY = {
+    "panel_scale": (0.5, 2.0),
     "row_height": (16, 64),
     "gap": (0, 24),
     "padding": (0, 40),
@@ -55,6 +56,7 @@ _COLORS = {
     "toggle_off",
     "toggle_on",
     "menu_glass",
+    "popup_surface",
     "api",
     "edge",
     "selection_rim",

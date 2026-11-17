@@ -10,6 +10,29 @@ def event(kind, value="PRESS"):
 
 
 class PopoverContracts(unittest.TestCase):
+    def test_sheet_survives_grid_reflow_but_not_opener_or_context_replacement(self):
+        from beyond_ui.layout_recording import Tape
+
+        def draw(columns, *, target="settings", active=True, openable=True):
+            tape = Tape()
+            grid = tape.root.grid_flow(columns=columns)
+            for i in range(columns):
+                grid.label(text=str(i))
+            row = tape.root.row()
+            row.context_string_set("target", target)
+            if openable:
+                row.popover(panel="Panel")
+            row.enabled = active
+            return tape
+
+        old = draw(3)
+        index = next(i for i, cmd in enumerate(old.commands) if cmd[2] == "popover")
+        owner = NS(options={"_popup_command": index})
+        self.assertTrue(old.keeps_popup_owner(draw(2), owner))
+        self.assertFalse(old.keeps_popup_owner(draw(2, target="replacement"), owner))
+        self.assertFalse(old.keeps_popup_owner(draw(2, active=False), owner))
+        self.assertFalse(old.keeps_popup_owner(draw(2, openable=False), owner))
+
     def test_custom_context_capture_is_bounded_and_excludes_ordinary_state(self):
         from beyond_ui.popover import PanelContextCapture
         owner=NS(as_pointer=lambda:123)

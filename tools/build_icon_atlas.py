@@ -16,8 +16,10 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument(
     "--consumer", type=Path, help="Optional add-on to discover additional literal icons"
 )
+parser.add_argument("--icon", action="append", default=[], help="Additional Blender icon passed dynamically by a consumer")
 args = parser.parse_args()
 icons = set(json.loads((OUT / "atlas.json").read_text())["entries"])
+icons.update(args.icon)
 if args.consumer:
     for p in args.consumer.glob("*.py"):
         for n in ast.walk(ast.parse(p.read_text())):
@@ -35,7 +37,7 @@ if args.consumer:
     known = {
         r["name"] for r in json.loads(urllib.request.urlopen(url, timeout=30).read())
     }
-    icons = {name for name in icons if name.lower() + ".svg" in known}
+    icons = {name for name in icons if name != "NONE" and name.lower() + ".svg" in known}
 
 
 def fetch(name):

@@ -4,6 +4,10 @@
   "license": "GPL-2.0-or-later (Blender repository); distributed here under GPL-3.0-or-later",
   "generator": "tools/build_icon_atlas.py; resvg-py",
   "sources": {
+    "ACTION": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/action.svg",
+      "sha256": "018ee4e2d22bfae1ccb647730c4e72272342a9c99d016735b16377a813220059"
+    },
     "ADD": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/add.svg",
       "sha256": "b733beb2fe24f80b338012a30390d35fcb2139f4245ea85bd35c94d284cce950"
@@ -11,6 +15,10 @@
     "ARMATURE_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/armature_data.svg",
       "sha256": "1abda50189356bf0b8c10f27569c3c948ff6d3ec8b26c01c601a44a67b22b409"
+    },
+    "ASSET_MANAGER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/asset_manager.svg",
+      "sha256": "1ddab43cf964ad15e91b0c5c04a55a0ddb10c24bf435473466caf21ed2bf7f02"
     },
     "BONE_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/bone_data.svg",
@@ -40,6 +48,10 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/con_childof.svg",
       "sha256": "bf7a1bc40f08c0164bcf03b41b75d3d32beb9d43359f4c23bd508b0f7f6d2efa"
     },
+    "COPYDOWN": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/copydown.svg",
+      "sha256": "47fe39f381cabcf927de94c68069410007cf7c94a82ae9561a3d331296d2ae5b"
+    },
     "CURVES": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/curves.svg",
       "sha256": "0c67ac5d963d11745ad2b4f592afaf6ec8fe63669bf22a5c072874b0496d21bd"
@@ -51,6 +63,10 @@
     "DRIVER": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/driver.svg",
       "sha256": "0bd692cc39a3c5040bac4cb84dda4a3e79dbb506239d3d4d543e5b2b9d99af80"
+    },
+    "DUPLICATE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/duplicate.svg",
+      "sha256": "60ee3f673bf26af0c5a2e380a58f5f1505f2cd755b93031c6bdbf4b14a5a0ef6"
     },
     "ERROR": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/error.svg",
@@ -64,13 +80,49 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/eyedropper.svg",
       "sha256": "22cde207d4cabc93246bbbd7576a649b5e9e79100796ed56140be9bb061d12f3"
     },
+    "FILE_FOLDER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/file_folder.svg",
+      "sha256": "f5823477533c18414a84dce21f1cca4713a22679ef8f14daed6ace6e37435cf9"
+    },
     "FILE_REFRESH": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/file_refresh.svg",
       "sha256": "5d5250ecab6c77dd3c3b4e732ec95d357ed686f268c5a771fb1200da4d705ac8"
     },
+    "FILE_SOUND": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/file_sound.svg",
+      "sha256": "21dd8d4c6efd6118249accc7daf0f79040a0b2b0e663192a41c1a39a4a574f22"
+    },
+    "FILE_TICK": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/file_tick.svg",
+      "sha256": "ee7b1058d51ba23378dbd25cb082ac1cff2f73c4bc2d3b3d7c886da0733e1d2e"
+    },
+    "FILTER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/filter.svg",
+      "sha256": "364f1f589dd7e6ac02dcdb0b4026db3db313de876401be226b802a87bd46a58d"
+    },
+    "GREASEPENCIL": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/greasepencil.svg",
+      "sha256": "acee42cce08ea1a045c2a7fb38ae7071f8a9d805eaa6bb3be864607eb04560d5"
+    },
+    "GRID": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/grid.svg",
+      "sha256": "3ae36f8b7118c0712ee73dca0b4407b8a5f196f0a85da490cb99ee56aea02cc1"
+    },
+    "GROUP_VERTEX": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/group_vertex.svg",
+      "sha256": "2870c326414f7745c196dbddc62c1304db34a82d0c768604aa4a9f82ffb0e585"
+    },
+    "HEART": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/heart.svg",
+      "sha256": "b7fcf5f04b7b5659798a0b245433a97a4684d9f7efa0fa643cd0d0e3eb13d959"
+    },
     "HIDE_OFF": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/hide_off.svg",
       "sha256": "2b7b6445b7ea9d3a524351501d09f471540f223d8d3d35b485de3517b250de83"
+    },
+    "HOOK": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/hook.svg",
+      "sha256": "e140c5a133943217c8797f275cc82c8fa057fc2598cb22b0a832a0eef31f62f7"
     },
     "IMAGE_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/image_data.svg",
@@ -92,6 +144,10 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/linenumbers_on.svg",
       "sha256": "8382e3f9ad4fa703ceae6c10288fa09ac0fee8019225063faaf781763ca97ee7"
     },
+    "LINKED": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/linked.svg",
+      "sha256": "e9179cafda0316f78afec0115b60a14277137130b87fe287e9473e2cffa854f7"
+    },
     "LOCKED": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/locked.svg",
       "sha256": "3049c50f5cc02fb244672db747bb5080a4f17faf826af4ebeab7912418d873fd"
@@ -100,17 +156,57 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/loop_back.svg",
       "sha256": "03c1f289ede0dbbde3fa5fecda293591180eb7216239ebaae2ecadbf15ed197e"
     },
+    "MATERIAL": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/material.svg",
+      "sha256": "02d6e4195b49ba8d8d2b15d441de54997c27bf111724ae238f9765a59e093edf"
+    },
+    "MEMORY": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/memory.svg",
+      "sha256": "b3651b06325975863382d83cdb7e9f98a0a81cbaa61b027aeb9f4ba0af1a2222"
+    },
     "MESH_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mesh_data.svg",
       "sha256": "979446de91f6c4f9e0ba7979a9ca5fc0eed5cbb88662a52ee09af60a3c87d204"
+    },
+    "MESH_UVSPHERE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mesh_uvsphere.svg",
+      "sha256": "b9566acca140f60d5ce23545f39fb3ad482d7aa470a745e1141ff98ad7f05aed"
     },
     "MODIFIER": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/modifier.svg",
       "sha256": "cfcbea3c66ca8339d7faf1a1d115f986ff6a7142a5ca8eff8990bdc0e894812a"
     },
+    "MOD_ARMATURE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mod_armature.svg",
+      "sha256": "9783b74595f95a2b15ee8aace2b87633249f77f85a1625574b1f5b4686e95f8d"
+    },
+    "MOD_BOOLEAN": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mod_boolean.svg",
+      "sha256": "5bfbb33e3da7b21a03f94f5be5cc32f3dd48882a919d086f2a26803113b7039a"
+    },
+    "MOD_MASK": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mod_mask.svg",
+      "sha256": "c219a28ca3b09311a0e1d1a377136d7781235779e6d4fcbdd0a293a12ab3c1c7"
+    },
+    "MOD_MIRROR": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mod_mirror.svg",
+      "sha256": "b2fbb0ad1760972a92e2434e72243c199126488c721df425f5c422d630e5550f"
+    },
+    "MOD_PHYSICS": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/mod_physics.svg",
+      "sha256": "004cb0a0da005df33b2cdcbf434906f6b87c70ca59256dbf276842cb606b7710"
+    },
+    "NEWFOLDER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/newfolder.svg",
+      "sha256": "9844c846d345062a74e5a59ebe0d90582fa3efbc232e90178873faedce643eb4"
+    },
     "NOCURVE": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/nocurve.svg",
       "sha256": "f64181cf0932a10a599628731fafb31d01dd2b612765c009e9f201f0cd4c9eb2"
+    },
+    "NODE_COMPOSITING": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/node_compositing.svg",
+      "sha256": "f6197130119522b1d487e8e27799312ca3e9f9e14fc4cc8e38b8134e56fe1ebd"
     },
     "OBJECT_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/object_data.svg",
@@ -124,6 +220,22 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/orientation_global.svg",
       "sha256": "3812b6d8a514ee4e63ae6136b33b525d4acba0fc9b30ca8a85910b52184c564b"
     },
+    "ORIENTATION_LOCAL": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/orientation_local.svg",
+      "sha256": "0ae875d92bf1d1c32754452fb28c582aafb419639934673975b54cecc03dc69d"
+    },
+    "OUTLINER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner.svg",
+      "sha256": "5de220869ed5982bc1f5ec29ea1752fb9d39e825fe83cedf475ce2378dd8f84e"
+    },
+    "OUTLINER_DATA_ARMATURE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner_data_armature.svg",
+      "sha256": "396d8e2d62d19c97a46280f7a4e23294991288486a6f98ef182983b532cc251b"
+    },
+    "OUTLINER_OB_ARMATURE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner_ob_armature.svg",
+      "sha256": "54caafe80e8e84fad3a2a7a62ec5c801d3cd8c53607622aa8efaa7a53c93a99f"
+    },
     "OUTLINER_OB_CURVE": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner_ob_curve.svg",
       "sha256": "50855ed360decff05d22ada2c3ee10090d748a54f372a1a0240b4564225c6081"
@@ -136,13 +248,41 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner_ob_mesh.svg",
       "sha256": "ea5199353617e3d7e9762709f3719196afd122a463f341f3784f5575ac54146a"
     },
+    "OUTLINER_OB_SPEAKER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/outliner_ob_speaker.svg",
+      "sha256": "c76a84b275e4e244a8bdd3560e99fc2a26880c193fec7dc06d96a813902ddf48"
+    },
+    "PACKAGE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/package.svg",
+      "sha256": "f08f47856b5014712e8508d7e6aa0d44d19d7b339e87a717277d47a67e08e6b8"
+    },
+    "PASTEDOWN": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/pastedown.svg",
+      "sha256": "c5893a7d03958aff558f18a94d1d560f60a7b51060d06f176af1de1f16222b25"
+    },
+    "PAUSE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/pause.svg",
+      "sha256": "74e79096516749a8e486e47d102a7ed5097ed35d3b7891ef57d4c47f2b1c0db4"
+    },
+    "PHYSICS": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/physics.svg",
+      "sha256": "7b410ce098fb001dfd80c92a6373b8e8ac34d7cfb06fb7850532e7e332ab8d6d"
+    },
     "PLAY": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/play.svg",
       "sha256": "354497080cdfdcc06206cf9dad004abc04530926e94da8f4c5ed77eae23fa5f4"
     },
+    "POSE_HLT": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/pose_hlt.svg",
+      "sha256": "9f7ed83155b4ca1aaa47485b3e22b957f5157f12f7e46ed6571112697d70dc77"
+    },
     "PREFERENCES": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/preferences.svg",
       "sha256": "bea8826fd38ade0825b3e86b0078788fa12c4cf68d1cf86eb7455d5c2a913809"
+    },
+    "PRESET": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/preset.svg",
+      "sha256": "5a42bb02b86afa833f2bd8466c45f1999e51a1dbab61a524eb7cd22d7451d135"
     },
     "PREVIEW_RANGE": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/preview_range.svg",
@@ -152,13 +292,25 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/rec.svg",
       "sha256": "56539bc01983f3973a8973be863f8ad3dd38715a7d3d1622fd20d7e1b97e292b"
     },
+    "RECOVER_LAST": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/recover_last.svg",
+      "sha256": "1dc7f59cb42cd091f6f7d42837851e9f8c65a2c471b8c27ee22b54d5505a3ce7"
+    },
     "REMOVE": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/remove.svg",
       "sha256": "b286896c3207575129a1c496740f3167d89f307e436a860fb041652b0b074505"
     },
+    "RENDERLAYERS": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/renderlayers.svg",
+      "sha256": "068a4979a7ea06d6e3c759610031e2ca1fb9704e8446943cad5e91f307711a61"
+    },
     "RENDER_ANIMATION": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/render_animation.svg",
       "sha256": "9d0445e08692bae06028ee4f83f80e075a254851636fe0db26317bffa25f465e"
+    },
+    "RENDER_STILL": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/render_still.svg",
+      "sha256": "8243bd06361e79d4a1387d4664cef7bd7cba76412a6670aa076058c9ff88a5b7"
     },
     "RESTRICT_RENDER_OFF": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/restrict_render_off.svg",
@@ -180,9 +332,25 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/scene_data.svg",
       "sha256": "75fdc32585c8756866649c546ccc235c59a3dd8f2521a8ccfcdc51023a5ee526"
     },
+    "SELECT_DIFFERENCE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/select_difference.svg",
+      "sha256": "07a4ae30a91c5e8a30163888cce1aabf57548714c205b5cd5979099cfbb72493"
+    },
+    "SELECT_EXTEND": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/select_extend.svg",
+      "sha256": "3c0d5688f58dc97cf755256b7639403565993bf5ce58abaf268bfe75edd53297"
+    },
     "SETTINGS": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/settings.svg",
       "sha256": "57a0ec7ef8fca5d32d49ece992c220930b8c8fa7978bd4cc846521405d11a85a"
+    },
+    "SHADERFX": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/shaderfx.svg",
+      "sha256": "db2b077556c1c7f3c31f3a303c8d4ef0b37f6462b26e528607830d4cc4ba26a4"
+    },
+    "SHADING_RENDERED": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/shading_rendered.svg",
+      "sha256": "c10e7a1ec9675d709dd62f82a1e7c678f566929d6f9feefd7bffecc9977a1e70"
     },
     "SHAPEKEY_DATA": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/shapekey_data.svg",
@@ -200,13 +368,53 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/smoothcurve.svg",
       "sha256": "aaaed69d6523697173504edbf4f7a3ad7818639699233aeaa47a01e16213df45"
     },
+    "SOLO_OFF": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/solo_off.svg",
+      "sha256": "b4761bb507455e8606be387f84e4655f85fe1a108148043b4c1ff89d1cb3caee"
+    },
+    "SOLO_ON": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/solo_on.svg",
+      "sha256": "f0206aabdafe861ee149e23c6f9d28b40ee21ddb050bf9282d3a0662ec11acb0"
+    },
+    "SORTALPHA": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/sortalpha.svg",
+      "sha256": "9027cb1acee9c946224a29045cf3ce94287832122c6bfc0c074f39916afa322d"
+    },
+    "SORTSIZE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/sortsize.svg",
+      "sha256": "2e609876a622fb19ff49653eca8f95d6989d238887ec36a902e3bd2676ad93cc"
+    },
+    "SORTTIME": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/sorttime.svg",
+      "sha256": "67c8ac1b1d03a14692b29f716854d573f59edc20c1e12c57b98a243a8e748788"
+    },
+    "SOUND": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/sound.svg",
+      "sha256": "7fb5e52eff96bd21067f06511cb07bd71d14f9a7d9b53e53e41219d38824e329"
+    },
+    "SPHERE": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/sphere.svg",
+      "sha256": "1c3fe642f9b50d3ec9737c962d21c3fdcdc84be6cf80ab883962b4960d62f2b3"
+    },
     "SPHERECURVE": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/spherecurve.svg",
       "sha256": "1d9f3998bdbaf9ab8c498de4597017b826e56a5994f56dea4cf8fec6537d1ae2"
     },
+    "TEXT": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/text.svg",
+      "sha256": "146665a9488ed5035836e22f42bc02e88510020a8d1ca8e53f6cb50932e5b51a"
+    },
     "THREE_DOTS": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/three_dots.svg",
       "sha256": "8c20701c90a9a0960b6b9b290997ac21e96f1013ef3e09abd1d66e0051ff3060"
+    },
+    "TIME": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/time.svg",
+      "sha256": "35f46aca58db22f10fb35b0a2c59825bb87b9e0ea55ac1217a0b2f26617d05f2"
+    },
+    "TOOL_SETTINGS": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/tool_settings.svg",
+      "sha256": "68c65ffea0c3195d7981fb9984c8c7554978bcc4f045e10e8049ec81b08efb70"
     },
     "TRASH": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/trash.svg",
@@ -224,6 +432,10 @@
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/tria_up.svg",
       "sha256": "4e5adaf285c163f10aedc12c80c82e51828f7aed214b185f0c5b72b15557fe82"
     },
+    "UNLINKED": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/unlinked.svg",
+      "sha256": "b5fa721ce02623761d622bb93529a8304b112b3666cfc08d1bff07ccdf16f85a"
+    },
     "UNLOCKED": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/unlocked.svg",
       "sha256": "668489ef8db09be9d6cd309f43789f733d0fe692638e65ab41750ade884f6a29"
@@ -231,6 +443,10 @@
     "URL": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/url.svg",
       "sha256": "3da8b606852591534670086b2f8b6b12d338b2befecda41cdf7c2e9bfc466fbf"
+    },
+    "USER": {
+      "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/user.svg",
+      "sha256": "dbcdb743fd52b3176077f368e77084a02f7f58d82fa828ee1155d523ba9e42e9"
     },
     "VIEWZOOM": {
       "url": "https://raw.githubusercontent.com/blender/blender/v5.2.2/release/datafiles/icons_svg/viewzoom.svg",

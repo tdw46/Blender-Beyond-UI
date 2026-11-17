@@ -294,3 +294,9 @@ extra field padding do not push the accessory down. Rows with no editable
 field use child centers. Existing `start`, `center` and `end` remain unchanged.
 This is retained layout work, not a per-frame adjustment; the same property
 bindings, right-click targets and animations remain in place.
+
+Use `enum_style="track"` on a row of enum choices or mutually exclusive
+operator buttons inside one styled group surface. The selected choice retains
+its highlight. Inactive choices share the enclosing outline and show hover
+feedback over their own hit areas. Bindings and keyboard navigation are
+identical to the individual segment presentation.

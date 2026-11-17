@@ -579,7 +579,7 @@ class RegisteredList(CollectionList):
                 row_height=20 if self.parent.theme.stylesheet else 28,
                 gap=self.row_gap,
                 padding=0,
-                font_size=self.parent.theme.font_size,
+                font_size=self.design_font_size,
             ),
             context_provider=self.parent.context_provider,
             menu_commit=self.parent.menu_commit,
@@ -713,6 +713,8 @@ class RegisteredList(CollectionList):
         return self.type != "COMPACT" and self.state.get("show_filter", False)
 
     def dimensions(self, font_size, available_width, available_height=None):
+        # Nested canvases are authored in widget units; apply host scale once.
+        font_size = min(font_size, getattr(self.cls, "beyond_ui_list_font_size", font_size))
         self._dimension_args = (font_size, available_width, available_height)
         measure_key = (font_size, available_width, self.row_padding, self.epoch,
                        getattr(self, "style_row_height", None))

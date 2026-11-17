@@ -8,6 +8,20 @@ from beyond_ui.flow import grid_shape
 
 
 class Flow(unittest.TestCase):
+    def test_gallery_headers_align_without_stretching_the_images(self):
+        from beyond_ui import style
+        ui = Layout()
+        grid = ui.grid_flow(columns=2, row_major=True, even_rows=True, even_columns=True)
+        images = []
+        for i, title in enumerate(("Short", "Two lines")):
+            card = grid.column(align=True)
+            style(card, scope="group", align_card_header=True)
+            card.group.label(f"title-{i}", title, height=14 if i == 0 else 28)
+            images.append(card.group.label(f"image-{i}", "", height=48))
+        ui.canvas.arrange(240)
+        self.assertEqual(images[0].rect[1:], images[1].rect[1:])
+        self.assertEqual(images[0].rect[3], 48)
+
     def test_split_factor_zero_auto_and_remainder(self):
         for factor, expected in (
             (0, (96, 96, 96)),

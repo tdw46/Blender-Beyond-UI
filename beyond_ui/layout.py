@@ -40,6 +40,8 @@ class Layout:
         id_actions=None,
         list_identity=None,
         property_options=None,
+        popup_header=None,
+        disclosure_style=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
         self.context = context
@@ -49,6 +51,8 @@ class Layout:
         self.pointer_sources = pointer_sources
         self.id_actions = id_actions
         self.list_identity = list_identity
+        self.disclosure_style = disclosure_style
+        self.popup_header = popup_header
         self.property_options = property_options or {}
         self.commit = commit or (lambda before, after: None)
         self.preview = preview
@@ -69,6 +73,28 @@ class Layout:
         self._is_popover = False
         self._panel_stack = ()
 
+    def beyond_widget(self, factory, *args):
+        """Create a retained consumer widget during replay, with this canvas as owner."""
+        widget = factory(self.canvas, *args)
+        if hasattr(widget, 'section'):
+            widget.section = self.group
+        return self.group.widget(self._key("custom_widget"), widget, **self._options())
+
+    def template_icon(self, icon_value, scale=1.0):
+        """Draw a registered Blender preview at the native template scale."""
+        from .widgets.preview_icon import PreviewIcon
+        bank = getattr(self.canvas, 'preview_icons', None)
+        if bank is None:
+            raise UnsupportedControl("template_icon requires a preview collection provider")
+        return self.beyond_widget(PreviewIcon, int(icon_value), float(scale))
+
+    def beyond_preview_tile(self, icon_value, *, radius=5):
+        """A full-width square crop of a registered preview or animation frame."""
+        from .widgets.preview_icon import PreviewIcon
+        if getattr(self.canvas, "preview_icons", None) is None:
+            raise UnsupportedControl("Preview tiles require a preview collection provider")
+        return self.beyond_widget(PreviewIcon, int(icon_value), 1.0, float(radius))
+
     def beyond_badge(self, text, *, translate=True, text_ctxt='', **options):
         from .widgets.badge import Badge
         return self.group.widget(self._key("badge"), Badge(self._text(text,text_ctxt,translate), **options), **self._options())
@@ -82,6 +108,25 @@ class Layout:
         control.options['menu_option'] = False
         control.options['height'] = options.get('height', 94)
         return control
+
+    def beyond_bool_segments(self, data, property, on_text="ON", off_text="OFF"):
+        """Two choices for one Boolean RNA binding; each selects an explicit value."""
+        from .bindings import Edit
+        row = self.row(align=True)
+        binding = row._binding(data, property)
+
+        def choose(value):
+            edit = Edit(binding)
+            if edit.before != value:
+                edit.update(value)
+            edit.finish()
+
+        for value, label in ((True, on_text), (False, off_text)):
+            row.group.button(row._key("boolean"), row._text(label),
+                             lambda v=value: choose(v),
+                             selected=lambda v=value: binding.read() == v,
+                             binding=binding, **row._options())
+        return row
 
     def beyond_segments(self, data, property, *, icons=None, height=28):
         """Enum segments retain exact property bindings, menus and shared motion."""
@@ -272,6 +317,8 @@ class Layout:
             id_actions=self.id_actions,
             list_identity=self.list_identity,
             property_options=self.property_options,
+            popup_header=self.popup_header,
+            disclosure_style=self.disclosure_style,
         )
         for name in (
             "_text_role",
@@ -375,6 +422,19 @@ class Layout:
             text_role=self._text_role,
             **self._options(),
         )
+
+    def _style_disclosure(self, label, icon):
+        if self.disclosure_style and label and icon in {
+            "TRIA_RIGHT", "TRIA_DOWN", "DISCLOSURE_TRI_RIGHT", "DISCLOSURE_TRI_DOWN"
+        }:
+            self.disclosure_style(self)
+
+    def draw_popup_header(self, **options):
+        """Let a host theme author popup headings without changing popup input or ownership."""
+        if self.popup_header is None:
+            self.title(**options)
+        else:
+            self.popup_header(self, **options)
 
     def paragraph(self, *, text="", icon="NONE", translate=True):
         """Responsive body copy, wrapped by the retained layout at its actual width."""
@@ -553,7 +613,9 @@ class Layout:
                 and self.group.kind == "row"
             ):
                 options["width"] = 52
-            return self.group.toggle(key, label, binding, **options)
+            control = self.group.toggle(key, label, binding, **options)
+            self._style_disclosure(label, icon)
+            return control
         if meta.type in {"INT", "FLOAT"}:
             if subtype in {"COLOR", "COLOR_GAMMA"} and index < 0:
                 return self.group.color(
@@ -576,6 +638,8 @@ class Layout:
                 **options,
             )
         if meta.type == "STRING":
+            if not label and placeholder and icon in {"VIEWZOOM", "ZOOM_ALL"}:
+                options["search_bar"] = True
             return self.group.text(
                 key, label, binding, placeholder=placeholder, **options
             )
@@ -1068,6 +1132,7 @@ class Layout:
             context_menu=lambda target, ctx: context_rows(target, ctx),
             **options,
         )
+        self._style_disclosure(label, icon)
         return properties
 
     def operator_menu_hold(
@@ -1453,6 +1518,8 @@ class Layout:
         expanded = bool(getattr(data, property))
         control = header.prop(data, property)
         control.options["disclosure_open"] = expanded
+        if self.disclosure_style:
+            self.disclosure_style(header)
         return header, self.column() if expanded else None
 
     def supports(self, name):

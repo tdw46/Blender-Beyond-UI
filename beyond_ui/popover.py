@@ -137,6 +137,8 @@ class RegisteredPanel(RegisteredMenu):
                 with override(context, self.pointers.values()):
                     child._panel_rebuild = bool(hook(context, before, after))
             self.layout.commit(before, after)
+            if hook is None:
+                child._panel_check_display = True
 
         def preview(data, property):
             # Preview never pushes undo or rebuilds the captured panel. The
@@ -160,6 +162,8 @@ class RegisteredPanel(RegisteredMenu):
             pointer_sources=self.layout.pointer_sources,
             id_actions=self.layout.id_actions,
             list_identity=self.layout.list_identity,
+            popup_header=self.layout.popup_header,
+            disclosure_style=self.layout.disclosure_style,
             property_options={**self.layout.property_options, **getattr(self.cls, "beyond_ui_props", {})},
         )
         ui._is_popover = True
@@ -174,7 +178,7 @@ class RegisteredPanel(RegisteredMenu):
                 if self.label.strip() and "HIDE_HEADER" not in getattr(
                     self.cls, "bl_options", set()
                 ):
-                    ui.title(
+                    ui.draw_popup_header(
                         text=self.label,
                         text_ctxt=getattr(self.cls, "bl_translation_context", "*"),
                     )
@@ -187,6 +191,7 @@ class RegisteredPanel(RegisteredMenu):
                 ui._context_pointers = dict(self.pointers.values())
                 tape.initialize_lists(ui.list_identity)
                 tape.play(ui)
+                child._panel_tape = tape
             self.check(context, scope)
             if len(child.controls) > LIMIT:
                 raise ValueError("Popover exceeds 4096 controls")
@@ -428,9 +433,28 @@ class PanelPopover(Widget):
         )
         if child.menu_error:
             self.parent.menu_error = child.menu_error
-        if getattr(child, "_panel_rebuild", False) and not child.widget_capture:
-            child._panel_rebuild = False
-            self.parent.open_panel(self.owner, self.parent._event_clip, context)
+        if ((self.parent.overlay or {}).get("widget") is self
+                and not (child.edit or child.widget_capture or child.overlay or child.context_menu)):
+            if getattr(child, "_panel_check_display", False):
+                child._panel_check_display = False
+                # Literal operator selection and conditional rows are authored
+                # values. Refresh once on commit, never on a slider preview.
+                from .layout_recording import Tape
+                tape = Tape(self.model.layout.state)
+                tape.root._values["is_popover"] = True
+                with override(context, self.model.pointers.values()):
+                    self.model.cls.draw(PanelProxy(self.model.cls, tape.root), context)
+                if not child._panel_tape.patch_display(tape):
+                    child._panel_rebuild = True
+                elif child._dirty:
+                    self.parent.open_widget(self, self.owner, self.parent._event_clip)
+            if getattr(child, "_panel_rebuild", False):
+                child._panel_rebuild = False
+                scroll = self.scroll
+                self.parent.open_panel(self.owner, self.parent._event_clip, context)
+                replacement = (self.parent.overlay or {}).get("widget")
+                if isinstance(replacement, PanelPopover):
+                    replacement.scroll = min(scroll, max(0, replacement.canvas.height - replacement.height))
         # Hover redraws must reach the owning host even when no spring is active.
         return used or contained and event.type in {"MOUSEMOVE", "RIGHTMOUSE"}
 
@@ -455,6 +479,10 @@ class PanelPopover(Widget):
                 palette["surfaces"]["card"][0],
                 radius=self.canvas.theme.radius * scale,
             )
+        # Optional theme scrim over the glass; keep the original lens when unset.
+        scrim = palette.get("popup_surface")
+        if scrim is not None:
+            skin.draw(rect, scrim, radius=self.canvas.theme.radius * scale, border=0)
         content_height = self.canvas.height * scale
         content_rect = (x, y + height - content_height + self.scroll * scale,
                         width, content_height)
@@ -550,9 +578,13 @@ def guard_controls(model, canvas, controls, context, scope, owner_valid=lambda: 
         if control.action is not None:
             action = control.action
 
-            def guarded_action(action=action, guard=guard):
+            def guarded_action(action=action, guard=guard, operator=control.options.get("operator_button")):
                 guard(context)
-                return action()
+                result = action()
+                if (operator and hasattr(canvas, "_panel_tape") and isinstance(result, set)
+                        and "FINISHED" in result):
+                    canvas._panel_check_display = True
+                return result
 
             control.action = guarded_action
     if controls:

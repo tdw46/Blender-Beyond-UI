@@ -94,13 +94,76 @@ class Tape:
                 provider.flush()
                 provider.prepare(data, prop)
 
+    # These calls can own a settings sheet, directly or inside a list row.
+    popup_sources = {"popover", "popover_group", "prop_with_popover",
+                     "template_component_menu", "template_list"}
+
+    def keeps_popup_owner(self, newer, control):
+        """Only defer reflow behind an unchanged, still-authored opener."""
+        index = control.options.get("_popup_command")
+        if index is None:
+            return False
+        # Address the layout branch, not unrelated operators, thumbnail IDs or
+        # display text. A changed group/registration/context is a new owner.
+        call = self.command_signatures[index][2:5]
+        key = self._popup_paths(call).get(index)
+        return key is not None and key in newer._popup_paths(call).values()
+
+    def _popup_paths(self, call):
+        # No per-frame work unless the host would otherwise revoke an open
+        # sheet. Compare all matching declarations in two linear passes.
+        parents, contexts, policies = {}, {0: {}}, {}
+        ordinals, matches = {}, {}
+        for i, (kind, target, name, args, kwargs, output) in enumerate(self.command_signatures):
+            if kind == "set":
+                if name in {"enabled", "active"}:
+                    policies[target, name] = args[0]
+                continue
+            if name in {"context_pointer_set", "context_string_set"}:
+                key = args[0] if args else dict(kwargs)["name"]
+                contexts[target][key] = (args, kwargs)
+            if name in Node.groups or name in {"panel", "panel_prop"}:
+                branch = (name, args, kwargs)
+                ordinal = ordinals.get((target, branch), 0)
+                ordinals[target, branch] = ordinal + 1
+                for slot, node in enumerate(output if isinstance(output, tuple) else (output,)):
+                    if node is not None:
+                        parents[node] = (target, (branch, ordinal, slot))
+                        contexts[node] = dict(contexts[target])
+            if (name, args, kwargs) == call:
+                ordinal = ordinals.get((target, call), 0)
+                ordinals[target, call] = ordinal + 1
+                extra = (self.signature[self.command_offsets[i] + 1]
+                         if name == "template_list" else None)
+                matches[i] = (target, ordinal, tuple(sorted(contexts[target].items())), extra)
+        paths = {}
+        for i, (node, ordinal, pointers, extra) in matches.items():
+            path = []
+            while True:
+                path.append((policies.get((node, "enabled"), True),
+                             policies.get((node, "active"), True)))
+                if node == 0:
+                    break
+                node, branch = parents[node]
+                path.append(branch)
+            paths[i] = (tuple(path), ordinal, pointers, extra)
+        return paths
+
     def play(self, layout):
         values = {0: layout}
         for index, (kind, target, name, args, kwargs, outputs) in enumerate(self.commands):
             if kind == "set":
                 setattr(values[target], name, args[0])
             else:
+                mark = name in self.popup_sources
+                if mark:
+                    controls = values[target].canvas.controls
+                    count = len(controls)
                 result = getattr(values[target], name)(*args, **kwargs)
+                if mark:
+                    from itertools import islice
+                    for control in islice(reversed(controls.values()), len(controls) - count):
+                        control.options["_popup_command"] = index
                 if name in {"label", "title"} and result is not None:
                     self.display_targets[index] = (result, values[target])
                 if isinstance(outputs, tuple):
@@ -189,7 +252,7 @@ class Tape:
 
 
 class Node:
-    groups = {"row", "column", "box", "split", "grid_flow", "column_flow", "menu_pie"}
+    groups = {"row", "column", "box", "split", "grid_flow", "column_flow", "menu_pie", "beyond_segments", "beyond_bool_segments"}
     operators = {"operator", "operator_menu_hold", "operator_menu_enum"}
     defaults = dict(
         enabled=True,

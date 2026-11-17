@@ -95,6 +95,7 @@ def paint(
         right_align=False,
         editor=None,
         inset=6,
+        right_inset=4,
         icon=None,
         icon_value=0,
         trailing_icon=None,
@@ -120,7 +121,7 @@ def paint(
         )
         left = max(a + (0 if icon_only and center else inset) * scale, cx)
         bottom = max(b, cy)
-        right = min(a + c - (0 if icon_only and center else 4) * scale, cx + cw)
+        right = min(a + c - (0 if icon_only and center else right_inset) * scale, cx + cw)
         top = min(b + d, cy + ch)
         if right <= left or top <= bottom:
             return
@@ -159,9 +160,13 @@ def paint(
                 else left
             )
         )
+        disclosure = bool(value) and icon in {'TRIA_RIGHT', 'TRIA_DOWN', 'DISCLOSURE_TRI_RIGHT', 'DISCLOSURE_TRI_DOWN'}
+        if disclosure:
+            group_left = left if not center else max(left, a+(c-measure(active_font,size,str(value))[0])/2-gutter)
         if has_icon:
+            icon_left = left if disclosure else group_left
             icon_rect = (
-                group_left,
+                icon_left,
                 b + (d - icon_size * scale) / 2,
                 icon_size * scale,
                 icon_size * scale,
@@ -174,7 +179,7 @@ def paint(
             if not handled:
                 style.icon(
                     icon,
-                    group_left + icon_size / 2 * scale,
+                    icon_left + icon_size / 2 * scale,
                     b + d / 2,
                     icon_size * scale,
                     ink,
@@ -249,6 +254,39 @@ def paint(
             typography.draw_text(active_font, value, ink, palette.get("text_effects"), scale)
         finally:
             blf.disable(active_font, blf.CLIPPING)
+
+    def wrapped_button(control, r, ink):
+        a, b, c, d = r
+        lines, step, lead, tail, inset = control.options["_button_lines"]
+        role = control.options.get("text_role", "body")
+        aligned = current_style.get("text_align", "CENTER")
+        start = a + inset * scale
+        end = a + c - tail * scale
+        if lead:
+            if aligned == "CENTER":
+                face_role = "title" if current_style.get("font_weight") == "bold" else role
+                face = typography.face(font, face_role)
+                size = current_style.get("font_size", t.font_size) * scale
+                size *= 12/11 if role == "title" else 9/11 if role == "secondary" else 1
+                label_width = max(measure(face, size, line)[0] for line in lines)
+                group_width = lead * scale + label_width + 2  # room for glyph overhang
+                start += max(0, (end - start - group_width) / 2)
+                end = min(end, start + group_width)
+            icon_size = min((lead - 6) * scale, d, max(0, end - start))
+            if icon_size > 0:
+                icon = control.options.get("icon")
+                icon_value = control.options.get("icon_value", 0)
+                box = (start, b + (d - icon_size) / 2, icon_size, icon_size)
+                if not (canvas.icon_renderer and canvas.icon_renderer(icon, icon_value, box, ink)):
+                    style.icon(icon, start + icon_size / 2, b + d / 2, icon_size, ink, palette=palette)
+            start += lead * scale
+        if tail:
+            glyph = control.options.get("trailing_icon") or "▾"
+            style.icon(glyph, a+c-tail*scale/2, b+d/2, min(tail-4, t.icon_size)*scale, ink)
+        top = b + (d + len(lines)*step*scale)/2
+        for i, line in enumerate(lines):
+            text(line, (start, top-(i+1)*step*scale, max(0, end-start), step*scale),
+                 ink, role, inset=0, right_inset=0, center=True)
 
     def surface(r, ink, radius=None, flat=False):
         radius = current_style.get("radius", t.radius if radius is None else radius)
@@ -363,6 +401,11 @@ def paint(
                 )
                 label_rect, r = mapped(label_logical), mapped(field_logical)
                 a, b, c, d = r
+            if kind in {"pointer","search","enum"}:
+                from .. import typed_pick
+                drop = min(20*scale, c*.30) if typed_pick.supported(control) else 0
+            else:
+                drop = 0
             prefix = "" if external_label else control.label
             # No binding reads for fully clipped controls or hidden canvases.
             try:
@@ -397,6 +440,12 @@ def paint(
             selected = selected() if callable(selected) else selected
             if "disclosure_open" in control.options and "highlight_expanded" in current_style:
                 selected = control.options["disclosure_open"] and current_style["highlight_expanded"]
+            # The parent surface owns a joined segment track. Keep the hit area
+            # and feedback while omitting a second bezel on inactive choices.
+            track_edges = (control.options.get("_track_edges")
+                           if current_style.get("enum_style") == "track" else None)
+            if track_edges is not None:
+                chrome = False
             if samples is not None:
                 if kind in {"widget", "image"} or type(value) not in (str, int, float, bool, type(None)):
                     samples = None
@@ -512,15 +561,44 @@ def paint(
                         ),
                         flat=inset,
                     )
+                    artwork = current_style.get("button_artwork")
+                    if artwork and enabled and kind == "button" and not menu_option:
+                        from . import icons
+                        radius = current_style.get("radius", t.radius) * scale
+                        if icons.artwork_surface(artwork, r, radius) and canvas.hover == control.key:
+                            style.draw(*r, (1., 1., 1., .12), radius=radius)
                     if kind == "button" and not menu_option:
                         skin.inset_outline(r, palette, scale, current_style.get("radius", t.radius))
                     if selected or menu_option and canvas.hover == control.key:
                         skin.selection_outline(menu_metrics.highlight(r, scale) if menu_option else r,
                                                palette, scale, current_style.get("radius", t.radius))
+                if track_edges is not None and (selected or (enabled and canvas.hover == control.key)):
+                    import gpu
+                    first, last = track_edges
+                    radius = min(current_style.get("radius", t.radius)*scale, d/2)
+                    left_extension = 0 if first else radius
+                    right_extension = 0 if last else radius
+                    bounds = (a-left_extension, b, c+left_extension+right_extension, d)
+                    # Extend only the internal corners beyond their cell and clip
+                    # them square. Keep the caller's scroll/overlay clipping intact.
+                    prev = gpu.state.scissor_get()
+                    x0 = max(prev[0], round(a))
+                    x1 = min(prev[0]+prev[2], round(a+c))
+                    if x1 > x0:
+                        gpu.state.scissor_set(x0, prev[1], x1-x0, prev[3])
+                        try:
+                            skin.draw(bounds, palette["selected" if selected else "hover"],
+                                      radius=radius, border=0)
+                        finally:
+                            gpu.state.scissor_set(*prev)
                 if control.options.get("choice_card"):
                     typography.flush_text(font)
                     control.options["choice_card"].paint(r,font,palette,selected=selected,
                         hovered=canvas.hover == control.key,backdrop=backdrop)
+                elif kind == "label" and current_style.get("label_artwork"):
+                    from . import icons
+                    if not icons.artwork_surface(current_style["label_artwork"], r, 0, contain=True):
+                        text(control.label, r, ink, center=True)
                 elif kind == "widget":
                     typography.flush_text(font)
                     control.options["widget"].paint(r, font, palette, backdrop=backdrop)
@@ -545,18 +623,21 @@ def paint(
                         )
                     elif (value and highlight is not False) or canvas.hover == control.key:
                         surface(r, palette["selected"] if value and highlight is not False else palette["hover"])
-                    alignment = control.options.get("text_alignment", "EXPAND")
-                    text(
-                        control.label,
-                        r,
-                        ink,
-                        role=control.options.get("text_role", "body"),
-                        center=alignment in {"EXPAND", "CENTER"},
-                        right_align=alignment == "RIGHT",
-                        icon=control.options.get("icon"),
-                        icon_value=control.options.get("icon_value", 0),
-                        trailing_icon=control.options.get("trailing_icon"),
-                    )
+                    if control.options.get("_button_lines"):
+                        wrapped_button(control, r, ink)
+                    else:
+                        alignment = control.options.get("text_alignment", "EXPAND")
+                        text(
+                            control.label,
+                            r,
+                            ink,
+                            role=control.options.get("text_role", "body"),
+                            center=alignment in {"EXPAND", "CENTER"},
+                            right_align=alignment == "RIGHT",
+                            icon=control.options.get("icon"),
+                            icon_value=control.options.get("icon_value", 0),
+                            trailing_icon=control.options.get("trailing_icon"),
+                        )
                 elif kind == "toggle":
                     from ..scalar_geometry import switch_rect
 
@@ -590,6 +671,7 @@ def paint(
                         "search_field" if kind == "search" else "pointer_field"
                     ]
                     label = model.label()
+                    c -= drop
                     clear = kind == "search" and model.can_clear()
                     quiet_pointer = (
                         control.options.get("list_row")
@@ -801,6 +883,8 @@ def paint(
                             r,
                             ink,
                         )
+                elif kind == "button" and control.options.get("_button_lines"):
+                    wrapped_button(control, r, ink)
                 elif kind == "button" and (
                     control.options.get("operator_enum")
                     or control.options.get("menu_model")
@@ -828,6 +912,7 @@ def paint(
                         )
                         style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
                 elif kind == "enum":
+                    c -= drop
                     field = control.options.get("enum_field")
                     label = (
                         field.format(value)
@@ -951,9 +1036,17 @@ def paint(
                     )
                     if menu_option and selected:
                         style.icon("✓", a + c - 12 * scale, b + d / 2, 12 * scale, ink)
+                if drop:
+                    style.icon("EYEDROPPER", a+c+drop/2, b+d/2, min(12*scale, drop*.75), ink)
             count += 1
         palette = base_palette
         current_style = {}
+        captured = canvas.widget_capture
+        if captured is not None:
+            indicator = getattr(captured.options.get('widget'), 'insertion_line', None)
+            line = indicator() if indicator else None
+            if line:
+                style.draw(*mapped(line), palette['accent'], radius=scale)
         if not overlays:
             return count
         if controls or composite_overlays:

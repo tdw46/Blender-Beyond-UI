@@ -341,6 +341,44 @@ class Plan:
             getattr(self.theme, "button_padding_y", 6), getattr(self.theme, "button_padding_x", 14),
         ))
 
+    def button_min_height(self, node, available):
+        """Wrap against the actual face and icon gutters after row flex/split."""
+        from .text_wrap import wrap_text
+        opts = node.options
+        opts.pop("_button_lines", None)
+        disclosure = node.kind == "toggle" and opts.get("bool_button") and opts.get("wrap_text")
+        if ((node.kind != "button" and not disclosure) or not node.label or opts.get("menu_option")
+                or opts.get("choice_card") or opts.get("wrap_text") is False):
+            return 0
+        size = opts.get("font_size", self.theme.font_size)
+        role = "title" if opts.get("font_weight") == "bold" else opts.get("text_role", "body")
+        size *= 12/11 if opts.get("text_role") == "title" else 9/11 if opts.get("text_role") == "secondary" else 1
+        sized = getattr(self.measure, "at_size", None)
+        def measure(text):
+            if sized:
+                return sized(text, role, size)
+            return self.measure(text, role) * size / self.theme.font_size if self.measure else len(text)*size*.58
+        gutter = opts.get("icon_size", self.theme.icon_size) + 6
+        lead = gutter if opts.get("icon") not in (None, "", "NONE", 0) or opts.get("icon_value") else 0
+        tail = gutter if opts.get("trailing_icon") not in (None, "", "NONE", 0) else 0
+        if opts.get("menu_model") or opts.get("operator_enum"):
+            tail = max(tail, 20)
+        inset = opts.get("text_inset", 6)
+        limit = max(1, available - inset - 4 - lead - tail - 1)
+        if "\n" not in node.label and measure(node.label) <= limit:
+            return 0
+        lines = wrap_text(node.label, limit, measure)
+        step = opts.get("line_height", size*1.32)
+        if lead and not disclosure:
+            # Spend spare space beside the longest wrapped line on its icon.
+            # Keeping the measured line breaks also preserves long translations.
+            spare = max(0, limit - max(map(measure, lines), default=0))
+            nominal = lead - 6
+            lead += min(spare, max(0, min(nominal * 2, len(lines) * step * .82) - nominal))
+        opts["_button_lines"] = lines, step, lead, tail, inset
+        top, _, bottom, _ = self.button_padding(node)
+        return len(lines)*step + max(5,top) + max(5,bottom)
+
     def paragraph_extra(self, node, available):
         node.options.pop("_wrapped_lines", None)
         if node.kind != "label" or not node.options.get("wrap_text"):
@@ -439,7 +477,7 @@ class Plan:
         )
         if "line_height" in node.options and node.options.get("_wrapped_lines") and "height" not in node.options:
             height = len(node.options["_wrapped_lines"]) * node.options["line_height"]
-        return available, max(0.0, height)
+        return available, max(0.0, height, self.button_min_height(node, available))
 
     def control_size(self, node, available):
         sx, sy = self.scale(node) if self.sized else (1.0, 1.0)
@@ -504,7 +542,7 @@ class Plan:
         )
         if "line_height" in node.options and node.options.get("_wrapped_lines") and "height" not in node.options:
             height = len(node.options["_wrapped_lines"]) * node.options["line_height"]
-        return available, max(0.0, height * sy)
+        return available, max(0.0, height, self.button_min_height(node, available)) * sy
 
     def compact_width(self, node):
         """Intrinsic icon rail width, without shrinking authored value controls."""
@@ -535,7 +573,13 @@ class Plan:
             if node.kind == "toggle" and not node.label:
                 return 46.0 * self.scale(node)[0]
             if node.kind == "label" and node.label:
-                return self.label_width(node) + 12
+                size = node.options.get("font_size", self.theme.font_size)
+                role = "title" if node.options.get("font_weight") == "bold" else "body"
+                measure = getattr(self.measure, "at_size", None)
+                text = measure(node.label, role, size) if measure else self.label_width(node)
+                icon = node.options.get("icon") not in {None, "", "NONE", 0} or node.options.get("icon_value")
+                gutter = node.options.get("icon_size", self.theme.icon_size) + 6 if icon else 0
+                return text + gutter + 12
         if (
             node.kind in {"button", "label"}
             and not node.label
@@ -671,10 +715,33 @@ class Plan:
                 h = self.layout(child, available)[0]
                 cells.append((child, 0, y, available, h))
                 y += h + gap
+        elif (node.kind == "row" and children
+              and node.options.get("_style_defaults", {}).get("enum_style") == "track"
+              and all(self.button_leaf(child) is not None for child in children)):
+            # Equal segments by default. A split action can reserve a compact
+            # menu target and leave the remaining width to its label.
+            widths = [
+                self.fixed(child, 0) if "width" in child.options else None
+                for child in children
+            ]
+            reserved = sum(w for w in widths if w is not None)
+            flexible = widths.count(None)
+            share = max(0, available - reserved) / max(1, flexible)
+            scale = min(1, available / reserved) if reserved else 1
+            widths = [share if w is None else w * scale for w in widths]
+            height = max(self.layout(child, w)[0] for child, w in zip(children, widths))
+            x = 0
+            for index, (child, w) in enumerate(zip(children, widths)):
+                cells.append((child, x, 0, w, height))
+                self.button_leaf(child).options["_track_edges"] = (index == 0, index == len(children) - 1)
+                x += w
         elif node.kind == "row" and node.options.get("flex_wrap"):
             lines, line, used = [], [], 0
             for child in children:
-                minimum = min(available, self.minimum(child))
+                # Aligned rows allocate intrinsic widths in row_widths(). Break
+                # at that same width so fitting a row never splits a tab label.
+                preferred = self.natural(child) if alignment != "EXPAND" else self.minimum(child)
+                minimum = min(available, preferred)
                 if line and used + gap + minimum > available:
                     lines.append(line);line=[];used=0
                 used += (gap if line else 0) + minimum
@@ -756,15 +823,18 @@ class Plan:
                 cells = [(c, x, row_height - h, w, h) for c, x, y, w, h in cells]
             # Explicit cross-axis alignment wins over automatic accessory alignment.
             # Move complete retained children; never scale their text or hit bounds.
-            if cells and "align_items" in node.options:
+            align_items = node.options.get("align_items")
+            if align_items is None and any(self.contains_track(c) for c in children):
+                align_items = "center"
+            if cells and align_items:
                 extent = max(h for _, _, _, _, h in cells)
-                if node.options["align_items"] == "value":
+                if align_items == "value":
                     anchors = [self.value_center(c, w) for c, _, _, w, _ in cells]
                     anchors = [h/2 if a is None else a for a, (_, _, _, _, h) in zip(anchors, cells)]
                     center = max(anchors)
                     cells = [(c, x, center-a, w, h) for a, (c, x, _, w, h) in zip(anchors, cells)]
                 else:
-                    offset = {"start": 0, "center": 0.5, "end": 1}[node.options["align_items"]]
+                    offset = {"start": 0, "center": 0.5, "end": 1}[align_items]
                     cells = [(c, x, (extent-h)*offset, w, h) for c, x, y, w, h in cells]
         elif node.kind == "grid" and children:
             natural = [self.natural(c) for c in children]
@@ -831,12 +901,34 @@ class Plan:
                 h = self.layout(child, w)[0]
                 cells.append((child, (available - w) * shift, y, w, h))
                 y += h + gap
+        if node.kind in {"row", "split"}:
+            # Gallery cards reserve extra space below the first child when a
+            # peer title wraps. Images, type and action hit targets keep their size.
+            if any(child.options.get("align_card_header") for child in children):
+                row_height = max((h for _, _, _, _, h in cells), default=0)
+                cells = [(c, x, y, w, row_height if c.options.get("align_card_header") else h)
+                         for c, x, y, w, h in cells]
+            # Match only button-only lines. A wrapped action must grow its
+            # peers without stretching unrelated sliders or caption columns.
+            lines = {}
+            for index,(child, _, y, _, _) in enumerate(cells):
+                lines.setdefault(y, []).append((index,self.button_leaf(child)))
+            for peers in lines.values():
+                if all(leaf is not None for _,leaf in peers) and any(
+                    leaf.options.get("_button_lines") for _,leaf in peers
+                ):
+                    extent = max(cells[i][4] for i,_ in peers)
+                    for i,_ in peers:
+                        cells[i] = (*cells[i][:4],extent)
         height = max((y + h for _, x, y, w, h in cells), default=0) + top + bottom
         height = max(height, node.options.get("min_height", 0))
         fixed_height = self.fixed(node, 1) if self.sized else None
         if "max_height" in node.options and height > node.options["max_height"]:
             fixed_height = min(fixed_height or 4096, node.options["max_height"])
         slot_ratio = 1.0
+        leaf = self.button_leaf(node) if fixed_height is not None else None
+        if leaf is not None and leaf.options.get("_button_lines"):
+            fixed_height = max(fixed_height,height)
         if fixed_height is not None and cells:
             # Fit the explicit slot without changing typography or logical ownership.
             # Compound controls re-fit uniformly during placement.
@@ -851,17 +943,33 @@ class Plan:
         self.plans[key] = result
         return result
 
-    def place_plain(self, node, x, y, width):
+    @staticmethod
+    def contains_track(child):
+        while hasattr(child, "children"):
+            if child.options.get("_style_defaults", {}).get("enum_style") == "track":
+                return True
+            if len(child.children) != 1:
+                break
+            child = child.children[0]
+        return False
+
+    @staticmethod
+    def button_leaf(child):
+        while hasattr(child,"children") and len(child.children)==1:
+            child=child.children[0]
+        return child if child.kind=="button" else None
+
+    def place_plain(self, node, x, y, width, allocated_height=None):
         """Keep ordinary layouts on the small unconstrained placement path."""
         if not hasattr(node, "children"):
             w, h = self.control_size(node, width)
-            node.rect = (x, y, w, h)
+            node.rect = (x, y, w, h if allocated_height is None else allocated_height)
             return
         height, cells = self.layout(node, width)
         node.rect = (x, y, width, height)
         top, right, bottom, left = self.insets(node)
         for child, a, b, w, h in cells:
-            self.place(child, x + left + a, y + top + b, w)
+            self.place(child, x + left + a, y + top + b, w, h if self.button_leaf(child) is not None else None)
 
     def place(self, node, x, y, width, allocated_height=None):
         width = self.bound_width(node, width)
@@ -883,19 +991,28 @@ class Plan:
             node.rect = (x, y, w, h)
             return
         height, cells = self.layout(node, width)
+        header_space = 0
+        if node.options.get("align_card_header") and allocated_height is not None:
+            header_space = max(0, allocated_height-height)
+            allocated_height = None
         ratio = (
             allocated_height / height
             if allocated_height is not None and height
             else 1.0
         )
-        node.rect = (x, y, width, height * ratio)
+        node.rect = (x, y, width, height * ratio + header_space)
         top, right, bottom, left = self.insets(node)
         child_scale = ratio * self.slot_ratios.get((id(node), width), 1.0)
         for child, a, b, w, h in cells:
             allocated = (
                 self.layout(child, w)[0] * child_scale if child_scale != 1.0 else None
             )
-            self.place(child, x + left + a, y + (top + b) * ratio, w, allocated)
+            if self.button_leaf(child) is not None:
+                allocated = h * ratio
+            if child.options.get("align_card_header"):
+                allocated = h * ratio
+            inset = header_space if b > 0 else 0
+            self.place(child, x + left + a, y + (top + b) * ratio + inset, w, allocated)
 
 
 def compact_paragraphs(group, font_size):

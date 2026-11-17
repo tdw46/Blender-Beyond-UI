@@ -34,6 +34,7 @@ class Theme:
     separator_height: float = 8.0
 
     popup_tint: float = 0.15
+    panel_scale: float = 1.0
 
     def __post_init__(self):
         if type(self.popup_tint) not in (int, float) or not 0 <= self.popup_tint <= 1:
@@ -420,6 +421,18 @@ class Canvas(Group):
             "clip": tuple(clip),
             "rect": rect,
         }
+
+    def settings_popup_owner(self, context):
+        """Find a live settings sheet, including those opened from list rows."""
+        overlay = self.overlay or {}
+        widget = overlay.get("widget")
+        if getattr(widget, "canvas", None) is not None and hasattr(widget, "valid"):
+            return overlay.get("owner") if widget.valid(context) else None
+        for control in self._composites.values():
+            child = getattr(control.options["widget"], "active_child", None)
+            if child is not None and child.settings_popup_owner(context) is not None:
+                return control
+        return None
 
     def active_menu(self):
         if self.context_menu is not None:
@@ -1656,6 +1669,11 @@ class Canvas(Group):
             return used
         if control is None or kind != "LEFTMOUSE" or not press:
             return False
+        if control.kind in {"enum","pointer","search"} and context is not None:
+            from . import typed_pick
+            from .context_menu import inside
+            if typed_pick.supported(control) and inside(typed_pick.button_rect(control), x, y):
+                return typed_pick.start(self, control, context)
         if control.options.get("panel_model"):
             self.open_panel(control, clip, context)
             return True

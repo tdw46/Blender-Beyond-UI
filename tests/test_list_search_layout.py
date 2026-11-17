@@ -66,4 +66,10 @@ class ListSearchLayout(unittest.TestCase):
         model,state=self.model(fail)
         with self.assertRaises(RuntimeError):model.clear()
         self.assertEqual(state['value'],'Cam_Left')
-        self.assertEqual(clear_rect((10,20,100,24)),(88,20,22,24))
+        from beyond_ui.typed_pick import button_rect
+        for width in (26, 100):
+            field = NS(label="", rect=(10,20,width,24))
+            x,y,w,h = clear_rect(field.rect)
+            dx,dy,dw,dh = button_rect(field)
+            self.assertEqual((x+w,y,h),(dx,dy,dh))
+            self.assertEqual(dx+dw, 10+width)
