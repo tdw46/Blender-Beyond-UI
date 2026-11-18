@@ -9,6 +9,7 @@ import sys
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
+from typing import NamedTuple
 import ctypes
 import math
 
@@ -18,9 +19,19 @@ _lens_batches = {}
 _lens_error = ""
 _owners = {}
 _views = {}
+_viewport_hosts = {}
+_viewport_handler = None
 error = ""
 _popup_pass = ContextVar("bui_popup_pass", default=None)
 POPUP_BLUR = 0.90
+
+
+class _BlurTargets(NamedTuple):
+    dimensions: tuple
+    copy: object
+    base: tuple
+    horizontal: tuple
+    strong: object = None
 
 
 @dataclass
@@ -124,24 +135,64 @@ float glassWipeRadius(vec2 size) {
 """
 
 
+def watch_viewport(records):
+    """All glass panels in this BUI installation share one viewport observer."""
+    global _viewport_handler
+    import bpy
+
+    if _viewport_handler is None:
+        _viewport_handler = bpy.types.SpaceView3D.draw_handler_add(
+            _viewport_draw, (), "WINDOW", "POST_PIXEL")
+    _viewport_hosts[id(records)] = records
+
+
+def unwatch_viewport(records):
+    global _viewport_handler
+    import bpy
+
+    _viewport_hosts.pop(id(records), None)
+    if not _viewport_hosts and _viewport_handler is not None:
+        bpy.types.SpaceView3D.draw_handler_remove(_viewport_handler, "WINDOW")
+        _viewport_handler = None
+        _views.clear()
+
+
+def _viewport_draw():
+    import bpy
+    _observe_viewport(bpy.context, _viewport_hosts.values())
+
+
 def viewport_changed(context, records):
+    _observe_viewport(context, (records,))
+
+
+def _observe_viewport(context, record_sets):
     """One revision per actual viewport draw; never request a viewport redraw."""
     if context.area.type != "VIEW_3D" or context.region.type != "WINDOW":
         return
-    key = (context.window.as_pointer(), context.area.as_pointer())
     if not getattr(context.preferences.system, "use_region_overlap", False):
         return
+    key = (context.window.as_pointer(), context.area.as_pointer())
     viewport = context.region
     for region in context.area.regions:
-        record = records.get((*key, region.as_pointer()))
-        if (region.type == "UI" and record and record.get("valid")
-                and _overlaps(viewport, region)):
+        if region.type != "UI" or not _overlaps(viewport, region):
+            continue
+        region_key = (*key, region.as_pointer())
+        visible = redraw = False
+        for records in record_sets:
+            record = records.get(region_key)
+            if record and record.get("valid"):
+                visible = True
+                if not record.get("late"):
+                    redraw = True
+                    break
+        if visible:
             _views[key] = _views.get(key, 0) + 1
             if len(_views) > 8:
                 _views.pop(next(iter(_views)))
             # A late window presenter consumes this revision in the same frame.
             # Fallback regions still need their next native UI paint.
-            if not record.get("late"):
+            if redraw:
                 region.tag_redraw()
             break
 
@@ -307,9 +358,8 @@ def draw(
 
     viewport = gpu.state.viewport_get()
     vx, vy, vw, vh = viewport
-    if not prepare_only and (
+    if not prepare_only and shared_key is not None and (
         source_key(key, shared_key, rect, (vw, vh)) == shared_key
-        and shared_key is not None
     ):
         if lens(
             shared_key,
@@ -363,6 +413,8 @@ def draw(
     owner["popup"] = popup
     if owner.get("failed") == signature:
         return False
+    if prepare_only and owner["signature"] == signature:
+        return True
     blend = gpu.state.blend_get()
     depth = gpu.state.depth_test_get()
     mask = gpu.state.depth_mask_get()
@@ -384,16 +436,15 @@ def draw(
             # share one transient copy target; only their blurred crops survive.
             shared_copy = scratch is not None and not cropped and not viewport_source
             dimensions = (copy_w, copy_h, bw, bh, viewport_source is not None, shared_copy)
-            if targets is None or targets[0] != dimensions:
+            if targets is None or targets.dimensions != dimensions:
                 # Allocate transactionally; leave prior published slots intact.
-                targets = (
+                targets = _BlurTargets(
                     dimensions,
                     None if viewport_source or shared_copy else _target(copy_w, copy_h),
                     _target(bw, bh),
                     _target(bw, bh),
-                    _target(bw, bh),
                 )
-                owner["allocations"] += 3 if viewport_source or shared_copy else 4
+                owner["allocations"] += 2 if viewport_source or shared_copy else 3
                 owner["ring"][slot] = (
                     targets  # Scratch ownership; published slot is unchanged until success.
                 )
@@ -406,13 +457,13 @@ def draw(
                     ctypes.c_int,
                 )
                 with (
-                    targets[2][1].bind(),
+                    targets.base[1].bind(),
                     gpu.matrix.push_pop(),
                     gpu.matrix.push_pop_projection(),
                 ):
                     gpu.state.viewport_set(0, 0, bw, bh)
                     gpu.state.scissor_set(0, 0, bw, bh)
-                    targets[2][1].clear(color=(0, 0, 0, 1))
+                    targets.base[1].clear(color=(0, 0, 0, 1))
                     gpu.matrix.load_matrix(Matrix.Identity(4))
                     gpu.matrix.load_projection_matrix(
                         Matrix(
@@ -435,7 +486,7 @@ def draw(
                     ):
                         return False
             else:
-                copy = targets[1]
+                copy = targets.copy
                 if shared_copy:
                     copy = scratch.get("_popup_copy")
                     if copy is None or (copy[0].width, copy[0].height) != (copy_w, copy_h):
@@ -460,12 +511,14 @@ def draw(
             crop = ((left + vx) / fw, (bottom + vy) / fh, cw / fw, ch / fh)
             if cropped:
                 crop = (0.0, 0.0, 1.0, 1.0)
+            # Downsample into base, blur horizontally, then write the finished
+            # vertical result back into base. Each pass samples a distinct target.
             passes = (
                 []
                 if viewport_source
                 else [
                     (
-                        targets[2],
+                        targets.base,
                         copy[0],
                         crop,
                         (cw / bw / copy_w * 0.25, ch / bh / copy_h * 0.25, 2.0, 0.0),
@@ -475,14 +528,14 @@ def draw(
             passes.extend(
                 (
                     (
-                        targets[3],
-                        targets[2][0],
+                        targets.horizontal,
+                        targets.base[0],
                         (0.0, 0.0, 1.0, 1.0),
                         (1 / bw, 0.0, 0.0, 0.0),
                     ),
                     (
-                        targets[4],
-                        targets[3][0],
+                        targets.base,
+                        targets.horizontal[0],
                         (0.0, 0.0, 1.0, 1.0),
                         (0.0, 1 / bh, 0.0, 0.0),
                     ),
@@ -514,7 +567,7 @@ def draw(
             key, display_rect or rect, radius, (0.0, 0.0, 0.0, 0.0), blur=blur
         ):
             return True
-        texture = owner["ring"][owner["slot"]][4][0]
+        texture = owner["ring"][owner["slot"]].base[0]
         display_rect = display_rect or rect
         x, y, w, h = display_rect
         _draw(
@@ -583,20 +636,19 @@ def prepare_texture(key, revision, texture, rect, *, scale=1.0):
             slot = (owner["slot"] + 1) % 3
             targets = owner["ring"][slot]
             dimensions = ("texture", bw, bh)
-            if targets is None or targets[0] != dimensions:
-                targets = (
+            if targets is None or targets.dimensions != dimensions:
+                targets = _BlurTargets(
                     dimensions,
                     None,
                     _target(bw, bh),
                     _target(bw, bh),
-                    _target(bw, bh),
                 )
-                owner["allocations"] += 3
+                owner["allocations"] += 2
                 owner["ring"][slot] = targets
             passes = (
-                (targets[2], texture, (0.25 / bw, 0.25 / bh, 2.0, 0.0)),
-                (targets[3], targets[2][0], (1 / bw, 0.0, 0.0, 0.0)),
-                (targets[4], targets[3][0], (0.0, 1 / bh, 0.0, 0.0)),
+                (targets.base, texture, (0.25 / bw, 0.25 / bh, 2.0, 0.0)),
+                (targets.horizontal, targets.base[0], (1 / bw, 0.0, 0.0, 0.0)),
+                (targets.base, targets.horizontal[0], (0.0, 1 / bh, 0.0, 0.0)),
             )
             gpu.state.blend_set("NONE")
             for output, source, step in passes:
@@ -659,12 +711,15 @@ def _strong_blur(owner):
         _ensure()
         slot = owner["slot"]
         targets = owner["ring"][slot]
-        source = targets[4][0]
+        source = targets.base[0]
         w, h = source.width, source.height
-        if len(targets) < 7:
-            targets = (*targets, _target(w, h), _target(w, h))
+        if targets.strong is None:
+            # Both horizontal passes finish before their vertical consumer.
+            # Only the two final levels are sampled by controls. Scratch stays
+            # with its original ring slot across asynchronous submissions.
+            targets = targets._replace(strong=_target(w, h))
             owner["ring"][slot] = targets
-            owner["allocations"] += 2
+            owner["allocations"] += 1
         # Baseline sigma is the existing tab blur. Variances add; this extra
         # radius produces the requested strong level without a third blur pass.
         strong = POPUP_BLUR if owner.get("popup") else 0.7
@@ -673,8 +728,8 @@ def _strong_blur(owner):
         gpu.state.depth_mask_set(False)
         gpu.state.blend_set("NONE")
         for target, texture, offset in (
-            (targets[5], source, (step / w, 0.0, 0.0, 0.0)),
-            (targets[6], targets[5][0], (0.0, step / h, 0.0, 0.0)),
+            (targets.horizontal, source, (step / w, 0.0, 0.0, 0.0)),
+            (targets.strong, targets.horizontal[0], (0.0, step / h, 0.0, 0.0)),
         ):
             with target[1].bind():
                 gpu.state.viewport_set(0, 0, w, h)
@@ -816,8 +871,8 @@ def lens(key, rect, radius, tint, *, phase=1.0, stretch=0.0, angle=0.0, blur=0.4
     if level > 0.3 and not _strong_blur(owner):
         level = 0.3
     targets = owner["ring"][owner["slot"]]
-    source = targets[4][0]
-    soft = targets[6][0] if level > 0.3 else source
+    source = targets.base[0]
+    soft = targets.strong[0] if level > 0.3 else source
     gpu.state.blend_set("ALPHA")
     _lens_shader.bind()
     _lens_shader.uniform_sampler("source", source)

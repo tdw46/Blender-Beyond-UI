@@ -61,7 +61,7 @@ def canvases():
     canvas.add(
         "pointer", "pointer", "Pointer", pointer_field=NS(label=lambda: "Active Node")
     )
-    canvas.add("search", "search", "Search", search_field=NS(label=lambda: "Target"))
+    canvas.add("search", "search", "Search", search_field=NS(label=lambda: "Target", can_clear=lambda: False))
     canvas.add("decorator", "decorator", decorator=None, width=32)
     canvas.arrange(360)
     result.append(("standard-controls", "Standard controls", canvas, None))

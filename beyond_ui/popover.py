@@ -290,6 +290,10 @@ class PanelPopover(Widget):
                 self.canvas.shortcut_registry.release(token)
             self.canvas._scoped_shortcuts.clear()
         self.canvas.park()
+        close = getattr(self.model, "closed", None)
+        if close and not getattr(self, "_did_close", False):
+            self._did_close = True
+            close()
         super().cancel()
 
     def advance(self):
@@ -317,6 +321,23 @@ class PanelPopover(Widget):
     def scroll_to(self, value):
         self.scroll = min(max(0.0, value), max(0.0, self.canvas.height - self.height))
         self.canvas.blur_focus()
+        rows = getattr(self.model, "windowed_rows", None)
+        if rows and rows.move(self.scroll, self.height):
+            # Rebuild only on crossing a block, inside the same popover. This
+            # preserves thumb capture and avoids rebuilding the parent panel.
+            old = self.canvas
+            replacement = self.model.build(self.parent, self.owner, self.model.context)
+            for token in old._scoped_shortcuts.values():
+                if old.shortcut_registry:
+                    old.shortcut_registry.release(token)
+            old.park()
+            self.canvas = replacement.canvas
+            self.canvas._popup_close = self.close_owned
+            self.canvas.icon_renderer = self.parent.icon_renderer
+            self.canvas.wide_numeric_motion_scale = self.parent.wide_numeric_motion_scale
+            self.canvas.arrange(self.width)
+            self.scroll = min(self.scroll, max(0, self.canvas.height - self.height))
+            self.canvas.bind_shortcuts(self.model.context, self.clip)
 
     def dispatch(self, event, x, y, *, context=None, clipboard=None, menu_measure=None):
         """Logical input. The parent retains dismissal and outside pass-through."""
@@ -418,12 +439,17 @@ class PanelPopover(Widget):
             and contained
             and not captured
         ):
+            if getattr(self.model, "content_scroll", False) and child.event(
+                event, x, y + self.scroll, self.clip, clipboard=clipboard,
+                context=context, menu_measure=menu_measure,
+            ):
+                return True
             old = self.scroll
             delta = scroll_delta(event, self.canvas.theme.row_height * 3)
-            self.scroll = min(
-                max(0.0, self.scroll + delta),
-                max(0, child.height - self.height),
-            )
+            if getattr(self.model, "windowed_rows", None):
+                self.scroll_to(self.scroll + delta)
+            else:
+                self.scroll = min(max(0.0, self.scroll + delta), max(0, child.height - self.height))
             if old != self.scroll:
                 child.blur_focus()
             return True
@@ -461,7 +487,7 @@ class PanelPopover(Widget):
             if getattr(child, "_panel_rebuild", False):
                 child._panel_rebuild = False
                 scroll = self.scroll
-                self.parent.open_panel(self.owner, self.parent._event_clip, context)
+                self.parent.open_panel(self.owner, self.parent._event_clip, context, model=self.model)
                 replacement = (self.parent.overlay or {}).get("widget")
                 if isinstance(replacement, PanelPopover):
                     replacement.scroll = min(scroll, max(0, replacement.canvas.height - replacement.height))

@@ -79,10 +79,9 @@ class PanelHost:
         ):
             handle = space.draw_handler_add(self._after_draw, (), region, "POST_PIXEL")
             self.handlers.append((space, handle, region))
-        handle = bpy.types.SpaceView3D.draw_handler_add(
-            self._viewport_draw, (), "WINDOW", "POST_PIXEL"
-        )
-        self.handlers.append((bpy.types.SpaceView3D, handle, "WINDOW"))
+        if self.glass_enabled:
+            from ..gpu import glass
+            glass.watch_viewport(self.records)
         self.reason = ""
         return True
 
@@ -314,13 +313,6 @@ class PanelHost:
                     if record and record.get("resume"):
                         region.tag_redraw()
         return None
-
-    def _viewport_draw(self):
-        import bpy
-        from ..gpu import glass
-
-        if self.glass_enabled and not self.closed:
-            glass.viewport_changed(bpy.context, self.records)
 
     def _after_draw(self):
         import bpy
@@ -616,6 +608,9 @@ class PanelHost:
             return
         self.closed = True
         self.invalidate()
+        if self.glass_enabled:
+            from ..gpu import glass
+            glass.unwatch_viewport(self.records)
         for space, handle, region in self.handlers:
             space.draw_handler_remove(handle, region)
         self.handlers.clear()

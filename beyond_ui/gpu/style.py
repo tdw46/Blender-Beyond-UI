@@ -804,9 +804,40 @@ def icon(glyph, x, y, size, color, *, palette=None):
     return True
 
 
-def slider_parts(x, y, width, height, scale=1.0, *, value_width=53):
+class VectorIcons:
+    """Custom normalized triangle silhouettes sharing BUI's uniform-color shader.
+
+    Resolve the host's shape on its first use only. Release only this artwork
+    when the host unloads; the BUI renderer owns the shared shader.
+    """
+    def __init__(self, geometry):
+        self.geometry = geometry
+        self.batches = {}
+
+    def draw(self, name, x, y, size, color):
+        global _icon_shader
+        import gpu
+        if _icon_shader is None:
+            _icon_shader = gpu.shader.from_builtin("UNIFORM_COLOR")
+        batch = self.batches.get(name)
+        if batch is None:
+            from gpu_extras.batch import batch_for_shader
+            batch = batch_for_shader(_icon_shader, "TRIS", {"pos": self.geometry(name)})
+            self.batches[name] = batch
+        gpu.state.blend_set("ALPHA")
+        with gpu.matrix.push_pop():
+            gpu.matrix.translate((x, y, 0))
+            gpu.matrix.scale((size / 2, size / 2, 1))
+            _icon_shader.bind()
+            _icon_shader.uniform_float("color", color)
+            batch.draw(_icon_shader)
+
+
+def slider_parts(x, y, width, height, scale=1.0, *, value_width=53, value_fraction=None):
     """One geometry contract for the visible track, numeric field and input."""
     number_width = min(max(0.0, width - 32.0 * scale), value_width * scale)
+    if value_fraction is not None:
+        number_width = min(width * value_fraction, value_width * scale)
     track_width = max(1.0, width - number_width - 16.0 * scale)
     return (x + 7.0 * scale, y + height / 2.0, track_width), (
         x + width - number_width,
@@ -817,7 +848,7 @@ def slider_parts(x, y, width, height, scale=1.0, *, value_width=53):
 
 
 def slider(
-    track, value, *, shape=(1.0, 1.0), scale=1.0, palette=None, enabled=True, hue=False
+    track, value, *, shape=(1.0, 1.0), scale=1.0, palette=None, enabled=True, hue=False, accent=None
 ):
     """BVT track and bubble; reuse the retained style shader/batch."""
     palette = palette or theme_palette()
@@ -843,7 +874,7 @@ def slider(
             border=0.5 * scale,
         )
     fill = tw * ratio
-    color = palette["slider_fill"] if enabled else palette["muted"]
+    color = (accent or palette["slider_fill"]) if enabled else palette["muted"]
     if fill > 0 and not hue:
         draw(
             tx,
@@ -864,13 +895,13 @@ def slider(
         shade(palette["switch_shadow"], 0, 0.65),
         mode=3,
     )
-    color = palette["text"] if enabled else palette["muted"]
+    color = (accent or palette["text"]) if enabled else palette["muted"]
     draw(
         tx + fill - r * ax,
         ty - r * ay,
         2 * r * ax,
         2 * r * ay,
-        shade(color, -0.18),
+        shade(color, -0.08 if accent else -0.18),
         top=shade(color, 0.15),
         mode=3,
         border=0.5 * scale,
@@ -953,14 +984,14 @@ def hover_impulse(
     return strength, 0.0 if width >= height else math.pi / 2
 
 
-def switch_bounds(x, y, width, height, scale=1.0):
+def switch_bounds(x, y, width, height, scale=1.0, *, fraction=0.75):
     """Shrink only the visible switch; keep layout and hit bounds unchanged."""
     return (
-        x + width * 0.125,
-        y + height * 0.125,
-        width * 0.75,
-        height * 0.75,
-        scale * 0.75,
+        x + width * (1.0 - fraction) / 2,
+        y + height * (1.0 - fraction) / 2,
+        width * fraction,
+        height * fraction,
+        scale * fraction,
     )
 
 
@@ -995,9 +1026,10 @@ def switch(
     palette=None,
     backdrop=None,
     hover=None,
+    *, fraction=0.75, lens=None,
 ):
     """Glass over the panel's shared blurred underlay; no extra blur producer."""
-    x, y, width, height, scale = switch_bounds(x, y, width, height, scale)
+    x, y, width, height, scale = switch_bounds(x, y, width, height, scale, fraction=fraction)
     position = max(0.0, min(1.0, position))
     palette = palette or theme_palette(None)
     off = palette["toggle_off"]
@@ -1006,7 +1038,7 @@ def switch(
     top = shade(fill, 0.06)
     from . import glass
 
-    if backdrop is None or not glass.lens(
+    if backdrop is None or not (lens or glass.lens)(
         backdrop, (x, y, width, height), height / 2, fill, **(hover or {})
     ):
         draw(

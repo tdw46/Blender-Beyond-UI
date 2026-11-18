@@ -448,8 +448,8 @@ class Canvas(Group):
                     return menu
         return None
 
-    def open_panel(self, control, clip, context=None):
-        model = control.options["panel_model"]
+    def open_panel(self, control, clip, context=None, *, model=None):
+        model = model if model is not None else control.options["panel_model"]
         context = context or model.context
         clip = self._popup_clip or clip or self._event_clip or (0, 0, self._width or 1, self.height)
         widget = None
@@ -1022,7 +1022,8 @@ class Canvas(Group):
             )
 
     def open_context(
-        self, control, x, y, clip, *, context=None, measure=None, overlay=None
+        self, control, x, y, clip, *, context=None, measure=None, overlay=None,
+        target=None, entries=None
     ):
         from .context_menu import Menu, Target, default_entries
         from .context_rna import Property
@@ -1038,7 +1039,7 @@ class Canvas(Group):
             )
 
         try:
-            if control.kind == "widget" or overlay is not None:
+            if target is None and (control.kind == "widget" or overlay is not None):
                 from .widgets.context import target as widget_target
 
                 widget = (
@@ -1053,7 +1054,7 @@ class Canvas(Group):
                     (x - a) * widget.width / max(w, 1),
                     (y - b) * widget.height / max(h, 1),
                 )
-            else:
+            elif target is None:
                 binding = control.binding.frozen() if control.binding else None
                 source = getattr(binding, "context", None)
                 target = Target(
@@ -1089,7 +1090,7 @@ class Canvas(Group):
             )
             from itertools import islice
 
-            rows = list(islice(provider(target, context), Menu.limit))
+            rows = list(islice(entries if entries is not None else provider(target, context), Menu.limit))
             # An extension's additional actions must not erase the exact bound
             # property's native actions (paths, animation, drivers, developer UI).
             if (provider is not default_entries and target.binding is not None
@@ -1098,7 +1099,7 @@ class Canvas(Group):
                 keys = {row.key for row in rows}
                 rows = [row for row in default_entries(target, context)
                         if row.key not in keys] + rows
-            if self.shortcut_registry is not None:
+            if self.shortcut_registry is not None and entries is None:
                 from .context_custom import CustomProperty
                 from .context_shortcuts import numeric_property_entry
 

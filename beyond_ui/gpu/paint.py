@@ -2,6 +2,7 @@
 
 from contextlib import contextmanager, nullcontext
 from functools import lru_cache
+from ..stylesheet import accent_palette
 from . import style, glass, typography, skin, is_windows_vulkan
 from ..editing import display_number
 from ..menu_metrics import Metrics as menu_metrics
@@ -81,10 +82,11 @@ def paint(
     if t.stylesheet is not None:
         palette = t.stylesheet.palette(palette)
 
+    offset = getattr(canvas, "page_motion", None)
+    shift = offset.position("slide", 0.0) if offset else 0.0
+
     def mapped(r):
         a, b, c, d = r
-        offset = getattr(canvas, "page_motion", None)
-        shift = offset.position("slide", 0.0) if offset else 0.0
         return x + (a + shift) * sx, y + h - (b + d) * sy, c * sx, d * sy
 
     current_style = {}
@@ -381,7 +383,6 @@ def paint(
             inline_sheet = control.options.get("_inline_sheet")
             if inline_sheet is not None:
                 palette = inline_sheet.palette(palette)
-            from ..stylesheet import accent_palette
             palette = accent_palette(palette, control)
             kind = control.kind
             if (retained_widgets and kind == "widget" and not control.motion.tracks
