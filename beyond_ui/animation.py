@@ -188,7 +188,7 @@ class Motion:
     def position(self, key, value):
         """Read-only eased switch travel; external changes settle immediately."""
         track = self.positions.get(key)
-        if not self.strength or track is None or track[2] != float(value):
+        if track is None or track[2] != float(value) or not self.strength:
             return float(value)
         from .gpu.style import switch_position
 

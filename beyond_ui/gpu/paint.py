@@ -6,6 +6,8 @@ from . import style, glass, typography, skin, is_windows_vulkan
 from ..editing import display_number
 from ..menu_metrics import Metrics as menu_metrics
 
+_REST = nullcontext()
+
 
 @contextmanager
 def gpu_state():
@@ -350,16 +352,18 @@ def paint(
         if controls:
             for card in getattr(canvas, "_style_cards", ()):
                 if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
-                    surface(mapped(card), palette["card"])
-                    skin.inset_outline(mapped(card), palette, scale, t.radius)
+                    bounds_px = mapped(card)
+                    surface(bounds_px, palette["card"])
+                    skin.inset_outline(bounds_px, palette, scale, t.radius)
             for bounds, options in getattr(canvas, "_style_surfaces", ()):
                 if bounds[1] + bounds[3] <= logical[1] or bounds[1] >= logical[1] + logical[3]:
                     continue
                 radius = options.get("surface_radius", t.radius)
                 tint = options.get("surface_color", palette[options["surface"]])
                 opacity = options.get("_style_defaults", {}).get("opacity", 1)
-                surface(mapped(bounds), tint[:3] + (tint[3] * opacity,), radius)
-                skin.inset_outline(mapped(bounds), palette, scale, radius)
+                bounds_px = mapped(bounds)
+                surface(bounds_px, tint[:3] + (tint[3] * opacity,), radius)
+                skin.inset_outline(bounds_px, palette, scale, radius)
         for control in canvas.visible_controls(logical) if controls else ():
             current_style = control.options.get("_inline_style", {})
             r = mapped(control.rect)
@@ -517,12 +521,13 @@ def paint(
                             "handle", (tx - 7, ty - 12, tw + 14, 24), circular=True
                         )
                         control.motion.region("field", field)
+            moving = bool(control.motion.tracks)
             with (
-                typography.motion_text(font, control.motion),
-                control.motion.deform("reveal", row_rect),
+                typography.motion_text(font, control.motion) if moving else _REST,
+                control.motion.deform("reveal", row_rect) if moving else _REST,
                 (
-                    nullcontext()
-                    if (kind == "toggle" and not control.options.get("bool_button"))
+                    _REST
+                    if not moving or (kind == "toggle" and not control.options.get("bool_button"))
                     or slider
                     else control.motion.deform("body", row_rect)
                 ),

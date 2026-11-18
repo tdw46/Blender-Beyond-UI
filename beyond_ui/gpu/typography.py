@@ -150,6 +150,13 @@ def draw_text(font, value, ink, effects=None, scale=1.0):
     import blf
     from ..text_effects import DEFAULTS
 
+    if effects and effects.get("shadow") is False and effects.get("outline") is False:
+        if hasattr(blf, "SHADOW"):
+            blf.disable(font, blf.SHADOW)
+        blf.color(font, *ink)
+        blf.draw(font, str(value))
+        return
+
     cfg = DEFAULTS if not effects else {**DEFAULTS, **effects}
     capable = all(hasattr(blf, name) for name in ('shadow', 'shadow_offset', 'SHADOW'))
     if not capable:
