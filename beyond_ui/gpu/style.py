@@ -192,9 +192,9 @@ def _theme_palette(signature, missing=()):
     return MappingProxyType(p)
 
 
-def animation_palette(preferences, *, reference=False):
+def animation_palette(preferences, *, reference=False, theme=None):
     """Central animation-state colors; missing theme data remains observable."""
-    palette = theme_palette(preferences, reference=reference)
+    palette = theme if theme is not None else theme_palette(preferences, reference=reference)
     try:
         state = preferences.themes[0].user_interface.wcol_state
     except (AttributeError, IndexError, TypeError, ReferenceError):
@@ -1199,9 +1199,9 @@ void main(){
         gpu.state.blend_set("ALPHA")
 
 
-def menu_status_palette(preferences, *, reference=False):
+def menu_status_palette(preferences, *, reference=False, theme=None):
     """Central theme roles for compound menu status; explicit capability fallback."""
-    colors = animation_palette(preferences, reference=reference)
+    colors = animation_palette(preferences, reference=reference, theme=theme)
     missing = list(colors["fallback_roles"])
     try:
         if reference:

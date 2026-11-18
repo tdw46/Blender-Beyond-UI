@@ -2,6 +2,7 @@
 
 import unittest
 from types import SimpleNamespace as NS
+from unittest.mock import patch
 
 from beyond_ui import Theme
 from beyond_ui.gpu import style, skin
@@ -21,6 +22,14 @@ def preferences():
 
 
 class ThemeTests(unittest.TestCase):
+    def test_status_can_share_the_base_theme_for_one_paint(self):
+        prefs = preferences()
+        for reference in (False, True):
+            base = style.theme_palette(prefs, reference=reference)
+            ordinary = style.menu_status_palette(prefs, reference=reference)
+            with patch.object(style, "theme_palette", side_effect=AssertionError("second theme read")):
+                self.assertEqual(style.menu_status_palette(prefs, reference=reference, theme=base), ordinary)
+
     def test_native_default_and_live_roles_without_color_conversion(self):
         prefs = preferences()
         ui = prefs.themes[0].user_interface

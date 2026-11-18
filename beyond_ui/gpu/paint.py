@@ -72,8 +72,9 @@ def paint(
     sy = h / max(1.0, canvas.height)
     scale = min(sx, sy)
     logical = ((cx - x) / sx, (y + h - cy - ch) / sy, cw / sx, ch / sy)
+    host_theme = None
     if palette is None:
-        palette = style.theme_palette(
+        host_theme = palette = style.theme_palette(
             preferences, reference=canvas.theme.palette == "REFERENCE"
         )
     t = canvas.theme
@@ -443,7 +444,7 @@ def paint(
             if alert or colored:
                 if status_colors is None:
                     status_colors = style.menu_status_palette(
-                        preferences, reference=t.palette == "REFERENCE"
+                        preferences, reference=t.palette == "REFERENCE", theme=host_theme
                     )
                 tint = (
                     status_colors["ALERT"]
