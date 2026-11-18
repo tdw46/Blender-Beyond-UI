@@ -7,7 +7,7 @@ from .hosts.menu_context import override
 from .widgets.base import Widget
 from .context_menu import Entry, inside
 from itertools import count
-from .gpu import is_windows_vulkan
+import sys
 
 _open_serial = count()
 
@@ -38,11 +38,13 @@ class PanelContextCapture:
 def panel_class(name):
     import bpy
 
-    if is_windows_vulkan():
+    if sys.platform in {"win32", "darwin"}:
         # Blender indexes registered Python types by RNA identifier. Resolve it
         # anew so replacing or unregistering an open panel is seen immediately.
         cls = getattr(bpy.types, name, None)
-        if isinstance(cls, type) and issubclass(cls, bpy.types.Panel):
+        # Registering a derived panel can leave its parent's name pointing
+        # to a generated bpy.types wrapper without the Python callbacks.
+        if isinstance(cls, type) and cls.__module__ != "bpy.types" and issubclass(cls, bpy.types.Panel):
             if getattr(cls, "is_registered", False) and cls.bl_rna.identifier == name:
                 return cls
     cls = bpy.types.Panel.bl_rna_get_subclass_py(name)
