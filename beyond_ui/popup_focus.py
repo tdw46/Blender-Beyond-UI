@@ -82,7 +82,8 @@ class PopupFocus:
                     {"FINISHED", "RUNNING_MODAL"}
                 ):
                     parent = self.popup.parent
-                    if (parent.overlay or {}).get("widget") is self.popup:
+                    if ((parent.overlay or {}).get("widget") is self.popup
+                            and not getattr(getattr(self.popup, "model", None), "keep_open", False)):
                         parent.cancel()
                 return True
             except (ReferenceError, RuntimeError, ValueError, AttributeError) as error:

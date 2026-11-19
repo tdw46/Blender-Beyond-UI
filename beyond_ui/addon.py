@@ -50,6 +50,7 @@ class AddonUI:
             "pointer_sources",
             "id_actions",
             "list_identity",
+            "list_property_aliases",
             "popup_header",
             "popup_confirm_style",
             "disclosure_style",

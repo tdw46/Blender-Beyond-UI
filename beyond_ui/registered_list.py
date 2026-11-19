@@ -524,7 +524,8 @@ class RegisteredList(CollectionList):
 
         if not self.source.valid_item(item):
             raise ReferenceError("List row changed before authoring")
-        tape = Tape({"_inside_list_callback": True})
+        aliases = self.source.layout.list_property_aliases
+        tape = Tape({"_inside_list_callback": True}, property_aliases=aliases.get(self.name) if aliases else None)
         tape.root._values.update(use_property_decorate=False,
                                  operator_context=self.source.layout.operator_context)
         row = tape.root.row(align=True)

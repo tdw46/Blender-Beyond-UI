@@ -210,9 +210,7 @@ class Router:
 
                 try:
                     if _name == "call_panel":
-                        if kwargs.get("keep_open", False):
-                            raise BridgeUnavailable("Persistent call_panel keep_open is not adapted")
-                        self.panel(context, event, name=kwargs["name"])
+                        self.panel(context, event, **kwargs)
                     else:
                         self.menu(
                             context, event, name=kwargs["name"],
@@ -654,7 +652,7 @@ class Router:
             host.close()
             raise
 
-    def panel(self, context, event, *, name):
+    def panel(self, context, event, *, name, keep_open=False):
         from .layout import Layout
         from .popover import RegisteredPanel
         from .hosts.bridge import BridgeUnavailable
@@ -672,6 +670,7 @@ class Router:
             layout = Layout(host.canvas, context, commit=commit, **self.config.layout_options)
             host.canvas.context_provider = self.config.context_menu
             model = RegisteredPanel(layout, name)
+            model.keep_open = keep_open
             owner = host.canvas.button("panel-owner", model.label, None)
             model.attach(owner)
             x, y = host.anchor(event)

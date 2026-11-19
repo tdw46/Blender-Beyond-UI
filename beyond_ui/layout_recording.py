@@ -26,7 +26,8 @@ def list_arguments(args, kwargs):
 
 
 class Tape:
-    def __init__(self, state=None):
+    def __init__(self, state=None, *, property_aliases=None):
+        self.property_aliases = property_aliases
         self.commands, self.signature = [], []
         self.command_signatures = []
         self.command_offsets = []
@@ -301,6 +302,17 @@ class Node:
 
         def call(*args, **kwargs):
             tape = self._tape
+            # Resolve a row's search facade before recording so changing the
+            # target kind invalidates both its binding and the retained row.
+            if name == "prop" and tape.property_aliases:
+                prop = args[1] if len(args) > 1 else kwargs["property"]
+                resolve = tape.property_aliases.get(prop)
+                if resolve:
+                    actual = resolve(args[0] if args else kwargs["data"])
+                    if len(args) > 1:
+                        args = (args[0], actual, *args[2:])
+                    else:
+                        kwargs["property"] = actual
             if name in {"panel", "panel_prop"}:
                 opened = (
                     tape.state.get(args[0], not kwargs.get("default_closed", False))

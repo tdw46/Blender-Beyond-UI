@@ -172,6 +172,7 @@ class RegisteredPanel(RegisteredMenu):
             pointer_sources=self.layout.pointer_sources,
             id_actions=self.layout.id_actions,
             list_identity=self.layout.list_identity,
+            list_property_aliases=self.layout.list_property_aliases,
             popup_header=self.layout.popup_header,
             disclosure_style=self.layout.disclosure_style,
             property_options={**self.layout.property_options, **getattr(self.cls, "beyond_ui_props", {})},
