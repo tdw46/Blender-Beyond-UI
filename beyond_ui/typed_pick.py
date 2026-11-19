@@ -5,9 +5,29 @@ from .context_menu import inside
 _sessions = {}
 
 
+# Object datablocks and the two more specific hits resolved by the viewport
+# sampler (face material and armature bone). Store eligibility on the model
+# once during authoring, including for empty search collections.
+_SCENE_TYPES = frozenset({
+    "Object", "Mesh", "Curve", "Curves", "MetaBall", "Light", "Speaker",
+    "LightProbe", "Camera", "Lattice", "GreasePencil", "GreasePencilv3",
+    "Armature", "PointCloud", "Volume", "Material", "Bone", "PoseBone", "EditBone",
+})
+
+
+def scene_type(rna_type):
+    while rna_type is not None:
+        if rna_type.identifier in _SCENE_TYPES:
+            return True
+        rna_type = rna_type.base
+    return False
+
+
 def supported(control):
-    return any(control.options.get(key) is not None for key in
-               ("search_field", "pointer_field", "enum_field")) and control.kind in {"search","pointer","enum"}
+    if control.kind == "enum":
+        return callable(control.options.get("eyedropper_items"))
+    field = control.options.get("search_field") or control.options.get("pointer_field")
+    return control.kind in {"pointer", "search"} and getattr(field, "scene_pickable", False)
 
 
 def button_rect(control):
@@ -37,6 +57,8 @@ def clear():
 
 
 def start(canvas, target, context):
+    if not supported(target):
+        return False
     win = context.window
     key = win.as_pointer()
     stop(key)
@@ -70,50 +92,13 @@ def start(canvas, target, context):
                 elif picker.valid(key):
                     return picker.select(key)
             return False
-        proposed = []
-        # A field is sampleable without any viewport object (e.g. a device enum).
-        if src is not None and src.kind == "enum" and src.options.get("enum_field"):
-            left, right = binding.context, src.binding.context
-            if left.name == right.name and left.owner().bl_rna.identifier == right.owner().bl_rna.identifier:
-                value = src.binding.read()
-                # Dynamic enum IDs can be owner-relative indices. Match identity
-                # AND the current display labels before transferring them.
-                labels = {i.identifier:i.name for i in src.options["enum_field"].snapshot()}
-                if all(any(c.identifier==v and c.name==labels.get(v) for c in choices)
-                       for v in (value if enum.flag else (value,))):
-                    proposed.append(value)
-        resolver = target.options.get("eyedropper_items")
-        if resolver:
-            ids = {_ptr(v) for v in values if v is not None}
-            candidates = {identifier for item,identifier in resolver(binding.context.owner(),binding.context.name)
-                          if _ptr(item) in ids}
-            if len(candidates)==1:
-                proposed.extend(candidates)
-        for item in values:
-            if hasattr(item, "bl_rna") and item.bl_rna.identifier == binding.context.owner().bl_rna.identifier:
-                proposed.append(getattr(item,binding.context.name))
-            name = getattr(item,"name",None)
-            if name:
-                matches = [c.identifier for c in choices if name in (c.name,c.identifier) and c.identifier]
-                if len(matches)==1:
-                    proposed.append(matches[0])
-        for value in proposed:
-            if enum.flag and isinstance(value,set):
-                from .bindings import Edit
-                current = {i.identifier:i for i in enum.snapshot() if i.identifier}
-                if not all(v in current and current[v] in choices for v in value):
-                    continue
-                edit = Edit(binding)
-                try:
-                    edit.update(set(value))
-                    if binding.read() != value:
-                        raise ValueError("Enum rejected the sample")
-                    edit.finish()
-                except Exception:
-                    edit.finish(cancel=True)
-                    raise
-                return True
-            choice = next((i for i in choices if i.identifier and i.identifier == value), None)
+        resolver = target.options["eyedropper_items"]
+        ids = {_ptr(item) for item in values if _ptr(item) is not None}
+        matches = {identifier for item, identifier in resolver(binding.context.owner(), binding.context.name)
+                   if _ptr(item) in ids}
+        if len(matches) == 1:
+            identifier = matches.pop()
+            choice = next((item for item in choices if item.identifier == identifier), None)
             if choice and choice in enum.snapshot():
                 enum.choose(choice, original=before, exclusive=enum.flag)
                 return True
@@ -234,13 +219,6 @@ def _viewport(context,target,mx,my):
                 if mat:
                     mat=mat.original
                     values.append(mat)
-                    tree=mat.node_tree
-                    if tree and tree.nodes.active:
-                        image=getattr(tree.nodes.active, "image", None)
-                        if image:
-                            values.append(image)
-        if len(obj.users_collection)==1:
-            values.append(obj.users_collection[0])
         return values
 
 

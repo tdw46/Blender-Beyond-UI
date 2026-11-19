@@ -41,6 +41,7 @@ class Layout:
         list_identity=None,
         property_options=None,
         popup_header=None,
+        popup_confirm_style=None,
         disclosure_style=None,
     ):
         self.canvas = canvas if canvas is not None else Canvas()
@@ -53,6 +54,7 @@ class Layout:
         self.list_identity = list_identity
         self.disclosure_style = disclosure_style
         self.popup_header = popup_header
+        self.popup_confirm_style = popup_confirm_style
         self.property_options = property_options or {}
         self.commit = commit or (lambda before, after: None)
         self.preview = preview
@@ -325,6 +327,7 @@ class Layout:
             list_identity=self.list_identity,
             property_options=self.property_options,
             popup_header=self.popup_header,
+            popup_confirm_style=self.popup_confirm_style,
             disclosure_style=self.disclosure_style,
         )
         for name in (

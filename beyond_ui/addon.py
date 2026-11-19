@@ -51,6 +51,7 @@ class AddonUI:
             "id_actions",
             "list_identity",
             "popup_header",
+            "popup_confirm_style",
             "disclosure_style",
         }:
             raise ValueError("Unknown Layout integration option")

@@ -21,6 +21,13 @@ class Forward:
 
 
 class WindowManager(Forward):
+    def modal_handler_add(self, operator):
+        # Confirming a dialog can start modal work on the same operator.
+        # Blender already owns its modal handler for the custom dialog.
+        if self.__dict__.get("continuing_operator") is operator:
+            return True
+        return self._raw.modal_handler_add(operator)
+
     def invoke_popup(self, operator, *, width=300, auto_keymap=False):
         from .hosts.bridge import BridgeUnavailable
 
@@ -245,8 +252,10 @@ class Router:
                 if namespace.get(key) is replacement:
                     namespace[key] = old
 
-    def call(self, function, operator, context, event=None):
+    def call(self, function, operator, context, event=None, *, continue_modal=False):
         with self.scope(function, context, event) as adapted:
+            if continue_modal:
+                adapted.window_manager.__dict__["continuing_operator"] = operator
             result = (
                 function(operator, adapted, event)
                 if event is not None
@@ -336,13 +345,17 @@ class Router:
                             else {"CANCELLED"}
                         )
                     try:
+                        from . import typed_pick
+                        runtime = router.config._runtime
+                        if runtime is not None and typed_pick.dispatch(runtime, context, event) is not None:
+                            return {"RUNNING_MODAL"}
                         accepted = dialog.dispatch(context, event)
                         if accepted is None:
                             return {"RUNNING_MODAL"}
                         router.dialogs.pop(key, None)
                         dialog.close()
                         if accepted and originals["execute"]:
-                            return router.call(originals["execute"], op, context)
+                            return router.call(originals["execute"], op, context, continue_modal=True)
                         dialog.cancel_once(originals["cancel"], context)
                         return {"CANCELLED"}
                     except Exception as error:
@@ -496,6 +509,15 @@ class Router:
 
         if type(operator) not in self.operators:
             raise ValueError("Cannot adapt another add-on's operator dialog")
+        # Timers (for example an export/render notice) have a window but no
+        # invoking area. Anchor the notice in a supported editor of that window.
+        if context.window is not None and context.area is None:
+            for kind in ("VIEW_3D", "PROPERTIES"):
+                area = next((a for a in context.window.screen.areas if a.type == kind), None)
+                region = next((r for r in area.regions if r.type == "WINDOW"), None) if area else None
+                if region:
+                    with context.temp_override(window=context.window, area=area, region=region):
+                        return self.dialog(operator, context, None, **options)
         if options.pop("translate", True):
             ctxt = options.pop("text_ctxt", "") or getattr(
                 operator, "bl_translation_context", "*"

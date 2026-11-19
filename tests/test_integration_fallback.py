@@ -58,6 +58,6 @@ class CompatibilityFallback(unittest.TestCase):
                     expected = BridgeUnavailable if enabled and isinstance(error, UnsupportedControl) else type(error)
                     with patch.dict(sys.modules, bpy=NS()), patch('beyond_ui.dialog.Dialog', side_effect=error):
                         with self.assertRaises(expected):
-                            router.dialog(operator_type(), NS(), None, translate=False)
+                            router.dialog(operator_type(), NS(window=Mock(), area=Mock()), None, translate=False)
                     host.close.assert_called_once()
                     self.assertFalse(router.dialogs)

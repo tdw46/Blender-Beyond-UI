@@ -15,6 +15,7 @@ class OperatorProxy(PanelProxy):
 
     def __getattr__(self, name):
         if name in {
+            "get",  # Custom properties belong to the operator properties RNA.
             "bl_rna",
             "is_property_readonly",
             "id_data",
@@ -65,6 +66,7 @@ class Dialog:
             context_menu=context_menu,
         )
         self.needs_check = False
+        self.state = {}
         root = host.canvas
         self.owner = root.button("dialog-owner", "", lambda: None)
         x, y = host.anchor(event)
@@ -74,12 +76,22 @@ class Dialog:
     def changed(self, before, after):
         self.needs_check = True
 
-    def build(self, context, *, initial=True):
+    def record_draw(self, context):
+        from .layout_recording import Tape
+
+        tape = Tape(self.state)
+        tape.root._values["is_popover"] = True
+        type(self.operator).draw(OperatorProxy(self.operator, tape.root), context)
+        tape.initialize_lists(self.list_identity)
+        return tape
+
+    def build(self, context, *, initial=True, tape=None):
         host, operator, root = self.host, self.operator, self.host.canvas
         title, confirm_text, cancel_default, context_menu = (
             self.form[k]
             for k in ("title", "confirm_text", "cancel_default", "context_menu")
         )
+        scroll = 0 if initial else self.popup.scroll
         if not initial:
             root.cancel()
         self.canvas = Canvas(
@@ -103,7 +115,7 @@ class Dialog:
             return lambda: value if not self.closed else None
 
         options = dict(self.layout_options)
-        options.update(resolve=resolve, commit=self.changed)
+        options.update(resolve=resolve, commit=self.changed, state=self.state)
         options["property_options"] = {
             **options.get("property_options", {}),
             **getattr(type(operator), "beyond_ui_props", {}),
@@ -111,17 +123,15 @@ class Dialog:
         ui = Layout(self.canvas, context, **options)
         ui._is_popover = True
         ui.draw_popup_header(text=title or operator.bl_label, icon=self.icon, translate=False)
+        self.list_identity = ui.list_identity
+        self.tape = None
         draw = getattr(type(operator), "draw", None)
         if self.mode == "CONFIRM":
             for line in self.message.splitlines():
                 ui.label(text=line, translate=False)
         elif draw is not None:
-            from .layout_recording import Tape
-
-            tape = Tape()
-            draw(OperatorProxy(operator, tape.root), context)
-            tape.initialize_lists(ui.list_identity)
-            tape.play(ui)
+            self.tape = tape or self.record_draw(context)
+            self.tape.play(ui)
         else:
             for prop in operator.properties.bl_rna.properties:
                 if (
@@ -130,12 +140,16 @@ class Dialog:
                     and not prop.is_readonly
                 ):
                     ui.prop(operator.properties, prop.identifier)
+        revision = getattr(type(operator), "beyond_ui_draw_revision", None)
+        self.draw_revision = revision(operator, context) if revision else None
         if self.mode != "PROPERTIES":
             self.footer(ui, confirm_text, cancel_default)
         self.popup = PanelPopover(self, root, self.owner, self.canvas, None)
         root.open_widget(self.popup, self.owner, host.clip)
         if initial:
             self.popup.opened(context)
+        else:
+            self.popup.scroll_to(scroll)
         root._bind_motion(self.popup.motion, self.owner)
         self.popup.motion.pulse("reveal", 0.12)
 
@@ -168,6 +182,8 @@ class Dialog:
                 active_default=(not accepted if cancel_default else accepted),
             )
             control.options["text_align"] = "CENTER"
+            if accepted and ui.popup_confirm_style:
+                ui.popup_confirm_style(row)
 
     def available(self, context, scope=None, *, poll=True):
         return not self.closed and self.host.alive(context)
@@ -182,11 +198,21 @@ class Dialog:
             self.outcome = False
         else:
             self.host.event(context, event)
-            if self.needs_check:
+            # A list action can update another section of this dialog without
+            # editing an operator property. Recheck on discrete input only.
+            revision = getattr(type(self.operator), "beyond_ui_draw_revision", None)
+            structural = (revision and event.value in {"PRESS", "RELEASE", "DOUBLE_CLICK"}
+                          and self.draw_revision != revision(self.operator, context))
+            if self.outcome is None and (structural or self.needs_check):
                 self.needs_check = False
                 check = getattr(type(self.operator), "check", None)
-                if check and check(self.operator, context) and self.outcome is None:
-                    self.build(context, initial=False)
+                checked = check(self.operator, context) if check else False
+                # Native dialogs re-evaluate conditional rows after an edit.
+                # Reuse controls for value/label changes and preserve scroll
+                # when an enabled state or the set of fields actually changes.
+                tape = self.record_draw(context) if self.tape else None
+                if structural or checked or (tape and not self.tape.patch_display(tape)):
+                    self.build(context, initial=False, tape=tape)
             if self.host.canvas.overlay is None and self.outcome is None:
                 self.outcome = False
         return self.outcome

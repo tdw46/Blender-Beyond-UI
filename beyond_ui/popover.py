@@ -291,7 +291,7 @@ class PanelPopover(Widget):
             self.canvas._scoped_shortcuts.clear()
         self.canvas.park()
         close = getattr(self.model, "closed", None)
-        if close and not getattr(self, "_did_close", False):
+        if callable(close) and not getattr(self, "_did_close", False):
             self._did_close = True
             close()
         super().cancel()

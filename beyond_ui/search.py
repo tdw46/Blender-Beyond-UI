@@ -35,9 +35,9 @@ def field_rect(control):
         label_band=control.options.get('_label_band', 20))[1]
 
 
-def clear_rect(rect):
+def clear_rect(rect, *, has_dropper=True):
     x, y, w, h = rect
-    drop = min(20., w*.30)
+    drop = min(20., w*.30) if has_dropper else 0
     return x + max(0, w-drop-22), y, min(22,w-drop), h
 
 
@@ -61,6 +61,8 @@ class CollectionSearch:
         meta = owner.bl_rna.properties[name]
         if meta.type != "COLLECTION":
             raise ValueError("Search source must be an RNA collection")
+        from .typed_pick import scene_type
+        self.scene_pickable = scene_type(meta.fixed_type)
         self.icon = native_item_icon(next(iter(getattr(owner, name)), None))
         target = self.source.owner().bl_rna.properties[self.source.name]
         if target.type not in {"STRING", "POINTER"}:

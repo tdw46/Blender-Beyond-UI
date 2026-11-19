@@ -1708,7 +1708,7 @@ class Canvas(Group):
                     from .search import clear_rect, field_rect
                     from .context_menu import inside
                     model = control.options["search_field"]
-                    if model.can_clear() and inside(clear_rect(field_rect(control)), x, y):
+                    if model.can_clear() and inside(clear_rect(field_rect(control), has_dropper=model.scene_pickable), x, y):
                         model.clear()
                         control.motion.pulse("body", 0.12)
                         return True

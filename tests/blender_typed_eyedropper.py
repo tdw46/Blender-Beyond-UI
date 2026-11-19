@@ -43,6 +43,11 @@ def run():
             center=list(c.controls.values())[-1]
             camera=ui.prop(scene,'camera')
             mode=ui.prop(rig,'display_type')
+            groups=ui.prop_search(scene.test_typed_pick,'center',cube,'vertex_groups',text='')
+            assert not typed_pick.supported(groups)
+            assert groups.options['search_field'].open() is not None
+            checks.append('Non-pickable collections remain searchable without a dropper')
+
             row=ui.row(align=True)
             for name in ('Try Automatic Mapping','Humanoid Standards'):
                 row.group.button(name,name,lambda:None,icon='WORLD')
@@ -70,9 +75,9 @@ def run():
             event((-3,0,0))
             assert scene.camera==cam,c.menu_error
             checks.append('Camera rejects mesh, then picks camera')
-            click(mode);event((0,0,0))
-            assert rig.display_type=='WIRE',c.menu_error
-            checks.append('Enum takes matching RNA value from mesh under cursor')
+            assert not typed_pick.supported(mode) and not typed_pick.start(c,mode,ctx)
+            assert not typed_pick._sessions and rig.display_type=='SOLID'
+            checks.append('Display mode is a plain enum')
             click(camera);event((0,0,0),'ESC')
             assert scene.camera==cam and not typed_pick._sessions
             assert ctx.active_object==rig and ctx.mode=='OBJECT'

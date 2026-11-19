@@ -78,6 +78,8 @@ class PointerField:
             raise ValueError("Expected a pointer property")
         import bpy
 
+        from .typed_pick import scene_type
+        self.scene_pickable = scene_type(meta.fixed_type)
         self.type = getattr(bpy.types, meta.fixed_type.identifier, None)
         if self.type is None:
             raise ValueError("Pointer target RNA type is unavailable")
