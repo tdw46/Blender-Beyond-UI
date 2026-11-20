@@ -42,6 +42,30 @@ class BindingSnapshots(unittest.TestCase):
         edit.finish()
         self.assertEqual(commits, [(1, "Second", "Accepted")])
 
+    def test_text_commits_before_clicked_action_and_escape_discards(self):
+        binding, owners, _, commits = self.dynamic()
+        canvas = Canvas()
+        field = canvas.text("speech", "", binding)
+        submitted = []
+        generate = canvas.button("generate", "Generate", lambda: submitted.append(binding.read()))
+        canvas.arrange(300)
+        clip = (0, 0, 300, 200)
+
+        def send(kind, control, char=""):
+            event = NS(type=kind, value="PRESS", unicode=char)
+            return canvas.event(event, control.rect[0] + 4, control.rect[1] + 4, clip)
+
+        send("LEFTMOUSE", field)
+        send("T", field, "Typed speech")
+        send("LEFTMOUSE", generate)
+        self.assertEqual(submitted, ["Typed speech"])
+        self.assertEqual(commits, [(0, "First", "Typed speech")])
+        send("LEFTMOUSE", field)
+        send("X", field, "Discard")
+        send("ESC", field)
+        self.assertEqual(owners[0]["name"], "Typed speech")
+        self.assertEqual(len(commits), 1)
+
     def test_canvas_stale_editor_closes_without_writing_new_selection(self):
         binding, owners, selection, commits = self.dynamic()
         canvas = Canvas()

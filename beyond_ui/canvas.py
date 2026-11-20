@@ -1240,6 +1240,17 @@ class Canvas(Group):
                 return event.value in {"PRESS", "DOUBLE_CLICK"} and (
                     event.type != "RIGHTMOUSE" or inside(clip, x, y)
                 )
+        # Commit the draft before the destination (including a nested widget)
+        # handles the same click. Its action may read the property immediately.
+        if (self.editor is not None and self.active.kind == "text"
+                and event.type == "LEFTMOUSE" and event.value in {"PRESS", "DOUBLE_CLICK"}):
+            if not self.edit.binding.valid():
+                self.cancel()
+                return True
+            if self.hit(x, y, clip, include_disabled=True) is self.active:
+                return True
+            self._write(self.editor.text)
+            self.finish()
         if self.overlay and "widget" in self.overlay and "clip" in self.overlay:
             if tuple(self._popup_clip or clip) != self.overlay["clip"]:
                 self.open_widget(
