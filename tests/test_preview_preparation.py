@@ -43,6 +43,40 @@ class PreviewPreparation(unittest.TestCase):
             bank.cancel_preparation()
             timers.unregister.assert_called_once()
             self.assertIsNone(bank._warm_callback)
-            platform.backend_type_get.return_value = "VULKAN"
+            platform.backend_type_get.return_value = "NONE"
             bank.prepare_tiles(owner, [7])
             self.assertEqual(timers.register.call_count, 2)
+
+    def test_windows_prepares_pixels_without_creating_gpu_resources(self):
+        for backend in ("VULKAN", "OPENGL"):
+            with self.subTest(backend=backend):
+                owner = Owner()
+                timers = Mock()
+                platform = Mock()
+                platform.backend_type_get.return_value = backend
+                reads = []
+
+                class Preview:
+                    icon_id = 13
+
+                    @property
+                    def image_size(self):
+                        reads.append(self.icon_id)
+                        return 32, 48
+
+                collection = {"pose": Preview()}
+                bank = PreviewIcons(lambda: [collection])
+                with (patch.object(sys, "platform", "win32"),
+                      patch.dict(sys.modules, bpy=SimpleNamespace(app=SimpleNamespace(background=False, timers=timers)),
+                                 gpu=SimpleNamespace(platform=platform)),
+                      patch.object(bank, "_upload", return_value=("texture", 2/3)) as upload):
+                    bank.prepare_tiles(owner, [13, 13])
+                    callback, = timers.register.call_args.args
+                    self.assertGreater(callback(), 0)
+                    self.assertIsNone(callback())
+                    self.assertEqual(reads, [13])
+                    upload.assert_not_called()
+                    bank.prepare_tiles(owner, [13])
+                    timers.register.assert_called_once()
+                    self.assertEqual(bank._texture(13, True, None), ("texture", 2/3))
+                    upload.assert_called_once_with(collection["pose"], square=True, letterbox=None)

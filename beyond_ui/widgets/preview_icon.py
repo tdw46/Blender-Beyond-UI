@@ -1,4 +1,5 @@
 """Resolve author-owned ImagePreviews and upload visible gallery tiles on demand."""
+import sys
 from collections import OrderedDict
 
 from .base import Widget
@@ -11,6 +12,7 @@ class PreviewIcons:
         self.textures = OrderedDict()
         self.errors = {}
         self.collections_key = None
+        self._decoded_page = set()
         self._warm_request = None
         self._warm_callback = None
 
@@ -96,13 +98,21 @@ class PreviewIcons:
         import bpy
         import gpu
 
-        # Timers have a usable GPU context on the qualified windowed Metal host.
-        # Other backends continue to create textures in the owning draw callback.
-        if bpy.app.background or gpu.platform.backend_type_get() != "METAL":
+        if bpy.app.background:
+            return
+        backend = gpu.platform.backend_type_get()
+        decode_only = sys.platform == "win32" and backend in {"VULKAN", "OPENGL"}
+        if backend != "METAL" and not decode_only:
             return
         variant = "square" if letterbox is None else letterbox
-        pending = tuple(dict.fromkeys(icon for icon in icons if icon and (icon, variant) not in self.textures))[:96]
-        self._warm_request = (ref(canvas), iter(pending), letterbox) if pending else None
+        if decode_only:
+            page = tuple(dict.fromkeys(icon for icon in icons if icon))[:96]
+            self._decoded_page.intersection_update(page)
+            pending = tuple(icon for icon in page if icon not in self._decoded_page
+                            and (icon, variant) not in self.textures)
+        else:
+            pending = tuple(dict.fromkeys(icon for icon in icons if icon and (icon, variant) not in self.textures))[:96]
+        self._warm_request = (ref(canvas), iter(pending), letterbox, decode_only) if pending else None
         if pending and self._warm_callback is None:
             self._warm_callback = self._warm_one
             bpy.app.timers.register(self._warm_callback, first_interval=0.01)
@@ -110,13 +120,25 @@ class PreviewIcons:
     def _warm_one(self):
         request = self._warm_request
         if request is not None:
-            owner, icons, letterbox = request
+            owner, icons, letterbox, decode_only = request
             canvas = owner()
             if canvas is not None and canvas.visible:
                 for icon in icons:
                     key = (icon, "square" if letterbox is None else letterbox)
                     if key not in self.textures:
-                        self._texture(icon, True, letterbox)
+                        if decode_only:
+                            # ImagePreview loads its full pixels lazily on the first dimension read.
+                            # Windows creates the GPUTexture only in the normal paint callback.
+                            try:
+                                preview = self._preview(icon)
+                                if preview is not None:
+                                    width, height = preview.image_size
+                                    if width and height:
+                                        self._decoded_page.add(icon)
+                            except (AttributeError, ReferenceError, RuntimeError, ValueError):
+                                pass  # First paint resolves missing or replaced previews again.
+                        else:
+                            self._texture(icon, True, letterbox)
                         return 0.01
         self._warm_request = self._warm_callback = None
         return None
@@ -124,6 +146,7 @@ class PreviewIcons:
     def cancel_preparation(self):
         import bpy
 
+        self._decoded_page.clear()
         callback = self._warm_callback
         self._warm_request = self._warm_callback = None
         if callback is not None and bpy.app.timers.is_registered(callback):
