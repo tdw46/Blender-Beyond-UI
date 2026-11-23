@@ -109,6 +109,24 @@ class ThemeTests(unittest.TestCase):
             self.assertGreater(p['header_divider'][3],.28)
             if light:self.assertGreater(p['input'][0],.8)
 
+    def test_accent_ink_cache_tracks_each_surface_and_alpha(self):
+        from beyond_ui.gpu.skin import _accent_inks, themed_roles
+        from beyond_ui.gpu.contrast import backgrounds, readable
+
+        palette = dict(style.theme_palette(preferences()))
+        _accent_inks.cache_clear()
+        for key in ("accent", "bg", "card", "input", "field"):
+            changed = dict(palette)
+            changed[key] = (*changed[key][:3], changed[key][3] * .75)
+            for current in (palette, changed, palette):
+                _, inks = themed_roles(current)
+                grounds = backgrounds(current)
+                self.assertEqual(inks["accent_text"], readable(current["accent"], grounds, vivid=True))
+                self.assertEqual(inks["curve"], readable(current["accent"], grounds, 3.0, vivid=True))
+                self.assertEqual(inks["curve"], inks["point_selected"])
+        self.assertEqual(_accent_inks.cache_info().misses, 6)
+        self.assertEqual(_accent_inks.cache_info().hits, 9)
+
     def test_explicit_ink_override_and_data_colors_are_not_rewritten(self):
         from beyond_ui import StyleSheet
         base=style.theme_palette(preferences())

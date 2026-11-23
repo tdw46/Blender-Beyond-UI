@@ -4,6 +4,8 @@ Uses the source library's shared glass lens when a host supplies its backdrop.
 All chrome remains translucent in the tint-only compatibility path as well.
 """
 
+from functools import lru_cache
+
 _shader = _batch = None
 
 
@@ -202,6 +204,14 @@ def reference_inks():
     }
 
 
+@lru_cache(maxsize=128)
+def _accent_inks(accent, bg, card, input_color, field):
+    from .contrast import backgrounds, readable
+
+    grounds = backgrounds({"bg": bg, "card": card, "input": input_color, "field": field})
+    return readable(accent, grounds, 3.0, vivid=True), readable(accent, grounds, vivid=True)
+
+
 def themed_roles(p):
     """Source RGB roles, with the compound controls' existing glass opacities.
 
@@ -210,7 +220,7 @@ def themed_roles(p):
     data never passes through this function. Neutral shader rims are optics.
     """
     from .style import shade
-    from .contrast import backgrounds, readable
+    curve, accent_text = _accent_inks(*(tuple(p[key]) for key in ("accent", "bg", "card", "input", "field")))
 
     owners = {
         "card": "card",
@@ -250,15 +260,15 @@ def themed_roles(p):
         "list_divider": alpha("text", 0.32),
         "grid_major": alpha("text", 0.27),
         "grid_minor": alpha("text", 0.14),
-        "curve": readable(p["accent"], backgrounds(p), 3.0, vivid=True),
+        "curve": curve,
         "point_border": alpha("bg", 1.0),
-        "point_selected": readable(p["accent"], backgrounds(p), 3.0, vivid=True),
+        "point_selected": curve,
         "point": p["text"],
         "marker_outer": alpha("bg", 0.8),
         "marker_ring": p["text"],
         "switch_shadow": alpha("bg", 0.30),
     }
-    inks["accent_text"] = readable(p["accent"], backgrounds(p), vivid=True)
+    inks["accent_text"] = accent_text
     # Changing values keep the source saturation at the readable ink's value.
     # Do not whiten this transient signal like ordinary accent labels.
     peak = max(p["accent"][:3])
