@@ -417,6 +417,8 @@ class Plan:
                 line += " "
             lines.append(line.rstrip())
         node.options["_wrapped_lines"] = tuple(lines)
+        if node.options.get("inline_label") and len(lines) > 1:
+            node.options["_last_line_width"] = gutter + measure(lines[-1])
         return max(
             0,
             len(lines) * node.options.get("line_height", node.options.get("font_size", self.theme.font_size) * 1.55)
@@ -842,6 +844,18 @@ class Plan:
                 else:
                     offset = {"start": 0, "center": 0.5, "end": 1}[align_items]
                     cells = [(c, x, (extent-h)*offset, w, h) for c, x, y, w, h in cells]
+            # Keep the next action beside the last painted line when a caption wraps.
+            if len(cells) == 2 and self.button_leaf(children[1]) is not None:
+                label, lx, ly, lw, lh = cells[0]
+                while hasattr(label, "children") and len(label.children) == 1:
+                    label = label.children[0]
+                lines = label.options.get("_wrapped_lines", ())
+                if label.options.get("inline_label") and len(lines) > 1:
+                    action, _, _, aw, ah = cells[1]
+                    step = label.options.get("line_height", self.theme.font_size * 1.55)
+                    end_x = lx + min(lw, label.options["_last_line_width"] + 2)
+                    center_y = ly + (lh + (len(lines) - 1) * step) / 2
+                    cells[1] = action, end_x + gap, center_y - ah / 2, aw, ah
         elif node.kind == "grid" and children:
             natural = [self.natural(c) for c in children]
             cols, rows = grid_shape(

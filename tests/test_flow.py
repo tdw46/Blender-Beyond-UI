@@ -25,6 +25,14 @@ class Flow(unittest.TestCase):
         self.assertEqual(action.rect[0], x + w + 4)
         self.assertEqual(action.rect[1] + action.rect[3] / 2, y + h / 2)
         self.assertEqual(caption.options["_wrapped_lines"], ("View",))
+        caption.label = "A very long title"
+        ui.canvas.invalidate()
+        ui.canvas.arrange(110)
+        lines = caption.options["_wrapped_lines"]
+        self.assertGreater(len(lines), 1)
+        self.assertEqual(action.rect[0], caption.rect[0] + len(lines[-1]) * 6 + 2 + 4)
+        self.assertEqual(action.rect[1] + action.rect[3] / 2,
+                         caption.rect[1] + caption.rect[3] - 10)
 
     def test_gallery_headers_align_without_stretching_the_images(self):
         from beyond_ui import style
