@@ -45,6 +45,17 @@ class StylesheetTests(unittest.TestCase):
         self.assertIs(sheet.palette(updated), updated)
         self.assertEqual(updated['field'][3], base['field'][3] * 0.75)
 
+    def test_alternating_parent_palettes_reuse_each_resolution(self):
+        base = theme_palette()
+        other = StyleSheet(colors={"accent": "#FF8000"}).palette(base)
+        sheet = StyleSheet(opacity=0.5)
+        first, second = sheet.palette(base), sheet.palette(other)
+        self.assertIs(sheet.palette(base), first)
+        self.assertIs(sheet.palette(other), second)
+        sheet.update(opacity=1)
+        self.assertEqual(sheet.palette(base)["field"], base["field"])
+        self.assertIsNot(sheet.palette(other), second)
+
     def test_large_heading_reserves_icon_and_wrapped_line_height(self):
         from beyond_ui import Layout
 

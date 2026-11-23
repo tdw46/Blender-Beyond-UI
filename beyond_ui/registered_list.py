@@ -433,6 +433,11 @@ class RegisteredList(CollectionList):
         self.proxy = ListProxy(self)
         self.draw_item = python_callback(self.cls, "draw_item")
         self.draw_item_cache_key = python_callback(self.cls, "draw_item_cache_key")
+        # Host-owned pure keys can describe a native UIList without invoking
+        # its draw callback or entering a temporary Blender context per row.
+        self.host_row_revision = (source.layout.list_row_revisions or {}).get(self.name)
+        if self.draw_item_cache_key is not None or getattr(self.draw_item, "_draw_funcs", None):
+            self.host_row_revision = None
         self.draw_item_texts = python_callback(self.cls, "draw_item_texts")
         if self.draw_item_texts is not None and self.draw_item_cache_key is None:
             raise ValueError("draw_item_texts requires a complete structural draw_item_cache_key")
@@ -547,6 +552,8 @@ class RegisteredList(CollectionList):
 
         if not self.source.valid_item(item):
             raise ReferenceError("List row changed before authoring")
+        if self.host_row_revision is not None:
+            return self.host_row_revision(self.context, self.source.resolve(), item.owner, item.index), None
         def read(proxy, context, data, value, index):
             revision = self.draw_item_cache_key(proxy, context, data, value, index)
             texts = self.draw_item_texts(proxy, context, data, value, index) if self.draw_item_texts else None
@@ -558,6 +565,8 @@ class RegisteredList(CollectionList):
 
     def refresh_display(self):
         """Re-evaluate only visible rows on their owning native panel redraw."""
+        if self.host_row_revision is not None:
+            self.check(self.context)
         if (getattr(self, "_resume_display", False)
                 or hasattr(self, "viewport") and any(
                     not self.source.valid_item(item) for item, _ in self.visible()
@@ -638,6 +647,7 @@ class RegisteredList(CollectionList):
             pointer_sources=base.pointer_sources,
             id_actions=base.id_actions,
             list_identity=base.list_identity,
+            list_row_revisions=base.list_row_revisions,
             property_options={
                 **base.property_options,
                 **getattr(self.cls, "beyond_ui_props", {}),
@@ -795,6 +805,7 @@ class RegisteredList(CollectionList):
         if not hasattr(self, "viewport"):
             return
         selected = self.selected()
+        keyed_rows = self.host_row_revision is not None or self.draw_item_cache_key is not None
         next_cache, created = {}, []
         try:
             for item, rect in self.visible():
@@ -811,10 +822,10 @@ class RegisteredList(CollectionList):
                 canvas = entry[0] if entry else None
                 revision = getattr(canvas, "_row_revision", None)
                 texts = None
-                if self.draw_item_cache_key is not None and (live or canvas is None):
+                if keyed_rows and (live or canvas is None):
                     revision, texts = self.row_display_revision(item)
                 refresh = live and entry and (
-                    self.draw_item_cache_key is None
+                    not keyed_rows
                     or canvas._row_revision != revision
                 )
                 tape = self.row_tape(item) if refresh else None

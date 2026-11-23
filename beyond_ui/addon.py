@@ -51,6 +51,7 @@ class AddonUI:
             "id_actions",
             "list_identity",
             "list_property_aliases",
+            "list_row_revisions",
             "popup_header",
             "popup_confirm_style",
             "popup_action_style",

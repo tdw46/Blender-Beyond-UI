@@ -122,6 +122,7 @@ class StyleSheet:
         self._canvas_variants = WeakKeyDictionary()
         self._cache = None
         self._variant_cache = {}
+        self._base_palettes = {}
         self.revision = 0
         self.animation = AnimationSettings()
         self._data = deepcopy(
@@ -231,6 +232,7 @@ class StyleSheet:
         self.revision += 1
         self._cache = None
         self._variant_cache.clear()
+        self._base_palettes.clear()
         self._sync_motion()
         for canvas in tuple(self._canvases):
             self.apply(canvas)
@@ -299,14 +301,20 @@ class StyleSheet:
                 if "accent" in values and role not in values:
                     resolved[role] = explicit[role]
             resolved["_color_overrides"] = MappingProxyType(explicit)
-            self._variant_cache[key] = MappingProxyType(resolved)
-        return self._variant_cache[key]
+            self._variant_cache[key] = (base, MappingProxyType(resolved))
+        return self._variant_cache[key][1]
 
     def palette(self, base):
         # Nested list rows inherit the parent's resolved palette. Applying this
         # same preset twice wastes work and compounds its surface opacity.
         if self._cache is not None and (self._cache[0] is base or self._cache[1] is base):
             return self._cache[1]
+        # Inline styles alternate between parent and row palettes on each paint.
+        # Keep the inputs alive with the outputs so an id cannot be recycled.
+        cached = self._base_palettes.get(id(base))
+        if cached is not None:
+            self._cache = cached
+            return cached[1]
         from .gpu.skin import themed_roles
 
         p = dict(base)
@@ -375,7 +383,9 @@ class StyleSheet:
         p["source"] = base["source"] + "+preset:" + self._data["name"]
         p["_color_overrides"] = MappingProxyType(overrides)
         result = MappingProxyType(p)
-        self._cache = (base, result)
+        if len(self._base_palettes) >= 64:
+            self._base_palettes.clear()
+        self._cache = self._base_palettes[id(base)] = (base, result)
         return result
 
 

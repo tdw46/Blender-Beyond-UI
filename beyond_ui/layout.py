@@ -42,6 +42,7 @@ class Layout:
         id_actions=None,
         list_identity=None,
         list_property_aliases=None,
+        list_row_revisions=None,
         property_options=None,
         popup_header=None,
         popup_confirm_style=None,
@@ -57,6 +58,7 @@ class Layout:
         self.id_actions = id_actions
         self.list_identity = list_identity
         self.list_property_aliases = list_property_aliases
+        self.list_row_revisions = list_row_revisions
         self.disclosure_style = disclosure_style
         self.popup_header = popup_header
         self.popup_confirm_style = popup_confirm_style
@@ -332,6 +334,7 @@ class Layout:
             id_actions=self.id_actions,
             list_identity=self.list_identity,
             list_property_aliases=self.list_property_aliases,
+            list_row_revisions=self.list_row_revisions,
             property_options=self.property_options,
             popup_header=self.popup_header,
             popup_confirm_style=self.popup_confirm_style,
