@@ -122,6 +122,9 @@ class Dialog:
         }
         ui = Layout(self.canvas, context, **options)
         ui._is_popover = True
+        header = getattr(type(operator), "beyond_ui_dialog_header", None)
+        if header:
+            ui.popup_header = header
         ui.draw_popup_header(text=title or operator.bl_label, icon=self.icon, translate=False)
         self.list_identity = ui.list_identity
         self.tape = None
@@ -182,7 +185,10 @@ class Dialog:
                 active_default=(not accepted if cancel_default else accepted),
             )
             control.options["text_align"] = "CENTER"
-            if accepted and ui.popup_confirm_style:
+            action_style = getattr(type(self.operator), "beyond_ui_dialog_action_style", None)
+            if action_style:
+                action_style(row, accepted)
+            elif accepted and ui.popup_confirm_style:
                 ui.popup_confirm_style(row)
 
     def available(self, context, scope=None, *, poll=True):
