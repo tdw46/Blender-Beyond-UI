@@ -1861,6 +1861,9 @@ class Canvas(Group):
     def paint(self, rect, clip, *, preferences=None, font=0, backdrop=None, overlays=True):
         from .gpu.paint import paint
 
+        if getattr(self, "prefer_native_panel_paint", False):
+            from .gpu.panel_painter import native_painter
+            paint = native_painter() or paint
         return paint(
             self, rect, clip, preferences=preferences, font=font, backdrop=backdrop, overlays=overlays
         )

@@ -8,6 +8,7 @@ from ..editing import display_number
 from ..menu_metrics import Metrics as menu_metrics
 
 _REST = nullcontext()
+_NATIVE_PANEL = __name__.endswith("._win_panel")
 
 
 @contextmanager
@@ -78,7 +79,7 @@ def paint(
     cx, cy, cw, ch = clip
     if not canvas.visible or w <= 0 or h <= 0 or cw <= 0 or ch <= 0:
         return 0
-    retained_widgets = is_windows_vulkan()
+    retained_widgets = _NATIVE_PANEL or is_windows_vulkan()
     sx = w / max(1.0, canvas._width)
     sy = h / max(1.0, canvas.height)
     scale = min(sx, sy)
@@ -257,6 +258,9 @@ def paint(
                 ink,
                 radius=0,
             )
+        # Icons, trailing artwork and the caret have already been submitted.
+        if _NATIVE_PANEL and not value and editor is None:
+            return
         blf.enable(active_font, blf.CLIPPING)
         try:
             blf.clipping(active_font, left, bottom, right, top)
