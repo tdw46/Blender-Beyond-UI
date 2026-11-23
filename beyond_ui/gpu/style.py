@@ -863,8 +863,9 @@ def slider(
             radius=3 * scale,
             mode=2,
         )
-    else:
-        draw(
+    _bind_shape()
+    if not hue:
+        _draw_bound(
             tx,
             ty - 2.5 * scale,
             tw,
@@ -876,7 +877,7 @@ def slider(
     fill = tw * ratio
     color = (accent or palette["slider_fill"]) if enabled else palette["muted"]
     if fill > 0 and not hue:
-        draw(
+        _draw_bound(
             tx,
             ty - 2.5 * scale,
             fill,
@@ -887,7 +888,7 @@ def slider(
         )
     ax, ay = shape
     r = 6.5 * scale
-    draw(
+    _draw_bound(
         tx + fill - r * ax - scale,
         ty - r * ay - 2 * scale,
         2 * r * ax + 2 * scale,
@@ -896,7 +897,7 @@ def slider(
         mode=3,
     )
     color = (accent or palette["text"]) if enabled else palette["muted"]
-    draw(
+    _draw_bound(
         tx + fill - r * ax,
         ty - r * ay,
         2 * r * ax,
@@ -1148,9 +1149,7 @@ void main() {
     )
 
 
-def draw(x, y, w, h, color, *, radius=6.0, border=0.0, top=None, mode=0.0, hue=0.0):
-    if w <= 0 or h <= 0:
-        return
+def _bind_shape():
     import gpu
 
     ensure()
@@ -1162,11 +1161,23 @@ def draw(x, y, w, h, color, *, radius=6.0, border=0.0, top=None, mode=0.0, hue=0
     _shader.uniform_float(
         "mvp", gpu.matrix.get_projection_matrix() @ gpu.matrix.get_model_view_matrix()
     )
+
+
+def _draw_bound(x, y, w, h, color, *, radius=6.0, border=0.0, top=None, mode=0.0, hue=0.0):
+    if w <= 0 or h <= 0:
+        return
     _shader.uniform_float("rect", (x, y, w, h))
     _shader.uniform_float("bottom", color)
     _shader.uniform_float("top", color if top is None else top)
     _shader.uniform_float("params", (radius, border, float(mode), hue))
     _batch.draw(_shader)
+
+
+def draw(x, y, w, h, color, *, radius=6.0, border=0.0, top=None, mode=0.0, hue=0.0):
+    if w <= 0 or h <= 0:
+        return
+    _bind_shape()
+    _draw_bound(x, y, w, h, color, radius=radius, border=border, top=top, mode=mode, hue=hue)
 
 
 def clear():

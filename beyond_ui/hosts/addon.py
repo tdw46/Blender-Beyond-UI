@@ -371,7 +371,7 @@ class Runtime:
             except Exception as error:
                 self.draw_error(definition, key, native, error, context, instance)
                 return
-            fingerprint += (tuple(tape.signature),)
+            fingerprint = cached[0] if reuse_author else (*fingerprint, tuple(tape.signature))
         if (not reuse_author and cached is not None and tape is not None and cached[0][:-1] == fingerprint[:-1]
                 and getattr(cached[1], "_author_tape", None) is not None
                 and cached[1]._author_tape.patch_display(tape)):
@@ -437,6 +437,9 @@ class Runtime:
                 **layout_options,
             )
             try:
+                # A new owner has no active edits, overlays or motion to retire.
+                # Build its composite index once, before its first arrange/refresh.
+                canvas._initial_authoring = True
                 if tape is not None:
                     tape.play(layout)
                     canvas._author_tape = tape
@@ -450,6 +453,9 @@ class Runtime:
                     raise
                 self.draw_error(definition, key, native, error, context, instance)
                 return
+            finally:
+                canvas._initial_authoring = False
+            canvas.invalidate()
             self.canvases[definition][key] = fingerprint, canvas
         else:
             canvas = cached[1]
@@ -532,7 +538,6 @@ class Runtime:
         return None
 
     def reset_file_hosts(self):
-        self.preview_banks.clear()
         """Release file/context-scoped drawing resources before replacing Main.
 
         Clearing canvases alone leaves BLF glyph/GPU state and draw handlers
@@ -540,6 +545,9 @@ class Runtime:
         while rendering no glyphs. Recreate hosts once through schedule_start,
         outside painting; ordinary undo/value refreshes retain their resources.
         """
+        for bank in self.preview_banks.values():
+            bank.cancel_preparation()
+        self.preview_banks.clear()
         self.refresh()
         for definition, host in tuple(self.hosts.items()):
             host.close()
@@ -583,6 +591,8 @@ class Runtime:
                     definition.draw = original
         self.draw_patches.clear()
         self.canvases.clear()
+        for bank in self.preview_banks.values():
+            bank.cancel_preparation()
         self.preview_banks.clear()
         self.running.clear()
         for cls in reversed(self.classes):

@@ -42,6 +42,16 @@ def measure(font, size, text):
     return blf.dimensions(font, text)
 
 
+@contextmanager
+def _moving_control(font, control, rect, slider):
+    body = not slider and (control.kind != "toggle" or control.options.get("bool_button"))
+    with (typography.motion_text(font, control.motion),
+          control.motion.deform("reveal", rect),
+          control.motion.deform("body", rect) if body else _REST,
+          typography.submitted_text(font)):
+        yield
+
+
 def paint(
     canvas,
     rect,
@@ -524,17 +534,9 @@ def paint(
                         )
                         control.motion.region("field", field)
             moving = bool(control.motion.tracks)
-            with (
-                typography.motion_text(font, control.motion) if moving else _REST,
-                control.motion.deform("reveal", row_rect) if moving else _REST,
-                (
-                    _REST
-                    if not moving or (kind == "toggle" and not control.options.get("bool_button"))
-                    or slider
-                    else control.motion.deform("body", row_rect)
-                ),
-                typography.submitted_text(font),
-            ):
+            scope = (_moving_control(font, control, row_rect, slider) if moving
+                     else typography.submitted_text(font))
+            with scope:
                 if external_label:
                     text(
                         control.label,

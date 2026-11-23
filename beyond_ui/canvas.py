@@ -258,6 +258,8 @@ class Canvas(Group):
             self.value_feedback.configure(self.theme.stylesheet._data.get("value_feedback", {}))
         self._sized_groups = WeakSet()
         self._composites = {}
+        self._control_bands = ()
+        self._initial_authoring = False
         self._dirty = True
         self._width = None
         self.height = 0.0
@@ -515,6 +517,10 @@ class Canvas(Group):
             motion.input(event, mx, my)
 
     def invalidate(self):
+        self._control_bands = ()
+        if self._initial_authoring and self.layout_count == 0:
+            self._dirty = True
+            return
         self.value_feedback.prune()
         self._button_press = None
         if hasattr((self.overlay or {}).get("widget"), "canvas"):
@@ -524,7 +530,8 @@ class Canvas(Group):
         self._dirty = True
         self._composites.clear()
         for control in self.controls.values():
-            if hasattr(control.options.get("widget"), "route"):
+            widget = control.options.get("widget")
+            if hasattr(widget, "route"):
                 self._composites[control.key] = control
                 control.options["widget"].cancel()
             control.motion.clear()
@@ -607,6 +614,19 @@ class Canvas(Group):
                         cards(child, depth + (child.kind == "box"))
 
             cards(self)
+        # Panel controls are authored roughly top to bottom. Cull contiguous
+        # runs as a unit while preserving draw and hit order for overlapping rows.
+        if panel_layout and len(self.controls) >= 64:
+            controls = tuple(self.controls.values())
+            bands = []
+            for start in range(0, len(controls), 16):
+                run = controls[start:start + 16]
+                top = min(control.rect[1] for control in run)
+                bottom = max(control.rect[1] + control.rect[3] for control in run)
+                bands.append((top, bottom, run))
+            self._control_bands = tuple(bands)
+        else:
+            self._control_bands = ()
         self.layout_count += 1
         return self.height
 
@@ -614,8 +634,12 @@ class Canvas(Group):
         if not self.visible:
             return
         x, y, w, h = clip
-        controls = self._composites if composites else self.controls
-        for control in controls.values():
+        if self._control_bands and not composites:
+            controls = (control for top, bottom, run in self._control_bands
+                        if top < y + h and bottom > y for control in run)
+        else:
+            controls = (self._composites if composites else self.controls).values()
+        for control in controls:
             a, b, c, d = control.rect
             if c > 0 and d > 0 and a < x + w and a + c > x and b < y + h and b + d > y:
                 yield control
@@ -624,9 +648,18 @@ class Canvas(Group):
         cx, cy, cw, ch = clip
         if not (cx <= x < cx + cw and cy <= y < cy + ch):
             return None
-        for control in reversed(tuple(self.visible_controls(clip))):
+        if not self.visible:
+            return None
+        if self._control_bands:
+            controls = (control for top, bottom, run in reversed(self._control_bands)
+                        if top <= y < bottom for control in reversed(run))
+        else:
+            controls = reversed(self.controls.values())
+        for control in controls:
             a, b, w, h = control.rect
-            if b <= y < b + min(20, control.options.get("_label_band", 0)):
+            if not (b <= y < b + h and a <= x and w > 0 and a + w > cx):
+                continue
+            if y < b + min(20, control.options.get("_label_band", 0)):
                 w = max(w, control.options.get("_label_span", w))
             if (
                 a <= x < a + w

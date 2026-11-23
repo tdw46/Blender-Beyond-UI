@@ -11,6 +11,8 @@ class PreviewIcons:
         self.textures = OrderedDict()
         self.errors = {}
         self.collections_key = None
+        self._warm_request = None
+        self._warm_callback = None
 
     def _preview(self, key):
         collections = tuple(self.provider())
@@ -63,9 +65,9 @@ class PreviewIcons:
         data = gpu.types.Buffer('FLOAT',rgba.size,rgba.ravel())
         return gpu.types.GPUTexture((w,h),format='RGBA8',data=data), aspect
 
-    def draw_icon(self, icon, icon_value, rect, color, *, tile=False, radius=0, letterbox=None):
+    def _texture(self, icon_value, tile, letterbox):
         if not icon_value:
-            return False
+            return None
         key = (int(icon_value), "square") if tile else int(icon_value)
         if letterbox is not None:
             key = (int(icon_value), letterbox)
@@ -78,15 +80,60 @@ class PreviewIcons:
                 if len(self.errors) >= 96:
                     self.errors.clear()
                 self.errors[key] = str(exc)
-                return False
+                return None
             if entry is None:
-                return False
+                return None
             self.errors.pop(key, None)
             self.textures[key] = entry
             while len(self.textures) > 96:
                 self.textures.popitem(last=False)
-        texture, aspect = self.textures[key]
         self.textures.move_to_end(key)
+        return self.textures[key]
+
+    def prepare_tiles(self, canvas, icons, *, letterbox=None):
+        """Warm this page in bounded idle slices. A first paint always resolves immediately."""
+        from weakref import ref
+        import bpy
+        import gpu
+
+        # Timers have a usable GPU context on the qualified windowed Metal host.
+        # Other backends continue to create textures in the owning draw callback.
+        if bpy.app.background or gpu.platform.backend_type_get() != "METAL":
+            return
+        variant = "square" if letterbox is None else letterbox
+        pending = tuple(dict.fromkeys(icon for icon in icons if icon and (icon, variant) not in self.textures))[:96]
+        self._warm_request = (ref(canvas), iter(pending), letterbox) if pending else None
+        if pending and self._warm_callback is None:
+            self._warm_callback = self._warm_one
+            bpy.app.timers.register(self._warm_callback, first_interval=0.01)
+
+    def _warm_one(self):
+        request = self._warm_request
+        if request is not None:
+            owner, icons, letterbox = request
+            canvas = owner()
+            if canvas is not None and canvas.visible:
+                for icon in icons:
+                    key = (icon, "square" if letterbox is None else letterbox)
+                    if key not in self.textures:
+                        self._texture(icon, True, letterbox)
+                        return 0.01
+        self._warm_request = self._warm_callback = None
+        return None
+
+    def cancel_preparation(self):
+        import bpy
+
+        callback = self._warm_callback
+        self._warm_request = self._warm_callback = None
+        if callback is not None and bpy.app.timers.is_registered(callback):
+            bpy.app.timers.unregister(callback)
+
+    def draw_icon(self, icon, icon_value, rect, color, *, tile=False, radius=0, letterbox=None):
+        entry = self._texture(icon_value, tile, letterbox)
+        if not entry:
+            return False
+        texture, aspect = entry
         x,y,w,h = rect
         dw = min(w, h*aspect)
         dh = dw/aspect

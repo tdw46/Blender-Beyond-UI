@@ -135,6 +135,30 @@ class Core(unittest.TestCase):
         canvas.park()
         self.assertEqual(list(canvas.visible_controls((0, 0, 300, 9999))), [])
 
+    def test_panel_bands_match_full_scan_after_resize_and_reflow(self):
+        canvas = Canvas()
+        canvas.panel_layout = True
+        for i in range(96):
+            canvas.number(str(i), "Value", Binding(lambda: 0, lambda value: None))
+        for width in (430, 180):
+            canvas.arrange(width)
+            self.assertTrue(canvas._control_bands)
+            for y in range(0, int(canvas.height), 37):
+                clip = (0, y, width, 137)
+                expected = []
+                for control in canvas.controls.values():
+                    x, top, w, h = control.rect
+                    if w > 0 and h > 0 and x < width and x + w > 0 and top < y + 137 and top + h > y:
+                        expected.append(control)
+                self.assertEqual(list(canvas.visible_controls(clip)), expected)
+                point = (width / 2, y + 68)
+                hit = next((c for c in reversed(expected)
+                            if c.rect[0] <= point[0] < c.rect[0] + c.rect[2]
+                            and c.rect[1] <= point[1] < c.rect[1] + c.rect[3]), None)
+                self.assertIs(canvas.hit(*point, clip), hit)
+            canvas.invalidate()
+            self.assertFalse(canvas._control_bands)
+
     def test_editing_rejects_code_nonfinite_and_preserves_alpha(self):
         for text in ('__import__("os")', "1e10000", "2**100", "1/0"):
             with self.assertRaises(ValueError):
