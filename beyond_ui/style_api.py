@@ -3,6 +3,7 @@
 from collections.abc import Mapping
 from copy import deepcopy, copy
 from math import isfinite
+from weakref import WeakValueDictionary
 
 _LAYOUT = {
     "responsive",
@@ -348,12 +349,31 @@ def prepare_control(control, values):
     return merged, numeric
 
 
+# These private sheets resolve colors only. Controls with identical declarations
+# can use the same base-palette cache until the last owning control disappears.
+_inline_palettes = WeakValueDictionary()
+
+
+def _inline_palette(kind, colors, opacity, effects):
+    from .stylesheet import StyleSheet
+
+    # Compound widgets can pass their resolved ink into a child canvas. Keep
+    # their sheets distinct so equal parent/child opacity still composes.
+    if kind == "widget":
+        return StyleSheet(colors=colors, opacity=opacity, text_effects=effects)
+    key = (tuple(sorted(colors.items())), opacity, tuple(sorted(effects.items())))
+    sheet = _inline_palettes.get(key)
+    if sheet is None:
+        sheet = StyleSheet(colors=colors, opacity=opacity, text_effects=effects)
+        _inline_palettes[key] = sheet
+    return sheet
+
+
 def apply_control(control, values, prepared=None):
     if "highlight_expanded" in values and control.kind == "toggle" and "disclosure_open" in control.options:
         control.options.update(bool_button=True, icon="TRIA_DOWN" if control.options["disclosure_open"] else "TRIA_RIGHT")
     if 'enum_style' in values and control.kind == 'button' and 'selected' in control.options:
         control.options['menu_option'] = values['enum_style'] == 'menu'
-    from .stylesheet import StyleSheet
 
     merged, numeric = prepared or prepare_control(control, values)
     control.options["_inline_style"] = merged
@@ -401,9 +421,8 @@ def apply_control(control, values, prepared=None):
         if key in merged:
             colors.update({role: merged[key] for role in roles})
     if colors or "opacity" in merged or "text_effects" in merged:
-        control.options["_inline_sheet"] = StyleSheet(
-            colors=colors, opacity=merged.get("opacity", 1),
-            text_effects=merged.get("text_effects", {})
+        control.options["_inline_sheet"] = _inline_palette(
+            control.kind, colors, merged.get("opacity", 1), merged.get("text_effects", {})
         )
     if "motion" in merged:
         for key, value in merged["motion"].items():

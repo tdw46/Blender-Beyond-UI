@@ -19,6 +19,18 @@ class TextEffectsTests(unittest.TestCase):
         for value in ({'outline':1},{'shadow_opacity':float('nan')},{'shadow_blur':6},{'shadow_offset':(9,0)},{'unknown':True}):
             with self.assertRaises(ValueError): normalize(value)
 
+    def test_repeated_inline_ink_reuses_palette_and_preserves_nested_opacity(self):
+        from beyond_ui.gpu.style import reference_palette
+        from beyond_ui.style_api import _inline_palette
+        base = reference_palette()
+        first = _inline_palette("button", {}, .5, {})
+        second = _inline_palette("label", {}, .5, {})
+        self.assertIs(first.palette(base), second.palette(base))
+        parent = _inline_palette("widget", {}, .5, {}).palette(base)
+        self.assertEqual(second.palette(parent)["field"][3], base["field"][3] * .25)
+        changed = dict(base, field=(.1, .2, .3, .8))
+        self.assertEqual(first.palette(changed)["field"], (.1, .2, .3, .4))
+
     def test_native_effects_draw_foreground_once_and_clear_font_state(self):
         blf = SimpleNamespace(SHADOW=4, shadow=Mock(),shadow_offset=Mock(),enable=Mock(),disable=Mock(),color=Mock(),draw=Mock())
         ink=(.8,.9,1,.5)
