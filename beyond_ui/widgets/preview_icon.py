@@ -66,7 +66,6 @@ class PreviewIcons:
     def draw_icon(self, icon, icon_value, rect, color, *, tile=False, radius=0, letterbox=None):
         if not icon_value:
             return False
-        from gpu_extras.presets import draw_texture_2d
         key = (int(icon_value), "square") if tile else int(icon_value)
         if letterbox is not None:
             key = (int(icon_value), letterbox)
@@ -96,7 +95,17 @@ class PreviewIcons:
             style.preview(texture, x+(w-dw)/2, y+(h-dh)/2, dw, dh,
                           radius, display_space=True)
         else:
-            draw_texture_2d(texture, (x+(w-dw)/2,y+(h-dh)/2), dw, dh)
+            import gpu
+            from gpu_extras.presets import draw_texture_2d
+
+            # Blender's ImagePreview bytes are already premultiplied. Text
+            # drawn just before this widget can leave blending disabled.
+            previous_blend = gpu.state.blend_get()
+            try:
+                gpu.state.blend_set("ALPHA_PREMULT")
+                draw_texture_2d(texture, (x+(w-dw)/2, y+(h-dh)/2), dw, dh)
+            finally:
+                gpu.state.blend_set(previous_blend)
         return True
 
 
