@@ -1,5 +1,6 @@
 """Resolve author-owned ImagePreviews and upload visible gallery tiles on demand."""
 import sys
+from time import perf_counter
 from collections import OrderedDict
 
 from .base import Widget
@@ -13,6 +14,7 @@ class PreviewIcons:
         self.errors = {}
         self.collections_key = None
         self._decoded_page = set()
+        self._tile_pixels = None
         self._warm_request = None
         self._warm_callback = None
 
@@ -26,12 +28,10 @@ class PreviewIcons:
 
     @staticmethod
     def _upload(preview, *, square=False, letterbox=None):
-        import gpu
         import numpy as np
         width, height = preview.image_size
         if not width or not height:
             return None
-        aspect = width/height
         pixels = preview.image_pixels
         if width*height > 4096**2:
             width,height = preview.icon_size
@@ -40,7 +40,15 @@ class PreviewIcons:
             return None
         packed = np.empty(width*height, dtype=np.int32)
         pixels.foreach_get(packed)
-        rgba = packed.view(np.uint8).reshape(height,width,4)
+        return PreviewIcons._upload_pixels(width, height, packed, square=square, letterbox=letterbox)
+
+    @staticmethod
+    def _upload_pixels(width, height, packed, *, square, letterbox):
+        import gpu
+        import numpy as np
+
+        aspect = width / height
+        rgba = np.frombuffer(packed, dtype=np.uint8).reshape(height, width, 4)
         if square and letterbox is None:
             side = min(width, height)
             x, y = (width-side)//2, (height-side)//2
@@ -67,7 +75,7 @@ class PreviewIcons:
         data = gpu.types.Buffer('FLOAT',rgba.size,rgba.ravel())
         return gpu.types.GPUTexture((w,h),format='RGBA8',data=data), aspect
 
-    def _texture(self, icon_value, tile, letterbox):
+    def _texture(self, icon_value, tile, letterbox, *, pixels=None):
         if not icon_value:
             return None
         key = (int(icon_value), "square") if tile else int(icon_value)
@@ -75,8 +83,13 @@ class PreviewIcons:
             key = (int(icon_value), letterbox)
         if key not in self.textures:
             try:
-                preview = self._preview(int(icon_value))
-                entry = self._upload(preview, square=tile, letterbox=letterbox) if preview else None
+                if pixels is None and tile and self._tile_pixels:
+                    pixels = self._tile_pixels(icon_value)
+                if pixels is None:
+                    preview = self._preview(int(icon_value))
+                    entry = self._upload(preview, square=tile, letterbox=letterbox) if preview else None
+                else:
+                    entry = self._upload_pixels(*pixels, square=tile, letterbox=letterbox)
             except (AttributeError, ReferenceError, RuntimeError, ValueError, BufferError) as exc:
                 # A stale/deferred preview must not interrupt later cells or their actions.
                 if len(self.errors) >= 96:
@@ -92,7 +105,7 @@ class PreviewIcons:
         self.textures.move_to_end(key)
         return self.textures[key]
 
-    def prepare_tiles(self, canvas, icons, *, letterbox=None):
+    def prepare_tiles(self, canvas, icons, *, letterbox=None, prepare_pixels=None):
         """Warm this page in bounded idle slices. A first paint always resolves immediately."""
         from weakref import ref
         import bpy
@@ -112,6 +125,9 @@ class PreviewIcons:
                             and (icon, variant) not in self.textures)
         else:
             pending = tuple(dict.fromkeys(icon for icon in icons if icon and (icon, variant) not in self.textures))[:96]
+        # A host may supply exact, predecoded RGBA bytes for missing page icons.
+        # A source miss or unfinished read uses the ordinary immediate ImagePreview.
+        self._tile_pixels = prepare_pixels(pending) if pending and prepare_pixels and backend == "METAL" else None
         self._warm_request = (ref(canvas), iter(pending), letterbox, decode_only) if pending else None
         if pending and self._warm_callback is None:
             self._warm_callback = self._warm_one
@@ -123,6 +139,7 @@ class PreviewIcons:
             owner, icons, letterbox, decode_only = request
             canvas = owner()
             if canvas is not None and canvas.visible:
+                deadline = perf_counter() + 0.0003 if self._tile_pixels else 0
                 for icon in icons:
                     key = (icon, "square" if letterbox is None else letterbox)
                     if key not in self.textures:
@@ -137,6 +154,10 @@ class PreviewIcons:
                                         self._decoded_page.add(icon)
                             except (AttributeError, ReferenceError, RuntimeError, ValueError):
                                 pass  # First paint resolves missing or replaced previews again.
+                        elif self._tile_pixels and (pixels := self._tile_pixels(icon)) is not None:
+                            self._texture(icon, True, letterbox, pixels=pixels)
+                            if perf_counter() < deadline:
+                                continue
                         else:
                             self._texture(icon, True, letterbox)
                         return 0.01
@@ -146,6 +167,7 @@ class PreviewIcons:
     def cancel_preparation(self):
         import bpy
 
+        self._tile_pixels = None
         self._decoded_page.clear()
         callback = self._warm_callback
         self._warm_request = self._warm_callback = None
