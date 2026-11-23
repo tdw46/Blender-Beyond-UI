@@ -34,30 +34,12 @@ MUTED = rgba("b9bdc2")
 EDGE = rgba("91969c", 0.45)
 
 
-def ensure():
-    global _shader, _batch
-    if _shader is not None:
-        return
-    import gpu
-    from gpu_extras.batch import batch_for_shader
-
-    interface = gpu.types.GPUStageInterfaceInfo("beyond_ui_glass_skin_uv")
-    interface.smooth("VEC2", "uv")
-    info = gpu.types.GPUShaderCreateInfo()
-    info.vertex_in(0, "VEC2", "pos")
-    info.vertex_out(interface)
-    info.fragment_out(0, "VEC4", "fragColor")
-    info.push_constant("MAT4", "mvp")
-    info.push_constant("VEC4", "rect")
-    info.push_constant("VEC4", "lower")
-    info.push_constant("VEC4", "upper")
-    info.push_constant("VEC4", "params")
-    info.vertex_source(
+def skin_sources():
+    return (
         "void main(){float pad=(params.z==6.||params.z==7.)?params.w:0.;"
         "vec2 p=rect.xy-vec2(pad)+pos*(rect.zw+vec2(2.*pad));"
-        "uv=(p-rect.xy)/rect.zw;gl_Position=mvp*vec4(p,0.,1.);}"
-    )
-    info.fragment_source("""
+        "uv=(p-rect.xy)/rect.zw;gl_Position=mvp*vec4(p,0.,1.);}",
+        """
 vec3 hue(float h) { return clamp(abs(fract(vec3(h)+vec3(0.,2./3.,1./3.))*6.-3.)-1.,0.,1.); }
 void main(){
  vec2 s=rect.zw; float r=min(params.x,min(s.x,s.y)*.5);
@@ -94,7 +76,31 @@ void main(){
   c=mix(c,vec4(rim,.92),edge*.75);
  }
  fragColor=vec4(c.rgb,c.a*coverage);
-}""")
+}""",
+    )
+
+
+def ensure():
+    global _shader, _batch
+    if _shader is not None:
+        return
+    import gpu
+    from gpu_extras.batch import batch_for_shader
+
+    interface = gpu.types.GPUStageInterfaceInfo("beyond_ui_glass_skin_uv")
+    interface.smooth("VEC2", "uv")
+    info = gpu.types.GPUShaderCreateInfo()
+    info.vertex_in(0, "VEC2", "pos")
+    info.vertex_out(interface)
+    info.fragment_out(0, "VEC4", "fragColor")
+    info.push_constant("MAT4", "mvp")
+    info.push_constant("VEC4", "rect")
+    info.push_constant("VEC4", "lower")
+    info.push_constant("VEC4", "upper")
+    info.push_constant("VEC4", "params")
+    vertex, fragment = skin_sources()
+    info.vertex_source(vertex)
+    info.fragment_source(fragment)
     _shader = gpu.shader.create_from_info(info)
     _batch = batch_for_shader(
         _shader,

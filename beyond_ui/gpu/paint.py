@@ -396,7 +396,12 @@ def paint(
         gpu.state.scissor_set(int(cx), int(cy), max(0, int(cw)), max(0, int(ch)))
         if background:
             style.draw(*rect, palette["bg"], radius=t.radius * scale)
-        if controls:
+        chrome_drawn = False
+        if controls and _NATIVE_PANEL and backdrop and is_windows_vulkan():
+            from .panel_chrome import draw_card_surfaces
+            chrome_drawn = draw_card_surfaces(canvas, backdrop, palette, logical,
+                                               x, y + h, sx, sy, scale, shift)
+        if controls and not chrome_drawn:
             for card in getattr(canvas, "_style_cards", ()):
                 if card[1] + card[3] > logical[1] and card[1] < logical[1] + logical[3]:
                     bounds_px = mapped(card)

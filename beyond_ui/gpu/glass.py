@@ -757,34 +757,9 @@ def _strong_blur(owner):
         gpu.state.depth_mask_set(mask)
 
 
-def _ensure_lens():
-    """One draw, at most two shared samples; no per-control targets."""
-    global _lens_shader, _lens_batch
-    if _lens_shader is not None:
-        return
-    import gpu
-    from gpu_extras.batch import batch_for_shader
-
-    interface = gpu.types.GPUStageInterfaceInfo("bvt_glass_lens_uv")
-    interface.smooth("VEC2", "uv")
-    interface.smooth("VEC2", "pixel")
-    interface.smooth("FLOAT", "blurMix")
-    info = gpu.types.GPUShaderCreateInfo()
-    info.vertex_in(0, "VEC3", "pos")
-    info.vertex_out(interface)
-    info.fragment_out(0, "VEC4", "fragColor")
-    # 128 bytes, matching the supported Metal push-constant budget.
-    for kind, name in (
-        ("MAT4", "mvp"),
-        ("VEC4", "rect"),
-        ("VEC4", "crop"),
-        ("VEC4", "tint"),
-        ("VEC4", "motion"),
-    ):
-        info.push_constant(kind, name)
-    info.sampler(0, "FLOAT_2D", "source")
-    info.sampler(1, "FLOAT_2D", "softSource")
-    info.vertex_source("""
+def lens_sources():
+    return (
+        """
 void main(){
     uv=pos.xy;blurMix=pos.z;
     vec2 axis=vec2(cos(motion.z),sin(motion.z));
@@ -794,8 +769,7 @@ void main(){
     p=p/stretch+axis*dot(p,axis)*(stretch-1.0/stretch);
     pixel=rect.xy+rect.zw*0.5+p;
     gl_Position=mvp*vec4(pixel,0.0,1.0);
-}""")
-    info.fragment_source(
+}""",
         _SMOOTH_NORMAL_GLSL
         + """
 void main(){
@@ -833,8 +807,40 @@ void main(){
     color+=vec3(sweep*(0.03+0.575*rim+0.09*halo*halo));
     float aa=max(fwidth(d),0.7);
     fragColor=vec4(color,1.0-smoothstep(-aa,aa,d));
-}"""
+}""",
     )
+
+
+def _ensure_lens():
+    """One draw, at most two shared samples; no per-control targets."""
+    global _lens_shader, _lens_batch
+    if _lens_shader is not None:
+        return
+    import gpu
+    from gpu_extras.batch import batch_for_shader
+
+    interface = gpu.types.GPUStageInterfaceInfo("bvt_glass_lens_uv")
+    interface.smooth("VEC2", "uv")
+    interface.smooth("VEC2", "pixel")
+    interface.smooth("FLOAT", "blurMix")
+    info = gpu.types.GPUShaderCreateInfo()
+    info.vertex_in(0, "VEC3", "pos")
+    info.vertex_out(interface)
+    info.fragment_out(0, "VEC4", "fragColor")
+    # 128 bytes, matching the supported Metal push-constant budget.
+    for kind, name in (
+        ("MAT4", "mvp"),
+        ("VEC4", "rect"),
+        ("VEC4", "crop"),
+        ("VEC4", "tint"),
+        ("VEC4", "motion"),
+    ):
+        info.push_constant(kind, name)
+    info.sampler(0, "FLOAT_2D", "source")
+    info.sampler(1, "FLOAT_2D", "softSource")
+    vertex, fragment = lens_sources()
+    info.vertex_source(vertex)
+    info.fragment_source(fragment)
     _lens_shader = gpu.shader.create_from_info(info)
     # Immutable quads carry blur and rim selection without exceeding the 128-byte
     # push-constant budget or allocating/updating a buffer per widget.
