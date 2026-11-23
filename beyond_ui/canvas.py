@@ -258,6 +258,7 @@ class Canvas(Group):
             self.value_feedback.configure(self.theme.stylesheet._data.get("value_feedback", {}))
         self._sized_groups = WeakSet()
         self._composites = {}
+        self._display_widgets = None
         self._control_bands = ()
         self._initial_authoring = False
         self._dirty = True
@@ -529,8 +530,11 @@ class Canvas(Group):
         self.close_context()
         self._dirty = True
         self._composites.clear()
+        self._display_widgets = [] if getattr(self, "prefer_native_panel_paint", False) else None
         for control in self.controls.values():
             widget = control.options.get("widget")
+            if self._display_widgets is not None and hasattr(widget, "refresh_display"):
+                self._display_widgets.append(widget)
             if hasattr(widget, "route"):
                 self._composites[control.key] = control
                 control.options["widget"].cancel()

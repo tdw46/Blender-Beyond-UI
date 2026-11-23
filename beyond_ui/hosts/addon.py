@@ -467,10 +467,14 @@ class Runtime:
         # unpainted canvases again; this does not schedule idle redraws.
         canvas.visible = True
         try:
-            for control in canvas.controls.values():
-                widget = control.options.get("widget")
-                if hasattr(widget, "refresh_display"):
+            if canvas._display_widgets is not None:
+                for widget in canvas._display_widgets:
                     widget.refresh_display()
+            else:
+                for control in canvas.controls.values():
+                    widget = control.options.get("widget")
+                    if hasattr(widget, "refresh_display"):
+                        widget.refresh_display()
         except Exception as error:
             self.draw_error(definition, key, native, error, context, instance)
             return
@@ -498,7 +502,7 @@ class Runtime:
 
         if isinstance(error, PendingListIdentity):
             self.errors.pop(definition.__name__, None)
-            native.label(text="Preparing custom list…", icon="INFO")
+            native.label(text="Preparing custom listâ€¦", icon="INFO")
             return
         if (
             self.config.native_fallback

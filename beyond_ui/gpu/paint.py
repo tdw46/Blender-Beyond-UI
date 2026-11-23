@@ -75,6 +75,19 @@ def paint(
     """
     import blf
 
+    # Double precision through layout, clipping and centering in the compiled path.
+    x: float
+    y: float
+    w: float
+    h: float
+    cx: float
+    cy: float
+    cw: float
+    ch: float
+    sx: float
+    sy: float
+    scale: float
+    shift: float
     x, y, w, h = rect
     cx, cy, cw, ch = clip
     if not canvas.visible or w <= 0 or h <= 0 or cw <= 0 or ch <= 0:
@@ -97,6 +110,10 @@ def paint(
     shift = offset.position("slide", 0.0) if offset else 0.0
 
     def mapped(r):
+        a: float
+        b: float
+        c: float
+        d: float
         a, b, c, d = r
         return x + (a + shift) * sx, y + h - (b + d) * sy, c * sx, d * sy
 
@@ -117,6 +134,19 @@ def paint(
         icon_value=0,
         trailing_icon=None,
     ):
+        a: float
+        b: float
+        c: float
+        d: float
+        size: float
+        left: float
+        bottom: float
+        right: float
+        top: float
+        group_left: float
+        gutter: float
+        tail_gutter: float
+        origin: float
         face_role = role
         if current_style.get("font_weight") == "bold":
             face_role = "title"
@@ -382,9 +412,10 @@ def paint(
                 surface(bounds_px, tint[:3] + (tint[3] * opacity,), radius)
                 skin.inset_outline(bounds_px, palette, scale, radius)
         for control in canvas.visible_controls(logical) if controls else ():
-            current_style = control.options.get("_inline_style", {})
+            opts = control.options
+            current_style = opts.get("_inline_style", {})
             r = mapped(control.rect)
-            if control.options.get("search_bar"):
+            if opts.get("search_bar"):
                 a, b, c, d = r
                 inset = menu_metrics.SEARCH_INSET * scale
                 r = (a + inset, b, max(0, c - 2 * inset), d)
@@ -394,16 +425,16 @@ def paint(
                 if t.stylesheet is not None
                 else base_palette
             )
-            inline_sheet = control.options.get("_inline_sheet")
+            inline_sheet = opts.get("_inline_sheet")
             if inline_sheet is not None:
                 palette = inline_sheet.palette(palette)
             palette = accent_palette(palette, control)
             kind = control.kind
             if (retained_widgets and kind == "widget" and not control.motion.tracks
-                    and control.binding is None and not control.options.get("value_feedback")
-                    and not control.options.get("alert") and samples is None
-                    and control.options.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"}):
-                present = getattr(control.options["widget"], "paint_retained_ink", None)
+                    and control.binding is None and not opts.get("value_feedback")
+                    and not opts.get("alert") and samples is None
+                    and opts.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"}):
+                present = getattr(opts["widget"], "paint_retained_ink", None)
                 if present:
                     # Previous ordinary controls drain BLF before restoring
                     # their transforms. A retained ink hit submits only a quad.
@@ -412,10 +443,10 @@ def paint(
                     if present(r, font, palette):
                         count += 1
                         continue
-            slider = kind == "number" and control.options.get("slider", True)
+            slider = kind == "number" and opts.get("slider", True)
             external_label = (
                 bool(control.label)
-                and not control.options.get("search_bar")
+                and not opts.get("search_bar")
                 and (
                     kind in {"text", "event", "pointer", "search", "enum"}
                     or kind == "number"
@@ -429,9 +460,9 @@ def paint(
 
                 label_logical, field_logical = entry_parts(
                     control.rect,
-                    label_width=control.options.get("_entry_label_width"),
-                    stacked=control.options.get("_entry_stacked", False),
-                    label_band=control.options.get("_label_band", 20),
+                    label_width=opts.get("_entry_label_width"),
+                    stacked=opts.get("_entry_stacked", False),
+                    label_band=opts.get("_label_band", 20),
                 )
                 label_rect, r = mapped(label_logical), mapped(field_logical)
                 a, b, c, d = r
@@ -446,13 +477,13 @@ def paint(
                 value = control.binding.read() if control.binding else None
             except (ReferenceError, RuntimeError):
                 value = None
-            if control.binding is not None or control.options.get("value_feedback"):
+            if control.binding is not None or opts.get("value_feedback"):
                 canvas.value_feedback.observe(control, value if control.binding is not None else control.label, feedback_now)
             enabled = control.enabled
-            alert = enabled and control.options.get("alert", False)
-            status = control.options.get("status", "EMPTY")
+            alert = enabled and opts.get("alert", False)
+            status = opts.get("status", "EMPTY")
             colored = enabled and status not in {"EMPTY", "UNAVAILABLE"}
-            emboss = control.options.get("emboss", "NORMAL")
+            emboss = opts.get("emboss", "NORMAL")
             chrome = emboss != "NONE" and (
                 emboss != "NONE_OR_STATUS" or alert or colored
             )
@@ -470,13 +501,13 @@ def paint(
             role = "text" if "color" in current_style else current_style.get("color_role", "text")
             ink_role = "accent_text" if role == "accent" and "color" not in current_style else role
             ink = palette.get(ink_role, palette[role]) if enabled else palette["muted"]
-            selected = control.options.get("selected", False)
+            selected = opts.get("selected", False)
             selected = selected() if callable(selected) else selected
-            if "disclosure_open" in control.options and "highlight_expanded" in current_style:
-                selected = control.options["disclosure_open"] and current_style["highlight_expanded"]
+            if "disclosure_open" in opts and "highlight_expanded" in current_style:
+                selected = opts["disclosure_open"] and current_style["highlight_expanded"]
             # The parent surface owns a joined segment track. Keep the hit area
             # and feedback while omitting a second bezel on inactive choices.
-            track_edges = (control.options.get("_track_edges")
+            track_edges = (opts.get("_track_edges")
                            if current_style.get("enum_style") == "track" else None)
             if track_edges is not None:
                 chrome = False
@@ -485,14 +516,14 @@ def paint(
                     samples = None
                 else:
                     samples.append((control.key, control.label, control.rect, value, enabled,
-                                    alert, status, selected, control.options.get("icon")))
-            menu_option = control.options.get("menu_option", False)
+                                    alert, status, selected, opts.get("icon")))
+            menu_option = opts.get("menu_option", False)
             if menu_option and not selected and canvas.hover != control.key:
                 chrome = False
             if (
-                control.options.get("list_row")
+                opts.get("list_row")
                 and kind not in {"number", "text", "event", "search"}
-                and not control.options.get("list_action")
+                and not opts.get("list_action")
                 and canvas.hover != control.key
                 and canvas.active is not control
             ):
@@ -528,10 +559,10 @@ def paint(
                         _, (tx, ty, tw), field = slider_parts(
                             control.rect,
                             bool(control.label),
-                            stacked=control.options.get("_slider_stacked"),
-                            label_width=control.options.get("_slider_label_width"),
-                            label_band=control.options.get("_label_band", 24),
-                            value_width=control.options.get("value_width", 53),
+                            stacked=opts.get("_slider_stacked"),
+                            label_width=opts.get("_slider_label_width"),
+                            label_band=opts.get("_label_band", 24),
+                            value_width=opts.get("value_width", 53),
                         )
                         control.motion.region(
                             "handle", (tx - 7, ty - 12, tw + 14, 24), circular=True
@@ -546,12 +577,12 @@ def paint(
                         control.label,
                         label_rect,
                         palette["text"] if enabled else palette["muted"],
-                        "title" if control.options.get("_entry_stacked") else "body",
+                        "title" if opts.get("_entry_stacked") else "body",
                         inset=0 if getattr(canvas, "panel_layout", False) else 6,
-                        icon=control.options.get("icon"),
-                        icon_value=control.options.get("icon_value", 0),
-                        trailing_icon=control.options.get("trailing_icon"),
-                        right_inset=0 if control.options.get("inline_label") else 4,
+                        icon=opts.get("icon"),
+                        icon_value=opts.get("icon_value", 0),
+                        trailing_icon=opts.get("trailing_icon"),
+                        right_inset=0 if opts.get("inline_label") else 4,
                     )
                 if (
                     kind
@@ -568,8 +599,8 @@ def paint(
                     }
                     and not slider
                     and chrome
-                    and not control.options.get("search_bar")
-                    and not control.options.get("choice_card")
+                    and not opts.get("search_bar")
+                    and not opts.get("choice_card")
                 ):
                     inset = kind in {"text", "number", "event", "search", "pointer", "enum"}
                     surface(
@@ -619,9 +650,9 @@ def paint(
                                       radius=radius, border=0)
                         finally:
                             gpu.state.scissor_set(*prev)
-                if control.options.get("choice_card"):
+                if opts.get("choice_card"):
                     typography.flush_text(font)
-                    control.options["choice_card"].paint(r,font,palette,selected=selected,
+                    opts["choice_card"].paint(r,font,palette,selected=selected,
                         hovered=canvas.hover == control.key,backdrop=backdrop)
                 elif kind == "label" and current_style.get("label_artwork"):
                     from . import icons
@@ -629,20 +660,20 @@ def paint(
                         text(control.label, r, ink, center=True)
                 elif kind == "widget":
                     typography.flush_text(font)
-                    control.options["widget"].paint(r, font, palette, backdrop=backdrop)
+                    opts["widget"].paint(r, font, palette, backdrop=backdrop)
                 elif kind == "separator":
-                    if not control.options.get("space"):
+                    if not opts.get("space"):
                         thickness = current_style.get("divider_width", 1) * scale
                         tint = ink if "color" in current_style or "color_role" in current_style else palette["muted"]
-                        if control.options.get("vertical"):
+                        if opts.get("vertical"):
                             style.draw(a + (c-thickness)/2, b, thickness, d, tint, radius=0)
                         else:
                             style.draw(a, b + (d-thickness)/2, c, thickness, tint, radius=0)
-                elif kind == "toggle" and control.options.get("bool_button"):
+                elif kind == "toggle" and opts.get("bool_button"):
                     highlight = current_style.get("highlight_expanded")
-                    if control.options.get("section_disclosure") and highlight is None:
+                    if opts.get("section_disclosure") and highlight is None:
                         surface(
-                            mapped(control.options.get("_section_rect", control.rect)),
+                            mapped(opts.get("_section_rect", control.rect)),
                             (
                                 palette["hover"]
                                 if canvas.hover == control.key
@@ -651,21 +682,21 @@ def paint(
                         )
                     elif (value and highlight is not False) or canvas.hover == control.key:
                         surface(r, palette["selected"] if value and highlight is not False else palette["hover"])
-                    if control.options.get("_button_lines"):
+                    if opts.get("_button_lines"):
                         wrapped_button(control, r, ink)
                     else:
-                        alignment = control.options.get("text_alignment", "EXPAND")
+                        alignment = opts.get("text_alignment", "EXPAND")
                         text(
                             control.label,
                             r,
                             ink,
-                            role=control.options.get("text_role", "body"),
+                            role=opts.get("text_role", "body"),
                             center=alignment in {"EXPAND", "CENTER"},
                             right_align=alignment == "RIGHT",
-                            icon=control.options.get("icon"),
-                            icon_value=control.options.get("icon_value", 0),
-                            trailing_icon=control.options.get("trailing_icon"),
-                        right_inset=0 if control.options.get("inline_label") else 4,
+                            icon=opts.get("icon"),
+                            icon_value=opts.get("icon_value", 0),
+                            trailing_icon=opts.get("trailing_icon"),
+                        right_inset=0 if opts.get("inline_label") else 4,
                         )
                 elif kind == "toggle":
                     from ..scalar_geometry import switch_rect
@@ -676,8 +707,8 @@ def paint(
                         (a, b, max(0.0, c - 52 * scale), d),
                         ink,
                         inset=0 if getattr(canvas, "panel_layout", False) else 6,
-                        icon=control.options.get("icon"),
-                        icon_value=control.options.get("icon_value", 0),
+                        icon=opts.get("icon"),
+                        icon_value=opts.get("icon_value", 0),
                     )
                     style.switch(
                         *switch,
@@ -696,14 +727,14 @@ def paint(
                         backdrop=backdrop,
                     )
                 elif kind in {"pointer", "search"}:
-                    model = control.options[
+                    model = opts[
                         "search_field" if kind == "search" else "pointer_field"
                     ]
                     label = model.label()
                     c -= drop
                     clear = kind == "search" and model.can_clear()
                     quiet_pointer = (
-                        control.options.get("list_row")
+                        opts.get("list_row")
                         and kind == "pointer"
                         and canvas.hover != control.key
                         and canvas.active is not control
@@ -713,11 +744,11 @@ def paint(
                         (a, b, max(0, c - (44 if clear else 0 if quiet_pointer else 22) * scale), d),
                         ink,
                         icon=(
-                            control.options.get("search_icon", control.options.get("icon"))
-                            if kind == "search" else control.options.get("icon") if not external_label else None
+                            opts.get("search_icon", opts.get("icon"))
+                            if kind == "search" else opts.get("icon") if not external_label else None
                         ),
                         icon_value=(
-                            control.options.get("icon_value", 0)
+                            opts.get("icon_value", 0)
                             if not external_label
                             else 0
                         ),
@@ -733,9 +764,9 @@ def paint(
                     if clear:
                         style.icon("X", a + c - 11 * scale, b + d / 2, 11 * scale, ink)
                 elif kind == "decorator":
-                    model = control.options["decorator"]
+                    model = opts["decorator"]
                     if model is not None:
-                        state = control.options.get("status", "EMPTY")
+                        state = opts.get("status", "EMPTY")
                         if animation_colors is None:
                             animation_colors = style.animation_palette(
                                 preferences, reference=t.palette == "REFERENCE"
@@ -763,21 +794,21 @@ def paint(
                         )
                 elif kind == "event":
                     label = (
-                        control.options["event_field"].format(value)
+                        opts["event_field"].format(value)
                         if value is not None
                         else "Unavailable"
                     )
                     text(label if external_label else f"{prefix}  {label}", r, ink)
                 elif kind == "number":
-                    numeric = control.options.get("numeric")
+                    numeric = opts.get("numeric")
                     numeric_state = None
                     if numeric is not None:
                         owner = id(numeric.context)
                         if owner not in numeric_states:
                             numeric_states[owner] = numeric.snapshot()
                         numeric_state = numeric_states[owner]
-                    lo = control.options.get("min", 0.0)
-                    hi = control.options.get("max", 1.0)
+                    lo = opts.get("min", 0.0)
+                    hi = opts.get("max", 1.0)
                     label = (
                         canvas.editor.text
                         if canvas.active is control and canvas.editor
@@ -797,17 +828,17 @@ def paint(
                         label_rect, (tx, ty, tw), field = slider_parts(
                             control.rect,
                             bool(control.label),
-                            stacked=control.options.get("_slider_stacked"),
-                            label_width=control.options.get("_slider_label_width"),
-                            label_band=control.options.get("_label_band", 24),
-                            value_width=control.options.get("value_width", 53),
+                            stacked=opts.get("_slider_stacked"),
+                            label_width=opts.get("_slider_label_width"),
+                            label_band=opts.get("_label_band", 24),
+                            value_width=opts.get("value_width", 53),
                         )
                         if control.label:
                             lx, ly, lw, lh = label_rect
                             label_rect = (
                                 lx,
                                 ly,
-                                control.options.get("_label_span", lw),
+                                opts.get("_label_span", lw),
                                 lh,
                             )
                             text(
@@ -816,14 +847,14 @@ def paint(
                                 stable_ink,
                                 (
                                     "title"
-                                    if control.options.get("_slider_stacked")
+                                    if opts.get("_slider_stacked")
                                     else "body"
                                 ),
                                 inset=(
                                     0 if getattr(canvas, "panel_layout", False) else 6
                                 ),
-                                icon=control.options.get("icon"),
-                                icon_value=control.options.get("icon_value", 0),
+                                icon=opts.get("icon"),
+                                icon_value=opts.get("icon_value", 0),
                             )
                         px, py, pw, _ = mapped((tx, ty, tw, 0))
                         ratio = (
@@ -838,7 +869,7 @@ def paint(
                             scale=scale,
                             palette=palette,
                             enabled=enabled
-                            or control.options.get("disabled_accent", False),
+                            or opts.get("disabled_accent", False),
                         )
                         field = mapped(field)
                         with control.motion.deform("field", field):
@@ -865,7 +896,7 @@ def paint(
                                 r,
                                 ink,
                             )
-                elif kind == "text" and control.options.get("search_bar"):
+                elif kind == "text" and opts.get("search_bar"):
                     from .menus import search_field
 
                     search_field(
@@ -888,7 +919,7 @@ def paint(
                                 min(bounds[3], cy + ch),
                             ),
                         ),
-                        placeholder=control.options.get("placeholder", "Search…"),
+                        placeholder=opts.get("placeholder", "Search…"),
                     )
                 elif kind == "text":
                     value = (
@@ -912,44 +943,44 @@ def paint(
                             r,
                             ink,
                         )
-                elif kind == "button" and control.options.get("_button_lines"):
+                elif kind == "button" and opts.get("_button_lines"):
                     wrapped_button(control, r, ink)
                 elif kind == "button" and (
-                    control.options.get("operator_enum")
-                    or control.options.get("menu_model")
-                    or control.options.get("panel_model")
-                    or control.options.get("hold_menu")
+                    opts.get("operator_enum")
+                    or opts.get("menu_model")
+                    or opts.get("panel_model")
+                    or opts.get("hold_menu")
                 ):
                     if not control.label:
                         # Icon-only menus have one centered glyph, never an edge arrow.
-                        glyph = control.options.get("icon")
+                        glyph = opts.get("icon")
                         text(
                             "",
                             r,
                             ink,
                             center=True,
                             icon="▾" if glyph in {None, "", "NONE", 0} else glyph,
-                            icon_value=control.options.get("icon_value", 0),
+                            icon_value=opts.get("icon_value", 0),
                         )
                     else:
                         text(
                             control.label,
                             (a, b, max(0, c - 20 * scale), d),
                             ink,
-                            icon=control.options.get("icon"),
-                            icon_value=control.options.get("icon_value", 0),
+                            icon=opts.get("icon"),
+                            icon_value=opts.get("icon_value", 0),
                         )
                         style.icon("▾", a + c - 12 * scale, b + d / 2, 10 * scale, ink)
                 elif kind == "enum":
                     c -= drop
-                    field = control.options.get("enum_field")
+                    field = opts.get("enum_field")
                     label = (
                         field.format(value)
                         if field and value is not None
                         else next(
                             (
                                 label
-                                for key, label in control.options["items"]
+                                for key, label in opts["items"]
                                 if key == value
                             ),
                             str(value),
@@ -967,8 +998,8 @@ def paint(
                         (a, b, max(0, c - 40 * scale), d),
                         ink,
                         inset=0 if getattr(canvas, "panel_layout", False) else 6,
-                        icon=control.options.get("icon"),
-                        icon_value=control.options.get("icon_value", 0),
+                        icon=opts.get("icon"),
+                        icon_value=opts.get("icon_value", 0),
                     )
                     if value is not None:
                         rgb = tuple(value[:3])
@@ -982,17 +1013,17 @@ def paint(
                             radius=4 * scale,
                         )
                 elif kind == "image":
-                    texture = control.options["texture"]
+                    texture = opts["texture"]
                     texture = texture() if callable(texture) else texture
                     if texture is not None:
                         style.preview(texture, *r, radius=t.radius * scale)
-                elif control.options.get("_wrapped_lines"):
-                    lines = control.options["_wrapped_lines"]
+                elif opts.get("_wrapped_lines"):
+                    lines = opts["_wrapped_lines"]
                     line_height = (
                         current_style.get("line_height", current_style.get("font_size", t.font_size) * 1.55) * scale
                     )
-                    has_icon = control.options.get("icon") not in {None, "", "NONE", 0}
-                    inline = control.options.get("inline_label")
+                    has_icon = opts.get("icon") not in {None, "", "NONE", 0}
+                    inline = opts.get("inline_label")
                     top = b + (d + len(lines) * line_height) / 2 if inline else b + d
                     for i, line in enumerate(lines):
                         gutter = (current_style.get("icon_size", t.icon_size) + 6 if inline else 20) * scale if has_icon and i else 0
@@ -1007,15 +1038,15 @@ def paint(
                             ink,
                             inset=0 if inline else 6,
                             right_inset=0 if inline else 4,
-                            icon=control.options.get("icon") if i == 0 else None,
+                            icon=opts.get("icon") if i == 0 else None,
                         )
-                elif control.options.get("_heading_lines"):
-                    lines = control.options["_heading_lines"]
+                elif opts.get("_heading_lines"):
+                    lines = opts["_heading_lines"]
                     line_height = max(18, t.font_size * 18 / 11) * scale
                     top = b + d / 2 + len(lines) * line_height / 2
                     for i, line in enumerate(lines):
                         gutter = (
-                            control.options.get("_heading_icon_gutter", 0) * scale
+                            opts.get("_heading_icon_gutter", 0) * scale
                             if i
                             else 0
                         )
@@ -1030,33 +1061,33 @@ def paint(
                             ink,
                             "title",
                             inset=0,
-                            icon=control.options.get("icon") if i == 0 else None,
+                            icon=opts.get("icon") if i == 0 else None,
                             icon_value=(
-                                control.options.get("icon_value", 0) if i == 0 else 0
+                                opts.get("icon_value", 0) if i == 0 else 0
                             ),
                         )
                 else:
-                    label_get = control.options.get("label_get")
+                    label_get = opts.get("label_get")
                     text(
                         label_get() if label_get else control.label,
                         (a, b, max(0, c - 22 * scale), d) if menu_option else r,
                         (
                             palette["muted"]
-                            if control.options.get("text_role") == "secondary"
+                            if opts.get("text_role") == "secondary"
                             else ink
                         ),
-                        control.options.get("text_role", "body"),
+                        opts.get("text_role", "body"),
                         center=(kind == "button" and not menu_option)
-                        or control.options.get("text_alignment") == "CENTER",
-                        right_align=control.options.get("text_alignment") == "RIGHT",
-                        icon=control.options.get("icon"),
-                        icon_value=control.options.get("icon_value", 0),
-                        trailing_icon=control.options.get("trailing_icon"),
-                        right_inset=0 if control.options.get("inline_label") else 4,
+                        or opts.get("text_alignment") == "CENTER",
+                        right_align=opts.get("text_alignment") == "RIGHT",
+                        icon=opts.get("icon"),
+                        icon_value=opts.get("icon_value", 0),
+                        trailing_icon=opts.get("trailing_icon"),
+                        right_inset=0 if opts.get("inline_label") else 4,
                         inset=(
                             menu_metrics.TEXT_INSET
                             if menu_option
-                            else control.options.get(
+                            else opts.get(
                                 "text_inset",
                                 (
                                     0
