@@ -1,4 +1,6 @@
 """Bounded 2D edit pad. RNA ownership/undo remain in its supplied binding."""
+
+from ..i18n import iface
 import math
 from time import monotonic
 from dataclasses import replace
@@ -114,7 +116,7 @@ class Joystick(Widget):
         return Target(key,('pad',),self.binding,self.binding.valid,self.binding.read,self)
 
     def entries(self,target,context):
-        rows=[Entry('JOYSTICK_RESET','Reset Offset',lambda t,c:self.reset(),enabled=lambda t,c:t.editable() and self.binding.valid(),icon='LOOP_BACK')]
+        rows=[Entry('JOYSTICK_RESET',iface('Reset Offset'),lambda t,c:self.reset(),enabled=lambda t,c:t.editable() and self.binding.valid(),icon='LOOP_BACK')]
         if self.binding.context:rows.extend(default_entries(target,context))
         for index,binding in enumerate(self.axes):
             part=replace(target,part=('component',index),binding=binding,valid=binding.valid,value=binding.read)

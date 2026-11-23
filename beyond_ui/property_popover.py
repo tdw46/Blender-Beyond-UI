@@ -1,5 +1,7 @@
 """Expanded property popups using the shared retained Canvas popup host."""
 
+from .i18n import iface
+
 from types import SimpleNamespace
 from .menu_metrics import Metrics as menu_metrics
 from .operator_enum import context_key
@@ -136,7 +138,7 @@ class PropertyPopover:
                         context_menu=lambda t, c: (
                             Entry(
                                 "CLEAR_SEARCH",
-                                "Clear Search",
+                                iface("Clear Search"),
                                 lambda t, c: query.write(""),
                                 enabled=bool(query.read()),
                             ),
@@ -171,7 +173,7 @@ class PropertyPopover:
                     prefix = tuple(child.children[:start])
                     empty = ui.group.label(
                         ui._key("empty-components"),
-                        "No matching components",
+                        iface("No matching components"),
                         enabled=False,
                     )
                     child.children.remove(empty)

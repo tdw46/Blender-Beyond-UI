@@ -4,6 +4,8 @@ Draw once on open/navigation, never paint. Unsupported calls abort collection;
 no callback is silently omitted and no native menu is opened.
 """
 
+from .i18n import iface
+
 from dataclasses import replace
 from itertools import islice
 from types import SimpleNamespace
@@ -287,9 +289,9 @@ class RegisteredMenu:
         route = 'wm.' + (self.native_route or ('call_menu_pie' if self.pie else 'call_menu'))
         command = operator_command(route, {'name': self.name})
         return (
-            Entry('COMMAND', 'Copy Python Command',
+            Entry('COMMAND', iface('Copy Python Command'),
                   lambda t, c: setattr(c.window_manager, 'clipboard', command)),
-            Entry('API', 'Online Python Reference',
+            Entry('API', iface('Online Python Reference'),
                   lambda t, c: operator('wm.doc_view')(doc_id=self.cls.__name__)),
             entry(self.cls.draw),
         )
@@ -420,7 +422,7 @@ class MenuLayout:
                 context=lambda t, c, row=row: (
                     Entry(
                         "OPEN",
-                        "Open " + row.label,
+                        iface("Open {name}").format(name=row.label),
                         children=row.children,
                         enabled=row.enabled,
                     ),

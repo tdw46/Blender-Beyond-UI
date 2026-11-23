@@ -1,5 +1,7 @@
 """Operator-instance dialogs built from the same retained custom popover controls."""
 
+from .i18n import iface
+
 from types import SimpleNamespace
 from .layout import Layout
 from .canvas import Canvas
@@ -125,7 +127,7 @@ class Dialog:
         header = getattr(type(operator), "beyond_ui_dialog_header", None)
         if header:
             ui.popup_header = header
-        ui.draw_popup_header(text=title or operator.bl_label, icon=self.icon, translate=False)
+        ui.draw_popup_header(text=title or operator.bl_label, icon=self.icon, translate=not bool(title))
         self.list_identity = ui.list_identity
         self.tape = None
         draw = getattr(type(operator), "draw", None)
@@ -160,8 +162,8 @@ class Dialog:
         row = ui.row()
         row.alignment = "RIGHT"
         for key, label, accepted in (
-            ("cancel", "Cancel", False),
-            ("confirm", confirm_text or "OK", True),
+            ("cancel", iface("Cancel"), False),
+            ("confirm", confirm_text or iface("OK"), True),
         ):
             control = row.group.button(
                 key,

@@ -1,5 +1,7 @@
 """Registered Python panels in retained custom canvases; no native popup widgets."""
 
+from .i18n import iface
+
 from .scroll import SCROLL_EVENTS, scroll_delta
 from .registered_menu import RegisteredMenu, Proxy, LIMIT
 from .operator_enum import context_key
@@ -404,10 +406,10 @@ class PanelPopover(Widget):
                 child.context_menu = Menu(
                     Target("popover-scroll", valid=lambda: self.valid(context)),
                     (
-                        Entry("TOP", "Scroll to Top", lambda t, c: self.scroll_to(0)),
+                        Entry("TOP", iface("Scroll to Top"), lambda t, c: self.scroll_to(0)),
                         Entry(
                             "BOTTOM",
-                            "Scroll to Bottom",
+                            iface("Scroll to Bottom"),
                             lambda t, c: self.scroll_to(limit),
                         ),
                     ),

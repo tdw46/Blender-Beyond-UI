@@ -1,5 +1,7 @@
 """Owned object/active-pose navigation, with selection rollback on rejected undo."""
 
+from .i18n import iface
+
 from .context_menu import Entry
 from .rna_owner import identity
 
@@ -76,7 +78,7 @@ def entries(resolve):
     return (
         Entry(
             "JUMP_TARGET",
-            "Jump to Target",
+            iface("Jump to Target"),
             execute,
             lambda t, c: destination(t, c) is not None,
             tip="Visible objects in Object Mode, or bones on the active pose rig. Hidden/excluded owners and mode transitions require host routing.",

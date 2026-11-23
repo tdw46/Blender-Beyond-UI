@@ -4,6 +4,8 @@ Source behavior: BVT VRM_ShoostContextMenu / VRM_ShoostCanvas. Actions and
 capabilities are rechecked on input; painting only consumes prepared rows.
 """
 
+from .i18n import iface
+
 from .scroll import scroll_step
 
 from dataclasses import dataclass, replace
@@ -254,7 +256,7 @@ class Menu:
         if not any(not r.heading and r.key != "__back__" for r in rows):
             rows = (
                 *rows,
-                Entry("__no_matches__", "No matches", enabled=False, heading=True),
+                Entry("__no_matches__", iface("No matches"), enabled=False, heading=True),
             )
         p.rows = rows
         x, y, w, h = p.search.rect
@@ -1083,4 +1085,4 @@ def default_entries(target, context):
     def copy(target, context):
         context.window_manager.clipboard = repr(getter())
 
-    return (Entry("COPY_VALUE", "Copy Value", copy, icon="COPYDOWN"),)
+    return (Entry("COPY_VALUE", iface("Copy Value"), copy, icon="COPYDOWN"),)

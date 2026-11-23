@@ -1,5 +1,7 @@
 """Owner-checked RNA pointer selection. Candidate/poll policy belongs to the host."""
 
+from .i18n import iface
+
 from dataclasses import dataclass, replace
 from contextlib import nullcontext
 from .context_menu import Entry
@@ -173,7 +175,7 @@ class PointerField:
 
         return Entry(
             "CLEAR_POINTER",
-            "Clear",
+            iface("Clear"),
             clear,
             lambda t, c: t.editable()
             and self.allow_none
@@ -281,13 +283,13 @@ class PointerField:
                     return (
                         Entry(
                             "SELECT_POINTER",
-                            "Select",
+                            iface("Select"),
                             lambda t, c: select(key),
                             lambda t, c: valid(key),
                         ),
                         Entry(
                             "COPY_NAME",
-                            "Copy Name",
+                            iface("Copy Name"),
                             lambda t, c: copy_name(key, c),
                             lambda t, c: valid(key),
                         ),

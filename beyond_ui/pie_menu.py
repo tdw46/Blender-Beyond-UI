@@ -4,6 +4,8 @@ Geometry is prepared once in host logical units. No Blender import, timer,
 pointer polling, GPU resources or binding reads in the layout/hit-test engine.
 """
 
+from .i18n import iface
+
 from math import atan2, pi, hypot, isfinite, sqrt
 from time import monotonic
 from contextlib import contextmanager, nullcontext
@@ -213,7 +215,7 @@ class PieMenu(Menu):
 
             index = len(self.root.rows)
             self.root.rows += (
-                Entry("__back__", "Back", icon="‹")
+                Entry("__back__", iface("Back"), icon="‹")
                 if navigation_back
                 else Entry("__pie_title__", title, heading=True, icon=icon),
             )

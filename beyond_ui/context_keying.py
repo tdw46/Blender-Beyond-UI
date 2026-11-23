@@ -1,5 +1,7 @@
 """Exact-owner scene keying-set actions, prepared only on menu input."""
 
+from .i18n import iface
+
 from .context_menu import Entry
 
 
@@ -140,7 +142,7 @@ def entries(source, target, context):
             1,
             Entry(
                 "KEYING_ADD_ALL",
-                "Add All to Keying Set",
+                iface("Add All to Keying Set"),
                 lambda t, c: execute(t, c, whole, False),
                 lambda t, c: enabled(t, c, whole, False),
             ),

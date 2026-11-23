@@ -1,5 +1,7 @@
 """Default RNA collection list, built from the shared source skin and motion."""
 
+from ..i18n import iface
+
 from math import ceil
 from ..scroll import scroll_delta, scroll_step
 from .base import Widget, Painter, contains
@@ -197,9 +199,9 @@ class CollectionList(Widget):
         yield "query", "Search", (4, top, max(0, self.width - 8), 26)
         for i, (key, label) in enumerate(
             (
-                ("invert", "Invert Filter"),
-                ("alpha", "Sort by Name"),
-                ("reverse", "Reverse"),
+                ("invert", iface("Invert Filter")),
+                ("alpha", iface("Sort by Name")),
+                ("reverse", iface("Reverse")),
             )
         ):
             if not self.sort_lock or key == "invert":
@@ -465,7 +467,7 @@ class CollectionList(Widget):
             rows.append(
                 Entry(
                     "LIST_SELECT",
-                    "Select",
+                    iface("Select"),
                     lambda t, c: self.source.select(item),
                     enabled=lambda t, c: t.editable() and self.source.active.valid(),
                 )
@@ -474,7 +476,7 @@ class CollectionList(Widget):
                 rows.append(
                     Entry(
                         "LIST_RENAME",
-                        "Rename",
+                        iface("Rename"),
                         lambda t, c: self.rename(item),
                         enabled=lambda t, c: t.editable() and target.binding.valid(),
                     )
@@ -482,31 +484,31 @@ class CollectionList(Widget):
             rows.extend(default_entries(target, context))
         else:
             rows.append(
-                Entry("LIST_REFRESH", "Refresh List", lambda t, c: self.refresh())
+                Entry("LIST_REFRESH", iface("Refresh List"), lambda t, c: self.refresh())
             )
             if self.type != "COMPACT":
                 rows.extend(
                     (
                         Entry(
                             "LIST_SEARCH",
-                            "Search",
+                            iface("Search"),
                             lambda t, c: self.search(),
                             shortcut="Ctrl F",
                         ),
                         Entry(
-                            "LIST_TOP", "Scroll to Top", lambda t, c: self.scroll_to(0)
+                            "LIST_TOP", iface("Scroll to Top"), lambda t, c: self.scroll_to(0)
                         ),
                         Entry(
                             "LIST_BOTTOM",
-                            "Scroll to Bottom",
+                            iface("Scroll to Bottom"),
                             lambda t, c: self.scroll_to(self.limit),
                         ),
                     )
                 )
                 for name, label in (
-                    ("invert", "Invert Filter"),
-                    ("alpha", "Sort by Name"),
-                    ("reverse", "Reverse"),
+                    ("invert", iface("Invert Filter")),
+                    ("alpha", iface("Sort by Name")),
+                    ("reverse", iface("Reverse")),
                 ):
                     if not self.sort_lock or name == "invert":
                         rows.append(
@@ -599,7 +601,7 @@ class CollectionList(Widget):
             )
             p.text(
                 (25, self.viewport + 1, max(0, self.width - 110), 24),
-                "Filter",
+                iface("Filter"),
                 size=11,
                 inset=0,
             )

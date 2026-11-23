@@ -4,6 +4,8 @@ No BVT/VRM data, global state, handlers, timers or scene evaluation. The host
 owns GPU state and lifetime, clipping, transforms, input and retained backdrop.
 """
 
+from ..i18n import iface
+
 from ..menu_metrics import Metrics as menu_metrics
 
 
@@ -521,6 +523,8 @@ def search_field(
     left = x + menu_metrics.SEARCH_TEXT * scale
     right = max(left, x + w - (8 + trailing) * scale)
     size = menu_metrics.SEARCH_FONT_SIZE * scale
+    if not value and placeholder in ("Search…", "Search options…"):
+        placeholder = iface("Search…") if placeholder == "Search…" else iface("Search options…")
     text = value or ("" if editor and editor.text else placeholder)
     cursor = measure(font, size, value[: editor.cursor])[0] if editor else 0
     origin = left - max(0, cursor - max(0, right - left - 2 * scale))

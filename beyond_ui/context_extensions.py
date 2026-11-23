@@ -4,6 +4,8 @@ A deliberately bounded collector, not a general replacement UILayout. Unsupporte
 callbacks are isolated and reported; unsupported native-button actions stay disabled.
 """
 
+from .i18n import iface
+
 from types import SimpleNamespace
 from dataclasses import replace
 from .context_menu import Entry
@@ -412,7 +414,7 @@ def entries(context, source):
         return [
             Entry(
                 "EXTENSIONS_UNAVAILABLE",
-                "Extension menu unavailable",
+                iface("Extension menu unavailable"),
                 enabled=False,
                 tip=str(error),
             ),
@@ -437,7 +439,7 @@ def operator_entries(
         rows.append(
             Entry(
                 "COMMAND",
-                "Copy Python Command",
+                iface("Copy Python Command"),
                 lambda t, c: setattr(c.window_manager, "clipboard", command),
             )
         )
@@ -473,7 +475,7 @@ def operator_entries(
     rows.append(
         Entry(
             "FAVORITES",
-            "Quick Favorites",
+            iface("Quick Favorites"),
             children=favorites,
             enabled=lambda t, c: independent
             and c.area is not None
@@ -489,7 +491,7 @@ def operator_entries(
         rows.append(
             Entry(
                 "SHORTCUT",
-                "Assign Shortcut",
+                iface("Assign Shortcut"),
                 enabled=False,
                 icon="shortcut",
                 tip="This operator's invocation or pointer overrides require a host shortcut dispatcher.",
@@ -498,7 +500,7 @@ def operator_entries(
     rows.append(
         Entry(
             "MANUAL",
-            "Online Manual",
+            iface("Online Manual"),
             lambda t, c: operator("wm.doc_view_manual")(doc_id=idname),
             icon="globe",
         )
@@ -506,7 +508,7 @@ def operator_entries(
     if getattr(context.preferences.view, "show_developer_ui", False):
         from .context_source import entry, operator_subject
 
-        rows.append(Entry("API", "Online Python Reference",
+        rows.append(Entry("API", iface("Online Python Reference"),
                           lambda t, c: operator("wm.doc_view")(doc_id=idname)))
         rows.append(entry(operator_subject(idname)))
     if getattr(context.preferences.view, "show_tooltips_python", False):

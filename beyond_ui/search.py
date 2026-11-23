@@ -1,5 +1,7 @@
 """Transactional collection search; snapshot on refresh, revalidate on commit."""
 
+from .i18n import iface
+
 from dataclasses import replace
 from .context_menu import Entry, default_entries
 from .pointer import PointerField, automatic
@@ -326,13 +328,13 @@ class CollectionSearch:
             return (
                 Entry(
                     "SELECT_SEARCH",
-                    "Select",
+                    iface("Select"),
                     lambda t, c: self.select(key),
                     lambda t, c: self.valid(key) and self.writable(),
                 ),
                 Entry(
                     "COPY_NAME",
-                    "Copy Name",
+                    iface("Copy Name"),
                     lambda t, c: self.copy_name(key, c),
                     lambda t, c: self.valid(key),
                 ),

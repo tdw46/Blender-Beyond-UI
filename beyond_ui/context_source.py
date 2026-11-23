@@ -1,5 +1,7 @@
 """Developer source locations from explicit authoring callables, never guessed UI."""
 
+from .i18n import iface
+
 import inspect
 from pathlib import Path
 from .context_menu import Entry
@@ -39,7 +41,7 @@ def entry(subject):
 
     return Entry(
         "SOURCE",
-        "Edit Source",
+        iface("Edit Source"),
         execute,
         allowed,
         tip="Open the host-supplied Python authoring function in the Text Editor.",

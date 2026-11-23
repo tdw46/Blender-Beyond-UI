@@ -4,6 +4,8 @@ Callbacks run on authoring, input or explicit refresh. Painting never invokes
 draw_item, draw_filter, filter_items, or registry discovery.
 """
 
+from .i18n import iface
+
 from dataclasses import replace
 from inspect import signature, Parameter
 from itertools import islice, count
@@ -271,7 +273,7 @@ class ListProxy(Proxy):
             return (
                 Entry(
                     "RESET_LIST_SETTING",
-                    "Reset to Default",
+                    iface("Reset to Default"),
                     reset,
                     enabled=lambda t, c: t.editable(),
                 ),

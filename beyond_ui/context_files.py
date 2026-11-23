@@ -1,5 +1,7 @@
 """Owner-relative external file actions, resolved only on menu input."""
 
+from .i18n import iface
+
 import os
 from .context_menu import Entry
 
@@ -52,7 +54,7 @@ def entries(source):
         rows.append(
             Entry(
                 "OPEN_FILE",
-                "Open File Externally",
+                iface("Open File Externally"),
                 lambda t, c: execute(t, c, False),
                 valid,
                 divider=True,
@@ -61,7 +63,7 @@ def entries(source):
     rows.append(
         Entry(
             "OPEN_LOCATION",
-            "Open Location Externally",
+            iface("Open Location Externally"),
             lambda t, c: execute(t, c, True),
             valid,
             divider=directory,

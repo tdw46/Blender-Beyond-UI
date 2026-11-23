@@ -1,5 +1,7 @@
 """Custom data-block controls with input-time snapshots and host-owned undo."""
 
+from .i18n import iface
+
 from dataclasses import dataclass, replace
 from .bindings import Binding, rna_binding
 from .context_menu import Entry, default_entries
@@ -333,7 +335,7 @@ class IDTemplate:
             0,
             Entry(
                 "ID_COPY",
-                "Make Single User",
+                iface("Make Single User"),
                 lambda t, c: self.duplicate(token),
                 lambda t, c: t.editable()
                 and self.matches(token)
@@ -448,8 +450,8 @@ class IDTemplate:
 
                 provider = self.canvas.context_provider
                 return (
-                    Entry("SELECT_ID", "Select Data-block", choose, current),
-                    Entry("COPY_NAME", "Copy Name", copy, current),
+                    Entry("SELECT_ID", iface("Select Data-block"), choose, current),
+                    Entry("COPY_NAME", iface("Copy Name"), copy, current),
                     *(provider(target, context) if provider else ()),
                 )
 

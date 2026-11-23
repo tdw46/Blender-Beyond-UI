@@ -4,6 +4,8 @@ Only implemented methods are exposed. Unsupported templates raise an explicit
 exception rather than displaying a generic form or claiming parity.
 """
 
+from .i18n import iface
+
 from types import SimpleNamespace
 from .canvas import Canvas, Group
 from .bindings import Binding, rna_binding
@@ -1337,7 +1339,7 @@ class Layout:
                 ),
                 Entry(
                     "SHORTCUT",
-                    "Shortcut to Open Menu",
+                    iface("Shortcut to Open Menu"),
                     enabled=False,
                     tip="The consuming host must provide a ShortcutRegistry for this custom popup.",
                 ),

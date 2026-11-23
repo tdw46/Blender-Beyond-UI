@@ -5,6 +5,8 @@ can supply an exact public keymap name; otherwise the admitted Blender helper
 chooses the same keymap as a native operator button. Unsupported cases stay off.
 """
 
+from .i18n import iface
+
 from copy import deepcopy
 from .context_menu import Entry
 
@@ -316,7 +318,7 @@ class Action:
             icon="shortcut",
             children=lambda t, c: (
                 self.capture_entry("Change Shortcut"),
-                Entry("REMOVE_SHORTCUT", "Remove Shortcut", self.remove, self.enabled),
+                Entry("REMOVE_SHORTCUT", iface("Remove Shortcut"), self.remove, self.enabled),
             ),
         )
 
@@ -336,7 +338,7 @@ def property_entry(source, context):
     if path is None or (getattr(meta, "is_array", False) and source.index is None):
         return Entry(
             "SHORTCUT",
-            "Assign Shortcut",
+            iface("Assign Shortcut"),
             enabled=False,
             icon="shortcut",
             tip="Requires a scalar/component with an exact context-relative path.",
@@ -408,7 +410,7 @@ def property_entry(source, context):
 
         return Entry(
             "SHORTCUT",
-            "Shortcut to Value",
+            iface("Shortcut to Value"),
             children=choices,
             enabled=lambda t, c: valid(c) and t.editable(),
             icon="shortcut",
@@ -416,7 +418,7 @@ def property_entry(source, context):
         )
     return Entry(
         "SHORTCUT",
-        "Assign Shortcut",
+        iface("Assign Shortcut"),
         enabled=False,
         icon="shortcut",
         tip="This property has no direct shortcut action; a host dispatcher can provide one.",
@@ -449,7 +451,7 @@ def capture_entry(capture, enabled, label="Assign Shortcut", *, allow_chord=True
         rows = (
             Entry(
                 "MOUSE_CAPTURE",
-                "Mouse / NDOF button…",
+                iface("Mouse / NDOF button…"),
                 enabled=enabled,
                 capture=lambda t, c, e: capture(t, c, e, mouse=True),
                 capture_mouse=True,
@@ -458,7 +460,7 @@ def capture_entry(capture, enabled, label="Assign Shortcut", *, allow_chord=True
             ),
             Entry(
                 "CHORD_CAPTURE",
-                "Key modifier chord…",
+                iface("Key modifier chord…"),
                 enabled=enabled,
                 capture=chord,
                 capture_prompt="Hold one key, then press another…",
@@ -507,7 +509,7 @@ def numeric_property_entry(source, context, registry=None):
     ):
         return Entry(
             "SHORTCUT",
-            "Shortcut to Value",
+            iface("Shortcut to Value"),
             enabled=False,
             icon="shortcut",
             tip="Requires the consuming extension's registered ShortcutRegistry.",
@@ -569,7 +571,7 @@ def numeric_property_entry(source, context, registry=None):
 
     return Entry(
         "SHORTCUT",
-        "Shortcut to Value",
+        iface("Shortcut to Value"),
         children=choices,
         enabled=lambda t, c: t.valid()
         and t.editable()
