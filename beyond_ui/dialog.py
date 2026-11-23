@@ -161,6 +161,9 @@ class Dialog:
     def footer(self, ui, confirm_text, cancel_default):
         row = ui.row()
         row.alignment = "RIGHT"
+        action_style = getattr(type(self.operator), "beyond_ui_dialog_action_style", None) or ui.popup_action_style
+        if ui.popup_action_style:
+            row.group.options["_equal_action_widths"] = True
         for key, label, accepted in (
             ("cancel", iface("Cancel"), False),
             ("confirm", confirm_text or iface("OK"), True),
@@ -187,7 +190,6 @@ class Dialog:
                 active_default=(not accepted if cancel_default else accepted),
             )
             control.options["text_align"] = "CENTER"
-            action_style = getattr(type(self.operator), "beyond_ui_dialog_action_style", None)
             if action_style:
                 action_style(row, accepted)
             elif accepted and ui.popup_confirm_style:

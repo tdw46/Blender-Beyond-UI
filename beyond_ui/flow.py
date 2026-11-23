@@ -603,6 +603,9 @@ class Plan:
     def row_widths(self, node, width, children=None):
         children, gap = self.children(node) if children is None else children, self.gap(node)
         usable = max(0.0, width - max(0, len(children) - 1) * gap)
+        if children and node.options.get("_equal_action_widths"):
+            longest = max(self.natural(child) for child in children)
+            return [min(longest, usable / len(children))] * len(children)
         if node.kind == "split":
             factor = node.options.get("factor", 0) or 1 / max(1, len(children))
             widths = [usable * factor] + [
