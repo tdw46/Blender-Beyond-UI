@@ -384,7 +384,11 @@ class Plan:
         if node.kind != "label" or not node.options.get("wrap_text"):
             return 0
         icon = node.options.get("icon") not in {None, "", "NONE", 0}
-        limit = max(1, available - (20 if icon else 0) - 12)
+        if node.options.get("inline_label"):
+            gutter = node.options.get("icon_size", self.theme.icon_size) + 6 if icon else 0
+            limit = max(1, available - gutter - 1)
+        else:
+            limit = max(1, available - (20 if icon else 0) - 12)
         # Wrapped labels paint as body text with an optional bold face override.
         # Use that same face and exact host-scaled size, including font hinting.
         size = node.options.get("font_size", self.theme.font_size)
@@ -579,7 +583,9 @@ class Plan:
                 text = measure(node.label, role, size) if measure else self.label_width(node)
                 icon = node.options.get("icon") not in {None, "", "NONE", 0} or node.options.get("icon_value")
                 gutter = node.options.get("icon_size", self.theme.icon_size) + 6 if icon else 0
-                return text + gutter + 12
+                # Inline captions reserve a pixel for glyph overhang. The owning
+                # row supplies the gap to its next action.
+                return text + gutter + (2 if node.options.get("inline_label") else 12)
         if (
             node.kind in {"button", "label"}
             and not node.label

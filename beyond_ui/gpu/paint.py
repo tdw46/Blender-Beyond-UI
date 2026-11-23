@@ -545,6 +545,7 @@ def paint(
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
                         trailing_icon=control.options.get("trailing_icon"),
+                        right_inset=0 if control.options.get("inline_label") else 4,
                     )
                 if (
                     kind
@@ -658,6 +659,7 @@ def paint(
                             icon=control.options.get("icon"),
                             icon_value=control.options.get("icon_value", 0),
                             trailing_icon=control.options.get("trailing_icon"),
+                        right_inset=0 if control.options.get("inline_label") else 4,
                         )
                 elif kind == "toggle":
                     from ..scalar_geometry import switch_rect
@@ -984,18 +986,21 @@ def paint(
                         current_style.get("line_height", current_style.get("font_size", t.font_size) * 1.55) * scale
                     )
                     has_icon = control.options.get("icon") not in {None, "", "NONE", 0}
+                    inline = control.options.get("inline_label")
+                    top = b + (d + len(lines) * line_height) / 2 if inline else b + d
                     for i, line in enumerate(lines):
-                        gutter = 20 * scale if has_icon and i else 0
+                        gutter = (current_style.get("icon_size", t.icon_size) + 6 if inline else 20) * scale if has_icon and i else 0
                         text(
                             line,
                             (
                                 a + gutter,
-                                b + d - (i + 1) * line_height,
+                                top - (i + 1) * line_height,
                                 c - gutter,
                                 line_height,
                             ),
                             ink,
-                            "body",
+                            inset=0 if inline else 6,
+                            right_inset=0 if inline else 4,
                             icon=control.options.get("icon") if i == 0 else None,
                         )
                 elif control.options.get("_heading_lines"):
@@ -1041,6 +1046,7 @@ def paint(
                         icon=control.options.get("icon"),
                         icon_value=control.options.get("icon_value", 0),
                         trailing_icon=control.options.get("trailing_icon"),
+                        right_inset=0 if control.options.get("inline_label") else 4,
                         inset=(
                             menu_metrics.TEXT_INSET
                             if menu_option

@@ -8,6 +8,24 @@ from beyond_ui.flow import grid_shape
 
 
 class Flow(unittest.TestCase):
+    def test_inline_caption_sizes_to_text_and_centers_its_action(self):
+        from beyond_ui import style
+
+        ui = Layout()
+        ui.canvas.panel_layout = True
+        ui.canvas.set_text_measure(lambda text, role: len(text) * 6, "test")
+        row = ui.row(align=True)
+        style(row, scope="group", gap=4, align_items="center")
+        caption = row.label(text="View")
+        style(row, inline_label=True, wrap=True, line_height=20)
+        action = row.group.button("help", "", lambda: None, width=18, height=18)
+        ui.canvas.arrange(320)
+        x, y, w, h = caption.rect
+        self.assertEqual(w, 26)
+        self.assertEqual(action.rect[0], x + w + 4)
+        self.assertEqual(action.rect[1] + action.rect[3] / 2, y + h / 2)
+        self.assertEqual(caption.options["_wrapped_lines"], ("View",))
+
     def test_gallery_headers_align_without_stretching_the_images(self):
         from beyond_ui import style
         ui = Layout()

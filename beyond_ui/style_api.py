@@ -59,6 +59,7 @@ _VISUAL = {
     "wrap",
     "list_row_height",
     "list_rows",
+    "inline_label",
     "label_position",
     "label_width",
     "button_padding",
@@ -118,7 +119,7 @@ def normalize(*presets, **options):
                 raise ValueError('enum_style must be menu, segment or track')
         elif key == "trailing_icon_align" and value not in {"text", "end"}:
             raise ValueError("trailing_icon_align must be text or end")
-        elif key in {"curve_lock_start", "curve_lock_end", "highlight_expanded", "align_card_header"}:
+        elif key in {"curve_lock_start", "curve_lock_end", "highlight_expanded", "align_card_header", "inline_label"}:
             if type(value) is not bool:raise ValueError(key+" must be Boolean")
         elif key == "responsive":
             from .responsive import normalize_rules
@@ -358,7 +359,7 @@ def apply_control(control, values, prepared=None):
     control.options["_inline_style"] = merged
     if numeric is not None:
         control.options["numeric"] = numeric
-    for key in ("slider", "value_width", "disabled_accent", "icon", "trailing_icon"):
+    for key in ("slider", "value_width", "disabled_accent", "icon", "trailing_icon", "inline_label"):
         if key in values:
             control.options[key] = values[key]
     if "wrap" in values:
