@@ -133,6 +133,7 @@ def paint(
         icon=None,
         icon_value=0,
         trailing_icon=None,
+        record=False,
     ):
         a: float
         b: float
@@ -167,9 +168,9 @@ def paint(
             icon not in {None, "", "NONE", 0} or bool(icon_value)
         )
         left = max(a + (0 if icon_only and center else inset) * scale, cx)
-        bottom = max(b, cy)
+        bottom = b if record else max(b, cy)
         right = min(a + c - (0 if icon_only and center else right_inset) * scale, cx + cw)
-        top = min(b + d, cy + ch)
+        top = b + d if record else min(b + d, cy + ch)
         if right <= left or top <= bottom:
             return
         has_icon = icon not in {None, "", "NONE", 0} or bool(icon_value)
@@ -218,22 +219,34 @@ def paint(
                 icon_size * scale,
                 icon_size * scale,
             )
-            handled = (
-                canvas.icon_renderer(icon, icon_value, icon_rect, ink)
-                if canvas.icon_renderer
-                else False
-            )
-            if not handled:
-                style.icon(
-                    icon,
-                    icon_left + icon_size / 2 * scale,
-                    b + d / 2,
-                    icon_size * scale,
-                    ink,
-                    palette=palette,
+            if record:
+                from . import icons
+                quad = icons.atlas_quad(icon, icon_left + icon_size / 2 * scale,
+                                        b + d / 2, icon_size * scale)
+                if quad is None:
+                    return None
+            else:
+                handled = (
+                    canvas.icon_renderer(icon, icon_value, icon_rect, ink)
+                    if canvas.icon_renderer
+                    else False
                 )
+                if not handled:
+                    style.icon(
+                        icon,
+                        icon_left + icon_size / 2 * scale,
+                        b + d / 2,
+                        icon_size * scale,
+                        ink,
+                        palette=palette,
+                    )
             left = group_left + gutter
         origin = group_left + gutter
+        if record:
+            if not has_icon:
+                return None
+            return (quad, active_font, size, left, right, origin,
+                    (d - measure(active_font, size, "H")[1]) / 2)
         if tail:
             tail_x = right + 6 * scale if end_icon else min(
                 right - icon_size * scale,
@@ -389,10 +402,32 @@ def paint(
             # Preserve the ordinary draw order at unsupported targets or capabilities.
             grouped = (len(queued_buttons) >= 2 and painter and owner and owner["slot"] >= 0
                        and "sample_rect" in owner and glass._strong_blur(owner))
+            plans = []
             if grouped:
-                grouped = painter.draw_buttons(queued_buttons, owner, canvas, x, y + h, sx, sy, scale, shift)
+                from ..widgets.preview_icon import PreviewIcons
+                bank = getattr(canvas, "preview_icons", None)
+                grouped = (type(bank) is PreviewIcons
+                           and getattr(canvas.icon_renderer, "__func__", None) is PreviewIcons.draw_icon)
+            if grouped:
+                for button, (a,b,c,d), palette, current_style in queued_buttons:
+                    opts = button.options
+                    key = (canvas.layout_count, font, scale, cx, cw, a, c, d, button.label,
+                           opts.get("icon"), opts.get("icon_value"), id(current_style))
+                    cached = getattr(button, "_panel_text_layout", None)
+                    if cached is None or cached[0] != key:
+                        plan = None if opts.get("icon_value") else text(
+                            button.label, (a,0.,c,d), palette["text"], opts.get("text_role", "body"),
+                            center=True, icon=opts.get("icon"), inset=opts.get("text_inset", 6), record=True)
+                        cached = button._panel_text_layout = (key, plan)
+                    if cached[1] is None:
+                        grouped = False
+                        break
+                    plans.append(cached[1])
+                if grouped:
+                    grouped = painter.draw_buttons(queued_buttons, plans, owner, canvas, x, y + h,
+                                                   sx, sy, scale, shift)
 
-            for button, bounds, palette, current_style in queued_buttons:
+            for index, (button, bounds, palette, current_style) in enumerate(queued_buttons):
                 opts = button.options
                 if not grouped:
                     radius = current_style.get("radius", t.radius)
@@ -403,9 +438,23 @@ def paint(
                     skin.inset_outline(bounds, palette, scale, radius)
                 role = "text" if "color" in current_style else current_style.get("color_role", "text")
                 ink = palette.get("accent_text", palette[role]) if role == "accent" else palette[role]
-                text(button.label, bounds, ink, opts.get("text_role", "body"), center=True,
-                     icon=opts.get("icon"), icon_value=opts.get("icon_value", 0),
-                     inset=opts.get("text_inset", 6))
+                if grouped:
+                    if button.label:
+                        _, face, size, left, right, origin, offset = plans[index]
+                        bottom, top = max(cy, bounds[1]), min(cy + ch, bounds[1] + bounds[3])
+                        if top > bottom and right > left:
+                            blf.size(face, size)
+                            blf.enable(face, blf.CLIPPING)
+                            try:
+                                blf.clipping(face, left, bottom, right, top)
+                                blf.position(face, origin, bounds[1] + offset, 0)
+                                typography.draw_text(face, button.label, ink, palette.get("text_effects"), scale)
+                            finally:
+                                blf.disable(face, blf.CLIPPING)
+                else:
+                    text(button.label, bounds, ink, opts.get("text_role", "body"), center=True,
+                         icon=opts.get("icon"), icon_value=opts.get("icon_value", 0),
+                         inset=opts.get("text_inset", 6))
             typography.flush_text(font)
             queued_buttons.clear()
             queued_keys.clear()
@@ -460,7 +509,8 @@ def paint(
             r = mapped(control.rect)
             if queued_buttons:
                 bounded = (not control.motion.tracks and (
-                    control.key in canvas._static_buttons
+                    (control.key in canvas._static_buttons and control.key != canvas.hover
+                     and control is not canvas.active and not opts.get("selected") and not opts.get("alert"))
                     or getattr(opts.get("widget"), "bounded_panel_ink", False)
                     or (control.kind == "label" and opts.get("_wrapped_lines")
                         and not (opts.get("icon_value") or opts.get("choice_card")

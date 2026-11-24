@@ -29,7 +29,8 @@ class CardSurfaces:
         info.sampler(0, "FLOAT_2D", "source")
         info.sampler(1, "FLOAT_2D", "softSource")
         info.sampler(2, "FLOAT_2D", "artTexture")
-        info.typedef_source("struct BuiCard { vec4 bounds; vec4 fill; vec4 edge; vec4 shape; };"
+        info.sampler(3, "FLOAT_2D", "iconAtlas")
+        info.typedef_source("struct BuiCard { vec4 bounds; vec4 fill; vec4 edge; vec4 shape; vec4 glyph; vec4 tile; vec4 ink; vec4 glyphFrac; };"
                             f"struct BuiCards {{ BuiCard cards[{CAPACITY}]; }};")
         info.uniform_buf(0, "BuiCards", "packet")
         lens = glass.lens_sources()
@@ -59,7 +60,10 @@ vec4 cardRect() {
                     art[stage].replace("void main()", "void drawArt()") +
                     "\n#undef pos\n#undef image\n#undef radius\nvoid main(){\n")
             if stage == 0:
-                code += "drawID=stageMode==3 ? 2*(gl_InstanceID/3) : gl_InstanceID; paintLayer=stageMode==3 ? gl_InstanceID%3 : 2*(drawID&1); pixel=vec2(0.); blurMix=0.;\n"
+                code += "drawID=stageMode==3 ? 2*(gl_InstanceID/4) : gl_InstanceID; paintLayer=stageMode==3 ? gl_InstanceID%4 : 2*(drawID&1); pixel=vec2(0.); blurMix=0.;\n"
+                code += "if(paintLayer==3){vec4 g=card.glyph;g.y=(origin.x-g.y)-card.glyphFrac.x; uv=card.tile.xy+corner*card.tile.zw; gl_Position=mvp*vec4(g.xy+corner*g.zw,0.,1.);return;}\n"
+            else:
+                code += "if(paintLayer==3){fragColor=vec4(card.ink.rgb,card.ink.a*texture(iconAtlas,uv).a);return;}\n"
             if stage:
                 code += "if(paintLayer==1 && card.shape.z==0.) discard;\n"
             code += "if(paintLayer==0) drawLens(); else if(paintLayer==1) drawArt(); else drawEdge(); }"
@@ -68,7 +72,7 @@ vec4 cardRect() {
         self.batch = batch_for_shader(self.shader, "TRIS",
                                       {"corner": ((0, 0), (1, 0), (0, 1), (1, 1))},
                                       indices=((0, 1, 2), (2, 1, 3)))
-        self.storage = np.zeros((CAPACITY, 4, 4), dtype=np.float32)
+        self.storage = np.zeros((CAPACITY, 8, 4), dtype=np.float32)
         self.frame = 0
         self.layout_key = self.palette = None
         self.layout_buffers = ()
@@ -76,32 +80,38 @@ vec4 cardRect() {
         self.buttons = {}
         self.button_builds = self.button_draws = 0
 
-    def draw_buttons(self, buttons, owner, canvas, x, top, sx, sy, scale, shift):
+    def draw_buttons(self, buttons, plans, owner, canvas, x, top, sx, sy, scale, shift):
         from math import floor
         import gpu
         if len(buttons) > CAPACITY or self.layout_key is None or self.layout_key[:7] != (canvas.layout_count, x, sx, sy, scale, shift, canvas.theme.radius):
             return False
         artwork = None
         signature = []
-        for button, _, colors, css in buttons:
+        for (button, _, colors, css), plan in zip(buttons, plans):
             token = css.get("button_artwork")
             if token:
                 if artwork and token != artwork:
                     return False
                 artwork = token
-            signature.append((button.key, tuple(colors["field"]), tuple(colors["edge"]), css.get("radius", canvas.theme.radius), token))
+            role = "text" if "color" in css else css.get("color_role", "text")
+            ink = colors.get("accent_text", colors[role]) if role == "accent" else colors[role]
+            signature.append((button.key, button.rect, plan[0], tuple(ink), tuple(colors["field"]), tuple(colors["edge"]), css.get("radius", canvas.theme.radius), token))
         texture = icons.full_artwork_texture(artwork) if artwork else None
         if artwork and texture is None:
             return False
         signature = tuple(signature)
         buf = self.buttons.get(signature)
         if buf is None:
-            for index, ((button, _, _, _), (_, fill, edge, radius, token)) in enumerate(zip(buttons, signature)):
+            for index, ((button, _, _, _), (_, _, (glyph, tile), ink, fill, edge, radius, token)) in enumerate(zip(buttons, signature)):
                 a, b, c, d = button.rect
                 bottom = (b + d) * sy
                 whole = floor(bottom)
                 box = (x + (a + shift) * sx, whole, c * sx, d * sy)
-                self.storage[index] = (box, fill, edge, (radius * scale, .65 * scale, float(bool(token)), bottom - whole))
+                glyph_bottom = bottom - glyph[1]
+                glyph_whole = floor(glyph_bottom)
+                self.storage[index] = (box, fill, edge, (radius * scale, .65 * scale, float(bool(token)), bottom - whole),
+                                       (glyph[0], glyph_whole, glyph[2], glyph[3]), tile, ink,
+                                       (glyph_bottom - glyph_whole, 0., 0., 0.))
             buf = gpu.types.GPUUniformBuf(self.storage)
             if len(self.buttons) >= 128:
                 self.buttons.pop(next(iter(self.buttons)))
@@ -117,9 +127,10 @@ vec4 cardRect() {
         shader.uniform_sampler("source", textures.base[0])
         shader.uniform_sampler("softSource", textures.strong[0])
         shader.uniform_sampler("artTexture", texture if texture is not None else textures.base[0])
+        shader.uniform_sampler("iconAtlas", icons._texture)
         shader.uniform_int("stageMode", 3)
         shader.uniform_block("packet", buf)
-        self.batch.draw_instanced(shader, instance_count=3 * len(buttons))
+        self.batch.draw_instanced(shader, instance_count=4 * len(buttons))
         self.button_draws += 1
         return True
 
@@ -157,7 +168,7 @@ vec4 cardRect() {
             packets = []
             for start in range(0, len(rows), CAPACITY):
                 group = rows[start:start + CAPACITY]
-                self.storage[:len(group)] = group
+                self.storage[:len(group), :4] = group
                 packets.append((gpu.types.GPUUniformBuf(self.storage), 2 * len(group)))
             self.layout_buffers = packets
             self.layout_key, self.palette = key, palette
@@ -173,6 +184,7 @@ vec4 cardRect() {
         shader.uniform_sampler("source", textures.base[0])
         shader.uniform_sampler("softSource", textures.strong[0])
         shader.uniform_sampler("artTexture", textures.base[0])
+        shader.uniform_sampler("iconAtlas", textures.base[0])
         shader.uniform_int("stageMode", 0)
         for buf, count in self.layout_buffers:
             shader.uniform_block("packet", buf)

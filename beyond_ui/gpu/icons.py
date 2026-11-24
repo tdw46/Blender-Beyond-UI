@@ -123,6 +123,21 @@ def layer_color(palette, role, color):
     return (*tint[:3], color[3])
 
 
+def atlas_quad(name, x, y, size):
+    """Geometry and UVs for a single existing monochrome atlas glyph."""
+    entry = _entries.get(name)
+    if entry is None or name in _duotone or _texture is None:
+        return None
+    a, b, w, h = entry
+    left, top, right, bottom = _ink_bounds.get(name, (0, 0, w, h))
+    ink_w, ink_h = right - left, bottom - top
+    draw_w, draw_h = size * ink_w / w, size * ink_h / h
+    a, b, w, h = a + left, b + top, ink_w, ink_h
+    tw, th = _dimensions
+    return ((x - draw_w / 2, y - draw_h / 2, draw_w, draw_h),
+            (a / tw, 1 - (b + h) / th, w / tw, h / th))
+
+
 def full_artwork_texture(token):
     """Resolve the current GPU image only for an entry spanning its full source."""
     pack = _artwork.get(token.partition(":")[0])
