@@ -373,6 +373,56 @@ def paint(
             text(control.label, (a, b, label_width + 6 * scale, d), ink)
         text(value, (a + label_width, b, c - label_width, d), ink, editor=canvas.editor)
 
+    queued_buttons = []
+
+    if _NATIVE_PANEL:
+        def outside_buttons(rect):
+            x0, y0, width, height = rect
+            return all(x0 >= a+w or a >= x0+width or y0 >= b+h or b >= y0+height
+                       for _, (a,b,w,h), _, _ in queued_buttons)
+
+        def flush_buttons():
+            nonlocal palette, current_style
+            if not queued_buttons:
+                return
+            saved = palette, current_style
+            from . import icons
+            owner = glass._owners.get(backdrop)
+            painter = getattr(canvas, "_vulkan_card_surfaces", None)
+            # Preserve the ordinary draw order at unsupported targets or capabilities.
+            grouped = (len(queued_buttons) >= 2 and painter and owner and owner["slot"] >= 0
+                       and "sample_rect" in owner and glass._strong_blur(owner))
+            if grouped:
+                rows = []
+                for _, bounds, colors, css in queued_buttons:
+                    radius = css.get("radius", t.radius) * scale
+                    rows.append((bounds, colors["field"], colors["edge"], (radius, .65 * scale, 5., 0.)))
+
+                def artwork(start, length):
+                    for _, bounds, _, css in queued_buttons[start:start + length]:
+                        token = css.get("button_artwork")
+                        if token:
+                            icons.artwork_surface(token, bounds, css.get("radius", t.radius) * scale)
+                painter.draw(rows, owner, artwork)
+
+            for button, bounds, palette, current_style in queued_buttons:
+                opts = button.options
+                if not grouped:
+                    radius = current_style.get("radius", t.radius)
+                    surface(bounds, palette["field"])
+                    token = current_style.get("button_artwork")
+                    if token:
+                        icons.artwork_surface(token, bounds, radius * scale)
+                    skin.inset_outline(bounds, palette, scale, radius)
+                role = "text" if "color" in current_style else current_style.get("color_role", "text")
+                ink = palette.get("accent_text", palette[role]) if role == "accent" else palette[role]
+                text(button.label, bounds, ink, opts.get("text_role", "body"), center=True,
+                     icon=opts.get("icon"), icon_value=opts.get("icon_value", 0),
+                     inset=opts.get("text_inset", 6))
+            typography.flush_text(font)
+            queued_buttons.clear()
+            palette, current_style = saved
+
     feedback_now = canvas.value_feedback.clock()
     count = 0
     animation_colors = None
@@ -420,6 +470,15 @@ def paint(
             opts = control.options
             current_style = opts.get("_inline_style", {})
             r = mapped(control.rect)
+            if queued_buttons:
+                bounded = (not control.motion.tracks and (
+                    control.key in canvas._static_buttons
+                    or getattr(opts.get("widget"), "bounded_panel_ink", False)
+                    or (control.kind == "label" and opts.get("_wrapped_lines")
+                        and not (opts.get("icon_value") or opts.get("choice_card")
+                                 or opts.get("icon") not in {None, "", "NONE", 0}))))
+                if not bounded or not outside_buttons(r):
+                    flush_buttons()
             if opts.get("search_bar"):
                 a, b, c, d = r
                 inset = menu_metrics.SEARCH_INSET * scale
@@ -448,6 +507,19 @@ def paint(
                     if present(r, font, palette):
                         count += 1
                         continue
+            if (_NATIVE_PANEL and kind == "button" and canvas._static_buttons.get(control.key) is control
+                    and canvas.hover != control.key and canvas.active is not control
+                    and not control.motion.tracks and not has_popup and not opts.get("alert")
+                    and not opts.get("selected") and not opts.get("_button_lines")
+                    and opts.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"} and control.enabled
+                    and not canvas.value_feedback.amount(control, feedback_now)):
+                # The layout owner marked a stationary ordinary operator. Read the
+                # live enabled/selection state before using its straight-line draw.
+                control.motion.begin_paint()
+                control.motion.region("body", control.rect, circular=abs(c - d) < 8)
+                queued_buttons.append((control, r, palette, current_style))
+                count += 1
+                continue
             slider = kind == "number" and opts.get("slider", True)
             external_label = (
                 bool(control.label)
@@ -1108,6 +1180,8 @@ def paint(
                 if drop:
                     style.icon("EYEDROPPER", a+c+drop/2, b+d/2, min(12*scale, drop*.75), ink)
             count += 1
+        if queued_buttons:
+            flush_buttons()
         palette = base_palette
         current_style = {}
         captured = canvas.widget_capture

@@ -259,6 +259,7 @@ class Canvas(Group):
         self._sized_groups = WeakSet()
         self._composites = {}
         self._display_widgets = None
+        self._static_buttons = {}
         self._control_bands = ()
         self._initial_authoring = False
         self._dirty = True
@@ -530,9 +531,19 @@ class Canvas(Group):
         self.close_context()
         self._dirty = True
         self._composites.clear()
+        self._static_buttons.clear()
+        static_operators = getattr(self, "static_panel_operators", ())
         self._display_widgets = [] if getattr(self, "prefer_native_panel_paint", False) else None
         for control in self.controls.values():
             widget = control.options.get("widget")
+            if (static_operators and control.kind == "button" and control.binding is None
+                    and control.options.get("operator_id") in static_operators
+                    and control.options.get("emboss", "NORMAL") == "NORMAL"
+                    and not any(control.options.get(name) for name in (
+                        "operator_enum", "menu_model", "panel_model", "hold_menu", "choice_card",
+                        "menu_option", "list_row", "search_bar", "label_get", "value_feedback",
+                        "disclosure_open", "trailing_icon", "inline_label", "_track_edges"))):
+                self._static_buttons[control.key] = control
             if self._display_widgets is not None and hasattr(widget, "refresh_display"):
                 self._display_widgets.append(widget)
             if hasattr(widget, "route"):

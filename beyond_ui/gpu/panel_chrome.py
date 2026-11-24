@@ -23,6 +23,7 @@ class CardSurfaces:
         info.fragment_out(0, "VEC4", "fragColor")
         info.push_constant("MAT4", "mvp")
         info.push_constant("VEC4", "crop")
+        info.push_constant("INT", "stageMode")
         info.sampler(0, "FLOAT_2D", "source")
         info.sampler(1, "FLOAT_2D", "softSource")
         info.typedef_source("struct BuiCard { vec4 bounds; vec4 fill; vec4 edge; vec4 shape; };"
@@ -46,7 +47,7 @@ class CardSurfaces:
                     rim_source.replace("void main()", "void drawEdge()") +
                     "\n#undef pos\nvoid main(){\n")
             if stage == 0:
-                code += "drawID=gl_InstanceID; pixel=vec2(0.); blurMix=0.;\n"
+                code += "drawID=stageMode==0 ? gl_InstanceID : 2*gl_InstanceID+stageMode-1; pixel=vec2(0.); blurMix=0.;\n"
             code += "if ((drawID & 1)==0) drawLens(); else drawEdge(); }"
             (info.fragment_source if stage else info.vertex_source)(code)
         self.shader = gpu.shader.create_from_info(info)
@@ -57,7 +58,7 @@ class CardSurfaces:
         self.buffers = {}
         self.frame = 0
 
-    def draw(self, rows, owner):
+    def draw(self, rows, owner, artwork=None):
         import gpu
         count = len(rows)
         ring = self.frame % 3
@@ -70,18 +71,33 @@ class CardSurfaces:
         textures = owner["ring"][owner["slot"]]
         gpu.state.blend_set("ALPHA")
         shader = self.shader
-        shader.bind()
-        shader.uniform_float("mvp", gpu.matrix.get_projection_matrix() @ gpu.matrix.get_model_view_matrix())
-        shader.uniform_float("crop", owner["sample_rect"])
-        shader.uniform_sampler("source", textures.base[0])
-        shader.uniform_sampler("softSource", textures.strong[0])
+        projection = gpu.matrix.get_projection_matrix() @ gpu.matrix.get_model_view_matrix()
+
+        def bind(mode, buf):
+            shader.bind()
+            shader.uniform_float("mvp", projection)
+            shader.uniform_float("crop", owner["sample_rect"])
+            shader.uniform_int("stageMode", mode)
+            shader.uniform_sampler("source", textures.base[0])
+            shader.uniform_sampler("softSource", textures.strong[0])
+            shader.uniform_block("packet", buf)
+
         for start in range(0, count, CAPACITY):
             chunk = rows[start:start + CAPACITY]
             self.storage[:len(chunk)] = chunk
             buf = self.buffers[ring, start]
             buf.update(self.storage)
-            shader.uniform_block("packet", buf)
-            self.batch.draw_instanced(shader, instance_count=2 * len(chunk))
+            if artwork is None:
+                bind(0, buf)
+                self.batch.draw_instanced(shader, instance_count=2 * len(chunk))
+            else:
+                # The caller proved that the button rectangles are disjoint.
+                bind(1, buf)
+                self.batch.draw_instanced(shader, instance_count=len(chunk))
+                artwork(start, len(chunk))
+                bind(2, buf)
+                self.batch.draw_instanced(shader, instance_count=len(chunk))
+
 
 
 def draw_card_surfaces(canvas, key, palette, clip, x, top, sx, sy, scale, shift):
