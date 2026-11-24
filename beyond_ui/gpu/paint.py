@@ -316,10 +316,12 @@ def paint(
         finally:
             blf.disable(active_font, blf.CLIPPING)
 
-    def wrapped_button(control, r, ink):
+    def wrapped_button(control, r, ink, *, icon_plan=False, icon_submitted=False):
         a, b, c, d = r
         lines, step, lead, tail, inset = control.options["_button_lines"]
         role = control.options.get("text_role", "body")
+        if icon_plan and (not lead or tail or control.options.get("icon_value")):
+            return None
         aligned = current_style.get("text_align", "CENTER")
         start = a + inset * scale
         end = a + c - tail * scale
@@ -338,9 +340,14 @@ def paint(
                 icon = control.options.get("icon")
                 icon_value = control.options.get("icon_value", 0)
                 box = (start, b + (d - icon_size) / 2, icon_size, icon_size)
-                if not (canvas.icon_renderer and canvas.icon_renderer(icon, icon_value, box, ink)):
+                if icon_plan:
+                    from . import icons
+                    return (icons.atlas_quad(icon, start + icon_size / 2, b + d / 2, icon_size),)
+                if not icon_submitted and not (canvas.icon_renderer and canvas.icon_renderer(icon, icon_value, box, ink)):
                     style.icon(icon, start + icon_size / 2, b + d / 2, icon_size, ink, palette=palette)
             start += lead * scale
+        if icon_plan:
+            return None
         if tail:
             glyph = control.options.get("trailing_icon") or "▾"
             style.icon(glyph, a+c-tail*scale/2, b+d/2, min(tail-4, t.icon_size)*scale, ink)
@@ -415,12 +422,15 @@ def paint(
                            opts.get("icon"), opts.get("icon_value"), opts.get("text_role", "body"),
                            opts.get("text_inset", 6), current_style.get("font_size", t.font_size),
                            current_style.get("font_weight"), current_style.get("text_align"),
-                           current_style.get("icon_size", t.icon_size), id(font), id(current_style))
+                           current_style.get("icon_size", t.icon_size), id(font), id(current_style), opts.get("_button_lines"))
                     cached = getattr(button, "_panel_text_layout", None)
                     if cached is None or cached[0] != key:
-                        plan = None if opts.get("icon_value") else text(
-                            button.label, (a,0.,c,d), palette["text"], opts.get("text_role", "body"),
-                            center=True, icon=opts.get("icon"), inset=opts.get("text_inset", 6), record=True)
+                        if opts.get("_button_lines"):
+                            plan = wrapped_button(button, (a, 0., c, d), palette["text"], icon_plan=True)
+                        else:
+                            plan = None if opts.get("icon_value") else text(
+                                button.label, (a,0.,c,d), palette["text"], opts.get("text_role", "body"),
+                                center=True, icon=opts.get("icon"), inset=opts.get("text_inset", 6), record=True)
                         cached = button._panel_text_layout = (key, plan)
                     if cached[1] is None or cached[1][0] is None:
                         grouped = False
@@ -441,7 +451,9 @@ def paint(
                     skin.inset_outline(bounds, palette, scale, radius)
                 role = "text" if "color" in current_style else current_style.get("color_role", "text")
                 ink = palette.get("accent_text", palette[role]) if role == "accent" else palette[role]
-                if grouped:
+                if opts.get("_button_lines"):
+                    wrapped_button(button, bounds, ink, icon_submitted=grouped)
+                elif grouped:
                     if button.label:
                         _, face, size, left, right, origin, offset = plans[index]
                         bottom, top = max(cy, bounds[1]), min(cy + ch, bounds[1] + bounds[3])
@@ -603,7 +615,9 @@ def paint(
             if (_NATIVE_PANEL and kind == "button" and canvas._static_buttons.get(control.key) is control
                     and canvas.hover != control.key and canvas.active is not control
                     and not control.motion.tracks and not has_popup and not opts.get("alert")
-                    and not opts.get("selected") and not opts.get("_button_lines")
+                    and not opts.get("selected") and (not opts.get("_button_lines") or
+                            (palette.get("text_effects") or {}).get("shadow") is False
+                            and (palette.get("text_effects") or {}).get("outline") is False)
                     and opts.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"} and control.enabled
                     and not canvas.value_feedback.amount(control, feedback_now)):
                 # The layout owner marked a stationary ordinary operator. Read the
