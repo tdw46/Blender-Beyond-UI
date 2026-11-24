@@ -412,7 +412,10 @@ def paint(
                 for button, (a,b,c,d), palette, current_style in queued_buttons:
                     opts = button.options
                     key = (canvas.layout_count, font, scale, cx, cw, a, c, d, button.label,
-                           opts.get("icon"), opts.get("icon_value"), id(current_style))
+                           opts.get("icon"), opts.get("icon_value"), opts.get("text_role", "body"),
+                           opts.get("text_inset", 6), current_style.get("font_size", t.font_size),
+                           current_style.get("font_weight"), current_style.get("text_align"),
+                           current_style.get("icon_size", t.icon_size), id(font), id(current_style))
                     cached = getattr(button, "_panel_text_layout", None)
                     if cached is None or cached[0] != key:
                         plan = None if opts.get("icon_value") else text(
@@ -453,7 +456,8 @@ def paint(
                 lines = button.options["_wrapped_lines"]
                 a, b, c, d = bounds
                 lh = current_style.get("line_height", current_style.get("font_size", t.font_size)*1.55)*scale
-                key = (canvas.layout_count, font, scale, cx, cw, a, c, lh, lines, id(current_style))
+                key = (canvas.layout_count, font, scale, cx, cw, a, c, lh, lines, current_style.get("font_size", t.font_size),
+                       current_style.get("font_weight"), current_style.get("text_align"), id(font), id(current_style))
                 cached = getattr(button, "_panel_label_layout", None)
                 if cached is None or cached[0] != key:
                     layouts = tuple(text(line, (a,0.,c,lh), palette["text"], inset=6, right_inset=4, record=True)
@@ -582,8 +586,8 @@ def paint(
                         continue
             if (_NATIVE_PANEL and canvas._static_buttons and kind == "label" and opts.get("_wrapped_lines")
                     and opts.get("icon") in {None, "", "NONE", 0} and not opts.get("icon_value")
-                    and palette.get("text_effects", {}).get("shadow") is False
-                    and palette.get("text_effects", {}).get("outline") is False
+                    and (palette.get("text_effects") or {}).get("shadow") is False
+                    and (palette.get("text_effects") or {}).get("outline") is False
                     and not (control.motion.tracks or has_popup or control.binding or opts.get("inline_label")
                              or opts.get("alert") or opts.get("selected") or opts.get("value_feedback")
                              or opts.get("choice_card") or opts.get("menu_option") or opts.get("label_get")

@@ -260,6 +260,7 @@ class Canvas(Group):
         self._composites = {}
         self._display_widgets = None
         self._static_buttons = {}
+        self._paint_overlaps = {}
         self._control_bands = ()
         self._initial_authoring = False
         self._dirty = True

@@ -141,7 +141,7 @@ vec4 cardRect() {
         # Group options and host colours can be edited without replacing a
         # palette object. Keep those author-controlled inputs in the paint key.
         surfaces = getattr(canvas, "_style_surfaces", ())
-        colors = tuple((opts.get("surface_color", palette[opts["surface"]]),
+        colors = tuple((tuple(opts.get("surface_color", palette[opts["surface"]])),
                         opts.get("_style_defaults", {}).get("opacity", 1),
                         opts.get("surface_radius", canvas.theme.radius)) for _, opts in surfaces)
         key = (canvas.layout_count, x, sx, sy, scale, shift, canvas.theme.radius,
@@ -152,6 +152,8 @@ vec4 cardRect() {
 
             def append(rect, tint, radius):
                 a, b, c, d = rect
+                if c <= 0 or d <= 0:
+                    return
                 # The host scroll origin is integral. Keeping the fractional
                 # edge separately avoids cancellation when the page moves.
                 bottom = (b + d) * sy
