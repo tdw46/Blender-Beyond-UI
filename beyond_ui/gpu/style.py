@@ -1188,6 +1188,23 @@ def clear():
     _preview_shader = _preview_batch = None
 
 
+def preview_sources():
+    return (
+        "void main(){uv=pos;gl_Position=mvp*vec4(rect.xy+pos*rect.zw,0.0,1.0);}",
+        """
+void main(){
+    vec4 color=texture(image,uv);
+    vec3 rgb=max(color.rgb,vec3(0.0));
+    if (!display_space) color.rgb=mix(1.055*pow(rgb,vec3(1.0/2.4))-0.055,rgb*12.92,lessThan(rgb,vec3(0.0031308)));
+    float r=min(radius,min(rect.z,rect.w)*0.5);
+    vec2 q=abs((uv-0.5)*rect.zw)-rect.zw*0.5+r;
+    float d=length(max(q,vec2(0.0)))+min(max(q.x,q.y),0.0)-r;
+    float aa=max(fwidth(d),0.7);
+    fragColor=vec4(color.rgb,color.a*(1.0-smoothstep(-aa,aa,d)));
+}""",
+    )
+
+
 def preview(texture, x, y, w, h, radius=6.0, *, display_space=False, premultiplied=False):
     """One retained texture draw with rounded coverage; no mask render target."""
     global _preview_shader, _preview_batch
@@ -1206,20 +1223,9 @@ def preview(texture, x, y, w, h, radius=6.0, *, display_space=False, premultipli
         info.push_constant("VEC4", "rect")
         info.push_constant("FLOAT", "radius")
         info.push_constant("BOOL", "display_space")
-        info.vertex_source(
-            "void main(){uv=pos;gl_Position=mvp*vec4(rect.xy+pos*rect.zw,0.0,1.0);}"
-        )
-        info.fragment_source("""
-void main(){
-    vec4 color=texture(image,uv);
-    vec3 rgb=max(color.rgb,vec3(0.0));
-    if (!display_space) color.rgb=mix(1.055*pow(rgb,vec3(1.0/2.4))-0.055,rgb*12.92,lessThan(rgb,vec3(0.0031308)));
-    float r=min(radius,min(rect.z,rect.w)*0.5);
-    vec2 q=abs((uv-0.5)*rect.zw)-rect.zw*0.5+r;
-    float d=length(max(q,vec2(0.0)))+min(max(q.x,q.y),0.0)-r;
-    float aa=max(fwidth(d),0.7);
-    fragColor=vec4(color.rgb,color.a*(1.0-smoothstep(-aa,aa,d)));
-}""")
+        vertex, fragment = preview_sources()
+        info.vertex_source(vertex)
+        info.fragment_source(fragment)
         _preview_shader = gpu.shader.create_from_info(info)
         _preview_batch = batch_for_shader(
             _preview_shader,

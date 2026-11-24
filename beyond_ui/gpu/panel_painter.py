@@ -13,6 +13,10 @@ def native_painter():
     if bpy.app.background or bpy.app.build_hash != b"d13f752e3b9c":
         return None
 
+    import gpu
+    if gpu.platform.backend_type_get() not in {"VULKAN", "OPENGL"}:
+        return None
+
     import hashlib
     import json
     from pathlib import Path

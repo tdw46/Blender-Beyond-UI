@@ -642,6 +642,21 @@ class Canvas(Group):
             self._control_bands = tuple(bands)
         else:
             self._control_bands = ()
+        if self._static_buttons:
+            # Layout owns the intersection index. A scroll changes only the
+            # pixel translation, so no rectangle pairs need retesting in paint.
+            active = []
+            overlaps = {}
+            for child in sorted(self.controls.values(), key=lambda item: item.rect[1]):
+                x, y, w, h = child.rect
+                active = [entry for entry in active if entry[1] > y]
+                for key, _, left, right in active:
+                    if x < right and x + w > left:
+                        overlaps.setdefault(child.key, set()).add(key)
+                        overlaps.setdefault(key, set()).add(child.key)
+                if w > 0 and h > 0:
+                    active.append((child.key, y + h, x, x + w))
+            self._paint_overlaps = overlaps
         self.layout_count += 1
         return self.height
 

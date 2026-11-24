@@ -376,10 +376,7 @@ def paint(
     queued_buttons = []
 
     if _NATIVE_PANEL:
-        def outside_buttons(rect):
-            x0, y0, width, height = rect
-            return all(x0 >= a+w or a >= x0+width or y0 >= b+h or b >= y0+height
-                       for _, (a,b,w,h), _, _ in queued_buttons)
+        queued_keys = set()
 
         def flush_buttons():
             nonlocal palette, current_style
@@ -388,22 +385,12 @@ def paint(
             saved = palette, current_style
             from . import icons
             owner = glass._owners.get(backdrop)
-            painter = getattr(canvas, "_vulkan_card_surfaces", None)
+            painter = getattr(canvas, "_panel_card_surfaces", None)
             # Preserve the ordinary draw order at unsupported targets or capabilities.
             grouped = (len(queued_buttons) >= 2 and painter and owner and owner["slot"] >= 0
                        and "sample_rect" in owner and glass._strong_blur(owner))
             if grouped:
-                rows = []
-                for _, bounds, colors, css in queued_buttons:
-                    radius = css.get("radius", t.radius) * scale
-                    rows.append((bounds, colors["field"], colors["edge"], (radius, .65 * scale, 5., 0.)))
-
-                def artwork(start, length):
-                    for _, bounds, _, css in queued_buttons[start:start + length]:
-                        token = css.get("button_artwork")
-                        if token:
-                            icons.artwork_surface(token, bounds, css.get("radius", t.radius) * scale)
-                painter.draw(rows, owner, artwork)
+                grouped = painter.draw_buttons(queued_buttons, owner, canvas, x, y + h, sx, sy, scale, shift)
 
             for button, bounds, palette, current_style in queued_buttons:
                 opts = button.options
@@ -421,6 +408,7 @@ def paint(
                      inset=opts.get("text_inset", 6))
             typography.flush_text(font)
             queued_buttons.clear()
+            queued_keys.clear()
             palette, current_style = saved
 
     feedback_now = canvas.value_feedback.clock()
@@ -447,9 +435,9 @@ def paint(
         if background:
             style.draw(*rect, palette["bg"], radius=t.radius * scale)
         chrome_drawn = False
-        if controls and _NATIVE_PANEL and backdrop and is_windows_vulkan():
+        if controls and _NATIVE_PANEL and backdrop:
             from .panel_chrome import draw_card_surfaces
-            chrome_drawn = draw_card_surfaces(canvas, backdrop, palette, logical,
+            chrome_drawn = draw_card_surfaces(canvas, backdrop, palette,
                                                x, y + h, sx, sy, scale, shift)
         if controls and not chrome_drawn:
             for card in getattr(canvas, "_style_cards", ()):
@@ -477,7 +465,7 @@ def paint(
                     or (control.kind == "label" and opts.get("_wrapped_lines")
                         and not (opts.get("icon_value") or opts.get("choice_card")
                                  or opts.get("icon") not in {None, "", "NONE", 0}))))
-                if not bounded or not outside_buttons(r):
+                if not bounded or not queued_keys.isdisjoint(canvas._paint_overlaps.get(control.key, ())):
                     flush_buttons()
             if opts.get("search_bar"):
                 a, b, c, d = r
@@ -517,6 +505,7 @@ def paint(
                 # live enabled/selection state before using its straight-line draw.
                 control.motion.begin_paint()
                 control.motion.region("body", control.rect, circular=abs(c - d) < 8)
+                queued_keys.add(control.key)
                 queued_buttons.append((control, r, palette, current_style))
                 count += 1
                 continue

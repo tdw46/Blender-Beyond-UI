@@ -123,6 +123,18 @@ def layer_color(palette, role, color):
     return (*tint[:3], color[3])
 
 
+def full_artwork_texture(token):
+    """Resolve the current GPU image only for an entry spanning its full source."""
+    pack = _artwork.get(token.partition(":")[0])
+    entry = pack["entries"].get(token) if pack else None
+    if entry:
+        source, bounds, _ = entry
+        width, height, _ = pack["sources"][source]
+        if tuple(bounds) == (0, 0, width, height):
+            return pack["textures"].get(source)
+    return None
+
+
 def artwork_surface(token, rect, radius, *, contain=False):
     """Stretch a whole, previously uploaded artwork source over a real button."""
     pack = _artwork.get(token.partition(':')[0])
