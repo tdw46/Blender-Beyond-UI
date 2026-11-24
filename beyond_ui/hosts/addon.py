@@ -502,7 +502,7 @@ class Runtime:
 
         if isinstance(error, PendingListIdentity):
             self.errors.pop(definition.__name__, None)
-            native.label(text="Preparing custom listâ€¦", icon="INFO")
+            native.label(text="Preparing custom list…", icon="INFO")
             return
         if (
             self.config.native_fallback
