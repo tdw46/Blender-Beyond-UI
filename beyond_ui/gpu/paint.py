@@ -243,9 +243,7 @@ def paint(
             left = group_left + gutter
         origin = group_left + gutter
         if record:
-            if not has_icon:
-                return None
-            return (quad, active_font, size, left, right, origin,
+            return (quad if has_icon else None, active_font, size, left, right, origin,
                     (d - measure(active_font, size, "H")[1]) / 2)
         if tail:
             tail_x = right + 6 * scale if end_icon else min(
@@ -390,10 +388,11 @@ def paint(
 
     if _NATIVE_PANEL:
         queued_keys = set()
+        queued_labels = []
 
-        def flush_buttons():
+        def flush_stationary():
             nonlocal palette, current_style
-            if not queued_buttons:
+            if not queued_keys:
                 return
             saved = palette, current_style
             from . import icons
@@ -402,6 +401,7 @@ def paint(
             # Preserve the ordinary draw order at unsupported targets or capabilities.
             grouped = (len(queued_buttons) >= 2 and painter and owner and owner["slot"] >= 0
                        and "sample_rect" in owner and glass._strong_blur(owner))
+            glyphs = []
             plans = []
             if grouped:
                 from ..widgets.preview_icon import PreviewIcons
@@ -419,7 +419,7 @@ def paint(
                             button.label, (a,0.,c,d), palette["text"], opts.get("text_role", "body"),
                             center=True, icon=opts.get("icon"), inset=opts.get("text_inset", 6), record=True)
                         cached = button._panel_text_layout = (key, plan)
-                    if cached[1] is None:
+                    if cached[1] is None or cached[1][0] is None:
                         grouped = False
                         break
                     plans.append(cached[1])
@@ -443,18 +443,53 @@ def paint(
                         _, face, size, left, right, origin, offset = plans[index]
                         bottom, top = max(cy, bounds[1]), min(cy + ch, bounds[1] + bounds[3])
                         if top > bottom and right > left:
-                            blf.size(face, size)
-                            blf.enable(face, blf.CLIPPING)
-                            try:
-                                blf.clipping(face, left, bottom, right, top)
-                                blf.position(face, origin, bounds[1] + offset, 0)
-                                typography.draw_text(face, button.label, ink, palette.get("text_effects"), scale)
-                            finally:
-                                blf.disable(face, blf.CLIPPING)
+                            glyphs.append((face, size, left, bottom, right, top, origin, bounds[1]+offset,
+                                           ink, button.label, palette.get("text_effects")))
                 else:
                     text(button.label, bounds, ink, opts.get("text_role", "body"), center=True,
                          icon=opts.get("icon"), icon_value=opts.get("icon_value", 0),
                          inset=opts.get("text_inset", 6))
+            for button, bounds, palette, current_style in queued_labels:
+                lines = button.options["_wrapped_lines"]
+                a, b, c, d = bounds
+                lh = current_style.get("line_height", current_style.get("font_size", t.font_size)*1.55)*scale
+                key = (canvas.layout_count, font, scale, cx, cw, a, c, lh, lines, id(current_style))
+                cached = getattr(button, "_panel_label_layout", None)
+                if cached is None or cached[0] != key:
+                    layouts = tuple(text(line, (a,0.,c,lh), palette["text"], inset=6, right_inset=4, record=True)
+                                    for line in lines)
+                    cached = button._panel_label_layout = key, layouts
+                ink = palette["text"]
+                for index, (line, layout) in enumerate(zip(lines, cached[1])):
+                    if not line or layout is None:
+                        continue
+                    _, face, size, left, right, origin, offset = layout
+                    y0 = b + d - (index+1)*lh
+                    bottom, top = max(cy, y0), min(cy+ch, y0+lh)
+                    if top > bottom and right > left:
+                        glyphs.append((face, size, left, bottom, right, top, origin, y0+offset,
+                                       ink, line, palette.get("text_effects")))
+            # These clips are disjoint and remain in the enclosing panel matrix.
+            # Submit Blender's glyphs while the font and clip are still owned.
+            last_face = None
+            last_size = None
+            try:
+                for face, size, left, bottom, right, top, px, py, ink, value, effects in glyphs:
+                    if face != last_face:
+                        if last_face is not None:
+                            blf.disable(last_face, blf.CLIPPING)
+                        blf.enable(face, blf.CLIPPING)
+                        last_face, last_size = face, None
+                    if size != last_size:
+                        blf.size(face, size)
+                        last_size = size
+                    blf.clipping(face, left, bottom, right, top)
+                    blf.position(face, px, py, 0)
+                    typography.draw_text(face, value, ink, effects, scale)
+            finally:
+                if last_face is not None:
+                    blf.disable(last_face, blf.CLIPPING)
+            queued_labels.clear()
             typography.flush_text(font)
             queued_buttons.clear()
             queued_keys.clear()
@@ -507,7 +542,7 @@ def paint(
             opts = control.options
             current_style = opts.get("_inline_style", {})
             r = mapped(control.rect)
-            if queued_buttons:
+            if _NATIVE_PANEL and queued_keys:
                 bounded = (not control.motion.tracks and (
                     (control.key in canvas._static_buttons and control.key != canvas.hover
                      and control is not canvas.active and not opts.get("selected") and not opts.get("alert"))
@@ -516,7 +551,7 @@ def paint(
                         and not (opts.get("icon_value") or opts.get("choice_card")
                                  or opts.get("icon") not in {None, "", "NONE", 0}))))
                 if not bounded or not queued_keys.isdisjoint(canvas._paint_overlaps.get(control.key, ())):
-                    flush_buttons()
+                    flush_stationary()
             if opts.get("search_bar"):
                 a, b, c, d = r
                 inset = menu_metrics.SEARCH_INSET * scale
@@ -545,6 +580,22 @@ def paint(
                     if present(r, font, palette):
                         count += 1
                         continue
+            if (_NATIVE_PANEL and canvas._static_buttons and kind == "label" and opts.get("_wrapped_lines")
+                    and opts.get("icon") in {None, "", "NONE", 0} and not opts.get("icon_value")
+                    and palette.get("text_effects", {}).get("shadow") is False
+                    and palette.get("text_effects", {}).get("outline") is False
+                    and not (control.motion.tracks or has_popup or control.binding or opts.get("inline_label")
+                             or opts.get("alert") or opts.get("selected") or opts.get("value_feedback")
+                             or opts.get("choice_card") or opts.get("menu_option") or opts.get("label_get")
+                             or opts.get("list_row") or current_style.get("label_artwork")
+                             or current_style.get("color_role"))
+                    and opts.get("status", "EMPTY") in {"EMPTY", "UNAVAILABLE"} and control.enabled
+                    and not canvas.value_feedback.amount(control, feedback_now)):
+                control.motion.begin_paint()
+                queued_keys.add(control.key)
+                queued_labels.append((control, r, palette, current_style))
+                count += 1
+                continue
             if (_NATIVE_PANEL and kind == "button" and canvas._static_buttons.get(control.key) is control
                     and canvas.hover != control.key and canvas.active is not control
                     and not control.motion.tracks and not has_popup and not opts.get("alert")
@@ -1219,8 +1270,8 @@ def paint(
                 if drop:
                     style.icon("EYEDROPPER", a+c+drop/2, b+d/2, min(12*scale, drop*.75), ink)
             count += 1
-        if queued_buttons:
-            flush_buttons()
+        if _NATIVE_PANEL and queued_keys:
+            flush_stationary()
         palette = base_palette
         current_style = {}
         captured = canvas.widget_capture
