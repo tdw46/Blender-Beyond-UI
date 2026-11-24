@@ -316,10 +316,11 @@ def paint(
         finally:
             blf.disable(active_font, blf.CLIPPING)
 
-    def wrapped_button(control, r, ink, *, icon_plan=False, icon_submitted=False):
+    def wrapped_button(control, r, ink, *, icon_plan=False):
         a, b, c, d = r
         lines, step, lead, tail, inset = control.options["_button_lines"]
         role = control.options.get("text_role", "body")
+        quad = None
         if icon_plan and (not lead or tail or control.options.get("icon_value")):
             return None
         aligned = current_style.get("text_align", "CENTER")
@@ -342,19 +343,24 @@ def paint(
                 box = (start, b + (d - icon_size) / 2, icon_size, icon_size)
                 if icon_plan:
                     from . import icons
-                    return (icons.atlas_quad(icon, start + icon_size / 2, b + d / 2, icon_size),)
-                if not icon_submitted and not (canvas.icon_renderer and canvas.icon_renderer(icon, icon_value, box, ink)):
+                    quad = icons.atlas_quad(icon, start + icon_size / 2, b + d / 2, icon_size)
+                elif not (canvas.icon_renderer and canvas.icon_renderer(icon, icon_value, box, ink)):
                     style.icon(icon, start + icon_size / 2, b + d / 2, icon_size, ink, palette=palette)
             start += lead * scale
-        if icon_plan:
+        if icon_plan and quad is None:
             return None
         if tail:
             glyph = control.options.get("trailing_icon") or "▾"
             style.icon(glyph, a+c-tail*scale/2, b+d/2, min(tail-4, t.icon_size)*scale, ink)
         top = b + (d + len(lines)*step*scale)/2
+        run = [] if icon_plan else None
         for i, line in enumerate(lines):
-            text(line, (start, top-(i+1)*step*scale, max(0, end-start), step*scale),
-                 ink, role, inset=0, right_inset=0, center=True)
+            row = (start, top-(i+1)*step*scale, max(0, end-start), step*scale)
+            glyph = text(line, row, ink, role, inset=0, right_inset=0, center=True, record=icon_plan)
+            if icon_plan and glyph is not None:
+                run.append((line, row[1], row[3], glyph))
+        if icon_plan:
+            return quad, tuple(run)
 
     def surface(r, ink, radius=None, flat=False):
         radius = current_style.get("radius", t.radius if radius is None else radius)
@@ -452,7 +458,16 @@ def paint(
                 role = "text" if "color" in current_style else current_style.get("color_role", "text")
                 ink = palette.get("accent_text", palette[role]) if role == "accent" else palette[role]
                 if opts.get("_button_lines"):
-                    wrapped_button(button, bounds, ink, icon_submitted=grouped)
+                    if grouped:
+                        for line, relative_y, height, glyph in plans[index][1]:
+                            _, face, size, left, right, origin, offset = glyph
+                            y0 = bounds[1] + relative_y
+                            bottom, top = max(cy, y0), min(cy + ch, y0 + height)
+                            if line and top > bottom and right > left:
+                                glyphs.append((face, size, left, bottom, right, top, origin,
+                                               y0 + offset, ink, line, palette.get("text_effects")))
+                    else:
+                        wrapped_button(button, bounds, ink)
                 elif grouped:
                     if button.label:
                         _, face, size, left, right, origin, offset = plans[index]
